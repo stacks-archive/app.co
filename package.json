@@ -1,0 +1,33 @@
+{
+  "name": "app.co-www",
+  "description": "The website for app.co",
+  "version": "1.0.0",
+  "author": "The Blockstack Team",
+  "bugs": {
+    "url": "https://github.com/blockstackpbc/app.co/issues"
+  },
+  "homepage": "https://github.com/blockstackpbc/app.co#readme",
+  "keywords": [
+    "dapps"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/blockstackpbc/app.co.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "next start",
+    "dev": "next",
+    "build": "next build"
+  },
+  "dependencies": {
+    "babel-plugin-styled-components": "^1.5.1",
+    "next": "^6.0.0",
+    "polished": "^1.9.2",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "styled-components": "^3.2.6"
+  }
+}
