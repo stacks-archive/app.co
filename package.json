@@ -23,11 +23,30 @@
     "build": "next build"
   },
   "dependencies": {
+    "async": "^2.6.0",
     "babel-plugin-styled-components": "^1.5.1",
+    "cheerio": "^1.0.0-rc.2",
+    "dotenv": "^5.0.1",
+    "fast-csv": "^2.4.1",
     "next": "^6.0.0",
     "polished": "^1.9.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "styled-components": "^3.2.6"
+    "request-promise": "^4.2.2",
+    "styled-components": "^3.2.6",
+    "twitter": "^1.7.1",
+    "underscore": "^1.9.0"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "eslint-scope": "^3.7.1",
+    "request": "^2.85.0",
+    "sepia": "^2.0.2"
   }
 }

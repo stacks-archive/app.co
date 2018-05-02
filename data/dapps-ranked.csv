@@ -1,0 +1,77 @@
+Name,Category,Blockchains,Storage Networks,Authentication,Website,Open Source Client?,Registration Open?,Tracking Blocked or Consented?,Twitter Mentions
+Aragon,Business & Governance,Ethereum,,,https://aragon.one/,https://github.com/aragon/aragon,YES,,159
+Bellwethr,Business & Governance,-,Gaia,Blockstack,,,,,
+Misthos,Business & Governance,-,Gaia,Blockstack,,,,,
+Gitcoin,Developer Tools,Ethereum,-,-,,,,,
+Everipedia,Education & News,EOS,IPFS,-,https://everipedia.org/,,NO,,280
+AdChain,Financial Services,Ethereum,,,,,,,
+Augur,Financial Services,Ethereum,,,http://www.augur.net/,,,,0
+Bancor,Financial Services,Ethereum,,,,,,,
+Bloom,Financial Services,Ethereum,,,https://bloom.co/,,,,22
+Bounty0x,Financial Services,Ethereum,,,https://bounty0x.io/,,,,597
+Coinfort,Financial Services,-,Gaia,Blockstack,http://www.coinfort.io/,https://github.com/twg/coinfort-web,,,0
+Coins,Financial Services,-,Gaia,Blockstack,https://coinsapp.co/,,,,0
+Coinstack,Financial Services,-,Gaia,Blockstack,http://www.coinstack.one/,,,,0
+Dharma,Financial Services,Ethereum,,,,,,,
+Dharma,Financial Services,Ethereum,,,,,,,
+DyDx,Financial Services,Ethereum,,,https://dydx.exchange/,,,,1
+Entaxy,Financial Services,-,Gaia,Blockstack,,,,,
+ERC dEX,Financial Services,Ethereum,,,,,,,
+EtherDelta,Financial Services,Ethereum,,,https://etherdelta.com,YES,,,87
+Etherisc,Financial Services,Ethereum,,,https://etherisc.com/,,,,14
+EthLend,Financial Services,Ethereum,,,,,,,
+Gnosis,Financial Services,Ethereum,,,https://gnosis.pm/,,,,60
+Hong Bao,Financial Services,Ethereum,,,,,,,
+Paradex,Financial Services,Ethereum,,,,,,,
+Prism,Financial Services,-,,,https://prism.exchange,,,,70
+Radar Relay,Financial Services,Ethereum,,,https://radarrelay.com/,,,,13
+WeTrust,Financial Services,Ethereum,,,,,,,
+CryptoEmperors,Games & Digital Assets,Ethereum,,Metamask,http://cryptoemperors.co/,,,,0
+ChainMonsters,Games & Digital Assets,Ethereum,,Metamask,https://chainmonsters.io/,,,,0
+Crypto Celebrities,Games & Digital Assets,Ethereum,,,,,,,
+Crypto High Score,Games & Digital Assets,Ethereum,,,,,,,
+Crypto Speech,Games & Digital Assets,Ethereum,,,,,,,
+CryptoFighters,Games & Digital Assets,Ethereum,,,,,,,
+CryptoKitties,Games & Digital Assets,Ethereum,,Metamask,https://www.cryptokitties.co/,,,NO,172
+Cryptopunks,Games & Digital Assets,Ethereum,,,,,,,
+DaDa,Games & Digital Assets,Ethereum,,,,,,,
+Decentraland,Games & Digital Assets,Ethereum,,,https://decentraland.org/,,,,284
+ETHCraft,Games & Digital Assets,Ethereum,,,,,,,
+Ether Numbers,Games & Digital Assets,Ethereum,,,,,,,
+Etherbots,Games & Digital Assets,Ethereum,,,,,,,
+Ethercraft,Games & Digital Assets,Ethereum,,,,,,,
+Etheremon,Games & Digital Assets,Ethereum,,,,,,,
+NameBazaar,Games & Digital Assets,Ethereum,IPFS,"Metamask, Parity",https://namebazaar.io/,,,,1
+OpenSea,Games & Digital Assets,Ethereum,,"Metamask, Toshi, Cipher, Trust",,,,,
+RARE,Games & Digital Assets,Ethereum,,,,,,,
+Rare Pepe Wallet,Games & Digital Assets,Bitcoin,-,12 word phrase,https://rarepepewallet.com/,,,,5
+RareBits,Games & Digital Assets,Ethereum,,,https://rarebits.io/,,,,78
+World of Ether,Games & Digital Assets,Ethereum,,,,,,,
+Afia,Health & Fitness,-,Gaia,Blockstack,http://www.afiabeta.com/,,,,1
+CryptoCribs,Marketplaces,Ethereum,,,https://www.cryptocribs.com/,,,,6
+ENSListing,Marketplaces,Ethereum,,,https://enslisting.com,,,,28
+ETHLance,Marketplaces,Ethereum,IPFS,Metamask,https://ethlance.com,https://github.com/district0x/ethlance,,,4
+Gems,Marketplaces,Ethereum,,,https://gems.org/,,,,0
+OpenBazaar,Marketplaces,-,,,https://www.openbazaar.org/,,,,100
+DotPodcast,"Music, Photo & Video",-,Gaia,Blockstack,https://dotpodcast.co/,,,,0
+Akasha,Social Networking,Ethereum,IPFS,Metamask,https://akasha.world/,,,,54
+Busy,Social Networking,Steem,,SteemConnect,https://busy.org/,,,,371
+DTube,Social Networking,Steem,IPFS,SteemConnect,https://d.tube/,,,,894
+Hermes,Social Networking,-,Gaia,Blockstack,https://www.hihermes.co,,,,0
+Leeroy,Social Networking,Ethereum,-,Metamask,https://leeroy.io/,,,,2
+Postly,Social Networking,-,Gaia,Blockstack,https://www.postly.co/,,,,0
+Stealthy,Social Networking,-,Gaia,Blockstack,https://stealthy.im,,,,3
+SteemIt,Social Networking,Steem,Steem,SteemConnect,https://steemit.com/,NO,,,399
+Utopian,Social Networking,Steem,Steem,SteemConnect,https://join.utopian.io/,,,,2
+Yours,Social Networking,Bitcoin Cash,-,-,https://www.yours.org/,,,,699
+Civic,Utilities & Productivity,Ethereum,IPFS,Civic,https://www.civic.com/,,,,27
+Graphite,Utilities & Productivity,-,Gaia,Blockstack,https://www.graphitedocs.com/,YES,,,6
+ZeroBlog,Social Networking,-,ZeroNet,ZeroNet,,,,,
+ZeroID,Utilities & Productivity,-,ZeroNet,ZeroNet,,,,,
+ZeroMail,Utilities & Productivity,-,ZeroNet,ZeroNet,,,,,
+ZeroName,Utilities & Productivity,-,ZeroNet,ZeroNet,,,,,
+ZeroBoard,Social Networking,-,ZeroNet,ZeroNet,,,,,
+ZeroChat,Social Networking,-,ZeroNet,ZeroNet,,,,,
+ZeroHello,Social Networking,-,ZeroNet,ZeroNet,,,,,
+ZeroTalk,Social Networking,-,ZeroNet,ZeroNet,,,,,
+GIF Time,Social Networking,-,ZeroNet,ZeroNet,,,,,
