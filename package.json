@@ -50,8 +50,8 @@
   "scripts": {
     "build": "next build",
     "dev": "next",
-    "lint": "eslint **/*.js",
-    "lint:fix": "eslint **/*.js --fix",
+    "lint": "eslint \"./**/*.js\"",
+    "lint:fix": "eslint \"./**/*.js\" --fix",
     "start": "next start",
     "test": "echo \"Error: no test specified\" && exit 1"
   }

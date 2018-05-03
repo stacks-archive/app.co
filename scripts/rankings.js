@@ -1,10 +1,9 @@
 const fs = require('fs');
 const csv = require('fast-csv');
 require('sepia'); /* eslint import/no-extraneous-dependencies: [0] */
-
 require('dotenv').config();
 
-const twitter = require('../lib/twitter');
+const twitter = require('../common/lib/twitter');
 
 // const { getRank } = require('../lib/similarweb.js');
 
