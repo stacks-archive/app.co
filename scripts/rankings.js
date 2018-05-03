@@ -5,9 +5,9 @@ require('dotenv').config();
 
 const twitter = require('../common/lib/twitter');
 
-// const { getRank } = require('../lib/similarweb.js');
+// const { getRank } = require('../common/lib/similarweb.js');
 
-const filename = './data/dapps.csv';
+const filename = './common/data/dapps.csv';
 const apps = [];
 
 csv
@@ -20,7 +20,7 @@ csv
   .on('end', async () => {
     await twitter.fetchMentions(apps);
 
-    const writeStream = fs.createWriteStream('./data/dapps-ranked.csv');
+    const writeStream = fs.createWriteStream('./common/data/dapps-ranked.csv');
     csv.write(apps, { headers: true }).pipe(writeStream);
 
     console.log('done');
