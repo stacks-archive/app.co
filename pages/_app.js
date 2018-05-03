@@ -3,7 +3,7 @@ import React from "react";
 import { withRouter } from "next/router";
 
 class MyApp extends App {
-  static async getInitialProps({ Component, router, ctx }) {
+  static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
 
     if (Component.getInitialProps) {

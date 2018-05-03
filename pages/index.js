@@ -1,3 +1,3 @@
 import React from "react";
 
-export default () => <>Home</>;
+export default () => <React.Fragment>Home</React.Fragment>;
