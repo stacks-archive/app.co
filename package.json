@@ -6,22 +6,6 @@
   "bugs": {
     "url": "https://github.com/blockstackpbc/app.co/issues"
   },
-  "homepage": "https://github.com/blockstackpbc/app.co#readme",
-  "keywords": [
-    "dapps"
-  ],
-  "license": "ISC",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/blockstackpbc/app.co.git"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "next start",
-    "dev": "next",
-    "build": "next build"
-  },
   "dependencies": {
     "async": "^2.6.0",
     "babel-plugin-styled-components": "^1.5.1",
@@ -42,11 +26,32 @@
     "babel-register": "^6.26.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.7.0",
     "eslint-scope": "^3.7.1",
+    "prettier": "^1.12.1",
     "request": "^2.85.0",
     "sepia": "^2.0.2"
+  },
+  "homepage": "https://github.com/blockstackpbc/app.co#readme",
+  "keywords": [
+    "dapps"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/blockstackpbc/app.co.git"
+  },
+  "scripts": {
+    "build": "next build",
+    "dev": "next",
+    "lint": "eslint **/*.js",
+    "lint:fix": "eslint **/*.js --fix",
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
