@@ -1,6 +1,6 @@
-import App, { Container } from "next/app";
-import React from "react";
-import { withRouter } from "next/router";
+import App, { Container } from 'next/app';
+import React from 'react';
+import { withRouter } from 'next/router';
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
