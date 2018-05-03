@@ -2,7 +2,13 @@ module.exports = (sequelize, DataTypes) => {
   const App = sequelize.define(
     'App',
     {
-      name: DataTypes.STRING,
+      name: {
+        type: DataTypes.STRING,
+        validate: {
+          notNull: true,
+          notEmpty: true,
+        },
+      },
       category: DataTypes.INTEGER,
       website: DataTypes.STRING,
       blockchain: DataTypes.INTEGER,

@@ -1,12 +1,13 @@
 {
   "extends": ["airbnb", "plugin:prettier/recommended"],
-  "plugins": ["babel"],
+  "plugins": ["babel", "jest"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "no-unused-expressions": ["error", { "allowTaggedTemplates": true }]
   },
   "env": {
     "node": true,
-    "es6": true
+    "es6": true,
+    "jest/globals": true
   }
 }
