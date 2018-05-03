@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "async": "^2.6.0",
-    "babel-plugin-styled-components": "^1.5.1",
     "cheerio": "^1.0.0-rc.2",
     "dotenv": "^5.0.1",
     "fast-csv": "^2.4.1",
@@ -18,10 +17,10 @@
     "react-dom": "^16.3.2",
     "request-promise": "^4.2.2",
     "styled-components": "^3.2.6",
-    "twitter": "^1.7.1",
-    "underscore": "^1.9.0"
+    "twitter": "^1.7.1"
   },
   "devDependencies": {
+    "babel-plugin-styled-components": "^1.5.1",
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
     "eslint": "^4.19.1",
