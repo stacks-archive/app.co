@@ -1,6 +1,7 @@
 import App, { Container } from 'next/app';
 import React from 'react';
 import { withRouter } from 'next/router';
+import { Root } from '@containers/root';
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -17,7 +18,9 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
     return (
       <Container>
-        <Component {...pageProps} />
+        <Root>
+          <Component {...pageProps} />
+        </Root>
       </Container>
     );
   }

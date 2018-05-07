@@ -7,10 +7,20 @@ import { normalize } from 'polished';
  */
 injectGlobal`
 ${normalize()};
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900|Roboto+Slab:300,400,700');
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
+}
+body, html{
+font-family: 'Lato', sans-serif;
+background:#EEEFEF;
+}
+h1, h2, h3, h4, h5, h6{
+font-family: 'Roboto Slab', serif;
+margin: 0;
+padding: 0;
 }
 `;
 
@@ -25,7 +35,10 @@ export default class MyDocument extends Document {
   render() {
     return (
       <html lang="en">
-        <Head>{this.props.styleTags}</Head>
+        <Head>
+          <title>App.co</title>
+          {this.props.styleTags}
+        </Head>
         <body>
           <Main />
           <NextScript />
