@@ -5,7 +5,7 @@ const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 /* eslint import/no-dynamic-require: [0] */
-const config = require(`${__dirname}/../config/config.json`)[env];
+const config = require(`${__dirname}/../../config/config.json`)[env];
 config.operatorsAliases = Sequelize.Op;
 const db = {};
 

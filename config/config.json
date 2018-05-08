@@ -4,7 +4,8 @@
     "password": null,
     "database": "app_co_development",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "migrations-path": "./db/migrations"
   },
   "test": {
     "username": null,
@@ -12,13 +13,15 @@
     "database": "app_co_test",
     "host": "127.0.0.1",
     "dialect": "postgres",
-    "logging": false
+    "logging": false,
+    "migrations-path": "./db/migrations"
   },
   "production": {
     "username": null,
     "password": null,
     "database": "app_co_production",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "migrations-path": "./db/migrations"
   }
 }
