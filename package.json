@@ -10,6 +10,7 @@
     "async": "^2.6.0",
     "cheerio": "^1.0.0-rc.2",
     "dotenv": "^5.0.1",
+    "express": "^4.16.3",
     "fast-csv": "^2.4.1",
     "mdi-react": "^3.3.0",
     "next": "^6.0.0",
@@ -60,10 +61,10 @@
     "build": "next build",
     "db:create": "sequelize db:create",
     "db:migrate": "sequelize db:migrate",
-    "dev": "next",
+    "dev": "node server.js",
     "lint": "eslint \"./**/*.js\"",
     "lint:fix": "eslint \"./**/*.js\" --fix",
-    "start": "next start",
+    "start": "NODE_ENV=production node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
