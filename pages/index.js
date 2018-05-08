@@ -11,13 +11,13 @@ const sections = {
   right: rightItems,
 };
 
-export default () => (
+export default ({ data }) => (
   <Page>
     <Header data={sections} />
     <Hero title="Decentralized Apps and You" />
     <Page.Section wrap>
       <Page.Section.Content>content</Page.Section.Content>
-      <Page.Sidebar>Sidebar</Page.Sidebar>
+      <Page.Sidebar>{data.results.map((person, i) => <div key={i}>{person.name}</div>)}</Page.Sidebar>
     </Page.Section>
   </Page>
 );
