@@ -11,7 +11,8 @@
     "password": null,
     "database": "app_co_test",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false
   },
   "production": {
     "username": null,

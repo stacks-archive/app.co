@@ -1,3 +1,4 @@
+import '../tests_helper';
 import { App } from '../../models';
 
 it('can fetch from an empty state', async () => {

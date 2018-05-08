@@ -3,7 +3,8 @@
   "plugins": ["babel", "jest"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "no-unused-expressions": ["error", { "allowTaggedTemplates": true }]
+    "no-unused-expressions": ["error", { "allowTaggedTemplates": true }],
+    "no-underscore-dangle": [0]
   },
   "env": {
     "node": true,
