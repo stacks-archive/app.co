@@ -58,6 +58,8 @@
   },
   "scripts": {
     "build": "next build",
+    "db:create": "sequelize db:create",
+    "db:migrate": "sequelize db:migrate",
     "dev": "next",
     "lint": "eslint \"./**/*.js\"",
     "lint:fix": "eslint \"./**/*.js\" --fix",

@@ -23,15 +23,15 @@ yarn build
 
 ### Database Setup
 
-We use the sequelize package for ORM and database connection. To setup the database, make sure you
-have PostgreSQL installed and run:
+We use the [sequelize](https://github.com/sequelize/sequelize) package for ORM and database connection. To setup the database, make sure you
+have [PostgreSQL](https://www.postgresql.org/) installed and run:
 
-~~~bash
-node_modules/.bin/sequelize db:create
-~~~
+```bash
+yarn db:create
+```
 
 Then to run migrations:
 
-~~~bash
-node_modules/.bin/sequelize db:migrate
-~~~
+```bash
+yarn db:migrate
+```
