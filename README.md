@@ -49,3 +49,9 @@ Then, run tests:
 ~~~bash
 yarn test
 ~~~
+
+Or, to automatically watch and re-run tests:
+
+~~~bash
+yarn test-watch
+~~~
