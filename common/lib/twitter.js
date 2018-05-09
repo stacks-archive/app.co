@@ -19,7 +19,6 @@ const fetchPage = async function fetchPage(app, _options, _lastCount, _totalMent
     }
     twitter.get('search/tweets', options, (error, tweets) => {
       if (error || !tweets) {
-        console.log(error);
         reject(error);
       } else {
         const { statuses } = tweets;
@@ -72,7 +71,6 @@ const saveRanking = (app) =>
       });
       resolve(ranking);
     } catch (error) {
-      console.log('rejecting in saveRanknigs', error);
       reject(error);
     }
   });
@@ -81,7 +79,6 @@ const fetchMentions = (apps) =>
   new Promise(async (resolve, reject) => {
     each(apps, paginateMentions, (error) => {
       if (error) {
-        console.log(error);
         reject(error);
       } else {
         resolve();
