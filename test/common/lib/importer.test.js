@@ -14,10 +14,10 @@ test('it should fetch apps on the spreadsheet', async () => {
   const apps = await Importer.import();
   const app = apps[0];
   expect(app.name).toEqual('Aragon');
-  // expect(app.category).toEqual('Business Tools');
-  // expect(app.blockchain).toEqual('Ethereum');
-  // expect(app.storageNetwork).toEqual('IPFS/Swarm');
-  // expect(app.authentication).toEqual('Ethereum Web3');
+  expect(app.category).toEqual('Business Tools');
+  expect(app.blockchain).toEqual('Ethereum');
+  expect(app.storageNetwork).toEqual('IPFS');
+  expect(app.authentication).toEqual('Ethereum Web3');
   expect(app.website).toEqual('https://aragon.one/');
   expect(app.registrationIsOpen).toEqual(true);
   expect(app.openSourceUrl).toEqual('https://github.com/aragon/aragon');

@@ -62,10 +62,7 @@ export default class Importer {
   }
 
   static transformValue(attribute, value) {
-    if (['blockchain', 'storageNetwork', 'authentication', 'category'].indexOf(attribute) !== -1) {
-      // TODO: handle enums
-      return null;
-    } else if (['registrationIsOpen'].indexOf(attribute) !== -1) {
+    if (['registrationIsOpen'].indexOf(attribute) !== -1) {
       return value === 'YES';
     }
     return value;
