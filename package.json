@@ -74,5 +74,13 @@
     "start": "NODE_ENV=production node server.js",
     "test": "NODE_ENV=test jest",
     "test-watch": "NODE_ENV=test jest --watch"
+  },
+  "jest": {
+    "globals": {
+      "NODE_ENV": "test"
+    },
+    "transform": {
+      "^.+\\.js?$": "babel-jest"
+    }
   }
 }
