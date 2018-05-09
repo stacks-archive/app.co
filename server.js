@@ -2,6 +2,8 @@ const express = require('express');
 const next = require('next');
 const LRUCache = require('lru-cache');
 
+const { App } = require('./db/models');
+
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -13,7 +15,7 @@ const ssrCache = new LRUCache({
   maxAge: 1000 * 60 * 60, // 1hour
 });
 
-async function renderAndCache(req, res, pagePath, queryParams) {
+async function renderAndCache(req, res, pagePath) {
   const key = getCacheKey(req);
 
   // If we have a page in the cache, let's serve it
@@ -25,8 +27,9 @@ async function renderAndCache(req, res, pagePath, queryParams) {
   }
 
   try {
+    const apps = await App.findAll();
     // If not let's render the page into HTML
-    const html = await app.renderToHTML(req, res, pagePath, queryParams);
+    const html = await app.renderToHTML(req, res, pagePath, { apps });
 
     // Something is wrong with the request, let's skip the cache
     if (res.statusCode !== 200) {
@@ -41,7 +44,7 @@ async function renderAndCache(req, res, pagePath, queryParams) {
     console.log('cache miss');
     res.send(html);
   } catch (err) {
-    app.renderError(err, req, res, pagePath, queryParams);
+    app.renderError(err, req, res, pagePath);
   }
 }
 
@@ -53,9 +56,7 @@ app.prepare().then(() => {
     renderAndCache(req, res, '/');
   });
 
-  server.get('*', (req, res) => {
-    return handle(req, res);
-  });
+  server.get('*', (req, res) => handle(req, res));
 
   server.listen(port, (err) => {
     if (err) throw err;

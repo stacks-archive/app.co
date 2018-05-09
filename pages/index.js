@@ -17,7 +17,7 @@ export default ({ data }) => (
     <Hero title="Decentralized Apps and You" />
     <Page.Section wrap>
       <Page.Section.Content>content</Page.Section.Content>
-      <Page.Sidebar>{data.results.map((person, i) => <div key={i}>{person.name}</div>)}</Page.Sidebar>
+      <Page.Sidebar>{data.apps.map((app) => <div key={app.id}>{app.name}</div>)}</Page.Sidebar>
     </Page.Section>
   </Page>
 );
