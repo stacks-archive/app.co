@@ -7,5 +7,5 @@ dotenv.config();
 
 beforeAll(async () => {
   sequelize.sync();
-  App.truncate();
+  App.truncate({ cascade: true });
 });
