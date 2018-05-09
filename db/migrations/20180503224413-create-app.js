@@ -11,19 +11,19 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      category: {
+      categoryID: {
         type: Sequelize.INTEGER,
       },
       website: {
         type: Sequelize.STRING,
       },
-      blockchain: {
+      blockchainID: {
         type: Sequelize.INTEGER,
       },
-      storageNetwork: {
+      storageNetworkID: {
         type: Sequelize.INTEGER,
       },
-      authentication: {
+      authenticationID: {
         type: Sequelize.INTEGER,
       },
       openSourceUrl: {
