@@ -82,5 +82,9 @@
     "transform": {
       "^.+\\.js?$": "babel-jest"
     }
+  },
+  "nodemonConfig": {
+    "verbose": true,
+    "ignore": [".next/*", ".next", "pages/*"]
   }
 }

@@ -1,9 +1,9 @@
-import { google } from 'googleapis';
-import _ from 'lodash';
+const { google } = require('googleapis');
+const _ = require('lodash');
 
-import { App } from '../../db/models';
+const { App } = require('../../db/models');
 
-export default class Importer {
+module.exports = class Importer {
   static auth() {
     const oauthClient = new google.auth.OAuth2(process.env.GOOGLE_OAUTH_CLIENT_ID, process.env.GOOGLE_OAUTH_SECRET);
     oauthClient.setCredentials({
@@ -84,4 +84,4 @@ export default class Importer {
       }
     });
   }
-}
+};
