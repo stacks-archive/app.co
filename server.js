@@ -2,7 +2,10 @@ const express = require('express');
 const next = require('next');
 const LRUCache = require('lru-cache');
 
+require('dotenv').config();
+
 const { App } = require('./db/models');
+const { saveRanking } = require('./common/lib/twitter');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
@@ -14,6 +17,14 @@ const ssrCache = new LRUCache({
   max: 100,
   maxAge: 1000 * 60 * 60, // 1hour
 });
+
+/*
+ * NB: make sure to modify this to take into account anything that should trigger
+ * an immediate page change (e.g a locale stored in req.session)
+ */
+function getCacheKey(req) {
+  return `${req.url}`;
+}
 
 async function renderAndCache(req, res, pagePath) {
   const key = getCacheKey(req);
@@ -51,6 +62,23 @@ async function renderAndCache(req, res, pagePath) {
 app.prepare().then(() => {
   const server = express();
 
+  server.post('/api/fetch_rankings', async (req, res) => {
+    if (process.env.API_KEY === req.query.key) {
+      const apps = await App.findAll();
+      const fetchRankings = apps.map((appModel) => saveRanking(appModel));
+      Promise.all(fetchRankings)
+        .then(() => {
+          res.send('OK');
+        })
+        .catch((error) => {
+          console.log('api error', error);
+          res.status(500).send('API Error.');
+        });
+    } else {
+      res.status(400).send('Bad Request');
+    }
+  });
+
   // Use the `renderAndCache` utility defined below to serve pages
   server.get('/', (req, res) => {
     renderAndCache(req, res, '/');
@@ -63,11 +91,3 @@ app.prepare().then(() => {
     console.log(`> Ready on http://localhost:${port}`);
   });
 });
-
-/*
- * NB: make sure to modify this to take into account anything that should trigger
- * an immediate page change (e.g a locale stored in req.session)
- */
-function getCacheKey(req) {
-  return `${req.url}`;
-}

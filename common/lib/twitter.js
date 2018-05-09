@@ -1,6 +1,5 @@
 const Twitter = require('twitter');
 const each = require('async/each');
-const whilst = require('async/whilst');
 const URL = require('url');
 const { Ranking } = require('../../db/models');
 
@@ -11,14 +10,14 @@ const twitter = new Twitter({
   access_token_secret: process.env.TWITTER_TOKEN_SECRET,
 });
 
-const fetchPage = async function fetchPage(app, options, lastCount, totalMentions, lastId) {
+const fetchPage = async function fetchPage(app, _options, _lastCount, _totalMentions, _lastId) {
+  let [lastId, lastCount, totalMentions] = [_lastCount, _totalMentions, _lastId];
+  const options = _options;
   return new Promise(async (resolve, reject) => {
-    // console.log(hostname, lastId);
     if (lastId) {
       options.max_id = lastId;
     }
     twitter.get('search/tweets', options, (error, tweets) => {
-      // console.log('RESULT!');
       if (error || !tweets) {
         console.log(error);
         reject(error);
@@ -26,9 +25,7 @@ const fetchPage = async function fetchPage(app, options, lastCount, totalMention
         const { statuses } = tweets;
         lastCount = statuses.length;
         totalMentions += statuses.length;
-        // console.log(hostname, statuses.length, lastCount);
         if (lastCount === 100) {
-          // console.log('lastCount == 100', statuses[99]);
           lastId = statuses[99].id;
         }
         resolve([lastId, lastCount, totalMentions]);
@@ -43,31 +40,20 @@ const paginateMentions = (app) =>
     let lastId = null;
     let totalMentions = 0;
 
-    if (app.website.length > 0) {
+    if (app.website && app.website.length > 0) {
       const { hostname } = URL.parse(app.website);
       const options = { q: hostname, count: 100 };
-      whilst(
-        () => lastCount === 100,
-        async (whilstCallback) => {
-          try {
-            [lastId, lastCount, totalMentions] = await fetchPage(app, options, lastCount, totalMentions, lastId);
-            whilstCallback();
-          } catch (error) {
-            whilstCallback(error);
-          }
-        },
-        (error) => {
-          /* eslint no-param-reassign: [0] */
-          app.twitterMentions = totalMentions;
-          if (error) {
-            reject(error);
-          } else {
-            resolve(totalMentions);
-          }
-        },
-      );
+      try {
+        while (lastCount === 100) {
+          /* eslint no-await-in-loop: [0] */
+          [lastId, lastCount, totalMentions] = await fetchPage(app, options, lastCount, totalMentions, lastId);
+        }
+        resolve(totalMentions);
+      } catch (error) {
+        reject(error);
+      }
     } else {
-      resolve(app);
+      resolve(totalMentions);
     }
   });
 
@@ -86,6 +72,7 @@ const saveRanking = (app) =>
       });
       resolve(ranking);
     } catch (error) {
+      console.log('rejecting in saveRanknigs', error);
       reject(error);
     }
   });
