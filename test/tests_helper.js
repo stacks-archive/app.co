@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import 'sepia'; /* eslint import/no-extraneous-dependencies: [0] */
 
-import { sequelize, App } from '../models';
+import { sequelize, App } from '../db/models';
 
 dotenv.config();
 

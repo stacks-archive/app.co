@@ -1,5 +1,5 @@
 import '../tests_helper';
-import { App } from '../../models';
+import { App } from '../../db/models';
 
 it('can fetch from an empty state', async () => {
   const apps = await App.findAll();

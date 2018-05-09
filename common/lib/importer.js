@@ -1,7 +1,7 @@
 import { google } from 'googleapis';
 import _ from 'lodash';
 
-import { App } from '../../models';
+import { App } from '../../db/models';
 
 export default class Importer {
   static auth() {

@@ -1,6 +1,6 @@
 import '../../tests_helper';
 import Importer from '../../../common/lib/importer';
-import { App } from '../../../models';
+import { App } from '../../../db/models';
 
 test('it should be able to setup authentication', async () => {
   const auth = Importer.auth();
@@ -26,5 +26,5 @@ test('it should fetch apps on the spreadsheet', async () => {
 test('it creates App records correctly', async () => {
   await Importer.import();
   const count = await App.count();
-  expect(count).toEqual(128);
+  expect(count).toBeGreaterThan(100);
 });
