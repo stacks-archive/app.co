@@ -35,3 +35,17 @@ Then to run migrations:
 ```bash
 yarn db:migrate
 ```
+
+### Running tests
+
+Make sure you have created a test database (you only need to run this once):
+
+~~~bash
+NODE_ENV=test yarn db:create
+~~~
+
+Then, run tests:
+
+~~~bash
+yarn test
+~~~
