@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Ranking.associate = function association(models) {
-    Ranking.App = Ranking.belongsTo(models.App);
+    Ranking.App = Ranking.belongsTo(models.App, { foreignKey: 'appId' });
   };
 
   return Ranking;

@@ -72,8 +72,8 @@
     "lint": "eslint \"./**/*.js\"",
     "lint:fix": "eslint \"./**/*.js\" --fix",
     "start": "NODE_ENV=production node server.js",
-    "test": "NODE_ENV=test jest",
-    "test-watch": "NODE_ENV=test jest --watch"
+    "test": "VCR_MODE=cache NODE_ENV=test jest",
+    "test-watch": "VCR_MODE=cache NODE_ENV=test jest --watch"
   },
   "jest": {
     "globals": {

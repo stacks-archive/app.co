@@ -15,7 +15,7 @@ it('can be associated with an app', async () => {
     date: new Date(),
   });
 
-  const found = await App.findById(ranking.appId);
+  const found = await ranking.getApp();
   expect(found.id).toEqual(app.id);
   expect(found.name).toEqual(app.name);
 });

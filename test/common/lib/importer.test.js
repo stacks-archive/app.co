@@ -10,21 +10,29 @@ test('it should be able to setup authentication', async () => {
   expect(auth.credentials.refresh_token).toEqual(process.env.GOOGLE_REFRESH_TOKEN);
 });
 
-test('it should fetch apps on the spreadsheet', async () => {
-  const apps = await Importer.import();
-  const app = apps[0];
-  expect(app.name).toEqual('Aragon');
-  expect(app.category).toEqual('Business Tools');
-  expect(app.blockchain).toEqual('Ethereum');
-  expect(app.storageNetwork).toEqual('IPFS');
-  expect(app.authentication).toEqual('Ethereum Web3');
-  expect(app.website).toEqual('https://aragon.one/');
-  expect(app.registrationIsOpen).toEqual(true);
-  expect(app.openSourceUrl).toEqual('https://github.com/aragon/aragon');
-});
+test.skip(
+  'it should fetch apps on the spreadsheet',
+  async () => {
+    const apps = await Importer.import();
+    const app = apps[0];
+    expect(app.name).toEqual('Aragon');
+    expect(app.category).toEqual('Business Tools');
+    expect(app.blockchain).toEqual('Ethereum');
+    expect(app.storageNetwork).toEqual('IPFS');
+    expect(app.authentication).toEqual('Ethereum Web3');
+    expect(app.website).toEqual('https://aragon.one/');
+    expect(app.registrationIsOpen).toEqual(true);
+    expect(app.openSourceUrl).toEqual('https://github.com/aragon/aragon');
+  },
+  15000,
+);
 
-test('it creates App records correctly', async () => {
-  await Importer.import();
-  const count = await App.count();
-  expect(count).toBeGreaterThan(100);
-});
+test.skip(
+  'it creates App records correctly',
+  async () => {
+    await Importer.import();
+    const count = await App.count();
+    expect(count).toBeGreaterThan(100);
+  },
+  15000,
+);
