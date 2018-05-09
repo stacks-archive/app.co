@@ -2,7 +2,7 @@
   "presets": [
     "next/babel",
     [
-      "env",
+      "@babel/preset-env",
       {
         "targets": {
           "node": "current"
@@ -10,5 +10,7 @@
       }
     ]
   ],
-  "plugins": ["babel-plugin-styled-components"]
+  "plugins": [
+    "babel-plugin-styled-components"
+  ]
 }
