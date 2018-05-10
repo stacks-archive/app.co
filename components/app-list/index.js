@@ -2,12 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { wrapperStyles } from '@common/styles';
 
-const StyledAppList = styled.table`
+const StyledAppList = styled.div`
   width: 100%;
-  padding: 0px 10px;
   font-family: Lato, sans-serif;
   font-size: 14px;
   color: #282F36;
+`;
+
+const Table = styled.table`
+  width: 100%;
+  padding: 0px 10px;
 `;
 
 const Row = styled.tr`
@@ -15,9 +19,9 @@ const Row = styled.tr`
 `;
 
 const Rank = styled.td`
-  width: 45px;
-  text-align: center;
-  padding: 10px 5px;
+  width: 35px;
+  text-align: left;
+  padding: 10px 0px;
 `;
 
 const Icon = styled.td`
@@ -31,7 +35,8 @@ const IconImage = styled.img`
 `
 
 const Name = styled.td`
-  padding: 10px 5px;
+  padding: 10px 10px;
+  font-weight: bold;
 `;
 
 const Description = styled.td`
@@ -52,6 +57,17 @@ const CategoryTag = styled.div`
   border: 1px solid rgba(40, 47, 54, 0.15)
 `
 
+const ExpandButtonWrapper = styled.div`
+  width:150px;
+  margin: 20px 10px;
+`
+
+const Footer = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+StyledAppList.Table = Table;
 StyledAppList.Row = Row;
 StyledAppList.Rank = Rank;
 StyledAppList.Name = Name;
@@ -60,5 +76,7 @@ StyledAppList.Category = Category;
 StyledAppList.CategoryTag = CategoryTag;
 StyledAppList.Icon = Icon;
 StyledAppList.IconImage = IconImage;
+StyledAppList.ExpandButtonWrapper = ExpandButtonWrapper;
+StyledAppList.Footer = Footer;
 
 export { StyledAppList };

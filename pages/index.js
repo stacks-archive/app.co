@@ -12,15 +12,16 @@ const sections = {
   right: rightItems,
 };
 
-export default ({ data }) => (
+export default ({ data }) => { 
+ return (
   <Page>
     <Header data={sections} />
-    <Hero title="Decentralized Apps and You" />
+    <Hero title="Universal Dapp Repository" />
     <Page.Section wrap>
       <Page.Section.Content>
-        <AppList apps={data.apps} />
+        <AppList apps={data.apps} show={10}/>
       </Page.Section.Content>
       <Page.Sidebar>{data.apps.map((app) => <div key={app.id}>{app.name}</div>)}</Page.Sidebar>
     </Page.Section>
   </Page>
-);
+)};
