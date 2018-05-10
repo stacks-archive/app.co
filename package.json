@@ -85,6 +85,10 @@
   },
   "nodemonConfig": {
     "verbose": true,
-    "ignore": [".next/*", ".next", "pages/*"]
+    "ignore": [
+      ".next/*",
+      ".next",
+      "pages/*"
+    ]
   }
 }
