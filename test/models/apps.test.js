@@ -1,5 +1,5 @@
-import '../tests_helper';
-import { App } from '../../db/models';
+import helpers from '../tests_helper';
+import { App, Ranking } from '../../db/models';
 
 it('can fetch from an empty state', async () => {
   const apps = await App.findAll();
@@ -65,5 +65,29 @@ describe('enums', () => {
     expect(app.authentication).toEqual('Blockstack');
     app.authentication = 'Ethereum Web3';
     expect(app.authenticationID).toEqual(App.authenticationEnums['Ethereum Web3']);
+  });
+});
+
+describe('findWithRankings', () => {
+  it('should return only the most recent rankings', async () => {
+    const app = await helpers.makeApp();
+    const now = new Date();
+
+    const ranking = await Ranking.create({
+      appId: app.id,
+      date: now,
+    });
+
+    now.setDate(now.getDate() - 1);
+
+    await Ranking.create({
+      appId: app.id,
+      date: now,
+    });
+
+    const apps = await App.findAllWithRankings();
+    expect(apps[0].id).toEqual(app.id);
+    expect(apps[0].Rankings[0].id).toEqual(ranking.id);
+    expect(apps[0].Rankings.length).toEqual(1);
   });
 });

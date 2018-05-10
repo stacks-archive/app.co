@@ -38,7 +38,7 @@ async function renderAndCache(req, res, pagePath) {
   }
 
   try {
-    const apps = await App.findAll();
+    const apps = await App.findAllWithRankings();
     // If not let's render the page into HTML
     const html = await app.renderToHTML(req, res, pagePath, { apps });
 
