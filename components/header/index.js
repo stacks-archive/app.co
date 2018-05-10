@@ -29,14 +29,22 @@ const Item = styled.div`
   flex-grow: 1;
   text-align: center;
   &:not(:first-of-type) {
-    padding-left: 20px;
+    padding-left: 40px;
   }
 `;
 
+const Link = styled.a`
+  color:white;
+  text-decoration:none;
+  border-bottom: 1px solid white;
+  font-size: 0.9rem;
+  font-weight: bold;
+`
+
 const Logo = styled.div`
   border-radius: 10px;
-  height: 48px;
-  width: 48px;
+  height: 92px;
+  width: 92px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,9 +53,15 @@ const Logo = styled.div`
   flex-shrink: 0;
 `;
 
+const LogoImage = styled.img`
+  width:100%;
+`;
+
 StyledHeader.Wrapper = Wrapper;
 StyledHeader.Section = Section;
 StyledHeader.Item = Item;
+StyledHeader.Link = Link;
 StyledHeader.Logo = Logo;
+StyledHeader.LogoImage = LogoImage;
 
 export { StyledHeader };

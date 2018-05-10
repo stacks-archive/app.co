@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyledHeader } from '@components/header';
 import { Button } from '@components/button';
+import Link from 'next/link'
 
 const Header = ({ data }) => {
   const renderItems = (items) =>
@@ -14,7 +15,7 @@ const Header = ({ data }) => {
       } else {
         return (
           <StyledHeader.Item key={i} onClick={() => action()}>
-            {label}
+            <StyledHeader.Link href="">{label}</StyledHeader.Link>
           </StyledHeader.Item>
         );
       }
@@ -25,7 +26,9 @@ const Header = ({ data }) => {
       <StyledHeader>
         <StyledHeader.Wrapper>
           <StyledHeader.Section>
-            <StyledHeader.Logo>A</StyledHeader.Logo>
+            <StyledHeader.Logo>
+              <StyledHeader.LogoImage src="/static/images/logo.png" />
+            </StyledHeader.Logo>
             {renderItems(data.left)}
           </StyledHeader.Section>
           <StyledHeader.Section>{renderItems(data.right)}</StyledHeader.Section>
