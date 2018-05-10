@@ -2,11 +2,6 @@ const express = require('express');
 const next = require('next');
 const LRUCache = require('lru-cache');
 
-require('dotenv').config();
-
-const { App } = require('./db/models');
-const { saveRanking } = require('./common/lib/twitter');
-
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -38,9 +33,8 @@ async function renderAndCache(req, res, pagePath) {
   }
 
   try {
-    const apps = await App.findAllWithRankings();
     // If not let's render the page into HTML
-    const html = await app.renderToHTML(req, res, pagePath, { apps });
+    const html = await app.renderToHTML(req, res, pagePath);
 
     // Something is wrong with the request, let's skip the cache
     if (res.statusCode !== 200) {
@@ -59,25 +53,10 @@ async function renderAndCache(req, res, pagePath) {
   }
 }
 
+console.log('starting server')
 app.prepare().then(() => {
+  console.log('prepared')
   const server = express();
-
-  server.post('/api/fetch_rankings', async (req, res) => {
-    if (process.env.API_KEY === req.query.key) {
-      const apps = await App.findAll();
-      const fetchRankings = apps.map((appModel) => saveRanking(appModel));
-      Promise.all(fetchRankings)
-        .then(() => {
-          res.send('OK');
-        })
-        .catch((error) => {
-          console.log('api error', error);
-          res.status(500).send('API Error.');
-        });
-    } else {
-      res.status(400).send('Bad Request');
-    }
-  });
 
   // Use the `renderAndCache` utility defined below to serve pages
   server.get('/', (req, res) => {
