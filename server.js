@@ -53,9 +53,7 @@ async function renderAndCache(req, res, pagePath) {
   }
 }
 
-console.log('starting server')
 app.prepare().then(() => {
-  console.log('prepared')
   const server = express();
 
   // Use the `renderAndCache` utility defined below to serve pages
