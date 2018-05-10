@@ -1,13 +1,18 @@
 import dotenv from 'dotenv';
 import 'sepia'; /* eslint import/no-extraneous-dependencies: [0] */
 
-import { sequelize, App } from '../db/models';
+import { sequelize, App, Ranking } from '../db/models';
 
 dotenv.config();
 
-beforeAll(async () => {
-  sequelize.sync();
-  App.truncate({ cascade: true });
+// beforeAll(async () => {
+//   await sequelize.sync();
+// });
+
+beforeEach(async () => {
+  await sequelize.sync();
+  await App.truncate({ cascade: true });
+  // Ranking.truncate({ cascade: true });
 });
 
 const makeApp = async function makeApp(name = 'Cryptokitties', website = 'https://cryptokitties.co') {

@@ -1,14 +1,14 @@
 import helpers from '../../tests_helper';
 import { paginateMentions, saveRanking } from '../../../common/lib/twitter';
 
-it('fetches the total number of mentions for an app', async () => {
+test.skip('fetches the total number of mentions for an app', async () => {
   const app = await helpers.makeApp();
 
   const totalMentions = await paginateMentions(app);
   expect(totalMentions).toBeGreaterThan(100);
 });
 
-it('saves a ranking model for an app', async () => {
+test.skip('saves a ranking model for an app', async () => {
   const app = await helpers.makeApp();
 
   const ranking = await saveRanking(app);

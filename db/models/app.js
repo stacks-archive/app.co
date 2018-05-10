@@ -54,12 +54,21 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
   });
-  App.associate = function associations() {
-    // associations can be defined here
+  App.associate = function associations(models) {
+    App.Rankings = App.hasMany(models.Ranking, { foreignKey: 'appId' });
+    App.findAllWithRankings = () =>
+      App.findAll({
+        include: [
+          {
+            model: models.Ranking,
+            order: [['date', 'DESC']],
+            limit: 1,
+          },
+        ],
+      });
   };
 
   _.extend(App, ENUMS);
 
-  // console.log(App.blockchainEnums);
   return App;
 };
