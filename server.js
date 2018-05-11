@@ -1,11 +1,17 @@
 const express = require('express');
 const next = require('next');
 const LRUCache = require('lru-cache');
+const dotenv = require('dotenv');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
+if (dev) {
+  dotenv.config();
+}
 const app = next({ dev });
 const handle = app.getRequestHandler();
+
+const apiServer = process.env.API_SERVER || 'https://app-co-api.herokuapp.com';
 
 // This is where we cache our rendered HTML pages
 const ssrCache = new LRUCache({
@@ -34,7 +40,7 @@ async function renderAndCache(req, res, pagePath) {
 
   try {
     // If not let's render the page into HTML
-    const html = await app.renderToHTML(req, res, pagePath);
+    const html = await app.renderToHTML(req, res, pagePath, { apiServer });
 
     // Something is wrong with the request, let's skip the cache
     if (res.statusCode !== 200) {

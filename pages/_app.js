@@ -8,7 +8,8 @@ class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
 
-    const response = await fetch('http://app-co-api.herokuapp.com/api/apps');
+    const { apiServer } = ctx.query;
+    const response = await fetch(`${apiServer}/api/apps`);
     const apps = await response.json();
     const data = { apps };
 
