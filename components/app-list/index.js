@@ -6,7 +6,7 @@ const StyledAppList = styled.div`
   width: 100%;
   font-family: Lato, sans-serif;
   font-size: 14px;
-  color: #282F36;
+  color: #282f36;
 `;
 
 const Table = styled.table`
@@ -25,14 +25,14 @@ const Rank = styled.td`
 `;
 
 const Icon = styled.td`
-  width:45px;
-  height:45px;
-`
+  width: 45px;
+  height: 45px;
+`;
 
 const IconImage = styled.img`
-  width:45px;
-  height:45px;
-`
+  width: 45px;
+  height: 45px;
+`;
 
 const Name = styled.td`
   padding: 10px 10px;
@@ -54,18 +54,18 @@ const CategoryTag = styled.div`
   text-align: center;
   padding: 10px 20px;
   border-radius: 10px;
-  border: 1px solid rgba(40, 47, 54, 0.15)
-`
+  border: 1px solid rgba(40, 47, 54, 0.15);
+`;
 
 const ExpandButtonWrapper = styled.div`
-  width:150px;
+  width: 150px;
   margin: 20px 10px;
-`
+`;
 
 const Footer = styled.div`
   display: flex;
   align-items: center;
-`
+`;
 
 StyledAppList.Table = Table;
 StyledAppList.Row = Row;
