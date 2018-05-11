@@ -3,14 +3,6 @@
     "next/babel"
   ],
   "plugins": [
-    "babel-plugin-styled-components",
-    [
-      "module-resolver",
-      {
-        "alias": {
-          "@components": "./components"
-        }
-      }
-    ]
+    "babel-plugin-styled-components"
   ]
 }

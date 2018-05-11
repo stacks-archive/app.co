@@ -9,7 +9,7 @@ const StyledHero = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  z-index: 100;
+  z-index: 1;
   padding-top: ${headerHeight};
 
   &::before {
@@ -32,7 +32,7 @@ const StyledHero = styled.div`
 `;
 const Content = styled.div`
   position: relative;
-  z-index: 100;
+  z-index: 1;
   ${wrapperStyles()};
 `;
 

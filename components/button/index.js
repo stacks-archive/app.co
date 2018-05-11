@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { darken } from 'polished';
+
 const Button = styled.div`
   padding: 10px 20px;
   border-radius: 20px;
@@ -13,6 +14,7 @@ const Button = styled.div`
   text-align: center;
   user-select: none;
   transition: 0.15s all ease-in-out;
+  cursor: pointer;
   &:hover {
     cursor: pointer;
   }

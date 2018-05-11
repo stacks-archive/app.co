@@ -1,40 +1,48 @@
 import React from 'react';
 import { StyledHeader } from '@components/header';
 import { Button } from '@components/button';
-import Link from 'next/link';
+import SubmitDapp from '@containers/modals/submit-dapp';
 
-const Header = ({ data }) => {
-  const renderItems = (items) =>
-    items.map(({ label, action = () => null, type }, i) => {
-      if (type === 'button/primary') {
-        return (
-          <Button key={i} onClick={() => action()} type={type}>
-            {label}
-          </Button>
-        );
-      }
-      return (
-        <StyledHeader.Item key={i} onClick={() => action()}>
-          <StyledHeader.Link href="">{label}</StyledHeader.Link>
-        </StyledHeader.Item>
-      );
+class Header extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      submitModalOpen: false,
+    };
+    this.openModal = this.openModal.bind(this);
+    this.modal = this.modal.bind(this);
+  }
+
+  openModal() {
+    this.setState({
+      submitModalOpen: true,
     });
+  }
 
-  if (data) {
+  render() {
     return (
       <StyledHeader>
         <StyledHeader.Wrapper>
           <StyledHeader.Section>
             <StyledHeader.Logo>App.co</StyledHeader.Logo>
-            {renderItems(data.left)}
+            <StyledHeader.Item onClick={() => {}}>
+              <StyledHeader.Link href="">What's a Dapp?</StyledHeader.Link>
+            </StyledHeader.Item>
+            <StyledHeader.Item onClick={() => {}}>
+              <StyledHeader.Link href="">Who we are</StyledHeader.Link>
+            </StyledHeader.Item>
           </StyledHeader.Section>
-          <StyledHeader.Section>{renderItems(data.right)}</StyledHeader.Section>
+          <StyledHeader.Section>
+            <Button type="button/primary" onClick={this.openModal} href="">
+              Add your Dapp
+            </Button>
+          </StyledHeader.Section>
         </StyledHeader.Wrapper>
         <StyledHeader.Illustration src="/static/images/hero-illustration/illustration@3x.png" />
+        <SubmitDapp open={this.state.submitModalOpen} close={() => this.setState({ submitModalOpen: false })} />
       </StyledHeader>
     );
   }
-  return null;
-};
+}
 
 export { Header };
