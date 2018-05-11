@@ -67,7 +67,7 @@ const NameLink = styled.a`
 `;
 
 const Column = styled.td`
-  padding: 10px 5px;
+  padding: 10px 15px;
   color: #6c737a;
   text-align: ${props => props.align};
 `;
@@ -102,7 +102,7 @@ const HeaderRow = styled.tr`
 
 const HeaderItem = styled.th`
   text-align: ${props => props.align};
-  padding: 20px 5px;
+  padding: 20px 15px;
 `
 
 const Footer = styled.div`
