@@ -7,7 +7,6 @@ import { normalize } from 'polished';
  */
 injectGlobal`
 ${normalize()};
-@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900|Roboto+Slab:300,400,700');
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -37,6 +36,10 @@ export default class MyDocument extends Document {
       <html lang="en">
         <Head>
           <title>App.co</title>
+          <link
+            href="https://fonts.googleapis.com/css?family=Lato:400,700,900|Roboto+Slab:300,400,700"
+            rel="stylesheet"
+          />
           {this.props.styleTags}
         </Head>
         <body>
