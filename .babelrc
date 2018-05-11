@@ -1,5 +1,13 @@
 {
   "env": {
+    "production": {
+      "presets": [
+        "next/babel"
+      ],
+      "plugins": [
+        "babel-plugin-styled-components"
+      ]
+    },
     "development": {
       "presets": [
         "next/babel"
