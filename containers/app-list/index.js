@@ -7,8 +7,8 @@ import { LinkButton } from '@components/link-button';
 import { DropdownButton } from '@containers/dropdown-button';
 
 const SORT_METHOD = {
-  POPULAR: { value: 0, name: 'Popular', description: 'Sorted by number of tweets in the last 7 days' }
-}
+  POPULAR: { value: 0, name: 'Popular', description: 'Sorted by number of tweets in the last 7 days' },
+};
 
 const getTwitterMentions = (app) => {
   const [ranking] = app.Rankings;
@@ -26,7 +26,7 @@ class AppList extends React.Component {
       showCount: props.show,
       showAll: false,
       sortMethod: SORT_METHOD.POPULAR,
-      sortedApps
+      sortedApps,
     };
   }
 
@@ -37,7 +37,7 @@ class AppList extends React.Component {
   }
 
   showSortDropdown() {
-    console.log('show sort')
+    console.log('show sort');
   }
 
   render() {
@@ -51,7 +51,11 @@ class AppList extends React.Component {
           <StyledAppList.Icon>
             <StyledAppList.IconImage src="https://blockstack.org/images/logos/app-icon-stealthy-256x256.png" />
           </StyledAppList.Icon>
-          <StyledAppList.Name>{app.name}</StyledAppList.Name>
+          <StyledAppList.Name>
+            <StyledAppList.NameLink href={app.website} target="_blank">
+              {app.name}
+            </StyledAppList.NameLink>
+          </StyledAppList.Name>
           <StyledAppList.Description>Placeholder for description</StyledAppList.Description>
           <StyledAppList.Category>
             <StyledAppList.CategoryTag>{app.category}</StyledAppList.CategoryTag>
@@ -66,16 +70,10 @@ class AppList extends React.Component {
         <StyledAppList>
           <StyledAppList.Header>
             <StyledAppList.HeaderItemLeft>
-              <DropdownButton onClick={() => this.showSortDropdown()}>
-                {sortMethod.name}
-              </DropdownButton>
+              <DropdownButton onClick={() => this.showSortDropdown()}>{sortMethod.name}</DropdownButton>
             </StyledAppList.HeaderItemLeft>
-            <StyledAppList.HeaderItemLeft>
-              {sortMethod.description}
-            </StyledAppList.HeaderItemLeft>
-            <StyledAppList.HeaderItemRight>
-              Add Filters
-            </StyledAppList.HeaderItemRight>
+            <StyledAppList.HeaderItemLeft>{sortMethod.description}</StyledAppList.HeaderItemLeft>
+            <StyledAppList.HeaderItemRight>Add Filters</StyledAppList.HeaderItemRight>
           </StyledAppList.Header>
           <StyledAppList.Table>
             <tbody>{renderRows()}</tbody>

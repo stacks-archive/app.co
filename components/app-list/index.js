@@ -39,6 +39,15 @@ const Name = styled.td`
   font-weight: bold;
 `;
 
+const NameLink = styled.a`
+  color: #282f36;
+  font-weight: 700;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 const Description = styled.td`
   padding: 10px 5px;
   color: #6c737a;
@@ -65,7 +74,7 @@ const ExpandButtonWrapper = styled.div`
 const Header = styled.div`
   display: flex;
   align-items: center;
-  border-bottom: 2px solid #BDBDBD;
+  border-bottom: 2px solid #bdbdbd;
   margin-bottom: 20px;
   padding: 20px 10px;
 `;
@@ -74,11 +83,11 @@ const HeaderItemLeft = styled.div`
   &:not(:first-of-type) {
     padding-left: 50px;
   }
-`
+`;
 
 const HeaderItemRight = styled.div`
   margin-left: auto;
-`
+`;
 
 const Footer = styled.div`
   display: flex;
@@ -89,6 +98,7 @@ StyledAppList.Table = Table;
 StyledAppList.Row = Row;
 StyledAppList.Rank = Rank;
 StyledAppList.Name = Name;
+StyledAppList.NameLink = NameLink;
 StyledAppList.Description = Description;
 StyledAppList.Category = Category;
 StyledAppList.CategoryTag = CategoryTag;
