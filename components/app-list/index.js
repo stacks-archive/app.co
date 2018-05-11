@@ -15,6 +15,10 @@ const Table = styled.table`
   border-collapse: collapse;
 `;
 
+const SpacerRow = styled.tr`
+  height: 30px;
+`;
+
 const Row = styled.tr`
   height: 60px;
   &:hover {
@@ -62,22 +66,24 @@ const NameLink = styled.a`
   }
 `;
 
-const Description = styled.td`
+const Column = styled.td`
   padding: 10px 5px;
   color: #6c737a;
+  text-align: ${props => props.align};
 `;
 
-const Category = styled.td`
-  padding: 10px 5px;
-  text-align: center;
-`;
+const TagGroup = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`
 
-const CategoryTag = styled.div`
-  display: inline-block;
-  text-align: center;
+const Tag = styled.div`
+  color: #282f36;
+  text-align: right;
   padding: 10px 20px;
   border-radius: 10px;
   border: 1px solid rgba(40, 47, 54, 0.15);
+  margin-left: 10px;
 `;
 
 const ExpandButtonWrapper = styled.div`
@@ -85,23 +91,19 @@ const ExpandButtonWrapper = styled.div`
   margin: 20px 10px;
 `;
 
-const Header = styled.div`
-  display: flex;
+const Header = styled.thead`
+`;
+
+const HeaderRow = styled.tr`
   align-items: center;
   border-bottom: 2px solid #bdbdbd;
   margin-bottom: 20px;
-  padding: 20px 10px;
 `;
 
-const HeaderItemLeft = styled.div`
-  &:not(:first-of-type) {
-    padding-left: 50px;
-  }
-`;
-
-const HeaderItemRight = styled.div`
-  margin-left: auto;
-`;
+const HeaderItem = styled.th`
+  text-align: ${props => props.align};
+  padding: 20px 5px;
+`
 
 const Footer = styled.div`
   display: flex;
@@ -109,19 +111,20 @@ const Footer = styled.div`
 `;
 
 StyledAppList.Table = Table;
+StyledAppList.SpacerRow = SpacerRow;
 StyledAppList.Row = Row;
 StyledAppList.Rank = Rank;
 StyledAppList.Name = Name;
 StyledAppList.NameLink = NameLink;
-StyledAppList.Description = Description;
-StyledAppList.Category = Category;
-StyledAppList.CategoryTag = CategoryTag;
+StyledAppList.Column = Column;
+StyledAppList.Tag = Tag;
+StyledAppList.TagGroup = TagGroup;
 StyledAppList.Icon = Icon;
 StyledAppList.IconImage = IconImage;
 StyledAppList.ExpandButtonWrapper = ExpandButtonWrapper;
 StyledAppList.Header = Header;
-StyledAppList.HeaderItemLeft = HeaderItemLeft;
-StyledAppList.HeaderItemRight = HeaderItemRight;
+StyledAppList.HeaderRow = HeaderRow;
+StyledAppList.HeaderItem = HeaderItem;
 StyledAppList.Footer = Footer;
 
 export { StyledAppList };

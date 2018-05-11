@@ -19,11 +19,11 @@ export default ({ data }) => (
     <Hero />
     <Page.Section wrap>
       <Page.Section.Content>
-        <AppList apps={data.apps} show={10} />
+        <AppList apps={data.apps} show={25} />
       </Page.Section.Content>
-      <Page.Sidebar>
+{/*      <Page.Sidebar>
         <SubmitDappCard />
-      </Page.Sidebar>
+      </Page.Sidebar>*/}
     </Page.Section>
   </Page>
 );

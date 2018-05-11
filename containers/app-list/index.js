@@ -7,7 +7,7 @@ import { LinkButton } from '@components/link-button';
 import { DropdownButton } from '@containers/dropdown-button';
 
 const SORT_METHOD = {
-  POPULAR: { value: 0, name: 'Popular', description: 'Sorted by number of tweets in the last 7 days' },
+  TWEETS: { value: 0, name: 'Tweets / Week', description: '' },
 };
 
 const getTwitterMentions = (app) => {
@@ -25,7 +25,7 @@ class AppList extends React.Component {
     this.state = {
       showCount: props.show,
       showAll: false,
-      sortMethod: SORT_METHOD.POPULAR,
+      sortMethod: SORT_METHOD.TWEETS,
       sortedApps,
     };
   }
@@ -43,6 +43,34 @@ class AppList extends React.Component {
   render() {
     const { showCount, showAll, sortMethod, sortedApps } = this.state;
 
+    console.log(sortedApps)
+
+    const renderNetworkTags = (data) => {
+      const tags = []
+
+      if (data.authentication) {
+        tags.push(data.authentication)
+      }
+
+      if (data.blockchain) {
+        tags.push(data.blockchain)
+      }
+
+      if (data.storageNetwork) {
+        tags.push(data.storageNetwork)
+      }
+
+      const tagSet = Array.from(new Set(tags))
+
+      console.log(tagSet)
+
+      return (
+        <StyledAppList.TagGroup>
+        {tagSet.map(tag => <StyledAppList.Tag>{tag}</StyledAppList.Tag>)}
+        </StyledAppList.TagGroup>
+      )
+    }
+
     const renderRows = () => {
       const visibleApps = showAll ? sortedApps : sortedApps.slice(0, showCount);
       return visibleApps.map((app, index) => (
@@ -56,11 +84,20 @@ class AppList extends React.Component {
               {app.name}
             </StyledAppList.NameLink>
           </StyledAppList.Name>
-          <StyledAppList.Description>Placeholder for description</StyledAppList.Description>
-          <StyledAppList.Category>
-            <StyledAppList.CategoryTag>{app.category}</StyledAppList.CategoryTag>
-          </StyledAppList.Category>
-          <StyledAppList.Description>{getTwitterMentions(app)}</StyledAppList.Description>
+          <StyledAppList.Column>Placeholder for description</StyledAppList.Column>
+          <StyledAppList.Column align="right">
+            <StyledAppList.TagGroup>
+              <StyledAppList.Tag>
+                {app.category}
+              </StyledAppList.Tag>
+            </StyledAppList.TagGroup>
+          </StyledAppList.Column>
+          <StyledAppList.Column align="right">
+            {renderNetworkTags(app)}
+          </StyledAppList.Column>
+          <StyledAppList.Column align="right">
+            {getTwitterMentions(app)}
+          </StyledAppList.Column>
         </StyledAppList.Row>
       ));
     };
@@ -68,15 +105,22 @@ class AppList extends React.Component {
     if (sortedApps) {
       return (
         <StyledAppList>
-          <StyledAppList.Header>
-            <StyledAppList.HeaderItemLeft>
-              <DropdownButton onClick={() => this.showSortDropdown()}>{sortMethod.name}</DropdownButton>
-            </StyledAppList.HeaderItemLeft>
-            <StyledAppList.HeaderItemLeft>{sortMethod.description}</StyledAppList.HeaderItemLeft>
-            <StyledAppList.HeaderItemRight>Add Filters</StyledAppList.HeaderItemRight>
-          </StyledAppList.Header>
           <StyledAppList.Table>
-            <tbody>{renderRows()}</tbody>
+            <StyledAppList.Header>
+              <StyledAppList.HeaderRow>
+                <StyledAppList.HeaderItem colSpan="3" align="left">
+                  <DropdownButton onClick={() => this.showSortDropdown()}>{sortMethod.name}</DropdownButton>
+                </StyledAppList.HeaderItem>
+                <StyledAppList.HeaderItem align="left">Add Filters</StyledAppList.HeaderItem>
+                <StyledAppList.HeaderItem align="right">Category</StyledAppList.HeaderItem>
+                <StyledAppList.HeaderItem align="right">Protocols</StyledAppList.HeaderItem>
+                <StyledAppList.HeaderItem align="right">Tweets</StyledAppList.HeaderItem>
+              </StyledAppList.HeaderRow>
+            </StyledAppList.Header>
+            <tbody>
+              <StyledAppList.SpacerRow key={0}></StyledAppList.SpacerRow>
+              {renderRows()}
+            </tbody>
           </StyledAppList.Table>
           <StyledAppList.Footer>
             <StyledAppList.ExpandButtonWrapper>
