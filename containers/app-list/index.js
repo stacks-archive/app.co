@@ -43,8 +43,6 @@ class AppList extends React.Component {
   render() {
     const { showCount, showAll, sortMethod, sortedApps } = this.state;
 
-    console.log(sortedApps)
-
     const renderNetworkTags = (data) => {
       const tags = []
 
@@ -62,11 +60,9 @@ class AppList extends React.Component {
 
       const tagSet = Array.from(new Set(tags))
 
-      console.log(tagSet)
-
       return (
         <StyledAppList.TagGroup>
-        {tagSet.map(tag => <StyledAppList.Tag>{tag}</StyledAppList.Tag>)}
+          {tagSet.map(tag => <StyledAppList.Tag>{tag}</StyledAppList.Tag>)}
         </StyledAppList.TagGroup>
       )
     }
