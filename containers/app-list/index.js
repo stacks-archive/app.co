@@ -4,6 +4,11 @@ import _ from 'lodash';
 import { StyledAppList } from '@components/app-list';
 import { Button } from '@components/button';
 import { LinkButton } from '@components/link-button';
+import { DropdownButton } from '@containers/dropdown-button';
+
+const SORT_METHOD = {
+  POPULAR: { value: 0, name: 'Popular', description: 'Sorted by number of tweets in the last 7 days' }
+}
 
 const getTwitterMentions = (app) => {
   const [ranking] = app.Rankings;
@@ -20,7 +25,8 @@ class AppList extends React.Component {
     this.state = {
       showCount: props.show,
       showAll: false,
-      sortedApps,
+      sortMethod: SORT_METHOD.POPULAR,
+      sortedApps
     };
   }
 
@@ -30,8 +36,12 @@ class AppList extends React.Component {
     });
   }
 
+  showSortDropdown() {
+    console.log('show sort')
+  }
+
   render() {
-    const { showCount, showAll, sortedApps } = this.state;
+    const { showCount, showAll, sortMethod, sortedApps } = this.state;
 
     const renderRows = () => {
       const visibleApps = showAll ? sortedApps : sortedApps.slice(0, showCount);
@@ -54,6 +64,19 @@ class AppList extends React.Component {
     if (sortedApps) {
       return (
         <StyledAppList>
+          <StyledAppList.Header>
+            <StyledAppList.HeaderItemLeft>
+              <DropdownButton onClick={() => this.showSortDropdown()}>
+                {sortMethod.name}
+              </DropdownButton>
+            </StyledAppList.HeaderItemLeft>
+            <StyledAppList.HeaderItemLeft>
+              {sortMethod.description}
+            </StyledAppList.HeaderItemLeft>
+            <StyledAppList.HeaderItemRight>
+              Add Filters
+            </StyledAppList.HeaderItemRight>
+          </StyledAppList.Header>
           <StyledAppList.Table>
             <tbody>{renderRows()}</tbody>
           </StyledAppList.Table>

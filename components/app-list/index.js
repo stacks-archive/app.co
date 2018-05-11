@@ -62,6 +62,24 @@ const ExpandButtonWrapper = styled.div`
   margin: 20px 10px;
 `;
 
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #BDBDBD;
+  margin-bottom: 20px;
+  padding: 20px 10px;
+`;
+
+const HeaderItemLeft = styled.div`
+  &:not(:first-of-type) {
+    padding-left: 50px;
+  }
+`
+
+const HeaderItemRight = styled.div`
+  margin-left: auto;
+`
+
 const Footer = styled.div`
   display: flex;
   align-items: center;
@@ -77,6 +95,9 @@ StyledAppList.CategoryTag = CategoryTag;
 StyledAppList.Icon = Icon;
 StyledAppList.IconImage = IconImage;
 StyledAppList.ExpandButtonWrapper = ExpandButtonWrapper;
+StyledAppList.Header = Header;
+StyledAppList.HeaderItemLeft = HeaderItemLeft;
+StyledAppList.HeaderItemRight = HeaderItemRight;
 StyledAppList.Footer = Footer;
 
 export { StyledAppList };
