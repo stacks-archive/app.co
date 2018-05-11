@@ -16,7 +16,7 @@ const apiServer = process.env.API_SERVER || 'https://app-co-api.herokuapp.com';
 // This is where we cache our rendered HTML pages
 const ssrCache = new LRUCache({
   max: 100,
-  maxAge: 1000 * 60 * 60, // 1hour
+  maxAge: dev ? 1000 * 30 : 1000 * 60 * 60, // 1hour
 });
 
 /*

@@ -15,12 +15,12 @@ const sections = {
 export default ({ data }) => (
   <Page>
     <Header data={sections} />
-    <Hero title="Universal Dapp Repository" />
+    <Hero />
     <Page.Section wrap>
       <Page.Section.Content>
-        <AppList apps={data.apps} show={10}/>
+        <AppList apps={data.apps} show={10}  />
       </Page.Section.Content>
-      <Page.Sidebar></Page.Sidebar>
+      <Page.Sidebar />
     </Page.Section>
   </Page>
 );

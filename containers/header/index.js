@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyledHeader } from '@components/header';
 import { Button } from '@components/button';
-import Link from 'next/link'
+import Link from 'next/link';
 
 const Header = ({ data }) => {
   const renderItems = (items) =>
@@ -12,13 +12,12 @@ const Header = ({ data }) => {
             {label}
           </Button>
         );
-      } else {
-        return (
-          <StyledHeader.Item key={i} onClick={() => action()}>
-            <StyledHeader.Link href="">{label}</StyledHeader.Link>
-          </StyledHeader.Item>
-        );
       }
+      return (
+        <StyledHeader.Item key={i} onClick={() => action()}>
+          <StyledHeader.Link href="">{label}</StyledHeader.Link>
+        </StyledHeader.Item>
+      );
     });
 
   if (data) {
@@ -26,18 +25,16 @@ const Header = ({ data }) => {
       <StyledHeader>
         <StyledHeader.Wrapper>
           <StyledHeader.Section>
-            <StyledHeader.Logo>
-              <StyledHeader.LogoImage src="/static/images/logo.png" />
-            </StyledHeader.Logo>
+            <StyledHeader.Logo>App.co</StyledHeader.Logo>
             {renderItems(data.left)}
           </StyledHeader.Section>
           <StyledHeader.Section>{renderItems(data.right)}</StyledHeader.Section>
         </StyledHeader.Wrapper>
+        <StyledHeader.Illustration src="/static/images/hero-illustration/illustration@3x.png" />
       </StyledHeader>
     );
-  } else {
-    return null;
   }
+  return null;
 };
 
 export { Header };

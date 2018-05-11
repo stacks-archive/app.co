@@ -34,12 +34,12 @@ const Item = styled.div`
 `;
 
 const Link = styled.a`
-  color:white;
-  text-decoration:none;
+  color: white;
+  text-decoration: none;
   border-bottom: 1px solid white;
   font-size: 0.9rem;
-  font-weight: bold;
-`
+  font-weight: 500;
+`;
 
 const Logo = styled.div`
   border-radius: 10px;
@@ -51,10 +51,21 @@ const Logo = styled.div`
   background: white;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
   flex-shrink: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
 `;
 
 const LogoImage = styled.img`
-  width:100%;
+  width: 100%;
+`;
+
+const Illustration = styled.img`
+  position: absolute;
+  text-align: center;
+  z-index: 0;
+  max-width: 80%;
+  top: 0px;
+  left: 10%;
 `;
 
 StyledHeader.Wrapper = Wrapper;
@@ -63,5 +74,6 @@ StyledHeader.Item = Item;
 StyledHeader.Link = Link;
 StyledHeader.Logo = Logo;
 StyledHeader.LogoImage = LogoImage;
+StyledHeader.Illustration = Illustration;
 
 export { StyledHeader };

@@ -2,10 +2,14 @@ import React from 'react';
 import { StyledHero } from '@components/hero';
 import PropTypes from 'prop-types';
 
-const Hero = ({ title }) => (
+const Hero = () => (
   <StyledHero>
     <StyledHero.Content>
-      <h1>{title}</h1>
+      <h1>
+        Universal
+        <br />
+        Dapp Repository
+      </h1>
     </StyledHero.Content>
   </StyledHero>
 );

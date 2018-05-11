@@ -9,6 +9,7 @@ const StyledHero = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+  z-index: 100;
   padding-top: ${headerHeight};
 
   &::before {
@@ -18,20 +19,20 @@ const StyledHero = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(179.82deg, #fe2171 21.44%, #ff8d38 100.55%);
+    background: white;
     opacity: 0.15;
     z-index: 1;
   }
 
   h1 {
-    color: #fe4f74;
+    color: #142144;
     font-size: 48px;
     max-width: 400px;
   }
 `;
 const Content = styled.div`
   position: relative;
-  z-index: 10;
+  z-index: 100;
   ${wrapperStyles()};
 `;
 
