@@ -35,7 +35,7 @@ class Header extends React.Component {
                 });
               }}
             >
-              <StyledHeader.Link>What's a Dapp?</StyledHeader.Link>
+              <StyledHeader.Link href="#">What's a Dapp?</StyledHeader.Link>
             </StyledHeader.Item>
             <StyledHeader.Item
               onClick={() => {
@@ -44,7 +44,7 @@ class Header extends React.Component {
                 });
               }}
             >
-              <StyledHeader.Link>Who we are</StyledHeader.Link>
+              <StyledHeader.Link href="#">Who we are</StyledHeader.Link>
             </StyledHeader.Item>
           </StyledHeader.Section>
           <StyledHeader.Section>
