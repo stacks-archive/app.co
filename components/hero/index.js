@@ -19,7 +19,7 @@ const StyledHero = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: white;
+    background: linear-gradient(rgba(254, 33, 113, 0.06), rgba(255, 255, 255, 1));
     opacity: 1;
     z-index: 1;
   }
