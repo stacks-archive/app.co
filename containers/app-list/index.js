@@ -5,16 +5,18 @@ import { StyledAppList } from '@components/app-list';
 import { Button } from '@components/button';
 import { LinkButton } from '@components/link-button';
 
+const getTwitterMentions = (app) => {
+  const [ranking] = app.Rankings;
+  if (ranking) {
+    return ranking.twitterMentions || 0;
+  }
+  return 0;
+};
+
 class AppList extends React.Component {
   constructor(props) {
     super(props);
-    const sortedApps = _.sortBy(props.apps, (app) => {
-      const [ranking] = app.Rankings;
-      if (ranking) {
-        return -(ranking.twitterMentions || 0);
-      }
-      return 0;
-    });
+    const sortedApps = _.sortBy(props.apps, (app) => -getTwitterMentions(app));
     this.state = {
       showCount: props.show,
       showAll: false,
@@ -44,6 +46,7 @@ class AppList extends React.Component {
           <StyledAppList.Category>
             <StyledAppList.CategoryTag>{app.category}</StyledAppList.CategoryTag>
           </StyledAppList.Category>
+          <StyledAppList.Description>{getTwitterMentions(app)}</StyledAppList.Description>
         </StyledAppList.Row>
       ));
     };
