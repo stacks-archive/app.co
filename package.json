@@ -27,6 +27,7 @@
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-lorem-component": "^0.13.0",
     "request-promise": "^4.2.2",
     "sequelize": "^4.37.6",
     "sequelize-cli": "^4.0.0",

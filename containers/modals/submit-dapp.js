@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from '@atlaskit/modal-dialog';
 import TextField from '@atlaskit/field-text';
+import PropTypes from 'prop-types';
 
 export default class SubmitDapp extends React.Component {
   constructor(props) {
@@ -42,3 +43,8 @@ export default class SubmitDapp extends React.Component {
     );
   }
 }
+
+SubmitDapp.propTypes = {
+  open: PropTypes.string.isRequired,
+  close: PropTypes.string.isRequired,
+};

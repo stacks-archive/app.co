@@ -2,12 +2,16 @@ import React from 'react';
 import { StyledHeader } from '@components/header';
 import { Button } from '@components/button';
 import SubmitDapp from '@containers/modals/submit-dapp';
+import WhatsADapp from '@containers/modals/whats-a-dapp';
+import WhoWeAre from '@containers/modals/who-we-are';
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       submitModalOpen: false,
+      whatsADappOpen: false,
+      whoWeAreOpen: false,
     };
     this.openModal = this.openModal.bind(this);
   }
@@ -24,11 +28,23 @@ class Header extends React.Component {
         <StyledHeader.Wrapper>
           <StyledHeader.Section>
             <StyledHeader.Logo>App.co</StyledHeader.Logo>
-            <StyledHeader.Item onClick={() => {}}>
-              <StyledHeader.Link href="">What's a Dapp?</StyledHeader.Link>
+            <StyledHeader.Item
+              onClick={() => {
+                this.setState({
+                  whatsADappOpen: true,
+                });
+              }}
+            >
+              <StyledHeader.Link>What's a Dapp?</StyledHeader.Link>
             </StyledHeader.Item>
-            <StyledHeader.Item onClick={() => {}}>
-              <StyledHeader.Link href="">Who we are</StyledHeader.Link>
+            <StyledHeader.Item
+              onClick={() => {
+                this.setState({
+                  whoWeAreOpen: true,
+                });
+              }}
+            >
+              <StyledHeader.Link>Who we are</StyledHeader.Link>
             </StyledHeader.Item>
           </StyledHeader.Section>
           <StyledHeader.Section>
@@ -38,7 +54,10 @@ class Header extends React.Component {
           </StyledHeader.Section>
         </StyledHeader.Wrapper>
         <StyledHeader.Illustration src="/static/images/hero-illustration/illustration@3x.png" />
+
         <SubmitDapp open={this.state.submitModalOpen} close={() => this.setState({ submitModalOpen: false })} />
+        <WhatsADapp open={this.state.whatsADappOpen} close={() => this.setState({ whatsADappOpen: false })} />
+        <WhoWeAre open={this.state.whoWeAreOpen} close={() => this.setState({ whoWeAreOpen: false })} />
       </StyledHeader>
     );
   }
