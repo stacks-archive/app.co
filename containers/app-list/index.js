@@ -124,11 +124,11 @@ class AppList extends React.Component {
           </StyledAppList.Table>
           <StyledAppList.Footer>
             <StyledAppList.ExpandButtonWrapper>
-              <Button onClick={() => {}} type="button/primary">
+              <Button onClick={() => this.showAll()} type="button/primary">
                 Next 100
               </Button>
             </StyledAppList.ExpandButtonWrapper>
-            <LinkButton onClick={() => this.showAll()}>View All</LinkButton>
+            {/*<LinkButton onClick={() => this.showAll()}>View All</LinkButton>*/}
           </StyledAppList.Footer>
         </StyledAppList>
       );

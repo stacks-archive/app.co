@@ -108,6 +108,7 @@ const HeaderItem = styled.th`
 const Footer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 StyledAppList.Table = Table;
