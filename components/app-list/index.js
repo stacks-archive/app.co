@@ -12,15 +12,29 @@ const StyledAppList = styled.div`
 const Table = styled.table`
   width: 100%;
   padding: 0px 10px;
+  border-collapse: collapse;
 `;
 
 const Row = styled.tr`
   height: 60px;
+  &:hover {
+    background-color: white;
+    box-shadow: 0 0 1px #e0e0e0;
+    td {
+      background-color: white;
+      &:first-child {
+        border-radius: 3px 0 0 3px;
+      }
+      &:last-child {
+        border-radius: 0 3px 3px 0;
+      }
+    }
+  }
 `;
 
 const Rank = styled.td`
   width: 35px;
-  text-align: left;
+  text-align: center;
   padding: 10px 0px;
 `;
 
