@@ -16,6 +16,7 @@ const Aside = styled.aside`
   max-width: 250px;
   width: 100%;
   flex-shrink: 0;
+  padding: 0 10px;
 `;
 
 StyledPage.Section = Section;

@@ -20,7 +20,7 @@ const StyledHero = styled.div`
     width: 100%;
     height: 100%;
     background: white;
-    opacity: 0.15;
+    opacity: 1;
     z-index: 1;
   }
 

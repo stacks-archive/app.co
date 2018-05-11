@@ -10,7 +10,6 @@ class Header extends React.Component {
       submitModalOpen: false,
     };
     this.openModal = this.openModal.bind(this);
-    this.modal = this.modal.bind(this);
   }
 
   openModal() {

@@ -1,4 +1,5 @@
 import { css } from 'styled-components';
+
 const wrapperStyles = () => css`
   width: 100%;
   max-width: 1130px;
