@@ -8,10 +8,17 @@ import { LinkButton } from '@components/link-button';
 class AppList extends React.Component {
   constructor(props) {
     super(props);
-
+    const sortedApps = _.sortBy(props.apps, (app) => {
+      const [ranking] = app.Rankings;
+      if (ranking) {
+        return -(ranking.twitterMentions || 0);
+      }
+      return 0;
+    });
     this.state = {
       showCount: props.show,
       showAll: false,
+      sortedApps,
     };
   }
 
@@ -22,15 +29,13 @@ class AppList extends React.Component {
   }
 
   render() {
-    const { apps } = this.props;
-    const { showCount, showAll } = this.state;
+    const { showCount, showAll, sortedApps } = this.state;
 
-    const renderRows = (apps, showCount, showAll) => {
-      let rank = 1;
-      const visibleApps = showAll ? apps : apps.slice(0, showCount);
-      return visibleApps.map((app) => (
+    const renderRows = () => {
+      const visibleApps = showAll ? sortedApps : sortedApps.slice(0, showCount);
+      return visibleApps.map((app, index) => (
         <StyledAppList.Row key={app.id}>
-          <StyledAppList.Rank>{rank++}</StyledAppList.Rank>
+          <StyledAppList.Rank>{index + 1}</StyledAppList.Rank>
           <StyledAppList.Icon>
             <StyledAppList.IconImage src="https://blockstack.org/images/logos/app-icon-stealthy-256x256.png" />
           </StyledAppList.Icon>
@@ -43,11 +48,11 @@ class AppList extends React.Component {
       ));
     };
 
-    if (apps) {
+    if (sortedApps) {
       return (
         <StyledAppList>
           <StyledAppList.Table>
-            <tbody>{renderRows(apps, showCount, showAll)}</tbody>
+            <tbody>{renderRows()}</tbody>
           </StyledAppList.Table>
           <StyledAppList.Footer>
             <StyledAppList.ExpandButtonWrapper>
