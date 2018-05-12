@@ -52,7 +52,6 @@ export default class MyDocument extends Document {
             gtag('js', new Date()); gtag('config', 'UA-119163063-1');
           `,
             }}
-         
           />
 
           {this.props.styleTags}
