@@ -95,7 +95,7 @@ const Tag = styled.div`
   border-radius: 10px;
   border: 1px solid rgba(40, 47, 54, 0.15);
   margin-left: 10px;
-  font-size: 13px;
+  font-size: 12px;
 `;
 
 const ExpandButtonWrapper = styled.div`
