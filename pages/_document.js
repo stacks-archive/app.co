@@ -42,6 +42,19 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
           <meta name="viewport" content="width=device-width,initial-scale=1" />
+          {/* Global site tag (gtag.js) - Google Analytics */}
+          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119163063-1" />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || []; function gtag() 
+            \{ dataLayer.push(arguments); \}
+            gtag('js', new Date()); gtag('config', 'UA-119163063-1');
+          `,
+            }}
+         
+          />
+
           {this.props.styleTags}
         </Head>
         <body>
