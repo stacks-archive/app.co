@@ -59,6 +59,7 @@ class Header extends React.Component {
         <SubmitDapp
           open={this.state.submitModalOpen}
           constants={this.props.data.constants.appConstants}
+          apiServer={this.props.data.apiServer}
           close={() => this.setState({ submitModalOpen: false })}
         />
         <WhatsADapp open={this.state.whatsADappOpen} close={() => this.setState({ whatsADappOpen: false })} />

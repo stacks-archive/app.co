@@ -11,6 +11,7 @@ class MyApp extends App {
     const { apiServer } = ctx.query || 'https://app-co.herokuapp.com';
     const response = await fetch(`${apiServer}/api/apps`);
     const data = await response.json();
+    data.apiServer = apiServer;
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
