@@ -59,8 +59,9 @@ const DefaultIcon = styled.div`
   color: #ffffff;
   text-align: center;
   line-height: 45px;
-  font-size: 35px;
-  background-color: ${props => props.bgColor};
+  font-size: 20px;
+  background-color: ${(props) => props.bgColor};
+  border-radius: 3px;
 `;
 
 const Name = styled.td`
