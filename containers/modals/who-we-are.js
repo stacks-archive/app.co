@@ -9,7 +9,7 @@ const WhoWeAre = (props) => {
   }
   const actions = [{ text: 'Close', onClick: () => props.close() }];
   return (
-    <Modal heading="Who we are" actions={actions}>
+    <Modal heading="Who we are" actions={actions} onClose={props.close}>
       <p>
         App.co surfaces the best new dapps every day. It’s a place for blockchain-loving nerds, enthusiasts, and
         investors to geek out over the latest decentralized tech—from currency exchanges to mutant-feline-marketplaces.

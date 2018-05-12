@@ -76,7 +76,7 @@ export default class SubmitDapp extends React.Component {
     }
     return (
       <div>
-        <Modal heading="Submit your Dapp" actions={actions} in={this.props.open}>
+        <Modal heading="Submit your Dapp" actions={actions} in={this.props.open} onClose={this.props.close}>
           {this.state.submitted || this.state.submitting ? (
             <p>Thanks for your submission! We'll get back to you soon.</p>
           ) : (
