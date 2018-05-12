@@ -1,7 +1,8 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheet, injectGlobal } from 'styled-components';
+import { injectGlobal, ServerStyleSheet } from 'styled-components';
 import { normalize } from 'polished';
+
 /**
  * Reset our styles
  */
@@ -14,7 +15,7 @@ ${normalize()};
 }
 body, html{
 font-family: 'Lato', sans-serif;
-background:#EEEFEF;
+background:#eeefef;
 }
 h1, h2, h3, h4, h5, h6{
 font-family: 'Roboto Slab', serif;
@@ -40,6 +41,7 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Lato:400,700,900|Roboto+Slab:300,400,700"
             rel="stylesheet"
           />
+          <meta name="viewport" content="width=device-width,initial-scale=1" />
           {this.props.styleTags}
         </Head>
         <body>
