@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { StyledHeader } from '@components/header';
 import { Button } from '@components/button';
 import SubmitDapp from '@containers/modals/submit-dapp';
@@ -55,7 +56,11 @@ class Header extends React.Component {
         </StyledHeader.Wrapper>
         <StyledHeader.Illustration src="/static/images/hero-illustration/illustration@3x.png" />
 
-        <SubmitDapp open={this.state.submitModalOpen} close={() => this.setState({ submitModalOpen: false })} />
+        <SubmitDapp
+          open={this.state.submitModalOpen}
+          constants={this.props.data.constants.appConstants}
+          close={() => this.setState({ submitModalOpen: false })}
+        />
         <WhatsADapp open={this.state.whatsADappOpen} close={() => this.setState({ whatsADappOpen: false })} />
         <WhoWeAre open={this.state.whoWeAreOpen} close={() => this.setState({ whoWeAreOpen: false })} />
       </StyledHeader>

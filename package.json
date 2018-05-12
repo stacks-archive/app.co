@@ -9,6 +9,7 @@
   "dependencies": {
     "@atlaskit/field-text": "^5.0.2",
     "@atlaskit/modal-dialog": "^4.0.4",
+    "@atlaskit/select": "^2.0.1",
     "@babel/polyfill": "7.0.0-beta.44",
     "@babel/register": "7.0.0-beta.44",
     "async": "^2.6.0",
