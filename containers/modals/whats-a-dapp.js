@@ -16,8 +16,8 @@ const WhatsADapp = (props) => {
 };
 
 WhatsADapp.propTypes = {
-  open: PropTypes.string.isRequired,
-  close: PropTypes.string.isRequired,
+  open: PropTypes.bool.isRequired,
+  close: PropTypes.func.isRequired,
 };
 
 export default WhatsADapp;

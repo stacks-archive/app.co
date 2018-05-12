@@ -9,7 +9,7 @@ export default ({ data }) => (
   <Page>
     <Header data={data} />
     <Hero />
-    <Page.Section wrap>
+    <Page.Section wrap={1}>
       <Page.Section.Content>
         <AppList apps={data.apps} show={25} />
       </Page.Section.Content>

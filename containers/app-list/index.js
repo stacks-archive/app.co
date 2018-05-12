@@ -63,7 +63,7 @@ class AppList extends React.Component {
 
       return (
         <StyledAppList.TagGroup>
-          {tagSet.map((tag) => <StyledAppList.Tag>{tag}</StyledAppList.Tag>)}
+          {tagSet.map((tag) => <StyledAppList.Tag key={tag}>{tag}</StyledAppList.Tag>)}
         </StyledAppList.TagGroup>
       );
     };
@@ -71,14 +71,14 @@ class AppList extends React.Component {
     const appImage = (app) => {
       if (app.imageUrl) {
         return <StyledAppList.IconImage src={app.imageUrl} />;
-      } else {
+      } 
         const bgColor = colorHexFromString(app.name);
         return (
           <StyledAppList.DefaultIcon bgColor={bgColor}>
             {app.name.substring(0,1)}
           </StyledAppList.DefaultIcon>
         )
-      }
+      
     };
 
     const renderRows = () => {
@@ -86,9 +86,7 @@ class AppList extends React.Component {
       return visibleApps.map((app, index) => (
         <StyledAppList.Row key={app.id}>
           <StyledAppList.Rank>{index + 1}</StyledAppList.Rank>
-          <StyledAppList.Icon>
-            {appImage(app)}
-          </StyledAppList.Icon>
+          <StyledAppList.Icon>{appImage(app)}</StyledAppList.Icon>
           <StyledAppList.Name>
             <StyledAppList.NameLink href={app.website} target="_blank">
               {app.name}

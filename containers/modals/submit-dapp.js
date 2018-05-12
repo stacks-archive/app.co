@@ -122,6 +122,6 @@ export default class SubmitDapp extends React.Component {
 }
 
 SubmitDapp.propTypes = {
-  open: PropTypes.string.isRequired,
-  close: PropTypes.string.isRequired,
+  open: PropTypes.bool.isRequired,
+  close: PropTypes.func.isRequired,
 };
