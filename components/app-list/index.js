@@ -24,6 +24,7 @@ const Row = styled.tr`
   &:hover {
     background-color: white;
     box-shadow: 0 0 1px #e0e0e0;
+    cursor: pointer;
     td {
       background-color: white;
       &:first-child {

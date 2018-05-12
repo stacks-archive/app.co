@@ -71,20 +71,19 @@ class AppList extends React.Component {
     const appImage = (app) => {
       if (app.imageUrl) {
         return <StyledAppList.IconImage src={app.imageUrl} />;
-      } 
-        const bgColor = colorHexFromString(app.name);
-        return (
-          <StyledAppList.DefaultIcon bgColor={bgColor}>
-            {app.name.substring(0,1)}
-          </StyledAppList.DefaultIcon>
-        )
-      
+      }
+      const bgColor = colorHexFromString(app.name);
+      return <StyledAppList.DefaultIcon bgColor={bgColor}>{app.name.substring(0, 1)}</StyledAppList.DefaultIcon>;
+    };
+
+    const openApp = (app) => {
+      window.open(app.website, '_blank');
     };
 
     const renderRows = () => {
       const visibleApps = showAll ? sortedApps : sortedApps.slice(0, showCount);
       return visibleApps.map((app, index) => (
-        <StyledAppList.Row key={app.id}>
+        <StyledAppList.Row key={app.id} onClick={() => openApp(app)}>
           <StyledAppList.Rank>{index + 1}</StyledAppList.Rank>
           <StyledAppList.Icon>{appImage(app)}</StyledAppList.Icon>
           <StyledAppList.Name>
