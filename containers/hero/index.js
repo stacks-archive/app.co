@@ -5,9 +5,9 @@ const Hero = () => (
   <StyledHero>
     <StyledHero.Content>
       <h1>
-        Universal
+        Discover
         <br />
-        Dapp Repository
+        decentralized apps
       </h1>
     </StyledHero.Content>
   </StyledHero>

@@ -26,8 +26,9 @@ const StyledHero = styled.div`
 
   h1 {
     color: #142144;
+    margin-top: 40px;
     font-size: 48px;
-    max-width: 400px;
+    max-width: 500px;
   }
 `;
 const Content = styled.div`
