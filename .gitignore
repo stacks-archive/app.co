@@ -6,3 +6,4 @@ fixtures/generated
 google-credentials.json
 scripts/google_oauth.js
 credentials.json
+yarn-error.log

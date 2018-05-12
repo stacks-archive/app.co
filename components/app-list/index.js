@@ -69,21 +69,22 @@ const NameLink = styled.a`
 const Column = styled.td`
   padding: 10px 15px;
   color: #6c737a;
-  text-align: ${props => props.align};
+  text-align: ${(props) => props.align};
 `;
 
 const TagGroup = styled.div`
   display: flex;
   justify-content: flex-end;
-`
+`;
 
 const Tag = styled.div`
   color: #282f36;
   text-align: right;
-  padding: 10px 20px;
+  padding: 10px;
   border-radius: 10px;
   border: 1px solid rgba(40, 47, 54, 0.15);
   margin-left: 10px;
+  font-size: 13px;
 `;
 
 const ExpandButtonWrapper = styled.div`
@@ -91,8 +92,7 @@ const ExpandButtonWrapper = styled.div`
   margin: 20px 10px;
 `;
 
-const Header = styled.thead`
-`;
+const Header = styled.thead``;
 
 const HeaderRow = styled.tr`
   align-items: center;
@@ -101,9 +101,9 @@ const HeaderRow = styled.tr`
 `;
 
 const HeaderItem = styled.th`
-  text-align: ${props => props.align};
+  text-align: ${(props) => props.align};
   padding: 20px 15px;
-`
+`;
 
 const Footer = styled.div`
   display: flex;
