@@ -50,6 +50,17 @@ const Icon = styled.td`
 const IconImage = styled.img`
   width: 45px;
   height: 45px;
+  border-radius: 9px;
+`;
+
+const DefaultIcon = styled.div`
+  width: 45px;
+  height: 45px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 45px;
+  font-size: 35px;
+  background-color: ${props => props.bgColor};
 `;
 
 const Name = styled.td`
@@ -84,7 +95,7 @@ const Tag = styled.div`
   border-radius: 10px;
   border: 1px solid rgba(40, 47, 54, 0.15);
   margin-left: 10px;
-  font-size: 13px;
+  font-size: 12px;
 `;
 
 const ExpandButtonWrapper = styled.div`
@@ -122,6 +133,7 @@ StyledAppList.Tag = Tag;
 StyledAppList.TagGroup = TagGroup;
 StyledAppList.Icon = Icon;
 StyledAppList.IconImage = IconImage;
+StyledAppList.DefaultIcon = DefaultIcon;
 StyledAppList.ExpandButtonWrapper = ExpandButtonWrapper;
 StyledAppList.Header = Header;
 StyledAppList.HeaderRow = HeaderRow;

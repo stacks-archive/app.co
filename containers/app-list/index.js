@@ -5,6 +5,7 @@ import { StyledAppList } from '@components/app-list';
 import { Button } from '@components/button';
 import { LinkButton } from '@components/link-button';
 import { DropdownButton } from '@containers/dropdown-button';
+import { colorHexFromString } from '@utils';
 
 const SORT_METHOD = {
   TWEETS: { value: 0, name: 'Tweets / Week', description: '' },
@@ -69,9 +70,15 @@ class AppList extends React.Component {
 
     const appImage = (app) => {
       if (app.imageUrl) {
-        return app.imageUrl;
+        return <StyledAppList.IconImage src={app.imageUrl} />;
+      } else {
+        const bgColor = colorHexFromString(app.name);
+        return (
+          <StyledAppList.DefaultIcon bgColor={bgColor}>
+            {app.name.substring(0,1)}
+          </StyledAppList.DefaultIcon>
+        )
       }
-      return 'https://blockstack.org/images/logos/app-icon-stealthy-256x256.png';
     };
 
     const renderRows = () => {
@@ -80,7 +87,7 @@ class AppList extends React.Component {
         <StyledAppList.Row key={app.id}>
           <StyledAppList.Rank>{index + 1}</StyledAppList.Rank>
           <StyledAppList.Icon>
-            <StyledAppList.IconImage src={appImage(app)} />
+            {appImage(app)}
           </StyledAppList.Icon>
           <StyledAppList.Name>
             <StyledAppList.NameLink href={app.website} target="_blank">
