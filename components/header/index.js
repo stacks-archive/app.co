@@ -62,10 +62,15 @@ const LogoImage = styled.img`
 const Illustration = styled.img`
   position: absolute;
   text-align: center;
-  z-index: 0;
+  z-index: -1;
   max-width: 80%;
   top: 0px;
   left: 10%;
+
+  @media (min-width:1450px) {
+    left:20%;
+    max-width: 60%;
+  }
 `;
 
 StyledHeader.Wrapper = Wrapper;
