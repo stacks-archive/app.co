@@ -10,7 +10,28 @@ const WhoWeAre = (props) => {
   const actions = [{ text: 'Close', onClick: () => props.close() }];
   return (
     <Modal heading="Who we are" actions={actions}>
-      <Lorem count={2} />
+      <p>
+        App.co surfaces the best new dapps every day. It’s a place for blockchain-loving nerds, enthusiasts, and
+        investors to geek out over the latest decentralized tech—from currency exchanges to mutant-feline-marketplaces.
+      </p>
+
+      <p>
+        App.co was originally a side-hustle at{' '}
+        <a href="https://blockstack.org" target="_blank">
+          Blockstack
+        </a>, an open source community building protocols that power decentralized apps.
+      </p>
+
+      <p>
+        Blockstack is the easiest way to start building decentralized, blockchain-based dapps. Our APIs provide
+        decentralized storage, password-less auth, and a scalable foundation for your dapps. And, Blockstack let’s you
+        decouple the personal data you create, from the dapps you use, which makes you the sole owner of that data.
+      </p>
+
+      <p>
+        We’re big fans of Blockstack, but all protocols and teams are welcome here. We’re committed to building and
+        celebrating an open, decentralized internet for all.
+      </p>
     </Modal>
   );
 };
