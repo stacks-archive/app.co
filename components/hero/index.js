@@ -39,12 +39,16 @@ const StyledHero = styled.div`
 
     h1 {
       max-width: 760px;
-      margin-top: 70px;
+      margin-top: 100px;
       font-size: 30px;
     }
   }
 
-
+  @media (max-width: 768px) {
+    h1 {
+      margin-top: 50px;
+    }
+  }
 `;
 
 const Content = styled.div`

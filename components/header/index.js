@@ -85,11 +85,11 @@ const Logo = styled.div`
   @media (max-width: 768px) {
     ${props => props.smShow ? '' : 'display: none;'}
     ${props => props.smShow ? 'margin-top: 30px;' : ''}
-    margin: auto;
+    margin: 50px auto;
   }
 
   @media (min-width: 768px) {
-    ${props => props.smShow ? 'display: none;' : ''}  
+    ${props => props.smShow ? 'display: none;' : ''};
   }
 `;
 
