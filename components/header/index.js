@@ -9,12 +9,17 @@ const StyledHeader = styled.header`
   left: 0;
   z-index: 20;
 `;
+
 const Wrapper = styled.div`
   padding: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   ${wrapperStyles()};
+
+  @media (max-width: 769px) {
+    padding: 20px 15px;
+  }
 `;
 
 const Section = styled.div`
@@ -100,9 +105,9 @@ const Illustration = styled.img`
   }
 
   @media (max-width: 768px) {
-    left: 0px;
+    left: -20px;
     top: 0px;
-    max-width: 150%;
+    max-width: 160%;
   }
 `;
 
