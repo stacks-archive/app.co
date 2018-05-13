@@ -20,16 +20,35 @@ const Wrapper = styled.div`
 const Section = styled.div`
   display: flex;
   align-items: center;
-  &:not(:first-of-type) {
-    padding-left: 20px;
+
+  @media (min-width: 769px) {
+    &:not(:first-of-type) {
+      padding-left: 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    &:not(:first-of-type) {
+      padding-left: 10px;
+    }
   }
 `;
 
 const Item = styled.div`
   flex-grow: 1;
   text-align: center;
-  &:not(:first-of-type) {
-    padding-left: 40px;
+  
+  @media (min-width: 769px) {
+    &:not(:first-of-type) {
+      padding-left: 40px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    &:not(:first-of-type) {
+      padding-left: 0px;
+      padding-right: 20px;
+    }
   }
 `;
 
@@ -39,6 +58,10 @@ const Link = styled.a`
   border-bottom: 1px solid white;
   font-size: 0.9rem;
   font-weight: 500;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const Logo = styled.div`
@@ -53,6 +76,10 @@ const Logo = styled.div`
   flex-shrink: 0;
   font-size: 1.2rem;
   font-weight: 700;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const LogoImage = styled.img`
@@ -67,9 +94,15 @@ const Illustration = styled.img`
   top: 0px;
   left: 10%;
 
-  @media (min-width:1450px) {
+  @media (min-width: 1450px) {
     left:20%;
     max-width: 60%;
+  }
+
+  @media (max-width: 768px) {
+    left: 0px;
+    top: 0px;
+    max-width: 150%;
   }
 `;
 
