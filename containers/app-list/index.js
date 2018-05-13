@@ -112,7 +112,7 @@ class AppList extends React.Component {
                 <StyledAppList.HeaderItem colSpan="3" align="left">
                   <DropdownButton onClick={() => this.showSortDropdown()}>{sortMethod.name}</DropdownButton>
                 </StyledAppList.HeaderItem>
-                <StyledAppList.HeaderItem align="left" smHide={true}>Add Filters</StyledAppList.HeaderItem>
+                <StyledAppList.HeaderItem align="left" smHide={true}>Description</StyledAppList.HeaderItem>
                 <StyledAppList.HeaderItem align="right" smHide={true}>Category</StyledAppList.HeaderItem>
                 <StyledAppList.HeaderItem align="right" smHide={true}>Protocols</StyledAppList.HeaderItem>
                 <StyledAppList.HeaderItem align="right">Tweets</StyledAppList.HeaderItem>
