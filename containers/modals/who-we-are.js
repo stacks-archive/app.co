@@ -1,6 +1,5 @@
 import React from 'react';
 import Modal from '@atlaskit/modal-dialog';
-import Lorem from 'react-lorem-component';
 import PropTypes from 'prop-types';
 
 const WhoWeAre = (props) => {
@@ -9,7 +8,7 @@ const WhoWeAre = (props) => {
   }
   const actions = [{ text: 'Close', onClick: () => props.close() }];
   return (
-    <Modal heading="Who we are" actions={actions} onClose={props.close}>
+    <Modal heading="About App.co" actions={actions} onClose={props.close}>
       <p>
         App.co surfaces the best new dapps every day. It’s a place for blockchain-loving nerds, enthusiasts, and
         investors to geek out over the latest decentralized tech—from currency exchanges to mutant-feline-marketplaces.

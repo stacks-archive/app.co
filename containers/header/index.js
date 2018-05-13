@@ -45,7 +45,7 @@ class Header extends React.Component {
                 });
               }}
             >
-              <StyledHeader.Link href="#">Who we are</StyledHeader.Link>
+              <StyledHeader.Link href="#">About App.co</StyledHeader.Link>
             </StyledHeader.Item>
           </StyledHeader.Section>
           <StyledHeader.Section>
