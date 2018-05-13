@@ -25,15 +25,21 @@ const StyledHero = styled.div`
 
   h1 {
     color: #142144;
-    margin-top: 40px;
+    margin-top: 50px;
     font-size: 48px;
-    max-width: 700px;
+    max-width: 300px;
+  }
+
+  h3 {
+    margin-top: 15px;
   }
 
   @media (max-width: 768px) {
     height: 50vh;
 
     h1 {
+      max-width: 760px;
+      margin-top: 70px;
       font-size: 30px;
     }
   }
