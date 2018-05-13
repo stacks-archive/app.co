@@ -83,32 +83,18 @@ const Logo = styled.div`
   font-weight: 700;
 
   @media (max-width: 768px) {
-    display: none;
+    ${props => props.smShow ? '' : 'display: none;'}
+    ${props => props.smShow ? 'margin-top: 30px;' : ''}
+    margin: auto;
+  }
+
+  @media (min-width: 768px) {
+    ${props => props.smShow ? 'display: none;' : ''}  
   }
 `;
 
 const LogoImage = styled.img`
   width: 100%;
-`;
-
-const Illustration = styled.img`
-  position: absolute;
-  text-align: center;
-  z-index: -1;
-  max-width: 80%;
-  top: 0px;
-  left: 10%;
-
-  @media (min-width: 1450px) {
-    left:20%;
-    max-width: 60%;
-  }
-
-  @media (max-width: 768px) {
-    left: -20px;
-    top: 0px;
-    max-width: 160%;
-  }
 `;
 
 StyledHeader.Wrapper = Wrapper;
@@ -117,6 +103,5 @@ StyledHeader.Item = Item;
 StyledHeader.Link = Link;
 StyledHeader.Logo = Logo;
 StyledHeader.LogoImage = LogoImage;
-StyledHeader.Illustration = Illustration;
 
 export { StyledHeader };

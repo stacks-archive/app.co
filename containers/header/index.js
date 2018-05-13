@@ -54,7 +54,6 @@ class Header extends React.Component {
             </Button>
           </StyledHeader.Section>
         </StyledHeader.Wrapper>
-        <StyledHeader.Illustration src="/static/images/hero-illustration/illustration@3x.png" />
 
         <SubmitDapp
           open={this.state.submitModalOpen}
