@@ -13,17 +13,34 @@ const Wrapper = Styled.div`
   h2 {
     color: white;
   }
+
+  @media (max-width: 768px) {
+    padding: 55px 50px;
+  }
 `;
 
 const Section = Styled.div`
   width: 40%;
   display: inline-block;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
 `;
 
 const RightSection = Section.extend`
   float: right;
   text-align: right;
   margin-top: 20px;
+
+  @media (max-width: 768px) {
+    margin-top: 40px;
+    text-align: center;
+    width: 100%;
+    display: block;
+  }
 `;
 
 const Input = Styled.input`
@@ -36,6 +53,10 @@ const Input = Styled.input`
   border-radius: 5px;
   display: inline-block;
   margin-right: 15px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const Button = BTN.extend`
@@ -43,6 +64,15 @@ const Button = BTN.extend`
   background-color: #0ccaba;
   padding-left: 35px;
   padding-right: 35px;
+
+  @media (max-width: 1069px) {
+    margin-top: 20px;
+    margin-right: 15px;
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 40px;
+  }
 `;
 
 export default {
