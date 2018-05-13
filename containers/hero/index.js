@@ -8,9 +8,9 @@ const Hero = () => (
 	    <StyledHero.Content>
 	    	<StyledHeader.Logo smShow={true}>App.co</StyledHeader.Logo>
 	      <h1>
-	        Discover
+	        Universal
 	        <br />
-	        Decentralized Apps
+	        Dapp Store
 	      </h1>
 	    </StyledHero.Content>
     </StyledHero.Inner>
