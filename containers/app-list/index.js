@@ -91,13 +91,13 @@ class AppList extends React.Component {
               {app.name}
             </StyledAppList.NameLink>
           </StyledAppList.Name>
-          <StyledAppList.Column>{app.description}</StyledAppList.Column>
-          <StyledAppList.Column align="right">
+          <StyledAppList.Column smHide={true}>{app.description}</StyledAppList.Column>
+          <StyledAppList.Column align="right" smHide={true}>
             <StyledAppList.TagGroup>
               <StyledAppList.Tag>{app.category}</StyledAppList.Tag>
             </StyledAppList.TagGroup>
           </StyledAppList.Column>
-          <StyledAppList.Column align="right">{renderNetworkTags(app)}</StyledAppList.Column>
+          <StyledAppList.Column align="right" smHide={true}>{renderNetworkTags(app)}</StyledAppList.Column>
           <StyledAppList.Column align="right">{getTwitterMentions(app)}</StyledAppList.Column>
         </StyledAppList.Row>
       ));
@@ -112,9 +112,9 @@ class AppList extends React.Component {
                 <StyledAppList.HeaderItem colSpan="3" align="left">
                   <DropdownButton onClick={() => this.showSortDropdown()}>{sortMethod.name}</DropdownButton>
                 </StyledAppList.HeaderItem>
-                <StyledAppList.HeaderItem align="left">Add Filters</StyledAppList.HeaderItem>
-                <StyledAppList.HeaderItem align="right">Category</StyledAppList.HeaderItem>
-                <StyledAppList.HeaderItem align="right">Protocols</StyledAppList.HeaderItem>
+                <StyledAppList.HeaderItem align="left" smHide={true}>Add Filters</StyledAppList.HeaderItem>
+                <StyledAppList.HeaderItem align="right" smHide={true}>Category</StyledAppList.HeaderItem>
+                <StyledAppList.HeaderItem align="right" smHide={true}>Protocols</StyledAppList.HeaderItem>
                 <StyledAppList.HeaderItem align="right">Tweets</StyledAppList.HeaderItem>
               </StyledAppList.HeaderRow>
             </StyledAppList.Header>

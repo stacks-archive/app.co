@@ -83,6 +83,10 @@ const Column = styled.td`
   padding: 10px 15px;
   color: #6c737a;
   text-align: ${(props) => props.align};
+
+  @media (max-width: 768px) {
+    ${(props) => props.smHide ? 'display: none;' : ''}
+  }
 `;
 
 const TagGroup = styled.div`
@@ -116,6 +120,10 @@ const HeaderRow = styled.tr`
 const HeaderItem = styled.th`
   text-align: ${(props) => props.align};
   padding: 20px 15px;
+  
+  @media (max-width: 768px) {
+    ${(props) => props.smHide ? 'display: none;' : ''}
+  }
 `;
 
 const Footer = styled.div`
