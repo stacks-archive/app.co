@@ -72,6 +72,7 @@ const Button = BTN.extend`
 
   @media (max-width: 768px) {
     margin-top: 40px;
+    margin-right: 0px;
   }
 `;
 
