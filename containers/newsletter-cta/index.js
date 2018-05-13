@@ -33,7 +33,7 @@ export default class NewsletterCTA extends React.Component {
       <Newsletter.Wrapper>
         <Newsletter.Section>
           <h2>Join Our Newsletter</h2>
-          <p>Keep up to date with Dapps and Dabbing</p>
+          <p>Keep updated as we build new features and add more dapps.</p>
         </Newsletter.Section>
         <Newsletter.RightSection>
           {this.state.submitted ? (
