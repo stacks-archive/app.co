@@ -79,6 +79,15 @@ app.prepare().then(() => {
     renderAndCache(req, res, '/');
   });
 
+  server.get('/clear-cache', (req, res) => {
+    if (req.query.key === process.env.PASSWORD) {
+      ssrCache.reset();
+      res.json({ success: true });
+    } else {
+      res.status(400).json({ success: false });
+    }
+  });
+
   server.get('*', (req, res) => handle(req, res));
 
   server.listen(port, (err) => {
