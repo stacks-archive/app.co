@@ -15,21 +15,17 @@ const WhoWeAre = (props) => {
       </p>
 
       <p>
-        App.co was originally a side-hustle at{' '}
+        App.co is sponsored by{' '}
         <a href="https://blockstack.org" target="_blank">
           Blockstack
-        </a>, an open source community building protocols that power decentralized apps.
+        </a>, a decentralized app protocol and community. All protocols are welcome on App.co as we’re committed to
+        celebrating an open, decentralized internet for all.
       </p>
 
       <p>
         Blockstack is the easiest way to start building decentralized, blockchain-based dapps. Our APIs provide
         decentralized storage, password-less auth, and a scalable foundation for your dapps. And, Blockstack let’s you
         decouple the personal data you create, from the dapps you use, which makes you the sole owner of that data.
-      </p>
-
-      <p>
-        We’re big fans of Blockstack, but all protocols and teams are welcome here. We’re committed to building and
-        celebrating an open, decentralized internet for all.
       </p>
     </Modal>
   );
