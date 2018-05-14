@@ -23,32 +23,10 @@ const StyledHero = styled.div`
     opacity: 1;
   }
 
-  h1 {
-    color: #142144;
-    margin-top: 50px;
-    font-size: 48px;
-    max-width: 300px;
-  }
-
-  h3 {
-    margin-top: 15px;
-  }
-
   @media (max-width: 768px) {
-    height: 50vh;
-
-    h1 {
-      max-width: 760px;
-      margin-top: 100px;
-      font-size: 30px;
-    }
+    height: 45vh;
   }
 
-  @media (max-width: 768px) {
-    h1 {
-      margin-top: 50px;
-    }
-  }
 `;
 
 const Content = styled.div`
@@ -68,25 +46,30 @@ const Inner = styled.div`
   width: 100%;
   height: 100%;
 
-  &::before {
-    position: absolute;
-    content: '';
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 1;
-  }
+  padding-top: 50px;
 
   background-image: url('/static/images/hero-illustration/illustration@3x.png');
   background-repeat: no-repeat;
-  background-size: 75%;
+  background-size: 80%;
   background-position-x: center;
 
+  h1 {
+    color: #142144;
+    font-size: 48px;
+    max-width: 300px;
+  }
+
+  h3 {
+    margin-top: 15px;
+  }
+
   @media (max-width: 768px) {
-    height: 50vh;
     background-size: 150%;
-    background-position: -20px 0px;
+    background-position: -40px 0px;
+    h1 {
+      max-width: 760px;
+      font-size: 30px;
+    }
   }
 
   @media (min-width: 1300px) {
@@ -94,7 +77,10 @@ const Inner = styled.div`
   }
 
   @media (min-width: 1500px) {
-    background-size: 55%;
+    background-size: 60%;
+    h1 {
+      padding-top: 120px;
+    }
   }
 
   @media (min-width: 1800px) {
