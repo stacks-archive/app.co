@@ -10,8 +10,7 @@ const StyledHero = styled.div`
   align-items: center;
   position: relative;
 
-  background: linear-gradient(rgba(254, 33, 113, 0.06), rgba(255, 255, 255, 1));
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+  background-image: linear-gradient(to bottom, rgba(240, 229, 232, 1) 0%, rgba(255, 255, 255, 1) 100%);
 
   &::before {
     position: absolute;
@@ -57,6 +56,7 @@ const Inner = styled.div`
     color: #142144;
     font-size: 48px;
     max-width: 300px;
+    padding-top: 90px;
   }
 
   h3 {
@@ -69,11 +69,15 @@ const Inner = styled.div`
     h1 {
       max-width: 760px;
       font-size: 30px;
+      padding-top: 0px;
     }
   }
 
   @media (min-width: 1300px) {
     background-size: 70%;
+    h1 {
+      padding-top: 120px;
+    }
   }
 
   @media (min-width: 1500px) {
