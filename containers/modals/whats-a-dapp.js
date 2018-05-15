@@ -11,7 +11,7 @@ const WhatsADapp = (props) => {
   return (
     <Modal heading="What is a Dapp?" actions={actions} onClose={props.close}>
       <p>
-        ​​A dapp is a decentralized app—an application that let’s users own their data and runs without any single
+        ​​A dapp is a decentralized app—an application that lets users own their data and runs without any single
         centralized operator.
       </p>
 
