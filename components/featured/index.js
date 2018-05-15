@@ -79,7 +79,7 @@ const Item = styled.div`
   }
 `;
 
-const Icon = styled.td`
+const Icon = styled.div`
   width: 45px;
   height: 45px;
 `;
