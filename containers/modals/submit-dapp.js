@@ -20,7 +20,7 @@ export default class SubmitDapp extends React.Component {
       category: null,
       blockchain: null,
       authentication: null,
-      storage: null,
+      storageNetwork: null,
       submitted: false,
       submitting: false,
     };
@@ -46,10 +46,10 @@ export default class SubmitDapp extends React.Component {
   render() {
     const { constants } = this.props;
 
-    const enumSelect = (enums, placeholder) => {
+    const enumSelect = (enums, placeholder, props) => {
       const options = _.map(_.keys(enums), (opt) => ({ label: opt, value: opt }));
       const onChange = (option) => {
-        this.setState({ [placeholder.toLowerCase()]: option.value });
+        this.setState({ [props.apiAttr || placeholder.toLowerCase()]: option.value });
       };
       return (
         <div>
@@ -60,6 +60,8 @@ export default class SubmitDapp extends React.Component {
             className="react-select"
             menuPlacement="bottom"
             onChange={onChange}
+            isSearchable={false}
+            {...props}
           />
           <br />
         </div>
@@ -111,8 +113,8 @@ export default class SubmitDapp extends React.Component {
               </Form.Wrapper>
               {enumSelect(constants.categoryEnums, 'Category')}
               {enumSelect(constants.blockchainEnums, 'Blockchain')}
-              {enumSelect(constants.storageEnums, 'Storage')}
-              {enumSelect(constants.authenticationEnums, 'Authentication')}
+              {enumSelect(constants.storageEnums, 'Storage', { apiAttr: 'storageNetwork' })}
+              {enumSelect(constants.authenticationEnums, 'Authentication', { menuPlacement: 'top' })}
             </div>
           )}
         </Modal>

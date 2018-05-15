@@ -11,6 +11,11 @@ const WhatsADapp = (props) => {
   return (
     <Modal heading="What is a Dapp?" actions={actions} onClose={props.close}>
       <p>
+        ​​A dapp is a decentralized app—an application that let’s users own their data and runs without any single
+        centralized operator.
+      </p>
+
+      <p>
         If you use traditional apps, your digital rights, privacy, and choices are severely limited. These app
         ecosystems serve to enrich a small number of powerful corporations by centralizing user identities and data
         storage.
@@ -24,8 +29,8 @@ const WhatsADapp = (props) => {
       </p>
 
       <p>
-        Today there are 1000s of dapps built on protocols like Ethereum, Blockstack, and many others. While definitions
-        are rapidly evolving, here are some criteria aligned with the future:
+        Today there are thousands of dapps built on protocols like Ethereum, Blockstack, and many others. While
+        definitions are rapidly evolving, here are some criteria aligned with the future:
       </p>
 
       <ul>
