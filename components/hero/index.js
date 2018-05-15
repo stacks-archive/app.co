@@ -56,6 +56,7 @@ const Inner = styled.div`
     color: #142144;
     font-size: 48px;
     max-width: 300px;
+    padding-top: 90px;
   }
 
   h3 {
@@ -68,11 +69,15 @@ const Inner = styled.div`
     h1 {
       max-width: 760px;
       font-size: 30px;
+      padding-top: 0px;
     }
   }
 
   @media (min-width: 1300px) {
     background-size: 70%;
+    h1 {
+      padding-top: 120px;
+    }
   }
 
   @media (min-width: 1500px) {
