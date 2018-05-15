@@ -10,8 +10,7 @@ const StyledHero = styled.div`
   align-items: center;
   position: relative;
 
-  background: linear-gradient(rgba(254, 33, 113, 0.06), rgba(255, 255, 255, 1));
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+  background-image: linear-gradient(to bottom, rgba(240, 229, 232, 1) 0%, rgba(255, 255, 255, 1) 100%);
 
   &::before {
     position: absolute;
