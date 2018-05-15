@@ -34,7 +34,10 @@ class Featured extends React.Component {
       <StyledFeatured>
         <StyledFeatured.Wrapper>
           <StyledFeatured.TitleSection>
-            Featured Social Dapps
+            Hot Social Dapps <br/>
+            <p>
+            Our curated list of notable Dapps changing the way we communicate.
+            </p>
           </StyledFeatured.TitleSection>
           <StyledFeatured.Section>
             {this.state.featuredApps.map(app => (

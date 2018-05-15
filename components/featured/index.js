@@ -22,15 +22,20 @@ const Wrapper = styled.div`
 const TitleSection = styled.div`
   width: 100px;
   background: linear-gradient(#0CCABA, #0C9AA6);
-  height: 255px;
+  height: 260px;
   min-width: 145px;
   color: #fff;
   flex: 1 1 auto;
   text-align: left;
   border-radius: 10px;
   padding: 15px 15px;
-  margin: 5px 0 0 0;
+  margin: 15px 0 0 0;
   font-weight: bold;
+
+  p {
+    font-weight: normal;
+    font-size: 14px;
+  }
 
   @media (max-width: 992px) {
     width: 98%;
@@ -50,7 +55,7 @@ const Section = styled.div`
 
   @media (min-width: 992px) {
     &:not(:first-of-type) {
-      padding-left: 20px;
+      padding-left: 15px;
     }
   }
 `;
@@ -61,21 +66,21 @@ const Item = styled.div`
   background: #fff;
   border-radius: 10px;
   padding: 15px 15px;
-  width: 30%;
+  width: 31%;
   min-height: 120px;
-  margin: 10px 1% 0 1%;
+  margin: 18px 1% 0 1%;
   cursor: pointer;
 
   @media (max-width: 992px) {
     width: 48%;
-    margin: 10px 1% 0 1%;
-    min-height: 80px;
+    margin: 15px 1% 0 1%;
+    min-height: 100px;
   }
 
   @media (max-width: 768px) {
     width: 98%;
     margin: 10px 1% 0 1%;
-    min-height: 80px;
+    min-height: 85px;
   }
 `;
 
@@ -119,7 +124,7 @@ const NameLink = styled.a`
 const Description = styled.p`
   padding: 5px 20px 5px 20px;
   margin: 0;
-  font-size: 15px;
+  font-size: 14px;
   color: #6c737a;
 `
 
