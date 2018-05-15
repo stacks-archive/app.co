@@ -13,8 +13,9 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  @media (max-width: 769px) {
+  @media (max-width: 992px) {
     padding: 10px 5px;
+    flex-direction: column;
   }
 `;
 
@@ -28,8 +29,15 @@ const TitleSection = styled.div`
   text-align: left;
   border-radius: 10px;
   padding: 15px 15px;
-  margin: 10px 0 0 0;
+  margin: 5px 0 0 0;
   font-weight: bold;
+
+  @media (max-width: 992px) {
+    width: 98%;
+    margin: 10px 1% 0 1%;
+    min-height: 80px;
+    height: auto;
+  }
 `
 
 const Section = styled.div`
@@ -40,15 +48,9 @@ const Section = styled.div`
   align-items: center;
   justify-content: space-around;
 
-  @media (min-width: 769px) {
+  @media (min-width: 992px) {
     &:not(:first-of-type) {
       padding-left: 20px;
-    }
-  }
-
-  @media (max-width: 768px) {
-    &:not(:first-of-type) {
-      padding-left: 10px;
     }
   }
 `;
@@ -63,6 +65,18 @@ const Item = styled.div`
   min-height: 120px;
   margin: 10px 1% 0 1%;
   cursor: pointer;
+
+  @media (max-width: 992px) {
+    width: 48%;
+    margin: 10px 1% 0 1%;
+    min-height: 80px;
+  }
+
+  @media (max-width: 768px) {
+    width: 98%;
+    margin: 10px 1% 0 1%;
+    min-height: 80px;
+  }
 `;
 
 const Icon = styled.td`
@@ -89,6 +103,7 @@ const DefaultIcon = styled.div`
 
 const Name = styled.span`
   font-weight: bold;
+  font-size: 18px;
 `;
 
 const NameLink = styled.a`
