@@ -8,15 +8,12 @@ import { AppList } from '@containers/app-list';
 import NewsletterCTA from '@containers/newsletter-cta';
 
 const featuredAppIDs = [
-  55,
-  112,
-  52,
-  73,
-  54,
-  50
-  // 48,
-  // 57,
-  // 53
+  173,
+  174,
+  187,
+  189,
+  202,
+  243
 ];
 
 export default ({ data }) => (
