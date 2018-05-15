@@ -46,7 +46,7 @@ export default class SubmitDapp extends React.Component {
   render() {
     const { constants } = this.props;
 
-    const enumSelect = (enums, placeholder, props) => {
+    const enumSelect = (enums, placeholder, props = {}) => {
       const options = _.map(_.keys(enums), (opt) => ({ label: opt, value: opt }));
       const onChange = (option) => {
         this.setState({ [props.apiAttr || placeholder.toLowerCase()]: option.value });
@@ -58,10 +58,9 @@ export default class SubmitDapp extends React.Component {
             options={options}
             placeholder={placeholder}
             className="react-select"
-            menuPlacement="bottom"
             onChange={onChange}
             isSearchable={false}
-            {...props}
+            menuPlacement={props.menuPlacement || 'bottom'}
           />
           <br />
         </div>
