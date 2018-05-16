@@ -2,23 +2,23 @@ import React from 'react';
 
 import { StyledFeatured } from '@components/featured';
 import { StyledAppList } from '@components/app-list';
+import { colorHexFromString } from '@utils';
 
 class Featured extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
-      featuredApps: this.getFeaturedApps(props.featured, props.apps)
+      featuredApps: this.getFeaturedApps(props.featured, props.apps),
     };
   }
 
   getFeaturedApps(featured, apps) {
-    return apps.filter(app => featured.includes(app.id))
+    return apps.filter((app) => featured.includes(app.id));
   }
 
   goToApp(website) {
-    window.open(website, "_blank")
+    window.open(website, '_blank');
   }
 
   render() {
@@ -34,13 +34,11 @@ class Featured extends React.Component {
       <StyledFeatured>
         <StyledFeatured.Wrapper>
           <StyledFeatured.TitleSection>
-            Hot Social Dapps <br/>
-            <p>
-            Our curated list of notable Dapps changing the way we communicate.
-            </p>
+            Hot Social Dapps <br />
+            <p>Our curated list of notable Dapps changing the way we communicate.</p>
           </StyledFeatured.TitleSection>
           <StyledFeatured.Section>
-            {this.state.featuredApps.map(app => (
+            {this.state.featuredApps.map((app) => (
               <StyledFeatured.Item key={app.id} onClick={() => this.goToApp(app.website)}>
                 <StyledFeatured.Icon>{appImage(app)}</StyledFeatured.Icon>
                 <div>
