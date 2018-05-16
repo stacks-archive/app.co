@@ -24,7 +24,7 @@ const WhatsADapp = (props) => {
       <p>
         Decentralized apps offer a solution based on blockchain technology. Dapps link developers and users directly,
         without middlemen hosting software or managing user data. These customer-developer networks are more
-        transparent, equitable, and resilient then traditional apps—with all parties incentivized to treat each other
+        transparent, equitable, and resilient than traditional apps—with all parties incentivized to treat each other
         well as they rapidly innovate.
       </p>
 
