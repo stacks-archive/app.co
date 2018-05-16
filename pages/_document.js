@@ -43,6 +43,8 @@ export default class MyDocument extends Document {
           />
           <link rel="shortcut icon" href="/static/images/favicon/favicon-96x96.png" />
           <meta name="viewport" content="width=device-width,initial-scale=1" />
+          <meta property="og:image" content="/static/images/open_graph/image.png">
+          <meta name="twitter:image" content="/static/images/open_graph/image.png">
           {/* Global site tag (gtag.js) - Google Analytics */}
           <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119163063-1" />
           <script
