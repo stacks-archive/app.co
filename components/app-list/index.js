@@ -49,8 +49,8 @@ const Icon = styled.td`
 `;
 
 const IconImage = styled.img`
-  width: 45px;
-  height: 45px;
+  max-width: 45px;
+  max-height: 45px;
   border-radius: 9px;
 `;
 
