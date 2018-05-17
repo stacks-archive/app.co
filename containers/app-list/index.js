@@ -143,7 +143,7 @@ class AppList extends React.Component {
     if (sortedApps) {
       return (
         <StyledAppList>
-          <StyledAppList.FilterSubtitle>Show Dapps by</StyledAppList.FilterSubtitle>
+          {/* <StyledAppList.FilterSubtitle>Show Dapps by</StyledAppList.FilterSubtitle>
           <StyledAppList.Filters>
             <StyledAppList.ClearFilter
               onClick={() => {
@@ -160,7 +160,7 @@ class AppList extends React.Component {
             {platformFilter('IPFS', { image: 'ipfs/IPFS' })}
             {platformFilter('ZeroNet', { image: 'ZeroNet/ZeroNet' })}
             {platformFilter('DAT', { image: 'dat/dat-hexagon' })}
-          </StyledAppList.Filters>
+          </StyledAppList.Filters> */}
           <StyledAppList.Table>
             <StyledAppList.Header>
               <StyledAppList.HeaderRow>
