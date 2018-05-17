@@ -1,14 +1,30 @@
-const colorHexFromString = str => {
-  var hash = 0;
-  for (var i = 0; i < str.length; i++) {
+import _ from 'lodash';
+
+const colorHexFromString = (str) => {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
     hash = str.charCodeAt(i) + ((hash << 5) - hash);
   }
-  var colour = '#';
-  for (var i = 0; i < 3; i++) {
-    var value = (hash >> (i * 8)) & 0xFF;
-    colour += ('00' + value.toString(16)).substr(-2);
+  let colour = '#';
+  for (let i = 0; i < 3; i++) {
+    const value = (hash >> (i * 8)) & 0xff;
+    colour += `00${value.toString(16)}`.substr(-2);
   }
   return colour;
-}
+};
 
-export { colorHexFromString }
+const truncate = (str, options) => {
+  const defaults = {
+    after: '...',
+    length: 50,
+  };
+
+  const opts = _.defaults(options, defaults);
+
+  if (str.length > opts.length) {
+    return str.slice(0, opts.length - opts.after.length) + opts.after;
+  }
+  return str;
+};
+
+export { colorHexFromString, truncate };

@@ -5,7 +5,7 @@ import { StyledAppList } from '@components/app-list';
 import { Button } from '@components/button';
 import { LinkButton } from '@components/link-button';
 import { DropdownButton } from '@containers/dropdown-button';
-import { colorHexFromString } from '@utils';
+import { colorHexFromString, truncate } from '@utils';
 
 const SORT_METHOD = {
   TWEETS: { value: 0, name: 'Tweets / Week', description: '' },
@@ -126,7 +126,9 @@ class AppList extends React.Component {
               {app.name}
             </StyledAppList.NameLink>
           </StyledAppList.Name>
-          <StyledAppList.Column smHide>{app.description}</StyledAppList.Column>
+          <StyledAppList.Column smHide title={app.description}>
+            {truncate(app.description, { length: 60 })}
+          </StyledAppList.Column>
           <StyledAppList.Column align="right" smHide>
             <StyledAppList.TagGroup>
               <StyledAppList.Tag>{app.category}</StyledAppList.Tag>
