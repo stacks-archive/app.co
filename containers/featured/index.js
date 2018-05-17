@@ -14,7 +14,7 @@ class Featured extends React.Component {
   }
 
   getFeaturedApps(featured, apps) {
-    return apps.filter((app) => featured.includes(app.id));
+    return apps.filter((app) => featured.includes(app.name));
   }
 
   goToApp(website) {

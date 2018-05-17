@@ -7,7 +7,7 @@ import { AppList } from '@containers/app-list';
 // import SubmitDappCard from '@containers/cards/submit-dapp-card';
 import NewsletterCTA from '@containers/newsletter-cta';
 
-const featuredAppIDs = [173, 174, 246, 189, 202, 243];
+const featuredApps = ['SteemIt', 'Stealthy', 'Peepeth', 'Mastodon', 'Diaspora', 'DTube'];
 
 export default ({ data }) => (
   <Page>
@@ -15,7 +15,7 @@ export default ({ data }) => (
     <Hero />
     <Page.Section wrap={1}>
       <Page.Section.Content>
-        <Featured apps={data.apps} featured={featuredAppIDs}  />
+        <Featured apps={data.apps} featured={featuredApps} />
       </Page.Section.Content>
     </Page.Section>
 
