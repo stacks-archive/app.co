@@ -7,3 +7,4 @@ google-credentials.json
 scripts/google_oauth.js
 credentials.json
 yarn-error.log
+*.DS_Store

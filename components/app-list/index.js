@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { wrapperStyles } from '@common/styles';
 
 const StyledAppList = styled.div`
@@ -85,7 +85,7 @@ const Column = styled.td`
   text-align: ${(props) => props.align};
 
   @media (max-width: 768px) {
-    ${(props) => props.smHide ? 'display: none;' : ''}
+    ${(props) => (props.smHide ? 'display: none;' : '')};
   }
 `;
 
@@ -120,9 +120,9 @@ const HeaderRow = styled.tr`
 const HeaderItem = styled.th`
   text-align: ${(props) => props.align};
   padding: 20px 15px;
-  
+
   @media (max-width: 768px) {
-    ${(props) => props.smHide ? 'display: none;' : ''}
+    ${(props) => (props.smHide ? 'display: none;' : '')};
   }
 `;
 
@@ -130,6 +130,43 @@ const Footer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const Filters = styled.div``;
+
+const Filter = styled.div`
+  float: left;
+  padding: 0px 25px;
+  cursor: pointer;
+  &:first-child {
+    padding-left: 0;
+  }
+  ${({ selected }) =>
+    selected &&
+    css`
+      font-size: 18px;
+      font-weight: 600;
+      padding-top: 1px;
+    `};
+`;
+
+const ClearFilter = Filter.extend`
+  padding-top: 6px;
+`;
+
+const FilterSubtitle = styled.p`
+  color: rgba(20, 33, 68, 0.5);
+  font-size: 14px;
+  margin-bottom: 3px;
+`;
+
+const FilterImage = styled.img`
+  max-width: 24px;
+  max-height: 24px;
+  position: relative;
+  top: 7px;
+  opacity: 0.75;
+  margin-right: 10px;
 `;
 
 StyledAppList.Table = Table;
@@ -149,5 +186,10 @@ StyledAppList.Header = Header;
 StyledAppList.HeaderRow = HeaderRow;
 StyledAppList.HeaderItem = HeaderItem;
 StyledAppList.Footer = Footer;
+StyledAppList.Filters = Filters;
+StyledAppList.Filter = Filter;
+StyledAppList.FilterSubtitle = FilterSubtitle;
+StyledAppList.FilterImage = FilterImage;
+StyledAppList.ClearFilter = ClearFilter;
 
 export { StyledAppList };

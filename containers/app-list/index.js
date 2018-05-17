@@ -11,12 +11,33 @@ const SORT_METHOD = {
   TWEETS: { value: 0, name: 'Tweets / Week', description: '' },
 };
 
+const PLATFORMS = ['Blockstack', 'Ethereum'];
+
 const getTwitterMentions = (app) => {
   const [ranking] = app.Rankings;
   if (ranking) {
     return ranking.twitterMentions || 0;
   }
   return 0;
+};
+
+const getTags = (app) => {
+  const tags = [];
+
+  if (app.authentication) {
+    tags.push(app.authentication);
+  }
+
+  if (app.blockchain) {
+    tags.push(app.blockchain);
+  }
+
+  if (app.storageNetwork) {
+    tags.push(app.storageNetwork);
+  }
+
+  const tagSet = Array.from(new Set(tags));
+  return tagSet;
 };
 
 class AppList extends React.Component {
@@ -28,6 +49,8 @@ class AppList extends React.Component {
       showAll: false,
       sortMethod: SORT_METHOD.TWEETS,
       sortedApps,
+      platform: null,
+      allApps: sortedApps,
     };
   }
 
@@ -41,25 +64,24 @@ class AppList extends React.Component {
     console.log('show sort');
   }
 
+  selectPlatform(platform) {
+    let apps = this.state.allApps;
+    apps = _.filter(apps, (app) => {
+      const tags = getTags(app);
+      console.log(app.name);
+      return tags.indexOf(platform) !== -1;
+    });
+    this.setState({
+      platform,
+      sortedApps: apps,
+    });
+  }
+
   render() {
     const { showCount, showAll, sortMethod, sortedApps } = this.state;
 
     const renderNetworkTags = (data) => {
-      const tags = [];
-
-      if (data.authentication) {
-        tags.push(data.authentication);
-      }
-
-      if (data.blockchain) {
-        tags.push(data.blockchain);
-      }
-
-      if (data.storageNetwork) {
-        tags.push(data.storageNetwork);
-      }
-
-      const tagSet = Array.from(new Set(tags));
+      const tagSet = getTags(data);
 
       return (
         <StyledAppList.TagGroup>
@@ -80,6 +102,19 @@ class AppList extends React.Component {
       window.open(app.website, '_blank');
     };
 
+    const platformFilter = (platform, opts) => (
+      <StyledAppList.Filter
+        key={platform}
+        onClick={() => {
+          this.selectPlatform(platform);
+        }}
+        selected={this.state.platform === platform}
+      >
+        <StyledAppList.FilterImage title={platform} src={`/static/images/platforms/${opts.image}@3x.png`} />
+        {platform}
+      </StyledAppList.Filter>
+    );
+
     const renderRows = () => {
       const visibleApps = showAll ? sortedApps : sortedApps.slice(0, showCount);
       return visibleApps.map((app, index) => (
@@ -91,13 +126,15 @@ class AppList extends React.Component {
               {app.name}
             </StyledAppList.NameLink>
           </StyledAppList.Name>
-          <StyledAppList.Column smHide={true}>{app.description}</StyledAppList.Column>
-          <StyledAppList.Column align="right" smHide={true}>
+          <StyledAppList.Column smHide>{app.description}</StyledAppList.Column>
+          <StyledAppList.Column align="right" smHide>
             <StyledAppList.TagGroup>
               <StyledAppList.Tag>{app.category}</StyledAppList.Tag>
             </StyledAppList.TagGroup>
           </StyledAppList.Column>
-          <StyledAppList.Column align="right" smHide={true}>{renderNetworkTags(app)}</StyledAppList.Column>
+          <StyledAppList.Column align="right" smHide>
+            {renderNetworkTags(app)}
+          </StyledAppList.Column>
           <StyledAppList.Column align="right">{getTwitterMentions(app)}</StyledAppList.Column>
         </StyledAppList.Row>
       ));
@@ -106,16 +143,40 @@ class AppList extends React.Component {
     if (sortedApps) {
       return (
         <StyledAppList>
+          <StyledAppList.FilterSubtitle>Show Dapps by</StyledAppList.FilterSubtitle>
+          <StyledAppList.Filters>
+            <StyledAppList.ClearFilter
+              onClick={() => {
+                this.setState({ sortedApps: this.state.allApps, platform: null });
+              }}
+              selected={!this.state.platform}
+            >
+              All Platforms
+            </StyledAppList.ClearFilter>
+            {platformFilter('Blockstack', { image: 'blockstack/blockstack' })}
+            {platformFilter('Ethereum', { image: 'ethereum/ethereum-1' })}
+            {platformFilter('Steem', { image: 'steem/steem' })}
+            {platformFilter('EOS', { image: 'EOS/EOS' })}
+            {platformFilter('IPFS', { image: 'ipfs/IPFS' })}
+            {platformFilter('ZeroNet', { image: 'ZeroNet/ZeroNet' })}
+            {platformFilter('DAT', { image: 'dat/dat-hexagon' })}
+          </StyledAppList.Filters>
           <StyledAppList.Table>
             <StyledAppList.Header>
               <StyledAppList.HeaderRow>
                 <StyledAppList.HeaderItem colSpan="3" align="left">
                   Rank
-                  {/*<DropdownButton onClick={() => this.showSortDropdown()}>{sortMethod.name}</DropdownButton>*/}
+                  {/* <DropdownButton onClick={() => this.showSortDropdown()}>{sortMethod.name}</DropdownButton> */}
                 </StyledAppList.HeaderItem>
-                <StyledAppList.HeaderItem align="left" smHide={true}>Description</StyledAppList.HeaderItem>
-                <StyledAppList.HeaderItem align="right" smHide={true}>Category</StyledAppList.HeaderItem>
-                <StyledAppList.HeaderItem align="right" smHide={true}>Protocols</StyledAppList.HeaderItem>
+                <StyledAppList.HeaderItem align="left" smHide>
+                  Description
+                </StyledAppList.HeaderItem>
+                <StyledAppList.HeaderItem align="right" smHide>
+                  Category
+                </StyledAppList.HeaderItem>
+                <StyledAppList.HeaderItem align="right" smHide>
+                  Protocols
+                </StyledAppList.HeaderItem>
                 <StyledAppList.HeaderItem align="right">Tweets/Week</StyledAppList.HeaderItem>
               </StyledAppList.HeaderRow>
             </StyledAppList.Header>
