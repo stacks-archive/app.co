@@ -77,22 +77,23 @@ export default class SubmitDapp extends React.Component {
     }
     return (
       <div>
-        <Modal heading="Submit your Dapp" actions={actions} in={this.props.open} onClose={this.props.close}>
+        <Modal heading="Add your Dapp" actions={actions} in={this.props.open} onClose={this.props.close}>
           {this.state.submitted || this.state.submitting ? (
             <p>Thanks for your submission! We'll get back to you soon.</p>
           ) : (
             <div>
-              Please submit this form, and we'll get back to you when your dapp is approved.
+              Please share some details. We will review and approve your submission shortly.
               <Form.Wrapper>
                 <TextField
                   value={this.state.name}
                   onChange={(e) => this.setState({ name: e.target.value })}
-                  label="Name"
+                  label="Dapp Name"
                 />
                 <TextField
                   value={this.state.description}
                   onChange={(e) => this.setState({ description: e.target.value })}
-                  label="Description"
+                  label="Short description (~50 characters)"
+                  maxLength={50}
                 />
                 <TextField
                   value={this.state.website}
