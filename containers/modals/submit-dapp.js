@@ -4,6 +4,7 @@ import TextField from '@atlaskit/field-text';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import Select from '@atlaskit/select';
+import { CheckboxStateless as Checkbox } from '@atlaskit/checkbox';
 import 'isomorphic-unfetch';
 
 import Form from '@components/form';
@@ -23,6 +24,9 @@ export default class SubmitDapp extends React.Component {
       storageNetwork: null,
       submitted: false,
       submitting: false,
+      openSourceUrl: '',
+      registrationIsOpen: false,
+      twitterHandle: '',
     };
     this.submit = this.submit.bind(this);
   }
@@ -109,6 +113,22 @@ export default class SubmitDapp extends React.Component {
                   value={this.state.imageUrl}
                   onChange={(e) => this.setState({ imageUrl: e.target.value })}
                   label="Image URL"
+                />
+                <TextField
+                  value={this.state.openSourceUrl}
+                  onChange={(e) => this.setState({ openSourceUrl: e.target.value })}
+                  label="Open Source URL"
+                />
+                <TextField
+                  value={this.state.twitterHandle}
+                  onChange={(e) => this.setState({ twitterHandle: e.target.value })}
+                  label="Twitter Handle"
+                />
+                <br />
+                <Checkbox
+                  isChecked={this.state.registrationIsOpen}
+                  onChange={() => this.setState({ registrationIsOpen: !this.state.registrationIsOpen })}
+                  label="Registration is open to all users"
                 />
               </Form.Wrapper>
               {enumSelect(constants.categoryEnums, 'Category')}

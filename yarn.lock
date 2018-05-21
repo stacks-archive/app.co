@@ -8,6 +8,12 @@
   dependencies:
     prop-types "^15.5.10"
 
+"@atlaskit/analytics-next@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@atlaskit/analytics-next/-/analytics-next-2.1.1.tgz#23b3a7498b3399f20dd57e7dcee36e0b4500c4f7"
+  dependencies:
+    prop-types "^15.5.10"
+
 "@atlaskit/blanket@^5.0.1":
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/@atlaskit/blanket/-/blanket-5.0.1.tgz#daa8002b5d7da106cd07b169cd42ba9fbef304f1"
@@ -23,6 +29,27 @@
     "@atlaskit/spinner" "5.0.1"
     "@atlaskit/theme" "^3.1.1"
     babel-runtime "^6.26.0"
+    styled-components "1.4.6 - 3"
+
+"@atlaskit/button@^7.2.5":
+  version "7.2.5"
+  resolved "https://registry.yarnpkg.com/@atlaskit/button/-/button-7.2.5.tgz#a554815075efdef32a5cbbd26a04e35370c8d4aa"
+  dependencies:
+    "@atlaskit/analytics-next" "^2.1.1"
+    "@atlaskit/spinner" "5.0.2"
+    "@atlaskit/theme" "^3.2.2"
+    babel-runtime "^6.26.0"
+    styled-components "1.4.6 - 3"
+
+"@atlaskit/checkbox@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@atlaskit/checkbox/-/checkbox-2.0.2.tgz#99f67f9a008101fd17e5e4f294f74d0e1df93e62"
+  dependencies:
+    "@atlaskit/button" "^7.2.5"
+    "@atlaskit/icon" "^11.3.0"
+    "@atlaskit/theme" "^3.2.2"
+    babel-runtime "^6.26.0"
+    prop-types "^15.5.10"
     styled-components "1.4.6 - 3"
 
 "@atlaskit/field-base@^9.0.2":
@@ -49,6 +76,15 @@
   resolved "https://registry.yarnpkg.com/@atlaskit/icon/-/icon-11.1.1.tgz#3ba9666a4dac003dd259359ce92b5efb319d81b1"
   dependencies:
     "@atlaskit/theme" "^3.1.1"
+    babel-runtime "^6.26.0"
+    styled-components "1.4.6 - 3"
+    uuid "^3.1.0"
+
+"@atlaskit/icon@^11.3.0":
+  version "11.3.0"
+  resolved "https://registry.yarnpkg.com/@atlaskit/icon/-/icon-11.3.0.tgz#63cecca718e049d38791d3ff000ddadda03ec6cd"
+  dependencies:
+    "@atlaskit/theme" "^3.2.2"
     babel-runtime "^6.26.0"
     styled-components "1.4.6 - 3"
     uuid "^3.1.0"
@@ -113,9 +149,25 @@
     react-transition-group "^2.2.1"
     styled-components "1.4.6 - 3"
 
+"@atlaskit/spinner@5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@atlaskit/spinner/-/spinner-5.0.2.tgz#a28ba94ae6a1c12f6ab6955e97db90f62546e95f"
+  dependencies:
+    "@atlaskit/theme" "^3.2.2"
+    babel-runtime "^6.26.0"
+    react-transition-group "^2.2.1"
+    styled-components "1.4.6 - 3"
+
 "@atlaskit/theme@^3.1.1":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@atlaskit/theme/-/theme-3.2.0.tgz#5eb4f2c02a929d427db60e52fcb65f929e849d4e"
+  dependencies:
+    prop-types "^15.5.10"
+    styled-components "1.4.6 - 3"
+
+"@atlaskit/theme@^3.2.2":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@atlaskit/theme/-/theme-3.2.2.tgz#14e55188a6561e34fa697445ec5582ef0c733942"
   dependencies:
     prop-types "^15.5.10"
     styled-components "1.4.6 - 3"

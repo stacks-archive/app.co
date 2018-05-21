@@ -7,6 +7,7 @@
     "url": "https://github.com/blockstackpbc/app.co/issues"
   },
   "dependencies": {
+    "@atlaskit/checkbox": "^2.0.2",
     "@atlaskit/field-text": "^5.0.2",
     "@atlaskit/modal-dialog": "^4.0.4",
     "@atlaskit/select": "^2.0.1",
