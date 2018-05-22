@@ -42,7 +42,7 @@ const Section = styled.div`
 const Item = styled.div`
   flex-grow: 1;
   text-align: center;
-  
+
   @media (min-width: 769px) {
     &:not(:first-of-type) {
       padding-left: 40px;
@@ -69,6 +69,11 @@ const Link = styled.a`
   }
 `;
 
+const LogoLink = styled.a`
+  text-decoration: none;
+  color: #333333;
+`;
+
 const Logo = styled.div`
   border-radius: 10px;
   height: 92px;
@@ -83,13 +88,13 @@ const Logo = styled.div`
   font-weight: 700;
 
   @media (max-width: 768px) {
-    ${props => props.smShow ? '' : 'display: none;'}
-    ${props => props.smShow ? 'margin-top: 30px;' : ''}
+    ${(props) => (props.smShow ? '' : 'display: none;')} ${(props) =>
+      props.smShow ? 'margin-top: 30px;' : ''}
     margin: 50px auto;
   }
 
   @media (min-width: 768px) {
-    ${props => props.smShow ? 'display: none;' : ''};
+    ${(props) => (props.smShow ? 'display: none;' : '')};
   }
 `;
 
@@ -102,6 +107,7 @@ StyledHeader.Section = Section;
 StyledHeader.Item = Item;
 StyledHeader.Link = Link;
 StyledHeader.Logo = Logo;
+StyledHeader.LogoLink = LogoLink;
 StyledHeader.LogoImage = LogoImage;
 
 export { StyledHeader };

@@ -68,6 +68,10 @@ app.prepare().then(() => {
     renderAndCache(req, res, '/');
   });
 
+  server.get('/faq', (req, res) => {
+    renderAndCache(req, res, '/faq');
+  });
+
   server.get('/clear-cache', (req, res) => {
     if (req.query.key === process.env.API_KEY) {
       ssrCache.reset();

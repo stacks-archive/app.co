@@ -28,24 +28,14 @@ class Header extends React.Component {
       <StyledHeader>
         <StyledHeader.Wrapper>
           <StyledHeader.Section>
-            <StyledHeader.Logo>App.co</StyledHeader.Logo>
-            <StyledHeader.Item
-              onClick={() => {
-                this.setState({
-                  whatsADappOpen: true,
-                });
-              }}
-            >
-              <StyledHeader.Link href="#">What's a Dapp?</StyledHeader.Link>
+            <StyledHeader.Logo>
+              <StyledHeader.LogoLink href="/">App.co</StyledHeader.LogoLink>
+            </StyledHeader.Logo>
+            <StyledHeader.Item>
+              <StyledHeader.Link href="/faq#whats-a-dapp">What's a Dapp?</StyledHeader.Link>
             </StyledHeader.Item>
-            <StyledHeader.Item
-              onClick={() => {
-                this.setState({
-                  whoWeAreOpen: true,
-                });
-              }}
-            >
-              <StyledHeader.Link href="#">About App.co</StyledHeader.Link>
+            <StyledHeader.Item>
+              <StyledHeader.Link href="/faq#about">About App.co</StyledHeader.Link>
             </StyledHeader.Item>
           </StyledHeader.Section>
           <StyledHeader.Section>
