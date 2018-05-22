@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { darken } from 'polished';
 
-const Button = styled.div`
+const Button = styled.a`
   padding: 10px 20px;
   border-radius: 20px;
   font-weight: bold;
@@ -16,6 +16,7 @@ const Button = styled.div`
   transition: 0.15s all ease-in-out;
   cursor: pointer;
   z-index: 10;
+  text-decoration: none;
   &:hover {
     cursor: pointer;
   }

@@ -39,7 +39,7 @@ class Header extends React.Component {
             </StyledHeader.Item>
           </StyledHeader.Section>
           <StyledHeader.Section>
-            <Button type="button/primary" onClick={this.openModal} href="">
+            <Button type="button/primary" href="/submit">
               Add your Dapp
             </Button>
           </StyledHeader.Section>
