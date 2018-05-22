@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Page } from '@containers/page';
 import { Header } from '@containers/header';
 import { Hero } from '@containers/hero';
+import { Button } from '@components/button';
 import _ from 'lodash';
 import Select from '@atlaskit/select';
 import { CheckboxStateless as Checkbox } from '@atlaskit/checkbox';
@@ -34,7 +35,7 @@ export default class SubmitDapp extends React.Component {
   }
 
   async submit() {
-    const { apiServer } = this.props;
+    const { apiServer } = this.props.data;
     const url = `${apiServer}/api/submit`;
     this.setState({ submitting: true });
     await fetch(url, {
@@ -45,7 +46,6 @@ export default class SubmitDapp extends React.Component {
       },
       body: JSON.stringify(this.state),
     });
-    this.props.close();
     this.setState({ submitted: true, submitting: false });
   }
 
@@ -138,6 +138,10 @@ export default class SubmitDapp extends React.Component {
                 {enumSelect(appConstants.blockchainEnums, 'Blockchain')}
                 {enumSelect(appConstants.storageEnums, 'Storage', { apiAttr: 'storageNetwork' })}
                 {enumSelect(appConstants.authenticationEnums, 'Authentication', { menuPlacement: 'top' })}
+                <br />
+                <Button onClick={this.submit} type="button/primary">
+                  Submit
+                </Button>
               </div>
             )}
           </Page.Section.Content>
@@ -146,8 +150,3 @@ export default class SubmitDapp extends React.Component {
     );
   }
 }
-
-SubmitDapp.propTypes = {
-  open: PropTypes.bool.isRequired,
-  close: PropTypes.func.isRequired,
-};
