@@ -1,7 +1,12 @@
 import App, { Container } from 'next/app';
 import React from 'react';
 import { withRouter } from 'next/router';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
 import { Root } from '@containers/root';
+import AppStore from '@stores/apps';
+
 import 'isomorphic-unfetch';
 
 class MyApp extends App {
@@ -25,11 +30,16 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, data } = this.props;
+    // console.log(appReducer);
+    const store = createStore(AppStore.reducer, data);
+
     return (
       <Container>
-        <Root>
-          <Component {...pageProps} data={data} />
-        </Root>
+        <Provider store={store}>
+          <Root>
+            <Component {...pageProps} data={data} />
+          </Root>
+        </Provider>
       </Container>
     );
   }

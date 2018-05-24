@@ -1,12 +1,15 @@
 import React from 'react';
 import _ from 'lodash';
 import Tooltip from '@atlaskit/tooltip';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import { StyledAppList } from '@components/app-list';
 import { Button } from '@components/button';
 import { LinkButton } from '@components/link-button';
 import { DropdownButton } from '@containers/dropdown-button';
 import { colorHexFromString, truncate, outboundLink } from '@utils';
+import AppStore from '@stores/apps';
 
 const SORT_METHOD = {
   TWEETS: { value: 0, name: 'Tweets / Week', description: '' },
@@ -166,7 +169,7 @@ class AppList extends React.Component {
             {platformFilter('IPFS', { image: 'ipfs/IPFS' })}
             {platformFilter('ZeroNet', { image: 'ZeroNet/ZeroNet' })}
             {platformFilter('DAT', { image: 'dat/dat-hexagon' })}
-          </StyledAppList.Filters> */}
+            </StyledAppList.Filters> */}
           <StyledAppList.Table>
             <StyledAppList.Header>
               <StyledAppList.HeaderRow>
@@ -210,4 +213,12 @@ class AppList extends React.Component {
   }
 }
 
-export { AppList };
+const mapStateToProps = (state) => ({
+  apps: state.apps,
+});
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Object.assign({}, AppStore.actions), dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppList);
