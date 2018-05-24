@@ -5,7 +5,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 import { Root } from '@containers/root';
-import AppStore from '@stores/apps';
+import Store from '@stores';
 
 import 'isomorphic-unfetch';
 
@@ -30,8 +30,7 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, data } = this.props;
-    // console.log(appReducer);
-    const store = createStore(AppStore.reducer, data);
+    const store = Store(data);
 
     return (
       <Container>

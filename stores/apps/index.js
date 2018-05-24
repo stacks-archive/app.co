@@ -1,8 +1,3 @@
-const initialState = {
-  apps: [],
-  platformFilter: null,
-};
-
 const constants = {
   SET_PLATFORM: 'SET_PLATFORM',
 };
@@ -16,19 +11,27 @@ const actions = {
   },
 };
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case constants.SET_PLATFORM:
-      return Object.assign({}, state, {
-        platformFilter: action.platform,
-      });
-    default:
-      return state;
-  }
+const makeReducer = (data) => {
+  const initialState = Object.assign({}, data, {
+    platformFilter: null,
+  });
+
+  const reducer = (state = initialState, action) => {
+    switch (action.type) {
+      case constants.SET_PLATFORM:
+        return Object.assign({}, state, {
+          platformFilter: action.platform,
+        });
+      default:
+        return state;
+    }
+  };
+
+  return reducer;
 };
 
 export default {
-  reducer,
+  makeReducer,
   constants,
   actions,
 };
