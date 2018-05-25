@@ -214,7 +214,7 @@ class AppList extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  apps: state.apps,
+  apps: state.apps.apps,
 });
 
 function mapDispatchToProps(dispatch) {

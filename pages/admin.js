@@ -1,20 +1,18 @@
 import React from 'react';
-import * as blockstack from 'blockstack';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import { Page } from '@containers/page';
 import { Header } from '@containers/header';
 import { Hero } from '@containers/hero';
 import { Button } from '@components/button';
 
+import AppStore from '@stores/apps';
+import UserStore from '@stores/user';
+
 import 'isomorphic-unfetch';
 
-const signIn = () => {
-  const redirect = `${window.location.origin}/admin`;
-  const manifest = `${window.location.origin}/static/manifest.json`;
-  blockstack.redirectToSignIn(redirect, manifest);
-};
-
-export default class Admin extends React.Component {
+class Admin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,23 +21,8 @@ export default class Admin extends React.Component {
   }
 
   componentDidMount() {
-    this.signInWithToken();
-  }
-
-  async signInWithToken() {
-    const token = blockstack.getAuthResponseToken();
-    if (!token || this.state.signingIn) {
-      return true;
-    }
-    this.setState({ signingIn: true });
-    // console.log(token);
-    const url = `${this.props.data.apiServer}/api/authenticate?authToken=${token}`;
-    const response = await fetch(url, {
-      method: 'POST',
-    });
-    const json = await response.json();
-    console.log(json);
-    return true;
+    // this.signInWithToken();
+    this.props.handleSignIn(this.props.apiServer);
   }
 
   render() {
@@ -53,7 +36,7 @@ export default class Admin extends React.Component {
             <Button
               type="button/primary"
               onClick={() => {
-                signIn();
+                this.props.signIn();
               }}
             >
               Sign In with Blockstack
@@ -64,3 +47,15 @@ export default class Admin extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  apps: state.apps.apps,
+  apiServer: state.apps.apiServer,
+  user: state.user,
+});
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Object.assign({}, AppStore.actions, UserStore.actions), dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Admin);
