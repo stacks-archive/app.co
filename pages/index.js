@@ -8,6 +8,7 @@ import { AppList } from '@containers/app-list';
 import NewsletterCTA from '@containers/newsletter-cta';
 
 const featuredApps = ['SteemIt', 'Stealthy', 'Peepeth', 'Mastodon', 'Diaspora', 'DTube'];
+const bizApps = ['Graphite', 'Aragon', 'Gitcoin', 'Bounty0x', 'adChain Registry', 'ETHLance'];
 
 export default ({ data }) => (
   <Page>
@@ -16,6 +17,9 @@ export default ({ data }) => (
     <Page.Section wrap={1}>
       <Page.Section.Content>
         <Featured apps={data.apps} featured={featuredApps} />
+        <br />
+        <br />
+        <Featured apps={data.apps} featured={bizApps} right />
       </Page.Section.Content>
     </Page.Section>
 

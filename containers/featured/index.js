@@ -33,10 +33,12 @@ class Featured extends React.Component {
     return (
       <StyledFeatured>
         <StyledFeatured.Wrapper>
-          <StyledFeatured.TitleSection>
-            Hot Social Dapps <br />
-            <p>Our curated list of notable Dapps changing the way we communicate.</p>
-          </StyledFeatured.TitleSection>
+          {!this.props.right && (
+            <StyledFeatured.TitleSection>
+              Hot Social Dapps <br />
+              <p>Our curated list of notable Dapps changing the way we communicate.</p>
+            </StyledFeatured.TitleSection>
+          )}
           <StyledFeatured.Section>
             {this.state.featuredApps.map((app) => (
               <StyledFeatured.Item key={app.id} onClick={() => this.goToApp(app.website)}>
@@ -53,6 +55,12 @@ class Featured extends React.Component {
               </StyledFeatured.Item>
             ))}
           </StyledFeatured.Section>
+          {this.props.right && (
+            <StyledFeatured.TitleSection>
+              Business Tools<br />
+              <p>Decentralize your workplace.</p>
+            </StyledFeatured.TitleSection>
+          )}
         </StyledFeatured.Wrapper>
       </StyledFeatured>
     );
