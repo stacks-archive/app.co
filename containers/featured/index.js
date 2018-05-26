@@ -1,4 +1,5 @@
 import React from 'react';
+import sortBy from 'lodash/sortBy';
 
 import { StyledFeatured } from '@components/featured';
 import { StyledAppList } from '@components/app-list';
@@ -8,8 +9,10 @@ class Featured extends React.Component {
   constructor(props) {
     super(props);
 
+    const featuredApps = sortBy(this.getFeaturedApps(props.featured, props.apps), (app) => props.featured.indexOf(app.name));
+
     this.state = {
-      featuredApps: this.getFeaturedApps(props.featured, props.apps),
+      featuredApps,
     };
   }
 
