@@ -27,4 +27,16 @@ const truncate = (str, options) => {
   return str;
 };
 
-export { colorHexFromString, truncate };
+const outboundLink = (app) => {
+  if (typeof ga !== 'undefined') {
+    ga('send', 'event', {
+      eventCategory: 'Apps',
+      eventAction: 'outgoingClick',
+      eventLabel: app.name,
+      transport: 'beacon',
+    });
+  }
+  window.open(app.website, '_blank');
+};
+
+export { colorHexFromString, truncate, outboundLink };

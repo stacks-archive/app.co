@@ -5,7 +5,7 @@ import { StyledAppList } from '@components/app-list';
 import { Button } from '@components/button';
 import { LinkButton } from '@components/link-button';
 import { DropdownButton } from '@containers/dropdown-button';
-import { colorHexFromString, truncate } from '@utils';
+import { colorHexFromString, truncate, outboundLink } from '@utils';
 
 const SORT_METHOD = {
   TWEETS: { value: 0, name: 'Tweets / Week', description: '' },
@@ -98,10 +98,6 @@ class AppList extends React.Component {
       return <StyledAppList.DefaultIcon bgColor={bgColor}>{app.name.substring(0, 1)}</StyledAppList.DefaultIcon>;
     };
 
-    const openApp = (app) => {
-      window.open(app.website, '_blank');
-    };
-
     const platformFilter = (platform, opts) => (
       <StyledAppList.Filter
         key={platform}
@@ -118,7 +114,7 @@ class AppList extends React.Component {
     const renderRows = () => {
       const visibleApps = showAll ? sortedApps : sortedApps.slice(0, showCount);
       return visibleApps.map((app, index) => (
-        <StyledAppList.Row key={app.id} onClick={() => openApp(app)}>
+        <StyledAppList.Row key={app.id} onClick={() => outboundLink(app)}>
           <StyledAppList.Rank>{index + 1}</StyledAppList.Rank>
           <StyledAppList.Icon>{appImage(app)}</StyledAppList.Icon>
           <StyledAppList.Name>

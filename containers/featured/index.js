@@ -3,13 +3,15 @@ import sortBy from 'lodash/sortBy';
 
 import { StyledFeatured } from '@components/featured';
 import { StyledAppList } from '@components/app-list';
-import { colorHexFromString } from '@utils';
+import { colorHexFromString, outboundLink } from '@utils';
 
 class Featured extends React.Component {
   constructor(props) {
     super(props);
 
-    const featuredApps = sortBy(this.getFeaturedApps(props.featured, props.apps), (app) => props.featured.indexOf(app.name));
+    const featuredApps = sortBy(this.getFeaturedApps(props.featured, props.apps), (app) =>
+      props.featured.indexOf(app.name),
+    );
 
     this.state = {
       featuredApps,
@@ -18,10 +20,6 @@ class Featured extends React.Component {
 
   getFeaturedApps(featured, apps) {
     return apps.filter((app) => featured.includes(app.name));
-  }
-
-  goToApp(website) {
-    window.open(website, '_blank');
   }
 
   render() {
@@ -44,7 +42,7 @@ class Featured extends React.Component {
           )}
           <StyledFeatured.Section>
             {this.state.featuredApps.map((app) => (
-              <StyledFeatured.Item key={app.id} onClick={() => this.goToApp(app.website)}>
+              <StyledFeatured.Item key={app.id} onClick={() => outboundLink(app)}>
                 <StyledFeatured.Icon>{appImage(app)}</StyledFeatured.Icon>
                 <div>
                   <StyledFeatured.Name>
