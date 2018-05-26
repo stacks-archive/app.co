@@ -28,12 +28,11 @@ const truncate = (str, options) => {
 };
 
 const outboundLink = (app) => {
-  if (typeof ga !== 'undefined') {
-    ga('send', 'event', {
-      eventCategory: 'Apps',
-      eventAction: 'outgoingClick',
-      eventLabel: app.name,
-      transport: 'beacon',
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'outgoing_click', {
+      app_name: app.name,
+      app_id: app.id,
+      url: app.website,
     });
   }
   window.open(app.website, '_blank');
