@@ -78,6 +78,7 @@ app.prepare().then(() => {
 
   server.get('/clear-cache', (req, res) => {
     if (req.query.key === process.env.API_KEY) {
+      console.log('Clearing cache from API');
       ssrCache.reset();
       res.json({ success: true });
     } else {
