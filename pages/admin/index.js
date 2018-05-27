@@ -7,42 +7,51 @@ import { Header } from '@containers/header';
 import { Hero } from '@containers/hero';
 import { Button } from '@components/button';
 
+// if (typeof window !== 'undefined') {
+//   import AdminLayout from '@containers/admin/layout2';
+// }
+
 import AppStore from '@stores/apps';
 import UserStore from '@stores/user';
 
 import 'isomorphic-unfetch';
+
+let AdminLayout = () => '';
 
 class Admin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       signingIn: false,
+      clientSide: false,
     };
   }
 
   componentDidMount() {
     // this.signInWithToken();
+    AdminLayout = require('../../containers/admin/layout').default;
+    this.setState({ clientSide: true });
     this.props.handleSignIn(this.props.apiServer);
   }
 
   render() {
+    console.log(AdminLayout);
     return (
       <div>
-        <Header data={this.props.data} />
-        <Hero />
+        {this.state.clientSide && <AdminLayout />}
 
-        <Page.Section wrap={1}>
-          <Page.Section.Content>
-            <Button
-              type="button/primary"
-              onClick={() => {
-                this.props.signIn();
-              }}
-            >
-              Sign In with Blockstack
-            </Button>
-          </Page.Section.Content>
-        </Page.Section>
+        {/* <Page.Section wrap={1}>
+        <Page.Section.Content>
+          <Button
+            type="button/primary"
+            onClick={() => {
+              this.props.signIn();
+            }}
+          >
+            Sign In with Blockstack
+          </Button>
+        </Page.Section.Content>
+      </Page.Section> */}
       </div>
     );
   }
