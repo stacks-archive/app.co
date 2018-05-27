@@ -1,4 +1,6 @@
 import _ from 'lodash';
+import React from 'react';
+import Select from '@atlaskit/select';
 
 const colorHexFromString = (str) => {
   let hash = 0;
@@ -40,4 +42,28 @@ const outboundLink = (app) => {
   window.open(app.website, '_blank');
 };
 
-export { colorHexFromString, truncate, outboundLink };
+const enumSelect = (enums, placeholder, props = {}) => {
+  const options = _.map(_.keys(enums), (opt) => ({ label: opt, value: opt }));
+  const onChange = (option) => {
+    props.onChange({ [props.apiAttr || placeholder.toLowerCase()]: option.value });
+  };
+  // console.log(props);
+  return (
+    <div>
+      <br />
+      <Select
+        options={options}
+        placeholder={placeholder}
+        className="react-select"
+        onChange={onChange}
+        isSearchable={false}
+        // selectedValue={props.value}
+        value={props.value}
+        menuPlacement={props.menuPlacement || 'bottom'}
+      />
+      <br />
+    </div>
+  );
+};
+
+export { colorHexFromString, truncate, outboundLink, enumSelect };

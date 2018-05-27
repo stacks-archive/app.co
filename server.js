@@ -44,6 +44,7 @@ async function renderAndCache(req, res, pagePath) {
       uri: `${apiServer}/api/apps`,
       json: true,
     });
+    console.log(Object.keys(data));
     data.apiServer = apiServer;
 
     // If not let's render the page into HTML

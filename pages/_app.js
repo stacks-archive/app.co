@@ -13,13 +13,7 @@ class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
 
-    // const { apiServer } = ctx.query || 'https://app-co.herokuapp.com';
-    const { apps } = ctx.query;
-    // const response = await fetch(`${apiServer}/api/apps`);
-    // const data = await response.json();
-    // data.apiServer = apiServer;
-    // data.apps = apps;
-    const data = { apps };
+    const data = ctx.query;
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);

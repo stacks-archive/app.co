@@ -190,8 +190,8 @@ class AdminHome extends React.Component {
             globalPrimaryItemHref="//www.atlassian.com/software/confluence"
             globalSearchIcon={<GlobalSearchIcon openDrawer={this.openDrawer} />}
             isOpen={this.state.isOpen}
-            onResize={this.resize}
-            onResizeStart={(e) => console.log('resizeStart', e)}
+            // onResize={this.resize}
+            // onResizeStart={(e) => console.log('resizeStart', e)}
             width={this.state.width}
             hasScrollHintTop
           >
