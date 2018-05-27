@@ -2,7 +2,7 @@ const express = require('express');
 const next = require('next');
 const LRUCache = require('lru-cache');
 const dotenv = require('dotenv');
-const basicAuth = require('express-basic-auth');
+const request = require('request-promise');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
@@ -40,8 +40,14 @@ async function renderAndCache(req, res, pagePath) {
   }
 
   try {
+    const data = await request({
+      uri: `${apiServer}/api/apps`,
+      json: true,
+    });
+    data.apiServer = apiServer;
+
     // If not let's render the page into HTML
-    const html = await app.renderToHTML(req, res, pagePath, { apiServer });
+    const html = await app.renderToHTML(req, res, pagePath, data);
 
     // Something is wrong with the request, let's skip the cache
     if (res.statusCode !== 200) {
@@ -78,6 +84,10 @@ app.prepare().then(() => {
 
   server.get('/admin', (req, res) => {
     renderAndCache(req, res, '/admin');
+  });
+
+  server.get('/admin/app', (req, res) => {
+    renderAndCache(req, res, '/admin/app');
   });
 
   server.get('/clear-cache', (req, res) => {

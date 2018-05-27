@@ -8,6 +8,7 @@ import AppsStore from '@stores/apps';
 import UserStore from '@stores/user';
 
 export default (data) => {
+  console.log(data);
   const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
   const finalCreateStore = composeEnhancers(applyMiddleware(thunk), persistState(['user']))(createStore);
 

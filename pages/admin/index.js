@@ -6,10 +6,7 @@ import { Page } from '@containers/page';
 import { Header } from '@containers/header';
 import { Hero } from '@containers/hero';
 import { Button } from '@components/button';
-
-// if (typeof window !== 'undefined') {
-//   import AdminLayout from '@containers/admin/layout2';
-// }
+import AppList from '@containers/admin/app-list';
 
 import AppStore from '@stores/apps';
 import UserStore from '@stores/user';
@@ -35,7 +32,25 @@ class Admin extends React.Component {
     console.log(AdminLayout);
     return (
       <div>
-        {AdminLayout && <AdminLayout />}
+        {AdminLayout && (
+          <AdminLayout>
+            <h1>Apps</h1>
+            <br />
+            <br />
+            {this.props.user.user ? (
+              <AppList />
+            ) : (
+              <Button
+                type="button/primary"
+                onClick={() => {
+                  this.props.signIn();
+                }}
+              >
+                Sign In with Blockstack
+              </Button>
+            )}
+          </AdminLayout>
+        )}
 
         {/* <Page.Section wrap={1}>
         <Page.Section.Content>

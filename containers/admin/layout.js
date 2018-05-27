@@ -23,11 +23,10 @@ import TrayIcon from '@atlaskit/icon/glyph/tray';
 import WorldIcon from '@atlaskit/icon/glyph/world';
 import QuestionIcon from '@atlaskit/icon/glyph/question';
 import { AkSearch } from '@atlaskit/quick-search';
+import Link from 'next/link';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
-import AppList from '@containers/admin/app-list';
 
 import AppStore from '@stores/apps';
 import UserStore from '@stores/user';
@@ -163,9 +162,20 @@ class AdminHome extends React.Component {
     const stack = [[]];
     let item = null;
     if (this.props.user.user) {
-      item = <AkNavigationItem text="Apps" icon={<DiscoverIcon label="Apps Icon" size="medium" />} isSelected />;
+      item = (
+        <Link href="/admin" key="apps">
+          <AkNavigationItem text="Apps" icon={<DiscoverIcon label="Apps Icon" size="medium" />} isSelected />
+        </Link>
+      );
     } else {
-      item = <AkNavigationItem text="Sign In" icon={<PeopleIcon label="Sign In Icon" size="medium" />} isSelected />;
+      item = (
+        <AkNavigationItem
+          text="Sign In"
+          icon={<PeopleIcon label="Sign In Icon" size="medium" />}
+          isSelected
+          key="sign-in"
+        />
+      );
     }
     stack[0].push(item);
     return (
@@ -193,21 +203,7 @@ class AdminHome extends React.Component {
           <GridColumn medium={12}>
             <br />
             <br />
-            <h1>Apps</h1>
-            <br />
-            <br />
-            {this.props.user.user ? (
-              <AppList />
-            ) : (
-              <Button
-                type="button/primary"
-                onClick={() => {
-                  this.props.signIn();
-                }}
-                >
-                Sign In with Blockstack
-              </Button>
-            )}
+            {this.props.children}
           </GridColumn>
         </Grid>
       </Page>
