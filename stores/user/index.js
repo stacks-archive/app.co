@@ -4,6 +4,7 @@ const initialState = {
   userId: null,
   jwt: null,
   signingIn: false,
+  user: null,
 };
 
 const constants = {
@@ -19,6 +20,8 @@ const signingIn = () => ({
 const signedIn = (data) => ({
   type: constants.SIGNED_IN,
   token: data.token,
+  user: data.user,
+  userId: data.user.id,
 });
 
 const handleSignIn = (apiServer) =>
@@ -62,6 +65,8 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         signingIn: false,
         jwt: action.token,
+        userId: action.userId,
+        user: action.user,
       });
     default:
       return state;

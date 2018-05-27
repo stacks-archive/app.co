@@ -48,21 +48,9 @@ const BackIcon = (
   </Tooltip>
 );
 
-const ContainerHeaderComponent = ({ stackLength, goBackHome }) => (
+const ContainerHeaderComponent = () => (
   <div>
     <AkContainerLogo>App.co</AkContainerLogo>
-    {stackLength > 1 ? (
-      <AkNavigationItem
-        icon={<ArrowLeftIcon label="Add-ons icon" />}
-        onClick={() => goBackHome()}
-        onKeyDown={(event) => {
-          if (event.key === 'Enter') {
-            goBackHome();
-          }
-        }}
-        text="Add-ons"
-      />
-    ) : null}
   </div>
 );
 
@@ -85,40 +73,7 @@ class AdminHome extends React.Component {
       isOpen: true,
       menuLoading: true,
       openDrawer: null,
-      stack: [
-        [
-          <AkNavigationItem text="Apps" icon={<DiscoverIcon label="Apps Icon" size="medium" />} isSelected />,
-          // <AkNavigationItem text="Your work" icon={<TrayIcon label="Your work icon" size="medium" />} />,
-          // <AkNavigationItem text="Spaces" icon={<FolderIcon label="Spaces icon" size="medium" />} />,
-          // <AkNavigationItem text="People" icon={<PeopleIcon label="People icon" size="medium" />} />,
-          // <AkNavigationItem
-          //   action={
-          //     <Button appearance="subtle" iconBefore={<ChevronRightIcon label="add" size="medium" />} spacing="none" />
-          //   }
-          //   text="Add-ons"
-          //   onClick={() => this.addOnsNestedNav()}
-          //   icon={<AddonIcon label="Add-ons icon" size="medium" />}
-          // />,
-          // <AkNavigationItem text="Settings" icon={<SettingsIcon label="Settings icon" size="medium" />} />,
-          // <AkNavigationItemGroup title="New Confluence Experience">
-          //   <AkNavigationItem icon={<EditorFeedbackIcon label="Feedback icon" size="medium" />} text="Give feedback" />
-          //   {/* <AkNavigationItem
-          //     icon={
-          //       <CrossCircleIcon
-          //         secondaryColor={({ theme }) => getProvided(theme).background.primary}
-          //         label="Opt icon"
-          //         size="medium"
-          //       />
-          //     }
-          //     text="Opt out for now"
-          //   /> */}
-          // </AkNavigationItemGroup>,
-          // <AkNavigationItemGroup title="My Spaces">
-          //   <AkNavigationItem icon={<ConfluenceIcon label="Confluence icon" size="medium" />} text="Confluence ADG 3" />
-          //   <AkNavigationItem icon={<WorldIcon label="World icon" size="medium" />} text="Atlaskit" />
-          // </AkNavigationItemGroup>,
-        ],
-      ],
+      stack: [],
       width: this.props.width,
     };
     this.openDrawer = this.openDrawer.bind(this);
@@ -169,17 +124,6 @@ class AdminHome extends React.Component {
     );
   }
 
-  addOnsNestedNav() {
-    this.setState({
-      stack: [
-        ...this.state.stack,
-        [
-          <AkNavigationItem icon={<CalendarIcon label="Calendar" />} text="Calendars" />,
-          <AkNavigationItem icon={<QuestionIcon label="Question" />} text="Questions" />,
-        ],
-      ],
-    });
-  }
   openDrawer(name) {
     console.log(`on ${name} drawer open called`);
 
@@ -216,15 +160,21 @@ class AdminHome extends React.Component {
   }
 
   render() {
+    const stack = [[]];
+    let item = null;
+    if (this.props.user.user) {
+      item = <AkNavigationItem text="Apps" icon={<DiscoverIcon label="Apps Icon" size="medium" />} isSelected />;
+    } else {
+      item = <AkNavigationItem text="Sign In" icon={<PeopleIcon label="Sign In Icon" size="medium" />} isSelected />;
+    }
+    stack[0].push(item);
     return (
       <Page
         navigation={
           <Navigation
             drawers={[this.getSearchDrawer(), this.getCreateDrawer()]}
             containerTheme={presetThemes.global}
-            containerHeaderComponent={() => (
-              <ContainerHeaderComponent stackLength={this.state.stack.length} goBackHome={this.goBackHome} />
-            )}
+            containerHeaderComponent={() => <ContainerHeaderComponent />}
             globalCreateIcon={<GlobalCreateIcon openDrawer={this.openDrawer} />}
             globalPrimaryIcon={<ConfluenceIcon label="Confluence icon" size="large" />}
             globalPrimaryItemHref="//www.atlassian.com/software/confluence"
@@ -235,7 +185,7 @@ class AdminHome extends React.Component {
             width={this.state.width}
             hasScrollHintTop
           >
-            <AkContainerNavigationNested stack={this.state.stack} />
+            <AkContainerNavigationNested stack={stack} />
           </Navigation>
         }
       >
@@ -244,9 +194,20 @@ class AdminHome extends React.Component {
             <br />
             <br />
             <h1>Apps</h1>
-            <ul>
+            <br />
+            <br />
+            {this.props.user.user ? (
               <AppList />
-            </ul>
+            ) : (
+              <Button
+                type="button/primary"
+                onClick={() => {
+                  this.props.signIn();
+                }}
+                >
+                Sign In with Blockstack
+              </Button>
+            )}
           </GridColumn>
         </Grid>
       </Page>

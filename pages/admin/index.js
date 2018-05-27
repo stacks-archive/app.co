@@ -21,10 +21,7 @@ let AdminLayout = () => '';
 class Admin extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      signingIn: false,
-      clientSide: false,
-    };
+    this.state = {};
   }
 
   componentDidMount() {
@@ -38,7 +35,7 @@ class Admin extends React.Component {
     console.log(AdminLayout);
     return (
       <div>
-        {this.state.clientSide && <AdminLayout />}
+        {AdminLayout && <AdminLayout />}
 
         {/* <Page.Section wrap={1}>
         <Page.Section.Content>
