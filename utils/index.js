@@ -30,6 +30,8 @@ const truncate = (str, options) => {
 const outboundLink = (app) => {
   if (typeof gtag !== 'undefined') {
     gtag('event', 'outgoing_click', {
+      event_label: app.name,
+      event_category: 'Apps'
       app_name: app.name,
       app_id: app.id,
       url: app.website,
