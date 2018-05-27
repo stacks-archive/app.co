@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 
 import TableTree from '@atlaskit/table-tree';
 
-const Name = (props) => {
-  console.log(props);
-  return <span>{props.name}</span>;
-};
+const Name = ({ name }) => <span>{name}</span>;
 
 const transformApps = (apps) =>
   apps.map((app) => ({

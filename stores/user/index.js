@@ -40,6 +40,8 @@ const handleSignIn = (apiServer) =>
     console.log(json);
     dispatch(signedIn(json));
 
+    document.location = '/admin';
+
     return true;
   };
 

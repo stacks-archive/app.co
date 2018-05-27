@@ -48,6 +48,8 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "redux": "^4.0.0",
+    "redux-localstorage": "^0.4.1",
+    "redux-persist": "^5.9.1",
     "redux-thunk": "^2.2.0",
     "request-promise": "^4.2.2",
     "sequelize": "^4.37.6",
