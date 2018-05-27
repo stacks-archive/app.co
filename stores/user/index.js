@@ -37,7 +37,6 @@ const handleSignIn = (apiServer) =>
       method: 'POST',
     });
     const json = await response.json();
-    console.log(json);
     dispatch(signedIn(json));
 
     document.location = '/admin';

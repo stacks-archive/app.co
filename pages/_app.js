@@ -27,7 +27,6 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, data } = this.props;
-    console.log('data', data);
     const store = Store(data);
 
     return (

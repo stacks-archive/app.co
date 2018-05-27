@@ -47,7 +47,6 @@ const enumSelect = (enums, placeholder, props = {}) => {
   const onChange = (option) => {
     props.onChange({ [props.apiAttr || placeholder.toLowerCase()]: option.value });
   };
-  // console.log(props);
   return (
     <div>
       <br />

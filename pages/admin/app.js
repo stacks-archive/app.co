@@ -11,7 +11,6 @@ import Form from '@components/form';
 
 import AppStore from '@stores/apps';
 import UserStore from '@stores/user';
-import { ENGINE_METHOD_DIGESTS } from 'constants';
 
 let AdminLayout = () => '';
 
@@ -39,7 +38,6 @@ class App extends React.Component {
 
   componentDidMount() {
     AdminLayout = require('../../containers/admin/layout').default;
-    console.log('mounting app');
     if (this.props.apps) {
       const parsed = queryString.parse(document.location.search);
       const app = findBy(this.props.apps, (app) => app.id === parseInt(parsed.id, 10));
@@ -58,7 +56,6 @@ class App extends React.Component {
     if (!app) {
       return <h1>Loading</h1>;
     }
-    console.log('render', this.state.name);
     return (
       <div>
         <h1>{app.name}</h1>

@@ -29,7 +29,6 @@ class Admin extends React.Component {
   }
 
   render() {
-    console.log(AdminLayout);
     return (
       <div>
         {AdminLayout && (

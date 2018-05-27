@@ -19,7 +19,6 @@ const actions = {
 };
 
 const makeReducer = (data) => {
-  console.log('reducer', data);
   const initialState = Object.assign({}, data, {
     platformFilter: null,
     selectedApp: null,
