@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import Tooltip from '@atlaskit/tooltip';
 
 import { StyledAppList } from '@components/app-list';
 import { Button } from '@components/button';
@@ -139,6 +140,13 @@ class AppList extends React.Component {
     };
 
     if (sortedApps) {
+      const faqTooltip = (
+        <span>
+          Rankings
+          <a href="/faq">FAQ</a>
+        </span>
+      );
+
       return (
         <StyledAppList>
           {/* <StyledAppList.FilterSubtitle>Show Dapps by</StyledAppList.FilterSubtitle>
@@ -175,7 +183,11 @@ class AppList extends React.Component {
                 <StyledAppList.HeaderItem align="right" smHide>
                   Protocols
                 </StyledAppList.HeaderItem>
-                <StyledAppList.HeaderItem align="right">Tweets/Week</StyledAppList.HeaderItem>
+                <StyledAppList.HeaderItem align="right">
+                  <Tooltip content="Click to learn more about our rankings">
+                    <StyledAppList.HeaderLink href="/faq#rankings">Tweets/Week</StyledAppList.HeaderLink>
+                  </Tooltip>
+                </StyledAppList.HeaderItem>
               </StyledAppList.HeaderRow>
             </StyledAppList.Header>
             <tbody>

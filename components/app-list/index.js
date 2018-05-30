@@ -126,6 +126,14 @@ const HeaderItem = styled.th`
   }
 `;
 
+const HeaderLink = styled.a`
+  color: #282f36;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 const Footer = styled.div`
   display: flex;
   align-items: center;
@@ -185,6 +193,7 @@ StyledAppList.ExpandButtonWrapper = ExpandButtonWrapper;
 StyledAppList.Header = Header;
 StyledAppList.HeaderRow = HeaderRow;
 StyledAppList.HeaderItem = HeaderItem;
+StyledAppList.HeaderLink = HeaderLink;
 StyledAppList.Footer = Footer;
 StyledAppList.Filters = Filters;
 StyledAppList.Filter = Filter;
