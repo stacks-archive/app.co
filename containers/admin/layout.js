@@ -86,7 +86,7 @@ class AdminHome extends React.Component {
         isOpen={this.state.openDrawer === 'create'}
         key="create"
         onBackButton={this.closeDrawer}
-        primaryIcon={<ConfluenceIcon label="Confluence icon" size="large" />}
+        // primaryIcon={<ConfluenceIcon label="Confluence icon" size="large" />}
       >
         <AkNavigationItem text="Item outside a group" />
         <AkNavigationItemGroup title="Create item group">
@@ -107,7 +107,7 @@ class AdminHome extends React.Component {
         isOpen={this.state.openDrawer === 'search'}
         key="seach"
         onBackButton={this.closeDrawer}
-        primaryIcon={<ConfluenceIcon label="Confluence icon" size="large" />}
+        // primaryIcon={<ConfluenceIcon label="Confluence icon" size="large" />}
       >
         <AkSearch placeholder="Search..." onKeyDown={() => {}}>
           <AkNavigationItemGroup title="RECENTLY VIEWED">
@@ -186,7 +186,7 @@ class AdminHome extends React.Component {
             containerTheme={presetThemes.global}
             containerHeaderComponent={() => <ContainerHeaderComponent />}
             globalCreateIcon={<GlobalCreateIcon openDrawer={this.openDrawer} />}
-            globalPrimaryIcon={<ConfluenceIcon label="Confluence icon" size="large" />}
+            // globalPrimaryIcon={<ConfluenceIcon label="Confluence icon" size="large" />}
             globalPrimaryItemHref="//www.atlassian.com/software/confluence"
             globalSearchIcon={<GlobalSearchIcon openDrawer={this.openDrawer} />}
             isOpen={this.state.isOpen}

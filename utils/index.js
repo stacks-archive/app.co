@@ -57,7 +57,7 @@ const enumSelect = (enums, placeholder, props = {}) => {
         onChange={onChange}
         isSearchable={false}
         // selectedValue={props.value}
-        value={props.value}
+        // value={props.value}
         menuPlacement={props.menuPlacement || 'bottom'}
       />
       <br />

@@ -5,6 +5,7 @@ import queryString from 'query-string';
 import findBy from 'lodash/find';
 import { FieldTextStateless as TextField } from '@atlaskit/field-text';
 import { CheckboxStateless as Checkbox } from '@atlaskit/checkbox';
+import Button from '@atlaskit/button';
 
 import { enumSelect } from '@utils';
 import Form from '@components/form';
@@ -16,7 +17,6 @@ let AdminLayout = () => '';
 
 class App extends React.Component {
   constructor(props) {
-    console.log(props);
     super(props);
     this.state = {
       name: '',
@@ -34,6 +34,7 @@ class App extends React.Component {
       registrationIsOpen: false,
       twitterHandle: '',
     };
+    this.save = this.save.bind(this);
   }
 
   componentDidMount() {
@@ -42,12 +43,13 @@ class App extends React.Component {
       const parsed = queryString.parse(document.location.search);
       const app = findBy(this.props.apps, (app) => app.id === parseInt(parsed.id, 10));
       this.props.selectApp(app);
-      console.log(parsed, app);
       this.setState(Object.assign({}, this.state, app));
-      setTimeout(() => {
-        this.forceUpdate();
-      }, 100);
     }
+  }
+
+  save() {
+    console.log(this);
+    this.props.saveApp(this.state, this.props.apiServer, this.props.jwt);
   }
 
   appDetails() {
@@ -71,7 +73,6 @@ class App extends React.Component {
             value={this.state.description || ''}
             onChange={(e) => this.setState({ description: e.target.value })}
             label="Short description (~50 characters)"
-            maxLength={50}
           />
           <TextField
             value={this.state.website || ''}
@@ -112,6 +113,9 @@ class App extends React.Component {
           menuPlacement: 'top',
           value: this.state.authentication,
         })} */}
+        <Button appearance="primary" onClick={this.save}>
+          Save
+        </Button>
       </div>
     );
   }
@@ -124,6 +128,8 @@ class App extends React.Component {
             <br />
             <br />
             {this.appDetails()}
+            <br />
+            <br />
           </AdminLayout>
         )}
       </div>
@@ -136,7 +142,10 @@ const mapStateToProps = (state) => ({
   selectedApp: state.apps.selectedApp,
   apiServer: state.apps.apiServer,
   constants: state.apps.constants,
-  user: state.user,
+  user: state.user.user,
+  jwt: state.user.jwt,
+  isSavingApp: state.apps.isSavingApp,
+  savedApp: state.apps.savedApp,
 });
 
 function mapDispatchToProps(dispatch) {
