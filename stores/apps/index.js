@@ -5,6 +5,7 @@ const constants = {
   SAVED_APP: 'SAVED_APP',
   FETCHING_PENDING: 'FETCH_PENDING',
   FETCHED_PENDING: 'FETCHING_PENDING',
+  FETCHED_ADMIN_APPS: 'FETCHED_ADMIN_APPS',
 };
 
 const setPlatformFilter = (platform) => ({
@@ -45,6 +46,24 @@ const fetchedPending = (apps) => ({
   apps,
 });
 
+const fetchedAdminApps = (apps) => ({
+  type: constants.FETCHED_ADMIN_APPS,
+  apps,
+});
+
+const fetchAdminApps = (apiServer, jwt) =>
+  async function innerFetchAdminApps(dispatch) {
+    const response = await fetch(`${apiServer}/api/admin/apps`, {
+      method: 'GET',
+      headers: new Headers({
+        Authorization: `Bearer ${jwt}`,
+        'Content-Type': 'application/json',
+      }),
+    });
+    const { apps } = await response.json();
+    dispatch(fetchedAdminApps(apps));
+  };
+
 const fetchPendingApps = (apiServer, jwt) =>
   async function innerFetchPendingApps(dispatch) {
     dispatch(fetchingPending());
@@ -66,6 +85,7 @@ const actions = {
   savedApp,
   saveApp,
   fetchPendingApps,
+  fetchAdminApps,
 };
 
 const makeReducer = (data) => {
@@ -105,6 +125,10 @@ const makeReducer = (data) => {
         return Object.assign({}, state, {
           isFetchingPending: false,
           pendingApps: action.apps,
+        });
+      case constants.FETCHED_ADMIN_APPS:
+        return Object.assign({}, state, {
+          apps: action.apps,
         });
       default:
         return state;

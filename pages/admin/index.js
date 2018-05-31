@@ -50,19 +50,6 @@ class Admin extends React.Component {
             )}
           </AdminLayout>
         )}
-
-        {/* <Page.Section wrap={1}>
-        <Page.Section.Content>
-          <Button
-            type="button/primary"
-            onClick={() => {
-              this.props.signIn();
-            }}
-          >
-            Sign In with Blockstack
-          </Button>
-        </Page.Section.Content>
-      </Page.Section> */}
       </div>
     );
   }

@@ -80,6 +80,12 @@ class AdminHome extends React.Component {
     this.closeDrawer = this.closeDrawer.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.jwt) {
+      this.props.fetchAdminApps(this.props.apiServer, this.props.jwt);
+    }
+  }
+
   getCreateDrawer() {
     return (
       <AkCreateDrawer
@@ -220,6 +226,7 @@ class AdminHome extends React.Component {
 const mapStateToProps = (state) => ({
   apps: state.apps.apps,
   apiServer: state.apps.apiServer,
+  jwt: state.user.jwt,
   user: state.user,
 });
 
