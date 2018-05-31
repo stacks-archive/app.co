@@ -37,7 +37,7 @@ class Admin extends React.Component {
             <br />
             <br />
             {this.props.user.user ? (
-              <AppList />
+              <AppList apps={this.props.apps} />
             ) : (
               <Button
                 type="button/primary"

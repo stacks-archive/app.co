@@ -91,6 +91,10 @@ app.prepare().then(() => {
     renderAndCache(req, res, '/admin/app');
   });
 
+  server.get('/admin/pending', (req, res) => {
+    renderAndCache(req, res, '/admin/pending');
+  });
+
   server.get('/clear-cache', (req, res) => {
     if (req.query.key === process.env.API_KEY) {
       console.log('Clearing cache from API');

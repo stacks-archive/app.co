@@ -19,10 +19,4 @@ const transformApps = (apps) =>
 
 const AppList = ({ apps }) => <TableTree headers={['Name']} columns={[Name]} items={transformApps(apps)} />;
 
-const mapAppListStateToProps = (state) => ({
-  apps: state.apps.apps,
-  apiServer: state.apps.apiServer,
-  user: state.user,
-});
-
-export default connect(mapAppListStateToProps)(AppList);
+export default AppList;

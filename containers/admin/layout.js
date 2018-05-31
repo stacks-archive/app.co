@@ -21,9 +21,10 @@ import SettingsIcon from '@atlaskit/icon/glyph/settings';
 import Tooltip from '@atlaskit/tooltip';
 import TrayIcon from '@atlaskit/icon/glyph/tray';
 import WorldIcon from '@atlaskit/icon/glyph/world';
-import QuestionIcon from '@atlaskit/icon/glyph/question';
+import WarningIcon from '@atlaskit/icon/glyph/warning';
 import { AkSearch } from '@atlaskit/quick-search';
 import Link from 'next/link';
+import { withRouter } from 'next/router';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -109,16 +110,7 @@ class AdminHome extends React.Component {
         onBackButton={this.closeDrawer}
         // primaryIcon={<ConfluenceIcon label="Confluence icon" size="large" />}
       >
-        <AkSearch placeholder="Search..." onKeyDown={() => {}}>
-          <AkNavigationItemGroup title="RECENTLY VIEWED">
-            <AkNavigationItem icon={<EditorAlignLeftIcon label="Editor icon" />} text="Article 1" />
-            <AkNavigationItem icon={<EditorAlignLeftIcon label="Editor icon" />} text="Article 2" />
-          </AkNavigationItemGroup>
-          <AkNavigationItemGroup title="RECENT SPACES">
-            <AkNavigationItem icon={<ConfluenceIcon label="Confluence icon" />} text="Confluence" />
-            <AkNavigationItem icon={<JiraIcon label="Jira icon" />} text="Jira" />
-          </AkNavigationItemGroup>
-        </AkSearch>
+        <AkSearch placeholder="Search..." onKeyDown={() => {}} />
       </AkSearchDrawer>
     );
   }
@@ -162,10 +154,24 @@ class AdminHome extends React.Component {
     const stack = [[]];
     let item = null;
     if (this.props.user.user) {
-      item = (
+      const isPending = this.props.router.route === '/admin/pending';
+      stack[0].push(
         <Link href="/admin" key="apps">
-          <AkNavigationItem text="Apps" icon={<DiscoverIcon label="Apps Icon" size="medium" />} isSelected />
-        </Link>
+          <AkNavigationItem
+            text="Apps"
+            icon={<DiscoverIcon label="Apps Icon" size="medium" />}
+            isSelected={!isPending}
+          />
+        </Link>,
+      );
+      stack[0].push(
+        <Link href="/admin/pending" key="pending">
+          <AkNavigationItem
+            text="Pending"
+            icon={<WarningIcon label="Pending Apps Icon" size="medium" />}
+            isSelected={isPending}
+          />
+        </Link>,
       );
     } else {
       item = (
@@ -221,4 +227,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(Object.assign({}, AppStore.actions, UserStore.actions), dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminHome);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AdminHome));
