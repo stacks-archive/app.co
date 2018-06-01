@@ -6,8 +6,9 @@ import findBy from 'lodash/find';
 import { FieldTextStateless as TextField } from '@atlaskit/field-text';
 import { CheckboxStateless as Checkbox } from '@atlaskit/checkbox';
 import Button from '@atlaskit/button';
+import Select from '@atlaskit/select';
 
-import { enumSelect } from '@utils';
+import { enumSelect, appStatuses, appStatusFromValue } from '@utils';
 import Form from '@components/form';
 
 import AppStore from '@stores/apps';
@@ -113,6 +114,17 @@ class App extends React.Component {
           menuPlacement: 'top',
           value: this.state.authentication,
         })} */}
+        <br />
+        <br />
+        <h3>Status:</h3>
+        <Select
+          className="react-select"
+          options={appStatuses}
+          value={appStatusFromValue(this.state.status)}
+          onChange={({ value }) => this.setState({ status: value })}
+        />
+        <br />
+        <br />
         <Button appearance="primary" onClick={this.save}>
           Save
         </Button>

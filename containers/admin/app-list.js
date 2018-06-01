@@ -1,22 +1,17 @@
 import React from 'react';
-// import { bindActionCreators } from 'redux';
-// import { connect } from 'react-redux';
 import Link from 'next/link';
 
-// import TableTree from '@atlaskit/table-tree';
 import DynamicTable from '@atlaskit/dynamic-table';
 
 const Name = ({ name, id }) => (
   <Link href={`/admin/app?id=${id}`}>
-    <span>{name}</span>
+    <a>{name}</a>
   </Link>
 );
 
-// const Description = ({ description }) => <span>{description}</span>;
-
 const transformApps = (apps) =>
   apps.map((app) => {
-    const [ranking] = app.Rankings;
+    const [ranking] = app.Rankings || [];
     let tweets = 0;
     if (ranking) {
       tweets = ranking.twitterMentions || 0;
@@ -28,26 +23,22 @@ const transformApps = (apps) =>
           content: <Name name={app.name} id={app.id} />,
         },
         {
-          key: app.description,
-          content: app.description,
+          key: app.category,
+          content: app.category,
         },
         {
           key: tweets,
           content: tweets,
         },
         {
-          key: app.status,
-          content: app.status,
+          key: app.status || '',
+          content: app.status || '',
         },
       ],
       id: app.id,
       key: app.id,
     };
   });
-
-// const AppList = ({ apps }) => (
-//   <TableTree headers={['Name', 'Description']} columns={[Name, Description]} items={transformApps(apps)} />
-// );
 
 const headers = {
   cells: [
@@ -57,9 +48,9 @@ const headers = {
       isSortable: true,
     },
     {
-      key: 'description',
-      content: 'Description',
-      isSortable: false,
+      key: 'category',
+      content: 'Category',
+      isSortable: true,
       shouldTruncate: true,
     },
     {
@@ -75,6 +66,6 @@ const headers = {
   ],
 };
 
-const AppList = ({ apps }) => <DynamicTable head={headers} rows={transformApps(apps)} />;
+const AppList = ({ apps }) => <DynamicTable head={headers} rows={apps && transformApps(apps)} />;
 
 export default AppList;

@@ -65,4 +65,12 @@ const enumSelect = (enums, placeholder, props = {}) => {
   );
 };
 
-export { colorHexFromString, truncate, outboundLink, enumSelect };
+const appStatuses = [
+  { label: 'Pending Audit', value: 'pending_audit' },
+  { label: 'Rejected', value: 'rejected' },
+  { label: 'Accepted', value: 'accepted' },
+];
+
+const appStatusFromValue = (value) => _.find(appStatuses, (status) => status.value === value);
+
+export { colorHexFromString, truncate, outboundLink, enumSelect, appStatuses, appStatusFromValue };

@@ -1,3 +1,5 @@
+import find from 'lodash/find';
+
 const constants = {
   SET_PLATFORM: 'SET_PLATFORM',
   SELECT_APP: 'SELECT_APP',
@@ -126,10 +128,16 @@ const makeReducer = (data) => {
           isFetchingPending: false,
           pendingApps: action.apps,
         });
-      case constants.FETCHED_ADMIN_APPS:
-        return Object.assign({}, state, {
-          apps: action.apps,
-        });
+      case constants.FETCHED_ADMIN_APPS: {
+        console.log('fetched admin apps');
+        const newState = { apps: action.apps };
+        if (state.selectedApp) {
+          console.log('existing selectedApp', state.selectedApp.status);
+          newState.selectedApp = find(action.apps, (app) => app.id === state.selectedApp.id);
+          console.log('new selectedApp', newState.selectedApp.status);
+        }
+        return Object.assign({}, state, newState);
+      }
       default:
         return state;
     }
