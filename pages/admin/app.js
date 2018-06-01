@@ -7,6 +7,7 @@ import { FieldTextStateless as TextField } from '@atlaskit/field-text';
 import { CheckboxStateless as Checkbox } from '@atlaskit/checkbox';
 import Button from '@atlaskit/button';
 import Select from '@atlaskit/select';
+import NotificationSystem from 'react-notification-system';
 
 import { enumSelect, appStatuses, appStatusFromValue } from '@utils';
 import Form from '@components/form';
@@ -42,15 +43,23 @@ class App extends React.Component {
     AdminLayout = require('../../containers/admin/layout').default;
     if (this.props.apps) {
       const parsed = queryString.parse(document.location.search);
-      const app = findBy(this.props.apps, (app) => app.id === parseInt(parsed.id, 10));
-      this.props.selectApp(app);
-      this.setState(Object.assign({}, this.state, app));
+      this.props.selectApp(parseInt(parsed.id, 10));
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.selectedApp) {
+      this.setState(Object.assign({}, this.state, nextProps.selectedApp));
     }
   }
 
   save() {
     console.log(this);
     this.props.saveApp(this.state, this.props.apiServer, this.props.jwt);
+    this.notifications.addNotification({
+      message: `${this.state.name} was saved successfully.`,
+      level: 'success',
+    });
   }
 
   appDetails() {
@@ -125,9 +134,13 @@ class App extends React.Component {
         />
         <br />
         <br />
-        <Button appearance="primary" onClick={this.save}>
-          Save
-        </Button>
+        {this.props.isSavingApp ? (
+          <p>Saving {this.state.name}...</p>
+        ) : (
+          <Button appearance="primary" onClick={this.save}>
+            Save
+          </Button>
+        )}
       </div>
     );
   }
@@ -135,6 +148,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <NotificationSystem
+          ref={(c) => {
+            this.notifications = c;
+          }}
+        />
         {AdminLayout && (
           <AdminLayout>
             <br />

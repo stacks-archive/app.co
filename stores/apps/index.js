@@ -14,9 +14,9 @@ const setPlatformFilter = (platform) => ({
   type: constants.SET_PLATFORM,
   platform,
 });
-const selectApp = (app) => ({
+const selectApp = (id) => ({
   type: constants.SELECT_APP,
-  app,
+  id,
 });
 const savingApp = () => ({ type: constants.SAVING_APP });
 const savedApp = (app) => ({
@@ -94,6 +94,7 @@ const makeReducer = (data) => {
   const initialState = Object.assign({}, data, {
     platformFilter: null,
     selectedApp: null,
+    selectedAppId: null,
     isSavingApp: false,
     savedApp: null,
     isFetchingPending: false,
@@ -106,10 +107,14 @@ const makeReducer = (data) => {
         return Object.assign({}, state, {
           platformFilter: action.platform,
         });
-      case constants.SELECT_APP:
+      case constants.SELECT_APP: {
+        const { id } = action;
+        const app = find(state.apps, (_app) => _app.id === id);
         return Object.assign({}, state, {
-          selectedApp: action.app,
+          selectedAppId: id,
+          selectedApp: app,
         });
+      }
       case constants.SAVING_APP:
         return Object.assign({}, state, {
           isSavingApp: true,
@@ -131,9 +136,9 @@ const makeReducer = (data) => {
       case constants.FETCHED_ADMIN_APPS: {
         console.log('fetched admin apps');
         const newState = { apps: action.apps };
-        if (state.selectedApp) {
-          console.log('existing selectedApp', state.selectedApp.status);
-          newState.selectedApp = find(action.apps, (app) => app.id === state.selectedApp.id);
+        if (state.selectedAppId) {
+          console.log('existing selectedApp', state.selectedApp);
+          newState.selectedApp = find(action.apps, (app) => app.id === state.selectedAppId);
           console.log('new selectedApp', newState.selectedApp.status);
         }
         return Object.assign({}, state, newState);
