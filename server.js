@@ -70,6 +70,12 @@ async function renderAndCache(req, res, pagePath) {
 app.prepare().then(() => {
   const server = express();
 
+  server.use((req, res, _next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', '*');
+    _next();
+  });
+
   // Use the `renderAndCache` utility defined below to serve pages
   server.get('/', (req, res) => {
     renderAndCache(req, res, '/');
