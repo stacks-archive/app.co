@@ -11,6 +11,7 @@ import NotificationSystem from 'react-notification-system';
 
 import { enumSelect, appStatuses, appStatusFromValue } from '@utils';
 import Form from '@components/form';
+import AppIcon from '@containers/app-icon';
 
 import AppStore from '@stores/apps';
 import UserStore from '@stores/user';
@@ -70,6 +71,7 @@ class App extends React.Component {
     }
     return (
       <div>
+        {app && <AppIcon app={app} />}
         <h1>{app.name}</h1>
         <br />
         <br />
