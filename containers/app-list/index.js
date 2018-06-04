@@ -8,6 +8,7 @@ import { StyledAppList } from '@components/app-list';
 import { Button } from '@components/button';
 import { LinkButton } from '@components/link-button';
 import { DropdownButton } from '@containers/dropdown-button';
+import AppIcon from '@containers/app-icon';
 import { colorHexFromString, truncate, outboundLink } from '@utils';
 import AppStore from '@stores/apps';
 
@@ -94,14 +95,6 @@ class AppList extends React.Component {
       );
     };
 
-    const appImage = (app) => {
-      if (app.imageUrl) {
-        return <StyledAppList.IconImage src={app.imageUrl} />;
-      }
-      const bgColor = colorHexFromString(app.name);
-      return <StyledAppList.DefaultIcon bgColor={bgColor}>{app.name.substring(0, 1)}</StyledAppList.DefaultIcon>;
-    };
-
     const platformFilter = (platform, opts) => (
       <StyledAppList.Filter
         key={platform}
@@ -120,7 +113,7 @@ class AppList extends React.Component {
       return visibleApps.map((app, index) => (
         <StyledAppList.Row key={app.id} onClick={() => outboundLink(app)}>
           <StyledAppList.Rank>{index + 1}</StyledAppList.Rank>
-          <StyledAppList.Icon>{appImage(app)}</StyledAppList.Icon>
+          <StyledAppList.Icon>{<AppIcon app={app} />}</StyledAppList.Icon>
           <StyledAppList.Name>
             <StyledAppList.NameLink href={app.website} target="_blank">
               {app.name}
@@ -143,13 +136,6 @@ class AppList extends React.Component {
     };
 
     if (sortedApps) {
-      const faqTooltip = (
-        <span>
-          Rankings
-          <a href="/faq">FAQ</a>
-        </span>
-      );
-
       return (
         <StyledAppList>
           {/* <StyledAppList.FilterSubtitle>Show Dapps by</StyledAppList.FilterSubtitle>
