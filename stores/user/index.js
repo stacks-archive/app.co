@@ -11,6 +11,7 @@ const constants = {
   SIGNING_IN: 'SIGNING_IN',
   SIGNED_IN: 'SIGNED_IN',
   SIGN_IN: 'SIGN_IN',
+  SIGNING_OUT: 'SIGNING_OUT',
 };
 
 const signingIn = () => ({
@@ -22,6 +23,10 @@ const signedIn = (data) => ({
   token: data.token,
   user: data.user,
   userId: data.user.id,
+});
+
+const signOut = () => ({
+  type: constants.SIGNING_OUT,
 });
 
 const handleSignIn = (apiServer) =>
@@ -54,6 +59,7 @@ const signIn = () => {
 const actions = {
   handleSignIn,
   signIn,
+  signOut,
 };
 
 const reducer = (state = initialState, action) => {
@@ -68,6 +74,12 @@ const reducer = (state = initialState, action) => {
         jwt: action.token,
         userId: action.userId,
         user: action.user,
+      });
+    case constants.SIGNING_OUT:
+      return Object.assign({}, state, {
+        user: null,
+        userId: null,
+        jwt: null,
       });
     default:
       return state;

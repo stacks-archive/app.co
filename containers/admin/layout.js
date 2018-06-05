@@ -161,7 +161,7 @@ class AdminHome extends React.Component {
     let item = null;
     if (this.props.user.user) {
       const isPending = this.props.router.route === '/admin/pending';
-      stack[0].push(
+      stack[0] = [
         <Link href="/admin" key="apps">
           <AkNavigationItem
             text="Apps"
@@ -169,8 +169,6 @@ class AdminHome extends React.Component {
             isSelected={!isPending}
           />
         </Link>,
-      );
-      stack[0].push(
         <Link href="/admin/pending" key="pending">
           <AkNavigationItem
             text="Pending"
@@ -178,7 +176,10 @@ class AdminHome extends React.Component {
             isSelected={isPending}
           />
         </Link>,
-      );
+        <AkNavigationItemGroup title="Authentication" key="authentication">
+          <AkNavigationItem text="Log Out" onClick={() => this.props.signOut()} />
+        </AkNavigationItemGroup>,
+      ];
     } else {
       item = (
         <AkNavigationItem
