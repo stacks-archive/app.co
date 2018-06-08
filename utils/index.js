@@ -1,4 +1,6 @@
 import _ from 'lodash';
+import React from 'react';
+import Select from '@atlaskit/select';
 
 const colorHexFromString = (str) => {
   let hash = 0;
@@ -40,4 +42,36 @@ const outboundLink = (app) => {
   window.open(app.website, '_blank');
 };
 
-export { colorHexFromString, truncate, outboundLink };
+const enumSelect = (enums, placeholder, props = {}) => {
+  const options = _.map(_.keys(enums), (opt) => ({ label: opt, value: opt }));
+  const onChange = (option) => {
+    props.onChange({ [props.apiAttr || placeholder.toLowerCase()]: option.value });
+  };
+  const value = props.value ? { label: props.value, value: props.value } : null;
+  return (
+    <div>
+      <h3>{placeholder}</h3>
+      <br />
+      <Select
+        options={options}
+        placeholder={placeholder}
+        className="react-select"
+        onChange={onChange}
+        isSearchable={false}
+        value={value}
+        menuPlacement={props.menuPlacement || 'bottom'}
+      />
+      <br />
+    </div>
+  );
+};
+
+const appStatuses = [
+  { label: 'Pending Audit', value: 'pending_audit' },
+  { label: 'Rejected', value: 'rejected' },
+  { label: 'Accepted', value: 'accepted' },
+];
+
+const appStatusFromValue = (value) => _.find(appStatuses, (status) => status.value === value);
+
+export { colorHexFromString, truncate, outboundLink, enumSelect, appStatuses, appStatusFromValue };

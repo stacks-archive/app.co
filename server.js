@@ -2,7 +2,7 @@ const express = require('express');
 const next = require('next');
 const LRUCache = require('lru-cache');
 const dotenv = require('dotenv');
-const basicAuth = require('express-basic-auth');
+const request = require('request-promise');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
@@ -16,7 +16,7 @@ const apiServer = process.env.API_SERVER || 'https://app-co-api.herokuapp.com';
 
 // This is where we cache our rendered HTML pages
 const ssrCache = new LRUCache({
-  max: 100,
+  max: 10,
   maxAge: dev ? 1000 * 30 : 1000 * 60 * 60, // 1hour
 });
 
@@ -40,8 +40,15 @@ async function renderAndCache(req, res, pagePath) {
   }
 
   try {
+    const data = await request({
+      uri: `${apiServer}/api/apps`,
+      json: true,
+    });
+    console.log(Object.keys(data));
+    data.apiServer = apiServer;
+
     // If not let's render the page into HTML
-    const html = await app.renderToHTML(req, res, pagePath, { apiServer });
+    const html = await app.renderToHTML(req, res, pagePath, data);
 
     // Something is wrong with the request, let's skip the cache
     if (res.statusCode !== 200) {
@@ -63,6 +70,12 @@ async function renderAndCache(req, res, pagePath) {
 app.prepare().then(() => {
   const server = express();
 
+  server.use((req, res, _next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', '*');
+    _next();
+  });
+
   // Use the `renderAndCache` utility defined below to serve pages
   server.get('/', (req, res) => {
     renderAndCache(req, res, '/');
@@ -74,6 +87,18 @@ app.prepare().then(() => {
 
   server.get('/submit', (req, res) => {
     renderAndCache(req, res, '/submit');
+  });
+
+  server.get('/admin', (req, res) => {
+    renderAndCache(req, res, '/admin');
+  });
+
+  server.get('/admin/app', (req, res) => {
+    renderAndCache(req, res, '/admin/app');
+  });
+
+  server.get('/admin/pending', (req, res) => {
+    renderAndCache(req, res, '/admin/pending');
   });
 
   server.get('/clear-cache', (req, res) => {
