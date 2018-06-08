@@ -35,7 +35,7 @@ const saveApp = (data, apiServer, jwt) =>
       }),
       body: JSON.stringify(data),
     });
-    const { app } = response.json();
+    const { app } = await response.json();
     dispatch(savedApp(app));
   };
 
@@ -123,6 +123,7 @@ const makeReducer = (data) => {
         return Object.assign({}, state, {
           isSavingApp: false,
           savedApp: action.app,
+          selectedApp: action.app,
         });
       case constants.FETCHING_PENDING:
         return Object.assign({}, state, {

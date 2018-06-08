@@ -49,7 +49,7 @@ class App extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedApp) {
+    if (nextProps.selectedApp && this.state.id !== nextProps.selectedApp.id) {
       this.setState(Object.assign({}, this.state, nextProps.selectedApp));
     }
   }
@@ -118,16 +118,36 @@ class App extends React.Component {
             label="Registration is open to all users"
           />
         </Form.Wrapper>
-        {/* {enumSelect(constants.categoryEnums, 'Category', { value: this.state.category })}
-        {enumSelect(constants.blockchainEnums, 'Blockchain', { value: this.state.blockchain })}
-        {enumSelect(constants.storageEnums, 'Storage', { apiAttr: 'storageNetwork', value: this.state.storage })}
+        <br />
+        {enumSelect(constants.categoryEnums, 'Category', {
+          value: this.state.category,
+          onChange: (data) => {
+            this.setState(data);
+          },
+        })}
+        {enumSelect(constants.blockchainEnums, 'Blockchain', {
+          value: this.state.blockchain,
+          onChange: (data) => {
+            this.setState(data);
+          },
+        })}
+        {enumSelect(constants.storageEnums, 'Storage', {
+          apiAttr: 'storageNetwork',
+          value: this.state.storageNetwork,
+          onChange: (data) => {
+            this.setState(data);
+          },
+        })}
         {enumSelect(constants.authenticationEnums, 'Authentication', {
           menuPlacement: 'top',
           value: this.state.authentication,
-        })} */}
-        <br />
+          onChange: (data) => {
+            this.setState(data);
+          },
+        })}
         <br />
         <h3>Status:</h3>
+        <br />
         <Select
           className="react-select"
           options={appStatuses}

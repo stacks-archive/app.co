@@ -47,8 +47,10 @@ const enumSelect = (enums, placeholder, props = {}) => {
   const onChange = (option) => {
     props.onChange({ [props.apiAttr || placeholder.toLowerCase()]: option.value });
   };
+  const value = props.value ? { label: props.value, value: props.value } : null;
   return (
     <div>
+      <h3>{placeholder}</h3>
       <br />
       <Select
         options={options}
@@ -56,8 +58,7 @@ const enumSelect = (enums, placeholder, props = {}) => {
         className="react-select"
         onChange={onChange}
         isSearchable={false}
-        // selectedValue={props.value}
-        // value={props.value}
+        value={value}
         menuPlacement={props.menuPlacement || 'bottom'}
       />
       <br />
