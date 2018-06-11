@@ -2,8 +2,8 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
-import findBy from 'lodash/find';
 import { FieldTextStateless as TextField } from '@atlaskit/field-text';
+import { FieldTextAreaStateless as TextArea } from '@atlaskit/field-text-area';
 import { CheckboxStateless as Checkbox } from '@atlaskit/checkbox';
 import Button from '@atlaskit/button';
 import Select from '@atlaskit/select';
@@ -116,6 +116,12 @@ class App extends React.Component {
             isChecked={this.state.registrationIsOpen}
             onChange={() => this.setState({ registrationIsOpen: !this.state.registrationIsOpen })}
             label="Registration is open to all users"
+          />
+          <br />
+          <TextArea
+            label="Admin Notes"
+            value={this.state.notes || ''}
+            onChange={(e) => this.setState({ notes: e.target.value })}
           />
         </Form.Wrapper>
         <br />

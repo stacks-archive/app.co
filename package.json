@@ -11,6 +11,7 @@
     "@atlaskit/checkbox": "^2.0.2",
     "@atlaskit/dynamic-table": "^8.1.0",
     "@atlaskit/field-text": "^5.0.2",
+    "@atlaskit/field-text-area": "^3.0.2",
     "@atlaskit/icon": "^11.3.2",
     "@atlaskit/logo": "^7.0.1",
     "@atlaskit/modal-dialog": "^4.0.4",
