@@ -1,14 +1,15 @@
 import React from 'react';
 import TextField from '@atlaskit/field-text';
 import PropTypes from 'prop-types';
-import { Page } from '@containers/page';
-import { Header } from '@containers/header';
-import { Hero } from '@containers/hero';
-import { Button } from '@components/button';
 import _ from 'lodash';
 import Select from '@atlaskit/select';
 import { CheckboxStateless as Checkbox } from '@atlaskit/checkbox';
 import 'isomorphic-unfetch';
+
+import { Page } from '@containers/page';
+import { Header } from '@containers/header';
+import { Hero } from '@containers/hero';
+import { Button } from '@components/button';
 
 import Form from '@components/form';
 

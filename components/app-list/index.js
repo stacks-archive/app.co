@@ -91,7 +91,7 @@ const Column = styled.td`
 
 const TagGroup = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: ${(props) => (props.left ? 'flex-start' : 'flex-end')};
 `;
 
 const Tag = styled.div`
@@ -100,7 +100,7 @@ const Tag = styled.div`
   padding: 10px;
   border-radius: 10px;
   border: 1px solid rgba(40, 47, 54, 0.15);
-  margin-left: 10px;
+  margin: ${(props) => (props.left ? '0 10px 0 0' : '0 0 0 10px;')};
   font-size: 12px;
 `;
 

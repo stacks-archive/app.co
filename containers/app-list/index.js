@@ -3,6 +3,7 @@ import _ from 'lodash';
 import Tooltip from '@atlaskit/tooltip';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import Link from 'next/link';
 
 import { StyledAppList } from '@components/app-list';
 import { Button } from '@components/button';
@@ -111,27 +112,29 @@ class AppList extends React.Component {
     const renderRows = () => {
       const visibleApps = showAll ? sortedApps : sortedApps.slice(0, showCount);
       return visibleApps.map((app, index) => (
-        <StyledAppList.Row key={app.id} onClick={() => outboundLink(app)}>
-          <StyledAppList.Rank>{index + 1}</StyledAppList.Rank>
-          <StyledAppList.Icon>{<AppIcon app={app} />}</StyledAppList.Icon>
-          <StyledAppList.Name>
-            <StyledAppList.NameLink href={app.website} target="_blank">
-              {app.name}
-            </StyledAppList.NameLink>
-          </StyledAppList.Name>
-          <StyledAppList.Column smHide title={app.description}>
-            {truncate(app.description, { length: 60 })}
-          </StyledAppList.Column>
-          <StyledAppList.Column align="right" smHide>
-            <StyledAppList.TagGroup>
-              <StyledAppList.Tag>{app.category}</StyledAppList.Tag>
-            </StyledAppList.TagGroup>
-          </StyledAppList.Column>
-          <StyledAppList.Column align="right" smHide>
-            {renderNetworkTags(app)}
-          </StyledAppList.Column>
-          <StyledAppList.Column align="right">{getTwitterMentions(app)}</StyledAppList.Column>
-        </StyledAppList.Row>
+        <Link href={`/app?id=${app.id}`}>
+          <StyledAppList.Row key={app.id} onClick={() => outboundLink(app)}>
+            <StyledAppList.Rank>{index + 1}</StyledAppList.Rank>
+            <StyledAppList.Icon>{<AppIcon app={app} />}</StyledAppList.Icon>
+            <StyledAppList.Name>
+              <StyledAppList.NameLink href={app.website} target="_blank">
+                {app.name}
+              </StyledAppList.NameLink>
+            </StyledAppList.Name>
+            <StyledAppList.Column smHide title={app.description}>
+              {truncate(app.description, { length: 60 })}
+            </StyledAppList.Column>
+            <StyledAppList.Column align="right" smHide>
+              <StyledAppList.TagGroup>
+                <StyledAppList.Tag>{app.category}</StyledAppList.Tag>
+              </StyledAppList.TagGroup>
+            </StyledAppList.Column>
+            <StyledAppList.Column align="right" smHide>
+              {renderNetworkTags(app)}
+            </StyledAppList.Column>
+            <StyledAppList.Column align="right">{getTwitterMentions(app)}</StyledAppList.Column>
+          </StyledAppList.Row>
+        </Link>
       ));
     };
 
