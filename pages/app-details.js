@@ -8,6 +8,7 @@ import Page, { Grid, GridColumn } from '@atlaskit/page';
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faGithub from '@fortawesome/fontawesome-free-brands/faGithub';
+import faTwitter from '@fortawesome/fontawesome-free-brands/faTwitter';
 
 import { Page as Container } from '@containers/page';
 import { Header } from '@containers/header';
@@ -61,6 +62,15 @@ class AppDetails extends React.Component {
                     <br />
                   </div>
                 )}
+
+              {app.twitterHandle && (
+                <div>
+                  <StyledApp.BrandLink href={`https://twitter.com/${app.twitterHandle}`} target="_blank">
+                    <FontAwesomeIcon icon={faTwitter} />
+                    View on Twitter
+                  </StyledApp.BrandLink>
+                </div>
+              )}
 
               <br />
               <StyledApp.MainSection center>
