@@ -53,10 +53,13 @@ class AppDetails extends React.Component {
               <br />
               {app.openSourceUrl &&
                 app.openSourceUrl.indexOf('github.com') !== -1 && (
-                  <StyledApp.BrandLink href={app.openSourceUrl}>
-                    <FontAwesomeIcon icon={faGithub} />
-                    View on Github
-                  </StyledApp.BrandLink>
+                  <div>
+                    <StyledApp.BrandLink href={app.openSourceUrl} target="_blank">
+                      <FontAwesomeIcon icon={faGithub} />
+                      View on Github
+                    </StyledApp.BrandLink>
+                    <br />
+                  </div>
                 )}
 
               <br />
