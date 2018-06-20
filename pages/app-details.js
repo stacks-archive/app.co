@@ -82,31 +82,44 @@ class AppDetails extends React.Component {
 
             <GridColumn medium={6}>
               <StyledApp.MainSection>
-                <StyledApp.TagLabel>Blockchain</StyledApp.TagLabel>
-                <StyledAppList.TagGroup left>
-                  <StyledAppList.Tag left>{app.blockchain}</StyledAppList.Tag>
-                </StyledAppList.TagGroup>
+                {app.blockchain && (
+                  <div>
+                    <StyledApp.TagLabel>Blockchain</StyledApp.TagLabel>
+                    <StyledAppList.TagGroup left>
+                      <StyledAppList.Tag left>{app.blockchain}</StyledAppList.Tag>
+                    </StyledAppList.TagGroup>
+                    <br />
+                  </div>
+                )}
 
-                <br />
+                {app.storageNetwork && (
+                  <div>
+                    <StyledApp.TagLabel>Storage Network</StyledApp.TagLabel>
+                    <StyledAppList.TagGroup left>
+                      <StyledAppList.Tag left>{app.storageNetwork}</StyledAppList.Tag>
+                    </StyledAppList.TagGroup>
+                    <br />
+                  </div>
+                )}
 
-                <StyledApp.TagLabel>Storage Network</StyledApp.TagLabel>
-                <StyledAppList.TagGroup left>
-                  <StyledAppList.Tag left>{app.storageNetwork}</StyledAppList.Tag>
-                </StyledAppList.TagGroup>
+                {app.authentication && (
+                  <div>
+                    <StyledApp.TagLabel>Authentication</StyledApp.TagLabel>
+                    <StyledAppList.TagGroup left>
+                      <StyledAppList.Tag left>{app.authentication}</StyledAppList.Tag>
+                    </StyledAppList.TagGroup>
+                    <br />
+                  </div>
+                )}
 
-                <br />
-
-                <StyledApp.TagLabel>Authentication</StyledApp.TagLabel>
-                <StyledAppList.TagGroup left>
-                  <StyledAppList.Tag left>{app.authentication}</StyledAppList.Tag>
-                </StyledAppList.TagGroup>
-
-                <br />
-
-                <StyledApp.TagLabel>Category</StyledApp.TagLabel>
-                <StyledAppList.TagGroup left>
-                  <StyledAppList.Tag left>{app.category}</StyledAppList.Tag>
-                </StyledAppList.TagGroup>
+                {app.category && (
+                  <div>
+                    <StyledApp.TagLabel>Category</StyledApp.TagLabel>
+                    <StyledAppList.TagGroup left>
+                      <StyledAppList.Tag left>{app.category}</StyledAppList.Tag>
+                    </StyledAppList.TagGroup>
+                  </div>
+                )}
               </StyledApp.MainSection>
             </GridColumn>
 
