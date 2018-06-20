@@ -81,7 +81,7 @@ app.prepare().then(() => {
     renderAndCache(req, res, '/');
   });
 
-  server.get('/app', (req, res) => {
+  server.get('/app/:slug', (req, res) => {
     renderAndCache(req, res, '/app-details');
   });
 

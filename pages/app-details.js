@@ -23,8 +23,9 @@ import UserStore from '@stores/user';
 
 class AppDetails extends React.Component {
   componentDidMount() {
-    const parsed = queryString.parse(document.location.search);
-    this.props.selectApp(parseInt(parsed.id, 10));
+    const { pathname } = document.location;
+    const slug = pathname.split('/')[2];
+    this.props.selectApp(slug);
   }
 
   appDetails() {

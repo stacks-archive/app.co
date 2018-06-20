@@ -108,8 +108,17 @@ const makeReducer = (data) => {
           platformFilter: action.platform,
         });
       case constants.SELECT_APP: {
+        console.log('select app');
         const { id } = action;
-        const app = find(state.apps, (_app) => _app.id === id);
+        let app = null;
+        if (typeof id === 'number') {
+          app = find(state.apps, (_app) => _app.id === id);
+        } else {
+          app = find(state.apps, (_app) => {
+            const slug = find(_app.Slugs, (_slug) => _slug.value === id);
+            return !!slug;
+          });
+        }
         return Object.assign({}, state, {
           selectedAppId: id,
           selectedApp: app,
