@@ -29,6 +29,13 @@ class AppDetails extends React.Component {
     this.props.selectApp(slug);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.selectedApp && nextProps.selectedApp) {
+      const app = nextProps.selectedApp;
+      document.title = `${app.name} on App.co - The Universal Dapp Store`;
+    }
+  }
+
   appDetails() {
     const app = this.props.selectedApp;
     const [ranking] = app.Rankings || [];
