@@ -24,9 +24,9 @@ const Button = styled.a`
     type &&
     css`
       color: #ffffff;
-      background: #4592ff;
+      background: #0ccaba;
       &:hover {
-        background: ${darken(0.1, '#4592ff')};
+        background: ${darken(0.1, '#0CCABA')};
       }
     `};
 `;

@@ -66,6 +66,11 @@ const enumSelect = (enums, placeholder, props = {}) => {
   );
 };
 
+const appRoute = (app) => {
+  const slug = app.Slugs[0];
+  return `/app/${slug ? slug.value : app.id}`;
+};
+
 const appStatuses = [
   { label: 'Pending Audit', value: 'pending_audit' },
   { label: 'Rejected', value: 'rejected' },
@@ -74,4 +79,4 @@ const appStatuses = [
 
 const appStatusFromValue = (value) => _.find(appStatuses, (status) => status.value === value);
 
-export { colorHexFromString, truncate, outboundLink, enumSelect, appStatuses, appStatusFromValue };
+export { colorHexFromString, truncate, outboundLink, enumSelect, appStatuses, appStatusFromValue, appRoute };

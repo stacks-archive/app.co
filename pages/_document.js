@@ -36,7 +36,7 @@ export default class MyDocument extends Document {
     return (
       <html lang="en">
         <Head>
-          <title>App.co</title>
+          <title>App.co - The Universal Dapp Store</title>
           <link
             href="https://fonts.googleapis.com/css?family=Lato:400,700,900|Roboto+Slab:300,400,700"
             rel="stylesheet"
