@@ -1,9 +1,10 @@
 import React from 'react';
 import sortBy from 'lodash/sortBy';
+import Link from 'next/link';
 
 import { StyledFeatured } from '@components/featured';
 import { StyledAppList } from '@components/app-list';
-import { colorHexFromString, outboundLink } from '@utils';
+import { colorHexFromString, appRoute } from '@utils';
 
 class Featured extends React.Component {
   constructor(props) {
@@ -42,18 +43,20 @@ class Featured extends React.Component {
           )}
           <StyledFeatured.Section>
             {this.state.featuredApps.map((app) => (
-              <StyledFeatured.Item key={app.id} onClick={() => outboundLink(app)}>
-                <StyledFeatured.Icon>{appImage(app)}</StyledFeatured.Icon>
-                <div>
-                  <StyledFeatured.Name>
-                    <StyledFeatured.NameLink href={app.website} target="_blank">
-                      {app.name}
-                    </StyledFeatured.NameLink>
-                  </StyledFeatured.Name>
+              <Link href={appRoute(app)}>
+                <StyledFeatured.Item key={app.id}>
+                  <StyledFeatured.Icon>{appImage(app)}</StyledFeatured.Icon>
+                  <div>
+                    <StyledFeatured.Name>
+                      <StyledFeatured.NameLink href={app.website} target="_blank">
+                        {app.name}
+                      </StyledFeatured.NameLink>
+                    </StyledFeatured.Name>
 
-                  <StyledFeatured.Description>{app.description}</StyledFeatured.Description>
-                </div>
-              </StyledFeatured.Item>
+                    <StyledFeatured.Description>{app.description}</StyledFeatured.Description>
+                  </div>
+                </StyledFeatured.Item>
+              </Link>
             ))}
           </StyledFeatured.Section>
           {this.props.right && (
