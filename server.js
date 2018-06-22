@@ -2,7 +2,9 @@ const express = require('express');
 const next = require('next');
 const LRUCache = require('lru-cache');
 const dotenv = require('dotenv');
-const request = require('request-promise');
+
+const { getApps } = require('./common/lib/api');
+const { makeFeed } = require('./common/lib/rss');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
@@ -40,11 +42,7 @@ async function renderAndCache(req, res, pagePath) {
   }
 
   try {
-    const data = await request({
-      uri: `${apiServer}/api/apps`,
-      json: true,
-    });
-    console.log(Object.keys(data));
+    const data = await getApps(apiServer);
     data.apiServer = apiServer;
 
     // If not let's render the page into HTML
@@ -113,6 +111,12 @@ app.prepare().then(() => {
     } else {
       res.status(400).json({ success: false });
     }
+  });
+
+  server.get('/rss', async (req, res) => {
+    const data = await getApps(apiServer);
+    const feed = makeFeed(data.apps);
+    res.send(feed.xml());
   });
 
   server.get('*', (req, res) => handle(req, res));

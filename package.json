@@ -60,6 +60,7 @@
     "redux-persist": "^5.9.1",
     "redux-thunk": "^2.2.0",
     "request-promise": "^4.2.2",
+    "rss": "^1.2.2",
     "sequelize": "^4.37.6",
     "sequelize-cli": "^4.0.0",
     "styled-components": "^3.2.6",
