@@ -14,9 +14,19 @@ const makeFeed = (apps) => {
     feed.item({
       title: app.name,
       description: app.description,
-      url: `https://app.co/apps/${slug ? slug.value : app.id}`,
+      url: `https://app.co/app/${slug ? slug.value : app.id}`,
       guid: app.id,
       date: app.createdAt,
+      custom_elements: [
+        {
+          'media:content': {
+            _attr: {
+              url: app.imageUrl,
+              medium: 'image',
+            },
+          },
+        },
+      ],
     });
   });
 
