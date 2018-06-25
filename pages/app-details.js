@@ -22,6 +22,8 @@ import { Button } from '@components/button';
 import AppStore from '@stores/apps';
 import UserStore from '@stores/user';
 
+import { outboundLink } from '@utils';
+
 class AppDetails extends React.Component {
   componentDidMount() {
     const { pathname } = document.location;
@@ -57,7 +59,14 @@ class AppDetails extends React.Component {
                 </GridColumn>
               </Grid>
               <p>{app.description}</p>
-              <Button type="button/primary">Visit Website</Button>
+              <Button
+                type="button/primary"
+                onClick={() => {
+                  outboundLink(app);
+                }}
+              >
+                Visit Website
+              </Button>
               <br />
               {app.openSourceUrl &&
                 app.openSourceUrl.indexOf('github.com') !== -1 && (
