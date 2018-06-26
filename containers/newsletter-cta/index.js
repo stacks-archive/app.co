@@ -1,11 +1,11 @@
 import React from 'react';
 import Newsletter from '@components/newsletter-cta';
-import { selectNewsletterAPI } from '@stores/apps/selectors';
+import { selectApiServer } from '@stores/apps/selectors';
 
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
-  newsletterApi: selectNewsletterAPI(state),
+  newsletterApi: selectApiServer(state),
 });
 
 const EMAIL_REGEX = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
