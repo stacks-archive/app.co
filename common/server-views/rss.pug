@@ -1,9 +1,9 @@
 doctype xml
-rss(version='2.0')
+rss(version='2.0' xmlns:atom="http://www.w3.org/2005/Atom")
   channel
     title App.co
     link https://app.co
-    //- atom:link(href='<a href="https://app.co/feed/rss" rel="nofollow">https://app.co/feed/rss</a>', rel='self', type='application/rss+xml')
+    atom:link(href='https://app.co/rss', rel='self', type='application/rss+xml')
     description A universal dapp store.
     language en-US
     if apps.length
@@ -12,9 +12,12 @@ rss(version='2.0')
       item
         title= app.name
         link https://app.co/app/#{app.Slugs[0].value}
-        description
-          | <![CDATA[
-          | !#{app.description}
-          | ]]>
+        description= app.description
         pubDate= new Date(app.createdAt).toUTCString()
-        guid(isPermaLink='false') https://app.co/app/#{app.Slugs[0].value}
+        guid https://app.co/app/#{app.Slugs[0].value}
+        if app.imageUrl
+          //- media:content(url=app.imageUrl, medium="image")
+          //- <media:content url="#{app.imageUrl}" medium="image" />
+          enclosure(url=app.imageUrl.replace('https', 'http') type="image/jpeg" length=200)
+          //- image
+          //-   url= app.imageUrl
