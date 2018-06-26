@@ -1,5 +1,5 @@
 doctype xml
-rss(version='2.0' xmlns:atom="http://www.w3.org/2005/Atom")
+rss(version='2.0' xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/")
   channel
     title App.co
     link https://app.co
@@ -16,8 +16,5 @@ rss(version='2.0' xmlns:atom="http://www.w3.org/2005/Atom")
         pubDate= new Date(app.createdAt).toUTCString()
         guid https://app.co/app/#{app.Slugs[0].value}
         if app.imageUrl
-          //- media:content(url=app.imageUrl, medium="image")
-          //- <media:content url="#{app.imageUrl}" medium="image" />
-          enclosure(url=app.imageUrl.replace('https', 'http') type="image/jpeg" length=200)
-          //- image
-          //-   url= app.imageUrl
+          //- enclosure(url=app.imageUrl.replace('https', 'http') type="image/jpeg" length=200)
+          media:content(url=app.imageUrl, medium="image")
