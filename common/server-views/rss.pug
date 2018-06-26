@@ -1,0 +1,20 @@
+doctype xml
+rss(version='2.0')
+  channel
+    title App.co
+    link https://app.co
+    //- atom:link(href='<a href="https://app.co/feed/rss" rel="nofollow">https://app.co/feed/rss</a>', rel='self', type='application/rss+xml')
+    description A universal dapp store.
+    language en-US
+    if apps.length
+      lastBuildDate= new Date(apps[0].createdAt).toUTCString()
+    each app in apps
+      item
+        title= app.name
+        link https://app.co/app/#{app.Slugs[0].value}
+        description
+          | <![CDATA[
+          | !#{app.description}
+          | ]]>
+        pubDate= new Date(app.createdAt).toUTCString()
+        guid(isPermaLink='false') https://app.co/app/#{app.Slugs[0].value}

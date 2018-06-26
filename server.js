@@ -3,14 +3,15 @@ const next = require('next');
 const LRUCache = require('lru-cache');
 const dotenv = require('dotenv');
 
-const { getApps } = require('./common/lib/api');
-const { makeFeed } = require('./common/lib/rss');
-
-const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 if (dev) {
   dotenv.config();
 }
+
+const { getApps } = require('./common/lib/api');
+const RSSController = require('./common/controllers/rss-controller');
+
+const port = parseInt(process.env.PORT, 10) || 3000;
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
@@ -68,6 +69,9 @@ async function renderAndCache(req, res, pagePath) {
 app.prepare().then(() => {
   const server = express();
 
+  server.set('views', './common/server-views');
+  server.set('view engine', 'pug');
+
   server.use((req, res, _next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', '*');
@@ -113,11 +117,7 @@ app.prepare().then(() => {
     }
   });
 
-  server.get('/rss', async (req, res) => {
-    const data = await getApps(apiServer);
-    const feed = makeFeed(data.apps);
-    res.send(feed.xml());
-  });
+  server.use('/rss', RSSController);
 
   server.get('*', (req, res) => handle(req, res));
 
