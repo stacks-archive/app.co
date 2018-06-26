@@ -1,20 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import queryString from 'query-string';
-
+import { selectCurrentApp } from '@stores/apps/selectors';
 import Page, { Grid, GridColumn } from '@atlaskit/page';
-
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faGithub from '@fortawesome/fontawesome-free-brands/faGithub';
-import faTwitter from '@fortawesome/fontawesome-free-brands/faTwitter';
-
+import Head from 'next/head';
+import { GithubCircleIcon, TwitterCircleIcon } from 'mdi-react';
 import { Page as Container } from '@containers/page';
 import { Header } from '@containers/header';
 import { Hero } from '@containers/hero';
 import AppIcon from '@containers/app-icon';
-
+import { doSelectApp } from '@stores/apps';
 import StyledApp from '@components/app-details';
 import { StyledAppList } from '@components/app-list';
 import { Button } from '@components/button';
@@ -25,17 +20,14 @@ import UserStore from '@stores/user';
 import { outboundLink } from '@utils';
 
 class AppDetails extends React.Component {
-  componentDidMount() {
-    const { pathname } = document.location;
-    const slug = pathname.split('/')[2];
-    this.props.selectApp(slug);
-  }
+  static getInitialProps({ req, reduxStore }) {
+    const {
+      params: { slug },
+    } = req;
 
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.selectedApp && nextProps.selectedApp) {
-      const app = nextProps.selectedApp;
-      document.title = `${app.name} on App.co - The Universal Dapp Store`;
-    }
+    reduxStore.dispatch(doSelectApp(slug));
+
+    return { slug };
   }
 
   appDetails() {
@@ -70,22 +62,22 @@ class AppDetails extends React.Component {
               <br />
               {app.openSourceUrl &&
                 app.openSourceUrl.indexOf('github.com') !== -1 && (
-                  <div>
+                  <>
                     <StyledApp.BrandLink href={app.openSourceUrl} target="_blank">
-                      <FontAwesomeIcon icon={faGithub} />
+                      <GithubCircleIcon color="currentColor" />
                       View on Github
                     </StyledApp.BrandLink>
                     <br />
-                  </div>
+                  </>
                 )}
 
               {app.twitterHandle && (
-                <div>
+                <>
                   <StyledApp.BrandLink href={`https://twitter.com/${app.twitterHandle}`} target="_blank">
-                    <FontAwesomeIcon icon={faTwitter} />
+                    <TwitterCircleIcon color="currentColor" />
                     View on Twitter
                   </StyledApp.BrandLink>
-                </div>
+                </>
               )}
 
               <br />
@@ -99,42 +91,42 @@ class AppDetails extends React.Component {
             <GridColumn medium={6}>
               <StyledApp.MainSection>
                 {app.blockchain && (
-                  <div>
+                  <>
                     <StyledApp.TagLabel>Blockchain</StyledApp.TagLabel>
                     <StyledAppList.TagGroup left>
                       <StyledAppList.Tag left>{app.blockchain}</StyledAppList.Tag>
                     </StyledAppList.TagGroup>
                     <br />
-                  </div>
+                  </>
                 )}
 
                 {app.storageNetwork && (
-                  <div>
+                  <>
                     <StyledApp.TagLabel>Storage Network</StyledApp.TagLabel>
                     <StyledAppList.TagGroup left>
                       <StyledAppList.Tag left>{app.storageNetwork}</StyledAppList.Tag>
                     </StyledAppList.TagGroup>
                     <br />
-                  </div>
+                  </>
                 )}
 
                 {app.authentication && (
-                  <div>
+                  <>
                     <StyledApp.TagLabel>Authentication</StyledApp.TagLabel>
                     <StyledAppList.TagGroup left>
                       <StyledAppList.Tag left>{app.authentication}</StyledAppList.Tag>
                     </StyledAppList.TagGroup>
                     <br />
-                  </div>
+                  </>
                 )}
 
                 {app.category && (
-                  <div>
+                  <>
                     <StyledApp.TagLabel>Category</StyledApp.TagLabel>
                     <StyledAppList.TagGroup left>
                       <StyledAppList.Tag left>{app.category}</StyledAppList.Tag>
                     </StyledAppList.TagGroup>
-                  </div>
+                  </>
                 )}
               </StyledApp.MainSection>
             </GridColumn>
@@ -150,21 +142,23 @@ class AppDetails extends React.Component {
   }
 
   render() {
-    console.log('App details page', this.props);
     return (
-      <div>
+      <>
+        <Head>
+          <title>{this.props.selectedApp.name} on App.co - The Universal Dapp Store</title>
+        </Head>
         <Header />
         <Hero />
         <Container.Section wrap={1}>
           <Container.Section.Content>{this.props.selectedApp && this.appDetails()}</Container.Section.Content>
         </Container.Section>
-      </div>
+      </>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  selectedApp: state.apps.selectedApp,
+  selectedApp: selectCurrentApp(state),
 });
 
 function mapDispatchToProps(dispatch) {

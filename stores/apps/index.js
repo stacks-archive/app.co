@@ -14,7 +14,7 @@ const setPlatformFilter = (platform) => ({
   type: constants.SET_PLATFORM,
   platform,
 });
-const selectApp = (id) => ({
+export const doSelectApp = (id) => ({
   type: constants.SELECT_APP,
   id,
 });
@@ -82,7 +82,7 @@ const fetchPendingApps = (apiServer, jwt) =>
 
 const actions = {
   setPlatformFilter,
-  selectApp,
+  doSelectApp,
   savingApp,
   savedApp,
   saveApp,
@@ -108,14 +108,13 @@ const makeReducer = (data) => {
           platformFilter: action.platform,
         });
       case constants.SELECT_APP: {
-        console.log('select app');
         const { id } = action;
         let app = null;
-        if (typeof id === 'number') {
-          app = find(state.apps, (_app) => _app.id === id);
+        if (Number.isInteger(id)) {
+          app = state.apps.find((_app) => _app.id === id);
         } else {
-          app = find(state.apps, (_app) => {
-            const slug = find(_app.Slugs, (_slug) => _slug.value === id);
+          app = state.apps.find((_app) => {
+            const slug = _app.Slugs.find((_slug) => _slug.value === id);
             return !!slug;
           });
         }

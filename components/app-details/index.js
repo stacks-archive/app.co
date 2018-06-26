@@ -26,9 +26,12 @@ const App = {
     line-height: 20px;
     color: #002257;
     text-decoration: none;
+    display: flex;
+    align-items: center;
 
     svg {
       margin-right: 5px;
+      display: block;
     }
 
     &:hover {

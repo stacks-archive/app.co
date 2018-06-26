@@ -4,14 +4,12 @@ import Tooltip from '@atlaskit/tooltip';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Link from 'next/link';
-
 import { StyledAppList } from '@components/app-list';
 import { Button } from '@components/button';
-import { LinkButton } from '@components/link-button';
-import { DropdownButton } from '@containers/dropdown-button';
 import AppIcon from '@containers/app-icon';
-import { truncate, appRoute } from '@utils';
+import { appRoute, truncate } from '@utils';
 import AppStore from '@stores/apps';
+import { selectApps } from '@stores/apps/selectors';
 
 const SORT_METHOD = {
   TWEETS: { value: 0, name: 'Tweets / Week', description: '' },
@@ -203,7 +201,7 @@ class AppList extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  apps: state.apps.apps,
+  apps: selectApps(state),
 });
 
 function mapDispatchToProps(dispatch) {

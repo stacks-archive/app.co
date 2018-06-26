@@ -1,12 +1,15 @@
 import React from 'react';
 import sortBy from 'lodash/sortBy';
 import Link from 'next/link';
-
+import { connect } from 'react-redux';
 import { StyledFeatured } from '@components/featured';
-import { StyledAppList } from '@components/app-list';
 import { colorHexFromString, appRoute } from '@utils';
 
-class Featured extends React.Component {
+import { selectApps } from '@stores/apps/selectors';
+
+class FeaturedContainer extends React.Component {
+  getFeaturedApps = (featured, apps) => (apps.length ? apps.filter((app) => featured.includes(app.name)) : null);
+
   constructor(props) {
     super(props);
 
@@ -19,11 +22,8 @@ class Featured extends React.Component {
     };
   }
 
-  getFeaturedApps(featured, apps) {
-    return apps.filter((app) => featured.includes(app.name));
-  }
-
   render() {
+    const { right, ...rest } = this.props;
     const appImage = (app) => {
       if (app.imageUrl) {
         return <StyledFeatured.IconImage src={app.imageUrl} />;
@@ -33,9 +33,9 @@ class Featured extends React.Component {
     };
 
     return (
-      <StyledFeatured>
+      <StyledFeatured {...rest}>
         <StyledFeatured.Wrapper>
-          {!this.props.right && (
+          {!right && (
             <StyledFeatured.TitleSection>
               Hot Social Dapps <br />
               <p>Our curated list of notable Dapps changing the way we communicate.</p>
@@ -59,7 +59,7 @@ class Featured extends React.Component {
               </Link>
             ))}
           </StyledFeatured.Section>
-          {this.props.right && (
+          {right && (
             <StyledFeatured.TitleSection>
               Business Tools<br />
               <p>Decentralize your workplace.</p>
@@ -70,5 +70,9 @@ class Featured extends React.Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  apps: selectApps(state),
+});
+const Featured = connect(mapStateToProps)(FeaturedContainer);
 
 export { Featured };
