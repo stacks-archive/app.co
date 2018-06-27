@@ -1,4 +1,5 @@
 import find from 'lodash/find';
+import assignIn from 'lodash/assignIn';
 
 const constants = {
   SET_PLATFORM: 'SET_PLATFORM',
@@ -91,15 +92,23 @@ const actions = {
 };
 
 const makeReducer = (data) => {
-  const initialState = Object.assign({}, data, {
-    platformFilter: null,
-    selectedApp: null,
-    selectedAppId: null,
-    isSavingApp: false,
-    savedApp: null,
-    isFetchingPending: false,
-    pendingApps: [],
-  });
+  let initialState = data;
+
+  if (initialState.apps.apps) {
+    initialState = initialState.apps;
+  } else {
+    const emptyState = {
+      platformFilter: null,
+      selectedApp: null,
+      selectedAppId: null,
+      isSavingApp: false,
+      savedApp: null,
+      isFetchingPending: false,
+      pendingApps: [],
+    };
+
+    initialState = assignIn(data, emptyState);
+  }
 
   const reducer = (state = initialState, action) => {
     switch (action.type) {
