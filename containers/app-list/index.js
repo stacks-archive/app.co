@@ -140,24 +140,6 @@ class AppList extends React.Component {
     if (sortedApps) {
       return (
         <StyledAppList>
-          {/* <StyledAppList.FilterSubtitle>Show Dapps by</StyledAppList.FilterSubtitle>
-          <StyledAppList.Filters>
-            <StyledAppList.ClearFilter
-              onClick={() => {
-                this.setState({ sortedApps: this.state.allApps, platform: null });
-              }}
-              selected={!this.state.platform}
-            >
-              All Platforms
-            </StyledAppList.ClearFilter>
-            {platformFilter('Blockstack', { image: 'blockstack/blockstack' })}
-            {platformFilter('Ethereum', { image: 'ethereum/ethereum-1' })}
-            {platformFilter('Steem', { image: 'steem/steem' })}
-            {platformFilter('EOS', { image: 'EOS/EOS' })}
-            {platformFilter('IPFS', { image: 'ipfs/IPFS' })}
-            {platformFilter('ZeroNet', { image: 'ZeroNet/ZeroNet' })}
-            {platformFilter('DAT', { image: 'dat/dat-hexagon' })}
-            </StyledAppList.Filters> */}
           <StyledAppList.Table>
             <StyledAppList.Header>
               <StyledAppList.HeaderRow>
