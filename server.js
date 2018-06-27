@@ -87,6 +87,10 @@ app.prepare().then(() => {
     renderAndCache(req, res, '/app-details');
   });
 
+  server.get('/platform/:platform', (req, res) => {
+    renderAndCache(req, res, '/platform');
+  });
+
   server.get('/faq', (req, res) => {
     renderAndCache(req, res, '/faq');
   });
