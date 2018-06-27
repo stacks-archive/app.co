@@ -140,43 +140,6 @@ const Footer = styled.div`
   justify-content: center;
 `;
 
-const Filters = styled.div``;
-
-const Filter = styled.div`
-  float: left;
-  padding: 0px 25px;
-  cursor: pointer;
-  &:first-child {
-    padding-left: 0;
-  }
-  ${({ selected }) =>
-    selected &&
-    css`
-      font-size: 18px;
-      font-weight: 600;
-      padding-top: 1px;
-    `};
-`;
-
-const ClearFilter = Filter.extend`
-  padding-top: 6px;
-`;
-
-const FilterSubtitle = styled.p`
-  color: rgba(20, 33, 68, 0.5);
-  font-size: 14px;
-  margin-bottom: 3px;
-`;
-
-const FilterImage = styled.img`
-  max-width: 24px;
-  max-height: 24px;
-  position: relative;
-  top: 7px;
-  opacity: 0.75;
-  margin-right: 10px;
-`;
-
 StyledAppList.Table = Table;
 StyledAppList.SpacerRow = SpacerRow;
 StyledAppList.Row = Row;
@@ -195,10 +158,5 @@ StyledAppList.HeaderRow = HeaderRow;
 StyledAppList.HeaderItem = HeaderItem;
 StyledAppList.HeaderLink = HeaderLink;
 StyledAppList.Footer = Footer;
-StyledAppList.Filters = Filters;
-StyledAppList.Filter = Filter;
-StyledAppList.FilterSubtitle = FilterSubtitle;
-StyledAppList.FilterImage = FilterImage;
-StyledAppList.ClearFilter = ClearFilter;
 
 export { StyledAppList };

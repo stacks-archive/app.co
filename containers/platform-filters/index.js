@@ -10,37 +10,34 @@ import { doSelectPlatformFilter } from '@stores/apps';
 import { selectPlatformFilter } from '@stores/apps/selectors';
 import UserStore from '@stores/user';
 
-import { StyledAppList } from '@components/app-list';
+import * as StyledPlatformFilters from '@components/platform-filters';
 
 const PlatformFilters = ({ platformFilter }) => {
+  const platformURL = (platform) => `/platform/${platform.toLowerCase()}`
   const platform = (platform, opts) => (
-    <Link href={`/platform/${platform.toLowerCase()}`} key={platform}>
-      <StyledAppList.Filter
+    <Link href={platformURL(platform)} key={platform}>
+      <StyledPlatformFilters.Filter
         key={platform}
+        href={platformURL(platform)}
         selected={platformFilter === platform.toLowerCase()}
       >
-        <StyledAppList.FilterImage title={platform} src={`/static/images/platforms/${opts.image}@3x.png`} />
-        {platform}
-      </StyledAppList.Filter>
+        <StyledPlatformFilters.FilterImage title={platform} src={`/static/images/platforms/${opts.image}@3x.png`} />
+        <StyledPlatformFilters.PlatformTitle>{platform}</StyledPlatformFilters.PlatformTitle>
+      </StyledPlatformFilters.Filter>
     </Link>
   );
   return (
     <>
-      <StyledAppList.FilterSubtitle>Show Dapps by</StyledAppList.FilterSubtitle>
-      <StyledAppList.Filters>
-        <StyledAppList.ClearFilter
-        selected={!platformFilter}
-        >
-          All Platforms
-            </StyledAppList.ClearFilter>
+      <StyledPlatformFilters.FilterSubtitle>Show Dapps by Platform</StyledPlatformFilters.FilterSubtitle>
+      <StyledPlatformFilters.Filters>
         {platform('Blockstack', { image: 'blockstack/blockstack' })}
         {platform('Ethereum', { image: 'ethereum/ethereum-1' })}
         {platform('Steem', { image: 'steem/steem' })}
         {platform('EOS', { image: 'EOS/EOS' })}
         {platform('IPFS', { image: 'ipfs/IPFS' })}
         {platform('ZeroNet', { image: 'ZeroNet/ZeroNet' })}
-        {platform('DAT', { image: 'dat/dat-hexagon' })}
-      </StyledAppList.Filters>
+        {/* {platform('DAT', { image: 'dat/dat-hexagon' })} */}
+      </StyledPlatformFilters.Filters>
     </>
   );
 }
