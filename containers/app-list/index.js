@@ -110,7 +110,7 @@ class AppList extends React.Component {
     const renderRows = () => {
       const visibleApps = showAll ? sortedApps : sortedApps.slice(0, showCount);
       return visibleApps.map((app, index) => (
-        <Link href={appRoute(app)}>
+        <Link href={appRoute(app)} key={app.id}>
           <StyledAppList.Row key={app.id}>
             <StyledAppList.Rank>{index + 1}</StyledAppList.Rank>
             <StyledAppList.Icon>{<AppIcon app={app} />}</StyledAppList.Icon>

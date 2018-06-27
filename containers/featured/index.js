@@ -43,7 +43,7 @@ class FeaturedContainer extends React.Component {
           )}
           <StyledFeatured.Section>
             {this.state.featuredApps.map((app) => (
-              <Link href={appRoute(app)}>
+              <Link href={appRoute(app)} key={app.id}>
                 <StyledFeatured.Item key={app.id}>
                   <StyledFeatured.Icon>{appImage(app)}</StyledFeatured.Icon>
                   <div>
