@@ -9,7 +9,7 @@ import { Button } from '@components/button';
 import AppIcon from '@containers/app-icon';
 import { appRoute, truncate } from '@utils';
 import AppStore from '@stores/apps';
-import { selectApps } from '@stores/apps/selectors';
+import { selectApps, selectPlatformFilter, selectFilteredApps } from '@stores/apps/selectors';
 
 const SORT_METHOD = {
   TWEETS: { value: 0, name: 'Tweets / Week', description: '' },
@@ -47,7 +47,8 @@ const getTags = (app) => {
 class AppList extends React.Component {
   constructor(props) {
     super(props);
-    const sortedApps = _.sortBy(props.apps, (app) => -getTwitterMentions(app));
+    const apps = props.platformFilter ? props.filteredApps : props.apps;
+    const sortedApps = _.sortBy(apps, (app) => -getTwitterMentions(app));
     this.state = {
       showCount: props.show,
       showAll: false,
@@ -202,6 +203,8 @@ class AppList extends React.Component {
 
 const mapStateToProps = (state) => ({
   apps: selectApps(state),
+  platformFilter: selectPlatformFilter(state),
+  filteredApps: selectFilteredApps(state),
 });
 
 function mapDispatchToProps(dispatch) {

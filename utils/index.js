@@ -79,4 +79,15 @@ const appStatuses = [
 
 const appStatusFromValue = (value) => _.find(appStatuses, (status) => status.value === value);
 
-export { colorHexFromString, truncate, outboundLink, enumSelect, appStatuses, appStatusFromValue, appRoute };
+const capitalize = (lower) => lower.charAt(0).toUpperCase() + lower.substr(1);
+
+export {
+  colorHexFromString,
+  truncate,
+  outboundLink,
+  enumSelect,
+  appStatuses,
+  appStatusFromValue,
+  appRoute,
+  capitalize,
+};

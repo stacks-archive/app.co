@@ -10,11 +10,14 @@ import Head from 'next/head';
 import { Page as Container } from '@containers/page';
 import { Header } from '@containers/header';
 import { Hero } from '@containers/hero';
+import AppList from '@containers/app-list';
 
 import AppStore from '@stores/apps';
 import { doSelectPlatformFilter } from '@stores/apps';
-import { selectApps } from '@stores/apps/selectors';
+import { selectPlatformFilter } from '@stores/apps/selectors';
 import UserStore from '@stores/user';
+
+import { capitalize } from '@utils';
 
 class Platform extends React.Component {
   static getInitialProps({ req, reduxStore }) {
@@ -32,13 +35,13 @@ class Platform extends React.Component {
     return (
       <>
         <Head>
-          {/* <title>{this.props.selectedApp.name} on App.co - The Universal Dapp Store</title> */}
+          <title>{capitalize(this.props.platformFilter)} Apps on App.co - The Universal Dapp Store</title>
         </Head>
         <Header />
         <Hero />
         <Container.Section wrap={1}>
           <Container.Section.Content>
-            Platform page
+            <AppList show={25} />
           </Container.Section.Content>
         </Container.Section>
       </>
@@ -47,7 +50,7 @@ class Platform extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  apps: selectApps(state),
+  platformFilter: selectPlatformFilter(state),
 });
 
 function mapDispatchToProps(dispatch) {
