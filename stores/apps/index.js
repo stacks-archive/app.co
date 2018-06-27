@@ -1,7 +1,7 @@
 import assignIn from 'lodash/assignIn';
 
 const constants = {
-  SET_PLATFORM: 'SET_PLATFORM',
+  SELECT_PLATFORM: 'SELECT_PLATFORM',
   SELECT_APP: 'SELECT_APP',
   SAVING_APP: 'SAVING_APP',
   SAVED_APP: 'SAVED_APP',
@@ -10,8 +10,8 @@ const constants = {
   FETCHED_ADMIN_APPS: 'FETCHED_ADMIN_APPS',
 };
 
-const setPlatformFilter = (platform) => ({
-  type: constants.SET_PLATFORM,
+export const doSelectPlatformFilter = (platform) => ({
+  type: constants.SELECT_PLATFORM,
   platform,
 });
 export const doSelectApp = (id) => ({
@@ -75,7 +75,7 @@ const fetchPendingApps = (apiServer, jwt) => async (dispatch) => {
 };
 
 const actions = {
-  setPlatformFilter,
+  doSelectPlatformFilter,
   doSelectApp,
   savingApp,
   savedApp,
@@ -98,6 +98,7 @@ const makeReducer = (data) => {
       savedApp: null,
       isFetchingPending: false,
       pendingApps: [],
+      filteredApps: [],
     };
 
     initialState = assignIn(data, emptyState);
@@ -105,11 +106,20 @@ const makeReducer = (data) => {
 
   const reducer = (state = initialState, action) => {
     switch (action.type) {
-      case constants.SET_PLATFORM:
+      case constants.SELECT_PLATFORM: {
+        const { platform } = action;
+        const filteredApps = state.apps.filter((app) => {
+          if (platform === 'blockstack') {
+            return app.authentication === 'Blockstack' || app.storageNetwork === 'Gaia';
+          }
+          return false;
+        });
         return {
           ...state,
-          platformFilter: action.platform,
+          platformFilter: platform,
+          filteredApps,
         };
+      }
       case constants.SELECT_APP: {
         const { id } = action;
         let selectedApp = null;
