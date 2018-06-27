@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { StyledAppList } from '@components/app-list';
 import { Button } from '@components/button';
 import AppIcon from '@containers/app-icon';
-import { appRoute, truncate } from '@utils';
+import { appRoute, truncate, getTags } from '@utils';
 import AppStore from '@stores/apps';
 import { selectApps, selectPlatformFilter, selectFilteredApps } from '@stores/apps/selectors';
 
@@ -23,25 +23,6 @@ const getTwitterMentions = (app) => {
     return ranking.twitterMentions || 0;
   }
   return 0;
-};
-
-const getTags = (app) => {
-  const tags = [];
-
-  if (app.authentication) {
-    tags.push(app.authentication);
-  }
-
-  if (app.blockchain) {
-    tags.push(app.blockchain);
-  }
-
-  if (app.storageNetwork) {
-    tags.push(app.storageNetwork);
-  }
-
-  const tagSet = Array.from(new Set(tags));
-  return tagSet;
 };
 
 class AppList extends React.Component {

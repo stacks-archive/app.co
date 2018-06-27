@@ -81,6 +81,25 @@ const appStatusFromValue = (value) => _.find(appStatuses, (status) => status.val
 
 const capitalize = (lower) => lower.charAt(0).toUpperCase() + lower.substr(1);
 
+const getTags = (app) => {
+  const tags = [];
+
+  if (app.authentication) {
+    tags.push(app.authentication);
+  }
+
+  if (app.blockchain) {
+    tags.push(app.blockchain);
+  }
+
+  if (app.storageNetwork) {
+    tags.push(app.storageNetwork);
+  }
+
+  const tagSet = Array.from(new Set(tags));
+  return tagSet;
+};
+
 export {
   colorHexFromString,
   truncate,
@@ -90,4 +109,5 @@ export {
   appStatusFromValue,
   appRoute,
   capitalize,
+  getTags,
 };

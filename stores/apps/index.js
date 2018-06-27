@@ -1,5 +1,7 @@
 import assignIn from 'lodash/assignIn';
 
+import { getTags } from '@utils';
+
 const constants = {
   SELECT_PLATFORM: 'SELECT_PLATFORM',
   SELECT_APP: 'SELECT_APP',
@@ -109,10 +111,11 @@ const makeReducer = (data) => {
       case constants.SELECT_PLATFORM: {
         const { platform } = action;
         const filteredApps = state.apps.filter((app) => {
+          const tags = getTags(app);
           if (platform === 'blockstack') {
             return app.authentication === 'Blockstack' || app.storageNetwork === 'Gaia';
           }
-          return false;
+          return !!tags.find((tag) => tag.toLowerCase() === platform);
         });
         return {
           ...state,
