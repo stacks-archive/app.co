@@ -35,7 +35,7 @@ async function renderAndCache(req, res, pagePath) {
   const key = getCacheKey(req);
 
   // If we have a page in the cache, let's serve it
-  if (ssrCache.has(key)) {
+  if (ssrCache.has(key) && !dev) {
     res.setHeader('x-cache', 'HIT');
     console.log('cache hit');
     res.send(ssrCache.get(key));

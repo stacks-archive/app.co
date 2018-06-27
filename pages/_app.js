@@ -1,8 +1,8 @@
 import App, { Container } from 'next/app';
 import React from 'react';
 import { withRouter } from 'next/router';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import withReduxStore from '@common/lib/with-redux-store';
 
 import { Root } from '@containers/root';
 import Store from '@stores';
@@ -10,30 +10,15 @@ import Store from '@stores';
 import 'isomorphic-unfetch';
 
 class MyApp extends App {
-  static async getInitialProps({ Component, ctx }) {
-    let pageProps = {};
-
-    const data = ctx.query;
-
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
-
-    return {
-      pageProps,
-      data,
-    };
-  }
 
   render() {
-    const { Component, pageProps, data } = this.props;
-    const store = Store(data);
+    const { Component, pageProps, reduxStore } = this.props;
 
     return (
       <Container>
-        <Provider store={store}>
+        <Provider store={reduxStore}>
           <Root>
-            <Component {...pageProps} data={data} />
+            <Component {...pageProps} />
           </Root>
         </Provider>
       </Container>
@@ -41,4 +26,4 @@ class MyApp extends App {
   }
 }
 
-export default withRouter(MyApp);
+export default withRouter(withReduxStore(MyApp));

@@ -13,17 +13,14 @@ const bizApps = ['Graphite', 'Aragon', 'Gitcoin', 'Bounty0x', 'adChain Registry'
 
 export default ({ data }) => (
   <Page>
-    <Header data={data} />
+    <Header />
     <Hero />
     <Page.Section wrap={1}>
       <Page.Section.Content>
-        <Featured apps={data.apps} featured={featuredApps} />
-        <br />
-        <br />
-        <Featured apps={data.apps} featured={bizApps} right />
+        <Featured featured={featuredApps} padding="0 0 20px 0" />
+        <Featured featured={bizApps} right />
       </Page.Section.Content>
     </Page.Section>
-
     <Page.Section wrap={1}>
       <Page.Section.Content>
         <AppList show={25} />
@@ -32,9 +29,8 @@ export default ({ data }) => (
         <SubmitDappCard />
       </Page.Sidebar> */}
     </Page.Section>
-
     <Page.Section wrap={1}>
-      <NewsletterCTA apiServer={data.apiServer} />
+      <NewsletterCTA />
     </Page.Section>
   </Page>
 );

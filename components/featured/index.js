@@ -1,10 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
-import { wrapperStyles } from '@common/styles';
+import styled, { css } from 'styled-components';
 
 const StyledFeatured = styled.div`
   position: relative;
-  width: 100%
+  width: 100%;
+  ${({ padding }) =>
+    padding &&
+    css`
+      padding: ${padding};
+    `};
 `;
 
 const Wrapper = styled.div`
@@ -21,7 +25,7 @@ const Wrapper = styled.div`
 
 const TitleSection = styled.div`
   width: 100px;
-  background: linear-gradient(#0CCABA, #0C9AA6);
+  background: linear-gradient(#0ccaba, #0c9aa6);
   height: 260px;
   min-width: 145px;
   color: #fff;
@@ -43,12 +47,12 @@ const TitleSection = styled.div`
     min-height: 80px;
     height: auto;
   }
-`
+`;
 
 const Section = styled.div`
   width: 100%;
   display: flex;
-  flex-flow: row; 
+  flex-flow: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
@@ -115,18 +119,18 @@ const NameLink = styled.a`
   color: #282f36;
   font-weight: 700;
   text-decoration: none;
-  padding-left:20px;
+  padding-left: 20px;
   &:hover {
     text-decoration: none;
   }
-`
+`;
 
 const Description = styled.p`
   padding: 5px 20px 5px 20px;
   margin: 0;
   font-size: 14px;
   color: #6c737a;
-`
+`;
 
 StyledFeatured.Wrapper = Wrapper;
 StyledFeatured.TitleSection = TitleSection;

@@ -1,11 +1,16 @@
 import React from 'react';
-import { Page } from '@containers/page';
 import Newsletter from '@components/newsletter-cta';
-import { Button } from '@components/button';
+import { selectApiServer } from '@stores/apps/selectors';
+
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => ({
+  newsletterApi: selectApiServer(state),
+});
 
 const EMAIL_REGEX = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
-export default class NewsletterCTA extends React.Component {
+class NewsletterCTA extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +22,7 @@ export default class NewsletterCTA extends React.Component {
   }
 
   submit() {
-    const url = `${this.props.apiServer}/api/subscribe`;
+    const url = `${this.props.newsletterApi}/api/subscribe`;
     const { email } = this.state;
     if (email.match(EMAIL_REGEX)) {
       const data = { email };
@@ -66,3 +71,5 @@ export default class NewsletterCTA extends React.Component {
     );
   }
 }
+
+export default connect(mapStateToProps)(NewsletterCTA);
