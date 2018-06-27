@@ -10,6 +10,7 @@ import AppList from '@containers/admin/app-list';
 
 import AppStore from '@stores/apps';
 import UserStore from '@stores/user';
+import { selectApps, selectApiServer } from '@stores/apps/selectors';
 
 import 'isomorphic-unfetch';
 
@@ -56,8 +57,8 @@ class Admin extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  apps: state.apps.apps,
-  apiServer: state.apps.apiServer,
+  apps: selectApps(state),
+  apiServer: selectApiServer(state),
   user: state.user,
 });
 
