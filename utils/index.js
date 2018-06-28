@@ -100,6 +100,11 @@ const getTags = (app) => {
   return tagSet;
 };
 
+const properTagFromParam = (param, enums) => {
+  const name = enums.find((platform) => platform.toLowerCase() === param) || capitalize(param);
+  return name;
+};
+
 export {
   colorHexFromString,
   truncate,

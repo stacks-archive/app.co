@@ -14,10 +14,10 @@ import AppList from '@containers/app-list';
 
 import AppStore from '@stores/apps';
 import { doSelectPlatformFilter } from '@stores/apps';
-import { selectPlatformFilter } from '@stores/apps/selectors';
+import { selectPlatformFilter, selectPlatformName } from '@stores/apps/selectors';
 import UserStore from '@stores/user';
 
-import { capitalize } from '@utils';
+import { capitalize, properTagFromParams } from '@utils';
 
 class Platform extends React.Component {
   static getInitialProps({ req, reduxStore }) {
@@ -35,7 +35,7 @@ class Platform extends React.Component {
     return (
       <>
         <Head>
-          <title>{capitalize(this.props.platformFilter)} Apps on App.co - The Universal Dapp Store</title>
+          <title>{this.props.platformName} Apps on App.co - The Universal Dapp Store</title>
         </Head>
         <Header />
         <Hero />
@@ -51,6 +51,7 @@ class Platform extends React.Component {
 
 const mapStateToProps = (state) => ({
   platformFilter: selectPlatformFilter(state),
+  platformName: selectPlatformName(state),
 });
 
 function mapDispatchToProps(dispatch) {

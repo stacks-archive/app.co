@@ -14,7 +14,7 @@ import AppList from '@containers/app-list';
 
 import AppStore from '@stores/apps';
 import { doSelectCategoryFilter } from '@stores/apps';
-import { selectCategoryFilter, selectAppCategories } from '@stores/apps/selectors';
+import { selectCategoryFilter, selectCategoryName } from '@stores/apps/selectors';
 import UserStore from '@stores/user';
 
 import { capitalize } from '@utils';
@@ -32,13 +32,10 @@ class Category extends React.Component {
   }
 
   render() {
-    const categoryName = Object.keys(this.props.categoryEnums).find((cat) => {
-      return cat.toLowerCase() === this.props.categoryFilter;
-    });
     return (
       <>
         <Head>
-          <title>{capitalize(categoryName)} Apps on App.co - The Universal Dapp Store</title>
+          <title>{this.props.categoryName} Apps on App.co - The Universal Dapp Store</title>
         </Head>
         <Header />
         <Hero />
@@ -54,7 +51,7 @@ class Category extends React.Component {
 
 const mapStateToProps = (state) => ({
   categoryFilter: selectCategoryFilter(state),
-  categoryEnums: selectAppCategories(state),
+  categoryName: selectCategoryName(state),
 });
 
 function mapDispatchToProps(dispatch) {

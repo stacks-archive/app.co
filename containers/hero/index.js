@@ -3,20 +3,20 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { selectPlatformFilter } from '@stores/apps/selectors';
+import { selectPlatformName, selectCategoryName } from '@stores/apps/selectors';
 
 import { StyledHero } from '@components/hero';
 import { StyledHeader } from '@components/header';
 
 import { capitalize } from '@utils';
 
-const HeroContainer = ({ platformFilter }) => (
+const HeroContainer = ({ platformName, categoryName }) => (
   <StyledHero>
     <StyledHero.Inner>
       <StyledHero.Content>
         <StyledHeader.Logo smShow>App.co</StyledHeader.Logo>
-				{platformFilter ? (
-					<h1>{capitalize(platformFilter)} Apps</h1>
+				{(platformName || categoryName) ? (
+					<h1>{platformName || categoryName} Apps</h1>
 				) : (
 					<>
 						<h1>Universal Dapp Store</h1>
@@ -29,7 +29,8 @@ const HeroContainer = ({ platformFilter }) => (
 );
 
 const mapStateToProps = (state) => ({
-  platformFilter: selectPlatformFilter(state),
+  platformName: selectPlatformName(state),
+  categoryName: selectCategoryName(state),
 });
 
 function mapDispatchToProps(dispatch) {

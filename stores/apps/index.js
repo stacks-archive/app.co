@@ -1,6 +1,6 @@
 import assignIn from 'lodash/assignIn';
 
-import { getTags } from '@utils';
+import { getTags, capitalize } from '@utils';
 
 const constants = {
   SELECT_PLATFORM: 'SELECT_PLATFORM',
@@ -108,6 +108,8 @@ const makeReducer = (data) => {
       pendingApps: [],
       filteredApps: [],
       categoryFilter: null,
+      platformName: null,
+      categoryName: null,
     };
 
     initialState = assignIn(data, emptyState);
@@ -124,10 +126,16 @@ const makeReducer = (data) => {
           }
           return !!tags.find((tag) => tag.toLowerCase() === platform);
         });
+        const { authenticationEnums, storageEnums, blockchainEnums } = state.constants.appConstants;
+        const enums = Object.keys(authenticationEnums)
+          .concat(Object.keys(storageEnums))
+          .concat(Object.keys(blockchainEnums));
+        const platformName = enums.find((_platform) => _platform.toLowerCase() === platform) || capitalize(platform);
         return {
           ...state,
           platformFilter: platform,
           filteredApps,
+          platformName,
         };
       }
       case constants.SELECT_APP: {
@@ -181,10 +189,12 @@ const makeReducer = (data) => {
       case constants.SELECT_CATEGORY: {
         const { category } = action;
         const filteredApps = state.apps.filter((app) => app.category && app.category.toLowerCase() === category);
+        const categoryName = Object.keys(state.constants.appConstants.categoryEnums).find((cat) => cat.toLowerCase() === category);
         return {
           ...state,
           categoryFilter: category,
           filteredApps,
+          categoryName,
         };
       }
       default:
