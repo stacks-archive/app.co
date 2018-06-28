@@ -6,6 +6,7 @@ import { Page } from '@containers/page';
 import { Featured } from '@containers/featured';
 import AppList from '@containers/app-list';
 import PlatformFilters from '@containers/platform-filters';
+import CategoryFilters from '@containers/category-filters';
 // import SubmitDappCard from '@containers/cards/submit-dapp-card';
 import NewsletterCTA from '@containers/newsletter-cta';
 
@@ -25,6 +26,9 @@ export default () => (
     <Page.Section wrap={1}>
       <Page.Section.Content>
         <PlatformFilters />
+        <br />
+        <br />
+        <CategoryFilters />
         <br />
         <br />
         <br />

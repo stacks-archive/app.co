@@ -13,7 +13,7 @@ import UserStore from '@stores/user';
 import * as StyledPlatformFilters from '@components/platform-filters';
 
 const PlatformFilters = ({ platformFilter }) => {
-  const platformURL = (platform) => `/platform/${platform.toLowerCase()}`
+  const platformURL = (platform) => `/platform/${encodeURIComponent(platform.toLowerCase())}`
   const platform = (platform, opts) => (
     <Link href={platformURL(platform)} key={platform}>
       <StyledPlatformFilters.Filter

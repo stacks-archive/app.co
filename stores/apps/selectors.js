@@ -4,3 +4,4 @@ export const selectApiServer = (state) => state.apps.apiServer;
 export const selectCurrentApp = (state) => state.apps.selectedApp;
 export const selectFilteredApps = (state) => state.apps.filteredApps;
 export const selectPlatformFilter = (state) => state.apps.platformFilter;
+export const selectAppCategories = (state) => state.apps.constants.appConstants.categoryEnums;
