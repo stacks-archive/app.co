@@ -10,6 +10,7 @@ const constants = {
   FETCHING_PENDING: 'FETCH_PENDING',
   FETCHED_PENDING: 'FETCHING_PENDING',
   FETCHED_ADMIN_APPS: 'FETCHED_ADMIN_APPS',
+  SELECT_CATEGORY: 'SELECT_CATEGORY',
 };
 
 export const doSelectPlatformFilter = (platform) => ({
@@ -46,6 +47,11 @@ const fetchingPending = () => ({
 const fetchedPending = (apps) => ({
   type: constants.FETCHED_PENDING,
   apps,
+});
+
+export const doSelectCategoryFilter = (category) => ({
+  type: constants.SELECT_CATEGORY,
+  category,
 });
 
 const fetchedAdminApps = (apps) => ({
@@ -101,6 +107,7 @@ const makeReducer = (data) => {
       isFetchingPending: false,
       pendingApps: [],
       filteredApps: [],
+      categoryFilter: null,
     };
 
     initialState = assignIn(data, emptyState);
@@ -169,6 +176,15 @@ const makeReducer = (data) => {
         return {
           ...state,
           ...newState,
+        };
+      }
+      case constants.SELECT_CATEGORY: {
+        const { category } = action;
+        const filteredApps = state.apps.filter((app) => app.category && app.category.toLowerCase() === category);
+        return {
+          ...state,
+          categoryFilter: category,
+          filteredApps,
         };
       }
       default:
