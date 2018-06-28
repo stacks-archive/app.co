@@ -91,6 +91,10 @@ app.prepare().then(() => {
     renderAndCache(req, res, '/platform');
   });
 
+  server.get('/category/:category', (req, res) => {
+    renderAndCache(req, res, '/category');
+  });
+
   server.get('/faq', (req, res) => {
     renderAndCache(req, res, '/faq');
   });
