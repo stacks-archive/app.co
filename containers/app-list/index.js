@@ -158,7 +158,6 @@ class AppList extends React.Component {
                 </Button>
               </StyledAppList.ExpandButtonWrapper>
             )}
-            {/* <LinkButton onClick={() => this.showAll()}>View All</LinkButton> */}
           </StyledAppList.Footer>
         </StyledAppList>
       );

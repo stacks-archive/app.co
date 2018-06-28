@@ -32,9 +32,7 @@ class Category extends React.Component {
   }
 
   render() {
-    console.log(Object.keys(this.props.categoryEnums))
     const categoryName = Object.keys(this.props.categoryEnums).find((cat) => {
-      console.log(cat, encodeURIComponent(cat.toLowerCase()), this.props.categoryFilter);
       return cat.toLowerCase() === this.props.categoryFilter;
     });
     return (
