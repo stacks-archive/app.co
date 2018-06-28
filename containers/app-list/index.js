@@ -150,11 +150,13 @@ class AppList extends React.Component {
             </tbody>
           </StyledAppList.Table>
           <StyledAppList.Footer>
-            <StyledAppList.ExpandButtonWrapper>
-              <Button onClick={() => this.showAll()} type="button/primary">
-                Next 100
-              </Button>
-            </StyledAppList.ExpandButtonWrapper>
+            {sortedApps.length > showCount && (
+              <StyledAppList.ExpandButtonWrapper>
+                <Button onClick={() => this.showAll()} type="button/primary">
+                  Show All
+                </Button>
+              </StyledAppList.ExpandButtonWrapper>
+            )}
             {/* <LinkButton onClick={() => this.showAll()}>View All</LinkButton> */}
           </StyledAppList.Footer>
         </StyledAppList>
