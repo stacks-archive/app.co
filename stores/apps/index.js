@@ -1,17 +1,20 @@
 import assignIn from 'lodash/assignIn';
 
+import { getTags, capitalize } from '@utils';
+
 const constants = {
-  SET_PLATFORM: 'SET_PLATFORM',
+  SELECT_PLATFORM: 'SELECT_PLATFORM',
   SELECT_APP: 'SELECT_APP',
   SAVING_APP: 'SAVING_APP',
   SAVED_APP: 'SAVED_APP',
   FETCHING_PENDING: 'FETCH_PENDING',
   FETCHED_PENDING: 'FETCHING_PENDING',
   FETCHED_ADMIN_APPS: 'FETCHED_ADMIN_APPS',
+  SELECT_CATEGORY: 'SELECT_CATEGORY',
 };
 
-const setPlatformFilter = (platform) => ({
-  type: constants.SET_PLATFORM,
+export const doSelectPlatformFilter = (platform) => ({
+  type: constants.SELECT_PLATFORM,
   platform,
 });
 export const doSelectApp = (id) => ({
@@ -46,6 +49,11 @@ const fetchedPending = (apps) => ({
   apps,
 });
 
+export const doSelectCategoryFilter = (category) => ({
+  type: constants.SELECT_CATEGORY,
+  category,
+});
+
 const fetchedAdminApps = (apps) => ({
   type: constants.FETCHED_ADMIN_APPS,
   apps,
@@ -75,7 +83,7 @@ const fetchPendingApps = (apiServer, jwt) => async (dispatch) => {
 };
 
 const actions = {
-  setPlatformFilter,
+  doSelectPlatformFilter,
   doSelectApp,
   savingApp,
   savedApp,
@@ -98,6 +106,10 @@ const makeReducer = (data) => {
       savedApp: null,
       isFetchingPending: false,
       pendingApps: [],
+      filteredApps: [],
+      categoryFilter: null,
+      platformName: null,
+      categoryName: null,
     };
 
     initialState = assignIn(data, emptyState);
@@ -105,11 +117,27 @@ const makeReducer = (data) => {
 
   const reducer = (state = initialState, action) => {
     switch (action.type) {
-      case constants.SET_PLATFORM:
+      case constants.SELECT_PLATFORM: {
+        const { platform } = action;
+        const filteredApps = state.apps.filter((app) => {
+          const tags = getTags(app);
+          if (platform === 'blockstack') {
+            return app.authentication === 'Blockstack' || app.storageNetwork === 'Gaia';
+          }
+          return !!tags.find((tag) => tag.toLowerCase() === platform);
+        });
+        const { authenticationEnums, storageEnums, blockchainEnums } = state.constants.appConstants;
+        const enums = Object.keys(authenticationEnums)
+          .concat(Object.keys(storageEnums))
+          .concat(Object.keys(blockchainEnums));
+        const platformName = enums.find((_platform) => _platform.toLowerCase() === platform) || capitalize(platform);
         return {
           ...state,
-          platformFilter: action.platform,
+          platformFilter: platform,
+          filteredApps,
+          platformName,
         };
+      }
       case constants.SELECT_APP: {
         const { id } = action;
         let selectedApp = null;
@@ -156,6 +184,17 @@ const makeReducer = (data) => {
         return {
           ...state,
           ...newState,
+        };
+      }
+      case constants.SELECT_CATEGORY: {
+        const { category } = action;
+        const filteredApps = state.apps.filter((app) => app.category && app.category.toLowerCase() === category);
+        const categoryName = Object.keys(state.constants.appConstants.categoryEnums).find((cat) => cat.toLowerCase() === category);
+        return {
+          ...state,
+          categoryFilter: category,
+          filteredApps,
+          categoryName,
         };
       }
       default:

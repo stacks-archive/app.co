@@ -7,9 +7,9 @@ import Link from 'next/link';
 import { StyledAppList } from '@components/app-list';
 import { Button } from '@components/button';
 import AppIcon from '@containers/app-icon';
-import { appRoute, truncate } from '@utils';
+import { appRoute, truncate, getTags } from '@utils';
 import AppStore from '@stores/apps';
-import { selectApps } from '@stores/apps/selectors';
+import { selectApps, selectPlatformFilter, selectFilteredApps, selectCategoryFilter } from '@stores/apps/selectors';
 
 const SORT_METHOD = {
   TWEETS: { value: 0, name: 'Tweets / Week', description: '' },
@@ -25,29 +25,12 @@ const getTwitterMentions = (app) => {
   return 0;
 };
 
-const getTags = (app) => {
-  const tags = [];
-
-  if (app.authentication) {
-    tags.push(app.authentication);
-  }
-
-  if (app.blockchain) {
-    tags.push(app.blockchain);
-  }
-
-  if (app.storageNetwork) {
-    tags.push(app.storageNetwork);
-  }
-
-  const tagSet = Array.from(new Set(tags));
-  return tagSet;
-};
-
 class AppList extends React.Component {
   constructor(props) {
     super(props);
-    const sortedApps = _.sortBy(props.apps, (app) => -getTwitterMentions(app));
+    const hasFilter = props.platformFilter || props.categoryFilter;
+    const apps = hasFilter ? props.filteredApps : props.apps;
+    const sortedApps = _.sortBy(apps, (app) => -getTwitterMentions(app));
     this.state = {
       showCount: props.show,
       showAll: false,
@@ -139,24 +122,6 @@ class AppList extends React.Component {
     if (sortedApps) {
       return (
         <StyledAppList>
-          {/* <StyledAppList.FilterSubtitle>Show Dapps by</StyledAppList.FilterSubtitle>
-          <StyledAppList.Filters>
-            <StyledAppList.ClearFilter
-              onClick={() => {
-                this.setState({ sortedApps: this.state.allApps, platform: null });
-              }}
-              selected={!this.state.platform}
-            >
-              All Platforms
-            </StyledAppList.ClearFilter>
-            {platformFilter('Blockstack', { image: 'blockstack/blockstack' })}
-            {platformFilter('Ethereum', { image: 'ethereum/ethereum-1' })}
-            {platformFilter('Steem', { image: 'steem/steem' })}
-            {platformFilter('EOS', { image: 'EOS/EOS' })}
-            {platformFilter('IPFS', { image: 'ipfs/IPFS' })}
-            {platformFilter('ZeroNet', { image: 'ZeroNet/ZeroNet' })}
-            {platformFilter('DAT', { image: 'dat/dat-hexagon' })}
-            </StyledAppList.Filters> */}
           <StyledAppList.Table>
             <StyledAppList.Header>
               <StyledAppList.HeaderRow>
@@ -186,12 +151,13 @@ class AppList extends React.Component {
             </tbody>
           </StyledAppList.Table>
           <StyledAppList.Footer>
-            <StyledAppList.ExpandButtonWrapper>
-              <Button onClick={() => this.showAll()} type="button/primary">
-                Next 100
-              </Button>
-            </StyledAppList.ExpandButtonWrapper>
-            {/* <LinkButton onClick={() => this.showAll()}>View All</LinkButton> */}
+            {sortedApps.length > showCount && (
+              <StyledAppList.ExpandButtonWrapper>
+                <Button onClick={() => this.showAll()} type="button/primary">
+                  Show All
+                </Button>
+              </StyledAppList.ExpandButtonWrapper>
+            )}
           </StyledAppList.Footer>
         </StyledAppList>
       );
@@ -202,6 +168,9 @@ class AppList extends React.Component {
 
 const mapStateToProps = (state) => ({
   apps: selectApps(state),
+  platformFilter: selectPlatformFilter(state),
+  filteredApps: selectFilteredApps(state),
+  categoryFilter: selectCategoryFilter(state),
 });
 
 function mapDispatchToProps(dispatch) {

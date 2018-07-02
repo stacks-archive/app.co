@@ -79,4 +79,40 @@ const appStatuses = [
 
 const appStatusFromValue = (value) => _.find(appStatuses, (status) => status.value === value);
 
-export { colorHexFromString, truncate, outboundLink, enumSelect, appStatuses, appStatusFromValue, appRoute };
+const capitalize = (lower) => lower.charAt(0).toUpperCase() + lower.substr(1);
+
+const getTags = (app) => {
+  const tags = [];
+
+  if (app.authentication) {
+    tags.push(app.authentication);
+  }
+
+  if (app.blockchain) {
+    tags.push(app.blockchain);
+  }
+
+  if (app.storageNetwork) {
+    tags.push(app.storageNetwork);
+  }
+
+  const tagSet = Array.from(new Set(tags));
+  return tagSet;
+};
+
+const properTagFromParam = (param, enums) => {
+  const name = enums.find((platform) => platform.toLowerCase() === param) || capitalize(param);
+  return name;
+};
+
+export {
+  colorHexFromString,
+  truncate,
+  outboundLink,
+  enumSelect,
+  appStatuses,
+  appStatusFromValue,
+  appRoute,
+  capitalize,
+  getTags,
+};
