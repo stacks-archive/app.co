@@ -11,3 +11,4 @@ export const selectAppBlockchainEnums = (state) => state.apps.constants.appConst
 export const selectCategoryFilter = (state) => state.apps.categoryFilter;
 export const selectPlatformName = (state) => state.apps.platformName;
 export const selectCategoryName = (state) => state.apps.categoryName;
+export const selectAppConstants = (state) => state.apps.constants.appConstants;

@@ -5,15 +5,18 @@ import _ from 'lodash';
 import Select from '@atlaskit/select';
 import { CheckboxStateless as Checkbox } from '@atlaskit/checkbox';
 import 'isomorphic-unfetch';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import { Page } from '@containers/page';
 import { Header } from '@containers/header';
 import { Hero } from '@containers/hero';
 import { Button } from '@components/button';
-
 import Form from '@components/form';
 
-export default class SubmitDapp extends React.Component {
+import { selectAppConstants, selectApiServer } from '@stores/apps/selectors';
+
+class SubmitDapp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,8 +54,7 @@ export default class SubmitDapp extends React.Component {
   }
 
   render() {
-    const { constants, apiServer } = this.props.data;
-    const { appConstants } = constants;
+    const { appConstants, apiServer } = this.props;
 
     const enumSelect = (enums, placeholder, props = {}) => {
       const options = _.map(_.keys(enums), (opt) => ({ label: opt, value: opt }));
@@ -151,3 +153,10 @@ export default class SubmitDapp extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  appConstants: selectAppConstants(state),
+  apiServer: selectApiServer(state),
+});
+
+export default connect(mapStateToProps)(SubmitDapp);
