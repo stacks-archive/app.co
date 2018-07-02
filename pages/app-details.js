@@ -146,6 +146,7 @@ class AppDetails extends React.Component {
       <>
         <Head>
           <title>{this.props.selectedApp.name} on App.co - The Universal Dapp Store</title>
+          <meta name="description" content={this.props.selectedApp.description}/>
         </Head>
         <Header />
         <Hero />
