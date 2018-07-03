@@ -43,17 +43,25 @@ export default class MyDocument extends Document {
           />
           <link rel="shortcut icon" href="/static/images/favicon/favicon-96x96.png" />
           <meta name="viewport" content="width=device-width,initial-scale=1" />
-          <meta property="og:image" content="https://app.co/static/images/open_graph/image.png" />
-          <meta name="twitter:image" content="https://app.co/static/images/open_graph/image.png" />
+          <meta property="og:image" content="https://app.co/static/images/open_graph/image.png" key="og_image" />
+          <meta name="twitter:image" content="https://app.co/static/images/open_graph/image.png" key="twitter_image" />
           <meta name="twitter:card" content="summary_large_image" />
           {/* <meta name="twitter:site" content="@blockstackorg" /> */}
-          <meta name="twitter:title" content="App.co" />
-          <meta name="twitter:description" content="Universal dapp store - discover decentralized apps." />
+          <meta name="twitter:title" content="App.co" key="twitter_title" />
+          <meta
+            name="twitter:description"
+            content="Universal dapp store - discover decentralized apps."
+            key="twitter_description"
+          />
 
-          <meta property="og:title" content="App.co" />
+          <meta property="og:title" content="App.co" key="og_title" />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://app.co" />
-          <meta property="og:description" content="Universal dapp store - discover decentralized apps." />
+          <meta
+            property="og:description"
+            content="Universal dapp store - discover decentralized apps."
+            key="og_description"
+          />
           {/* Global site tag (gtag.js) - Google Analytics */}
           <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119163063-1" />
           <script

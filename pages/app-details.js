@@ -142,11 +142,38 @@ class AppDetails extends React.Component {
   }
 
   render() {
+    const app = this.props.selectedApp;
     return (
       <>
         <Head>
           <title>{this.props.selectedApp.name} on App.co - The Universal Dapp Store</title>
-          <meta name="description" content={this.props.selectedApp.description}/>
+          <meta name="description" content={this.props.selectedApp.description} key="description"/>
+          {app.imageUrl && (
+            <>
+              <meta property="og:image" content={app.imageUrl} key="og_image" />
+              <meta name="twitter:image" content={app.imageUrl} key="twitter_image" />
+            </>
+          )}
+          <meta name="twitter:title" content={`${app.name} on App.co - Discover Decentralized Apps`} key="twitter_title" />
+          {app.description && (
+            <meta
+              name="twitter:description"
+              content={app.description}
+              key="twitter_description"
+            />
+          )}
+          {app.description && (
+            <meta
+              property="og:description"
+              content={app.description}
+              key="og_description"
+            />
+          )}
+
+          <meta property="og:title" content={`${app.name} on App.co - Discover Decentralized Apps`} key="og_title" />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content={`https://app.co/app/${app.Slugs[0].value}`} />
+          
         </Head>
         <Header />
         <Hero />
