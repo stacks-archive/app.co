@@ -98,9 +98,7 @@ class AppList extends React.Component {
             <StyledAppList.Rank>{index + 1}</StyledAppList.Rank>
             <StyledAppList.Icon>{<AppIcon app={app} />}</StyledAppList.Icon>
             <StyledAppList.Name>
-              <StyledAppList.NameLink href={app.website} target="_blank">
-                {app.name}
-              </StyledAppList.NameLink>
+              <StyledAppList.NameLink href={appRoute(app)}>{app.name}</StyledAppList.NameLink>
             </StyledAppList.Name>
             <StyledAppList.Column smHide title={app.description}>
               {truncate(app.description, { length: 60 })}

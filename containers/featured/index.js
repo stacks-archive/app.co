@@ -48,7 +48,7 @@ class FeaturedContainer extends React.Component {
                   <StyledFeatured.Icon>{appImage(app)}</StyledFeatured.Icon>
                   <div>
                     <StyledFeatured.Name>
-                      <StyledFeatured.NameLink href={app.website} target="_blank">
+                      <StyledFeatured.NameLink href={appRoute(app)}>
                         {app.name}
                       </StyledFeatured.NameLink>
                     </StyledFeatured.Name>
