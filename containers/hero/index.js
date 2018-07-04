@@ -14,7 +14,9 @@ const HeroContainer = ({ platformName, categoryName }) => (
   <StyledHero>
     <StyledHero.Inner>
       <StyledHero.Content>
-        <StyledHeader.Logo smShow>App.co</StyledHeader.Logo>
+        <StyledHeader.Logo smShow>
+          <StyledHeader.LogoLink href="/">App.co</StyledHeader.LogoLink>
+        </StyledHeader.Logo>
 				{(platformName || categoryName) ? (
 					<h1>{platformName || categoryName} Apps</h1>
 				) : (
