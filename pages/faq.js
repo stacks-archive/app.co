@@ -2,9 +2,11 @@ import React from 'react';
 import { Page } from '@containers/page';
 import { Header } from '@containers/header';
 import { Hero } from '@containers/hero';
+import Head from '@containers/head';
 
 export default ({ data }) => (
   <div>
+    <Head />
     <Header data={data} />
     <Hero />
 

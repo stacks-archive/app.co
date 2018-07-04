@@ -5,12 +5,11 @@ import Page, { Grid, GridColumn } from '@atlaskit/page';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Head from 'next/head';
-
 import { Page as Container } from '@containers/page';
 import { Header } from '@containers/header';
 import { Hero } from '@containers/hero';
 import AppList from '@containers/app-list';
+import Head from '@containers/head';
 
 import AppStore from '@stores/apps';
 import { doSelectPlatformFilter } from '@stores/apps';
@@ -34,9 +33,7 @@ class Platform extends React.Component {
   render() {
     return (
       <>
-        <Head>
-          <title>{this.props.platformName} Apps on App.co - The Universal Dapp Store</title>
-        </Head>
+        <Head title={`${this.props.platformName} Apps on App.co - The Universal Dapp Store`} />
         <Header />
         <Hero />
         <Container.Section wrap={1}>

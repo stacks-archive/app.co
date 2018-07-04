@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { selectCurrentApp } from '@stores/apps/selectors';
 import Page, { Grid, GridColumn } from '@atlaskit/page';
-import Head from 'next/head';
+// import Head from 'next/head';
 import { GithubCircleIcon, TwitterCircleIcon } from 'mdi-react';
 import { Page as Container } from '@containers/page';
 import { Header } from '@containers/header';
@@ -13,6 +13,7 @@ import { doSelectApp } from '@stores/apps';
 import StyledApp from '@components/app-details';
 import { StyledAppList } from '@components/app-list';
 import { Button } from '@components/button';
+import Head from '@containers/head';
 
 import AppStore from '@stores/apps';
 import UserStore from '@stores/user';
@@ -145,36 +146,11 @@ class AppDetails extends React.Component {
     const app = this.props.selectedApp;
     return (
       <>
-        <Head>
-          <title>{this.props.selectedApp.name} on App.co - The Universal Dapp Store</title>
-          <meta name="description" content={this.props.selectedApp.description} key="description"/>
-          {app.imageUrl && (
-            <>
-              <meta property="og:image" content={app.imageUrl} key="og_image" />
-              <meta name="twitter:image" content={app.imageUrl} key="twitter_image" />
-            </>
-          )}
-          <meta name="twitter:title" content={`${app.name} on App.co - Discover Decentralized Apps`} key="twitter_title" />
-          {app.description && (
-            <meta
-              name="twitter:description"
-              content={app.description}
-              key="twitter_description"
-            />
-          )}
-          {app.description && (
-            <meta
-              property="og:description"
-              content={app.description}
-              key="og_description"
-            />
-          )}
-
-          <meta property="og:title" content={`${app.name} on App.co - Discover Decentralized Apps`} key="og_title" />
-          <meta property="og:type" content="website" />
-          <meta property="og:url" content={`https://app.co/app/${app.Slugs[0].value}`} />
-          
-        </Head>
+        <Head
+          title={`${app.name} on App.co - The Universal Dapp Store`}
+          description={app.description}
+          ogImage={app.imageUrl}
+        />
         <Header />
         <Hero />
         <Container.Section wrap={1}>

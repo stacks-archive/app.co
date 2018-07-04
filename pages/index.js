@@ -7,6 +7,7 @@ import { Featured } from '@containers/featured';
 import AppList from '@containers/app-list';
 import PlatformFilters from '@containers/platform-filters';
 import CategoryFilters from '@containers/category-filters';
+import Head from '@containers/head';
 // import SubmitDappCard from '@containers/cards/submit-dapp-card';
 import NewsletterCTA from '@containers/newsletter-cta';
 
@@ -15,6 +16,7 @@ const bizApps = ['Graphite', 'Aragon', 'Gitcoin', 'Bounty0x', 'adChain Registry'
 
 export default () => (
   <Page>
+    <Head />
     <Header />
     <Hero />
     <Page.Section wrap={1}>
