@@ -44,7 +44,7 @@ class App extends React.Component {
     AdminLayout = require('../../containers/admin/layout').default;
     if (this.props.apps) {
       const parsed = queryString.parse(document.location.search);
-      this.props.selectApp(parseInt(parsed.id, 10));
+      this.props.doSelectApp(parseInt(parsed.id, 10));
     }
   }
 
