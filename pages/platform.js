@@ -33,7 +33,7 @@ class Platform extends React.Component {
   render() {
     return (
       <>
-        <Head title={`${this.props.platformName} Apps on App.co - The Universal Dapp Store`} />
+        <Head title={`${this.props.platformName} Apps`} />
         <Header />
         <Hero />
         <Container.Section wrap={1}>

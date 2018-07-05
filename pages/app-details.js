@@ -147,7 +147,7 @@ class AppDetails extends React.Component {
     return (
       <>
         <Head
-          title={`${app.name} on App.co - The Universal Dapp Store`}
+          title={app.name}
           description={app.description}
           ogImage={app.imageUrl}
         />

@@ -33,7 +33,7 @@ class Category extends React.Component {
   render() {
     return (
       <>
-        <Head title={`${this.props.categoryName} Apps on App.co - The Universal Dapp Store`} />
+        <Head title={`${this.props.categoryName} Apps`} />
         <Header />
         <Hero />
         <Container.Section wrap={1}>

@@ -2,10 +2,12 @@ import React from 'react';
 import NextHead from 'next/head';
 import { string } from 'prop-types';
 
+const defaultTitle = 'App.co, The Universal Dapp Store';
+
 const Head = (props) => (
   <NextHead>
     <meta charSet="UTF-8" />
-    <title>{props.title ? `${props.title} - ` : ''}App.co, the Universal Dapp Store</title>
+    <title>{props.title === defaultTitle ? props.title : `${props.title} - ${defaultTitle}`}</title>
     <meta name="description" content={props.description} />
     {/* <meta property="og:url" content={props.url} /> */}
     {/* <meta name="twitter:site" content={props.url} /> */}
@@ -30,7 +32,7 @@ Head.propTypes = {
 };
 
 Head.defaultProps = {
-  title: 'App.co - The Universal Dapp Store',
+  title: defaultTitle,
   description: 'Universal dapp store - discover decentralized apps.',
   ogImage: 'https://app.co/static/images/open_graph/image.png',
   // url: 'https://app.co',
