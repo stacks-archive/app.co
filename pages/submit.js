@@ -39,7 +39,7 @@ class SubmitDapp extends React.Component {
   }
 
   async submit() {
-    const { apiServer } = this.props.data;
+    const { apiServer } = this.props;
     const url = `${apiServer}/api/submit`;
     this.setState({ submitting: true });
     await fetch(url, {
