@@ -5,7 +5,7 @@ import { string } from 'prop-types';
 const Head = (props) => (
   <NextHead>
     <meta charSet="UTF-8" />
-    <title>{props.title ? `${props.title} - ` : ''} Stacks Explorer</title>
+    <title>{props.title ? `${props.title} - ` : ''}App.co, the Universal Dapp Store</title>
     <meta name="description" content={props.description} />
     {/* <meta property="og:url" content={props.url} /> */}
     {/* <meta name="twitter:site" content={props.url} /> */}
