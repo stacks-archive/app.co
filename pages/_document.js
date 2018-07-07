@@ -55,6 +55,14 @@ export default class MyDocument extends Document {
             }}
           />
 
+          <script
+            type="text/javascript"
+            src="https://a.optmstr.com/app/js/api.min.js"
+            data-account="54556"
+            data-user="48381"
+            async
+          />
+
           {this.props.styleTags}
         </Head>
         <body>
