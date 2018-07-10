@@ -1,6 +1,6 @@
 import assignIn from 'lodash/assignIn';
 
-import { getTags, capitalize } from '@utils';
+import { getTags, capitalize, slugifyCategory } from '@utils';
 
 const constants = {
   SELECT_PLATFORM: 'SELECT_PLATFORM',
@@ -187,9 +187,11 @@ const makeReducer = (data) => {
         };
       }
       case constants.SELECT_CATEGORY: {
-        const { category } = action;
-        const filteredApps = state.apps.filter((app) => app.category && app.category.toLowerCase() === category);
-        const categoryName = Object.keys(state.constants.appConstants.categoryEnums).find((cat) => cat.toLowerCase() === category);
+        const category = slugifyCategory(action.category);
+        const filteredApps = state.apps.filter((app) => app.category && slugifyCategory(app.category) === category);
+        const categoryName = Object.keys(state.constants.appConstants.categoryEnums).find(
+          (cat) => slugifyCategory(cat) === category,
+        );
         return {
           ...state,
           categoryFilter: category,

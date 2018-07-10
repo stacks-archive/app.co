@@ -12,8 +12,10 @@ import UserStore from '@stores/user';
 
 import * as StyledPlatformFilters from '@components/platform-filters';
 
+import { slugifyCategory } from '@utils';
+
 const CategoryFilters = ({ categories }) => {
-  const categoryURL = (category) => `/category/${encodeURIComponent(category.toLowerCase())}`
+  const categoryURL = (category) => `/category/${slugifyCategory(category)}`
   const categoryEl = (category, opts) => (
     <Link href={categoryURL(category)} key={category}>
       <StyledPlatformFilters.Filter

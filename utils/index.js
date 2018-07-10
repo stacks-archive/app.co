@@ -105,6 +105,8 @@ const properTagFromParam = (param, enums) => {
   return name;
 };
 
+const slugifyCategory = (category) => category.toLowerCase().replace(' ', '-');
+
 export {
   colorHexFromString,
   truncate,
@@ -115,4 +117,6 @@ export {
   appRoute,
   capitalize,
   getTags,
+  slugifyCategory,
+  properTagFromParam,
 };
