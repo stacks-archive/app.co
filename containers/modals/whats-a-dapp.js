@@ -1,13 +1,13 @@
-import React from 'react';
-import Modal from '@atlaskit/modal-dialog';
-import Lorem from 'react-lorem-component';
-import PropTypes from 'prop-types';
+import React from 'react'
+import Modal from '@atlaskit/modal-dialog'
+import Lorem from 'react-lorem-component'
+import PropTypes from 'prop-types'
 
 const WhatsADapp = (props) => {
   if (!props.open) {
-    return '';
+    return ''
   }
-  const actions = [{ text: 'Close', onClick: () => props.close() }];
+  const actions = [{ text: 'Close', onClick: () => props.close() }]
   return (
     <Modal heading="What is a Dapp?" actions={actions} onClose={props.close}>
       <p>
@@ -43,12 +43,12 @@ const WhatsADapp = (props) => {
         <li>Does the app limit or clearly communicate the scope of data logging?</li>
       </ul>
     </Modal>
-  );
-};
+  )
+}
 
 WhatsADapp.propTypes = {
   open: PropTypes.bool.isRequired,
-  close: PropTypes.func.isRequired,
-};
+  close: PropTypes.func.isRequired
+}
 
-export default WhatsADapp;
+export default WhatsADapp

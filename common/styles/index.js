@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css } from 'styled-components'
 
 const wrapperStyles = () => css`
   width: 100%;
@@ -9,6 +9,6 @@ const wrapperStyles = () => css`
   position: relative;
   padding-left: 40px;
   padding-right: 40px;
-`;
+`
 
-export { wrapperStyles };
+export { wrapperStyles }

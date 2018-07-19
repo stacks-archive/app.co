@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const LinkButton = styled.span`
   color: #828282;
@@ -10,6 +10,6 @@ const LinkButton = styled.span`
   &:hover {
     cursor: pointer;
   }
-`;
+`
 
-export { LinkButton };
+export { LinkButton }

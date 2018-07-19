@@ -1,8 +1,8 @@
-import React from 'react';
-import { Page } from '@containers/page';
-import { Header } from '@containers/header';
-import { Hero } from '@containers/hero';
-import Head from '@containers/head';
+import React from 'react'
+import { Page } from '@containers/page'
+import { Header } from '@containers/header'
+import { Hero } from '@containers/hero'
+import Head from '@containers/head'
 
 export default ({ data }) => (
   <div>
@@ -131,4 +131,4 @@ export default ({ data }) => (
       </Page.Section.Content>
     </Page.Section>
   </div>
-);
+)

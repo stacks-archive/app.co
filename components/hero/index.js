@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import { wrapperStyles } from '@common/styles';
-import { headerHeight } from '@common/constants';
+import React from 'react'
+import styled from 'styled-components'
+import { wrapperStyles } from '@common/styles'
+import { headerHeight } from '@common/constants'
 
 const StyledHero = styled.div`
   height: 40vh;
@@ -26,7 +26,7 @@ const StyledHero = styled.div`
     height: 45vh;
   }
 
-`;
+`
 
 const Content = styled.div`
   position: relative;
@@ -36,7 +36,7 @@ const Content = styled.div`
   @media (max-width: 768px) {
     text-align: center;
   }
-`;
+`
 
 const Inner = styled.div`
   display: flex;
@@ -92,6 +92,6 @@ const Inner = styled.div`
   }
 `
 
-StyledHero.Content = Content;
-StyledHero.Inner = Inner;
-export { StyledHero };
+StyledHero.Content = Content
+StyledHero.Inner = Inner
+export { StyledHero }

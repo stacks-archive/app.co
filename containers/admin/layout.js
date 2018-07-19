@@ -1,36 +1,36 @@
-import React, { Component } from 'react';
-import AddIcon from '@atlaskit/icon/glyph/add';
-import AddonIcon from '@atlaskit/icon/glyph/addon';
-import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left';
-import Button from '@atlaskit/button';
-import ChevronRightIcon from '@atlaskit/icon/glyph/chevron-right';
-import CalendarIcon from '@atlaskit/icon/glyph/calendar';
-import ConfluenceIcon from '@atlaskit/icon/glyph/confluence';
-import { ConfluenceWordmark } from '@atlaskit/logo';
-import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
-import DiscoverIcon from '@atlaskit/icon/glyph/discover';
-import EditorAlignLeftIcon from '@atlaskit/icon/glyph/editor/align-left';
-import EditorFeedbackIcon from '@atlaskit/icon/glyph/editor/feedback';
-import FolderIcon from '@atlaskit/icon/glyph/folder';
-import JiraIcon from '@atlaskit/icon/glyph/jira';
-import Lorem from 'react-lorem-component';
-import Page, { Grid, GridColumn } from '@atlaskit/page';
-import PeopleIcon from '@atlaskit/icon/glyph/people';
-import SearchIcon from '@atlaskit/icon/glyph/search';
-import SettingsIcon from '@atlaskit/icon/glyph/settings';
-import Tooltip from '@atlaskit/tooltip';
-import TrayIcon from '@atlaskit/icon/glyph/tray';
-import WorldIcon from '@atlaskit/icon/glyph/world';
-import WarningIcon from '@atlaskit/icon/glyph/warning';
-import { AkSearch } from '@atlaskit/quick-search';
-import Link from 'next/link';
-import { withRouter } from 'next/router';
+import React, { Component } from 'react'
+import AddIcon from '@atlaskit/icon/glyph/add'
+import AddonIcon from '@atlaskit/icon/glyph/addon'
+import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left'
+import Button from '@atlaskit/button'
+import ChevronRightIcon from '@atlaskit/icon/glyph/chevron-right'
+import CalendarIcon from '@atlaskit/icon/glyph/calendar'
+import ConfluenceIcon from '@atlaskit/icon/glyph/confluence'
+import { ConfluenceWordmark } from '@atlaskit/logo'
+import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle'
+import DiscoverIcon from '@atlaskit/icon/glyph/discover'
+import EditorAlignLeftIcon from '@atlaskit/icon/glyph/editor/align-left'
+import EditorFeedbackIcon from '@atlaskit/icon/glyph/editor/feedback'
+import FolderIcon from '@atlaskit/icon/glyph/folder'
+import JiraIcon from '@atlaskit/icon/glyph/jira'
+import Lorem from 'react-lorem-component'
+import Page, { Grid, GridColumn } from '@atlaskit/page'
+import PeopleIcon from '@atlaskit/icon/glyph/people'
+import SearchIcon from '@atlaskit/icon/glyph/search'
+import SettingsIcon from '@atlaskit/icon/glyph/settings'
+import Tooltip from '@atlaskit/tooltip'
+import TrayIcon from '@atlaskit/icon/glyph/tray'
+import WorldIcon from '@atlaskit/icon/glyph/world'
+import WarningIcon from '@atlaskit/icon/glyph/warning'
+import { AkSearch } from '@atlaskit/quick-search'
+import Link from 'next/link'
+import { withRouter } from 'next/router'
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-import AppStore from '@stores/apps';
-import UserStore from '@stores/user';
+import AppStore from '@stores/apps'
+import UserStore from '@stores/user'
 
 import Navigation, {
   AkContainerLogo,
@@ -39,50 +39,50 @@ import Navigation, {
   AkNavigationItemGroup,
   AkNavigationItem,
   AkSearchDrawer,
-  presetThemes,
-} from '@atlaskit/navigation';
+  presetThemes
+} from '@atlaskit/navigation'
 
 const BackIcon = (
   <Tooltip position="right" content="Back">
     <ArrowLeftIcon label="Back icon" size="medium" />
   </Tooltip>
-);
+)
 
 const ContainerHeaderComponent = () => (
   <div>
     <AkContainerLogo>App.co</AkContainerLogo>
   </div>
-);
+)
 
 const GlobalCreateIcon = ({ openDrawer }) => (
   <Tooltip position="right" content="Create">
     <AddIcon label="Create icon" secondaryColor="inherit" size="medium" onClick={() => openDrawer('create')} />
   </Tooltip>
-);
+)
 
 const GlobalSearchIcon = ({ openDrawer }) => (
   <Tooltip position="right" content="Search">
     <SearchIcon label="Search icon" secondaryColor="inherit" size="medium" onClick={() => openDrawer('search')} />
   </Tooltip>
-);
+)
 
 class AdminHome extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       isOpen: true,
       menuLoading: true,
       openDrawer: null,
       stack: [],
-      width: this.props.width,
-    };
-    this.openDrawer = this.openDrawer.bind(this);
-    this.closeDrawer = this.closeDrawer.bind(this);
+      width: this.props.width
+    }
+    this.openDrawer = this.openDrawer.bind(this)
+    this.closeDrawer = this.closeDrawer.bind(this)
   }
 
   componentDidMount() {
     if (this.props.jwt) {
-      this.props.fetchAdminApps(this.props.apiServer, this.props.jwt);
+      this.props.fetchAdminApps(this.props.apiServer, this.props.jwt)
     }
   }
 
@@ -96,15 +96,15 @@ class AdminHome extends React.Component {
         // primaryIcon={<ConfluenceIcon label="Confluence icon" size="large" />}
       >
         <AkNavigationItem text="Item outside a group" />
-        <AkNavigationItemGroup title="Create item group">
-          <AkNavigationItem icon={<ConfluenceIcon label="Confluence icon" />} text="Item with an icon" />
-          <AkNavigationItem
-            icon={<JiraIcon label="Jira icon" />}
-            text="A really, really, quite long, actually super long container name"
-          />
-        </AkNavigationItemGroup>
+          <AkNavigationItemGroup title="Create item group">
+            <AkNavigationItem icon={<ConfluenceIcon label="Confluence icon" />} text="Item with an icon" />
+              <AkNavigationItem
+                icon={<JiraIcon label="Jira icon" />}
+                text="A really, really, quite long, actually super long container name"
+              />
+          </AkNavigationItemGroup>
       </AkCreateDrawer>
-    );
+    )
   }
 
   getSearchDrawer() {
@@ -118,49 +118,49 @@ class AdminHome extends React.Component {
       >
         <AkSearch placeholder="Search..." onKeyDown={() => {}} />
       </AkSearchDrawer>
-    );
+    )
   }
 
   openDrawer(name) {
-    console.log(`on ${name} drawer open called`);
+    console.log(`on ${name} drawer open called`)
 
     this.setState({
-      openDrawer: name,
-    });
+      openDrawer: name
+    })
   }
 
   closeDrawer() {
     this.setState({
-      openDrawer: null,
-    });
+      openDrawer: null
+    })
   }
 
   resize(resizeState) {
-    console.log('onResize called');
+    console.log('onResize called')
     this.setState({
       isOpen: resizeState.isOpen,
-      width: resizeState.width,
-    });
+      width: resizeState.width
+    })
   }
 
   goBackHome() {
     if (this.state.stack.length <= 1) {
-      return false;
+      return false
     }
 
-    const stack = this.state.stack.slice(0, this.state.stack.length - 1);
-    return this.setState({ stack });
+    const stack = this.state.stack.slice(0, this.state.stack.length - 1)
+    return this.setState({ stack })
   }
 
   timerMenu() {
-    setTimeout(() => this.setState({ menuLoading: false }), 2000);
+    setTimeout(() => this.setState({ menuLoading: false }), 2000)
   }
 
   render() {
-    const stack = [[]];
-    let item = null;
+    const stack = [[]]
+    let item = null
     if (this.props.user.user) {
-      const isPending = this.props.router.route === '/admin/pending';
+      const isPending = this.props.router.route === '/admin/pending'
       stack[0] = [
         <Link href="/admin" key="apps">
           <AkNavigationItem
@@ -178,8 +178,8 @@ class AdminHome extends React.Component {
         </Link>,
         <AkNavigationItemGroup title="Authentication" key="authentication">
           <AkNavigationItem text="Log Out" onClick={() => this.props.signOut()} />
-        </AkNavigationItemGroup>,
-      ];
+        </AkNavigationItemGroup>
+      ]
     } else {
       item = (
         <AkNavigationItem
@@ -188,9 +188,9 @@ class AdminHome extends React.Component {
           isSelected
           key="sign-in"
         />
-      );
+      )
     }
-    stack[0].push(item);
+    stack[0].push(item)
     return (
       <Page
         navigation={
@@ -215,12 +215,12 @@ class AdminHome extends React.Component {
         <Grid layout="fixed">
           <GridColumn medium={12}>
             <br />
-            <br />
+              <br />
             {this.props.children}
           </GridColumn>
         </Grid>
       </Page>
-    );
+    )
   }
 }
 
@@ -228,11 +228,11 @@ const mapStateToProps = (state) => ({
   apps: state.apps.apps,
   apiServer: state.apps.apiServer,
   jwt: state.user.jwt,
-  user: state.user,
-});
+  user: state.user
+})
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Object.assign({}, AppStore.actions, UserStore.actions), dispatch);
+  return bindActionCreators(Object.assign({}, AppStore.actions, UserStore.actions), dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AdminHome));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AdminHome))

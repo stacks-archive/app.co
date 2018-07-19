@@ -1,46 +1,44 @@
-import React from 'react';
+import React from 'react'
 
-import Page, { Grid, GridColumn } from '@atlaskit/page';
+import Page, { Grid, GridColumn } from '@atlaskit/page'
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-import { Page as Container } from '@containers/page';
-import { Header } from '@containers/header';
-import { Hero } from '@containers/hero';
-import AppList from '@containers/app-list';
-import Head from '@containers/head';
+import { Page as Container } from '@containers/page'
+import { Header } from '@containers/header'
+import { Hero } from '@containers/hero'
+import AppList from '@containers/app-list'
+import Head from '@containers/head'
 
-import AppStore from '@stores/apps';
-import { doSelectCategoryFilter } from '@stores/apps';
-import { selectCategoryFilter, selectCategoryName } from '@stores/apps/selectors';
-import UserStore from '@stores/user';
-
-import { capitalize } from '@utils';
+import AppStore from '@stores/apps'
+import { doSelectCategoryFilter } from '@stores/apps'
+import { selectCategoryFilter, selectCategoryName } from '@stores/apps/selectors'
+import UserStore from '@stores/user'
 
 class Category extends React.Component {
   static getInitialProps({ req, reduxStore }) {
 
     const {
-      params: { category },
-    } = req;
+      params: { category }
+    } = req
 
-    reduxStore.dispatch(doSelectCategoryFilter(category));
+    reduxStore.dispatch(doSelectCategoryFilter(category))
 
-    return { category };
+    return { category }
   }
 
   render() {
     return (
       <>
         <Head title={`${this.props.categoryName} Apps`} />
-        <Header />
-        <Hero />
-        <Container.Section wrap={1}>
-          <Container.Section.Content>
-            <AppList show={25} />
-          </Container.Section.Content>
-        </Container.Section>
+          <Header />
+            <Hero />
+              <Container.Section wrap={1}>
+                <Container.Section.Content>
+                  <AppList show={25} />
+                </Container.Section.Content>
+              </Container.Section>
       </>
     )
   }
@@ -48,11 +46,11 @@ class Category extends React.Component {
 
 const mapStateToProps = (state) => ({
   categoryFilter: selectCategoryFilter(state),
-  categoryName: selectCategoryName(state),
-});
+  categoryName: selectCategoryName(state)
+})
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Object.assign({}, AppStore.actions, UserStore.actions), dispatch);
+  return bindActionCreators(Object.assign({}, AppStore.actions, UserStore.actions), dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Category);
+export default connect(mapStateToProps, mapDispatchToProps)(Category)

@@ -1,12 +1,12 @@
-import React from 'react';
-import Modal from '@atlaskit/modal-dialog';
-import PropTypes from 'prop-types';
+import React from 'react'
+import Modal from '@atlaskit/modal-dialog'
+import PropTypes from 'prop-types'
 
 const WhoWeAre = (props) => {
   if (!props.open) {
-    return '';
+    return ''
   }
-  const actions = [{ text: 'Close', onClick: () => props.close() }];
+  const actions = [{ text: 'Close', onClick: () => props.close() }]
   return (
     <Modal heading="About App.co" actions={actions} onClose={props.close}>
       <p>
@@ -28,12 +28,12 @@ const WhoWeAre = (props) => {
         decouple the personal data you create, from the dapps you use, which makes you the sole owner of that data.
       </p>
     </Modal>
-  );
-};
+  )
+}
 
 WhoWeAre.propTypes = {
   open: PropTypes.bool.isRequired,
-  close: PropTypes.func.isRequired,
-};
+  close: PropTypes.func.isRequired
+}
 
-export default WhoWeAre;
+export default WhoWeAre

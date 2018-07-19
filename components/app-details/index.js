@@ -1,5 +1,5 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React from 'react'
+import styled, { css } from 'styled-components'
 
 const App = {
   MainSection: styled.div`
@@ -62,7 +62,7 @@ const App = {
     &:hover {
       text-decoration: underline;
     }
-  `,
-};
+  `
+}
 
-export default App;
+export default App

@@ -96,9 +96,7 @@
     "sepia": "^2.0.2"
   },
   "homepage": "https://github.com/blockstackpbc/app.co#readme",
-  "keywords": [
-    "dapps"
-  ],
+  "keywords": ["dapps"],
   "license": "ISC",
   "main": "index.js",
   "repository": {
@@ -112,6 +110,7 @@
     "dev": "node server.js",
     "lint": "eslint \"./**/*.js\"",
     "lint:fix": "eslint \"./**/*.js\" --fix",
+    "format": "prettier --write ./**/**/*.{js,md} && echo -e '\\033[0;32m'💅 Just use prettier'\\033[0m'",
     "start": "NODE_ENV=production node server.js",
     "test": "VCR_MODE=cache NODE_ENV=test jest",
     "test-watch": "VCR_MODE=cache NODE_ENV=test jest --watch",
@@ -127,10 +126,6 @@
   },
   "nodemonConfig": {
     "verbose": true,
-    "ignore": [
-      ".next/*",
-      ".next",
-      "pages/*"
-    ]
+    "ignore": [".next/*", ".next", "pages/*"]
   }
 }

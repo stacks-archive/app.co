@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const StyledDropdownButton = styled.span`
   text-decoration:none;
@@ -8,6 +8,6 @@ const StyledDropdownButton = styled.span`
   &:hover {
     cursor: pointer;
   }
-`;
+`
 
-export { StyledDropdownButton };
+export { StyledDropdownButton }

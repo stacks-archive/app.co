@@ -1,33 +1,33 @@
-import _ from 'lodash';
-import React from 'react';
-import Select from '@atlaskit/select';
+import _ from 'lodash'
+import React from 'react'
+import Select from '@atlaskit/select'
 
 const colorHexFromString = (str) => {
-  let hash = 0;
+  let hash = 0
   for (let i = 0; i < str.length; i++) {
-    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    hash = str.charCodeAt(i) + ((hash << 5) - hash)
   }
-  let colour = '#';
+  let colour = '#'
   for (let i = 0; i < 3; i++) {
-    const value = (hash >> (i * 8)) & 0xff;
-    colour += `00${value.toString(16)}`.substr(-2);
+    const value = (hash >> (i * 8)) & 0xff
+    colour += `00${value.toString(16)}`.substr(-2)
   }
-  return colour;
-};
+  return colour
+}
 
 const truncate = (str, options) => {
   const defaults = {
     after: '...',
-    length: 50,
-  };
+    length: 50
+  }
 
-  const opts = _.defaults(options, defaults);
+  const opts = _.defaults(options, defaults)
 
   if (str.length > opts.length) {
-    return str.slice(0, opts.length - opts.after.length) + opts.after;
+    return str.slice(0, opts.length - opts.after.length) + opts.after
   }
-  return str;
-};
+  return str
+}
 
 const outboundLink = (app) => {
   if (typeof gtag !== 'undefined') {
@@ -36,18 +36,18 @@ const outboundLink = (app) => {
       event_category: 'Apps',
       app_name: app.name,
       app_id: app.id,
-      url: app.website,
-    });
+      url: app.website
+    })
   }
-  window.open(app.website, '_blank');
-};
+  window.open(app.website, '_blank')
+}
 
 const enumSelect = (enums, placeholder, props = {}) => {
-  const options = _.map(_.keys(enums), (opt) => ({ label: opt, value: opt }));
+  const options = _.map(_.keys(enums), (opt) => ({ label: opt, value: opt }))
   const onChange = (option) => {
-    props.onChange({ [props.apiAttr || placeholder.toLowerCase()]: option.value });
-  };
-  const value = props.value ? { label: props.value, value: props.value } : null;
+    props.onChange({ [props.apiAttr || placeholder.toLowerCase()]: option.value })
+  }
+  const value = props.value ? { label: props.value, value: props.value } : null
   return (
     <div>
       <h3>{placeholder}</h3>
@@ -63,49 +63,49 @@ const enumSelect = (enums, placeholder, props = {}) => {
       />
       <br />
     </div>
-  );
-};
+  )
+}
 
 const appRoute = (app) => {
-  const slug = app.Slugs[0];
-  return `/app/${slug ? slug.value : app.id}`;
-};
+  const slug = app.Slugs[0]
+  return `/app/${slug ? slug.value : app.id}`
+}
 
 const appStatuses = [
   { label: 'Pending Audit', value: 'pending_audit' },
   { label: 'Rejected', value: 'rejected' },
-  { label: 'Accepted', value: 'accepted' },
-];
+  { label: 'Accepted', value: 'accepted' }
+]
 
-const appStatusFromValue = (value) => _.find(appStatuses, (status) => status.value === value);
+const appStatusFromValue = (value) => _.find(appStatuses, (status) => status.value === value)
 
-const capitalize = (lower) => lower.charAt(0).toUpperCase() + lower.substr(1);
+const capitalize = (lower) => lower.charAt(0).toUpperCase() + lower.substr(1)
 
 const getTags = (app) => {
-  const tags = [];
+  const tags = []
 
   if (app.authentication) {
-    tags.push(app.authentication);
+    tags.push(app.authentication)
   }
 
   if (app.blockchain) {
-    tags.push(app.blockchain);
+    tags.push(app.blockchain)
   }
 
   if (app.storageNetwork) {
-    tags.push(app.storageNetwork);
+    tags.push(app.storageNetwork)
   }
 
-  const tagSet = Array.from(new Set(tags));
-  return tagSet;
-};
+  const tagSet = Array.from(new Set(tags))
+  return tagSet
+}
 
 const properTagFromParam = (param, enums) => {
-  const name = enums.find((platform) => platform.toLowerCase() === param) || capitalize(param);
-  return name;
-};
+  const name = enums.find((platform) => platform.toLowerCase() === param) || capitalize(param)
+  return name
+}
 
-const slugifyCategory = (category) => category.toLowerCase().replace(' ', '-');
+const slugifyCategory = (category) => category.toLowerCase().replace(' ', '-')
 
 export {
   colorHexFromString,
@@ -118,5 +118,5 @@ export {
   capitalize,
   getTags,
   slugifyCategory,
-  properTagFromParam,
-};
+  properTagFromParam
+}

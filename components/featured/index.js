@@ -1,5 +1,5 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React from 'react'
+import styled, { css } from 'styled-components'
 
 const StyledFeatured = styled.div`
   position: relative;
@@ -9,7 +9,7 @@ const StyledFeatured = styled.div`
     css`
       padding: ${padding};
     `};
-`;
+`
 
 const Wrapper = styled.div`
   padding: 0;
@@ -21,7 +21,7 @@ const Wrapper = styled.div`
     padding: 10px 5px;
     flex-direction: column;
   }
-`;
+`
 
 const TitleSection = styled.div`
   width: 100px;
@@ -47,7 +47,7 @@ const TitleSection = styled.div`
     min-height: 80px;
     height: auto;
   }
-`;
+`
 
 const Section = styled.div`
   width: 100%;
@@ -62,7 +62,7 @@ const Section = styled.div`
       padding-left: 15px;
     }
   }
-`;
+`
 
 const Item = styled.div`
   display: flex;
@@ -86,18 +86,18 @@ const Item = styled.div`
     margin: 10px 1% 0 1%;
     min-height: 85px;
   }
-`;
+`
 
 const Icon = styled.div`
   width: 45px;
   height: 45px;
-`;
+`
 
 const IconImage = styled.img`
   width: 55px;
   height: 55px;
   border-radius: 9px;
-`;
+`
 
 const DefaultIcon = styled.div`
   width: 55px;
@@ -108,12 +108,12 @@ const DefaultIcon = styled.div`
   font-size: 20px;
   background-color: ${(props) => props.bgColor};
   border-radius: 3px;
-`;
+`
 
 const Name = styled.span`
   font-weight: bold;
   font-size: 18px;
-`;
+`
 
 const NameLink = styled.a`
   color: #282f36;
@@ -123,24 +123,24 @@ const NameLink = styled.a`
   &:hover {
     text-decoration: none;
   }
-`;
+`
 
 const Description = styled.p`
   padding: 5px 20px 5px 20px;
   margin: 0;
   font-size: 14px;
   color: #6c737a;
-`;
+`
 
-StyledFeatured.Wrapper = Wrapper;
-StyledFeatured.TitleSection = TitleSection;
-StyledFeatured.Section = Section;
-StyledFeatured.Item = Item;
-StyledFeatured.Icon = Icon;
-StyledFeatured.IconImage = IconImage;
-StyledFeatured.DefaultIcon = DefaultIcon;
-StyledFeatured.Name = Name;
-StyledFeatured.NameLink = NameLink;
-StyledFeatured.Description = Description;
+StyledFeatured.Wrapper = Wrapper
+StyledFeatured.TitleSection = TitleSection
+StyledFeatured.Section = Section
+StyledFeatured.Item = Item
+StyledFeatured.Icon = Icon
+StyledFeatured.IconImage = IconImage
+StyledFeatured.DefaultIcon = DefaultIcon
+StyledFeatured.Name = Name
+StyledFeatured.NameLink = NameLink
+StyledFeatured.Description = Description
 
-export { StyledFeatured };
+export { StyledFeatured }

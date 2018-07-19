@@ -1,18 +1,18 @@
-import App, { Container } from 'next/app';
-import React from 'react';
-import { withRouter } from 'next/router';
-import { Provider } from 'react-redux';
-import withReduxStore from '@common/lib/with-redux-store';
+import App, { Container } from 'next/app'
+import React from 'react'
+import { withRouter } from 'next/router'
+import { Provider } from 'react-redux'
+import withReduxStore from '@common/lib/with-redux-store'
 
-import { Root } from '@containers/root';
-import Store from '@stores';
+import { Root } from '@containers/root'
+import Store from '@stores'
 
-import 'isomorphic-unfetch';
+import 'isomorphic-unfetch'
 
 class MyApp extends App {
 
   render() {
-    const { Component, pageProps, reduxStore } = this.props;
+    const { Component, pageProps, reduxStore } = this.props
 
     return (
       <Container>
@@ -22,8 +22,8 @@ class MyApp extends App {
           </Root>
         </Provider>
       </Container>
-    );
+    )
   }
 }
 
-export default withRouter(withReduxStore(MyApp));
+export default withRouter(withReduxStore(MyApp))

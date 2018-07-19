@@ -1,8 +1,8 @@
-import React from 'react';
-import NextHead from 'next/head';
-import { string } from 'prop-types';
+import React from 'react'
+import NextHead from 'next/head'
+import { string } from 'prop-types'
 
-const defaultTitle = 'App.co, The Universal Dapp Store';
+const defaultTitle = 'App.co, The Universal Dapp Store'
 
 const Head = (props) => (
   <NextHead>
@@ -22,20 +22,20 @@ const Head = (props) => (
     <meta name="twitter:image" content={props.ogImage} />
     <meta property="og:image" content={props.ogImage} />
   </NextHead>
-);
+)
 
 Head.propTypes = {
   title: string,
   description: string,
   // url: string,
-  ogImage: string,
-};
+  ogImage: string
+}
 
 Head.defaultProps = {
   title: defaultTitle,
   description: 'Universal dapp store - discover decentralized apps.',
-  ogImage: 'https://app.co/static/images/open_graph/image.png',
+  ogImage: 'https://app.co/static/images/open_graph/image.png'
   // url: 'https://app.co',
-};
+}
 
-export default Head;
+export default Head

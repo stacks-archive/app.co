@@ -2,7 +2,6 @@ const path = require('path');
 
 module.exports = {
   resolve: {
-    root: './',
     alias: {
       '@components': path.resolve(__dirname, 'components'),
       '@containers': path.resolve(__dirname, 'containers'),
