@@ -18,9 +18,8 @@ import UserStore from '@stores/user'
 
 class Category extends React.Component {
   static getInitialProps({ req, reduxStore }) {
-
     const {
-      params: { category }
+      params: { category },
     } = req
 
     reduxStore.dispatch(doSelectCategoryFilter(category))
@@ -32,13 +31,13 @@ class Category extends React.Component {
     return (
       <>
         <Head title={`${this.props.categoryName} Apps`} />
-          <Header />
-            <Hero />
-              <Container.Section wrap={1}>
-                <Container.Section.Content>
-                  <AppList show={25} />
-                </Container.Section.Content>
-              </Container.Section>
+        <Header />
+        <Hero />
+        <Container.Section wrap={1}>
+          <Container.Section.Content>
+            <AppList show={25} />
+          </Container.Section.Content>
+        </Container.Section>
       </>
     )
   }
@@ -46,7 +45,7 @@ class Category extends React.Component {
 
 const mapStateToProps = (state) => ({
   categoryFilter: selectCategoryFilter(state),
-  categoryName: selectCategoryName(state)
+  categoryName: selectCategoryName(state),
 })
 
 function mapDispatchToProps(dispatch) {

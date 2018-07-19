@@ -18,7 +18,7 @@ const colorHexFromString = (str) => {
 const truncate = (str, options) => {
   const defaults = {
     after: '...',
-    length: 50
+    length: 50,
   }
 
   const opts = _.defaults(options, defaults)
@@ -36,7 +36,7 @@ const outboundLink = (app) => {
       event_category: 'Apps',
       app_name: app.name,
       app_id: app.id,
-      url: app.website
+      url: app.website,
     })
   }
   window.open(app.website, '_blank')
@@ -74,7 +74,7 @@ const appRoute = (app) => {
 const appStatuses = [
   { label: 'Pending Audit', value: 'pending_audit' },
   { label: 'Rejected', value: 'rejected' },
-  { label: 'Accepted', value: 'accepted' }
+  { label: 'Accepted', value: 'accepted' },
 ]
 
 const appStatusFromValue = (value) => _.find(appStatuses, (status) => status.value === value)
@@ -118,5 +118,5 @@ export {
   capitalize,
   getTags,
   slugifyCategory,
-  properTagFromParam
+  properTagFromParam,
 }

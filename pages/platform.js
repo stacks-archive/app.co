@@ -20,9 +20,8 @@ import { capitalize, properTagFromParams } from '@utils'
 
 class Platform extends React.Component {
   static getInitialProps({ req, reduxStore }) {
-
     const {
-      params: { platform }
+      params: { platform },
     } = req
 
     reduxStore.dispatch(doSelectPlatformFilter(platform))
@@ -34,13 +33,13 @@ class Platform extends React.Component {
     return (
       <>
         <Head title={`${this.props.platformName} Apps`} />
-          <Header />
-            <Hero />
-              <Container.Section wrap={1}>
-                <Container.Section.Content>
-                  <AppList show={25} />
-                </Container.Section.Content>
-              </Container.Section>
+        <Header />
+        <Hero />
+        <Container.Section wrap={1}>
+          <Container.Section.Content>
+            <AppList show={25} />
+          </Container.Section.Content>
+        </Container.Section>
       </>
     )
   }
@@ -48,7 +47,7 @@ class Platform extends React.Component {
 
 const mapStateToProps = (state) => ({
   platformFilter: selectPlatformFilter(state),
-  platformName: selectPlatformName(state)
+  platformName: selectPlatformName(state),
 })
 
 function mapDispatchToProps(dispatch) {

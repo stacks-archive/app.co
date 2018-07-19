@@ -37,38 +37,38 @@ export default class MyDocument extends Document {
       <html lang="en">
         <Head>
           <title>App.co - The Universal Dapp Store</title>
-            <link
-              href="https://fonts.googleapis.com/css?family=Lato:400,700,900|Roboto+Slab:300,400,700"
-              rel="stylesheet"
-            />
-              <link rel="shortcut icon" href="/static/images/favicon/favicon-96x96.png" />
-                <meta name="viewport" content="width=device-width,initial-scale=1" />
+          <link
+            href="https://fonts.googleapis.com/css?family=Lato:400,700,900|Roboto+Slab:300,400,700"
+            rel="stylesheet"
+          />
+          <link rel="shortcut icon" href="/static/images/favicon/favicon-96x96.png" />
+          <meta name="viewport" content="width=device-width,initial-scale=1" />
           {/* Global site tag (gtag.js) - Google Analytics */}
-            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119163063-1" />
-              <script
-                dangerouslySetInnerHTML={{
+          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119163063-1" />
+          <script
+            dangerouslySetInnerHTML={{
               __html: `
             window.dataLayer = window.dataLayer || []; function gtag()
             \{ dataLayer.push(arguments); \}
             gtag('js', new Date()); gtag('config', 'UA-119163063-1');
-          `
+          `,
             }}
-              />
+          />
 
-                <script
-                  type="text/javascript"
-                  src="https://a.optmstr.com/app/js/api.min.js"
-                  data-account="54556"
-                  data-user="48381"
-                  async
-                />
+          <script
+            type="text/javascript"
+            src="https://a.optmstr.com/app/js/api.min.js"
+            data-account="54556"
+            data-user="48381"
+            async
+          />
 
           {this.props.styleTags}
         </Head>
-          <body>
-            <Main />
-              <NextScript />
-          </body>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
       </html>
     )
   }

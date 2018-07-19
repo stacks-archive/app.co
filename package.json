@@ -110,7 +110,7 @@
     "dev": "node server.js",
     "lint": "eslint \"./**/*.js\"",
     "lint:fix": "eslint \"./**/*.js\" --fix",
-    "format": "prettier --write ./**/**/*.{js,md} && echo -e '\\033[0;32m'💅 Just use prettier'\\033[0m'",
+    "format": "prettier --write ./{components,containers,common,pages,stores,utils}/*.js && echo -e '\\033[0;32m'💅 Just use prettier'\\033[0m'",
     "start": "NODE_ENV=production node server.js",
     "test": "VCR_MODE=cache NODE_ENV=test jest",
     "test-watch": "VCR_MODE=cache NODE_ENV=test jest --watch",

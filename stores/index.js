@@ -14,7 +14,7 @@ export default (data) => {
 
   const Reducer = combineReducers({
     apps: AppsStore.makeReducer(data),
-    user: UserStore.reducer
+    user: UserStore.reducer,
   })
 
   return finalCreateStore(Reducer)

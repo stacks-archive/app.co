@@ -24,7 +24,7 @@ import { outboundLink } from '@utils'
 class AppDetails extends React.Component {
   static getInitialProps({ req, reduxStore }) {
     const {
-      params: { slug }
+      params: { slug },
     } = req
 
     reduxStore.dispatch(doSelectApp(slug))
@@ -41,25 +41,25 @@ class AppDetails extends React.Component {
     }
     return (
       <Flex flexWrap>
-        <Box width={[1, 1, 1/4, 1/4]}>
+        <Box width={[1, 1, 1 / 4, 1 / 4]}>
           <Flex>
-            <Box width={1/3}>
+            <Box width={1 / 3}>
               <AppIcon app={app} />
             </Box>
-              <Box width={2/3}>
-                <h2>{app.name}</h2>
-              </Box>
+            <Box width={2 / 3}>
+              <h2>{app.name}</h2>
+            </Box>
           </Flex>
-            <p>{app.description}</p>
-              <Button
-                type="button/primary"
-                onClick={() => {
+          <p>{app.description}</p>
+          <Button
+            type="button/primary"
+            onClick={() => {
               outboundLink(app)
             }}
-              >
+          >
             Visit Website
-              </Button>
-                <br />
+          </Button>
+          <br />
           {app.openSourceUrl &&
             app.openSourceUrl.indexOf('github.com') !== -1 && (
               <>
@@ -67,7 +67,7 @@ class AppDetails extends React.Component {
                   <GithubCircleIcon color="currentColor" />
                   View on Github
                 </StyledApp.BrandLink>
-                  <br />
+                <br />
               </>
             )}
 
@@ -80,61 +80,61 @@ class AppDetails extends React.Component {
             </>
           )}
 
-            <br />
-              <StyledApp.MainSection center>
-                <StyledApp.ClaimApp href={`mailto:hello@app.co?subject=I want to claim ${app.name}`}>
+          <br />
+          <StyledApp.MainSection center>
+            <StyledApp.ClaimApp href={`mailto:hello@app.co?subject=I want to claim ${app.name}`}>
               Is this your app? Claim it now.
-                </StyledApp.ClaimApp>
-              </StyledApp.MainSection>
+            </StyledApp.ClaimApp>
+          </StyledApp.MainSection>
         </Box>
 
-          <Box width={[1, 1, 1 / 2, 1 / 2]} px={[0, 0, 3, 3]} mt={[2, 2, 0, 0]}>
-            <StyledApp.MainSection>
-              {app.blockchain && (
+        <Box width={[1, 1, 1 / 2, 1 / 2]} px={[0, 0, 3, 3]} mt={[2, 2, 0, 0]}>
+          <StyledApp.MainSection>
+            {app.blockchain && (
               <>
                 <StyledApp.TagLabel>Blockchain</StyledApp.TagLabel>
-                  <StyledAppList.TagGroup left>
-                    <StyledAppList.Tag left>{app.blockchain}</StyledAppList.Tag>
-                  </StyledAppList.TagGroup>
-                    <br />
+                <StyledAppList.TagGroup left>
+                  <StyledAppList.Tag left>{app.blockchain}</StyledAppList.Tag>
+                </StyledAppList.TagGroup>
+                <br />
               </>
             )}
 
-              {app.storageNetwork && (
+            {app.storageNetwork && (
               <>
                 <StyledApp.TagLabel>Storage Network</StyledApp.TagLabel>
-                  <StyledAppList.TagGroup left>
-                    <StyledAppList.Tag left>{app.storageNetwork}</StyledAppList.Tag>
-                  </StyledAppList.TagGroup>
-                    <br />
+                <StyledAppList.TagGroup left>
+                  <StyledAppList.Tag left>{app.storageNetwork}</StyledAppList.Tag>
+                </StyledAppList.TagGroup>
+                <br />
               </>
             )}
 
-              {app.authentication && (
+            {app.authentication && (
               <>
                 <StyledApp.TagLabel>Authentication</StyledApp.TagLabel>
-                  <StyledAppList.TagGroup left>
-                    <StyledAppList.Tag left>{app.authentication}</StyledAppList.Tag>
-                  </StyledAppList.TagGroup>
-                    <br />
+                <StyledAppList.TagGroup left>
+                  <StyledAppList.Tag left>{app.authentication}</StyledAppList.Tag>
+                </StyledAppList.TagGroup>
+                <br />
               </>
             )}
 
-              {app.category && (
+            {app.category && (
               <>
                 <StyledApp.TagLabel>Category</StyledApp.TagLabel>
-                  <StyledAppList.TagGroup left>
-                    <StyledAppList.Tag left>{app.category}</StyledAppList.Tag>
-                  </StyledAppList.TagGroup>
+                <StyledAppList.TagGroup left>
+                  <StyledAppList.Tag left>{app.category}</StyledAppList.Tag>
+                </StyledAppList.TagGroup>
               </>
             )}
-            </StyledApp.MainSection>
-          </Box>
+          </StyledApp.MainSection>
+        </Box>
 
-            <Box width={[1, 1, 1/4, 1/4]}>
-              <StyledApp.StatNumber>{tweets}</StyledApp.StatNumber>
-                <StyledApp.StatLabel>Tweets about {app.name} in the last 7 days</StyledApp.StatLabel>
-            </Box>
+        <Box width={[1, 1, 1 / 4, 1 / 4]}>
+          <StyledApp.StatNumber>{tweets}</StyledApp.StatNumber>
+          <StyledApp.StatLabel>Tweets about {app.name} in the last 7 days</StyledApp.StatLabel>
+        </Box>
       </Flex>
     )
   }
@@ -143,23 +143,19 @@ class AppDetails extends React.Component {
     const app = this.props.selectedApp
     return (
       <>
-        <Head
-          title={app.name}
-          description={app.description}
-          ogImage={app.imageUrl}
-        />
-          <Header />
-            <Hero />
-              <Container.Section wrap={1}>
-                <Container.Section.Content>{this.props.selectedApp && this.appDetails()}</Container.Section.Content>
-              </Container.Section>
+        <Head title={app.name} description={app.description} ogImage={app.imageUrl} />
+        <Header />
+        <Hero />
+        <Container.Section wrap={1}>
+          <Container.Section.Content>{this.props.selectedApp && this.appDetails()}</Container.Section.Content>
+        </Container.Section>
       </>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  selectedApp: selectCurrentApp(state)
+  selectedApp: selectCurrentApp(state),
 })
 
 function mapDispatchToProps(dispatch) {
