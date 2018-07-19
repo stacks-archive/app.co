@@ -1,8 +1,25 @@
 {
-  "presets": [
-    "next/babel"
-  ],
+  "presets": ["next/babel"],
   "plugins": [
-    "babel-plugin-styled-components"
+    [
+      "babel-plugin-styled-components",
+      {
+        "ssr": true
+      }
+    ],
+    [
+      "module-resolver",
+      {
+        "root": ["./"],
+        "alias": {
+          "@components": "./components",
+          "@containers": "./containers",
+          "@stores": "./stores",
+          "@pages": "./pages",
+          "@common": "./common",
+          "@utils": "./utils"
+        }
+      }
+    ]
   ]
 }

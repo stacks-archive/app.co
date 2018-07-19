@@ -1,18 +1,17 @@
-import React from 'react';
+import React from 'react'
 
-import { Hero } from '@containers/hero';
-import { Header } from '@containers/header';
-import { Page } from '@containers/page';
-import { Featured } from '@containers/featured';
-import AppList from '@containers/app-list';
-import PlatformFilters from '@containers/platform-filters';
-import CategoryFilters from '@containers/category-filters';
-import Head from '@containers/head';
-// import SubmitDappCard from '@containers/cards/submit-dapp-card';
-import NewsletterCTA from '@containers/newsletter-cta';
+import { Hero } from '@containers/hero'
+import { Header } from '@containers/header'
+import { Page } from '@containers/page'
+import { Featured } from '@containers/featured'
+import AppList from '@containers/app-list'
+import PlatformFilters from '@containers/platform-filters'
+import CategoryFilters from '@containers/category-filters'
+import Head from '@containers/head'
+import NewsletterCTA from '@containers/newsletter-cta'
 
-const featuredApps = ['SteemIt', 'Stealthy', 'Peepeth', 'Mastodon', 'Diaspora', 'DTube'];
-const bizApps = ['Graphite', 'Aragon', 'Gitcoin', 'Bounty0x', 'adChain Registry', 'ETHLance'];
+const featuredApps = ['SteemIt', 'Stealthy', 'Peepeth', 'Mastodon', 'Diaspora', 'DTube']
+const bizApps = ['Graphite', 'Aragon', 'Gitcoin', 'Bounty0x', 'adChain Registry', 'ETHLance']
 
 export default () => (
   <Page>
@@ -37,12 +36,9 @@ export default () => (
         <br />
         <AppList show={25} />
       </Page.Section.Content>
-      {/*      <Page.Sidebar>
-        <SubmitDappCard />
-      </Page.Sidebar> */}
     </Page.Section>
     <Page.Section wrap={1}>
       <NewsletterCTA />
     </Page.Section>
   </Page>
-);
+)
