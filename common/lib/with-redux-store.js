@@ -17,11 +17,14 @@ function getOrCreateStore(initialState) {
   return window[__NEXT_REDUX_STORE__]
 }
 
-export default (App) => class AppWithRedux extends React.Component {
+export default (App) =>
+  class AppWithRedux extends React.Component {
     static async getInitialProps(appContext) {
       // Get or Create the store with `undefined` as initialState
       // This allows you to set a custom default initialState
       const data = appContext.ctx.query
+
+      console.log(appContext.ctx.req)
       const reduxStore = getOrCreateStore(data)
 
       // Provide the store to getInitialProps of pages

@@ -2,6 +2,7 @@ import React from 'react'
 import Document, { Head, Main, NextScript } from 'next/document'
 import { injectGlobal, ServerStyleSheet } from 'styled-components'
 import { normalize } from 'polished'
+import { theme } from '@common/styles'
 
 /**
  * Reset our styles
@@ -14,8 +15,8 @@ ${normalize()};
   box-sizing: border-box;
 }
 body, html{
-font-family: 'Lato', sans-serif;
-background:#eeefef;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  background-color: ${theme.colors.grey.light};
 }
 h1, h2, h3, h4, h5, h6{
 font-family: 'Roboto Slab', serif;
@@ -51,7 +52,7 @@ export default class MyDocument extends Document {
             window.dataLayer = window.dataLayer || []; function gtag()
             \{ dataLayer.push(arguments); \}
             gtag('js', new Date()); gtag('config', 'UA-119163063-1');
-          `,
+          `
             }}
           />
 

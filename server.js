@@ -3,6 +3,7 @@ const next = require('next')
 const LRUCache = require('lru-cache')
 const dotenv = require('dotenv')
 const shrinkRay = require('shrink-ray')
+const cookiesMiddleware = require('universal-cookie-express');
 
 const dev = process.env.NODE_ENV !== 'production'
 if (dev) {
@@ -70,7 +71,7 @@ async function renderAndCache(req, res, pagePath) {
 app.prepare().then(() => {
   const server = express()
 
-  server.use(shrinkRay())
+  server.use(shrinkRay()).use(cookiesMiddleware())
 
   server.set('views', './common/server-views')
   server.set('view engine', 'pug')

@@ -1,8 +1,15 @@
 import React from 'react'
+import { Page } from '@components/page'
+import { Newsletter } from '@components/newsletter'
 
 class HomePage extends React.PureComponent {
   render() {
-    return <div>Home!</div>
+    return (
+      <Page>
+        <Newsletter wrap />
+        Home!
+      </Page>
+    )
   }
 }
 

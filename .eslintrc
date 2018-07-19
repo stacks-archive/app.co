@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb", "prettier"],
+  "extends": ["airbnb", "prettier", "prettier/react"],
   "parser": "babel-eslint",
   "plugins": ["react"],
   "env": {
@@ -30,6 +30,7 @@
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2,
+    "react/require-default-props": 0,
     "react/prop-types": 2,
     "react/sort-comp": 0,
     "react/prefer-stateless-function": 0,
