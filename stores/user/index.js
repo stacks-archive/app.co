@@ -43,7 +43,6 @@ const handleSignIn = (apiServer) =>
     })
     const json = await response.json()
     dispatch(signedIn(json))
-
     document.location = '/admin'
 
     return true

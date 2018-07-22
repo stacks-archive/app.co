@@ -1,24 +1,27 @@
 import styled, { css } from 'styled-components'
 import { Box } from '@components/box'
-import { theme, below } from '@common/styles'
+import { above, below, theme, wrapperStyle } from '@common/styles'
 
 const StyledNewsletter = styled(Box)`
   background-color: ${theme.colors.blue};
-  border-radius: 6px;
   overflow: hidden;
   min-height: 75px;
   display: flex;
   position: relative;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  box-shadow: 0 1px 1px 0 rgba(20, 33, 68, 0.04), 0 1px 3px 1px rgba(20, 33, 68, 0.09);
+  ${above.md`${wrapperStyle}
+    border-radius: 6px;`};
 `
 const Section = styled(Box)`
   flex-grow: 1;
   flex-shrink: 1;
   position: relative;
   z-index: 3;
-  ${below.md`
+  ${({ width }) =>
+    width &&
+    css`
+      width: ${width};
+    `} ${below.md`
     & + & {
       margin-top: 20px;
     }
@@ -26,6 +29,8 @@ const Section = styled(Box)`
 `
 const SvgBackgroundElement = styled.div`
   position: absolute;
+  ${below.md`
+  transform: translateY(12px)`};
   ${({ top }) =>
     top &&
     css`
@@ -48,7 +53,17 @@ const SvgBackgroundElement = styled.div`
     `};
 `
 
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  justify-content: space-between;
+  flex-wrap: wrap;
+`
+
 StyledNewsletter.Svg = SvgBackgroundElement
+StyledNewsletter.Wrapper = Wrapper
 StyledNewsletter.Section = Section
 
 export { StyledNewsletter }

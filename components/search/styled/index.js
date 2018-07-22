@@ -7,7 +7,7 @@ const StyledSearchBar = styled(Box)`
   align-items: center;
   color: ${theme.colors.grey};
 `
-const Icon = styled.div`
+const Icon = styled(Box)`
   flex-shrink: 0;
   svg {
     display: block;

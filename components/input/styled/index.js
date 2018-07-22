@@ -10,7 +10,7 @@ const Action = styled(Box)`
   position: absolute;
   right: 0;
   top: 0;
-  height: 36px;
+  height: 100%;
   width: 36px;
   display: flex;
   align-items: center;
@@ -41,6 +41,15 @@ const Input = styled.input`
   &::placeholder {
     color: rgba(255, 255, 255, 0.6);
   }
+  ${({ transparent }) =>
+    transparent &&
+    css`
+      background: transparent;
+      color: ${theme.colors.grey};
+      &::placeholder {
+        color: ${theme.colors.grey};
+      }
+    `};
   ${space};
 `
 

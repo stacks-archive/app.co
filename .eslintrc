@@ -9,7 +9,7 @@
   },
   "rules": {
     "comma-dangle": ["error", "never"],
-    "quotes": [2, "single"],
+    "quotes": 0,
     "eol-last": 2,
     "no-debugger": 1,
     "no-mixed-requires": 0,

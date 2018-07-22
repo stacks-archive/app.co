@@ -1,7 +1,25 @@
 import styled, { css } from 'styled-components'
-import { wrapperStyles, theme, below } from '@common/styles'
+import { wrapperStyle, theme, below, above } from '@common/styles'
 
+const Navigation = styled.div`
+  display: flex;
+  ${({ mobile }) =>
+    mobile
+      ? below.md`
+        display: none;
+      `
+      : above.md`
+        display: none;
+      `};
+`
 const StyledTopBar = styled.div`
+  width:100%;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  //position: fixed;
+  background: white;
+  box-shadow: 0 1px 1px 0 rgba(20, 33, 68, 0.04), 0 1px 3px 1px rgba(20, 33, 68, 0.09);
   a {
     &:link,
     &:visited,
@@ -13,20 +31,15 @@ const StyledTopBar = styled.div`
       color: rgba(20, 33, 68, 0.7);
       text-decoration: none;
       font-weight: 600;
-
-      ${below.md`
-        display: none;
-      `};
     }
     &:hover {
       color: rgba(20, 33, 68, 1);
     }
   }
-  border-bottom: 1px solid ${theme.colors.border};
 `
 
 const Wrapper = styled.div`
-  ${wrapperStyles()};
+  ${wrapperStyle};
   height: 65px;
   display: flex;
   justify-content: space-between;
@@ -38,4 +51,5 @@ const Section = styled.div`
 `
 StyledTopBar.Wrapper = Wrapper
 StyledTopBar.Section = Section
+StyledTopBar.Navigation = Navigation
 export { StyledTopBar }

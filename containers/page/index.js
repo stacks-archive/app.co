@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledPage } from '@components/page'
+import { StyledPage } from '@components/page/styled'
 
 const Page = ({ children, ...rest }) => <StyledPage {...rest}>{children}</StyledPage>
 

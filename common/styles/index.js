@@ -1,10 +1,13 @@
-import { css } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { rgba } from 'polished'
+import { Box } from '@components/box'
+import hash from 'string-hash'
+import color from 'tinycolor2'
 
 const sizes = {
   xl: 1170,
   lg: 960,
-  md: 640,
+  md: 638,
   sm: 400
 }
 
@@ -26,7 +29,7 @@ export const above = Object.keys(sizes).reduce((accumulator, label) => {
   // changing their browsers font-size: https://zellwk.com/blog/media-query-units/
   const emSize = sizes[label] / 16
   accumulator[label] = (...args) => css`
-    @media (max-width: ${emSize}em) {
+    @media (min-width: ${emSize}em) {
       ${css(...args)};
     }
   `
@@ -38,17 +41,11 @@ const wrapperStyles = () => (props) =>
   props.wrap &&
   css`
     width: 100%;
-    max-width: 1130px;
+    max-width: 1400px;
     margin-right: auto;
     margin-left: auto;
     z-index: 10;
     position: relative;
-    padding-left: 40px;
-    padding-right: 40px;
-    ${below.md`
-      padding-left: 20px;
-      padding-right: 20px;  
-  `};
   `
 
 const theme = {
@@ -80,4 +77,32 @@ const theme = {
   }
 }
 
-export { wrapperStyles, theme }
+const wrapperStyle = css`
+  width: 100%;
+  max-width: 1400px;
+  margin-right: auto;
+  margin-left: auto;
+  z-index: 10;
+  position: relative;
+  padding-left: 20px;
+  padding-right: 20px;
+  ${below.md`
+      padding-left: 20px;
+      padding-right: 20px;  
+  `};
+`
+
+const wrapper = styled(Box)`
+  ${wrapperStyle};
+`
+
+const gradientFromString = (string, stop1 = 0, stop2 = 100) => {
+  const n = hash(string)
+  const c1 = color({ h: n % 360, s: 0.95, l: 0.5 })
+  const c1_ = c1.toHexString()
+  const c2 = c1.triad()[1].toHexString()
+
+  return `${c1_} ${stop1}%, ${c2} ${stop2}%`
+}
+
+export { wrapper, wrapperStyles, wrapperStyle, theme, gradientFromString }

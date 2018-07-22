@@ -17,11 +17,15 @@ ${normalize()};
 body, html{
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   background-color: ${theme.colors.grey.light};
+  color: ${theme.colors.grey};
 }
 h1, h2, h3, h4, h5, h6{
 font-family: 'Roboto Slab', serif;
 margin: 0;
 padding: 0;
+}
+.headroom{
+z-index: 99 !important;
 }
 `
 

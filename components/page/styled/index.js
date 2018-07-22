@@ -1,14 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 import { wrapperStyles } from '@common/styles'
-import { Box } from '@components/box'
+import { Box, boxProps } from '@components/box'
 
 const StyledPage = styled(Box)``
 
 const Section = styled(Box)`
   display: flex;
-  flex-direction: column;
-  ${props => wrapperStyles(props)};
+  width: 100%;
+  ${(props) => wrapperStyles(props)};
+  ${boxProps};
 `
 const Content = styled.div`
   flex-grow: 1;

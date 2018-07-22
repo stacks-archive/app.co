@@ -5,7 +5,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 
 import AppsStore from '@stores/apps'
 import UserStore from '@stores/user'
-import newsetter from '@stores/newsletter'
+import newsletter from '@stores/newsletter'
 
 export default (data) => {
   const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
@@ -14,7 +14,7 @@ export default (data) => {
   const Reducer = combineReducers({
     apps: AppsStore.makeReducer(data),
     user: UserStore.reducer,
-    newsetter
+    newsletter
   })
 
   return finalCreateStore(Reducer)

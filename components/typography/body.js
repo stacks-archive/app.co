@@ -22,6 +22,7 @@ const Body = styled.div`
 `
 
 const Strong = styled.strong`
+  font-weight: 500;
   ${color};
   ${space};
 `
