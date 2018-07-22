@@ -18,7 +18,7 @@ const TopBar = (props) => {
     <Headroom>
       <StyledTopBar>
         <StyledTopBar.Wrapper wrap>
-          <StyledTopBar.Section>
+          <StyledTopBar.Section grow>
             <AppIcon />
             <SearchBar transparent />
           </StyledTopBar.Section>

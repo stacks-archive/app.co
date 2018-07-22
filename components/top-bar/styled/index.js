@@ -13,7 +13,7 @@ const Navigation = styled.div`
       `};
 `
 const StyledTopBar = styled.div`
-  width:100%;
+  width: 100%;
   top: 0;
   left: 0;
   z-index: 99;
@@ -48,6 +48,7 @@ const Wrapper = styled.div`
 const Section = styled.div`
   display: flex;
   align-items: center;
+  ${({ grow }) => grow && `flex-grow:1;`};
 `
 StyledTopBar.Wrapper = Wrapper
 StyledTopBar.Section = Section

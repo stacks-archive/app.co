@@ -72,4 +72,4 @@ const AppsList = connect(mapStateToProps)(({ filterBy = 'category', limit, apps,
   )
 })
 
-export { AppsList }
+export { AppsList, AppItem }

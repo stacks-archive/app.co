@@ -17,6 +17,11 @@ const Item = styled(Box)`
         cursor: pointer;
       }
     `};
+    ${({ noBorder }) =>
+    noBorder &&
+    css`
+      border: 0 !important;
+    `};
 `
 
 const Body = styled(Box)`
