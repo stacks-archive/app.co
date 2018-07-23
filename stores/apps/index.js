@@ -162,12 +162,14 @@ const makeReducer = (data) => {
         };
       case constants.SAVED_APP:
         return {
+          ...state,
           isSavingApp: false,
           savedApp: action.app,
           selectedApp: action.app,
         };
       case constants.FETCHING_PENDING:
         return Object.assign({}, state, {
+          ...state,
           isFetchingPending: true,
         });
       case constants.FETCHED_PENDING:
