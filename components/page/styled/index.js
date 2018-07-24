@@ -1,5 +1,4 @@
-import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { wrapperStyles } from '@common/styles'
 import { Box, boxProps } from '@components/box'
 
@@ -10,6 +9,15 @@ const Section = styled(Box)`
   width: 100%;
   ${(props) => wrapperStyles(props)};
   ${boxProps};
+  ${({ richText }) =>
+    richText &&
+    css`
+
+      h1, h2, h3, h4, h5, h6, p{
+            
+      max-width: 700px;
+      }
+    `};
 `
 const Content = styled.div`
   flex-grow: 1;

@@ -1,11 +1,25 @@
 import styled, { css } from 'styled-components'
 import { theme } from '@common/styles'
-import { Box, boxProps } from '@components/box'
+import { boxProps } from '@components/box'
 
 const StyledTag = styled.div`
   display: inline-block;
   background-color: ${theme.colors.grey.light};
   border-radius: 5px;
+  ${({ small }) =>
+    small &&
+    css`
+      font-size: 10px;
+    `};
+
+  ${({ light }) =>
+    light &&
+    css`
+      border: 1px solid rgba(40, 47, 54, 0.15);
+      box-sizing: border-box;
+      border-radius: 5px;
+      background: white;
+    `};
   ${boxProps};
 
   & + & {

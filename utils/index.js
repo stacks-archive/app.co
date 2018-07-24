@@ -18,7 +18,7 @@ const colorHexFromString = (str) => {
 const truncate = (str, options) => {
   const defaults = {
     after: '...',
-    length: 50,
+    length: 50
   }
 
   const opts = _.defaults(options, defaults)
@@ -29,17 +29,17 @@ const truncate = (str, options) => {
   return str
 }
 
-const outboundLink = (app) => {
+const outboundLink = (app, link) => {
   if (typeof gtag !== 'undefined') {
     gtag('event', 'outgoing_click', {
       event_label: app.name,
       event_category: 'Apps',
       app_name: app.name,
       app_id: app.id,
-      url: app.website,
+      url: link || app.website
     })
   }
-  window.open(app.website, '_blank')
+  window.open(link || app.website, '_blank')
 }
 
 const enumSelect = (enums, placeholder, props = {}) => {
@@ -74,7 +74,7 @@ const appRoute = (app) => {
 const appStatuses = [
   { label: 'Pending Audit', value: 'pending_audit' },
   { label: 'Rejected', value: 'rejected' },
-  { label: 'Accepted', value: 'accepted' },
+  { label: 'Accepted', value: 'accepted' }
 ]
 
 const appStatusFromValue = (value) => _.find(appStatuses, (status) => status.value === value)
@@ -96,14 +96,11 @@ const getTags = (app) => {
     tags.push(app.storageNetwork)
   }
 
-  const tagSet = Array.from(new Set(tags))
-  return tagSet
+  return Array.from(new Set(tags))
 }
 
-const properTagFromParam = (param, enums) => {
-  const name = enums.find((platform) => platform.toLowerCase() === param) || capitalize(param)
-  return name
-}
+const properTagFromParam = (param, enums) =>
+  enums.find((platform) => platform.toLowerCase() === param) || capitalize(param)
 
 const slugifyCategory = (category) => category.toLowerCase().replace(' ', '-')
 
@@ -118,5 +115,5 @@ export {
   capitalize,
   getTags,
   slugifyCategory,
-  properTagFromParam,
+  properTagFromParam
 }

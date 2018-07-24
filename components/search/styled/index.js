@@ -22,8 +22,6 @@ const SearchResults = styled.div`
   transition: all 135ms cubic-bezier(0.4, 0, 0.2, 1);
   transform: none;
   opacity: 1;
-  max-height: calc(100vh - 65px);
-  overflow: auto;
   &::before {
     content: '';
     height: 2px;
@@ -45,6 +43,8 @@ const SearchResults = styled.div`
 `
 
 const ResultsWrapper = styled.div`
+  max-height: calc(60vh - 65px);
+  overflow: auto;
   ${wrapperStyle};
   ${boxProps};
 `

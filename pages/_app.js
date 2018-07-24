@@ -6,7 +6,7 @@ import withReduxStore from '@common/lib/with-redux-store'
 import { Root } from '@containers/root'
 import { theme } from '@common/styles'
 import { ThemeProvider } from 'styled-components'
-
+import { Mdx } from '@components/mdx'
 import 'isomorphic-unfetch'
 
 class MyApp extends App {
@@ -14,15 +14,17 @@ class MyApp extends App {
     const { Component, pageProps, reduxStore } = this.props
 
     return (
-      <ThemeProvider theme={theme}>
-        <Container>
-          <Provider store={reduxStore}>
-            <Root>
-              <Component {...pageProps} />
-            </Root>
-          </Provider>
-        </Container>
-      </ThemeProvider>
+      <Mdx>
+        <ThemeProvider theme={theme}>
+          <Container>
+            <Provider store={reduxStore}>
+              <Root>
+                <Component {...pageProps} />
+              </Root>
+            </Provider>
+          </Container>
+        </ThemeProvider>
+      </Mdx>
     )
   }
 }

@@ -1,27 +1,37 @@
-import React from 'react'
 import Shevy from 'shevyjs'
 import styled, { css } from 'styled-components'
 import { color, space } from 'styled-system'
+
 const shevy = new Shevy()
 
 const { h5: large, body } = shevy
 
+const baseProps = css`
+  line-height: 1.6;
+  color: rgba(20, 33, 68, 0.7);
+  /* Description */
+`
 const P = styled.p`
+  ${baseProps};
   ${color};
   ${space};
+
 `
 
 const Span = styled.span`
+  ${baseProps};
   ${color};
   ${space};
 `
 
 const Body = styled.div`
+  ${baseProps};
   ${color};
   ${space};
 `
 
 const Strong = styled.strong`
+  ${baseProps};
   font-weight: 500;
   ${color};
   ${space};
@@ -32,10 +42,12 @@ const Em = styled.em`
   ${space};
 `
 const Ul = styled.ul`
+  ${baseProps};
   ${color};
   ${space};
 `
 const Ol = styled.ol`
+  ${baseProps};
   ${color};
   ${space};
 `

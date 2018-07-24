@@ -13,6 +13,7 @@ const StyledAppIcon = styled(Box)`
   overflow: hidden;
   flex-shrink: 0;
   border-radius: 15px;
+  box-shadow: 0 1px 5px 0 rgba(20, 33, 68, 0.04), 0 1px 6px 1px rgba(20, 33, 68, 0.09);
   ${({ showGradient, gradient }) =>
     showGradient &&
     css`

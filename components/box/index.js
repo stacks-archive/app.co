@@ -14,13 +14,14 @@ const boxProps = css`
 `
 
 const Box = styled.div`
-  ${space}
-  ${width}
-  ${fontSize}
-  ${color}
-  ${flex}
-  ${flexDirection}
-  ${flexWrap}
+  ${({ card }) =>
+    card &&
+    css`
+      background: #ffffff;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 3px;
+    `};
+  ${boxProps};
 `
 Box.propTypes = {
   ...space.propTypes,

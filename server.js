@@ -3,7 +3,7 @@ const next = require('next')
 const LRUCache = require('lru-cache')
 const dotenv = require('dotenv')
 const shrinkRay = require('shrink-ray')
-const cookiesMiddleware = require('universal-cookie-express');
+const cookiesMiddleware = require('universal-cookie-express')
 
 const dev = process.env.NODE_ENV !== 'production'
 if (dev) {
@@ -33,7 +33,7 @@ function getCacheKey(req) {
   return `${req.url}`
 }
 
-async function renderAndCache(req, res, pagePath) {
+async function renderAndCache(req, res, pagePath, serverData) {
   const key = getCacheKey(req)
 
   // If we have a page in the cache, let's serve it
@@ -48,8 +48,13 @@ async function renderAndCache(req, res, pagePath) {
     const data = await getApps(apiServer)
     data.apiServer = apiServer
 
+    const dataToPass = {
+      ...data,
+      ...serverData
+    }
+
     // If not let's render the page into HTML
-    const html = await app.renderToHTML(req, res, pagePath, data)
+    const html = await app.renderToHTML(req, res, pagePath, dataToPass)
 
     // Something is wrong with the request, let's skip the cache
     if (res.statusCode !== 200) {
@@ -88,11 +93,15 @@ app.prepare().then(() => {
   })
 
   server.get('/app/:slug', (req, res) => {
-    renderAndCache(req, res, '/app-details')
+    renderAndCache(req, res, '/app')
   })
 
-  server.get('/platform/:platform', (req, res) => {
-    renderAndCache(req, res, '/platform')
+  server.get('/platforms/:platform', (req, res) => {
+    renderAndCache(req, res, '/platforms', { platform: req.params.platform })
+  })
+
+  server.get('/platforms', (req, res) => {
+    renderAndCache(req, res, '/platforms')
   })
 
   server.get('/category/:category', (req, res) => {
@@ -101,6 +110,10 @@ app.prepare().then(() => {
 
   server.get('/faq', (req, res) => {
     renderAndCache(req, res, '/faq')
+  })
+
+  server.get('/learn-more', (req, res) => {
+    renderAndCache(req, res, '/learn-more')
   })
 
   server.get('/submit', (req, res) => {

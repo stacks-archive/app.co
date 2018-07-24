@@ -1,33 +1,34 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import Shevy from 'shevyjs'
-import { color, space } from 'styled-system'
+import { color } from 'styled-system'
+import { boxProps } from '@components/box'
+
 const shevy = new Shevy()
 const { baseSpacing: bs, h1, h2, h3, h4, h5, h6 } = shevy
 
-const H1 = styled.h1`
+const baseProps = css`
+  color: rgba(20, 33, 68, 1);
   ${color};
-  ${space};
+  ${boxProps};
+`
+const H1 = styled.h1`
+  ${baseProps};
 `
 const H2 = styled.h2`
-  ${color};
-  ${space};
+  ${baseProps};
 `
 const H3 = styled.h3`
-  ${color};
-  ${space};
+  ${baseProps};
 `
 const H4 = styled.h4`
-  ${color};
-  ${space};
+  ${baseProps};
 `
 const H5 = styled.h5`
-  ${color};
-  ${space};
+  ${baseProps};
 `
 const H6 = styled.h6`
-  ${color};
-  ${space};
+  ${baseProps};
 `
 
 export { H1, H2, H3, H4, H5, H6 }

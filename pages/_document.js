@@ -20,12 +20,18 @@ body, html{
   color: ${theme.colors.grey};
 }
 h1, h2, h3, h4, h5, h6{
-font-family: 'Roboto Slab', serif;
 margin: 0;
 padding: 0;
 }
 .headroom{
 z-index: 99 !important;
+}
+hr{
+background:transparent;
+border: 1px solid #F2F2F2;
+margin: 0;
+padding: 0;
+display: block;
 }
 `
 

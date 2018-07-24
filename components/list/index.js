@@ -1,22 +1,23 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Type } from '@components/typography'
 import { StyledList } from '@components/list/styled'
 import { Button } from '@components/button'
 
+const Items = ({ items, item: Item, limit, width }) =>
+  items.map((item, i) => {
+    const Component = () => <Item width={width} {...item} key={i} />
+    if (limit) {
+      if (i <= limit) {
+        return <Component />
+      } else {
+        return null
+      }
+    }
+    return <Component />
+  })
 
-const listItems = (items, Component, limit, width) =>
-  items.map(
-    (item, i) =>
-      limit ? (
-        i <= limit ? (
-          <Component width={width} {...item} key={i} />
-        ) : null
-      ) : (
-        <Component width={width} {...item} key={i} />
-      )
-  )
-
-const ListContainer = ({ header, items, item, limit, width = [1, 1 / 2], ...rest }) => {
+const ListContainer = ({ header, items, item, limit = 7, width = [1, 1 / 2], ...rest }) => {
   const Header = () =>
     header ? (
       <StyledList.Header p={4}>
@@ -25,13 +26,34 @@ const ListContainer = ({ header, items, item, limit, width = [1, 1 / 2], ...rest
       </StyledList.Header>
     ) : null
 
+  const itemProps = {
+    items,
+    item,
+    limit,
+    width
+  }
   return items ? (
     <StyledList mb={[4]} {...rest}>
       <Header />
-      <StyledList.Body>{listItems(items, item, limit, width)}</StyledList.Body>
+      <StyledList.Body>
+        <Items {...itemProps} />
+      </StyledList.Body>
     </StyledList>
   ) : null
 }
+ListContainer.defautProps = {
+  limit: 7,
+  width: [1, 1 / 2]
+}
+ListContainer.propTypes = {
+  header: PropTypes.shape({
+    title: PropTypes.node.isRequired,
+    action: PropTypes.func
+  }),
+  items: PropTypes.arrayOf(PropTypes.object),
+  item: PropTypes.node,
+  limit: PropTypes.number.isRequired,
+  width: PropTypes.arrayOf(PropTypes.number.isRequired)
+}
 
-
-export { ListContainer, listItems }
+export { ListContainer, Items }

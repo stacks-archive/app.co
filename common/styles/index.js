@@ -41,7 +41,7 @@ const wrapperStyles = () => (props) =>
   props.wrap &&
   css`
     width: 100%;
-    max-width: 1400px;
+    max-width: 1130px;
     margin-right: auto;
     margin-left: auto;
     z-index: 10;
@@ -79,7 +79,7 @@ const theme = {
 
 const wrapperStyle = css`
   width: 100%;
-  max-width: 1400px;
+  max-width: 1130px;
   margin-right: auto;
   margin-left: auto;
   z-index: 10;

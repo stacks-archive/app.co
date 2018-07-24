@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { selectApps, selectAppCategoriesArray } from '@stores/apps/selectors'
 import { ListContainer } from '@components/list/index'
 import { Box } from '@components/box'
-
+import { Truncate } from 'rebass'
 const mapStateToProps = (state) => ({
   apps: selectApps(state),
   categories: selectAppCategoriesArray(state)
@@ -13,8 +13,10 @@ const mapStateToProps = (state) => ({
 
 const CategoryItem = ({ category, ...rest }) => (
   <StyledList.Item {...rest} link>
-    <Box style={{ flexGrow: 1 }} px={0}>
-      <Type.strong>{category}</Type.strong>
+    <Box style={{ flexGrow: 1, maxWidth: '100%' }} px={0}>
+      <Type.strong>
+        <Truncate>{category}</Truncate>
+      </Type.strong>
     </Box>
   </StyledList.Item>
 )

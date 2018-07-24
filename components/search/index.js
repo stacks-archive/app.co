@@ -7,6 +7,8 @@ import { connect } from 'react-redux'
 import { selectApps, selectAppCategoriesArray } from '@stores/apps/selectors'
 import debounce from 'lodash/debounce'
 
+import { Trail } from 'react-spring'
+
 let store = {}
 
 const mapStateToProps = (state) => ({
@@ -19,13 +21,18 @@ function contains(string, query) {
 
 const searchApps = (query, apps) =>
   apps.filter(
-    (app) => contains(app.name, query) || contains(app.blockchain, query) || contains(app.storageNetwork, query)
+    (app) =>
+      contains(app.name, query) ||
+      contains(app.blockchain, query) ||
+      contains(app.storageNetwork, query) ||
+      contains(app.authentication, query) ||
+      contains(app.category, query)
   )
 
 class SearchBarClass extends React.Component {
   constructor(props) {
     super(props)
-    this.search = debounce(this.search, 200)
+    this.search = debounce(this.search, 400)
   }
   state = {
     isLoading: false,
@@ -82,7 +89,9 @@ class SearchBarClass extends React.Component {
                   {this.state.results.length > 0 ? (
                     <>
                       <ResultItemGroup title="Apps">
-                        {this.state.results.map((app, i) => <AppItem {...app} key={i} noBorder />)}
+                        {this.state.results.map((app, i) => (
+                          <AppItem {...app} key={app.name} noBorder  />
+                        ))}
                       </ResultItemGroup>
                     </>
                   ) : null}{' '}

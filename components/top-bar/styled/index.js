@@ -17,7 +17,7 @@ const StyledTopBar = styled.div`
   top: 0;
   left: 0;
   z-index: 99;
-  //position: fixed;
+  position: relative;
   background: white;
   box-shadow: 0 1px 1px 0 rgba(20, 33, 68, 0.04), 0 1px 3px 1px rgba(20, 33, 68, 0.09);
   a {

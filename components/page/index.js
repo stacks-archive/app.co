@@ -2,12 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { TopBar } from '@components/top-bar'
 import { StyledPage } from './styled'
-import { Box } from '@components/box'
+
 
 const Page = ({ children, ...rest }) => (
   <StyledPage {...rest}>
     <TopBar />
-    <StyledPage.Section flexDirection={['column']} alignItems="center" pt={[0, 4]}>
+    <StyledPage.Section flexDirection={['column']} alignItems="center" pt={[4, 4]} px={[3, 0]}>
       {children}
     </StyledPage.Section>
   </StyledPage>
