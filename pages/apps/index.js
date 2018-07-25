@@ -3,29 +3,23 @@ import { Page } from '@components/page'
 import { Newsletter } from '@components/newsletter'
 import { AppsList } from '@components/list/apps'
 import { CategoriesList } from '@components/list/categories'
-import { doSelectApp } from '@stores/apps'
 import { PlatformsList } from '@components/list/platforms'
 import { Modal } from '@components/modal'
 import Head from 'next/head'
-class HomePage extends React.PureComponent {
+
+class PlatformsPage extends React.PureComponent {
   state = {
     filterBy: 'category'
   }
 
-  static getInitialProps({ req, reduxStore }) {
-    if (req) {
-      const {
-        params: { appSlug }
-      } = req
+  static async getInitialProps(ctx) {
+    const {
+      query: { category }
+    } = ctx
 
-      reduxStore.dispatch(doSelectApp(appSlug))
-
-      return {
-        appSlug
-      }
+    return {
+      category
     }
-
-    return {}
   }
 
   render() {
@@ -44,7 +38,11 @@ class HomePage extends React.PureComponent {
           </Page.Section>
         </Page.Section>
         <Page.Section flexDirection="column" px>
-          <AppsList filterBy={this.state.filterBy} limit={7} />
+          <AppsList
+            filterBy={this.state.filterBy}
+            single={this.props.category === 'all-categories' ? undefined : this.props.category}
+            limit={this.props.category === 'all-categories' ? 7 : undefined}
+          />
         </Page.Section>
         <Modal />
       </Page>
@@ -52,4 +50,4 @@ class HomePage extends React.PureComponent {
   }
 }
 
-export { HomePage }
+export default PlatformsPage

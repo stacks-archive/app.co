@@ -87,7 +87,6 @@ app.prepare().then(() => {
     _next()
   })
 
-
   // Use the `renderAndCache` utility defined below to serve pages
   server.get('/', (req, res) => {
     renderAndCache(req, res, '/')
@@ -99,6 +98,12 @@ app.prepare().then(() => {
 
   server.get('/platforms/:platform', (req, res) => {
     renderAndCache(req, res, '/platforms', { platform: req.params.platform })
+  })
+  server.get('/apps/:category', (req, res) => {
+    renderAndCache(req, res, '/apps', { category: req.params.category })
+  })
+  server.get('/apps', (req, res) => {
+    renderAndCache(req, res, '/')
   })
 
   server.get('/platforms', (req, res) => {

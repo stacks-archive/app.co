@@ -166,10 +166,18 @@ const AppCard = ({ py, px, my, mx, mr = 'auto', ml = 'auto', mt, mb, style, ...p
     style
   }
 
+  const descNoPeriod =
+    props.description[props.description.length - 1] === '.' ? props.description.slice(0, -1) : props.description
+  const metaDesc = `${props.name} — ${descNoPeriod}. Explore this and other dapps on App.co, the universal dapp store.`
+  const metaTitle = `${props.name} — App.co`
   return (
     <>
       <Head>
-        <title>{props.name} &mdash; App.co</title>
+        <title>{metaTitle}</title>
+        <meta name="description" content={metaDesc} />
+        <meta property="og:site_name" content="App.co" />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDesc} />
       </Head>
       <Box
         width={[1]}

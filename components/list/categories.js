@@ -6,6 +6,9 @@ import { selectApps, selectAppCategoriesArray } from '@stores/apps/selectors'
 import { ListContainer } from '@components/list/index'
 import { Box } from '@components/box'
 import { Truncate } from 'rebass'
+import { slugify } from '@common'
+import Link from 'next/link'
+
 const mapStateToProps = (state) => ({
   apps: selectApps(state),
   categories: selectAppCategoriesArray(state)
@@ -13,18 +16,42 @@ const mapStateToProps = (state) => ({
 
 const CategoryItem = ({ category, ...rest }) => (
   <StyledList.Item {...rest} link>
-    <Box style={{ flexGrow: 1, maxWidth: '100%' }} px={0}>
-      <Type.strong>
-        <Truncate>{category}</Truncate>
-      </Type.strong>
-    </Box>
+    <Link {...rest.link}>
+      <a>
+        <Box style={{ flexGrow: 1, maxWidth: '100%' }} px={0}>
+          <Type.strong>
+            <Truncate>{category}</Truncate>
+          </Type.strong>
+        </Box>
+      </a>
+    </Link>
   </StyledList.Item>
 )
 
 const CategoriesList = connect(mapStateToProps)(({ categories, apps, ...rest }) => {
-  const modifiedArray = categories.slice(0, 5).map((category) => ({ category }))
+  const modifiedArray = categories.slice(0, 5).map((category) => ({
+    category,
+    link: {
+      as: `/apps/${slugify(category)}`,
+      href: {
+        pathname: `/apps`,
+        query: {
+          category: slugify(category)
+        }
+      }
+    }
+  }))
   const lastItem = {
-    category: 'All Categories'
+    category: 'All Categories',
+    link: {
+      as: `/apps/all-categories`,
+      href: {
+        pathname: `/apps`,
+        query: {
+          category: 'all-categories'
+        }
+      }
+    }
   }
   const categoriesArray = [...modifiedArray, lastItem]
 

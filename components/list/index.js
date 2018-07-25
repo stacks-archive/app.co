@@ -3,6 +3,27 @@ import PropTypes from 'prop-types'
 import { Type } from '@components/typography'
 import { StyledList } from '@components/list/styled'
 import { Button } from '@components/button'
+import { Flex, Box } from 'rebass'
+
+const ListTableHeader = (props) => (
+  <StyledList.Body.Header>
+    <Flex p={2} width={1}>
+      <Box width={0.5}>Rank</Box>
+      <Box width={0.5 / 4} style={{ textAlign: 'right' }}>
+        Auth
+      </Box>
+      <Box width={0.5 / 4} style={{ textAlign: 'right' }}>
+        Storage
+      </Box>
+      <Box width={0.5 / 4} style={{ textAlign: 'right' }}>
+        Blockchain
+      </Box>
+      <Box width={0.5 / 4} style={{ textAlign: 'right' }}>
+        Views/Week
+      </Box>
+    </Flex>
+  </StyledList.Body.Header>
+)
 
 const Items = ({ items, item: Item, limit, width, ...rest }) =>
   items.map((item, i) => {
@@ -17,7 +38,7 @@ const Items = ({ items, item: Item, limit, width, ...rest }) =>
     return <Component />
   })
 
-const ListContainer = ({ header, items, item, limit = 7, width = [1, 1 / 2], ...rest }) => {
+const ListContainer = ({ header, items, item, limit, width = [1, 1 / 2], ...rest }) => {
   const Header = () =>
     header ? (
       <StyledList.Header p={4}>
@@ -30,14 +51,15 @@ const ListContainer = ({ header, items, item, limit = 7, width = [1, 1 / 2], ...
     items,
     item,
     limit,
-    width,
+    width: rest.single ? [1] : width,
     dispatch: rest.dispatch
   }
   return items ? (
     <StyledList mb={[4]} {...rest}>
       <Header />
       <StyledList.Body>
-        <Items {...itemProps} />
+        {rest.single ? <ListTableHeader /> : null}
+        <Items {...itemProps} single={rest.single} />
       </StyledList.Body>
     </StyledList>
   ) : null

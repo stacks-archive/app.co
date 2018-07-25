@@ -91,6 +91,13 @@ const Header = styled(Box)`
   }
 `
 
+const StyledListTableHeader = styled.div`
+  border: 1px solid ${theme.colors.border};
+  border-top: 0;
+  border-right: 0;
+  width: 100%;
+`
+
 const StyledList = styled(Box)`
   box-shadow: 0 1px 1px 0 rgba(20, 33, 68, 0.04), 0 1px 3px 1px rgba(20, 33, 68, 0.09);
   display: flex;
@@ -114,6 +121,7 @@ Item.defaultProps = {
 
 StyledList.Header = Header
 StyledList.Body = Body
+StyledList.Body.Header = StyledListTableHeader
 StyledList.Item = Item
 
 export { StyledList }

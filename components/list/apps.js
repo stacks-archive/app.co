@@ -17,7 +17,17 @@ import { Tag } from '@components/tag'
 import { slugify } from '@common'
 import PropTypes from 'prop-types'
 import { Truncate } from 'rebass'
-import Link from 'next/link'
+import { Flex } from 'grid-styled'
+
+import sortBy from 'lodash/sortBy'
+
+const getTwitterMentions = (app) => {
+  const [ranking] = app.Rankings
+  if (ranking) {
+    return ranking.twitterMentions || 0
+  }
+  return 0
+}
 
 const mapStateToProps = (state) => ({
   apps: selectApps(state),
@@ -37,7 +47,7 @@ const returnCorrectKey = (filter) => {
 }
 
 const AppItem = connect()(
-  ({ imageUrl, blockchain, name, authentication, description, storageNetwork, dispatch, ...rest }) => {
+  ({ imageUrl, blockchain, name, authentication, description, storageNetwork, dispatch, single, ...rest }) => {
     const AppTags = () => (
       <Type.span style={{ fontSize: '11px' }}>
         <Tag>{authentication}</Tag>
@@ -52,13 +62,33 @@ const AppItem = connect()(
     }
     return (
       <StyledList.Item {...rest} link onClick={() => handleClick(rest.id)}>
-        <AppIcon src={imageUrl} alt={name} size={48} />
-        <Box style={{ flexGrow: 1, maxWidth: '85%' }} px={3}>
-          <Type.h4>{name}</Type.h4>
-          <Type.p p={0} my={2}>
-            <Truncate>{description}</Truncate>
-          </Type.p>
-        </Box>
+        <Flex width={1} alignItems="center">
+          <Flex width={single ? [0.5] : [1]}>
+            <AppIcon src={imageUrl} alt={name} size={48} />
+            <Box style={{ flexGrow: 1, maxWidth: single ? '100%' : '85%' }} px={3}>
+              <Type.h4>{name}</Type.h4>
+              <Type.p p={0} my={2}>
+                <Truncate>{description}</Truncate>
+              </Type.p>
+            </Box>
+          </Flex>
+          {single ? (
+            <>
+              <Box width={0.5 / 4} style={{ textAlign: 'right' }}>
+                {authentication || 'N/A'}
+              </Box>
+              <Box width={0.5 / 4} style={{ textAlign: 'right' }}>
+                {storageNetwork || 'N/A'}
+              </Box>
+              <Box width={0.5 / 4} style={{ textAlign: 'right' }}>
+                {blockchain || 'N/A'}
+              </Box>
+              <Box width={0.5 / 4} style={{ textAlign: 'right' }}>
+                {getTwitterMentions(rest)}
+              </Box>
+            </>
+          ) : null}
+        </Flex>
       </StyledList.Item>
     )
   }
@@ -76,17 +106,21 @@ AppItem.propTypes = {
 const AppsList = connect(mapStateToProps)(({ filterBy = 'category', single, limit, apps, ...rest }) => {
   console.log(single, rest[filterBy])
   const items = single ? rest[filterBy].filter((filter) => slugify(filter) === single) : rest[filterBy]
+
   return (
     items &&
     items.map((filter, i) => {
       const filteredList = apps.filter((app) => app[returnCorrectKey(filterBy)] === filter)
+      const sortedApps = sortBy(filteredList, (app) => -getTwitterMentions(app))
       return filteredList.length > 0 ? (
         <ListContainer
           key={i}
           header={{ title: filter, action: { label: 'View All' }, white: true }}
-          items={filteredList}
+          items={single ? sortedApps : filteredList}
           item={AppItem}
           width={[1, 1 / 2, 1 / 3]}
+          limit={limit}
+          single={single}
           {...rest}
         />
       ) : null

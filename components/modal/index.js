@@ -16,7 +16,7 @@ const CloseButton = styled.div`
   opacity: 0.5;
   &:hover {
     opacity: 1;
-    cursor:pointer;
+    cursor: pointer;
   }
 `
 
@@ -79,16 +79,17 @@ class ModalClass extends React.Component {
     const { dispatch } = this.props
     dispatch(doClearApp())
     if (goBack) {
-      this.goBack()
+      this.goBack(true)
     }
   }
 
   goBack = () => {
     if (typeof window !== 'undefined') {
-      if (!document.referrer.includes('app.co') || !document.referrer.includes('localhost')) {
-        window.history.pushState({}, 'App.co - The Universal Dapp Store', `/`)
-      } else {
+      console.log('document.referrer', document.referrer)
+      if (document.referrer.includes('app.co') || document.referrer.includes('localhost')) {
         window.history.go(-1)
+      } else {
+        window.history.pushState({}, 'App.co - The Universal Dapp Store', `/`)
       }
     }
   }
