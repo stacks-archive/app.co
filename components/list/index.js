@@ -4,9 +4,9 @@ import { Type } from '@components/typography'
 import { StyledList } from '@components/list/styled'
 import { Button } from '@components/button'
 
-const Items = ({ items, item: Item, limit, width }) =>
+const Items = ({ items, item: Item, limit, width, ...rest }) =>
   items.map((item, i) => {
-    const Component = () => <Item width={width} {...item} key={i} />
+    const Component = () => <Item width={width} {...item} key={i} {...rest} />
     if (limit) {
       if (i <= limit) {
         return <Component />
@@ -30,7 +30,8 @@ const ListContainer = ({ header, items, item, limit = 7, width = [1, 1 / 2], ...
     items,
     item,
     limit,
-    width
+    width,
+    dispatch: rest.dispatch
   }
   return items ? (
     <StyledList mb={[4]} {...rest}>

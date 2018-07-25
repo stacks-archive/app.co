@@ -66,6 +66,13 @@ class SearchBarClass extends React.Component {
     this.search(query)
   }
 
+  clearSearch = () =>{
+    this.setState({
+      results: [],
+      query: ' '
+    })
+  }
+
   render() {
     const { transparent, placeholder = 'Search for apps...', ...rest } = this.props
     return (
@@ -89,9 +96,7 @@ class SearchBarClass extends React.Component {
                   {this.state.results.length > 0 ? (
                     <>
                       <ResultItemGroup title="Apps">
-                        {this.state.results.map((app, i) => (
-                          <AppItem {...app} key={app.name} noBorder  />
-                        ))}
+                        {this.state.results.map((app, i) => <AppItem {...app} key={app.name} noBorder />)}
                       </ResultItemGroup>
                     </>
                   ) : null}{' '}
@@ -100,6 +105,7 @@ class SearchBarClass extends React.Component {
             </div>
           </QuickSearch>
         </StyledSearchBar.Section>
+        {this.state.results.length > 0 ? <StyledSearchBar.Backdrop onClick={() => this.clearSearch()} /> : null}
       </StyledSearchBar>
     )
   }

@@ -5,6 +5,7 @@ import { getTags, capitalize, slugifyCategory } from '@utils'
 const constants = {
   SELECT_PLATFORM: 'SELECT_PLATFORM',
   SELECT_APP: 'SELECT_APP',
+  CLEAR_APP: 'CLEAR_APP',
   SAVING_APP: 'SAVING_APP',
   SAVED_APP: 'SAVED_APP',
   FETCHING_PENDING: 'FETCH_PENDING',
@@ -20,6 +21,9 @@ export const doSelectPlatformFilter = (platform) => ({
 export const doSelectApp = (id) => ({
   type: constants.SELECT_APP,
   id
+})
+export const doClearApp = () => ({
+  type: constants.CLEAR_APP,
 })
 const savingApp = () => ({ type: constants.SAVING_APP })
 const savedApp = (app) => ({
@@ -138,6 +142,13 @@ const makeReducer = (data) => {
           platformName
         }
       }
+      case constants.CLEAR_APP: {
+        return {
+          ...state,
+          selectedAppId: null,
+          selectedApp: null
+        }
+      }
       case constants.SELECT_APP: {
         const { id } = action
         let selectedApp = null
@@ -190,7 +201,7 @@ const makeReducer = (data) => {
         const category = slugifyCategory(action.category)
         const filteredApps = state.apps.filter((app) => app.category && slugifyCategory(app.category) === category)
         const categoryName = Object.keys(state.constants.appConstants.categoryEnums).find(
-          (cat) => slugifyCategory(cat) === category,
+          (cat) => slugifyCategory(cat) === category
         )
         return {
           ...state,

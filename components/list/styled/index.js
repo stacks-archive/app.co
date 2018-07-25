@@ -17,6 +17,7 @@ const Item = styled(animated.div)`
         display: flex;
         align-items: center;
         max-width: 85%;
+        text-decoration: none !important;
       }
       &::before {
         bottom: -1px;
@@ -97,11 +98,12 @@ const StyledList = styled(Box)`
   * {
     text-decoration: none;
   }
+  border-radius: 6px;
+  overflow: hidden;
+
   ${above.md`
     ${wrapperStyle};
     padding: 0;
-    border-radius: 6px;
-    overflow: hidden;
   `};
   ${space};
 `

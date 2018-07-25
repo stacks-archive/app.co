@@ -87,13 +87,14 @@ app.prepare().then(() => {
     _next()
   })
 
+
   // Use the `renderAndCache` utility defined below to serve pages
   server.get('/', (req, res) => {
     renderAndCache(req, res, '/')
   })
 
-  server.get('/app/:slug', (req, res) => {
-    renderAndCache(req, res, '/app')
+  server.get('/app/:appSlug', (req, res) => {
+    renderAndCache(req, res, '/')
   })
 
   server.get('/platforms/:platform', (req, res) => {

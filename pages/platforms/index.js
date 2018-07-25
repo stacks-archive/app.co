@@ -4,6 +4,8 @@ import { Newsletter } from '@components/newsletter'
 import { AppsList } from '@components/list/apps'
 import { CategoriesList } from '@components/list/categories'
 import { PlatformsList } from '@components/list/platforms'
+import { Modal } from '@components/modal'
+import Head from 'next/head'
 
 class PlatformsPage extends React.PureComponent {
   state = {
@@ -23,6 +25,9 @@ class PlatformsPage extends React.PureComponent {
   render() {
     return (
       <Page>
+        <Head>
+          <title>App.co - The Universal Dapp Store</title>
+        </Head>
         <Page.Section px>
           <Newsletter wrap />
         </Page.Section>
@@ -35,6 +40,7 @@ class PlatformsPage extends React.PureComponent {
         <Page.Section flexDirection="column" px>
           <AppsList filterBy={this.state.filterBy} single={this.props.platform} />
         </Page.Section>
+        <Modal />
       </Page>
     )
   }

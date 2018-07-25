@@ -22,7 +22,11 @@ const TopBar = (props) => {
       <StyledTopBar>
         <StyledTopBar.Wrapper wrap>
           <StyledTopBar.Section grow>
-            <AppIcon />
+            <Link href="/" prefetch>
+              <a>
+                <AppIcon />
+              </a>
+            </Link>
             <SearchBar transparent />
           </StyledTopBar.Section>
           <StyledTopBar.Section>

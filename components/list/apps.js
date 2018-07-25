@@ -9,6 +9,7 @@ import {
   selectStorageCategories,
   selectAuthenticationCategories
 } from '@stores/apps/selectors'
+import { doSelectApp } from '@stores/apps'
 import { AppIcon } from '@components/app-icon'
 import { Box } from '@components/box'
 import { ListContainer } from '@components/list/index'
@@ -35,29 +36,33 @@ const returnCorrectKey = (filter) => {
   }
 }
 
-const AppItem = ({ imageUrl, blockchain, name, authentication, description, storageNetwork, ...rest }) => {
-  const AppTags = () => (
-    <Type.span style={{ fontSize: '11px' }}>
-      <Tag>{authentication}</Tag>
-      <Tag>{storageNetwork}</Tag>
-    </Type.span>
-  )
-  return (
-    <StyledList.Item {...rest} link>
-      <Link href={`/app/${rest.Slugs[0].value}`}>
-        <a>
-          <AppIcon src={imageUrl} alt={name} size={48} />
-          <Box style={{ flexGrow: 1, maxWidth: '85%' }} px={3}>
-            <Type.h4>{name}</Type.h4>
-            <Type.p p={0} my={2}>
-              <Truncate>{description}</Truncate>
-            </Type.p>
-          </Box>
-        </a>
-      </Link>
-    </StyledList.Item>
-  )
-}
+const AppItem = connect()(
+  ({ imageUrl, blockchain, name, authentication, description, storageNetwork, dispatch, ...rest }) => {
+    const AppTags = () => (
+      <Type.span style={{ fontSize: '11px' }}>
+        <Tag>{authentication}</Tag>
+        <Tag>{storageNetwork}</Tag>
+      </Type.span>
+    )
+    const handleClick = (id) => {
+      dispatch(doSelectApp(id))
+      if (typeof window !== 'undefined') {
+        window.history.pushState({}, name, `/app/${rest.Slugs[0].value}`)
+      }
+    }
+    return (
+      <StyledList.Item {...rest} link onClick={() => handleClick(rest.id)}>
+        <AppIcon src={imageUrl} alt={name} size={48} />
+        <Box style={{ flexGrow: 1, maxWidth: '85%' }} px={3}>
+          <Type.h4>{name}</Type.h4>
+          <Type.p p={0} my={2}>
+            <Truncate>{description}</Truncate>
+          </Type.p>
+        </Box>
+      </StyledList.Item>
+    )
+  }
+)
 
 AppItem.propTypes = {
   imageUrl: PropTypes.string,

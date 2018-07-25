@@ -15,8 +15,8 @@ const mapStateToProps = (state) => ({
 
 const PlatformItem = ({ platform, link, ...rest }) => (
   <StyledList.Item {...rest} link>
-    <Link href={link} prefetch>
-      <a>
+    <Link {...link} prefetch>
+      <a style={{width: '100%'}}>
         <Box style={{ flexGrow: 1 }} px={0}>
           <Type.strong>{platform}</Type.strong>
         </Box>
@@ -26,10 +26,23 @@ const PlatformItem = ({ platform, link, ...rest }) => (
 )
 
 const PlatformsList = connect(mapStateToProps)(({ platforms, apps, ...rest }) => {
-  const modifiedArray = platforms.slice(0, 5).map((platform) => ({ platform, link: `/platforms/${slugify(platform)}` }))
+  const modifiedArray = platforms.slice(0, 5).map((platform) => ({
+    platform,
+    link: {
+      as: `/platforms/${slugify(platform)}`,
+      href: {
+        pathname: `/platforms`,
+        query: {
+          platform: slugify(platform)
+        }
+      }
+    }
+  }))
   const lastItem = {
     platform: 'All Platforms',
-    link: '/platforms'
+    link: {
+      href: '/platforms'
+    }
   }
   const categoriesArray = [...modifiedArray, lastItem]
 

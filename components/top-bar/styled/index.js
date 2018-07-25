@@ -3,6 +3,22 @@ import { wrapperStyle, theme, below, above } from '@common/styles'
 
 const Navigation = styled.div`
   display: flex;
+  a {
+    &:link,
+    &:visited,
+    &:active {
+      display: block;
+      padding: 10px;
+
+      font-size: 14px;
+      color: rgba(20, 33, 68, 0.7);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    &:hover {
+      color: rgba(20, 33, 68, 1);
+    }
+  }
   ${({ mobile }) =>
     mobile
       ? below.md`
@@ -20,22 +36,6 @@ const StyledTopBar = styled.div`
   position: relative;
   background: white;
   box-shadow: 0 1px 1px 0 rgba(20, 33, 68, 0.04), 0 1px 3px 1px rgba(20, 33, 68, 0.09);
-  a {
-    &:link,
-    &:visited,
-    &:active {
-      display: block;
-      padding: 10px;
-
-      font-size: 14px;
-      color: rgba(20, 33, 68, 0.7);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    &:hover {
-      color: rgba(20, 33, 68, 1);
-    }
-  }
 `
 
 const Wrapper = styled.div`

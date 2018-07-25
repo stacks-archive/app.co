@@ -58,10 +58,35 @@ const Section = styled.div`
   ${({ grow }) => grow && `flex-grow:1;`};
 `
 
+const Backdrop = styled.div`
+  position: fixed;
+  height: calc(100vh - 65px);
+  top: calc(65px);
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  max-height: 100vh;
+  z-index: -1;
+  &::before {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.85;
+    content: '';
+    background: ${theme.colors.blue};
+  }
+`
+
 ResultsWrapper.defaultProps = {
   pl: 100,
   py: 4
 }
+StyledSearchBar.Backdrop = Backdrop
 StyledSearchBar.Icon = Icon
 StyledSearchBar.Section = Section
 StyledSearchBar.Results = SearchResults

@@ -9,8 +9,8 @@ const StyledNewsletter = styled(Box)`
   display: flex;
   position: relative;
   box-shadow: 0 1px 1px 0 rgba(20, 33, 68, 0.04), 0 1px 3px 1px rgba(20, 33, 68, 0.09);
-  ${above.md`${wrapperStyle}
-    border-radius: 6px;`};
+  border-radius: 6px;
+  ${above.md`${wrapperStyle}`};
 `
 const Section = styled(Box)`
   flex-grow: 1;

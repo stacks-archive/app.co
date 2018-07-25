@@ -7,8 +7,9 @@ import { GithubCircleIcon, TwitterCircleIcon, ArrowLeftIcon } from 'mdi-react'
 import { Button } from '@components/button'
 import { outboundLink } from '@utils'
 import { Tag } from '@components/tag'
-
+import { doClearApp } from '@stores/apps'
 import Link from 'next/link'
+import Head from 'next/head'
 
 const LinkWithIcon = (props) => {
   const { icon: Icon, link, label, title } = props
@@ -113,11 +114,18 @@ const Website = (props) =>
     </Box>
   ) : null
 
-const StatsItem = ({ tweets, name }) => (
-  <Flex pt={3} alignItems="center">
-    <Type.h3 pr={2}>{tweets}</Type.h3> <Type.p>Tweets about {name} in the last 7 days</Type.p>
-  </Flex>
-)
+const StatsItem = ({ Rankings, name }) => {
+  const [ranking] = Rankings || []
+  let tweets = 0
+  if (ranking) {
+    tweets = ranking.twitterMentions || 0
+  }
+  return (
+    <Flex pt={3} alignItems="center">
+      <Type.h3 pr={2}>{tweets}</Type.h3> <Type.p>Tweets about {name} in the last 7 days</Type.p>
+    </Flex>
+  )
+}
 
 const ClaimApp = ({ name }) => (
   <Box>
@@ -125,13 +133,14 @@ const ClaimApp = ({ name }) => (
   </Box>
 )
 
-const HomeLink = () => (
+const HomeLink = (props) => (
   <div
     style={{
       position: 'absolute',
       top: '-38px',
       left: 0
     }}
+    {...props}
   >
     <Link href="/">
       <a>
@@ -144,7 +153,7 @@ const HomeLink = () => (
   </div>
 )
 
-const AppCard = ({ py, px, my, mx, mr = 'auto', ml = 'auto', mt, mb, ...props }) => {
+const AppCard = ({ py, px, my, mx, mr = 'auto', ml = 'auto', mt, mb, style, ...props }) => {
   const appCardStyleProps = {
     py,
     px,
@@ -153,35 +162,42 @@ const AppCard = ({ py, px, my, mx, mr = 'auto', ml = 'auto', mt, mb, ...props })
     mr,
     ml,
     mt,
-    mb
+    mb,
+    style
   }
+
   return (
-    <Box
-      width={[1, 0.65, 0.65, 0.5]}
-      card
-      p={4}
-      style={{
-        position: 'relative'
-      }}
-      {...appCardStyleProps}
-    >
-      {props.homeLink ? <HomeLink /> : null}
-      <Header {...props} />
-      <hr />
-      <Box py={4}>
-        <WebsiteButton {...props} />
+    <>
+      <Head>
+        <title>{props.name} &mdash; App.co</title>
+      </Head>
+      <Box
+        width={[1]}
+        card
+        p={4}
+        style={{
+          position: 'relative'
+        }}
+        {...appCardStyleProps}
+      >
+        {props.homeLink ? <HomeLink onClick={() => props.dispatch(doClearApp())} /> : null}
+        <Header {...props} />
+        <hr />
+        <Box py={4}>
+          <WebsiteButton {...props} />
+        </Box>
+        <Website {...props} />
+        <Flex py={3}>
+          <OpenSource {...props} />
+          <Twitter {...props} />
+        </Flex>
+        <hr />
+        <TagsSection {...props} />
+        <hr />
+        <StatsItem {...props} />
+        <ClaimApp {...props} />
       </Box>
-      <Website {...props} />
-      <Flex py={3}>
-        <OpenSource {...props} />
-        <Twitter {...props} />
-      </Flex>
-      <hr />
-      <TagsSection {...props} />
-      <hr />
-      <StatsItem {...props} />
-      <ClaimApp {...props} />
-    </Box>
+    </>
   )
 }
 
