@@ -5,29 +5,23 @@ import { StyledList } from '@components/list/styled'
 import { Button } from '@components/button'
 import { Flex, Box } from 'rebass'
 
+const HeaderItem = (props) => <Box width={[0, 0.5 / 4]} style={{ textAlign: 'right', overflow: 'hidden' }} {...props} />
+
 const ListTableHeader = (props) => (
   <StyledList.Body.Header>
     <Flex p={2} width={1}>
       <Box width={0.5}>Rank</Box>
-      <Box width={0.5 / 4} style={{ textAlign: 'right' }}>
-        Auth
-      </Box>
-      <Box width={0.5 / 4} style={{ textAlign: 'right' }}>
-        Storage
-      </Box>
-      <Box width={0.5 / 4} style={{ textAlign: 'right' }}>
-        Blockchain
-      </Box>
-      <Box width={0.5 / 4} style={{ textAlign: 'right' }}>
-        Views/Week
-      </Box>
+      <HeaderItem>Auth</HeaderItem>
+      <HeaderItem>Storage</HeaderItem>
+      <HeaderItem>Blockchain</HeaderItem>
+      <HeaderItem>Views/Week</HeaderItem>
     </Flex>
   </StyledList.Body.Header>
 )
 
 const Items = ({ items, item: Item, limit, width, ...rest }) =>
   items.map((item, i) => {
-    const Component = () => <Item width={width} {...item} key={i} {...rest} />
+    const Component = () => <Item width={width} {...item} key={i} rank={i + 1} {...rest} />
     if (limit) {
       if (i <= limit) {
         return <Component />

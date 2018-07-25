@@ -46,8 +46,10 @@ const returnCorrectKey = (filter) => {
   }
 }
 
+const TableItem = (props) => <Box width={[0, 0.5 / 4]} style={{ textAlign: 'right', overflow: 'hidden' }} {...props} />
+
 const AppItem = connect()(
-  ({ imageUrl, blockchain, name, authentication, description, storageNetwork, dispatch, single, ...rest }) => {
+  ({ imageUrl, blockchain, name, authentication, description, storageNetwork, dispatch, single, rank, ...rest }) => {
     const AppTags = () => (
       <Type.span style={{ fontSize: '11px' }}>
         <Tag>{authentication}</Tag>
@@ -63,9 +65,14 @@ const AppItem = connect()(
     return (
       <StyledList.Item {...rest} link onClick={() => handleClick(rest.id)}>
         <Flex width={1} alignItems="center">
-          <Flex width={single ? [0.5] : [1]}>
+          <Flex width={single ? [1, 0.5] : [1]}>
+            {single ? (
+              <Flex pr={3} alignItems="center" justifyContent="center" style={{ opacity: 0.45 }}>
+                <Type.p>{rank}</Type.p>
+              </Flex>
+            ) : null}
             <AppIcon src={imageUrl} alt={name} size={48} />
-            <Box style={{ flexGrow: 1, maxWidth: single ? '100%' : '85%' }} px={3}>
+            <Box style={{ flexGrow: 1, maxWidth: '85%' }} px={3}>
               <Type.h4>{name}</Type.h4>
               <Type.p p={0} my={2}>
                 <Truncate>{description}</Truncate>
@@ -74,18 +81,10 @@ const AppItem = connect()(
           </Flex>
           {single ? (
             <>
-              <Box width={0.5 / 4} style={{ textAlign: 'right' }}>
-                {authentication || 'N/A'}
-              </Box>
-              <Box width={0.5 / 4} style={{ textAlign: 'right' }}>
-                {storageNetwork || 'N/A'}
-              </Box>
-              <Box width={0.5 / 4} style={{ textAlign: 'right' }}>
-                {blockchain || 'N/A'}
-              </Box>
-              <Box width={0.5 / 4} style={{ textAlign: 'right' }}>
-                {getTwitterMentions(rest)}
-              </Box>
+              <TableItem>{authentication || 'N/A'}</TableItem>
+              <TableItem>{storageNetwork || 'N/A'}</TableItem>
+              <TableItem>{blockchain || 'N/A'}</TableItem>
+              <TableItem>{getTwitterMentions(rest)}</TableItem>
             </>
           ) : null}
         </Flex>
