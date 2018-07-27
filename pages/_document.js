@@ -46,6 +46,12 @@ export default class MyDocument extends Document {
           {/* Global site tag (gtag.js) - Google Analytics */}
           <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119163063-1" />
           <script
+            src="https://my.hellobar.com/cefe56c097b8691a6036dcfe8feea1fd6c5c736b.js"
+            type="text/javascript"
+            charSet="utf-8"
+            async="async"
+          />
+          <script
             dangerouslySetInnerHTML={{
               __html: `
             window.dataLayer = window.dataLayer || []; function gtag()
