@@ -46,7 +46,7 @@ const returnCorrectKey = (filter) => {
   }
 }
 
-const TableItem = (props) => <Box width={[0, 0.5 / 4]} style={{ textAlign: 'right', overflow: 'hidden' }} {...props} />
+const TableItem = (props) => <Box width={[0, 0.5 / 4]} style={{ textAlign: 'left', overflow: 'hidden' }} {...props} />
 
 const AppItem = connect()(
   ({ imageUrl, blockchain, name, authentication, description, storageNetwork, dispatch, single, rank, ...rest }) => {
@@ -73,18 +73,18 @@ const AppItem = connect()(
             ) : null}
             <AppIcon src={imageUrl} alt={name} size={48} />
             <Box style={{ flexGrow: 1, maxWidth: '85%' }} px={3}>
-              <Type.h4>{name}</Type.h4>
-              <Type.p p={0} my={2}>
+              <Type.h4 fontSize={16} mt='4px'>{name}</Type.h4>
+              <Type.p p={0} my={2} fontSize={12}>
                 <Truncate>{description}</Truncate>
               </Type.p>
             </Box>
           </Flex>
           {single ? (
             <>
-              <TableItem>{authentication || 'N/A'}</TableItem>
-              <TableItem>{storageNetwork || 'N/A'}</TableItem>
-              <TableItem>{blockchain || 'N/A'}</TableItem>
-              <TableItem>{getTwitterMentions(rest)}</TableItem>
+              <TableItem>{authentication && <Tag>{authentication.toLowerCase()}</Tag> || 'N/A'}</TableItem>
+              <TableItem>{storageNetwork && <Tag>{storageNetwork.toLowerCase()}</Tag> || 'N/A'}</TableItem>
+              <TableItem>{blockchain && <Tag>{blockchain.toLowerCase()}</Tag> || 'N/A'}</TableItem>
+              <TableItem style={{textAlign: 'right', fontSize: '13px', fontWeight: 700}}>{getTwitterMentions(rest)}</TableItem>
             </>
           ) : null}
         </Flex>

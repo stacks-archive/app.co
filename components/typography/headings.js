@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import Shevy from 'shevyjs'
-import { color } from 'styled-system'
+import { color, fontSize } from 'styled-system'
 import { boxProps } from '@components/box'
 
 const shevy = new Shevy()
@@ -11,6 +11,7 @@ const baseProps = css`
   color: rgba(20, 33, 68, 1);
   ${color};
   ${boxProps};
+  ${fontSize};
 `
 const H1 = styled.h1`
   ${baseProps};

@@ -3,6 +3,7 @@ import { Box, boxProps } from '@components/box'
 import { space } from 'styled-system'
 import { theme, below, above, wrapperStyle } from '@common/styles'
 import { animated } from 'react-spring'
+
 const Item = styled(animated.div)`
   display: flex;
   align-items: center;
@@ -96,6 +97,8 @@ const StyledListTableHeader = styled.div`
   border-top: 0;
   border-right: 0;
   width: 100%;
+  height: 50px;
+  font-size: 13px;
 `
 
 const StyledList = styled(Box)`

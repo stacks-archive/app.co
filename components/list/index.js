@@ -5,16 +5,16 @@ import { StyledList } from '@components/list/styled'
 import { Button } from '@components/button'
 import { Flex, Box } from 'rebass'
 
-const HeaderItem = (props) => <Box width={[0, 0.5 / 4]} style={{ textAlign: 'right', overflow: 'hidden' }} {...props} />
+const HeaderItem = (props) => <Box width={[0, 0.5 / 4]} style={{ textAlign: 'left', overflow: 'hidden' }} {...props} />
 
 const ListTableHeader = (props) => (
   <StyledList.Body.Header>
-    <Flex p={2} width={1}>
+    <Flex px={3} pt={3} width={1}>
       <Box width={0.5}>Rank</Box>
       <HeaderItem>Auth</HeaderItem>
       <HeaderItem>Storage</HeaderItem>
       <HeaderItem>Blockchain</HeaderItem>
-      <HeaderItem>Views/Week</HeaderItem>
+      <HeaderItem style={{textAlign: 'right'}}>Tweets/Week</HeaderItem>
     </Flex>
   </StyledList.Body.Header>
 )

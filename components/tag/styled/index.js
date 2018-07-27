@@ -6,6 +6,8 @@ const StyledTag = styled.div`
   display: inline-block;
   background-color: ${theme.colors.grey.light};
   border-radius: 5px;
+  font-size: 12px;
+  color: #7588A2;
   ${({ small }) =>
     small &&
     css`

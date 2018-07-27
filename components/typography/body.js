@@ -1,6 +1,6 @@
 import Shevy from 'shevyjs'
 import styled, { css } from 'styled-components'
-import { color, space } from 'styled-system'
+import { color, space, fontSize } from 'styled-system'
 
 const shevy = new Shevy()
 
@@ -15,7 +15,7 @@ const P = styled.p`
   ${baseProps};
   ${color};
   ${space};
-
+  ${fontSize};
 `
 
 const Span = styled.span`
