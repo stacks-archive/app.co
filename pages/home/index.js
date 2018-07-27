@@ -7,6 +7,7 @@ import { doSelectApp } from '@stores/apps'
 import { PlatformsList } from '@components/list/platforms'
 import { Modal } from '@components/modal'
 import Head from 'next/head'
+
 class HomePage extends React.PureComponent {
   state = {
     filterBy: 'category'
