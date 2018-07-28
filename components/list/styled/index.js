@@ -118,6 +118,15 @@ const StyledList = styled(Box)`
   ${space};
 `
 
+const Image = styled.img`
+  max-height: 24px;
+  max-width: 24px;
+  position: relative;
+  top: 6px;
+  margin-right: 10px;
+  opacity: 0.8;
+`
+
 Item.defaultProps = {
   p: 3
 }
@@ -126,5 +135,6 @@ StyledList.Header = Header
 StyledList.Body = Body
 StyledList.Body.Header = StyledListTableHeader
 StyledList.Item = Item
+StyledList.Image = Image
 
 export { StyledList }

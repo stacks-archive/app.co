@@ -13,11 +13,12 @@ const mapStateToProps = (state) => ({
   platforms: selectBlockchainCategories(state)
 })
 
-const PlatformItem = ({ platform, link, ...rest }) => (
+const PlatformItem = ({ platform, link, image, ...rest }) => (
   <StyledList.Item {...rest} link>
     <Link {...link} prefetch>
-      <a style={{width: '100%'}}>
+      <a style={{width: '100%'}} href={link.as}>
         <Box style={{ flexGrow: 1 }} px={0}>
+          {image && <StyledList.Image src={image} alt={platform}/>}
           <Type.strong>{platform}</Type.strong>
         </Box>
       </a>
@@ -25,19 +26,31 @@ const PlatformItem = ({ platform, link, ...rest }) => (
   </StyledList.Item>
 )
 
-const PlatformsList = connect(mapStateToProps)(({ platforms, apps, ...rest }) => {
-  const modifiedArray = platforms.slice(0, 5).map((platform) => ({
-    platform,
-    link: {
-      as: `/platforms/${slugify(platform)}`,
-      href: {
-        pathname: `/platforms`,
-        query: {
-          platform: slugify(platform)
+const PlatformsList = connect(mapStateToProps)(({ apps, ...rest }) => {
+  const platforms = [
+    'Blockstack',
+    'Ethereum',
+    'Steem',
+    'IPFS',
+    'ZeroNet'
+  ]
+  const modifiedArray = platforms.slice(0, 5).map((platform) => {
+    const slugified = slugify(platform)
+    return {
+      platform,
+      slugified,
+      image: `/static/images/platforms/${slugified}/${slugified}@3x.png`,
+      link: {
+        as: `/platforms/${slugified}`,
+        href: {
+          pathname: `/platforms`,
+          query: {
+            platform: slugified
+          }
         }
       }
     }
-  }))
+  })
   const lastItem = {
     platform: 'All Platforms',
     link: {
