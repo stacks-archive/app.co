@@ -110,7 +110,7 @@ class ModalClass extends React.Component {
     const { app } = this.props
     return app ? (
       <StyledModal>
-        <Box style={{ position: 'relative', zIndex: 10 }} width={[1, 0.65, 0.65, 0.5]}>
+        <Box style={{ position: 'relative', zIndex: 10, maxWidth: 558 }} width={[1, 0.65, 0.65, 0.5]}>
           <CloseButton
             style={{
               position: 'absolute',
