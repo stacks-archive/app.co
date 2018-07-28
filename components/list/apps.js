@@ -48,6 +48,10 @@ const returnCorrectKey = (filter) => {
 
 const TableItem = (props) => <Box width={[0, 0.5 / 4]} style={{ textAlign: 'left', overflow: 'hidden' }} {...props} />
 
+const appTag = (tag) => (
+  tag ? <Tag>{tag.toLowerCase()}</Tag> : 'N/A'
+)
+
 const AppItem = connect()(
   ({ imageUrl, blockchain, name, authentication, description, storageNetwork, dispatch, single, rank, ...rest }) => {
     const AppTags = () => (
@@ -57,13 +61,14 @@ const AppItem = connect()(
       </Type.span>
     )
     const handleClick = (id) => {
+      console.log('click handle')
       dispatch(doSelectApp(id))
       if (typeof window !== 'undefined') {
         window.history.pushState({}, name, `/app/${rest.Slugs[0].value}`)
       }
     }
     return (
-      <StyledList.Item {...rest} link onClick={() => handleClick(rest.id)}>
+      <StyledList.Item {...rest} link onClick={() => handleClick(rest.id)} key={rest.id}>
         <Flex width={1} alignItems="center">
           <Flex width={single ? [1, 0.5] : [1]}>
             {single ? (
@@ -81,9 +86,9 @@ const AppItem = connect()(
           </Flex>
           {single ? (
             <>
-              <TableItem>{authentication && <Tag>{authentication.toLowerCase()}</Tag> || 'N/A'}</TableItem>
-              <TableItem>{storageNetwork && <Tag>{storageNetwork.toLowerCase()}</Tag> || 'N/A'}</TableItem>
-              <TableItem>{blockchain && <Tag>{blockchain.toLowerCase()}</Tag> || 'N/A'}</TableItem>
+              <TableItem>{appTag(authentication)}</TableItem>
+              <TableItem>{appTag(storageNetwork)}</TableItem>
+              <TableItem>{appTag(blockchain)}</TableItem>
               <TableItem style={{textAlign: 'right', fontSize: '13px', fontWeight: 700}}>{getTwitterMentions(rest)}</TableItem>
             </>
           ) : null}
