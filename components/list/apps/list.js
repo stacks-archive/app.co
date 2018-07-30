@@ -1,9 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Truncate } from 'rebass'
-import { Flex } from 'grid-styled'
 import sortBy from 'lodash/sortBy'
-import Link from 'next/link'
 
 import { connect } from 'react-redux'
 
@@ -16,23 +13,13 @@ import {
   selectFilteredApps,
   selectPlatformFilter,
   selectCategoryFilter,
-  selectPlatformName, 
+  selectPlatformName,
   selectCategoryName
 } from '@stores/apps/selectors'
-import { doSelectApp, selectAppsForPlatform } from '@stores/apps'
+import { selectAppsForPlatform } from '@stores/apps'
 
-import { Type } from '@components/typography'
-import { StyledList } from '@components/list/styled'
-import { AppIcon } from '@components/app-icon'
-import { Box } from '@components/box'
 import { ListContainer } from '@components/list/index'
-// import { StyledTagLink as Tag } from '@components/tag/styled'
-import { TagLink } from '@components/tag'
-
-import { slugify } from '@common'
-
-// import AppStore from '@stores/apps'
-// import { selectApps, selectPlatformFilter, selectFilteredApps, selectCategoryFilter } from '@stores/apps/selectors'
+import AppItem from './item'
 
 const getTwitterMentions = (app) => {
   const [ranking] = app.Rankings
@@ -54,75 +41,6 @@ const mapStateToProps = (state) => ({
   platformName: selectPlatformName(state),
   categoryName: selectCategoryName(state)
 })
-
-const returnCorrectKey = (filter) => {
-  switch (filter) {
-    case 'storage':
-      return 'storageNetwork'
-    default:
-      return filter
-  }
-}
-
-const TableItem = (props) => <Box width={[0, 0.5 / 4]} style={{ textAlign: 'left', overflow: 'hidden' }} {...props} />
-
-const appTag = (tag) => {
-  if (!tag) {
-    return 'N/A'
-  }
-  const url = `/platforms/${slugify(tag)}`
-  return (
-    <TagLink href={url}>{tag.toLowerCase()}</TagLink>
-  )
-}
-
-const AppItem = connect()(
-  ({ imageUrl, blockchain, name, authentication, description, storageNetwork, dispatch, single, rank, ...rest }) => {
-    const handleClick = (id) => {
-      dispatch(doSelectApp(id))
-      if (typeof window !== 'undefined') {
-        window.history.pushState({}, name, `/app/${rest.Slugs[0].value}`)
-      }
-    }
-    return (
-      <StyledList.Item {...rest} link onClick={() => handleClick(rest.id)} key={rest.id}>
-        <Flex width={1} alignItems="center">
-          <Flex width={single ? [1, 0.5] : [1]}>
-            {single ? (
-              <Flex pr={3} alignItems="center" justifyContent="center" style={{ opacity: 0.45 }}>
-                <Type.p>{rank}</Type.p>
-              </Flex>
-            ) : null}
-            <AppIcon src={imageUrl} alt={name} size={48} />
-            <Box style={{ flexGrow: 1, maxWidth: '85%' }} px={3}>
-              <Type.h4 fontSize={16} mt='4px'>{name}</Type.h4>
-              <Type.p p={0} my={2} fontSize={12}>
-                <Truncate>{description}</Truncate>
-              </Type.p>
-            </Box>
-          </Flex>
-          {single ? (
-            <>
-              <TableItem>{appTag(authentication)}</TableItem>
-              <TableItem>{appTag(storageNetwork)}</TableItem>
-              <TableItem>{appTag(blockchain)}</TableItem>
-              <TableItem style={{textAlign: 'right', fontSize: '13px', fontWeight: 700}}>{getTwitterMentions(rest)}</TableItem>
-            </>
-          ) : null}
-        </Flex>
-      </StyledList.Item>
-    )
-  }
-)
-
-AppItem.propTypes = {
-  imageUrl: PropTypes.string,
-  blockchain: PropTypes.string,
-  name: PropTypes.string,
-  authentication: PropTypes.string,
-  description: PropTypes.string,
-  storageNetwork: PropTypes.string
-}
 
 const getApps = (props) => {
   const hasFilter = props.platformFilter || props.categoryFilter
@@ -169,7 +87,7 @@ class AppsListComponent extends React.Component {
       items.map((filter) => {
         let filteredList = []
         if (filterBy === 'category') {
-          filteredList = apps.filter((app) => app[returnCorrectKey(filterBy)] === filter)
+          filteredList = apps.filter((app) => app.category === filter)
         } else {
           filteredList = selectAppsForPlatform(apps, filter)
         }
@@ -208,4 +126,4 @@ class AppsListComponent extends React.Component {
 
 const AppsList = connect(mapStateToProps)(AppsListComponent)
 
-export { AppsList, AppItem }
+export default AppsList

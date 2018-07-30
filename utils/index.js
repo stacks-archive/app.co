@@ -104,6 +104,14 @@ const properTagFromParam = (param, enums) =>
 
 const slugifyCategory = (category) => category.toLowerCase().replace(' ', '-')
 
+const getTwitterMentions = (app) => {
+  const [ranking] = app.Rankings
+  if (ranking) {
+    return ranking.twitterMentions || 0
+  }
+  return 0
+}
+
 export {
   colorHexFromString,
   truncate,
@@ -115,5 +123,6 @@ export {
   capitalize,
   getTags,
   slugifyCategory,
-  properTagFromParam
+  properTagFromParam,
+  getTwitterMentions
 }
