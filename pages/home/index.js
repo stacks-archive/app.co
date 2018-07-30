@@ -6,7 +6,7 @@ import { CategoriesList } from '@components/list/categories'
 import { doSelectApp } from '@stores/apps'
 import { PlatformsList } from '@components/list/platforms'
 import { Modal } from '@components/modal'
-import Head from 'next/head'
+import Head from '@containers/head'
 
 class HomePage extends React.PureComponent {
   state = {
@@ -32,9 +32,7 @@ class HomePage extends React.PureComponent {
   render() {
     return (
       <Page>
-        <Head>
-          <title>App.co - The Universal Dapp Store</title>
-        </Head>
+        <Head />
         <Page.Section px>
           <Newsletter wrap />
         </Page.Section>

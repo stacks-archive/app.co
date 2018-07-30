@@ -2,13 +2,13 @@ import React from 'react'
 import { Flex } from 'grid-styled'
 import { GithubCircleIcon, TwitterCircleIcon, ArrowLeftIcon } from 'mdi-react'
 import Link from 'next/link'
-import Head from 'next/head'
 
 import { Type } from '@components/typography'
 import { AppIcon } from '@components/app-icon'
 import { Button } from '@components/button'
 import { Box } from '@components/box'
 import { TagLink } from '@components/tag'
+import Head from '@containers/head'
 
 import { outboundLink } from '@utils'
 import { slugify } from '@common'
@@ -184,13 +184,14 @@ const AppCard = ({ py, px, my, mx, mr = 'auto', ml = 'auto', mt, mb, style, ...p
   const metaTitle = `${props.name} — App.co`
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>{metaTitle}</title>
         <meta name="description" content={metaDesc} />
         <meta property="og:site_name" content="App.co" />
         <meta property="og:title" content={metaTitle} />
         <meta property="og:description" content={metaDesc} />
-      </Head>
+      </Head> */}
+      <Head title={props.name} description={metaDesc} />
       <Box
         width={[1]}
         card

@@ -15,7 +15,6 @@ import { connect } from 'react-redux'
 import AppStore from '@stores/apps'
 import { doSelectPlatformFilter } from '@stores/apps'
 import {
-  selectPlatformFilter, 
   selectPlatformName, 
   selectAllPlatforms
 } from '@stores/apps/selectors'
@@ -62,7 +61,6 @@ class PlatformsPage extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  platformFilter: selectPlatformFilter(state),
   platformName: selectPlatformName(state),
   platforms: selectAllPlatforms(state)
 })

@@ -1,6 +1,6 @@
 import React from 'react'
-import Head from 'next/head'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 import { Page } from '@components/page'
 import { Newsletter } from '@components/newsletter'
@@ -8,12 +8,15 @@ import { AppsList } from '@components/list/apps'
 import { CategoriesList } from '@components/list/categories'
 import { PlatformsList } from '@components/list/platforms'
 import { Modal } from '@components/modal'
+import Head from '@containers/head'
 
 import { doSelectCategoryFilter } from '@stores/apps'
+import { selectCategoryName } from '@stores/apps/selectors'
 
 class CategoryPage extends React.PureComponent {
   propTypes = {
-    category: PropTypes.string
+    category: PropTypes.string,
+    categoryName: PropTypes.string
   }
 
   static async getInitialProps({ query, reduxStore }) {
@@ -29,11 +32,10 @@ class CategoryPage extends React.PureComponent {
   }
 
   render() {
+    const { categoryName } = this.props
     return (
       <Page>
-        <Head>
-          <title>App.co - The Universal Dapp Store</title>
-        </Head>
+        <Head title={categoryName ? `${categoryName} Apps` : 'All Categories'} />
         <Page.Section px>
           <Newsletter wrap />
         </Page.Section>
@@ -56,4 +58,8 @@ class CategoryPage extends React.PureComponent {
   }
 }
 
-export default CategoryPage
+const mapStateToProps = (state) => ({
+  categoryName: selectCategoryName(state)
+})
+
+export default connect(mapStateToProps)(CategoryPage)

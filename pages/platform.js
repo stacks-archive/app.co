@@ -1,7 +1,5 @@
 import React from 'react'
 
-import Page, { Grid, GridColumn } from '@atlaskit/page'
-
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -13,15 +11,13 @@ import Head from '@containers/head'
 
 import AppStore from '@stores/apps'
 import { doSelectPlatformFilter } from '@stores/apps'
-import { selectPlatformFilter, selectPlatformName } from '@stores/apps/selectors'
+import { selectPlatformName } from '@stores/apps/selectors'
 import UserStore from '@stores/user'
-
-import { capitalize, properTagFromParams } from '@utils'
 
 class Platform extends React.Component {
   static getInitialProps({ req, reduxStore }) {
     const {
-      params: { platform },
+      params: { platform }
     } = req
 
     reduxStore.dispatch(doSelectPlatformFilter(platform))
@@ -46,8 +42,7 @@ class Platform extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  platformFilter: selectPlatformFilter(state),
-  platformName: selectPlatformName(state),
+  platformName: selectPlatformName(state)
 })
 
 function mapDispatchToProps(dispatch) {
