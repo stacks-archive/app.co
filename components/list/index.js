@@ -41,7 +41,7 @@ const ListContainer = ({ header, items, item, limit, href, width = [1, 1 / 2], .
         <Type.h2>{header.title}</Type.h2>
         {header.action && (
           <Link href={href}>
-            <Button dark href={href}>View All</Button>
+            <Button dark href={href} style={{marginLeft: 32}}>View All</Button>
           </Link>
         )}
       </StyledList.Header>
