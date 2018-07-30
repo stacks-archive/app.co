@@ -18,6 +18,10 @@ const StyledButton = styled.a`
   text-decoration: none;
   transition: all 135ms cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color;
+  color: #fff;
+  &:link, &:visited, &:active {
+    color: #fff;
+  }
   svg {
     display: block;
   }

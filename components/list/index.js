@@ -1,13 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Link from 'next/link'
+import { Flex, Box } from 'rebass'
+
 import { Type } from '@components/typography'
 import { StyledList } from '@components/list/styled'
 import { Button } from '@components/button'
-import { Flex, Box } from 'rebass'
 
 const HeaderItem = (props) => <Box width={[0, 0.5 / 4]} style={{ textAlign: 'left', overflow: 'hidden' }} {...props} />
 
-const ListTableHeader = (props) => (
+const ListTableHeader = () => (
   <StyledList.Body.Header>
     <Flex px={3} pt={3} width={1}>
       <Box width={0.5}>Rank</Box>
@@ -32,12 +34,16 @@ const Items = ({ items, item: Item, limit, width, ...rest }) =>
     return <Component />
   })
 
-const ListContainer = ({ header, items, item, limit, width = [1, 1 / 2], ...rest }) => {
+const ListContainer = ({ header, items, item, limit, href, width = [1, 1 / 2], ...rest }) => {
   const Header = () =>
     header ? (
       <StyledList.Header p={4}>
         <Type.h2>{header.title}</Type.h2>
-        {header.action ? <Button dark>View All</Button> : null}
+        {header.action && (
+          <Link href={href}>
+            <Button dark href={href}>View All</Button>
+          </Link>
+        )}
       </StyledList.Header>
     ) : null
 
@@ -70,7 +76,8 @@ ListContainer.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
   item: PropTypes.node,
   limit: PropTypes.number.isRequired,
-  width: PropTypes.arrayOf(PropTypes.number.isRequired)
+  width: PropTypes.arrayOf(PropTypes.number.isRequired),
+  href: PropTypes.string
 }
 
 export { ListContainer, Items }

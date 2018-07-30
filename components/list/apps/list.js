@@ -17,6 +17,7 @@ import {
   selectCategoryName
 } from '@stores/apps/selectors'
 import { selectAppsForPlatform } from '@stores/apps'
+import { slugify } from '@common'
 
 import { ListContainer } from '@components/list/index'
 import AppItem from './item'
@@ -84,11 +85,14 @@ class AppsListComponent extends React.Component {
     return (
       items &&
       items.map((filter) => {
-        let filteredList = []
+        let filteredList
+        let path
         if (filterBy === 'category') {
           filteredList = apps.filter((app) => app.category === filter)
+          path = `/categories/`
         } else {
           filteredList = selectAppsForPlatform(apps, filter)
+          path = `/platforms/`
         }
         return filteredList.length > 0 ? (
           <ListContainer
@@ -98,7 +102,8 @@ class AppsListComponent extends React.Component {
             item={AppItem}
             width={[1, 1 / 2, 1 / 3]}
             limit={limit}
-            single={single}
+            single={false}
+            href={path + slugify(filter)}
             {...rest}
           />
         ) : null
@@ -116,7 +121,7 @@ class AppsListComponent extends React.Component {
         item={AppItem}
         width={[1, 1 / 2, 1 / 3]}
         limit={limit}
-        single={single}
+        single
         {...rest}
       />
     )
