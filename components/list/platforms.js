@@ -13,8 +13,8 @@ const mapStateToProps = (state) => ({
   platforms: selectBlockchainCategories(state)
 })
 
-const PlatformItem = ({ platform, link, image, ...rest }) => (
-  <StyledList.Item {...rest} link>
+const PlatformItem = ({ platform, link, image, width }) => (
+  <StyledList.Item width={width} link>
     <Link {...link} prefetch>
       <a style={{width: '100%'}} href={link.as}>
         <Box style={{ flexGrow: 1 }} px={0}>
@@ -61,7 +61,7 @@ const PlatformsList = connect(mapStateToProps)(({ apps, ...rest }) => {
 
   return (
     <>
-      <ListContainer items={categoriesArray} item={PlatformItem} width={[1 / 2, 1 / 3]} {...rest} />
+      <ListContainer items={categoriesArray} item={PlatformItem} width={[1, 1/2]} {...rest} />
     </>
   )
 })

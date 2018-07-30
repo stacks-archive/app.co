@@ -57,7 +57,7 @@ const CategoriesList = connect(mapStateToProps)(({ categories, apps, ...rest }) 
 
   return (
     <>
-      <ListContainer items={categoriesArray} item={CategoryItem} width={[1 / 2, 1 / 3]} {...rest} />
+      <ListContainer items={categoriesArray} item={CategoryItem} width={[1, 1/2]} {...rest} />
     </>
   )
 })
