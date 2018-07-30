@@ -9,10 +9,6 @@ import Modal from '@containers/modals/app'
 import Head from '@containers/head'
 
 class HomePage extends React.PureComponent {
-  state = {
-    filterBy: 'category'
-  }
-
   static getInitialProps({ req, reduxStore }) {
     if (req) {
       const {
@@ -43,7 +39,6 @@ class HomePage extends React.PureComponent {
           </Page.Section>
         </Page.Section>
         <Page.Section flexDirection="column" px>
-          {/* <AppsList filterBy={this.state.filterBy} limit={7} /> */}
           <FeaturedList 
             appNames={[
               "Graphite",
@@ -54,6 +49,7 @@ class HomePage extends React.PureComponent {
               "Coins"
             ]}
             title="Popular Blockstack Apps"
+            href="/platforms/blockstack"
           />
           <FeaturedList 
             title="Decentralized Exchanges"
