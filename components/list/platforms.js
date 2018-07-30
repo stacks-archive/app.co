@@ -54,7 +54,8 @@ const PlatformsList = connect(mapStateToProps)(({ apps, ...rest }) => {
   const lastItem = {
     platform: 'All Platforms',
     link: {
-      href: '/platforms'
+      href: '/platforms',
+      as: '/platforms'
     }
   }
   const categoriesArray = [...modifiedArray, lastItem]

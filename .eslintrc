@@ -38,7 +38,8 @@
     "import/no-duplicates": 2,
     "import/no-extraneous-dependencies": false,
     "import/prefer-default-export": false,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/forbid-prop-types": [2, { "forbid": ["any"] }]
   },
   "settings": {
     "import/resolver": {

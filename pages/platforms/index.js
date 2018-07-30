@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { Page } from '@components/page'
 import { Newsletter } from '@components/newsletter'
@@ -13,13 +14,24 @@ import { connect } from 'react-redux'
 
 import AppStore from '@stores/apps'
 import { doSelectPlatformFilter } from '@stores/apps'
-import { selectPlatformFilter, selectPlatformName } from '@stores/apps/selectors'
+import {
+  selectPlatformFilter, 
+  selectPlatformName, 
+  selectAllPlatforms
+} from '@stores/apps/selectors'
 
 class PlatformsPage extends React.PureComponent {
+  propTypes = {
+    platformName: PropTypes.string,
+    platforms: PropTypes.array.isRequired
+  }
+
   static async getInitialProps({ query, reduxStore }) {
     const { platform } = query
 
-    reduxStore.dispatch(doSelectPlatformFilter(platform))
+    if (platform) {
+      reduxStore.dispatch(doSelectPlatformFilter(platform))
+    }
 
     return {
       platform
@@ -27,9 +39,10 @@ class PlatformsPage extends React.PureComponent {
   }
 
   render() {
+    const { platformName } = this.props
     return (
       <Page>
-        <Head title={`${this.props.platformName} Apps`} />
+        <Head title={platformName ? `${platformName} Apps` : 'All Platforms'} />
         <Page.Section px>
           <Newsletter wrap />
         </Page.Section>
@@ -40,7 +53,7 @@ class PlatformsPage extends React.PureComponent {
           </Page.Section>
         </Page.Section>
         <Page.Section flexDirection="column" px>
-          <AppsList single/>
+          <AppsList single={!!platformName} sectionKeys={this.props.platforms} limit={8} filterBy='platform' />
         </Page.Section>
         <Modal />
       </Page>
@@ -50,7 +63,8 @@ class PlatformsPage extends React.PureComponent {
 
 const mapStateToProps = (state) => ({
   platformFilter: selectPlatformFilter(state),
-  platformName: selectPlatformName(state)
+  platformName: selectPlatformName(state),
+  platforms: selectAllPlatforms(state)
 })
 
 function mapDispatchToProps(dispatch) {

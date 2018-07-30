@@ -1,5 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
+import PropTypes from 'prop-types'
 
 import { Page } from '@components/page'
 import { Newsletter } from '@components/newsletter'
@@ -11,16 +12,16 @@ import { Modal } from '@components/modal'
 import { doSelectCategoryFilter } from '@stores/apps'
 
 class CategoryPage extends React.PureComponent {
-  state = {
-    filterBy: 'category'
+  propTypes = {
+    category: PropTypes.string
   }
 
   static async getInitialProps({ query, reduxStore }) {
     const { category } = query
 
-    console.log('about to select')
-    reduxStore.dispatch(doSelectCategoryFilter(category))
-    console.log('getInitialProps')
+    if (category) {
+      reduxStore.dispatch(doSelectCategoryFilter(category))
+    }
 
     return {
       category
@@ -44,9 +45,9 @@ class CategoryPage extends React.PureComponent {
         </Page.Section>
         <Page.Section flexDirection="column" px>
           <AppsList
-            // filterBy={this.state.filterBy}
-            single
-            // limit={this.props.category === 'all-categories' ? 7 : undefined}
+            filterBy='category'
+            single={!!this.props.category}
+            limit={this.props.category ? undefined : 7}
           />
         </Page.Section>
         <Modal />

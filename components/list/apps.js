@@ -18,7 +18,7 @@ import {
   selectPlatformName, 
   selectCategoryName
 } from '@stores/apps/selectors'
-import { doSelectApp } from '@stores/apps'
+import { doSelectApp, selectAppsForPlatform } from '@stores/apps'
 
 import { Type } from '@components/typography'
 import { StyledList } from '@components/list/styled'
@@ -130,6 +130,16 @@ const getApps = (props) => {
 }
 
 class AppsListComponent extends React.Component {
+  propTypes = {
+    filterBy: PropTypes.string,
+    single: PropTypes.string,
+    limit: PropTypes.number,
+    apps: PropTypes.array.isRequired,
+    sectionKeys: PropTypes.array,
+    categoryName: PropTypes.string,
+    platformName: PropTypes.string
+  }
+
   constructor(props) {
     super(props)
     const sortedApps = getApps(props)
@@ -148,13 +158,19 @@ class AppsListComponent extends React.Component {
   }
 
   multilist() {
-    const { filterBy = 'category', single, limit, apps, ...rest } = this.props
-    const items = rest[filterBy]
+    const { filterBy = 'category', single, limit, apps, sectionKeys, ...rest } = this.props
+    console.log(sectionKeys)
+    const items = sectionKeys || rest[filterBy]
 
     return (
       items &&
       items.map((filter) => {
-        const filteredList = apps.filter((app) => app[returnCorrectKey(filterBy)] === filter)
+        let filteredList = []
+        if (filterBy === 'category') {
+          filteredList = apps.filter((app) => app[returnCorrectKey(filterBy)] === filter)
+        } else {
+          filteredList = selectAppsForPlatform(apps, filter)
+        }
         return filteredList.length > 0 ? (
           <ListContainer
             key={filter}
@@ -186,15 +202,6 @@ class AppsListComponent extends React.Component {
       />
     )
   }
-}
-
-AppsListComponent.propTypes = {
-  filterBy: PropTypes.string,
-  single: PropTypes.string,
-  limit: PropTypes.number,
-  apps: PropTypes.array.isRequired,
-  categoryName: PropTypes.string,
-  platformName: PropTypes.string
 }
 
 const AppsList = connect(mapStateToProps)(AppsListComponent)

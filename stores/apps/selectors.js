@@ -23,3 +23,16 @@ export const selectCategoryFilter = (state) => state.apps && state.apps.category
 export const selectPlatformName = (state) => state.apps && state.apps.platformName
 export const selectCategoryName = (state) => state.apps && state.apps.categoryName
 export const selectAppConstants = (state) => state.apps && state.apps.constants.appConstants
+
+export const selectAllPlatforms = (state) => {
+  if (!state.apps) {
+    return []
+  }
+
+  const platforms = Array.prototype.concat.apply([], [
+    selectBlockchainCategories(state),
+    selectAuthenticationCategories(state),
+    selectStorageCategories(state)
+  ])
+  return platforms
+}

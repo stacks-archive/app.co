@@ -44,12 +44,9 @@ const CategoriesList = connect(mapStateToProps)(({ categories, apps, ...rest }) 
   const lastItem = {
     category: 'All Categories',
     link: {
-      as: `/categories/all-categories`,
+      as: `/categories`,
       href: {
-        pathname: `/categories`,
-        query: {
-          category: 'all-categories'
-        }
+        pathname: `/categories`
       }
     }
   }

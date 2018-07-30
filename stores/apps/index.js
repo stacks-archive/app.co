@@ -1,6 +1,7 @@
 import assignIn from 'lodash/assignIn'
 
 import { getTags, capitalize, slugifyCategory } from '@utils'
+import { selectAllPlatforms } from '@stores/apps/selectors'
 
 const constants = {
   SELECT_PLATFORM: 'SELECT_PLATFORM',
@@ -23,7 +24,7 @@ export const doSelectApp = (id) => ({
   id
 })
 export const doClearApp = () => ({
-  type: constants.CLEAR_APP,
+  type: constants.CLEAR_APP
 })
 const savingApp = () => ({ type: constants.SAVING_APP })
 const savedApp = (app) => ({
@@ -96,6 +97,19 @@ const actions = {
   fetchAdminApps
 }
 
+export const selectAppsForPlatform = (apps, platform) => {
+  console.log('filtering', platform)
+  return apps.filter((app) => {
+    const tags = getTags(app)
+    // console.log(platform, tags)
+    if (platform === 'blockstack') {
+      return app.authentication === 'Blockstack' || app.storageNetwork === 'Gaia'
+    }
+    // console.log(platform, tags)
+    return !!tags.find((tag) => tag.toLowerCase() === platform.toLowerCase())
+  })
+}
+
 const makeReducer = (data) => {
   let initialState = data
 
@@ -123,18 +137,9 @@ const makeReducer = (data) => {
     switch (action.type) {
       case constants.SELECT_PLATFORM: {
         const { platform } = action
-        const filteredApps = state.apps.filter((app) => {
-          const tags = getTags(app)
-          if (platform === 'blockstack') {
-            return app.authentication === 'Blockstack' || app.storageNetwork === 'Gaia'
-          }
-          return !!tags.find((tag) => tag.toLowerCase() === platform)
-        })
-        const { authenticationEnums, storageEnums, blockchainEnums } = state.constants.appConstants
-        const enums = Object.keys(authenticationEnums)
-          .concat(Object.keys(storageEnums))
-          .concat(Object.keys(blockchainEnums))
-        const platformName = enums.find((_platform) => _platform.toLowerCase() === platform) || capitalize(platform)
+        const filteredApps = selectAppsForPlatform(state.apps, platform)
+        const allPlatforms = selectAllPlatforms(state)
+        const platformName = allPlatforms.find((_platform) => _platform.toLowerCase() === platform) || capitalize(platform)
         return {
           ...state,
           platformFilter: platform,
