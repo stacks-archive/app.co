@@ -25,8 +25,10 @@ export const selectCategoryName = (state) => state.apps && state.apps.categoryNa
 export const selectAppConstants = (state) => state.apps && state.apps.constants.appConstants
 
 export const selectAllPlatforms = (state) => {
+  console.log('selectAllPlatforms')
+  console.log(state.apps.constants)
   if (!state.apps || !state.apps.constants) {
-    return []
+    state.apps.constants = state.constants
   }
 
   const platforms = Array.prototype.concat.apply([], [
