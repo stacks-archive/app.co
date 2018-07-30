@@ -6,14 +6,13 @@ import { Newsletter } from '@components/newsletter'
 import { AppsList } from '@components/list/apps'
 import { CategoriesList } from '@components/list/categories'
 import { PlatformsList } from '@components/list/platforms'
-import { Modal } from '@components/modal'
+import Modal from '@containers/modals/app'
 import Head from '@containers/head'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import AppStore from '@stores/apps'
-import { doSelectPlatformFilter } from '@stores/apps'
+import AppStore, { doSelectPlatformFilter } from '@stores/apps'
 import {
   selectPlatformName, 
   selectAllPlatforms
@@ -38,6 +37,7 @@ class PlatformsPage extends React.PureComponent {
   }
 
   render() {
+    console.log('modal!', Modal)
     const { platformName } = this.props
     return (
       <Page>

@@ -7,7 +7,7 @@ import { Newsletter } from '@components/newsletter'
 import { AppsList } from '@components/list/apps'
 import { CategoriesList } from '@components/list/categories'
 import { PlatformsList } from '@components/list/platforms'
-import { Modal } from '@components/modal'
+import Modal from '@components/modal'
 import Head from '@containers/head'
 
 import { doSelectCategoryFilter } from '@stores/apps'

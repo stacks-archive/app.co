@@ -5,7 +5,7 @@ import { AppsList } from '@components/list/apps'
 import { CategoriesList } from '@components/list/categories'
 import { doSelectApp } from '@stores/apps'
 import { PlatformsList } from '@components/list/platforms'
-import { Modal } from '@components/modal'
+import Modal from '@containers/modals/app'
 import Head from '@containers/head'
 
 class HomePage extends React.PureComponent {
@@ -30,6 +30,7 @@ class HomePage extends React.PureComponent {
   }
 
   render() {
+    console.log('modal!', Modal)
     return (
       <Page>
         <Head />

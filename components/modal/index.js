@@ -1,16 +1,6 @@
-import React from 'react'
 import styled from 'styled-components'
-import { connect } from 'react-redux'
-import { selectCurrentApp } from '@stores/apps/selectors'
-import { AppCard } from '@components/app-card'
-import { theme } from '@common/styles'
-import { doClearApp } from '@stores/apps'
-import { CloseIcon } from 'mdi-react'
-import { Box } from '@components/box'
 
-const mapStateToProps = (state) => ({
-  app: selectCurrentApp(state)
-})
+import { theme } from '@common/styles'
 
 const CloseButton = styled.div`
   opacity: 0.5;
@@ -20,7 +10,7 @@ const CloseButton = styled.div`
   }
 `
 
-const StyledModal = styled.div`
+const Modal = styled.div`
   position: fixed;
   height: 100vh;
   top: 0;
@@ -66,70 +56,9 @@ const Content = styled.div`
   z-index: 5;
 `
 
-const handleClick = (action) => {
-  action()
-  if (typeof window !== 'undefined') {
-    console.log('goBack one')
-    window.history.go(-1)
-  }
+export default {
+  Content,
+  Backdrop,
+  Modal,
+  CloseButton
 }
-
-class ModalClass extends React.Component {
-  handleClose = (goBack) => {
-    const { dispatch } = this.props
-    dispatch(doClearApp())
-    if (goBack) {
-      this.goBack(true)
-    }
-  }
-
-  goBack = () => {
-    if (typeof window !== 'undefined') {
-      console.log('document.referrer', document.referrer)
-      if (document.referrer.includes('app.co') || document.referrer.includes('localhost')) {
-        window.history.go(-1)
-      } else {
-        window.history.pushState({}, 'App.co - The Universal Dapp Store', `/`)
-      }
-    }
-  }
-
-  handleBack = (event) => {
-    if (event.state && !event.state.as.includes('app')) {
-      this.handleClose()
-    }
-  }
-
-  componentDidMount() {
-    if (typeof window !== 'undefined') {
-      window.onpopstate = this.handleBack
-    }
-  }
-
-  render() {
-    const { app } = this.props
-    return app ? (
-      <StyledModal>
-        <Box style={{ position: 'relative', zIndex: 10, maxWidth: 558 }} width={[1, 0.65, 0.65, 0.5]}>
-          <CloseButton
-            style={{
-              position: 'absolute',
-              zIndex: 20,
-              right: '30px',
-              top: '25px'
-            }}
-            onClick={() => this.handleClose(true)}
-          >
-            <CloseIcon />
-          </CloseButton>
-          <AppCard {...app} style={{ position: 'relative', zIndex: 10 }} />
-        </Box>
-        <Backdrop onClick={() => this.handleClose(true)} />
-      </StyledModal>
-    ) : null
-  }
-}
-
-const Modal = connect(mapStateToProps)(ModalClass)
-
-export { Modal }
