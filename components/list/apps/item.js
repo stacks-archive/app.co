@@ -18,7 +18,7 @@ const TableItem = (props) => <Box width={[0, 0.5 / 4]} style={{ textAlign: 'left
 
 const appTag = (tag) => {
   if (!tag) {
-    return 'N/A'
+    return ''
   }
   const url = `/platforms/${slugify(tag)}`
   return (
