@@ -64,6 +64,8 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
           <link rel="shortcut icon" href="/static/images/favicon/favicon-96x96.png" />
+          <link href="/static/nprogress.css" rel="stylesheet" type="text/css" async />
+
           <meta name="viewport" content="width=device-width,initial-scale=1" />
           {/* Global site tag (gtag.js) - Google Analytics */}
           <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119163063-1" />

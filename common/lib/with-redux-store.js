@@ -24,7 +24,7 @@ export default (App) =>
       // This allows you to set a custom default initialState
       const data = appContext.ctx.query
 
-      console.log(appContext.ctx.req)
+      // console.log(appContext.ctx.req)
       const reduxStore = getOrCreateStore(data)
 
       // Provide the store to getInitialProps of pages

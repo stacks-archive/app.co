@@ -7,6 +7,7 @@ import persistState from 'redux-localstorage'
 import AppsStore from '@stores/apps'
 import UserStore from '@stores/user'
 import newsletter from '@stores/newsletter'
+import RouterStore from '@stores/router'
 
 export default (data) => {
   const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
@@ -16,7 +17,8 @@ export default (data) => {
   const Reducer = combineReducers({
     apps: AppsStore.makeReducer(data),
     user: UserStore.reducer,
-    newsletter
+    newsletter,
+    router: RouterStore.reducer
   })
 
   return finalCreateStore(Reducer)
