@@ -41,15 +41,6 @@ class PlatformsPage extends React.PureComponent {
     return (
       <Page>
         <Head title={platformName ? `${platformName} Apps` : 'All Platforms'} />
-        <Page.Section px>
-          <Newsletter wrap />
-        </Page.Section>
-        <Page.Section p={0} px>
-          <Page.Section wrap flexDirection={['column', 'column', 'row']} p={0}>
-            <PlatformsList mr={[0, 3]} />
-            <CategoriesList />
-          </Page.Section>
-        </Page.Section>
         <Page.Section flexDirection="column" px>
           <AppsList single={!!platformName} sectionKeys={this.props.platforms} limit={platformName ? undefined : 7} filterBy='platform' />
         </Page.Section>

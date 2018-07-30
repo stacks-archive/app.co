@@ -7,7 +7,7 @@ import { Newsletter } from '@components/newsletter'
 import { AppsList } from '@components/list/apps'
 import { CategoriesList } from '@components/list/categories'
 import { PlatformsList } from '@components/list/platforms'
-import Modal from '@components/modal'
+import Modal from '@containers/modals/app'
 import Head from '@containers/head'
 
 import { doSelectCategoryFilter } from '@stores/apps'
@@ -36,15 +36,6 @@ class CategoryPage extends React.PureComponent {
     return (
       <Page>
         <Head title={categoryName ? `${categoryName} Apps` : 'All Categories'} />
-        <Page.Section px>
-          <Newsletter wrap />
-        </Page.Section>
-        <Page.Section p={0} px>
-          <Page.Section wrap flexDirection={['column', 'column', 'row']} p={0}>
-            <PlatformsList mr={[0, 3]} />
-            <CategoriesList />
-          </Page.Section>
-        </Page.Section>
         <Page.Section flexDirection="column" px>
           <AppsList
             filterBy='category'
