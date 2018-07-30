@@ -1,7 +1,8 @@
 import assignIn from 'lodash/assignIn'
 
-import { getTags, capitalize, slugifyCategory } from '@utils'
+import { getTags, capitalize } from '@utils'
 import { selectAllPlatforms } from '@stores/apps/selectors'
+import { slugify } from '@common'
 
 const constants = {
   SELECT_PLATFORM: 'SELECT_PLATFORM',
@@ -198,10 +199,10 @@ const makeReducer = (data) => {
         }
       }
       case constants.SELECT_CATEGORY: {
-        const category = slugifyCategory(action.category)
-        const filteredApps = state.apps.filter((app) => app.category && slugifyCategory(app.category) === category)
+        const category = slugify(action.category)
+        const filteredApps = state.apps.filter((app) => app.category && slugify(app.category) === category)
         const categoryName = Object.keys(state.constants.appConstants.categoryEnums).find(
-          (cat) => slugifyCategory(cat) === category
+          (cat) => slugify(cat) === category
         )
         return {
           ...state,

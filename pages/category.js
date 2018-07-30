@@ -3,10 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { Page } from '@components/page'
-import { Newsletter } from '@components/newsletter'
 import { AppsList } from '@components/list/apps'
-import { CategoriesList } from '@components/list/categories'
-import { PlatformsList } from '@components/list/platforms'
 import Modal from '@containers/modals/app'
 import Head from '@containers/head'
 
@@ -35,7 +32,7 @@ class CategoryPage extends React.PureComponent {
     const { categoryName } = this.props
     return (
       <Page>
-        <Head title={categoryName ? `${categoryName} Apps` : 'All Categories'} />
+        <Head title={categoryName || 'All Categories'} />
         <Page.Section flexDirection="column" px>
           <AppsList
             filterBy='category'
