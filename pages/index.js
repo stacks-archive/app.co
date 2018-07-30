@@ -12,7 +12,7 @@ import Head from '@containers/head';
 import NewsletterCTA from '@containers/newsletter-cta';
 
 const featuredApps = ['SteemIt', 'Stealthy', 'Peepeth', 'Mastodon', 'Diaspora', 'DTube'];
-const bizApps = ['Graphite', 'Aragon', 'Gitcoin', 'Bounty0x', 'adChain Registry', 'ETHLance'];
+const bizApps = ['Graphite', 'Misthos', 'Aragon', 'Gitcoin', 'adChain Registry', 'ETHLance'];
 
 export default () => (
   <Page>
