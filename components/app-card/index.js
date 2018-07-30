@@ -1,15 +1,19 @@
 import React from 'react'
-import { Box } from '@components/box'
 import { Flex } from 'grid-styled'
-import { Type } from '@components/typography'
-import { AppIcon } from '@components/app-icon'
 import { GithubCircleIcon, TwitterCircleIcon, ArrowLeftIcon } from 'mdi-react'
-import { Button } from '@components/button'
-import { outboundLink } from '@utils'
-import { Tag } from '@components/tag'
-import { doClearApp } from '@stores/apps'
 import Link from 'next/link'
 import Head from 'next/head'
+
+import { Type } from '@components/typography'
+import { AppIcon } from '@components/app-icon'
+import { Button } from '@components/button'
+import { Box } from '@components/box'
+import { TagLink } from '@components/tag'
+
+import { outboundLink } from '@utils'
+import { slugify } from '@common'
+import { doClearApp } from '@stores/apps'
+
 
 const LinkWithIcon = (props) => {
   const { icon: Icon, link, label, title } = props
@@ -53,15 +57,21 @@ const Twitter = ({ twitterHandle, ...rest }) =>
     />
   ) : null
 
-const TagBox = ({ label, tag }) =>
-  tag ? (
+const TagBox = ({ label, tag }) => {
+  if (!tag) {
+    return null
+  }
+  const url = `/platforms/${slugify(tag)}`
+  return (
     <Box py={4} pr={4}>
       <Type.h5>{label}</Type.h5>
-      <Tag light mt={3}>
+
+      <TagLink light mt={3} href={url}>
         {tag}
-      </Tag>
+      </TagLink>
     </Box>
-  ) : null
+  )
+}
 
 const TagsSection = ({ authentication, blockchain, storageNetwork }) => (
   <Flex alignItems="center">
@@ -82,15 +92,17 @@ const WebsiteButton = (props) => (
   </Button>
 )
 
+const categoryURL = (category) => `/categories/${slugify(category)}`
+
 const Header = ({ imageUrl, name, category, description }) => (
   <>
     <Flex alignItems="center">
       <AppIcon src={imageUrl} alt={name} />
       <Box pl={3}>
         <Type.h3>{name}</Type.h3>
-        <Tag mt={2} small>
+        <TagLink mt={2} small href={categoryURL(category)}>
           {category}
-        </Tag>
+        </TagLink>
       </Box>
     </Flex>
     <Box py={3}>
@@ -143,7 +155,7 @@ const HomeLink = (props) => (
     {...props}
   >
     <Link href="/">
-      <a>
+      <a href="/">
         <Flex>
           <ArrowLeftIcon />
           All dapps

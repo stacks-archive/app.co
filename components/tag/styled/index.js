@@ -34,4 +34,11 @@ StyledTag.defaultProps = {
   py: 1
 }
 
-export { StyledTag }
+const StyledTagLink = StyledTag.withComponent('a').extend`
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
+export { StyledTag, StyledTagLink }

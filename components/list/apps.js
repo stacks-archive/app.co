@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Truncate } from 'rebass'
 import { Flex } from 'grid-styled'
 import sortBy from 'lodash/sortBy'
+import Link from 'next/link'
 
 import { connect } from 'react-redux'
 
@@ -25,7 +26,8 @@ import { StyledList } from '@components/list/styled'
 import { AppIcon } from '@components/app-icon'
 import { Box } from '@components/box'
 import { ListContainer } from '@components/list/index'
-import { Tag } from '@components/tag'
+// import { StyledTagLink as Tag } from '@components/tag/styled'
+import { TagLink } from '@components/tag'
 
 import { slugify } from '@common'
 
@@ -64,18 +66,18 @@ const returnCorrectKey = (filter) => {
 
 const TableItem = (props) => <Box width={[0, 0.5 / 4]} style={{ textAlign: 'left', overflow: 'hidden' }} {...props} />
 
-const appTag = (tag) => (
-  tag ? <Tag>{tag.toLowerCase()}</Tag> : 'N/A'
-)
+const appTag = (tag) => {
+  if (!tag) {
+    return 'N/A'
+  }
+  const url = `/platforms/${slugify(tag)}`
+  return (
+    <TagLink href={url}>{tag.toLowerCase()}</TagLink>
+  )
+}
 
 const AppItem = connect()(
   ({ imageUrl, blockchain, name, authentication, description, storageNetwork, dispatch, single, rank, ...rest }) => {
-    const AppTags = () => (
-      <Type.span style={{ fontSize: '11px' }}>
-        <Tag>{authentication}</Tag>
-        <Tag>{storageNetwork}</Tag>
-      </Type.span>
-    )
     const handleClick = (id) => {
       dispatch(doSelectApp(id))
       if (typeof window !== 'undefined') {
