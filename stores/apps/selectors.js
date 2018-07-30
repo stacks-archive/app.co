@@ -25,7 +25,7 @@ export const selectCategoryName = (state) => state.apps && state.apps.categoryNa
 export const selectAppConstants = (state) => state.apps && state.apps.constants.appConstants
 
 export const selectAllPlatforms = (state) => {
-  if (!state.apps) {
+  if (!state.apps || !state.apps.constants) {
     return []
   }
 

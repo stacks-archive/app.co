@@ -53,7 +53,7 @@ class PlatformsPage extends React.PureComponent {
           </Page.Section>
         </Page.Section>
         <Page.Section flexDirection="column" px>
-          <AppsList single={!!platformName} sectionKeys={this.props.platforms} limit={8} filterBy='platform' />
+          <AppsList single={!!platformName} sectionKeys={this.props.platforms} limit={platformName ? undefined : 7} filterBy='platform' />
         </Page.Section>
         <Modal />
       </Page>
