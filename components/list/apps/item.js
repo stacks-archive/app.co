@@ -27,14 +27,24 @@ const appTag = (tag) => {
 }
 
 const AppItem = ({ imageUrl, blockchain, name, authentication, description, storageNetwork, dispatch, single, rank, ...rest }) => {
-  const handleClick = (id) => {
-    dispatch(doSelectApp(id))
-    if (typeof window !== 'undefined') {
-      window.history.pushState({}, name, `/app/${rest.Slugs[0].value}`)
+  const handleClick = (id, event) => {
+    const href = event.target.getAttribute('href')
+    if (!href || href.indexOf('/platforms') === -1) {
+      dispatch(doSelectApp(id))
+      if (typeof window !== 'undefined') {
+        window.history.pushState({}, name, `/app/${rest.Slugs[0].value}`)
+      }
+      event.preventDefault()
     }
   }
   return (
-    <StyledList.Item {...rest} link onClick={() => handleClick(rest.id)} key={rest.id}>
+    <StyledList.ItemLink 
+      {...rest} 
+      link
+      href={`/app/${rest.Slugs[0].value}`}
+      onClick={(evt) => handleClick(rest.id, evt)} 
+      key={rest.id}
+    >
       <Flex width={1} alignItems="center">
         <Flex width={single ? [1, 0.5] : [1]}>
           {single ? (
@@ -59,7 +69,7 @@ const AppItem = ({ imageUrl, blockchain, name, authentication, description, stor
           </>
         ) : null}
       </Flex>
-    </StyledList.Item>
+    </StyledList.ItemLink>
   )
 }
 

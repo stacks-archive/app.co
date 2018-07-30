@@ -52,6 +52,8 @@ const Item = styled(animated.div)`
   ${boxProps};
 `
 
+const ItemLink = Item.withComponent('a').extend``
+
 const Body = styled(Box)`
   background: white;
   display: flex;
@@ -136,5 +138,6 @@ StyledList.Body = Body
 StyledList.Body.Header = StyledListTableHeader
 StyledList.Item = Item
 StyledList.Image = Image
+StyledList.ItemLink = ItemLink
 
 export { StyledList }

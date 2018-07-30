@@ -79,7 +79,6 @@ class AppsListComponent extends React.Component {
 
   multilist() {
     const { filterBy = 'category', single, limit, apps, sectionKeys, ...rest } = this.props
-    console.log(sectionKeys)
     const items = sectionKeys || rest[filterBy]
 
     return (
