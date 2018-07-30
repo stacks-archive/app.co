@@ -122,23 +122,25 @@ AppItem.propTypes = {
   storageNetwork: PropTypes.string
 }
 
+const getApps = (props) => {
+  const hasFilter = props.platformFilter || props.categoryFilter
+  const apps = hasFilter ? props.filteredApps : props.apps
+  const sortedApps = sortBy(apps, (app) => -getTwitterMentions(app))
+  return sortedApps
+}
+
 class AppsListComponent extends React.Component {
   constructor(props) {
     super(props)
-    this.updateApps(props)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.updateApps(nextProps)
-  }
-
-  updateApps(props) {
-    const hasFilter = props.platformFilter || props.categoryFilter
-    const apps = hasFilter ? props.filteredApps : props.apps
-    const sortedApps = sortBy(apps, (app) => -getTwitterMentions(app))
+    const sortedApps = getApps(props)
     this.state = {
       sortedApps
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const sortedApps = getApps(nextProps)
+    this.setState({ sortedApps })
   }
 
   render() {
