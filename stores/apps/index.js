@@ -97,18 +97,13 @@ const actions = {
   fetchAdminApps
 }
 
-export const selectAppsForPlatform = (apps, platform) => {
-  console.log('filtering', platform)
-  return apps.filter((app) => {
-    const tags = getTags(app)
-    // console.log(platform, tags)
-    if (platform === 'blockstack') {
-      return app.authentication === 'Blockstack' || app.storageNetwork === 'Gaia'
-    }
-    // console.log(platform, tags)
-    return !!tags.find((tag) => tag.toLowerCase() === platform.toLowerCase())
-  })
-}
+export const selectAppsForPlatform = (apps, platform) => apps.filter((app) => {
+  const tags = getTags(app)
+  if (platform === 'blockstack') {
+    return app.authentication === 'Blockstack' || app.storageNetwork === 'Gaia'
+  }
+  return !!tags.find((tag) => tag.toLowerCase() === platform.toLowerCase())
+})
 
 const makeReducer = (data) => {
   let initialState = data

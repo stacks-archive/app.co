@@ -55,7 +55,6 @@ class App extends React.Component {
   }
 
   save() {
-    console.log(this)
     this.props.saveApp(this.state, this.props.apiServer, this.props.jwt)
     this.notifications.addNotification({
       message: `${this.state.name} was saved successfully.`,

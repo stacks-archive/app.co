@@ -16,7 +16,6 @@ import 'isomorphic-unfetch'
 class MyApp extends App {
   constructor(props) {
     super(props)
-    console.log('constructing app')
     routerEvents.on('routeChangeStart', () => NProgress.start())
     routerEvents.on('routeChangeComplete', () => NProgress.done())
     routerEvents.on('routeChangeError', () => NProgress.done())
