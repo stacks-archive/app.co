@@ -16,10 +16,6 @@ import { doSelectPlatformFilter } from '@stores/apps'
 import { selectPlatformFilter, selectPlatformName } from '@stores/apps/selectors'
 
 class PlatformsPage extends React.PureComponent {
-  state = {
-    filterBy: 'blockchain'
-  }
-
   static async getInitialProps({ query, reduxStore }) {
     const { platform } = query
 

@@ -125,6 +125,14 @@ AppItem.propTypes = {
 class AppListComponent extends React.Component {
   constructor(props) {
     super(props)
+    this.updateApps(props)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.updateApps(nextProps)
+  }
+
+  updateApps(props) {
     const hasFilter = props.platformFilter || props.categoryFilter
     const apps = hasFilter ? props.filteredApps : props.apps
     const sortedApps = sortBy(apps, (app) => -getTwitterMentions(app))
