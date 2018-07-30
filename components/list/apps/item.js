@@ -58,7 +58,7 @@ const AppItem = ({ imageUrl, blockchain, name, authentication, description, stor
           <Box style={{ flexGrow: 1, maxWidth: '85%' }} px={3}>
             <Type.h4 fontSize={16} mt='4px'>{name}</Type.h4>
             <Type.p p={0} my={2} fontSize={12}>
-              <Truncate>{description}</Truncate>
+              {description}
             </Type.p>
           </Box>
         </Flex>
