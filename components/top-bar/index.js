@@ -26,7 +26,7 @@ const NavigationComponent = (props) => (
       Get Updates
     </a>
     <Link href="/submit">
-      <a href="/submit">Submit your dApp</a>
+      <a href="/submit">Submit your dapp</a>
     </Link>
   </StyledTopBar.Navigation>
 )

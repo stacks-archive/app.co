@@ -1,7 +1,7 @@
 import React from 'react'
 import { Page } from '@components/page'
 import { Newsletter } from '@components/newsletter'
-import { AppsList } from '@components/list/apps'
+import { FeaturedList } from '@components/list/apps'
 import { CategoriesList } from '@components/list/categories'
 import { doSelectApp } from '@stores/apps'
 import { PlatformsList } from '@components/list/platforms'
@@ -43,7 +43,39 @@ class HomePage extends React.PureComponent {
           </Page.Section>
         </Page.Section>
         <Page.Section flexDirection="column" px>
-          <AppsList filterBy={this.state.filterBy} limit={7} />
+          {/* <AppsList filterBy={this.state.filterBy} limit={7} /> */}
+          <FeaturedList 
+            appNames={[
+              "Graphite",
+              "Stealthy",
+              "Misthos",
+              "TravelStack",
+              "Dappy Wallet",
+              "Coins"
+            ]}
+            title="Popular Blockstack Apps"
+          />
+          <FeaturedList 
+            title="Decentralized Exchanges"
+            appNames={[
+              "Radar Relay",
+              "IDEX",
+              "OasisDEX",
+              "ForkDelta"
+            ]}
+          />
+          <FeaturedList 
+            appNames={[
+              'MyCrypto',
+              'MyEtherWallet',
+              'Balance.io',
+              'Toshi',
+              'MetaMask',
+              'Exodus',
+              'Trust Wallet'
+            ]}
+            title='Ethereum Wallets'
+          />
         </Page.Section>
         <Modal />
       </Page>
