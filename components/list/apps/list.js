@@ -51,7 +51,7 @@ const getApps = (props) => {
 }
 
 class AppsListComponent extends React.Component {
-  propTypes = {
+  static propTypes = {
     filterBy: PropTypes.string,
     single: PropTypes.string,
     limit: PropTypes.number,

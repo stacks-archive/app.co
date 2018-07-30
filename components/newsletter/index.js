@@ -1,32 +1,31 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
 import { PlanetsWithGasGiant } from '@components/svg'
 import { Type } from '@components/typography'
 import { Input } from '@components/input'
 import { theme } from '@common/styles'
-import { connect } from 'react-redux'
-import { doSubmitEmail } from '@stores/newsletter/actions'
-import { selectNewsletterHasSubscribed, selectNewsletterSubmitting } from '@stores/newsletter/selectors'
 import { StyledNewsletter } from './styled'
-import {StyledPage} from '@components/page/styled'
 
-const mapStateToProps = (state) => ({
-  subscribed: selectNewsletterHasSubscribed(state),
-  submitting: selectNewsletterSubmitting(state)
-})
+import NewsletterActions from '@stores/newsletter/actions'
+import { selectNewsletterHasSubscribed, selectNewsletterSubmitting } from '@stores/newsletter/selectors'
+
 const EMAIL_REGEX = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
 
 class NewsletterClass extends React.Component {
   state = {
     email: null
   }
+
   handleSubmit = (email = this.state.email) => {
     if (email.match(EMAIL_REGEX)) {
-      const { dispatch } = this.props
-      dispatch(doSubmitEmail(email))
+      this.props.doSubmitEmail(email)
     }
   }
+
   render() {
-    const doingSomething = this.props.submitted | this.props.subscribed
+    const doingSomething = this.props.submitted || this.props.subscribed
     const text = this.props.submitting ? 'Loading...' : 'Thanks for subscribing!'
     return (
       <StyledNewsletter p={3} mb={4} {...this.props}>
@@ -61,6 +60,15 @@ class NewsletterClass extends React.Component {
   }
 }
 
-const Newsletter = connect(mapStateToProps)(NewsletterClass)
+const mapStateToProps = (state) => ({
+  subscribed: selectNewsletterHasSubscribed(state),
+  submitting: selectNewsletterSubmitting(state)
+})
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Object.assign({}, NewsletterActions), dispatch)
+}
+
+const Newsletter = connect(mapStateToProps, mapDispatchToProps)(NewsletterClass)
 
 export { Newsletter }

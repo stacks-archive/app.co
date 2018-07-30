@@ -1,6 +1,7 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { theme } from '@common/styles'
+import { Box } from '@components/box'
 
 const CloseButton = styled.div`
   opacity: 0.5;
@@ -8,6 +9,18 @@ const CloseButton = styled.div`
     opacity: 1;
     cursor: pointer;
   }
+  width: 28px;
+  height: 28px;
+  padding-top: 2px;
+  padding-left: 2px;
+
+  ${({ dark }) =>
+    dark &&
+    css`
+      background-color: #000;
+      color: white;
+      border-radius: 50%;
+    `};
 `
 
 const Modal = styled.div`
@@ -46,14 +59,28 @@ const Backdrop = styled.div`
     left: 0;
     opacity: 0.85;
     content: '';
-    background: ${theme.colors.blue};
+    background: ${theme.colors.grey.mid};
   }
 `
 
-const Content = styled.div`
+const Content = styled(Box)`
+  background-color: white;
+  padding: 40px;
+  border-radius: 4px;
   position: relative;
-  width: 100%;
-  z-index: 5;
+  z-index: 10;
+  max-width: 558px;
+
+  ${({ dark }) =>
+    dark &&
+    css`
+      background-color: #142144;
+      color: white;
+      padding-top: 85px;
+      background-image: url(/static/images/newsletter-modal-illustration.png);
+      background-size: 100%;
+      background-repeat: no-repeat;
+    `};
 `
 
 export default {

@@ -1,6 +1,7 @@
 import React from 'react'
 import { CloseIcon } from 'mdi-react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import { selectCurrentApp } from '@stores/apps/selectors'
 import { doClearApp } from '@stores/apps'
@@ -9,8 +10,12 @@ import StyledModal from '@components/modal'
 import { Box } from '@components/box'
 import { AppCard } from '@components/app-card'
 
-
 class ModalClass extends React.Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    app: PropTypes.object
+  }
+
   handleClose = (goBack) => {
     const { dispatch } = this.props
     dispatch(doClearApp())

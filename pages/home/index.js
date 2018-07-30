@@ -30,7 +30,6 @@ class HomePage extends React.PureComponent {
   }
 
   render() {
-    console.log('modal!', Modal)
     return (
       <Page>
         <Head />

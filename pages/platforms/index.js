@@ -37,7 +37,6 @@ class PlatformsPage extends React.PureComponent {
   }
 
   render() {
-    console.log('modal!', Modal)
     const { platformName } = this.props
     return (
       <Page>

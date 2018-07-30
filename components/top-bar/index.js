@@ -7,22 +7,37 @@ import Link from 'next/link'
 import { StyledTopBar } from '@components/top-bar/styled'
 import { AppIcon } from '@components/logos'
 import { SearchBar } from '@components/search'
-import { selectIsLoading } from '@stores/router/selectors'
-import RouterStore from '@stores/router'
+import GetUpdatesModal from '@containers/modals/get-updates'
 
-const Navigation = (props) => (
+// import { selectIsLoading } from '@stores/router/selectors'
+import NewsletterActions from '@stores/newsletter/actions'
+
+const NavigationComponent = (props) => (
   <StyledTopBar.Navigation mobile>
     <Link href="/learn-more" prefetch>
-      <a>Learn more</a>
+      <a href="/learn-more">Learn more</a>
     </Link>
-    <a href="/learn-more">Get Updates</a>
+    <a href="#" onClick={(evt) => {
+        console.log(props, NewsletterActions)
+        evt.preventDefault()
+        props.openNewsletterModal()
+      }}
+    >
+      Get Updates
+    </a>
     <Link href="/submit">
       <a href="/submit">Submit your dApp</a>
     </Link>
   </StyledTopBar.Navigation>
 )
 
-class TopBarComponent extends React.Component {
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Object.assign({}, NewsletterActions), dispatch)
+}
+
+const Navigation = connect(() => ({}), mapDispatchToProps)(NavigationComponent)
+
+class TopBar extends React.Component {
   render() {
     return (
       <Headroom>
@@ -42,19 +57,9 @@ class TopBarComponent extends React.Component {
             </StyledTopBar.Section>
           </StyledTopBar.Wrapper>
         </StyledTopBar>
+        <GetUpdatesModal />
       </Headroom>
     )
   }
 }
-
-const mapStateToProps = (state) => ({
-  isLoading: selectIsLoading(state)
-})
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Object.assign({}, RouterStore.actions), dispatch)
-}
-
-const TopBar = connect(mapStateToProps, mapDispatchToProps)(TopBarComponent)
-
 export { TopBar }
