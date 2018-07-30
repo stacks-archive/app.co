@@ -29,7 +29,9 @@ const appTag = (tag) => {
 const AppItem = ({ imageUrl, blockchain, name, authentication, description, storageNetwork, dispatch, single, rank, ...rest }) => {
   const handleClick = (id, event) => {
     const href = event.target.getAttribute('href')
-    if (!href || href.indexOf('/platforms') === -1) {
+    const isClickingTag = href && href.indexOf('/platforms') === 0
+    const altKey = event.metaKey || event.altKey || event.ctrlKey
+    if (!isClickingTag && !altKey) {
       dispatch(doSelectApp(id))
       if (typeof window !== 'undefined') {
         window.history.pushState({}, name, `/app/${rest.Slugs[0].value}`)
