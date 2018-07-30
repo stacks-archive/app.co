@@ -122,7 +122,7 @@ AppItem.propTypes = {
   storageNetwork: PropTypes.string
 }
 
-class AppListComponent extends React.Component {
+class AppsListComponent extends React.Component {
   constructor(props) {
     super(props)
     this.updateApps(props)
@@ -142,16 +142,40 @@ class AppListComponent extends React.Component {
   }
 
   render() {
+    return this.props.single ? this.singleTable() : this.multilist()
+  }
+
+  multilist() {
     const { filterBy = 'category', single, limit, apps, ...rest } = this.props
-    const { sortedApps }= this.state
-    // console.log(single)
-    const items = single ? sortedApps : sortedApps
-    // console.log(items.length)
+    const items = rest[filterBy]
+
+    return (
+      items &&
+      items.map((filter) => {
+        const filteredList = apps.filter((app) => app[returnCorrectKey(filterBy)] === filter)
+        return filteredList.length > 0 ? (
+          <ListContainer
+            key={filter}
+            header={{ title: filter, action: { label: 'View All' }, white: true }}
+            items={filteredList}
+            item={AppItem}
+            width={[1, 1 / 2, 1 / 3]}
+            limit={limit}
+            single={single}
+            {...rest}
+          />
+        ) : null
+      })
+    )
+  }
+
+  singleTable() {
+    const { single, platformName, categoryName, limit, ...rest } = this.props
+    const { sortedApps } = this.state
     return (
       <ListContainer
-        // key={i}
-        header={{ title: this.props.platformName || this.props.categoryName, action: { label: 'View All' }, white: true }}
-        items={single ? sortedApps : sortedApps}
+        header={{ title: platformName || categoryName, action: { label: 'View All' }, white: true }}
+        items={sortedApps}
         item={AppItem}
         width={[1, 1 / 2, 1 / 3]}
         limit={limit}
@@ -159,40 +183,18 @@ class AppListComponent extends React.Component {
         {...rest}
       />
     )
-
-    // return (
-    //   items &&
-    //   items.map((filter, i) => {
-    //     const filteredList = apps.filter((app) => app[returnCorrectKey(filterBy)] === filter)
-    //     // const sortedApps = sortBy(filteredList, (app) => -getTwitterMentions(app))
-    //     return filteredList.length > 0 ? (
-    //       <ListContainer
-    //         key={i}
-    //         header={{ title: filter, action: { label: 'View All' }, white: true }}
-    //         items={single ? sortedApps : filteredList}
-    //         item={AppItem}
-    //         width={[1, 1 / 2, 1 / 3]}
-    //         limit={limit}
-    //         single={single}
-    //         {...rest}
-    //       />
-    //     ) : null
-    //   })
-    // )
   }
 }
 
-// const AppsList = connect(mapStateToProps)(({ filterBy = 'category', single, limit, apps, ...rest }) => {
-  
-// })
-
-const AppsList = connect(mapStateToProps)(AppListComponent)
-
-AppsList.propTypes = {
+AppsListComponent.propTypes = {
   filterBy: PropTypes.string,
   single: PropTypes.string,
   limit: PropTypes.number,
-  apps: PropTypes.array.isRequired
+  apps: PropTypes.array.isRequired,
+  categoryName: PropTypes.string,
+  platformName: PropTypes.string
 }
+
+const AppsList = connect(mapStateToProps)(AppsListComponent)
 
 export { AppsList, AppItem }
