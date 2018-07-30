@@ -94,13 +94,16 @@ const Header = styled(Box)`
   }
 `
 
-const StyledListTableHeader = styled.div`
+const StyledListTableHeader = styled(Box)`
   border: 1px solid ${theme.colors.border};
   border-top: 0;
   border-right: 0;
   width: 100%;
-  height: 50px;
   font-size: 13px;
+  overflow: hidden;
+  @media (max-width: 40em) {
+    display: none;
+  }
 `
 
 const StyledList = styled(Box)`
@@ -129,6 +132,11 @@ const Image = styled.img`
   opacity: 0.8;
 `
 
+const TableItem = styled(Box)`
+  textAlign: left;
+  overflow: hidden;
+`
+
 Item.defaultProps = {
   p: 3
 }
@@ -139,5 +147,6 @@ StyledList.Body.Header = StyledListTableHeader
 StyledList.Item = Item
 StyledList.Image = Image
 StyledList.ItemLink = ItemLink
+StyledList.TableItem = TableItem
 
 export { StyledList }

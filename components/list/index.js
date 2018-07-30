@@ -7,12 +7,12 @@ import { Type } from '@components/typography'
 import { StyledList } from '@components/list/styled'
 import { Button } from '@components/button'
 
-const HeaderItem = (props) => <Box width={[0, 0.5 / 4]} style={{ textAlign: 'left', overflow: 'hidden' }} {...props} />
+const HeaderItem = (props) => <StyledList.TableItem width={[0, 0.5 / 4]} height={['0px', '50px']} {...props} />
 
 const ListTableHeader = () => (
-  <StyledList.Body.Header>
-    <Flex px={3} pt={3} width={1}>
-      <Box width={0.5}>Rank</Box>
+  <StyledList.Body.Header height={['0px', '50px']}>
+    <Flex px={3} py={[0, 3]} width={[0, 1]}>
+      <Box width={[0, 0.5]} style={{overflow: 'hidden'}}>Rank</Box>
       <HeaderItem>Auth</HeaderItem>
       <HeaderItem>Storage</HeaderItem>
       <HeaderItem>Blockchain</HeaderItem>

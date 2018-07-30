@@ -14,7 +14,7 @@ import { doSelectApp } from '@stores/apps'
 import { slugify } from '@common'
 import { getTwitterMentions } from '@utils'
 
-const TableItem = (props) => <Box width={[0, 0.5 / 4]} style={{ textAlign: 'left', overflow: 'hidden' }} {...props} />
+const TableItem = (props) => <StyledList.TableItem width={[0, 0.5 / 4]} style={{ textAlign: 'left', overflow: 'hidden' }} {...props} />
 
 const appTag = (tag) => {
   if (!tag) {
@@ -50,7 +50,7 @@ const AppItem = ({ imageUrl, blockchain, name, authentication, description, stor
       <Flex width={1} alignItems="center">
         <Flex width={single ? [1, 0.5] : [1]}>
           {single ? (
-            <Flex pr={3} alignItems="center" justifyContent="center" style={{ opacity: 0.45 }}>
+            <Flex mr={3} alignItems="center" justifyContent="center" style={{ opacity: 0.45, overflow: 'hidden' }} width={[0, 0.5/4]}>
               <Type.p>{rank}</Type.p>
             </Flex>
           ) : null}
@@ -67,7 +67,7 @@ const AppItem = ({ imageUrl, blockchain, name, authentication, description, stor
             <TableItem>{appTag(authentication)}</TableItem>
             <TableItem>{appTag(storageNetwork)}</TableItem>
             <TableItem>{appTag(blockchain)}</TableItem>
-            <TableItem style={{ textAlign: 'right', fontSize: '13px', fontWeight: 700 }}>{getTwitterMentions(rest)}</TableItem>
+            <TableItem style={{ textAlign: 'right', fontSize: '13px', fontWeight: 700 }} width={[0, 0.5 / 4]}>{getTwitterMentions(rest)}</TableItem>
           </>
         ) : null}
       </Flex>
