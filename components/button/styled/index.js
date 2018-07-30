@@ -71,6 +71,7 @@ const StyledButton = styled.a`
 
   &:hover {
     cursor: pointer;
+    color: #ffffff;
   }
   ${({ type }) =>
     type &&
