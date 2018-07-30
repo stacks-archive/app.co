@@ -1,21 +1,29 @@
 import React from 'react'
+
 import { Page } from '@components/page'
 import { Newsletter } from '@components/newsletter'
 import { AppsList } from '@components/list/apps'
 import { CategoriesList } from '@components/list/categories'
 import { PlatformsList } from '@components/list/platforms'
 import { Modal } from '@components/modal'
-import Head from 'next/head'
+import Head from '@containers/head'
+
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import AppStore from '@stores/apps'
+import { doSelectPlatformFilter } from '@stores/apps'
+import { selectPlatformFilter, selectPlatformName } from '@stores/apps/selectors'
 
 class PlatformsPage extends React.PureComponent {
   state = {
     filterBy: 'blockchain'
   }
 
-  static async getInitialProps(ctx) {
-    const {
-      query: { platform }
-    } = ctx
+  static async getInitialProps({ query, reduxStore }) {
+    const { platform } = query
+
+    reduxStore.dispatch(doSelectPlatformFilter(platform))
 
     return {
       platform
@@ -25,9 +33,7 @@ class PlatformsPage extends React.PureComponent {
   render() {
     return (
       <Page>
-        <Head>
-          <title>App.co - The Universal Dapp Store</title>
-        </Head>
+        <Head title={`${this.props.platformName} Apps`} />
         <Page.Section px>
           <Newsletter wrap />
         </Page.Section>
@@ -38,7 +44,7 @@ class PlatformsPage extends React.PureComponent {
           </Page.Section>
         </Page.Section>
         <Page.Section flexDirection="column" px>
-          <AppsList filterBy={this.state.filterBy} single={this.props.platform} />
+          <AppsList single/>
         </Page.Section>
         <Modal />
       </Page>
@@ -46,4 +52,13 @@ class PlatformsPage extends React.PureComponent {
   }
 }
 
-export default PlatformsPage
+const mapStateToProps = (state) => ({
+  platformFilter: selectPlatformFilter(state),
+  platformName: selectPlatformName(state)
+})
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Object.assign({}, AppStore.actions), dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlatformsPage)

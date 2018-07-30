@@ -1,25 +1,36 @@
 import React from 'react'
-import { Type } from '@components/typography'
-import { StyledList } from '@components/list/styled'
+import PropTypes from 'prop-types'
+import { Truncate } from 'rebass'
+import { Flex } from 'grid-styled'
+import sortBy from 'lodash/sortBy'
+
 import { connect } from 'react-redux'
+
 import {
   selectApps,
   selectAppCategoriesArray,
   selectBlockchainCategories,
   selectStorageCategories,
-  selectAuthenticationCategories
+  selectAuthenticationCategories,
+  selectFilteredApps,
+  selectPlatformFilter,
+  selectCategoryFilter,
+  selectPlatformName, 
+  selectCategoryName
 } from '@stores/apps/selectors'
 import { doSelectApp } from '@stores/apps'
+
+import { Type } from '@components/typography'
+import { StyledList } from '@components/list/styled'
 import { AppIcon } from '@components/app-icon'
 import { Box } from '@components/box'
 import { ListContainer } from '@components/list/index'
 import { Tag } from '@components/tag'
-import { slugify } from '@common'
-import PropTypes from 'prop-types'
-import { Truncate } from 'rebass'
-import { Flex } from 'grid-styled'
 
-import sortBy from 'lodash/sortBy'
+import { slugify } from '@common'
+
+// import AppStore from '@stores/apps'
+// import { selectApps, selectPlatformFilter, selectFilteredApps, selectCategoryFilter } from '@stores/apps/selectors'
 
 const getTwitterMentions = (app) => {
   const [ranking] = app.Rankings
@@ -34,7 +45,12 @@ const mapStateToProps = (state) => ({
   category: selectAppCategoriesArray(state),
   blockchain: selectBlockchainCategories(state),
   storage: selectStorageCategories(state),
-  authentication: selectAuthenticationCategories(state)
+  authentication: selectAuthenticationCategories(state),
+  platformFilter: selectPlatformFilter(state),
+  filteredApps: selectFilteredApps(state),
+  categoryFilter: selectCategoryFilter(state),
+  platformName: selectPlatformName(state),
+  categoryName: selectCategoryName(state)
 })
 
 const returnCorrectKey = (filter) => {
@@ -61,7 +77,6 @@ const AppItem = connect()(
       </Type.span>
     )
     const handleClick = (id) => {
-      console.log('click handle')
       dispatch(doSelectApp(id))
       if (typeof window !== 'undefined') {
         window.history.pushState({}, name, `/app/${rest.Slugs[0].value}`)
@@ -107,30 +122,63 @@ AppItem.propTypes = {
   storageNetwork: PropTypes.string
 }
 
-const AppsList = connect(mapStateToProps)(({ filterBy = 'category', single, limit, apps, ...rest }) => {
-  console.log(single, rest[filterBy])
-  const items = single ? rest[filterBy].filter((filter) => slugify(filter) === single) : rest[filterBy]
+class AppListComponent extends React.Component {
+  constructor(props) {
+    super(props)
+    const hasFilter = props.platformFilter || props.categoryFilter
+    const apps = hasFilter ? props.filteredApps : props.apps
+    const sortedApps = sortBy(apps, (app) => -getTwitterMentions(app))
+    this.state = {
+      sortedApps
+    }
+  }
 
-  return (
-    items &&
-    items.map((filter, i) => {
-      const filteredList = apps.filter((app) => app[returnCorrectKey(filterBy)] === filter)
-      const sortedApps = sortBy(filteredList, (app) => -getTwitterMentions(app))
-      return filteredList.length > 0 ? (
-        <ListContainer
-          key={i}
-          header={{ title: filter, action: { label: 'View All' }, white: true }}
-          items={single ? sortedApps : filteredList}
-          item={AppItem}
-          width={[1, 1 / 2, 1 / 3]}
-          limit={limit}
-          single={single}
-          {...rest}
-        />
-      ) : null
-    })
-  )
-})
+  render() {
+    const { filterBy = 'category', single, limit, apps, ...rest } = this.props
+    const { sortedApps }= this.state
+    // console.log(single)
+    const items = single ? sortedApps : sortedApps
+    // console.log(items.length)
+    return (
+      <ListContainer
+        // key={i}
+        header={{ title: this.props.platformName || this.props.categoryName, action: { label: 'View All' }, white: true }}
+        items={single ? sortedApps : sortedApps}
+        item={AppItem}
+        width={[1, 1 / 2, 1 / 3]}
+        limit={limit}
+        single={single}
+        {...rest}
+      />
+    )
+
+    // return (
+    //   items &&
+    //   items.map((filter, i) => {
+    //     const filteredList = apps.filter((app) => app[returnCorrectKey(filterBy)] === filter)
+    //     // const sortedApps = sortBy(filteredList, (app) => -getTwitterMentions(app))
+    //     return filteredList.length > 0 ? (
+    //       <ListContainer
+    //         key={i}
+    //         header={{ title: filter, action: { label: 'View All' }, white: true }}
+    //         items={single ? sortedApps : filteredList}
+    //         item={AppItem}
+    //         width={[1, 1 / 2, 1 / 3]}
+    //         limit={limit}
+    //         single={single}
+    //         {...rest}
+    //       />
+    //     ) : null
+    //   })
+    // )
+  }
+}
+
+// const AppsList = connect(mapStateToProps)(({ filterBy = 'category', single, limit, apps, ...rest }) => {
+  
+// })
+
+const AppsList = connect(mapStateToProps)(AppListComponent)
 
 AppsList.propTypes = {
   filterBy: PropTypes.string,
