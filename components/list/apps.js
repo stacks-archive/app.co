@@ -176,7 +176,7 @@ class AppsListComponent extends React.Component {
     const { sortedApps } = this.state
     return (
       <ListContainer
-        header={{ title: platformName || categoryName, action: { label: 'View All' }, white: true }}
+        header={{ title: platformName || categoryName, white: true }}
         items={sortedApps}
         item={AppItem}
         width={[1, 1 / 2, 1 / 3]}
