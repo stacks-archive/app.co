@@ -2,11 +2,11 @@ import React from 'react'
 import { Flex } from 'grid-styled'
 import { GithubCircleIcon, TwitterCircleIcon, ArrowLeftIcon } from 'mdi-react'
 import Link from 'next/link'
+import { Box } from 'rebass'
 
 import { Type } from '@components/typography'
 import { AppIcon } from '@components/app-icon'
 import { Button } from '@components/button'
-import { Box } from '@components/box'
 import { TagLink } from '@components/tag'
 import Head from '@containers/head'
 

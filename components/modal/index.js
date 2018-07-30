@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { theme } from '@common/styles'
-import { Box } from '@components/box'
+import { Box } from 'rebass'
 
 const CloseButton = styled.div`
   opacity: 0.5;
@@ -69,7 +69,12 @@ const Content = styled(Box)`
   border-radius: 4px;
   position: relative;
   z-index: 10;
-  max-width: 558px;
+  max-width: 40em;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 40em) {
+    border-radius: 0px;
+  }
 
   ${({ dark }) =>
     dark &&

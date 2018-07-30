@@ -51,7 +51,7 @@ class ModalClass extends React.Component {
     const { app } = this.props
     return app ? (
       <StyledModal.Modal>
-        <Box style={{ position: 'relative', zIndex: 10, maxWidth: 558 }} width={[1, 0.65, 0.65, 0.5]}>
+        <StyledModal.Content width={[1, 0.65, 0.65, 0.5]}>
           <StyledModal.CloseButton
             style={{
               position: 'absolute',
@@ -64,7 +64,7 @@ class ModalClass extends React.Component {
             <CloseIcon />
           </StyledModal.CloseButton>
           <AppCard {...app} style={{ position: 'relative', zIndex: 10 }} />
-        </Box>
+        </StyledModal.Content>
         <StyledModal.Backdrop onClick={() => this.handleClose(true)} />
       </StyledModal.Modal>
     ) : null
