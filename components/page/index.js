@@ -13,8 +13,8 @@ const Page = ({ children, ...rest }) => (
   </StyledPage>
 )
 
-const pxProps = ({ px }) => (px ? { px: [0, 4] } : {})
-const pyProps = ({ py }) => (py ? { py: [0, 4] } : {})
+const pxProps = ({ px }) => (px ? { px: [2, 4] } : {})
+const pyProps = ({ py }) => (py ? { py: [2, 4] } : {})
 
 const Section = (props) => <StyledPage.Section {...props} {...pxProps(props)} {...pyProps(props)} />
 

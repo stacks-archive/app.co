@@ -14,8 +14,8 @@ import NewsletterActions from '@stores/newsletter/actions'
 
 const NavigationComponent = (props) => (
   <StyledTopBar.Navigation mobile>
-    <Link href="/learn-more" prefetch>
-      <a href="/learn-more">Learn more</a>
+    <Link href="/faq" prefetch>
+      <a href="/faq">Learn more</a>
     </Link>
     <a href="#" onClick={(evt) => {
         console.log(props, NewsletterActions)

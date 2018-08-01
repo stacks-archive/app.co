@@ -1,4 +1,4 @@
-# [What's a Dapp?](/whats-a-dapp)
+# What's a Dapp?
 
 A dapp is a decentralized app—an application that lets users own their data and runs without any single centralized operator.
 
