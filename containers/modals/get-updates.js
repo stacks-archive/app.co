@@ -63,26 +63,30 @@ class GetUpdates extends React.Component {
             <CloseIcon color="#fff" />
           </StyledModal.CloseButton>
           <Type.h3 color={theme.colors.blue.accent} >
-            Get updates{' '}
-            <Type.span color={theme.colors.grey.light}>Discover your next favorite decentralized app!</Type.span>
+            {doingSomething ? 'Thanks for subscribing!' : 'Get updates'}{' '}
+            <Type.span color={theme.colors.grey.light}>
+              {doingSomething ? "We'll send you the hottest new dapps soon." : 'Discover your next favorite decentralized app!'}
+            </Type.span>
           </Type.h3>
 
-          <StyledNewsletter.Section
-            style={{
-              pointerEvents: doingSomething ? 'none' : null
-            }}
-            pt={4}
-          >
-            <Input
-              px={3}
-              py={2}
-              my={2}
-              placeholder="Enter your email"
-              value={doingSomething ? text : this.state.email}
-              action={!doingSomething ? () => this.handleSubmit() : null}
-              onChange={(evt) => this.setState({ email: evt.target.value })}
-            />
-          </StyledNewsletter.Section>
+          {!doingSomething && (
+            <StyledNewsletter.Section
+              style={{
+                pointerEvents: doingSomething ? 'none' : null
+              }}
+              pt={4}
+            >
+              <Input
+                px={3}
+                py={2}
+                my={2}
+                placeholder="Enter your email"
+                value={doingSomething ? text : this.state.email}
+                action={!doingSomething ? () => this.handleSubmit() : null}
+                onChange={(evt) => this.setState({ email: evt.target.value })}
+              />
+            </StyledNewsletter.Section>
+          )}
         </StyledModal.Content>
         <StyledModal.Backdrop onClick={() => this.handleClose(true)} />
       </StyledModal.Modal>

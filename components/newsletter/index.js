@@ -35,25 +35,29 @@ class NewsletterClass extends React.Component {
         </StyledNewsletter.Svg>
         <StyledNewsletter.Section width="60%">
           <Type.h3 color={theme.colors.blue.accent} pl={68} py={2} pr={2}>
-            Get updates{' '}
-            <Type.span color={theme.colors.grey.light}>Discover your next favorite decentralized app!</Type.span>
+            {doingSomething ? 'Thanks for subscribing!' : 'Get updates'}{' '}
+            <Type.span color={theme.colors.grey.light}>
+              {doingSomething ? "We'll send you the hottest new dapps soon." : 'Discover your next favorite decentralized app!'}
+            </Type.span>
           </Type.h3>
         </StyledNewsletter.Section>
-        <StyledNewsletter.Section
-          style={{
-            pointerEvents: doingSomething ? 'none' : null
-          }}
-        >
-          <Input
-            px={3}
-            py={2}
-            my={2}
-            placeholder="Enter your email"
-            value={doingSomething ? text : this.state.email}
-            action={!doingSomething ? () => this.handleSubmit() : null}
-            onChange={(evt) => this.setState({ email: evt.target.value })}
-          />
-        </StyledNewsletter.Section>
+        {!doingSomething && (
+          <StyledNewsletter.Section
+            style={{
+              pointerEvents: doingSomething ? 'none' : null
+            }}
+          >
+            <Input
+              px={3}
+              py={2}
+              my={2}
+              placeholder="Enter your email"
+              value={doingSomething ? text : this.state.email}
+              action={!doingSomething ? () => this.handleSubmit() : null}
+              onChange={(evt) => this.setState({ email: evt.target.value })}
+            />
+          </StyledNewsletter.Section>
+        )}
         </StyledNewsletter.Wrapper>
       </StyledNewsletter>
     )
