@@ -32,6 +32,32 @@ class HomePage extends React.PureComponent {
         <Page.Section px>
           <Newsletter wrap />
         </Page.Section>
+        <Page.Section flexDirection="column" px>
+          <FeaturedList
+            appNames={[
+              "SteemIt",
+              "Stealthy",
+              "Peepeth",
+              "Mastodon",
+              "Diaspora",
+              "DTube"
+            ]}
+            title="Hot Social Dapps"
+            href="/categories/social-networking"
+          />
+          <FeaturedList 
+            appNames={[
+              "Graphite",
+              "Misthos",
+              "Aragon",
+              "Gitcoin",
+              "adChain Registry",
+              "ETHLance"
+            ]}
+            title="Business Tools"
+            href="/categories/business-tools"
+          />
+        </Page.Section>
         <Page.Section p={0} px>
           <Page.Section wrap flexDirection={['column', 'column', 'row']} p={0}>
             <PlatformsList mr={[0, 3]} />
@@ -39,18 +65,6 @@ class HomePage extends React.PureComponent {
           </Page.Section>
         </Page.Section>
         <Page.Section flexDirection="column" px>
-          <FeaturedList 
-            appNames={[
-              "Graphite",
-              "Stealthy",
-              "Misthos",
-              "TravelStack",
-              "Dappy Wallet",
-              "Coins"
-            ]}
-            title="Popular Blockstack Apps"
-            href="/platforms/blockstack"
-          />
           <FeaturedList 
             title="Decentralized Exchanges"
             appNames={[
@@ -71,6 +85,18 @@ class HomePage extends React.PureComponent {
               'Trust Wallet'
             ]}
             title='Ethereum Wallets'
+          />
+          <FeaturedList
+            appNames={[
+              "Graphite",
+              "Stealthy",
+              "Misthos",
+              "TravelStack",
+              "Dappy Wallet",
+              "Coins"
+            ]}
+            title="Popular Blockstack Apps"
+            href="/platforms/blockstack"
           />
         </Page.Section>
         <Modal />
