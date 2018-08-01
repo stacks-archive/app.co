@@ -3,6 +3,7 @@ import { Flex } from 'grid-styled'
 import { GithubCircleIcon, TwitterCircleIcon, ArrowLeftIcon } from 'mdi-react'
 import Link from 'next/link'
 import { Box } from 'rebass'
+import numeral from 'numeral'
 
 import { Type } from '@components/typography'
 import { AppIcon } from '@components/app-icon'
@@ -12,6 +13,7 @@ import Head from '@containers/head'
 
 import { outboundLink } from '@utils'
 import { slugify } from '@common'
+import { theme } from '@common/styles'
 import { doClearApp } from '@stores/apps'
 
 
@@ -123,6 +125,14 @@ const Website = (props) =>
       >
         {formatUrl(props.website)}
       </a>
+      {props.Rankings[0].monthlyVisitsCount && (
+        <Type.span fontSize={14} color={theme.colors.grey.mid} ml={3}>
+          {numeral(props.Rankings[0].monthlyVisitsCount || 0).format('0a')}{' '}
+          visits / month
+        </Type.span>
+      )}
+      
+
     </Box>
   ) : null
 

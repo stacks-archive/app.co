@@ -22,6 +22,7 @@ const Span = styled.span`
   ${baseProps};
   ${color};
   ${space};
+  ${fontSize};
 `
 
 const Body = styled.div`
