@@ -14,18 +14,16 @@ const mapStateToProps = (state) => ({
   categories: selectAppCategoriesArray(state)
 })
 
-const CategoryItem = ({ category, ...rest }) => (
-  <StyledList.Item {...rest} link>
-    <Link {...rest.link}>
-      <a>
-        <Box style={{ flexGrow: 1, maxWidth: '100%' }} px={0}>
-          <Type.strong>
-            <Truncate>{category}</Truncate>
-          </Type.strong>
-        </Box>
-      </a>
-    </Link>
-  </StyledList.Item>
+const CategoryItem = ({ category, link, ...rest }) => (
+  <Link href={link.as}>
+    <StyledList.ItemLink {...rest} href={link.as}>
+      <Box style={{ flexGrow: 1, maxWidth: '100%' }} px={0}>
+        <Type.strong>
+          <Truncate>{category}</Truncate>
+        </Type.strong>
+      </Box>
+    </StyledList.ItemLink>
+  </Link>
 )
 
 const CategoriesList = connect(mapStateToProps)(({ categories, apps, ...rest }) => {

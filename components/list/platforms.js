@@ -14,16 +14,14 @@ const mapStateToProps = (state) => ({
 })
 
 const PlatformItem = ({ platform, link, image, width }) => (
-  <StyledList.Item width={width} link>
-    <Link {...link} prefetch>
-      <a style={{width: '100%'}} href={link.as}>
-        <Box style={{ flexGrow: 1 }} px={0}>
-          {image && <StyledList.Image src={image} alt={platform}/>}
-          <Type.strong>{platform}</Type.strong>
-        </Box>
-      </a>
-    </Link>
-  </StyledList.Item>
+  <Link href={link.as}>
+    <StyledList.ItemLink width={width} link href={link.as}>
+      <Box style={{ flexGrow: 1 }} px={0}>
+        {image && <StyledList.Image src={image} alt={platform} />}
+        <Type.strong>{platform}</Type.strong>
+      </Box>
+    </StyledList.ItemLink>
+  </Link>
 )
 
 const PlatformsList = connect(mapStateToProps)(({ apps, ...rest }) => {
