@@ -124,10 +124,6 @@ app.prepare().then(() => {
     renderAndCache(req, res, '/faq')
   })
 
-  server.get('/learn-more', (req, res) => {
-    renderAndCache(req, res, '/learn-more')
-  })
-
   server.get('/submit', (req, res) => {
     renderAndCache(req, res, '/submit')
   })
