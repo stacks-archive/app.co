@@ -54,8 +54,25 @@ const Icon = styled(Box)`
     display: block;
   }
 `
+
+const CloseIcon = styled(Box)`
+  background-color: #000;
+  color: white;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  opacity: 0.5;
+  padding: 2px 0 0 2px;
+  position: absolute;
+  top: 3px;
+  right: 40px;
+  z-index: 10;
+  cursor: pointer;
+`
+
 const Section = styled.div`
   ${({ grow }) => grow && `flex-grow:1;`};
+  position: relative;
 `
 
 const Backdrop = styled.div`
@@ -91,5 +108,6 @@ StyledSearchBar.Icon = Icon
 StyledSearchBar.Section = Section
 StyledSearchBar.Results = SearchResults
 StyledSearchBar.Results.Wrapper = ResultsWrapper
+StyledSearchBar.CloseIcon = CloseIcon
 
 export { StyledSearchBar }

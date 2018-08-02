@@ -1,7 +1,7 @@
 import React from 'react'
 import { QuickSearch, ObjectResult, ContainerResult, ResultItemGroup } from '@atlaskit/quick-search'
 import { StyledSearchBar } from '@components/search/styled'
-import { SearchIcon } from 'mdi-react'
+import { SearchIcon, CloseIcon } from 'mdi-react'
 import { AppItem } from '@components/list/apps'
 import { connect } from 'react-redux'
 import { selectApps, selectAppCategoriesArray } from '@stores/apps/selectors'
@@ -9,7 +9,7 @@ import debounce from 'lodash/debounce'
 
 import { Trail } from 'react-spring'
 
-let store = {}
+const store = {}
 
 const mapStateToProps = (state) => ({
   apps: selectApps(state)
@@ -69,7 +69,7 @@ class SearchBarClass extends React.Component {
   clearSearch = () =>{
     this.setState({
       results: [],
-      query: ' '
+      query: ''
     })
   }
 
@@ -81,6 +81,12 @@ class SearchBarClass extends React.Component {
           <SearchIcon color="currentColor" />
         </StyledSearchBar.Icon>
         <StyledSearchBar.Section grow>
+          <StyledSearchBar.CloseIcon 
+            style={{display: this.state.query.length > 0 ? 'block' : 'none'}}
+            onClick={() => this.clearSearch()}
+          >
+            <CloseIcon color="#fff" />
+          </StyledSearchBar.CloseIcon>
           <QuickSearch
             placeholder="Search for apps..."
             isLoading={this.state.isLoading}
