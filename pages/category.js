@@ -11,7 +11,7 @@ import { doSelectCategoryFilter } from '@stores/apps'
 import { selectCategoryName } from '@stores/apps/selectors'
 
 class CategoryPage extends React.PureComponent {
-  propTypes = {
+  static propTypes = {
     category: PropTypes.string,
     categoryName: PropTypes.string
   }
