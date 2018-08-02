@@ -47,6 +47,11 @@ const ResultsWrapper = styled.div`
   overflow: auto;
   ${wrapperStyle};
   ${boxProps};
+  padding-right: 100px;
+  @media (max-width: 40em) {
+    padding: 16px 32px;
+    max-height: calc(100vh - 65px);
+  }
 `
 const Icon = styled(Box)`
   flex-shrink: 0;

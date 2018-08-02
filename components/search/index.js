@@ -1,5 +1,5 @@
 import React from 'react'
-import { QuickSearch, ObjectResult, ContainerResult, ResultItemGroup } from '@atlaskit/quick-search'
+import { ResultItemGroup } from '@atlaskit/quick-search'
 import { StyledSearchBar } from '@components/search/styled'
 import { SearchIcon, CloseIcon } from 'mdi-react'
 import { AppItem } from '@components/list/apps'
@@ -70,10 +70,17 @@ class SearchBarClass extends React.Component {
     }
   }
 
+  resultsTitle() {
+    if (this.state.results.length === 0) {
+      return `No results for "${this.state.query}"`
+    } else {
+      return `${this.state.results.length} App${this.state.results.length === 1 ? '' : 's'}`
+    }
+  } 
+
   render() {
-    const { transparent, placeholder = 'Search for apps...', ...rest } = this.props
     return (
-      <StyledSearchBar {...rest} pl={3}>
+      <StyledSearchBar {...this.props} pl={3}>
         <StyledSearchBar.Icon pr={1}>
           <SearchIcon color="currentColor" />
         </StyledSearchBar.Icon>
@@ -91,15 +98,13 @@ class SearchBarClass extends React.Component {
             onFocus={() => this.handleSearch(this.state.oldQuery)}
             onChange={({target}) => this.handleSearch(target.value)}
           />
-          <StyledSearchBar.Results show={this.state.results.length > 0}>
+          <StyledSearchBar.Results show={this.state.query.length > 0}>
             <StyledSearchBar.Results.Wrapper>
-              {this.state.results.length > 0 ? (
-                <>
-                  <ResultItemGroup title="Apps">
-                    {this.state.results.map((app, i) => <AppItem {...app} key={app.name} noBorder />)}
-                  </ResultItemGroup>
-                </>
-              ) : null}{' '}
+              <>
+                <ResultItemGroup title={this.resultsTitle()}>
+                  {this.state.results.map((app) => <AppItem {...app} key={app.name} noBorder />)}
+                </ResultItemGroup>
+              </>
             </StyledSearchBar.Results.Wrapper>
           </StyledSearchBar.Results>
         </StyledSearchBar.Section>
