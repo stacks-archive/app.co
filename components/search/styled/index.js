@@ -64,7 +64,7 @@ const CloseIcon = styled(Box)`
   opacity: 0.5;
   padding: 2px 0 0 2px;
   position: absolute;
-  top: 3px;
+  top: 0px;
   right: 40px;
   z-index: 10;
   cursor: pointer;
@@ -99,6 +99,17 @@ const Backdrop = styled.div`
   }
 `
 
+const Input = styled.input`
+  border: none;
+  width: 100%;
+  height: 100%;
+
+  &:focus {
+    box-shadow: none;
+    outline: none;
+  }
+`
+
 ResultsWrapper.defaultProps = {
   pl: 100,
   py: 4
@@ -109,5 +120,6 @@ StyledSearchBar.Section = Section
 StyledSearchBar.Results = SearchResults
 StyledSearchBar.Results.Wrapper = ResultsWrapper
 StyledSearchBar.CloseIcon = CloseIcon
+StyledSearchBar.Input = Input
 
 export { StyledSearchBar }

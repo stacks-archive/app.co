@@ -11,6 +11,7 @@ const Item = styled(animated.div)`
   flex-grow: 1;
   border-left: 1px solid ${theme.colors.border};
   position: relative;
+  text-decoration: none;
   ${({ link }) =>
     link &&
     css`

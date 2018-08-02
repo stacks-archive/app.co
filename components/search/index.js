@@ -9,8 +9,6 @@ import debounce from 'lodash/debounce'
 
 import { Trail } from 'react-spring'
 
-const store = {}
-
 const mapStateToProps = (state) => ({
   apps: selectApps(state)
 })
@@ -39,15 +37,8 @@ class SearchBarClass extends React.Component {
     query: '',
     results: []
   }
-  setQuery(query) {
-    store.query = query
-    this.setState({
-      query
-    })
-  }
-  search = (query) => {
-    this.setQuery(query)
 
+  search = (query) => {
     let results = searchApps(query, this.props.apps)
     if (query === '') {
       results = []
@@ -61,7 +52,8 @@ class SearchBarClass extends React.Component {
   }
   handleSearch = (query) => {
     this.setState({
-      isLoading: true
+      isLoading: true,
+      query
     })
     this.search(query)
   }
@@ -71,6 +63,14 @@ class SearchBarClass extends React.Component {
       results: [],
       query: ''
     })
+  }
+
+  handleKeyDown = (event) => {
+    if (event.key === 'Escape') {
+      this.clearSearch()
+    } else if (event.key.length === 1) {
+      this.handleSearch(this.state.query + event.key)
+    }
   }
 
   render() {
@@ -87,29 +87,22 @@ class SearchBarClass extends React.Component {
           >
             <CloseIcon color="#fff" />
           </StyledSearchBar.CloseIcon>
-          <QuickSearch
+          <StyledSearchBar.Input 
             placeholder="Search for apps..."
-            isLoading={this.state.isLoading}
-            onSearchInput={({ target }) => {
-              this.handleSearch(target.value)
-            }}
-            onSearchSubmit={() => console.log('onSearchSubmit', this.state.query)}
+            onKeyUp={(event) => this.handleKeyDown(event)}
             value={this.state.query}
-          >
-            <div>
-              <StyledSearchBar.Results show={this.state.results.length > 0}>
-                <StyledSearchBar.Results.Wrapper>
-                  {this.state.results.length > 0 ? (
-                    <>
-                      <ResultItemGroup title="Apps">
-                        {this.state.results.map((app, i) => <AppItem {...app} key={app.name} noBorder />)}
-                      </ResultItemGroup>
-                    </>
-                  ) : null}{' '}
-                </StyledSearchBar.Results.Wrapper>
-              </StyledSearchBar.Results>
-            </div>
-          </QuickSearch>
+          />
+          <StyledSearchBar.Results show={this.state.results.length > 0}>
+            <StyledSearchBar.Results.Wrapper>
+              {this.state.results.length > 0 ? (
+                <>
+                  <ResultItemGroup title="Apps">
+                    {this.state.results.map((app, i) => <AppItem {...app} key={app.name} noBorder />)}
+                  </ResultItemGroup>
+                </>
+              ) : null}{' '}
+            </StyledSearchBar.Results.Wrapper>
+          </StyledSearchBar.Results>
         </StyledSearchBar.Section>
         {this.state.results.length > 0 ? <StyledSearchBar.Backdrop onClick={() => this.clearSearch()} /> : null}
       </StyledSearchBar>
