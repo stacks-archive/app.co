@@ -69,7 +69,7 @@ const CloseIcon = styled(Box)`
   opacity: 0.5;
   padding: 2px 0 0 2px;
   position: absolute;
-  top: 0px;
+  top: -4px;
   right: 40px;
   z-index: 10;
   cursor: pointer;
