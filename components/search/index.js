@@ -35,7 +35,8 @@ class SearchBarClass extends React.Component {
   state = {
     query: '',
     oldQuery: '',
-    results: []
+    results: [],
+    isLoading: false
   }
 
   search = (query) => {
@@ -45,13 +46,15 @@ class SearchBarClass extends React.Component {
     }
     setTimeout(() => {
       this.setState({
-        results
+        results,
+        isLoading: false
       })
     }, 300)
   }
   handleSearch = (query) => {
     this.setState({
-      query
+      query,
+      isLoading: true
     })
     this.search(query)
   }
@@ -71,7 +74,9 @@ class SearchBarClass extends React.Component {
   }
 
   resultsTitle() {
-    if (this.state.results.length === 0) {
+    if (this.state.isLoading) {
+      return `Loading results for "${this.state.query}"`
+    } else if (this.state.results.length === 0) {
       return `No results for "${this.state.query}"`
     } else {
       return `${this.state.results.length} App${this.state.results.length === 1 ? '' : 's'}`
