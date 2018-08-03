@@ -52,16 +52,17 @@ class SearchBarClass extends React.Component {
     }, 300)
   }
   handleSearch = (query) => {
+    const isLoading = query !== this.state.oldQuery
     this.setState({
       query,
-      isLoading: true
+      isLoading,
+      oldQuery: ''
     })
     this.search(query)
   }
 
   clearSearch = () =>{
     this.setState({
-      results: [],
       oldQuery: this.state.query,
       query: ''
     })
@@ -71,6 +72,13 @@ class SearchBarClass extends React.Component {
     if (event.key === 'Escape') {
       this.clearSearch()
     }
+  }
+
+  visibleQuery() {
+    if (this.state.query.length === 0) {
+      return this.state.oldQuery
+    }
+    return this.state.query
   }
 
   resultsTitle() {
@@ -99,7 +107,7 @@ class SearchBarClass extends React.Component {
           <StyledSearchBar.Input 
             placeholder="Search for apps..."
             onKeyUp={(event) => this.handleKeyDown(event)}
-            value={this.state.query}
+            value={this.visibleQuery()}
             onFocus={() => this.handleSearch(this.state.oldQuery)}
             onChange={({target}) => this.handleSearch(target.value)}
           />
