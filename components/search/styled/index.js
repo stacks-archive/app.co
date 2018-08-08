@@ -10,6 +10,11 @@ const StyledSearchBar = styled(Box)`
   * {
     border-bottom: 0 !important;
   }
+  ${({ focused }) =>
+    !focused &&
+    css`
+      opacity: 0.75;
+    `};
 `
 
 const SearchResults = styled.div`
@@ -43,7 +48,7 @@ const SearchResults = styled.div`
 `
 
 const ResultsWrapper = styled.div`
-  max-height: calc(60vh - 65px);
+  max-height: calc(80vh - 65px);
   overflow: auto;
   ${wrapperStyle};
   ${boxProps};
@@ -55,15 +60,18 @@ const ResultsWrapper = styled.div`
 `
 const Icon = styled(Box)`
   flex-shrink: 0;
+  ${({ focused }) =>
+    !focused &&
+    css`
+      opacity: 0.25;
+    `};
   svg {
     display: block;
   }
 `
 
 const CloseIcon = styled(Box)`
-  background-color: #000;
-  color: white;
-  border-radius: 50%;
+  color: ${theme.colors.blue};
   width: 28px;
   height: 28px;
   opacity: 0.5;
@@ -73,6 +81,9 @@ const CloseIcon = styled(Box)`
   right: 40px;
   z-index: 10;
   cursor: pointer;
+  &:hover {
+    opacity: 1;
+  }
 `
 
 const Section = styled.div`
@@ -117,7 +128,7 @@ const Input = styled.input`
 
 ResultsWrapper.defaultProps = {
   pl: 100,
-  py: 4
+  py: 3
 }
 StyledSearchBar.Backdrop = Backdrop
 StyledSearchBar.Icon = Icon

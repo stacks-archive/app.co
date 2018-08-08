@@ -4,10 +4,9 @@ import { StyledSearchBar } from '@components/search/styled'
 import { SearchIcon, CloseIcon } from 'mdi-react'
 import { AppItem } from '@components/list/apps'
 import { connect } from 'react-redux'
-import { selectApps, selectAppCategoriesArray } from '@stores/apps/selectors'
+import { selectApps } from '@stores/apps/selectors'
 import debounce from 'lodash/debounce'
-
-import { Trail } from 'react-spring'
+import { Focus } from 'react-powerplug'
 
 const mapStateToProps = (state) => ({
   apps: selectApps(state)
@@ -36,6 +35,7 @@ class SearchBarClass extends React.Component {
     query: '',
     oldQuery: '',
     results: [],
+    searchActive: false,
     isLoading: false
   }
 
@@ -45,6 +45,7 @@ class SearchBarClass extends React.Component {
       results = []
     }
     setTimeout(() => {
+      document.body.classList.add('no-scroll')
       this.setState({
         results,
         isLoading: false
@@ -56,30 +57,26 @@ class SearchBarClass extends React.Component {
     this.setState({
       query,
       isLoading,
+      searchActive: true,
       oldQuery: ''
     })
+
     this.search(query)
   }
 
-  clearSearch = () =>{
+  clearSearch = () => {
     this.setState({
       oldQuery: this.state.query,
+      results: [],
+      searchActive: false,
       query: ''
     })
+    document.body.classList.remove('no-scroll')
   }
 
-  handleKeyDown = (event) => {
-    if (event.key === 'Escape') {
-      this.clearSearch()
-    }
-  }
+  handleKeyDown = (event) => (event.key === 'Escape' ? this.clearSearch() : null)
 
-  visibleQuery() {
-    if (this.state.query.length === 0) {
-      return this.state.oldQuery
-    }
-    return this.state.query
-  }
+  visibleQuery = () => (this.state.query.length === 0 ? this.state.oldQuery : this.state.query)
 
   resultsTitle() {
     if (this.state.isLoading) {
@@ -89,40 +86,51 @@ class SearchBarClass extends React.Component {
     } else {
       return `${this.state.results.length} App${this.state.results.length === 1 ? '' : 's'}`
     }
-  } 
+  }
 
   render() {
     return (
-      <StyledSearchBar {...this.props} pl={3}>
-        <StyledSearchBar.Icon pr={1}>
-          <SearchIcon color="currentColor" />
-        </StyledSearchBar.Icon>
-        <StyledSearchBar.Section grow>
-          <StyledSearchBar.CloseIcon 
-            style={{display: this.state.query.length > 0 ? 'block' : 'none'}}
-            onClick={() => this.clearSearch()}
-          >
-            <CloseIcon color="#fff" />
-          </StyledSearchBar.CloseIcon>
-          <StyledSearchBar.Input 
-            placeholder="Search for apps..."
-            onKeyUp={(event) => this.handleKeyDown(event)}
-            value={this.visibleQuery()}
-            onFocus={() => this.handleSearch(this.state.oldQuery)}
-            onChange={({target}) => this.handleSearch(target.value)}
-          />
-          <StyledSearchBar.Results show={this.state.query.length > 0}>
-            <StyledSearchBar.Results.Wrapper>
-              <>
-                <ResultItemGroup title={this.resultsTitle()}>
-                  {this.state.results.map((app) => <AppItem {...app} key={app.name} noBorder />)}
-                </ResultItemGroup>
-              </>
-            </StyledSearchBar.Results.Wrapper>
-          </StyledSearchBar.Results>
-        </StyledSearchBar.Section>
-        {this.state.results.length > 0 ? <StyledSearchBar.Backdrop onClick={() => this.clearSearch()} /> : null}
-      </StyledSearchBar>
+      <Focus>
+        {({ focused, bind }) => (
+          <StyledSearchBar {...this.props} pl={3} focused={focused || this.state.searchActive}>
+            <StyledSearchBar.Icon pr={1} focused={focused || this.state.searchActive}>
+              <SearchIcon color="currentColor" />
+            </StyledSearchBar.Icon>
+            <StyledSearchBar.Section grow>
+              <StyledSearchBar.CloseIcon
+                style={{ display: this.state.query.length > 0 ? 'block' : 'none' }}
+                onClick={() => this.clearSearch()}
+                title="Clear Search"
+              >
+                <CloseIcon color="currentColor" />
+              </StyledSearchBar.CloseIcon>
+              <StyledSearchBar.Input
+                placeholder="Search for apps..."
+                onKeyUp={(event) => this.handleKeyDown(event)}
+                value={this.state.query}
+                onFocus={() => {
+                  this.handleSearch(this.state.oldQuery)
+                  bind.onFocus()
+                }}
+                onChange={({ target }) => this.handleSearch(target.value)}
+                onBlur={() => bind.onBlur()}
+              />
+              <StyledSearchBar.Results show={this.state.query.length > 0}>
+                <StyledSearchBar.Results.Wrapper>
+                  <>
+                    <ResultItemGroup title={this.resultsTitle()}>
+                      {this.state.results.map((app) => <AppItem {...app} key={app.name} noBorder />)}
+                    </ResultItemGroup>
+                  </>
+                </StyledSearchBar.Results.Wrapper>
+              </StyledSearchBar.Results>
+            </StyledSearchBar.Section>
+            {this.state.searchActive && this.state.query !== '' ? (
+              <StyledSearchBar.Backdrop onClick={() => this.clearSearch()} />
+            ) : null}
+          </StyledSearchBar>
+        )}
+      </Focus>
     )
   }
 }
