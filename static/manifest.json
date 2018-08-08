@@ -1,6 +1,7 @@
 {
-  "name": "Hello, Blockstack",
-  "start_url": "localhost:5000",
+  "name": "App.co, The Universal Dapp Store",
+  "short_name": "App.co",
+  "start_url": "/",
   "description": "A simple demo of Blockstack Auth",
   "icons": [
     {

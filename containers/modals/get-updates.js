@@ -47,9 +47,10 @@ class GetUpdates extends React.Component {
     const text = this.props.submitting ? 'Loading...' : 'Thanks for subscribing!'
     return (
       <StyledModal.Modal>
-        <StyledModal.Content 
+        <StyledModal.Content
           dark
           width={[1, 0.65, 0.65, 0.5]}
+          p={4}
         >
           <StyledModal.CloseButton dark
             style={{

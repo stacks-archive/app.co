@@ -17,7 +17,9 @@ const NavigationComponent = (props) => (
     <Link href="/faq" prefetch>
       <a href="/faq">Learn more</a>
     </Link>
-    <a href="#" onClick={(evt) => {
+    <a
+      href="#"
+      onClick={(evt) => {
         console.log(props, NewsletterActions)
         evt.preventDefault()
         props.openNewsletterModal()
@@ -52,7 +54,6 @@ class TopBar extends React.Component {
               <SearchBar transparent />
             </StyledTopBar.Section>
             <StyledTopBar.Section>
-              {/* <MenuIcon color="currentColor" size={24} /> */}
               <Navigation />
             </StyledTopBar.Section>
           </StyledTopBar.Wrapper>
