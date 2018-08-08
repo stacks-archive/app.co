@@ -16,7 +16,7 @@ const mapStateToProps = (state) => ({
 const PlatformItem = ({ platform, link, image, width }) => (
   <Link href={link.as}>
     <StyledList.ItemLink width={width} link href={link.as}>
-      <Box style={{ flexGrow: 1 }} px={0}>
+      <Box style={{ flexGrow: 1, maxWidth: '100%' }} px={2}>
         {image && <StyledList.Image src={image} alt={platform} />}
         <Type.strong>{platform}</Type.strong>
       </Box>
@@ -25,19 +25,13 @@ const PlatformItem = ({ platform, link, image, width }) => (
 )
 
 const PlatformsList = connect(mapStateToProps)(({ apps, ...rest }) => {
-  const platforms = [
-    'Blockstack',
-    'Ethereum',
-    'Steem',
-    'IPFS',
-    'ZeroNet'
-  ]
+  const platforms = ['Blockstack', 'Ethereum', 'Steem', 'IPFS', 'ZeroNet']
   const modifiedArray = platforms.slice(0, 5).map((platform) => {
     const slugified = slugify(platform)
     return {
       platform,
       slugified,
-      image: `/static/images/platforms/${slugified}/${slugified}@3x.png`,
+      image: `/static/images/platforms/${slugified}/${slugified}.png`,
       link: {
         as: `/platforms/${slugified}`,
         href: {
@@ -60,7 +54,7 @@ const PlatformsList = connect(mapStateToProps)(({ apps, ...rest }) => {
 
   return (
     <>
-      <ListContainer items={categoriesArray} item={PlatformItem} width={[1, 1/2]} {...rest} />
+      <ListContainer items={categoriesArray} item={PlatformItem} width={[1, 1 / 2]} {...rest} />
     </>
   )
 })

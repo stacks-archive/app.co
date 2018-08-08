@@ -71,6 +71,10 @@ const Content = styled(Box)`
   max-width: 40em;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
+  @media (max-width: 700px) {
+    min-height: 100vh;
+  }
+
   @media (max-width: 40em) {
     border-radius: 0px;
   }
