@@ -7,7 +7,6 @@ import { selectCurrentApp } from '@stores/apps/selectors'
 import { doClearApp } from '@stores/apps'
 
 import StyledModal from '@components/modal'
-import { Box } from '@components/box'
 import { AppCard } from '@components/app-card'
 
 class ModalClass extends React.Component {

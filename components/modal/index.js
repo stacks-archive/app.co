@@ -65,12 +65,11 @@ const Backdrop = styled.div`
 
 const Content = styled(Box)`
   background-color: white;
-  padding: 40px;
   border-radius: 4px;
   position: relative;
   z-index: 10;
   max-width: 40em;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 40em) {
     border-radius: 0px;

@@ -12,11 +12,13 @@ const HeaderItem = (props) => <StyledList.TableItem width={[0, 0.5 / 4]} height=
 const ListTableHeader = () => (
   <StyledList.Body.Header height={['0px', '50px']}>
     <Flex px={3} py={[0, 3]} width={[0, 1]}>
-      <Box width={[0, 0.5]} style={{overflow: 'hidden'}}>Rank</Box>
+      <Box width={[0, 0.5]} style={{ overflow: 'hidden' }}>
+        Rank
+      </Box>
       <HeaderItem>Auth</HeaderItem>
       <HeaderItem>Storage</HeaderItem>
       <HeaderItem>Blockchain</HeaderItem>
-      <HeaderItem style={{textAlign: 'right'}}>Tweets/Week</HeaderItem>
+      <HeaderItem style={{ textAlign: 'right' }}>Tweets/Week</HeaderItem>
     </Flex>
   </StyledList.Body.Header>
 )
@@ -37,11 +39,13 @@ const Items = ({ items, item: Item, limit, width, ...rest }) =>
 const ListContainer = ({ header, items, item, limit, href, width = [1, 1 / 2], ...rest }) => {
   const Header = () =>
     header ? (
-      <StyledList.Header p={4}>
+      <StyledList.Header py={4} px={[3, 4]} title={header.title}>
         <Type.h2>{header.title}</Type.h2>
         {header.action && (
           <Link href={href}>
-            <Button dark href={href} style={{marginLeft: 32}}>View All</Button>
+            <Button dark href={href} style={{ marginLeft: 32 }}>
+              View All
+            </Button>
           </Link>
         )}
       </StyledList.Header>

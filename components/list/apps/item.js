@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Truncate } from 'rebass'
 import { Flex } from 'grid-styled'
 import { connect } from 'react-redux'
+import Router from 'next/router'
 
 import styled from 'styled-components'
 import { Type } from '@components/typography'
@@ -60,15 +61,16 @@ const AppItem = ({
     <StyledList.ItemLink
       {...rest}
       link
-      href={`/app/${rest.Slugs[0].value}`}
-      onClick={(evt) => handleClick(rest.id, evt)}
+      onClick={(evt) => {
+        handleClick(rest.id, evt)
+      }}
       key={rest.id}
     >
       <Flex width={1} alignItems="center">
         <Flex width={single ? [1, 0.5] : [1]} alignItems="center">
           {single ? (
             <Flex
-              mr={3}
+              mr={[2, 3]}
               alignItems="center"
               justifyContent="flex-start"
               style={{ opacity: 0.45, overflow: 'hidden' }}

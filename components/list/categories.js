@@ -16,7 +16,7 @@ const mapStateToProps = (state) => ({
 
 const CategoryItem = ({ category, link, ...rest }) => (
   <Link href={link.as}>
-    <StyledList.ItemLink {...rest} href={link.as}>
+    <StyledList.ItemLink {...rest} link>
       <Box style={{ flexGrow: 1, maxWidth: '100%' }} px={0}>
         <Type.strong>
           <Truncate>{category}</Truncate>

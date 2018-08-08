@@ -53,12 +53,12 @@ const theme = {
   space: [
     // margin and padding
     0,
-    4,
-    8,
-    16,
-    32,
-    64,
-    128,
+    3,
+    6,
+    12,
+    24,
+    48,
+    72,
     256
   ],
   colors: {

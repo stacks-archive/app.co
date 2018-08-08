@@ -1,8 +1,9 @@
 import styled, { css } from 'styled-components'
 import { Box, boxProps } from '@components/box'
 import { space } from 'styled-system'
-import { theme, below, above, wrapperStyle } from '@common/styles'
+import { theme, above, wrapperStyle } from '@common/styles'
 import { animated } from 'react-spring'
+import { rgba } from 'polished'
 
 const Item = styled(animated.div)`
   display: flex;
@@ -62,7 +63,36 @@ const Body = styled(Box)`
   border-right: 1px solid ${theme.colors.border};
   flex-grow: 1;
 `
+
+const headerBgColorGenerator = ({ title }) => {
+
+  if (title.includes('lockstack')) {
+    return css`
+      background: linear-gradient(-45deg, #3700ff 0%, #3700ff 180%);
+    `
+  }
+  switch (title) {
+    case 'Business Tools':
+      return css`
+        background: linear-gradient(275.03deg, #51e068 -2.6%, #06b441 135.01%);
+      `
+    case 'Decentralized Exchanges':
+      return css`
+        background: linear-gradient(275.03deg, #51bee0 -2.6%, #0680b4 135.01%);
+      `
+    case 'Ethereum Wallets':
+      return css`
+        background: linear-gradient(275.03deg, #e0a751 -2.6%, #b42606 135.01%);
+      `
+    default:
+      return css`
+        background: linear-gradient(45deg, #9b51e0 0%, #5306b4 200%);
+      `
+  }
+}
+
 const Header = styled(Box)`
+  ${headerBgColorGenerator};
   ${({ white }) =>
     white &&
     css`
@@ -76,7 +106,7 @@ const Header = styled(Box)`
         color: ${theme.colors.blue};
       }
     `};
-  background: linear-gradient(45deg, #9b51e0 0%, #5306b4 200%);
+  //background: linear-gradient(45deg, #9b51e0 0%, #5306b4 200%);
   //background: linear-gradient(45deg, #0CCABA 0%, #0C9AA6 200%);
   //background: linear-gradient(-45deg, #142144 0%, #324476 200%);
   //background: linear-gradient(45deg, #FE4F74 0%, #CF2B4D 120%);
@@ -139,8 +169,8 @@ const TableItem = styled(Box)`
 `
 
 Item.defaultProps = {
-  px: [1, 3],
-  py: 2
+  px: [2, 3],
+  py: 3
 }
 
 StyledList.Header = Header

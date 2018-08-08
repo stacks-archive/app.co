@@ -1,9 +1,9 @@
-import { H1, H2, H3, H4, H5, H6 } from './headings'
-import Body from './body'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { color, space } from 'styled-system'
 
+import { H1, H2, H3, H4, H5, H6 } from './headings'
+import Body from './body'
 
 const Type = styled.div``
 
