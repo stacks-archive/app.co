@@ -53,7 +53,7 @@ const Item = styled(animated.div)`
   ${boxProps};
 `
 
-const ItemLink = Item.withComponent('a').extend``
+const ItemLink = Item.extend``
 
 const Body = styled(Box)`
   background: white;
@@ -134,12 +134,13 @@ const Image = styled.img`
 `
 
 const TableItem = styled(Box)`
-  textAlign: left;
+  text-align: left;
   overflow: hidden;
 `
 
 Item.defaultProps = {
-  p: 3
+  px: [1, 3],
+  py: 2
 }
 
 StyledList.Header = Header
