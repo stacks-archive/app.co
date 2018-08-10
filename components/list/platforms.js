@@ -4,22 +4,28 @@ import { StyledList } from '@components/list/styled'
 import { connect } from 'react-redux'
 import { selectApps, selectBlockchainCategories } from '@stores/apps/selectors'
 import { ListContainer } from '@components/list/index'
-import { Box } from '@components/box'
+
+import { Flex, Box } from 'rebass'
 import Link from 'next/link'
 import { slugify } from '@common'
+import { renderPlatformIcon } from '@components/svg/platforms'
 
 const mapStateToProps = (state) => ({
   apps: selectApps(state),
   platforms: selectBlockchainCategories(state)
 })
 
-const PlatformItem = ({ platform, link, image, width }) => (
+const PlatformItem = ({ platform, link, image, width, icon: Icon, ...rest }) => (
   <Link href={link.as}>
     <StyledList.ItemLink width={width} link href={link.as}>
-      <Box style={{ flexGrow: 1, maxWidth: '100%' }} px={2}>
-        {image && <StyledList.Image src={image} alt={platform} />}
+      <Flex style={{ flexGrow: 1, maxWidth: '100%' }} pr={2}>
+        {Icon ? (
+          <Box pr={2}>
+            <Icon color="currentColor" />
+          </Box>
+        ) : null}
         <Type.strong>{platform}</Type.strong>
-      </Box>
+      </Flex>
     </StyledList.ItemLink>
   </Link>
 )
@@ -31,7 +37,7 @@ const PlatformsList = connect(mapStateToProps)(({ apps, ...rest }) => {
     return {
       platform,
       slugified,
-      image: `/static/images/platforms/${slugified}/${slugified}.png`,
+      icon: renderPlatformIcon(slugified),
       link: {
         as: `/platforms/${slugified}`,
         href: {

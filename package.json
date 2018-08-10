@@ -17,7 +17,7 @@
     "@atlaskit/modal-dialog": "^4.0.4",
     "@atlaskit/navigation": "^31.0.4",
     "@atlaskit/page": "^7.1.1",
-    "@atlaskit/quick-search": "^4.1.0",
+    "@atlaskit/quick-search": "^4.2.6",
     "@atlaskit/select": "^2.0.1",
     "@atlaskit/single-select": "^4.0.3",
     "@atlaskit/table-tree": "^2.0.1",
