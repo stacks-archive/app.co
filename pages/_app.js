@@ -13,10 +13,6 @@ import { Mdx } from '@components/mdx'
 import 'isomorphic-unfetch'
 
 class MyApp extends App {
-  constructor(props) {
-    super(props)
-  }
-
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {}
 
