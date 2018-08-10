@@ -45,7 +45,8 @@ const mapStateToProps = (state) => ({
 
 const getApps = (props) => {
   const hasFilter = props.platformFilter || props.categoryFilter
-  const apps = hasFilter ? props.filteredApps : props.apps
+  const isAll = hasFilter === 'all'
+  const apps = hasFilter && !isAll ? props.filteredApps : props.apps
   const sortedApps = sortBy(apps, (app) => -getTwitterMentions(app))
   return sortedApps
 }

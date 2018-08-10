@@ -69,6 +69,7 @@ const Body = styled(Box)`
 `
 
 const headerBgColorGenerator = ({ title }) => {
+  if (!title) return null
   if (title.includes('lockstack')) {
     return css`
       background: linear-gradient(-45deg, #3700ff 0%, #3700ff 180%);

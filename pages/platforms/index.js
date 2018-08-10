@@ -1,20 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import { Page } from '@components/page'
-import { Newsletter } from '@components/newsletter'
 import { AppsList } from '@components/list/apps'
-import { CategoriesList } from '@components/list/categories'
-import { PlatformsList } from '@components/list/platforms'
 import Modal from '@containers/modals/app'
 import Head from '@containers/head'
-
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
 import AppStore, { doSelectPlatformFilter } from '@stores/apps'
 import {
-  selectPlatformName, 
+  selectPlatformName,
   selectAllPlatforms
 } from '@stores/apps/selectors'
 
