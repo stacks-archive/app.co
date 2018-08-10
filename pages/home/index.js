@@ -30,7 +30,7 @@ class HomePage extends React.PureComponent {
       <Page>
         <Head />
         <Page.Section px>
-          <Newsletter wrap />
+          <Newsletter serverCookies={this.props.serverCookies} wrap />
         </Page.Section>
         <Page.Section flexDirection="column" px>
           <FeaturedList
@@ -45,7 +45,7 @@ class HomePage extends React.PureComponent {
             title="Hot Social Dapps"
             href="/categories/social-networking"
           />
-          <FeaturedList 
+          <FeaturedList
             appNames={[
               "Graphite",
               "Misthos",
@@ -65,7 +65,7 @@ class HomePage extends React.PureComponent {
           </Page.Section>
         </Page.Section>
         <Page.Section flexDirection="column" px>
-          <FeaturedList 
+          <FeaturedList
             title="Decentralized Exchanges"
             appNames={[
               "Radar Relay",
@@ -74,7 +74,7 @@ class HomePage extends React.PureComponent {
               "ForkDelta"
             ]}
           />
-          <FeaturedList 
+          <FeaturedList
             appNames={[
               'MyCrypto',
               'MyEtherWallet',

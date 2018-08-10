@@ -2,8 +2,7 @@ import App, { Container } from 'next/app'
 import React from 'react'
 import { withRouter } from 'next/router'
 import { Provider } from 'react-redux'
-import NProgress from 'nprogress'
-import routerEvents from 'next-router-events'
+import { CookiesProvider } from 'react-cookie'
 
 import withReduxStore from '@common/lib/with-redux-store'
 import { Root } from '@containers/root'
@@ -16,26 +15,40 @@ import 'isomorphic-unfetch'
 class MyApp extends App {
   constructor(props) {
     super(props)
-    routerEvents.on('routeChangeStart', () => NProgress.start())
-    routerEvents.on('routeChangeComplete', () => NProgress.done())
-    routerEvents.on('routeChangeError', () => NProgress.done())
+  }
+
+  static async getInitialProps({ Component, router, ctx }) {
+    let pageProps = {}
+
+    /**
+     * Pass down cookies from server to each page
+     */
+    const cookies = ctx.req && ctx.req.universalCookies && ctx.req.universalCookies.cookies
+
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx)
+    }
+
+    return { pageProps, cookies }
   }
 
   render() {
     const { Component, pageProps, reduxStore } = this.props
 
     return (
-      <Mdx>
-        <ThemeProvider theme={theme}>
-          <Container>
-            <Provider store={reduxStore}>
-              <Root>
-                <Component {...pageProps} />
-              </Root>
-            </Provider>
-          </Container>
-        </ThemeProvider>
-      </Mdx>
+      <CookiesProvider>
+        <Mdx>
+          <ThemeProvider theme={theme}>
+            <Container>
+              <Provider store={reduxStore}>
+                <Root>
+                  <Component {...pageProps} serverCookies={this.props.cookies} />
+                </Root>
+              </Provider>
+            </Container>
+          </ThemeProvider>
+        </Mdx>
+      </CookiesProvider>
     )
   }
 }
