@@ -109,11 +109,11 @@ app.prepare().then(() => {
   })
 
   server.get('/categories/:category', (req, res) => {
-    renderAndCache(req, res, '/category', { category: req.params.category })
+    renderAndCache(req, res, '/categories', { category: req.params.category })
   })
 
   server.get('/categories', (req, res) => {
-    renderAndCache(req, res, '/category')
+    renderAndCache(req, res, '/categories')
   })
 
   server.get('/category/:category', (req, res) => {

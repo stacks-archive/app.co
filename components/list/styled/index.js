@@ -72,25 +72,30 @@ const headerBgColorGenerator = ({ title }) => {
   if (!title) return null
   if (title.includes('lockstack')) {
     return css`
-      background: linear-gradient(-45deg, #3700ff 0%, #3700ff 180%);
+      background-image: linear-gradient(-135deg, #43cbff 10%, #9708cc 180%);
+    `
+  }
+  if (title.includes('Hot')) {
+    return css`
+      background-image: linear-gradient(135deg, #ffc600 -200%, #fd6e6a 200%);
     `
   }
   switch (title) {
     case 'Business Tools':
       return css`
-        background: linear-gradient(275.03deg, #51e068 -2.6%, #06b441 135.01%);
+        background-image: linear-gradient(-135deg, #fd6585 10%, #0d25b9 200%);
       `
     case 'Decentralized Exchanges':
       return css`
-        background: linear-gradient(275.03deg, #51bee0 -2.6%, #0680b4 135.01%);
+        background-image: linear-gradient(135deg, #3b2667 10%, #bc78ec 200%);
       `
     case 'Ethereum Wallets':
       return css`
-        background: linear-gradient(275.03deg, #e0a751 -2.6%, #b42606 135.01%);
+        background-image: linear-gradient(-135deg, #92ffc0 10%, #002661 200%);
       `
     default:
       return css`
-        background: linear-gradient(45deg, #9b51e0 0%, #5306b4 200%);
+        background-image: linear-gradient(-135deg, #e2b0ff 10%, #9f44d3 180%);
       `
   }
 }
@@ -126,6 +131,7 @@ const Header = styled(Box)`
   h5,
   h6 {
     color: white;
+    text-shadow: rgba(0, 0, 0, 0.15) 1px 1px;
   }
 `
 

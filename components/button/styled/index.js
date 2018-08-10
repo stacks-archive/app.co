@@ -18,9 +18,11 @@ const StyledButton = styled.a`
   text-decoration: none;
   transition: all 135ms cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color;
-  color: #fff;
-  &:link, &:visited, &:active {
-    color: #fff;
+  color: #ffffff;
+  &:link,
+  &:visited,
+  &:active {
+    color: #ffffff;
   }
   svg {
     display: block;
@@ -47,6 +49,16 @@ const StyledButton = styled.a`
       background-color: rgba(20, 33, 68, 0.07);
       &:hover {
         background-color: rgba(20, 33, 68, 0.1);
+      }
+    `};
+  ${({ white }) =>
+    white &&
+    css`
+      background-color: rgba(255, 255, 255, 0.1);
+      text-shadow: rgba(0, 0, 0, 0.05) 1px 1px;
+      font-weight: 500;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.3);
       }
     `};
   ${({ transparent }) =>

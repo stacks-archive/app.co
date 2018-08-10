@@ -34,28 +34,18 @@ class HomePage extends React.PureComponent {
         </Page.Section>
         <Page.Section flexDirection="column" px>
           <FeaturedList
-            appNames={[
-              "SteemIt",
-              "Stealthy",
-              "Peepeth",
-              "Mastodon",
-              "Diaspora",
-              "DTube"
-            ]}
+            appNames={['SteemIt', 'Stealthy', 'Peepeth', 'Mastodon', 'Diaspora', 'DTube']}
             title="Hot Social Dapps"
             href="/categories/social-networking"
+            filterBy="categories"
+            query="social-networking"
           />
           <FeaturedList
-            appNames={[
-              "Graphite",
-              "Misthos",
-              "Aragon",
-              "Gitcoin",
-              "adChain Registry",
-              "ETHLance"
-            ]}
+            appNames={['Graphite', 'Misthos', 'Aragon', 'Gitcoin', 'adChain Registry', 'ETHLance']}
             title="Business Tools"
             href="/categories/business-tools"
+            filterBy="categories"
+            query="business-tools"
           />
         </Page.Section>
         <Page.Section p={0} px>
@@ -65,38 +55,17 @@ class HomePage extends React.PureComponent {
           </Page.Section>
         </Page.Section>
         <Page.Section flexDirection="column" px>
+          <FeaturedList title="Decentralized Exchanges" appNames={['Radar Relay', 'IDEX', 'OasisDEX', 'ForkDelta']} />
           <FeaturedList
-            title="Decentralized Exchanges"
-            appNames={[
-              "Radar Relay",
-              "IDEX",
-              "OasisDEX",
-              "ForkDelta"
-            ]}
+            appNames={['MyCrypto', 'MyEtherWallet', 'Balance.io', 'Toshi', 'MetaMask', 'Exodus', 'Trust Wallet']}
+            title="Ethereum Wallets"
           />
           <FeaturedList
-            appNames={[
-              'MyCrypto',
-              'MyEtherWallet',
-              'Balance.io',
-              'Toshi',
-              'MetaMask',
-              'Exodus',
-              'Trust Wallet'
-            ]}
-            title='Ethereum Wallets'
-          />
-          <FeaturedList
-            appNames={[
-              "Graphite",
-              "Stealthy",
-              "Misthos",
-              "TravelStack",
-              "Dappy Wallet",
-              "Coins"
-            ]}
+            appNames={['Graphite', 'Stealthy', 'Misthos', 'TravelStack', 'Dappy Wallet', 'Coins']}
             title="Popular Blockstack Apps"
             href="/platforms/blockstack"
+            filterBy="platforms"
+            query="blockstack"
           />
         </Page.Section>
         <Modal />

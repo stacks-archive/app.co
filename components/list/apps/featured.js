@@ -4,9 +4,7 @@ import sortBy from 'lodash/sortBy'
 
 import { connect } from 'react-redux'
 
-import {
-  selectApps
-} from '@stores/apps/selectors'
+import { selectApps } from '@stores/apps/selectors'
 
 import { ListContainer } from '@components/list/index'
 import AppItem from './item'
@@ -16,6 +14,8 @@ class FeaturedListComponent extends React.Component {
     allApps: PropTypes.array.isRequired,
     appNames: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired,
+    query: PropTypes.string,
+    filterBy: PropTypes.string,
     href: PropTypes.string
   }
 
@@ -27,11 +27,24 @@ class FeaturedListComponent extends React.Component {
   }
 
   render() {
-    const { title, href } = this.props
+    const { title, href, filterBy, query } = this.props
+    const link = href
+      ? {
+          as: `/${filterBy}/${query}`,
+          href: {
+            pathname: `/${filterBy}`,
+            query: {
+              [filterBy]: query
+            }
+          }
+        }
+      : {}
     const header = {
       title,
-      white: true
+      white: true,
+      ...link
     }
+
     if (href) {
       header.action = { label: 'View All' }
     }

@@ -146,6 +146,9 @@
       "^.+\\.js?$": "babel-jest"
     }
   },
+  "now": {
+    "alias": "appco.now.sh"
+  },
   "nodemonConfig": {
     "verbose": true,
     "ignore": [

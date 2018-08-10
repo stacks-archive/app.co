@@ -15,7 +15,7 @@ const mapStateToProps = (state) => ({
 })
 
 const CategoryItem = ({ category, link, ...rest }) => (
-  <Link href={link.as} prefetch>
+  <Link href={link.href} as={link.as} prefetch>
     <StyledList.ItemLink {...rest} link>
       <Box style={{ flexGrow: 1, maxWidth: '100%' }} px={2}>
         <Type.strong>
