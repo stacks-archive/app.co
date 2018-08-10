@@ -42,7 +42,7 @@ const ListContainer = ({ header, items, item, limit, href, width = [1, 1 / 2], .
       <StyledList.Header py={4} px={[3, 4]} title={header.title}>
         <Type.h2>{header.title}</Type.h2>
         {header.action && (
-          <Link href={href}>
+          <Link href={href} prefetch>
             <Button dark href={href} style={{ marginLeft: 32 }}>
               View All
             </Button>

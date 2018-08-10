@@ -54,7 +54,11 @@ const Item = styled(animated.div)`
   ${boxProps};
 `
 
-const ItemLink = Item.extend``
+const ItemLink = Item.extend`
+  &:hover {
+    color: ${theme.colors.blue};
+  }
+`
 
 const Body = styled(Box)`
   background: white;
@@ -65,7 +69,6 @@ const Body = styled(Box)`
 `
 
 const headerBgColorGenerator = ({ title }) => {
-
   if (title.includes('lockstack')) {
     return css`
       background: linear-gradient(-45deg, #3700ff 0%, #3700ff 180%);

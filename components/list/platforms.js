@@ -16,7 +16,7 @@ const mapStateToProps = (state) => ({
 })
 
 const PlatformItem = ({ platform, link, image, width, icon: Icon, ...rest }) => (
-  <Link href={link.as}>
+  <Link href={link.as} prefetch>
     <StyledList.ItemLink width={width} link href={link.as}>
       <Flex style={{ flexGrow: 1, maxWidth: '100%' }} pr={2}>
         {Icon ? (
