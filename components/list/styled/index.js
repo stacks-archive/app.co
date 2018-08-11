@@ -3,16 +3,26 @@ import { Box, boxProps } from '@components/box'
 import { space } from 'styled-system'
 import { theme, above, wrapperStyle } from '@common/styles'
 import { animated } from 'react-spring'
-import { rgba } from 'polished'
 
 const Item = styled(animated.div)`
   display: flex;
   align-items: center;
   border-bottom: 1px solid ${theme.colors.border};
   flex-grow: 1;
-  border-left: 1px solid ${theme.colors.border};
   position: relative;
   text-decoration: none;
+  border-left: 1px solid ${theme.colors.border};
+  @media (min-width: 640px) {
+    &:nth-of-type(1) {
+      border-left: 0;
+    }
+    &:nth-of-type(4n+0) {
+      border-left: 0;
+    }
+  }
+  @media (max-width: 639px) {
+    border-left: 0;
+  }
   ${({ link }) =>
     link &&
     css`
