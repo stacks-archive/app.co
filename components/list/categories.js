@@ -30,6 +30,7 @@ const CategoriesList = connect(mapStateToProps)(({ categories, apps, limit, ...r
   const items = limit !== 0 ? categories.slice(0, limit - 1) : categories
   const modifiedArray = items.map((category) => ({
     category,
+    slug: slugify(category),
     link: {
       as: `/categories/${slugify(category)}`,
       href: {
@@ -42,6 +43,7 @@ const CategoriesList = connect(mapStateToProps)(({ categories, apps, limit, ...r
   }))
   const lastItem = {
     category: 'All Categories',
+    slug: slugify('All Categories'),
     link: {
       as: `/categories`,
       href: {

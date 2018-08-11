@@ -6,6 +6,7 @@ import { slugify } from '@common'
 
 const constants = {
   SELECT_PLATFORM: 'SELECT_PLATFORM',
+  CLEAR_PLATFORM: 'CLEAR_PLATFORM',
   SELECT_APP: 'SELECT_APP',
   CLEAR_APP: 'CLEAR_APP',
   SAVING_APP: 'SAVING_APP',
@@ -20,6 +21,9 @@ const constants = {
 export const doSelectPlatformFilter = (platform) => ({
   type: constants.SELECT_PLATFORM,
   platform
+})
+export const doClearPlatformFilter = () => ({
+  type: constants.CLEAR_PLATFORM
 })
 export const doSelectApp = (id) => ({
   type: constants.SELECT_APP,
@@ -148,6 +152,17 @@ const makeReducer = (data) => {
           filteredApps,
           platformName
         }
+      }
+      case constants.CLEAR_PLATFORM: {
+        if (state.platformFilter || state.filteredApps.length || state.platformName) {
+          return {
+            ...state,
+            platformFilter: null,
+            filteredApps: [],
+            platformName: null
+          }
+        }
+        return state
       }
       case constants.CLEAR_APP: {
         return {

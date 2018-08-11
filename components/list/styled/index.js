@@ -16,14 +16,14 @@ const Item = styled(animated.div)`
     &:nth-of-type(1) {
       border-left: 0;
     }
-    &:nth-of-type(3n+1) {
+    &:nth-of-type(3n + 1) {
       border-left: 0;
     }
   }
   @media (max-width: 639px) {
     border-left: 0;
   }
-  ${({ link }) =>
+  ${({ link, selected }) =>
     link &&
     css`
       & > a {
@@ -54,6 +54,13 @@ const Item = styled(animated.div)`
         }
         cursor: pointer;
       }
+      ${selected &&
+        css`
+          position: relative;
+          &::before {
+            transform: none;
+          }
+        `};
     `};
   ${({ noBorder }) =>
     noBorder &&

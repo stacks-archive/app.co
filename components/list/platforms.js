@@ -17,7 +17,7 @@ const mapStateToProps = (state) => ({
 
 const PlatformItem = ({ platform, link, image, width, icon: Icon, ...rest }) => (
   <Link href={link.href} as={link.as} prefetch>
-    <StyledList.ItemLink width={width} link href={link.as}>
+    <StyledList.ItemLink width={width} link href={link.as} {...rest}>
       <Flex style={{ flexGrow: 1, maxWidth: '100%' }} pr={2}>
         {Icon ? (
           <Box pr={2}>
@@ -30,13 +30,15 @@ const PlatformItem = ({ platform, link, image, width, icon: Icon, ...rest }) => 
   </Link>
 )
 
-const PlatformsList = connect(mapStateToProps)(({ apps, ...rest }) => {
-  const platforms = ['Blockstack', 'Ethereum', 'Steem', 'IPFS', 'ZeroNet']
-  const modifiedArray = platforms.slice(0, 5).map((platform) => {
+const PlatformsList = connect(mapStateToProps)(({ apps, limit, ...rest }) => {
+  const platforms = limit === 0 ? rest.platforms : ['Blockstack', 'Ethereum', 'Steem', 'IPFS', 'ZeroNet']
+
+  const modifiedArray = platforms.map((platform) => {
     const slugified = slugify(platform)
     return {
       platform,
       slugified,
+      slug: slugified,
       icon: renderPlatformIcon(slugified),
       link: {
         as: `/platforms/${slugified}`,
@@ -51,6 +53,7 @@ const PlatformsList = connect(mapStateToProps)(({ apps, ...rest }) => {
   })
   const lastItem = {
     platform: 'All Platforms',
+    slug: 'all-platforms',
     link: {
       href: '/platforms',
       as: '/platforms'
@@ -60,7 +63,7 @@ const PlatformsList = connect(mapStateToProps)(({ apps, ...rest }) => {
 
   return (
     <>
-      <ListContainer items={categoriesArray} item={PlatformItem} width={[1, 1 / 2]} {...rest} />
+      <ListContainer items={categoriesArray} item={PlatformItem} limit={limit} width={[1, 1 / 2]} {...rest} />
     </>
   )
 })

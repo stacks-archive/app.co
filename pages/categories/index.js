@@ -60,8 +60,7 @@ class CategoryPage extends React.PureComponent {
         reduxStore.dispatch(doSelectCategoryFilter(category))
         return { category }
       } else {
-                reduxStore.dispatch(doClearCategoryFilter())
-
+        reduxStore.dispatch(doClearCategoryFilter())
       }
     }
     return {}
@@ -75,7 +74,7 @@ class CategoryPage extends React.PureComponent {
       : {}
     return (
       <Page>
-        <CategoriesList limit={0} width={[1, 1 / 3]} />
+        <CategoriesList limit={0} width={[1, 1 / 3]} selectedItem={this.props.category || 'all-categories'} />
         <PageContent {...this.props} category={this.props.category || 'all'} {...extraProps} />
       </Page>
     )
