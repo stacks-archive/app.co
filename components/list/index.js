@@ -26,7 +26,7 @@ const ListTableHeader = () => (
 const Items = ({ items, item: Item, limit, width, ...rest }) =>
   items.map((item, i) => {
     const Component = () => <Item width={ width } { ...item } key={ i } rank={ i + 1 } { ...rest } />
-    if (limit) {
+    if (limit && limit !== 0) {
       if (i <= limit) {
         return <Component/>
       } else {

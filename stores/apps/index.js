@@ -13,7 +13,8 @@ const constants = {
   FETCHING_PENDING: 'FETCH_PENDING',
   FETCHED_PENDING: 'FETCHING_PENDING',
   FETCHED_ADMIN_APPS: 'FETCHED_ADMIN_APPS',
-  SELECT_CATEGORY: 'SELECT_CATEGORY'
+  SELECT_CATEGORY: 'SELECT_CATEGORY',
+  CLEAR_CATEGORY: 'CLEAR_CATEGORY'
 }
 
 export const doSelectPlatformFilter = (platform) => ({
@@ -59,6 +60,9 @@ export const doSelectCategoryFilter = (category) => ({
   type: constants.SELECT_CATEGORY,
   category
 })
+export const doClearCategoryFilter = () => ({
+  type: constants.CLEAR_CATEGORY
+})
 
 const fetchedAdminApps = (apps) => ({
   type: constants.FETCHED_ADMIN_APPS,
@@ -98,13 +102,14 @@ const actions = {
   fetchAdminApps
 }
 
-export const selectAppsForPlatform = (apps, platform) => apps.filter((app) => {
-  const tags = getTags(app)
-  if (platform === 'blockstack') {
-    return app.authentication === 'Blockstack' || app.storageNetwork === 'Gaia'
-  }
-  return !!tags.find((tag) => tag.toLowerCase() === platform.toLowerCase())
-})
+export const selectAppsForPlatform = (apps, platform) =>
+  apps.filter((app) => {
+    const tags = getTags(app)
+    if (platform === 'blockstack') {
+      return app.authentication === 'Blockstack' || app.storageNetwork === 'Gaia'
+    }
+    return !!tags.find((tag) => tag.toLowerCase() === platform.toLowerCase())
+  })
 
 const makeReducer = (data) => {
   let initialState = data
@@ -135,7 +140,8 @@ const makeReducer = (data) => {
         const { platform } = action
         const filteredApps = selectAppsForPlatform(state.apps, platform)
         const allPlatforms = selectAllPlatforms(state)
-        const platformName = allPlatforms.find((_platform) => _platform.toLowerCase() === platform.toLowerCase()) || capitalize(platform)
+        const platformName =
+          allPlatforms.find((_platform) => _platform.toLowerCase() === platform.toLowerCase()) || capitalize(platform)
         return {
           ...state,
           platformFilter: platform,
@@ -210,6 +216,17 @@ const makeReducer = (data) => {
           filteredApps,
           categoryName
         }
+      }
+      case constants.CLEAR_CATEGORY: {
+        if (state.categoryFilter || state.filteredApps.length || state.categoryName) {
+          return {
+            ...state,
+            categoryFilter: null,
+            filteredApps: [],
+            categoryName: null
+          }
+        }
+        return state
       }
       default:
         return state

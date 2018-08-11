@@ -125,11 +125,11 @@ class AppsListComponent extends React.Component {
   }
 
   singleTable() {
-    const { single, platformName, categoryName, limit, ...rest } = this.props
+    const { single, platformName, categoryName, title, limit, ...rest } = this.props
     const { sortedApps } = this.state
     return (
       <ListContainer
-        header={ { title: platformName || categoryName, white: true } }
+        header={ { title: title || platformName || categoryName, white: true } }
         items={ sortedApps }
         item={ AppItem }
         width={ [1, 1 / 2, 1 / 3] }

@@ -16,7 +16,7 @@ const Item = styled(animated.div)`
     &:nth-of-type(1) {
       border-left: 0;
     }
-    &:nth-of-type(4n+0) {
+    &:nth-of-type(3n+1) {
       border-left: 0;
     }
   }

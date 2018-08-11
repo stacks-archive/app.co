@@ -26,8 +26,9 @@ const CategoryItem = ({ category, link, ...rest }) => (
   </Link>
 )
 
-const CategoriesList = connect(mapStateToProps)(({ categories, apps, ...rest }) => {
-  const modifiedArray = categories.slice(0, 5).map((category) => ({
+const CategoriesList = connect(mapStateToProps)(({ categories, apps, limit, ...rest }) => {
+  const items = limit !== 0 ? categories.slice(0, limit - 1) : categories
+  const modifiedArray = items.map((category) => ({
     category,
     link: {
       as: `/categories/${slugify(category)}`,
@@ -52,7 +53,7 @@ const CategoriesList = connect(mapStateToProps)(({ categories, apps, ...rest }) 
 
   return (
     <>
-      <ListContainer items={categoriesArray} item={CategoryItem} width={[1, 1/2]} {...rest} />
+      <ListContainer items={categoriesArray} item={CategoryItem} width={[1, 1 / 2]} limit={limit} {...rest} />
     </>
   )
 })
