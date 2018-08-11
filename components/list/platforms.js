@@ -2,7 +2,12 @@ import React from 'react'
 import { Type } from '@components/typography'
 import { StyledList } from '@components/list/styled'
 import { connect } from 'react-redux'
-import { selectApps, selectBlockchainCategories } from '@stores/apps/selectors'
+import {
+  selectApps,
+  selectBlockchainCategories,
+  selectStorageCategories,
+  selectAuthenticationCategories
+} from '@stores/apps/selectors'
 import { ListContainer } from '@components/list/index'
 
 import { Flex, Box } from 'rebass'
@@ -12,7 +17,9 @@ import { renderPlatformIcon } from '@components/svg/platforms'
 
 const mapStateToProps = (state) => ({
   apps: selectApps(state),
-  platforms: selectBlockchainCategories(state)
+  platforms: selectBlockchainCategories(state),
+  storage: selectStorageCategories(state),
+  auth: selectAuthenticationCategories(state)
 })
 
 const PlatformItem = ({ platform, link, image, width, icon: Icon, ...rest }) => (
@@ -30,10 +37,12 @@ const PlatformItem = ({ platform, link, image, width, icon: Icon, ...rest }) => 
   </Link>
 )
 
-const PlatformsList = connect(mapStateToProps)(({ apps, limit, ...rest }) => {
-  const platforms = limit === 0 ? rest.platforms : ['Blockstack', 'Ethereum', 'Steem', 'IPFS', 'ZeroNet']
+const mergeDedupe = (arr) => [...new Set([].concat(...arr))]
 
-  const modifiedArray = platforms.map((platform) => {
+const PlatformsList = connect(mapStateToProps)(({ apps, limit, platforms, auth, storage, ...rest }) => {
+  const all = mergeDedupe([platforms, auth, storage])
+  const items = limit === 0 ? all : ['Blockstack', 'Ethereum', 'Steem', 'IPFS', 'ZeroNet']
+  const modifiedArray = items.map((platform) => {
     const slugified = slugify(platform)
     return {
       platform,
