@@ -43,7 +43,7 @@ const ListContainer = ({ header, items, item, limit, href, as, width = [1, 1 / 2
         <Type.h2>{ header.title }</Type.h2>
         { header.action && (
           <Link href={ header.href ? header.href : href } as={ header.as ? header.as : as } prefetch>
-            <Button white href={ href } style={ { marginLeft: 32 } }>
+            <Button white style={ { marginLeft: 32 } }>
               View All
             </Button>
           </Link>

@@ -44,12 +44,17 @@ injectGlobal`
   }
   hr{
     background:transparent;
-    border: 1px solid #F2F2F2;
+    border: 1px solid #f2f2f2;
     margin: 0;
     padding: 0;
     display: block;
   }
 `
+const GoogleCode = `
+            window.dataLayer = window.dataLayer || []; function gtag()
+            { dataLayer.push(arguments); }
+            gtag('js', new Date()); gtag('config', 'UA-119163063-1');
+          `
 
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
@@ -63,33 +68,10 @@ export default class MyDocument extends Document {
     return (
       <html lang="en">
         <Head>
-          {/* <title>App.co - The Universal Dapp Store</title> */}
-          <link
-            href="https://fonts.googleapis.com/css?family=Lato:400,700,900|Roboto+Slab:300,400,700"
-            rel="stylesheet"
-          />
           <link rel="shortcut icon" href="/static/images/favicon/favicon-96x96.png" />
-          <link href="/static/nprogress.css" rel="stylesheet" type="text/css" async />
-
           <meta name="viewport" content="width=device-width,initial-scale=1" />
-          {/* Global site tag (gtag.js) - Google Analytics */}
           <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119163063-1" />
-          <script
-            src="https://my.hellobar.com/cefe56c097b8691a6036dcfe8feea1fd6c5c736b.js"
-            type="text/javascript"
-            charSet="utf-8"
-            async="async"
-          />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-            window.dataLayer = window.dataLayer || []; function gtag()
-            \{ dataLayer.push(arguments); \}
-            gtag('js', new Date()); gtag('config', 'UA-119163063-1');
-          `
-            }}
-          />
-
+          <script dangerouslySetInnerHTML={{ __html: GoogleCode }} />
           {this.props.styleTags}
         </Head>
         <body>

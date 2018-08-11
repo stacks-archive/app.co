@@ -31,6 +31,7 @@ class SearchBarClass extends React.Component {
     super(props)
     this.search = debounce(this.search, 400)
   }
+
   state = {
     query: '',
     oldQuery: '',
@@ -40,12 +41,15 @@ class SearchBarClass extends React.Component {
   }
 
   search = (query) => {
+    const emptyQuery = query === ''
     let results = searchApps(query, this.props.apps)
-    if (query === '') {
+    if (emptyQuery) {
+      document.body.classList.remove('no-scroll')
       results = []
+    } else {
+      document.body.classList.add('no-scroll')
     }
     setTimeout(() => {
-      document.body.classList.add('no-scroll')
       this.setState({
         results,
         isLoading: false

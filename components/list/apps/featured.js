@@ -15,6 +15,7 @@ class FeaturedListComponent extends React.Component {
     appNames: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired,
     query: PropTypes.string,
+    singular: PropTypes.string,
     filterBy: PropTypes.string,
     href: PropTypes.string
   }
@@ -27,14 +28,14 @@ class FeaturedListComponent extends React.Component {
   }
 
   render() {
-    const { title, href, filterBy, query } = this.props
+    const { title, href, filterBy, singular, query } = this.props
     const link = href
       ? {
           as: `/${filterBy}/${query}`,
           href: {
             pathname: `/${filterBy}`,
             query: {
-              [filterBy]: query
+              [singular]: query
             }
           }
         }
