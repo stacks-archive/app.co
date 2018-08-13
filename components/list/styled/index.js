@@ -12,27 +12,6 @@ const Item = styled(animated.div)`
   position: relative;
   text-decoration: none;
   border-left: 1px solid ${theme.colors.border};
-  @media (min-width: 640px) {
-    &:nth-of-type(1) {
-      border-left: 0;
-    }
-    ${({ width }) =>
-      width &&
-      width.toString().includes('5') &&
-      css`
-        &:nth-of-type(2n + 1) {
-          border-left: 0;
-        }
-      `};
-    ${({ width }) =>
-      width &&
-      width.toString().includes('3') &&
-      css`
-        &:nth-of-type(3n + 1) {
-          border-left: 0;
-        }
-      `};
-  }
   @media (max-width: 639px) {
     border-left: 0;
   }
