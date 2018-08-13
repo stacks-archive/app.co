@@ -62,7 +62,7 @@ const ListContainer = ({ header, items, item, limit, href, as, width = [1, 1 / 2
     selectedItem
   }
   return items ? (
-    <StyledList mb={[4]} {...rest}>
+    <StyledList mb={[3, 4]} {...rest}>
       <Header />
       <StyledList.Body>
         {rest.single ? <ListTableHeader /> : null}

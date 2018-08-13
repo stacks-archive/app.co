@@ -7,14 +7,14 @@ import { StyledPage } from './styled'
 const Page = ({ children, ...rest }) => (
   <StyledPage {...rest}>
     <TopBar />
-    <StyledPage.Section flexDirection={['column']} alignItems="center" pt={[4, 4]} px={[3, 0]}>
+    <StyledPage.Section flexDirection={['column']} alignItems="center" pt={[3, 4]} px={[2, 0]}>
       {children}
     </StyledPage.Section>
   </StyledPage>
 )
 
 const pxProps = ({ px }) => (px ? { px: [2, 4] } : {})
-const pyProps = ({ py }) => (py ? { py: [2, 4] } : {})
+const pyProps = ({ py }) => (py ? { py: [1, 4] } : {})
 
 const Section = (props) => <StyledPage.Section {...props} {...pxProps(props)} {...pyProps(props)} />
 
