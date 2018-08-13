@@ -55,7 +55,7 @@ const CategoriesList = connect(mapStateToProps)(({ categories, apps, limit = 6, 
 
   return (
     <>
-      <ListContainer items={categoriesArray} item={CategoryItem} width={[1, 1 / 2]} limit={limit} {...rest} />
+      <ListContainer items={categoriesArray} item={CategoryItem} width={[1, 1 / 2]} limit={limit} mx={[2, 0]} {...rest}  />
     </>
   )
 })

@@ -171,6 +171,14 @@ const StyledList = styled(Box)`
     padding: 0;
   `};
   ${space};
+
+  ${({ gutter }) =>
+    gutter &&
+    css`
+      @media (min-width: 832px) {
+        margin-left: 16px;
+      }
+    `};
 `
 
 const Image = styled.img`

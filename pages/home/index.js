@@ -28,13 +28,13 @@ class HomePage extends React.PureComponent {
   render() {
     return (
       <Page>
-        <Head/>
+        <Head />
         <Page.Section px>
-          <Newsletter serverCookies={ this.props.serverCookies } wrap/>
+          <Newsletter serverCookies={this.props.serverCookies} wrap />
         </Page.Section>
         <Page.Section flexDirection="column" px>
           <FeaturedList
-            appNames={ ['SteemIt', 'Stealthy', 'Peepeth', 'Mastodon', 'Diaspora', 'DTube'] }
+            appNames={['SteemIt', 'Stealthy', 'Peepeth', 'Mastodon', 'Diaspora', 'DTube']}
             title="Hot Social Dapps"
             href="/categories/social-networking"
             filterBy="categories"
@@ -42,7 +42,7 @@ class HomePage extends React.PureComponent {
             query="social-networking"
           />
           <FeaturedList
-            appNames={ ['Graphite', 'Misthos', 'Aragon', 'Gitcoin', 'adChain Registry', 'ETHLance'] }
+            appNames={['Graphite', 'Misthos', 'Aragon', 'Gitcoin', 'adChain Registry', 'ETHLance']}
             title="Business Tools"
             href="/categories/business-tools"
             filterBy="categories"
@@ -50,20 +50,21 @@ class HomePage extends React.PureComponent {
             query="business-tools"
           />
         </Page.Section>
-        <Page.Section p={ 0 } px>
-          <Page.Section wrap flexDirection={ ['column', 'column', 'row'] } p={ 0 }>
-            <PlatformsList mr={ [0, 3] }/>
-            <CategoriesList/>
+        <Page.Section p={0} pl={[0, 4]} pr={[0, 4]}>
+          <Page.Section wrap flexDirection={['column', 'column', 'row']} p={0}>
+            <PlatformsList />
+
+            <CategoriesList gutter />
           </Page.Section>
         </Page.Section>
         <Page.Section flexDirection="column" px>
-          <FeaturedList title="Decentralized Exchanges" appNames={ ['Radar Relay', 'IDEX', 'OasisDEX', 'ForkDelta'] }/>
+          <FeaturedList title="Decentralized Exchanges" appNames={['Radar Relay', 'IDEX', 'OasisDEX', 'ForkDelta']} />
           <FeaturedList
-            appNames={ ['MyCrypto', 'MyEtherWallet', 'Balance.io', 'Toshi', 'MetaMask', 'Exodus', 'Trust Wallet'] }
+            appNames={['MyCrypto', 'MyEtherWallet', 'Balance.io', 'Toshi', 'MetaMask', 'Exodus', 'Trust Wallet']}
             title="Ethereum Wallets"
           />
           <FeaturedList
-            appNames={ ['Graphite', 'Stealthy', 'Misthos', 'TravelStack', 'Dappy Wallet', 'Coins'] }
+            appNames={['Graphite', 'Stealthy', 'Misthos', 'TravelStack', 'Dappy Wallet', 'Coins']}
             title="Popular Blockstack Apps"
             href="/platforms/blockstack"
             filterBy="platforms"
@@ -71,7 +72,7 @@ class HomePage extends React.PureComponent {
             query="blockstack"
           />
         </Page.Section>
-        <Modal/>
+        <Modal />
       </Page>
     )
   }

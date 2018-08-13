@@ -70,11 +70,11 @@ const AppItem = ({
         <Flex width={single ? [1, 0.5] : [1]} alignItems="center">
           {single ? (
             <Flex
-              mr={[2, 3]}
+              mr={[3, 3]}
+              ml={[2, 0]}
               alignItems="center"
               justifyContent="flex-start"
               style={{ opacity: 0.45, overflow: 'hidden' }}
-              width={[0, 'auto']}
               flex="0 0 auto"
             >
               <Type.p>{rank}</Type.p>
