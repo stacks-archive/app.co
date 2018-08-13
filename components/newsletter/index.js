@@ -46,6 +46,7 @@ class NewsletterClass extends React.Component {
   handleSubmit = (email = this.state.email) => {
     if (email.match(EMAIL_REGEX)) {
       this.props.doSubmitEmail(email)
+      setTimeout(() => this.handleClose(SUBSCRIBED), 5400)
     }
   }
 
@@ -68,7 +69,7 @@ class NewsletterClass extends React.Component {
     const doingSomething = this.props.submitted || this.props.subscribed
     const text = this.props.submitting ? 'Loading...' : 'Thanks for subscribing!'
     return show() ? (
-      <StyledNewsletter pl={3} py={3} mb={[3,4]} {...this.props}>
+      <StyledNewsletter pl={3} py={3} mb={[3, 4]} {...this.props}>
         <StyledNewsletter.Wrapper>
           <Box
             dark
