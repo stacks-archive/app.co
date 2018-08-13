@@ -86,7 +86,11 @@ class PlatformsPage extends React.PureComponent {
       : {}
     return (
       <Page>
-        <PlatformsList limit={0} width={[1, 1 / 3]} selectedItem={this.props.platform || 'all-platforms'} />
+        <Page.Section p={0} pl={[0, 4]} pr={[0, 4]}>
+          <Page.Section wrap flexDirection={['column', 'column', 'row']} p={0}>
+            <PlatformsList limit={0} width={[1, 1 / 3]} selectedItem={this.props.platform || 'all-platforms'} />
+          </Page.Section>
+        </Page.Section>
         <PageContent {...this.props} {...extraProps} />
       </Page>
     )

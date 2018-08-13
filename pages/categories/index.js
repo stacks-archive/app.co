@@ -74,7 +74,11 @@ class CategoryPage extends React.PureComponent {
       : {}
     return (
       <Page>
-        <CategoriesList limit={0} width={[1, 1 / 3]} selectedItem={this.props.category || 'all-categories'} />
+        <Page.Section p={0} pl={[0, 4]} pr={[0, 4]}>
+          <Page.Section wrap flexDirection={['column', 'column', 'row']} p={0}>
+            <CategoriesList limit={0} width={[1, 1 / 3]} selectedItem={this.props.category || 'all-categories'} />
+          </Page.Section>
+        </Page.Section>
         <PageContent {...this.props} category={this.props.category || 'all'} {...extraProps} />
       </Page>
     )
