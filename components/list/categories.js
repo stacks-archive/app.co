@@ -26,7 +26,7 @@ const CategoryItem = ({ category, link, ...rest }) => (
   </Link>
 )
 
-const CategoriesList = connect(mapStateToProps)(({ categories, apps, limit, ...rest }) => {
+const CategoriesList = connect(mapStateToProps)(({ categories, apps, limit = 6, ...rest }) => {
   const items = limit !== 0 ? categories.slice(0, limit - 1) : categories
   const modifiedArray = items.map((category) => ({
     category,

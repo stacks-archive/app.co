@@ -16,9 +16,22 @@ const Item = styled(animated.div)`
     &:nth-of-type(1) {
       border-left: 0;
     }
-    &:nth-of-type(3n + 1) {
-      border-left: 0;
-    }
+    ${({ width }) =>
+      width &&
+      width.toString().includes('5') &&
+      css`
+        &:nth-of-type(2n + 1) {
+          border-left: 0;
+        }
+      `};
+    ${({ width }) =>
+      width &&
+      width.toString().includes('3') &&
+      css`
+        &:nth-of-type(3n + 1) {
+          border-left: 0;
+        }
+      `};
   }
   @media (max-width: 639px) {
     border-left: 0;
