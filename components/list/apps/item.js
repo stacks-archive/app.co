@@ -74,7 +74,7 @@ const AppItem = ({
               alignItems="center"
               justifyContent="flex-start"
               style={{ opacity: 0.45, overflow: 'hidden' }}
-              width={[0, '18px']}
+              width={[0, 'auto']}
               flex="0 0 auto"
             >
               <Type.p>{rank}</Type.p>
