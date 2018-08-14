@@ -37,12 +37,12 @@ async function renderAndCache(req, res, pagePath, serverData) {
   const key = getCacheKey(req)
 
   // If we have a page in the cache, let's serve it
-  if (ssrCache.has(key) && !dev) {
-    res.setHeader('x-cache', 'HIT')
-    console.log('cache hit')
-    res.send(ssrCache.get(key))
-    return
-  }
+  // if (ssrCache.has(key) && !dev) {
+  //   res.setHeader('x-cache', 'HIT')
+  //   console.log('cache hit')
+  //   res.send(ssrCache.get(key))
+  //   return
+  // }
 
   try {
     const data = await getApps(apiServer)
@@ -64,7 +64,6 @@ async function renderAndCache(req, res, pagePath, serverData) {
 
     // Let's cache this page
     ssrCache.set(key, html)
-
     res.setHeader('x-cache', 'MISS')
     console.log('cache miss')
     res.send(html)
