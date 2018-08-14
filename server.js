@@ -91,6 +91,10 @@ app.prepare().then(() => {
     renderAndCache(req, res, '/')
   })
 
+  server.get('/mining', (req, res) => {
+    renderAndCache(req, res, '/mining')
+  })
+
   server.get('/app/:appSlug', (req, res) => {
     renderAndCache(req, res, '/')
   })
