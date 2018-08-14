@@ -155,7 +155,7 @@ const headerBgColorGenerator = ({ title }) => {
       `
     case 'Business Tools':
       return css`
-        background-image: linear-gradient(-135deg, rgb(146, 255, 192) 10%, rgb(0, 38, 97) 200%);
+        background-image: linear-gradient(-135deg, rgb(146, 255, 192) -50%, rgb(0, 38, 97) 200%);
       `
     case 'Developer Tools':
       return css`
