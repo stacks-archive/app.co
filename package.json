@@ -118,7 +118,9 @@
     "prettier": "^1.12.1",
     "regenerator-runtime": "^0.11.1",
     "request": "^2.85.0",
-    "sepia": "^2.0.2"
+    "responsive-loader": "^1.1.0",
+    "sepia": "^2.0.2",
+    "sharp": "^0.20.5"
   },
   "homepage": "https://github.com/blockstackpbc/app.co#readme",
   "keywords": [
