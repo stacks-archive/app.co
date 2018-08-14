@@ -1,7 +1,18 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import Shevy from 'shevyjs'
-import { color, fontSize, fontWeight, fontFamily, textStyle, textAlign, lineHeight, opacity } from 'styled-system'
+import {
+  color,
+  fontSize,
+  fontWeight,
+  fontFamily,
+  textStyle,
+  textAlign,
+  lineHeight,
+  opacity,
+  borders,
+  borderRadius
+} from 'styled-system'
 import { boxProps } from '@components/box'
 
 const shevy = new Shevy()
@@ -18,6 +29,8 @@ const baseProps = css`
   ${lineHeight};
   ${opacity};
   ${textAlign};
+  ${borders};
+  ${borderRadius};
 `
 const H1 = styled.h1`
   ${baseProps};
