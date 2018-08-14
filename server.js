@@ -96,10 +96,6 @@ app.prepare().then(() => {
     renderAndCache(req, res, '/')
   })
 
-  server.get('/platforms/:platform', (req, res) => {
-    renderAndCache(req, res, '/platforms', { platform: req.params.platform })
-  })
-
   server.get('/apps', (req, res) => {
     renderAndCache(req, res, '/')
   })
@@ -107,15 +103,23 @@ app.prepare().then(() => {
   server.get('/platforms', (req, res) => {
     renderAndCache(req, res, '/platforms')
   })
-
-  server.get('/categories/:category', (req, res) => {
-    renderAndCache(req, res, '/categories', { category: req.params.category })
+  server.get('/platforms/all', (req, res) => {
+    renderAndCache(req, res, '/platforms/all')
+  })
+  server.get('/platforms/:platform', (req, res) => {
+    renderAndCache(req, res, '/platforms', { platform: req.params.platform })
   })
 
   server.get('/categories', (req, res) => {
     renderAndCache(req, res, '/categories')
   })
 
+  server.get('/categories/all', (req, res) => {
+    renderAndCache(req, res, '/categories/all')
+  })
+  server.get('/categories/:category', (req, res) => {
+    renderAndCache(req, res, '/categories', { category: req.params.category })
+  })
   server.get('/category/:category', (req, res) => {
     res.redirect(`/categories/${req.params.category}`)
   })

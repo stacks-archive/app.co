@@ -78,11 +78,11 @@ class NewsletterClass extends React.Component {
           >
             <CloseIcon color="rgba(255,255,255,0.5)" size={18} />
           </Box>
-          <StyledNewsletter.Svg top={10} left={10}>
+          <StyledNewsletter.Svg top={[ 10]} left={['100%', 10]} right={[[10, 'auto']]}>
             <PlanetsWithGasGiant />
           </StyledNewsletter.Svg>
           <StyledNewsletter.Section width="60%">
-            <Type.h3 color={theme.colors.blue.accent} pl={68} py={2} pr={2}>
+            <Type.h3 color={theme.colors.blue.accent} pl={[0, 0,  68]} py={2} pr={2}>
               {doingSomething ? 'Thanks for subscribing!' : 'Get updates'}{' '}
               <Type.span color={theme.colors.grey.light}>
                 {doingSomething

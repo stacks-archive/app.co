@@ -9,4 +9,7 @@ function slugify(text) {
     .replace(/-+$/, '') // Trim - from end of text
 }
 
-export { slugify }
+function dedupe(a) {
+   return Array.from(new Set(a));
+}
+export { slugify,dedupe }

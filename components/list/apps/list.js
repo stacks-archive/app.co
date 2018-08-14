@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import sortBy from 'lodash/sortBy'
+import { dedupe } from '@common'
 
 import { connect } from 'react-redux'
 
@@ -81,7 +82,7 @@ class AppsListComponent extends React.Component {
 
   multilist() {
     const { filterBy = 'category', single, limit, apps, sectionKeys, ...rest } = this.props
-    const items = sectionKeys || rest[filterBy]
+    const items = dedupe(sectionKeys) || rest[filterBy]
 
     return (
       items &&
@@ -106,18 +107,17 @@ class AppsListComponent extends React.Component {
           }
         }
 
-
         return filteredList.length > 0 ? (
           <ListContainer
-            key={ filter }
-            header={ { title: filter, action: { label: 'View All' }, white: true, ...link } }
-            items={ filteredList }
-            item={ AppItem }
-            width={ [1, 1 / 2, 1 / 3] }
-            limit={ limit }
-            single={ false }
-            href={ path + '/' + slugify(filter) }
-            { ...rest }
+            key={filter}
+            header={{ title: filter, action: { label: 'View All' }, white: true, ...link }}
+            items={filteredList}
+            item={AppItem}
+            width={[1, 1 / 2, 1 / 3]}
+            limit={limit}
+            single={false}
+            href={path + '/' + slugify(filter)}
+            {...rest}
           />
         ) : null
       })
@@ -129,13 +129,13 @@ class AppsListComponent extends React.Component {
     const { sortedApps } = this.state
     return (
       <ListContainer
-        header={ { title: title || platformName || categoryName, white: true } }
-        items={ sortedApps }
-        item={ AppItem }
-        width={ [1, 1 / 2, 1 / 3] }
-        limit={ limit }
+        header={{ title: title || platformName || categoryName, white: true }}
+        items={sortedApps}
+        item={AppItem}
+        width={[1, 1 / 2, 1 / 3]}
+        limit={limit}
         single
-        { ...rest }
+        {...rest}
       />
     )
   }

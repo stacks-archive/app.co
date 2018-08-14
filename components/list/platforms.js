@@ -39,7 +39,7 @@ const PlatformItem = ({ platform, link, image, width, icon: Icon, ...rest }) => 
 
 const mergeDedupe = (arr) => [...new Set([].concat(...arr))]
 
-const PlatformsList = connect(mapStateToProps)(({ apps, limit, platforms, auth, storage, ...rest }) => {
+const PlatformsList = connect(mapStateToProps)(({ apps, limit, platforms, auth, storage, noAll, ...rest }) => {
   const all = mergeDedupe([platforms, auth, storage])
   const items = limit === 0 ? all : ['Blockstack', 'Ethereum', 'Steem', 'IPFS', 'ZeroNet']
   const modifiedArray = items.map((platform) => {
@@ -68,11 +68,18 @@ const PlatformsList = connect(mapStateToProps)(({ apps, limit, platforms, auth, 
       as: '/platforms'
     }
   }
-  const categoriesArray = [...modifiedArray, lastItem]
+  const array = !noAll ? [...modifiedArray, lastItem] : modifiedArray
 
   return (
     <>
-      <ListContainer items={categoriesArray} item={PlatformItem} limit={limit} width={[1, 1 / 2]} mx={[2, 0]} {...rest}  />
+      <ListContainer
+        items={array}
+        item={PlatformItem}
+        limit={limit}
+        width={[1, 1 / 2]}
+        mx={[2, 0]}
+        {...rest}
+      />
     </>
   )
 })

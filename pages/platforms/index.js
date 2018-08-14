@@ -8,8 +8,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import AppStore, { doSelectPlatformFilter, doClearPlatformFilter } from '@stores/apps'
 import { selectPlatformName, selectAllPlatforms } from '@stores/apps/selectors'
-import { PlatformsList } from '@components/list/platforms'
-import Platform from '@pages/platform'
 
 const mapStateToProps = (state) => ({
   platformName: selectPlatformName(state),
@@ -25,7 +23,7 @@ function mapDispatchToProps(dispatch) {
  * because the class cannot run getInitialProps if it's connected
  */
 const PageContent = connect(mapStateToProps, mapDispatchToProps)(
-  ({ platformName, platform = 'all', platforms, ...rest }) => (
+  ({ platformName, platform, platforms, ...rest }) => (
     <>
       <Head title={platformName ? `${platformName} Apps` : 'All Platforms'} />
       <Page.Section flexDirection="column" px>
@@ -79,19 +77,9 @@ class PlatformsPage extends React.PureComponent {
   }
 
   render() {
-    const extraProps = !this.props.platform
-      ? {
-          title: 'All Platforms'
-        }
-      : {}
     return (
       <Page>
-        <Page.Section p={0} pl={[0, 4]} pr={[0, 4]}>
-          <Page.Section wrap flexDirection={['column', 'column', 'row']} p={0}>
-            <PlatformsList limit={0} width={[1, 1 / 3]} selectedItem={this.props.platform || 'all-platforms'} />
-          </Page.Section>
-        </Page.Section>
-        <PageContent {...this.props} {...extraProps} />
+        <PageContent {...this.props} />
       </Page>
     )
   }

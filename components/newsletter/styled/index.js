@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { position, top, left, right, bottom } from 'styled-system'
 import { Box } from '@components/box'
 import { above, below, theme, wrapperStyle } from '@common/styles'
 
@@ -31,33 +32,23 @@ const SvgBackgroundElement = styled.div`
   position: absolute;
   ${below.md`
   transform: translateY(12px)`};
-  ${({ top }) =>
-    top &&
-    css`
-      top: ${top}px;
-    `};
-  ${({ left }) =>
-    left &&
-    css`
-      left: ${left}px;
-    `};
-  ${({ right }) =>
-    right &&
-    css`
-      right: ${right}px;
-    `};
-  ${({ bottom }) =>
-    bottom &&
-    css`
-      bottom: ${bottom}px;
-    `};
+
+  ${position};
+  ${top};
+  ${right};
+  ${bottom};
+  ${left};
+
+  @media (max-width: 831px) {
+    right: 0 !important;
+    left: calc(100% - 60px) !important;
+  }
 `
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-
   justify-content: space-between;
   flex-wrap: wrap;
 `
