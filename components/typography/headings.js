@@ -1,19 +1,23 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
-import Shevy from 'shevyjs'
-import { color, fontSize, textAlign, width, maxWidth } from 'styled-system'
+// import Shevy from 'shevyjs'
+import { color, fontSize, fontWeight, fontFamily, textStyle, textAlign, lineHeight, opacity, width, maxWidth } from 'styled-system'
 import { boxProps } from '@components/box'
 
-const shevy = new Shevy()
-const { baseSpacing: bs, h1, h2, h3, h4, h5, h6 } = shevy
+// const shevy = new Shevy()
+// const { baseSpacing: bs, h1, h2, h3, h4, h5, h6 } = shevy
 
 const baseProps = css`
   color: rgba(20, 33, 68, 1);
   ${color};
   ${boxProps};
   ${fontSize};
-  ${maxWidth};
+  ${fontWeight};
+  ${fontFamily};
+  ${textStyle};
+  ${lineHeight};
+  ${opacity};
   ${textAlign};
+  ${maxWidth};
   ${width};
 `
 const H1 = styled.h1`

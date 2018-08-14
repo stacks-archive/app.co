@@ -2840,20 +2840,6 @@ camelcase@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
 
-can-simple-dom@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/can-simple-dom/-/can-simple-dom-0.3.0.tgz#a7b364d228595e11a3b6e9d662741e893c58339d"
-  dependencies:
-    micro-location "^0.1.4"
-    simple-html-tokenizer "^0.2.1"
-
-can@^2.3.0-pre.1:
-  version "2.3.35"
-  resolved "https://registry.yarnpkg.com/can/-/can-2.3.35.tgz#9e5f4032e53e6775d4ad8a9926f4ef51bd108835"
-  dependencies:
-    can-simple-dom "^0.3.0"
-    jquery ">=1.9.0 <1.12.0 || >=2.1.0 <2.3.0"
-
 caniuse-lite@^1.0.30000835:
   version "1.0.30000839"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000839.tgz#41fcc036cf1cb77a0e0be041210f77f1ced44a7b"
@@ -5832,10 +5818,6 @@ jest@^22.4.3:
     import-local "^1.0.0"
     jest-cli "^22.4.3"
 
-"jquery@>=1.9.0 <1.12.0 || >=2.1.0 <2.3.0", jquery@^2.1.4:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-2.2.4.tgz#2c89d6889b5eac522a7eea32c14521559c6cbf02"
-
 js-beautify@^1.7.4:
   version "1.7.5"
   resolved "https://registry.yarnpkg.com/js-beautify/-/js-beautify-1.7.5.tgz#69d9651ef60dbb649f65527b53674950138a7919"
@@ -6401,10 +6383,6 @@ merkle-lib@^2.0.10:
 methods@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
-
-micro-location@^0.1.4:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/micro-location/-/micro-location-0.1.5.tgz#282a2ad93a25ed73b2868974ea9999428ffc1be2"
 
 micromatch@^2.3.11:
   version "2.3.11"
@@ -8549,10 +8527,6 @@ simple-html-tokenizer@^0.2.1:
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/simple-html-tokenizer/-/simple-html-tokenizer-0.2.6.tgz#a6efab7bc705cf3a96f1aaeaa1a76365f0d16c33"
 
-simple-html-tokenizer@^0.2.1:
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/simple-html-tokenizer/-/simple-html-tokenizer-0.2.6.tgz#a6efab7bc705cf3a96f1aaeaa1a76365f0d16c33"
-
 slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
@@ -8963,13 +8937,6 @@ symbol-observable@^1.0.3, symbol-observable@^1.2.0:
 symbol-tree@^3.2.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.2.tgz#ae27db38f660a7ae2e1c3b7d1bc290819b8519e6"
-
-system-component@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/system-component/-/system-component-0.0.3.tgz#79bee7ba913b17155e81ac9a96f879cc49737080"
-  dependencies:
-    can "^2.3.0-pre.1"
-    jquery "^2.1.4"
 
 system-components@^2.2.1, system-components@^2.2.3:
   version "2.2.3"
