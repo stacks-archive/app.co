@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Flex, Box } from '@components/mining/index'
 
-const MiningListItem = ({ ...rest }) => <Flex p={4} {...rest} />
+const MiningListItem = ({ ...rest }) => <Flex {...rest} />
 const RenderItems = ({ items, ...rest }) => (
   <>
     {items.map((item, i) => {
