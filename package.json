@@ -49,7 +49,7 @@
     "isomorphic-unfetch": "^2.0.0",
     "lodash": "^4.17.10",
     "lru-cache": "^4.1.3",
-    "mdi-react": "^3.3.0",
+    "mdi-react": "3.4.0",
     "next": "^6.1.1",
     "next-router-events": "^2.1.0",
     "nprogress": "^0.2.0",

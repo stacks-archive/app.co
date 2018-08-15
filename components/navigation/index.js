@@ -22,7 +22,7 @@ const NavigationComponent = ({ handleClick, openNewsletterModal, ...rest }) => {
         Get Updates
       </a>
       <Link href="/submit" {...extraProps}>
-        <a href="/submit">Submit your dapp</a>
+        <a href="/submit">Add your app</a>
       </Link>
     </StyledTopBar.Navigation>
   )
