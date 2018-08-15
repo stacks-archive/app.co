@@ -282,7 +282,7 @@ const StyledList = styled(Box)`
     gutter &&
     css`
       @media (min-width: 832px) {
-        margin-left: 16px;
+        margin-left: 16px !important;
       }
     `};
 `
