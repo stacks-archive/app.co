@@ -11,7 +11,8 @@ import {
   lineHeight,
   opacity,
   borders,
-  borderRadius
+  borderRadius,
+  display
 } from 'styled-system'
 import { boxProps } from '@components/box'
 
@@ -30,6 +31,7 @@ const baseProps = css`
   ${opacity};
   ${textAlign};
   ${borders};
+  ${display};
   ${borderRadius};
 `
 const H1 = styled.h1`

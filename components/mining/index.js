@@ -1,3 +1,4 @@
+import * as React from 'react'
 import system from 'system-components'
 import tag from 'clean-tag'
 
@@ -23,18 +24,20 @@ const Box = system(
   'maxHeight',
   'maxWidth',
   'minWidth',
-  'borders'
+  'borders',
+  'display'
 )
 
-const Flex = system(
+const SystemFlex = system(
   {
     is: Box
   },
-  { display: 'flex' },
   'flexWrap',
   'flexDirection',
   'alignItems',
   'justifyContent'
 )
+
+const Flex = (props) => <SystemFlex display="flex" {...props} />
 
 export { Box, Flex }
