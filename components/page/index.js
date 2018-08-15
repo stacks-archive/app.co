@@ -1,14 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { TopBar } from '@components/top-bar'
-import { StyledPage } from './styled'
+import { Footer } from '@components/footer'
 
+import { StyledPage } from './styled'
 
 const Page = ({ children, ...rest }) => (
   <StyledPage {...rest}>
     <TopBar />
     <StyledPage.Section flexDirection={['column']} alignItems="center" pt={[3, 4]} px={[2, 0]}>
       {children}
+    </StyledPage.Section>
+    <StyledPage.Section flexDirection={['column']} alignItems="center" px={[2, 0]}>
+      <Footer pb={3} />
     </StyledPage.Section>
   </StyledPage>
 )

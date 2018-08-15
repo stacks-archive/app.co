@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
-import { wrapperStyle, theme, below, above } from '@common/styles'
+import { wrapperStyle } from '@common/styles'
+import { display } from 'styled-system'
 
 const Navigation = styled.div`
   display: flex;
@@ -19,14 +20,26 @@ const Navigation = styled.div`
       color: rgba(20, 33, 68, 1);
     }
   }
+  ${display};
   ${({ mobile }) =>
-    mobile
-      ? below.md`
-        display: none;
-      `
-      : above.md`
-        display: none;
-      `};
+    mobile &&
+    css`
+      position: fixed;
+      top: 60px;
+      height: calc(100vh - 60px);
+      background: white;
+      width: 100%;
+      left: 0;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      a {
+        font-size: 25px !important;
+        text-align: right;
+        width: 100%;
+        display: block;
+      }
+    `};
 `
 const StyledTopBar = styled.div`
   width: 100%;

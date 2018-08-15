@@ -1,4 +1,7 @@
-import styled, { css } from 'styled-components'
+import { css } from 'styled-components'
+import system from 'system-components'
+import tag from 'clean-tag'
+
 import { space, color, fontSize, width, flex, flexDirection, flexWrap, alignContent, alignItems } from 'styled-system'
 
 const boxProps = css`
@@ -13,16 +16,46 @@ const boxProps = css`
   ${alignItems}
 `
 
-const Box = styled.div`
-  ${({ card }) =>
-    card &&
-    css`
-      background: #ffffff;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-      border-radius: 3px;
-    `};
-  ${boxProps};
-`
+
+const Box = system(
+  {
+    is: tag
+  },
+  'width',
+  'space',
+  'fontSize',
+  'color',
+  'flex',
+  'order',
+  'alignSelf',
+  'opacity',
+  'display',
+  'position',
+  'top',
+  'right',
+  'left',
+  'bottom',
+  'minHeight',
+  'borderRadius',
+  'maxHeight',
+  'maxWidth',
+  'minWidth',
+  'borders'
+)
+
+const Flex = system(
+  {
+    is: Box
+  },
+  { display: 'flex' },
+  'flexWrap',
+  'flexDirection',
+  'alignItems',
+  'justifyContent'
+)
+
+
+
 Box.propTypes = {
   ...space.propTypes,
   ...width.propTypes,
@@ -35,4 +68,4 @@ Box.propTypes = {
   ...color.propTypes
 }
 
-export { Box, boxProps }
+export { Box, Flex, boxProps }
