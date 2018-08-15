@@ -53,7 +53,6 @@ class HomePage extends React.PureComponent {
         <Page.Section p={0} pl={[0, 4]} pr={[0, 4]}>
           <Page.Section wrap flexDirection={['column', 'column', 'row']} p={0}>
             <PlatformsList />
-
             <CategoriesList gutter />
           </Page.Section>
         </Page.Section>
