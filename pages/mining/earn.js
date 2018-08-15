@@ -5,23 +5,56 @@ import { Type } from '@components/typography'
 import { Flex, Box } from '@components/mining'
 import { MiningButton } from '@components/mining/button'
 import ArrowRightIcon from 'mdi-react/ArrowRightIcon'
+import { AppIcon } from '@components/app-icon'
+
 const ListItemText = (props) => <Type.h4 color="white" fontSize="18px" lineHeight={1.5} fontWeight={400} {...props} />
 
 const apps = [
   {
-    name: 'Graphite Docs'
+    name: 'Sovereign',
+    earnings: {
+      usd: '$15,000',
+      btc: 1.2
+    },
+    tags: ['Blockstack Auth', 'Gaia'],
+    appIcon: 'https://i.imgur.com/xFn761F.png'
   },
   {
-    name: 'Graphite Docs'
+    name: 'Graphite Docs',
+    earnings: {
+      usd: '$12,500',
+      btc: 1.2
+    },
+    tags: ['Blockstack Auth', 'Gaia'],
+    appIcon: 'https://browser.blockstack.org/images/app-icon-graphite-256x256.png'
   },
   {
-    name: 'Graphite Docs'
+    name: 'Stealthy',
+    earnings: {
+      usd: '$11,120',
+      btc: 1.2
+    },
+    tags: ['Blockstack Auth', 'Gaia'],
+    appIcon: 'https://browser.blockstack.org/images/app-icon-stealthy-256x256.png'
+  },
+
+  {
+    name: 'Misthos',
+    earnings: {
+      usd: '$10,800',
+      btc: 1.2
+    },
+    tags: ['Blockstack Auth', 'Gaia'],
+    appIcon: 'https://browser.blockstack.org/images/app-icon-misthos-256x256.png'
   },
   {
-    name: 'Graphite Docs'
-  },
-  {
-    name: 'Graphite Docs'
+    name: 'Souq',
+    earnings: {
+      usd: '$10,000',
+      btc: 1.2
+    },
+    tags: ['Blockstack Auth', 'Gaia'],
+    appIcon: 'https://browser.blockstack.org/images/app-icon-souq-256x256.png'
   }
 ]
 
@@ -30,20 +63,22 @@ const Tag = ({ ...rest }) => (
   <AppItemText border="1px solid #646C73" borderRadius="3px" fontSize={1} px={2} ml={2} {...rest} />
 )
 
-const AppItem = ({ name, i, index, length, ...rest }) => (
+const AppItem = ({ name, earnings, tags, i, index, appIcon, length, ...rest }) => (
   <Flex width={1} p={[3, 4]} bg={`rgba(255,255,255, ${index / length + 0.1})`} alignItems="center">
     <AppItemText opacity={0.5} mr={3}>
       {i + 1}
     </AppItemText>
-    <AppItemText pr={3}>{name}</AppItemText>
+    <Flex alignItems="center">
+      <AppIcon mr={3} src={appIcon} alt={name} size={42} />
+      <AppItemText pr={3}>{name}</AppItemText>
+    </Flex>
     <Flex display={['none', 'flex']}>
-      <Tag>Blockstack Auth</Tag>
-      <Tag>Gaia</Tag>
+      {tags && tags.length ? tags.map((tag, tagIndex) => <Tag key={tagIndex}>{tag}</Tag>) : null}
     </Flex>
     <Flex flexDirection={['column', 'row']} ml="auto" alignItems={['flex-end', 'center']}>
-      <AppItemText fontSize={3}>$15,000</AppItemText>
+      <AppItemText fontSize={3}>{earnings.usd}</AppItemText>
       <AppItemText opacity={0.5} ml={3}>
-        1.2 BTC
+        {earnings.btc} BTC
       </AppItemText>
     </Flex>
   </Flex>
