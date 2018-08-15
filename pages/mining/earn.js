@@ -31,19 +31,21 @@ const Tag = ({ ...rest }) => (
 )
 
 const AppItem = ({ name, i, index, length, ...rest }) => (
-  <Flex width={1} p={4} bg={`rgba(255,255,255, ${index / length + 0.1})`} alignItems="center">
+  <Flex width={1} p={[3, 4]} bg={`rgba(255,255,255, ${index / length + 0.1})`} alignItems="center">
     <AppItemText opacity={0.5} mr={3}>
       {i + 1}
     </AppItemText>
     <AppItemText pr={3}>{name}</AppItemText>
-    <Tag>Blockstack Auth</Tag>
-    <Tag>Gaia</Tag>
-    <AppItemText ml="auto" fontSize={3}>
-      $15,000
-    </AppItemText>
-    <AppItemText opacity={0.5} ml={3}>
-      1.2 BTC
-    </AppItemText>
+    <Flex display={['none', 'flex']}>
+      <Tag>Blockstack Auth</Tag>
+      <Tag>Gaia</Tag>
+    </Flex>
+    <Flex flexDirection={['column', 'row']} ml="auto" alignItems={['flex-end', 'center']}>
+      <AppItemText fontSize={3}>$15,000</AppItemText>
+      <AppItemText opacity={0.5} ml={3}>
+        1.2 BTC
+      </AppItemText>
+    </Flex>
   </Flex>
 )
 
@@ -57,10 +59,10 @@ const Rankings = (props) => (
       noItemBorder
       items={[
         <Flex width={1} p={4}>
-          <ListItemText opacity={0.5} mr={3}>
+          <ListItemText opacity={0.5} mr={3} display={['none', 'block']}>
             App.co Rank
           </ListItemText>
-          <ListItemText ml="auto" color="#11A9BC">
+          <ListItemText ml={['0', 'auto']} textAlign={['center', 'right']} width={['100%', 'auto']} color="#11A9BC">
             Estimated October Payouts
           </ListItemText>
         </Flex>,

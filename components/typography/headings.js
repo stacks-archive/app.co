@@ -12,7 +12,8 @@ import {
   borders,
   borderRadius,
   width,
-  maxWidth
+  maxWidth,
+  display
 } from 'styled-system'
 import { boxProps } from '@components/box'
 
@@ -33,6 +34,7 @@ const baseProps = css`
   ${maxWidth};
   ${width};
   ${borders};
+  ${display};
   ${borderRadius};
 `
 const H1 = styled.h1`
