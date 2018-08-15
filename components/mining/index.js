@@ -37,7 +37,32 @@ const SystemFlex = system(
   'alignItems',
   'justifyContent'
 )
+const Img = system(
+  {
+    is: tag.img
+  },
+  'width',
+  'space',
+  'fontSize',
+  'color',
+  'flex',
+  'order',
+  'alignSelf',
+  'opacity',
+  'position',
+  'top',
+  'right',
+  'left',
+  'bottom',
+  'minHeight',
+  'borderRadius',
+  'maxHeight',
+  'maxWidth',
+  'minWidth',
+  'borders',
+  'display'
+)
 
 const Flex = (props) => <SystemFlex display="flex" {...props} />
 
-export { Box, Flex }
+export { Box, Flex, Img }
