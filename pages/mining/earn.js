@@ -63,26 +63,49 @@ const Tag = ({ ...rest }) => (
   <AppItemText border="1px solid #646C73" borderRadius="3px" fontSize={1} px={2} ml={2} {...rest} />
 )
 
-const AppItem = ({ name, earnings, tags, i, index, appIcon, length, ...rest }) => (
-  <Flex width={1} p={[3, 4]} bg={`rgba(255,255,255, ${index / length + 0.1})`} alignItems="center">
+const AppItem = ({ name, earnings, tags, i, index, appIcon, length, ...rest }) => {
+  const GradientItem = (props) => (
+    <Flex
+      width={1}
+      p={[3, 4]}
+      bg={`rgba(255,255,255, ${index / length + 0.1})`}
+      alignItems="center"
+      {...props}
+      {...rest}
+    />
+  )
+  const AppRank = () => (
     <AppItemText opacity={0.5} mr={3}>
       {i + 1}
     </AppItemText>
+  )
+  const AppName = () => (
     <Flex alignItems="center">
       <AppIcon mr={3} src={appIcon} alt={name} size={42} />
       <AppItemText pr={3}>{name}</AppItemText>
     </Flex>
-    <Flex display={['none', 'flex']}>
-      {tags && tags.length ? tags.map((tag, tagIndex) => <Tag key={tagIndex}>{tag}</Tag>) : null}
-    </Flex>
+  )
+  const AppTags = () =>
+    tags && tags.length ? (
+      <Flex display={['none', 'flex']}>{tags.map((tag, tagIndex) => <Tag key={tagIndex}>{tag}</Tag>)}</Flex>
+    ) : null
+  const AppEarnings = () => (
     <Flex flexDirection={['column', 'row']} ml="auto" alignItems={['flex-end', 'center']}>
       <AppItemText fontSize={3}>{earnings.usd}</AppItemText>
       <AppItemText opacity={0.5} ml={3}>
         {earnings.btc} BTC
       </AppItemText>
     </Flex>
-  </Flex>
-)
+  )
+  return (
+    <GradientItem>
+      <AppRank />
+      <AppName />
+      <AppTags />
+      <AppEarnings />
+    </GradientItem>
+  )
+}
 
 const appsArray = apps.map((app, i) => <AppItem key={i} i={i} index={apps.length - i} length={apps.length} {...app} />)
 
@@ -108,17 +131,15 @@ const Rankings = (props) => (
 )
 
 const ActionBar = () => (
-  <>
-    <Box maxWidth="960px" mx="auto" style={{ transform: 'translateY(-25px)' }}>
-      <Box borderTop="1px solid white" />
-      <MiningButton mx="auto" width="250px" bg="#EF6F6F" alignItems="center" style={{ transform: 'translateY(-25px)' }}>
-        View all apps
-        <Box ml={2}>
-          <ArrowRightIcon color="currentColor" size="1.3rem" style={{ transform: 'translateY(4px)' }} />
-        </Box>
-      </MiningButton>
-    </Box>
-  </>
+  <Box maxWidth="960px" mx="auto" style={{ transform: 'translateY(-25px)' }}>
+    <Box borderTop="1px solid white" />
+    <MiningButton mx="auto" width="250px" bg="#EF6F6F" alignItems="center" style={{ transform: 'translateY(-25px)' }}>
+      <Box>View all apps</Box>
+      <Box ml={2}>
+        <ArrowRightIcon color="currentColor" size="1.3rem" style={{ transform: 'translateY(4px)' }} />
+      </Box>
+    </MiningButton>
+  </Box>
 )
 
 const Earn = ({ ...props }) => (

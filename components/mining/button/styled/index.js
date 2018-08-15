@@ -7,6 +7,11 @@ const StyledMiningButton = styled(Flex)`
   color: white;
   font-size: 18px;
   line-height: 28px;
+  transition: 0.25s ease-in-out all;
+  &:hover {
+    cursor: pointer;
+    transform: translateY(-3px);
+  }
 `
 
 StyledMiningButton.defaultProps = {
