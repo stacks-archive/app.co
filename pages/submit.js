@@ -1,12 +1,11 @@
 import React from 'react'
 import TextField from '@atlaskit/field-text'
-import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Select from '@atlaskit/select'
 import { CheckboxStateless as Checkbox } from '@atlaskit/checkbox'
 import 'isomorphic-unfetch'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import Head from '@containers/head'
 
 import { Page } from '@components/page'
 import { Button } from '@components/button'
@@ -82,11 +81,12 @@ class SubmitDapp extends React.Component {
 
     return (
       <Page>
+        <Head title="Submit your dapp" description="Submit your dapp to be listed on the Universal Dapp Store." />
         <Page.Section wrap px py mb={3} richText bg="white">
           {this.state.submitted || this.state.submitting ? (
             <p>Thanks for your submission! We'll get back to you soon.</p>
           ) : (
-            <div style={{marginLeft: 'auto', marginRight: 'auto'}}>
+            <div style={{ marginLeft: 'auto', marginRight: 'auto' }}>
               Please share some details. We will review and approve your submission shortly.
               <Form.Wrapper>
                 <TextField
