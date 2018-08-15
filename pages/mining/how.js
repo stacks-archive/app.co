@@ -1,9 +1,41 @@
 import * as React from 'react'
-import { Heading, Section, SubHeading } from '@pages/mining/shared'
+import { Heading, Section } from '@pages/mining/shared'
 import { Box, Img, Flex } from '@components/mining'
 import { Card } from '@components/mining/card'
+import { LogoWordmark } from '@components/mining/logo'
+import { Type } from '@components/typography'
+import { CheckMark } from '@components/svg'
 
-const CardItem = (props) => <Card width={['100%', 'calc(33.333% - 20px)']} {...props} />
+const CardItem = (props) => (
+  <Card
+    alignItems="center"
+    justifyContent="center"
+    width={['100%', 'calc(33.333% - 20px)']}
+    flexDirection="column"
+    px={[3, 4]}
+    py={4}
+    my={[2, 0]}
+    {...props}
+  />
+)
+
+const RankedBy = ({ by, bg, ...rest }) => (
+  <Flex pt={4} alignItems="center" {...rest}>
+    <Type.span>Ranks by:</Type.span>
+    <Box bg={bg} ml={2} px={3} py={1}>
+      <Type.span color="white">{by}</Type.span>
+    </Box>
+  </Flex>
+)
+
+const ListCheckItem = ({ children, ...props }) => (
+  <Flex pb={4} alignItems="center" {...props}>
+    <Box mr={3} style={{ transform: 'translateY(3px)' }}>
+      <CheckMark />
+    </Box>
+    <Type.span color="white">{children}</Type.span>
+  </Flex>
+)
 
 const How = ({ ...props }) => (
   <>
@@ -20,11 +52,28 @@ const How = ({ ...props }) => (
       <Heading mb={5} maxWidth={['100%', '800px']}>
         Apps are ranked by reviewers and rewards distributed every 30 days
       </Heading>
-      <Flex width="960px">
-        <CardItem>Thing 1</CardItem>
-        <CardItem mx={4}>Thing 1</CardItem>
-        <CardItem>Thing 1</CardItem>
+      <Flex maxWidth="960px" width="100%" flexDirection={['column', 'row']}>
+        <CardItem>
+          <LogoWordmark />
+          <RankedBy bg="#11A9BC" by="Get App Clicks" />
+        </CardItem>
+        <CardItem mx={[0, 4]}>
+          <LogoWordmark />
+          <RankedBy bg="#EF6F6F" by="Get App Clicks" />
+        </CardItem>
+        <CardItem>
+          <LogoWordmark />
+          <RankedBy bg="#2F4EEA" by="Get App Clicks" />
+        </CardItem>
       </Flex>
+
+      <Box pt={6}>
+        <ListCheckItem>Any user-ready app on App.co with Blockstack authentication or storage.</ListCheckItem>
+        <ListCheckItem>
+          Reviewers use their proprietary data to rank App.co apps. <a href="#">View rankings.</a>
+        </ListCheckItem>
+        <ListCheckItem>Reviewers, criteria, and rankings are made public each month.</ListCheckItem>
+      </Box>
     </Section>
   </>
 )
