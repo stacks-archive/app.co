@@ -72,14 +72,7 @@ const PlatformsList = connect(mapStateToProps)(({ apps, limit, platforms, auth, 
 
   return (
     <>
-      <ListContainer
-        items={array}
-        item={PlatformItem}
-        limit={limit}
-        width={[1, 1 / 2]}
-        mx={[2, 0]}
-        {...rest}
-      />
+      <ListContainer items={array} item={PlatformItem} limit={limit} width={[1, 1 / 2]} mx={[2, 0]} {...rest} />
     </>
   )
 })

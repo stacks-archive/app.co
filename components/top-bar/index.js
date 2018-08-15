@@ -1,66 +1,62 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import Headroom from 'react-headroom'
 import Link from 'next/link'
-
 import { StyledTopBar } from '@components/top-bar/styled'
 import { AppIcon } from '@components/logos'
 import { SearchBar } from '@components/search'
 import GetUpdatesModal from '@containers/modals/get-updates'
+import MenuIcon from 'mdi-react/MenuIcon'
+import CloseIcon from 'mdi-react/CloseIcon'
+import { Toggle } from 'react-powerplug'
+import { Box } from '@components/box'
+import { Navigation } from '@components/navigation'
 
-// import { selectIsLoading } from '@stores/router/selectors'
-import NewsletterActions from '@stores/newsletter/actions'
+const handleBodyScroll = (on) =>
+  on ? document.body.classList.remove('no-scroll') : document.body.classList.add('no-scroll')
 
-const NavigationComponent = (props) => (
-  <StyledTopBar.Navigation mobile>
-    <Link href="/faq" prefetch>
-      <a href="/faq">Learn more</a>
-    </Link>
-    <a
-      href="#"
-      onClick={(evt) => {
-        console.log(props, NewsletterActions)
-        evt.preventDefault()
-        props.openNewsletterModal()
-      }}
-    >
-      Get Updates
-    </a>
-    <Link href="/submit">
-      <a href="/submit">Submit your dapp</a>
-    </Link>
-  </StyledTopBar.Navigation>
+const TopBar = (props) => (
+  <Headroom>
+    <StyledTopBar {...props}>
+      <StyledTopBar.Wrapper wrap>
+        <StyledTopBar.Section grow>
+          <Link href="/" prefetch>
+            <a href="/">
+              <AppIcon />
+            </a>
+          </Link>
+          <SearchBar transparent />
+        </StyledTopBar.Section>
+        <StyledTopBar.Section>
+          <Navigation display={['none', 'flex']} />
+          <Box display={['block', 'none']}>
+            <Toggle>
+              {({ on, toggle }) => (
+                <>
+                  <Box
+                    onClick={() => {
+                      toggle()
+                      handleBodyScroll(on)
+                    }}
+                  >
+                    {on ? <CloseIcon color="currentColor" /> : <MenuIcon color="currentColor" />}
+                  </Box>
+                  <Navigation
+                    mobile
+                    on={on}
+                    handleClick={() => {
+                      toggle()
+                      handleBodyScroll(on)
+                    }}
+                    display={[on ? 'flex' : 'none', 'none']}
+                  />
+                </>
+              )}
+            </Toggle>
+          </Box>
+        </StyledTopBar.Section>
+      </StyledTopBar.Wrapper>
+    </StyledTopBar>
+    <GetUpdatesModal />
+  </Headroom>
 )
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Object.assign({}, NewsletterActions), dispatch)
-}
-
-const Navigation = connect(() => ({}), mapDispatchToProps)(NavigationComponent)
-
-class TopBar extends React.Component {
-  render() {
-    return (
-      <Headroom>
-        <StyledTopBar>
-          <StyledTopBar.Wrapper wrap>
-            <StyledTopBar.Section grow>
-              <Link href="/" prefetch>
-                <a href="/">
-                  <AppIcon />
-                </a>
-              </Link>
-              <SearchBar transparent />
-            </StyledTopBar.Section>
-            <StyledTopBar.Section>
-              <Navigation />
-            </StyledTopBar.Section>
-          </StyledTopBar.Wrapper>
-        </StyledTopBar>
-        <GetUpdatesModal />
-      </Headroom>
-    )
-  }
-}
 export { TopBar }

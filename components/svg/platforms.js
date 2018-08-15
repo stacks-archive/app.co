@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import ServerIcon from 'mdi-react/ServerIcon'
+import DeathStarIcon from 'mdi-react/DeathStarIcon'
 import { theme } from '@common/styles'
 
 const StyledSVG = styled.svg`
@@ -126,7 +126,7 @@ const PlatformZeroNetIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
   </StyledSVG>
 )
 
-const DefaultIcon = ({ color = DEFAULT_COLOR, ...rest }) => <ServerIcon color={color} {...rest} />
+const DefaultIcon = ({ color = DEFAULT_COLOR, ...rest }) => <DeathStarIcon color={color} {...rest} />
 
 const renderPlatformIcon = (slug) => {
   switch (slug) {
@@ -151,7 +151,8 @@ const renderPlatformIcon = (slug) => {
     case 'ethereum':
       return (props) => <PlatformEthereumIcon {...props} />
     default:
-      return (props) => <DefaultIcon {...props }/>  }
+      return (props) => <DefaultIcon {...props} />
+  }
 }
 
 export {

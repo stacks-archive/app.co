@@ -17,7 +17,7 @@ const port = parseInt(process.env.PORT, 10) || 3000
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
-const apiServer = process.env.API_SERVER || 'https://app-co-api.herokuapp.com'
+const apiServer = process.env.API_SERVER || 'https://app-co-api-staging.herokuapp.com'
 
 // This is where we cache our rendered HTML pages
 const ssrCache = new LRUCache({

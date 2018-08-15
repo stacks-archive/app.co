@@ -235,11 +235,6 @@ const Header = styled(Box)`
         color: ${theme.colors.blue};
       }
     `};
-  //background: linear-gradient(45deg, #9b51e0 0%, #5306b4 200%);
-  //background: linear-gradient(45deg, #0CCABA 0%, #0C9AA6 200%);
-  //background: linear-gradient(-45deg, #142144 0%, #324476 200%);
-  //background: linear-gradient(45deg, #FE4F74 0%, #CF2B4D 120%);
-  //background: linear-gradient(45deg, #FCB33F 0%, #E38920 200%);
   color: white;
   display: flex;
   align-items: center;
@@ -287,16 +282,15 @@ const StyledList = styled(Box)`
     gutter &&
     css`
       @media (min-width: 832px) {
-        margin-left: 16px;
+        margin-left: 16px !important;
       }
     `};
 `
 
 const Image = styled.img`
-  max-height: 24px;
-  max-width: 24px;
+  height: 24px;
   position: relative;
-  top: 6px;
+  top: 5px;
   margin-right: 10px;
   opacity: 0.8;
 `
