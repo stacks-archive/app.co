@@ -2,7 +2,7 @@ import * as React from 'react'
 import { MiningList } from '@components/mining/list'
 import { Section, Heading, SubHeading } from '@pages/mining/shared'
 import { Type } from '@components/typography'
-import { Flex, Box } from '@components/mining'
+import { Flex, Box, Img } from '@components/mining'
 import { MiningButton } from '@components/mining/button'
 import ArrowRightIcon from 'mdi-react/ArrowRightIcon'
 import { AppIcon } from '@components/app-icon'
@@ -125,10 +125,12 @@ const Earn = ({ ...props }) => (
   <>
     <Section minHeight="40vh" justifyContent="flex-end" mt={5} flexDirection="column" {...props}>
       <Box p={4}>
-        <img
+        <Img
           src="https://file-vdymnlybqk.now.sh/"
           alt="How much can you earn?"
-          style={{ maxWidth: '360px', margin: '0 auto', display: 'block' }}
+          maxWidth={['80%', '360px']}
+          mx="auto"
+          display="block"
         />
       </Box>
       <Heading mb={5}>How much can you earn?</Heading>
