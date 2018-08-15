@@ -82,7 +82,7 @@ const AppItem = ({ name, earnings, tags, i, index, appIcon, length, ...rest }) =
   const AppName = () => (
     <Flex alignItems="center">
       <AppIcon mr={3} src={appIcon} alt={name} size={42} />
-      <AppItemText pr={3}>{name}</AppItemText>
+      <AppItemText fontWeight="500" pr={3}>{name}</AppItemText>
     </Flex>
   )
   const AppTags = () =>

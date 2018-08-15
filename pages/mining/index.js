@@ -3,7 +3,7 @@ import { MiningPage } from '@components/mining/page'
 import { AppCoLogo } from '@components/mining/logo'
 import { Hero, Steps } from '@pages/mining/hero'
 import { Earn } from '@pages/mining/earn'
-
+import { How } from '@pages/mining/how'
 import { Section, HeaderType } from '@pages/mining/shared'
 
 const Header = () => (
@@ -19,6 +19,7 @@ const AppMiningPage = () => (
     <Hero />
     <Steps />
     <Earn />
+    <How />
   </MiningPage>
 )
 

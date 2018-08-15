@@ -36,6 +36,7 @@ const baseProps = css`
   ${borders};
   ${display};
   ${borderRadius};
+  ${maxWidth};
 `
 const H1 = styled.h1`
   ${baseProps};
