@@ -293,10 +293,9 @@ const StyledList = styled(Box)`
 `
 
 const Image = styled.img`
-  max-height: 24px;
-  max-width: 24px;
+  height: 24px;
   position: relative;
-  top: 6px;
+  top: 5px;
   margin-right: 10px;
   opacity: 0.8;
 `

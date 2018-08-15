@@ -24,18 +24,20 @@ const mapStateToProps = (state) => ({
 
 const PlatformItem = ({ platform, link, image, width, icon: Icon, ...rest }) => (
   <Link href={link.href} as={link.as} prefetch>
-    <StyledList.ItemLink width={width} link href={link.as} {...rest}>
+    <StyledList.ItemLink width={width} link href={link.as} {...rest} style={{ height: '60px' }}>
       <Flex style={{ flexGrow: 1, maxWidth: '100%' }} pr={2}>
         {Icon ? (
           <Box pr={2}>
             <Icon color="currentColor" />
           </Box>
         ) : null}
-        <Type.strong>{platform}</Type.strong>
+        <Type.strong
+          style={{ position: 'absolute', left: (image ? '50px' : '16px'), top: '20px' }}
+        >
+          {platform}
+        </Type.strong>
       </Flex>
-    </StyledList.ItemLink>
-  </Link>
-)
+
 
 const mergeDedupe = (arr) => [...new Set([].concat(...arr))]
 
