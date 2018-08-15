@@ -1,5 +1,21 @@
 import React from 'react'
 
+const CheckMark = ({ color = '#2F4EEA', size = 32 }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+    <rect width="31.2255" height="31.1298" fill="black" fillOpacity="0" />
+    <path
+      d="M23.4191 7.78248C27.7304 12.0806 27.7304 19.0493 23.4191 23.3474C19.1078 27.6455 12.1177 27.6455 7.80636 23.3474C3.49503 19.0493 3.49503 12.0806 7.80636 7.78248C12.1177 3.48435 19.1078 3.48435 23.4191 7.78248Z"
+      fill={color}
+    />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M28.3626 5.34418L15.6629 18.7245L9.63892 12.4368L10.361 11.745L15.6596 17.2755L27.6373 4.65576L28.3626 5.34418Z"
+      fill="white"
+    />
+  </svg>
+)
+
 const PlanetsWithGasGiant = (props) => (
   <svg width="104" height="71" viewBox="0 0 104 71" fill="none" {...props}>
     <path
@@ -60,4 +76,4 @@ const ArrowRight = ({ color = 'currentColor', ...rest }) => (
   </svg>
 )
 
-export { ArrowRight, PlanetsWithGasGiant }
+export { ArrowRight, PlanetsWithGasGiant, CheckMark }
