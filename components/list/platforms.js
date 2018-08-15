@@ -31,13 +31,13 @@ const PlatformItem = ({ platform, link, image, width, icon: Icon, ...rest }) => 
             <Icon color="currentColor" />
           </Box>
         ) : null}
-        <Type.strong
-          style={{ position: 'absolute', left: (image ? '50px' : '16px'), top: '20px' }}
-        >
+        <Type.strong style={{ position: 'absolute', left: image ? '50px' : '16px', top: '20px' }}>
           {platform}
         </Type.strong>
       </Flex>
-
+    </StyledList.ItemLink>
+  </Link>
+)
 
 const mergeDedupe = (arr) => [...new Set([].concat(...arr))]
 
@@ -74,14 +74,7 @@ const PlatformsList = connect(mapStateToProps)(({ apps, limit, platforms, auth, 
 
   return (
     <>
-      <ListContainer
-        items={array}
-        item={PlatformItem}
-        limit={limit}
-        width={[1, 1 / 2]}
-        mx={[2, 0]}
-        {...rest}
-      />
+      <ListContainer items={array} item={PlatformItem} limit={limit} width={[1, 1 / 2]} mx={[2, 0]} {...rest} />
     </>
   )
 })
