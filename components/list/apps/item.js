@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Truncate } from 'rebass'
 import { Flex } from 'grid-styled'
 import { connect } from 'react-redux'
-import Router from 'next/router'
 
 import styled from 'styled-components'
 import { Type } from '@components/typography'
@@ -30,7 +29,17 @@ const appTag = (tag) => {
     return ''
   }
   const url = `/platforms/${slugify(tag)}`
-  return <TagLink href={url}>{tag.toLowerCase()}</TagLink>
+  const href = {
+    pathname: `/platforms`,
+    query: {
+      platform: slugify(tag)
+    }
+  }
+  return (
+    <TagLink href={href} as={url}>
+      {tag.toLowerCase()}
+    </TagLink>
+  )
 }
 
 const AppItem = ({
@@ -83,7 +92,7 @@ const AppItem = ({
           <AppIcon src={imageUrl} alt={name} size={48} />
           <Box style={{ flexGrow: 1, maxWidth: '75%' }} pl={3}>
             <Type.h4 fontSize={16} mt="4px">
-              {name}
+              <a href={`/app/${rest.Slugs[0] && rest.Slugs[0].value}`}>{name}</a>
             </Type.h4>
             <SmallText p={0} my={2}>
               <Truncate>{description}</Truncate>

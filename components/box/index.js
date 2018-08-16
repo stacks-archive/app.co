@@ -46,6 +46,36 @@ const Box = system(
   'backgroundRepeat'
 )
 
+const A = system(
+  {
+    is: tag.a
+  },
+  'width',
+  'space',
+  'fontSize',
+  'color',
+  'flex',
+  'order',
+  'alignSelf',
+  'opacity',
+  'display',
+  'position',
+  'top',
+  'right',
+  'left',
+  'bottom',
+  'minHeight',
+  'borderRadius',
+  'maxHeight',
+  'maxWidth',
+  'minWidth',
+  'borders',
+  'backgroundImage',
+  'backgroundSize',
+  'backgroundPosition',
+  'backgroundRepeat'
+)
+
 const Flex = system(
   {
     is: Box
@@ -69,4 +99,4 @@ Box.propTypes = {
   ...color.propTypes
 }
 
-export { Box, Flex, boxProps }
+export { Box, Flex, boxProps, A }

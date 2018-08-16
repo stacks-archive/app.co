@@ -23,9 +23,6 @@ const doSubmitEmail = (email, callback) => async (dispatch) => {
       },
       body: JSON.stringify(data)
     })
-    dispatch({
-      type: SUBMIT_EMAIL_FINISHED
-    })
     if (callback) {
       callback()
     }

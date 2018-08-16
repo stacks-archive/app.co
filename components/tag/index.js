@@ -5,9 +5,9 @@ import { StyledTag, StyledTagLink } from '@components/tag/styled'
 
 const Tag = ({ children, ...rest }) => (children ? <StyledTag {...rest}>{children}</StyledTag> : null)
 
-const TagLink = ({ children, href, ...rest }) => (
-  <Link href={href}>
-    <StyledTagLink href={href} {...rest}>
+const TagLink = ({ children, href, as, ...rest }) => (
+  <Link href={href} as={as} prefetch>
+    <StyledTagLink href={as} {...rest}>
       {children}
     </StyledTagLink>
   </Link>

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Box, boxProps } from '@components/box'
+import { Box, boxProps, A } from '@components/box'
 import { space } from 'styled-system'
 import { theme, above, wrapperStyle } from '@common/styles'
 import { animated } from 'react-spring'
@@ -63,11 +63,7 @@ const Item = styled(animated.div)`
   ${boxProps};
 `
 
-const ItemLink = Item.extend`
-  &:hover {
-    color: ${theme.colors.blue};
-  }
-`
+const ItemLink = Item.withComponent(Box)
 
 const Body = styled(Box)`
   background: white;
