@@ -9,9 +9,9 @@ class AllAppsPage extends React.PureComponent {
   render() {
     return (
       <Page>
-        <Head title='All Apps' />
+        <Head title='Popular decentralized apps' />
         <Page.Section flexDirection="column" px>
-          <AppsList image="g3" single title="All Apps" />
+          <AppsList image="g3" single title="Popular decentralized apps" />
         </Page.Section>
         <Modal />
       </Page>
