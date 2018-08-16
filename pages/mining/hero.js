@@ -44,7 +44,7 @@ const Steps = (props) => (
 )
 
 const Hero = ({ ...props }) => (
-  <Section minHeight="40vh" justifyContent="flex-end" flexDirection="column" {...props}>
+  <Section minHeight="50vh" justifyContent="flex-end" flexDirection="column" py={4} {...props}>
     <Heading mb={5}>
       The better your app,<br />the more Bitcoin you earn.
     </Heading>
