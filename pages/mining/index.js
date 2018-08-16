@@ -4,6 +4,9 @@ import { AppCoLogo } from '@components/mining/logo'
 import { Hero, Steps } from '@pages/mining/hero'
 import { Earn } from '@pages/mining/earn'
 import { How } from '@pages/mining/how'
+import { Why } from '@pages/mining/why'
+import { Closing } from '@pages/mining/closing'
+import { FAQ } from '@pages/mining/faq'
 import { Section, HeaderType, Watch } from '@pages/mining/shared'
 
 const Header = () => (
@@ -15,21 +18,24 @@ const Header = () => (
   </Watch>
 )
 
+const sections = [
+  <>
+    <Hero />
+    <Steps />
+  </>,
+  <Earn />,
+  <How />,
+  <Why />,
+  <Closing />,
+  <FAQ />
+]
+
 const AppMiningPage = () => (
   <MiningPage>
     <Watch top>
       <Header />
     </Watch>
-    <Watch>
-      <Hero />
-      <Steps />
-    </Watch>
-    <Watch>
-      <Earn />
-    </Watch>
-    <Watch>
-      <How />
-    </Watch>
+    {sections.map((PageSection, i) => <Watch key={i}>{PageSection}</Watch>)}
   </MiningPage>
 )
 

@@ -17,9 +17,9 @@ const RenderItems = ({ items, noItemBorder, ...rest }) => (
   </>
 )
 
-const MiningList = ({ items, children, noItemBorder, ...rest }) => (
-  <Box border="1px solid white" {...rest}>
-    {items ? <RenderItems items={items} noItemBorder={noItemBorder} /> : null}
+const MiningList = ({ items, children, noItemBorder, noBorders, ...rest }) => (
+  <Box border={noBorders ? '0' : '1px solid white'} {...rest}>
+    {items ? <RenderItems items={items} noItemBorder={noItemBorder || noBorders} /> : null}
     {children}
   </Box>
 )

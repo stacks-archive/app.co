@@ -44,11 +44,21 @@ const Steps = (props) => (
 )
 
 const Hero = ({ ...props }) => (
-  <Section minHeight="50vh" justifyContent="flex-end" flexDirection="column" py={4} {...props}>
-    <Heading mb={5}>
+  <Section
+    minHeight={['60vh', '40vh']}
+    justifyContent={['center', 'flex-end']}
+    flexDirection="column"
+    py={4}
+    backgroundRepeat="no-repeat"
+    backgroundPosition={['top', 'center center']}
+    backgroundSize={['400px', '800px']}
+    backgroundImage="url(https://file-jiffetytgn.now.sh)"
+    {...props}
+  >
+    <Heading mb={[0, 5]} mt={[5, 0]}>
       The better your app,<br />the more Bitcoin you earn.
     </Heading>
-    <MiningButton>Register your app</MiningButton>
+    <MiningButton mt={[6, 0]}>Register your app</MiningButton>
   </Section>
 )
 

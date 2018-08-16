@@ -20,7 +20,7 @@ import { boxProps } from '@components/box'
 // const shevy = new Shevy()
 // const { baseSpacing: bs, h1, h2, h3, h4, h5, h6 } = shevy
 
-const baseProps = css`
+export const baseProps = css`
   color: rgba(20, 33, 68, 1);
   ${color};
   ${boxProps};
