@@ -33,7 +33,7 @@ const ListCheckItem = ({ children, ...props }) => (
     <Box mr={3} style={{ transform: 'translateY(3px)' }}>
       <CheckMark />
     </Box>
-    <Type.span color="white">{children}</Type.span>
+    <Type.span color="white" lineHeight={1.5}>{children}</Type.span>
   </Flex>
 )
 

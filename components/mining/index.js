@@ -25,7 +25,11 @@ const Box = system(
   'maxWidth',
   'minWidth',
   'borders',
-  'display'
+  'display',
+  'backgroundImage',
+  'backgroundPosition',
+  'backgroundRepeat',
+  'backgroundSize'
 )
 
 const SystemFlex = system(
