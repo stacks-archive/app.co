@@ -38,9 +38,19 @@ const Items = ({ items, item: Item, limit, width, selectedItem, ...rest }) =>
   })
 
 const ListContainer = ({ header, items, item, limit, href, as, width = [1, 1 / 2], selectedItem, ...rest }) => {
+  const HeaderWrapper = (props) =>
+    !header.action ? (
+      <StyledList.Header {...props} />
+    ) : (
+      <Link href={header.href ? header.href : href} as={header.as ? header.as : as} prefetch>
+        <a>
+          <StyledList.Header {...props} />
+        </a>
+      </Link>
+    )
   const Header = () =>
     header ? (
-      <StyledList.Header
+      <HeaderWrapper
         py={4}
         px={[3, 4]}
         title={header.title}
@@ -48,15 +58,17 @@ const ListContainer = ({ header, items, item, limit, href, as, width = [1, 1 / 2
         backgroundSize="cover"
         backgroundPosition="center right"
       >
-        <Type.h2>{header.title}</Type.h2>
-        {header.action && (
-          <Link href={header.href ? header.href : href} as={header.as ? header.as : as} prefetch>
-            <Button white style={{ marginLeft: 32 }}>
-              View All
-            </Button>
-          </Link>
-        )}
-      </StyledList.Header>
+        <>
+          <Type.h2>{header.title}</Type.h2>
+          {header.action && (
+            <Link href={header.href ? header.href : href} as={header.as ? header.as : as} prefetch>
+              <Button white style={{ marginLeft: 32 }}>
+                View All
+              </Button>
+            </Link>
+          )}
+        </>
+      </HeaderWrapper>
     ) : null
 
   const itemProps = {
