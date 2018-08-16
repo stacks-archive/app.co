@@ -32,7 +32,7 @@ class FeaturedListComponent extends React.Component {
   }
 
   render() {
-    const { title, href, filterBy, singular, query } = this.props
+    const { title, href, filterBy, singular, query, image } = this.props
     const link = href
       ? {
           as: `/${filterBy}/${query}`,
@@ -46,7 +46,7 @@ class FeaturedListComponent extends React.Component {
       : {}
     const header = {
       title,
-      background: background(title),
+      background: background(image || title),
       white: true,
       ...link
     }

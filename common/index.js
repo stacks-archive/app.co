@@ -17,6 +17,18 @@ const background = (title) => {
   if (title.includes('lockstack')) {
     return 'url("https://files-jkbhagqrri.now.sh/blockstack.png")'
   }
+  if (title === 'g1') {
+    return 'url("https://files-cazqqisedw.now.sh/blockstack_platforms-12.png")'
+  }
+  if (title === 'g2') {
+    return 'url("https://files-cazqqisedw.now.sh/blockstack_platforms-13.png")'
+  }
+  if (title === 'g3') {
+    return 'url("https://files-cazqqisedw.now.sh/blockstack_platforms-14.png")'
+  }
+  if (title === 'g4') {
+    return 'url("https://files-cazqqisedw.now.sh/blockstack_platforms-15.png")'
+  }
   if (title.includes('EOS')) {
     return 'url("https://files-jkbhagqrri.now.sh/eos.png")'
   }

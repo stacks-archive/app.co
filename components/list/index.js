@@ -62,8 +62,9 @@ const ListContainer = ({ header, items, item, limit, href, as, width = [1, 1 / 2
         px={[3, 4]}
         title={header.title}
         backgroundImage={header.background}
-        backgroundSize="cover"
-        backgroundPosition="center right"
+        backgroundSize="1130px"
+        backgroundPosition="100% 50%"
+        backgroundRepeat="no-repeat"
         minHeight={['100px']}
       >
         <>
