@@ -222,6 +222,13 @@ const headerBgColorGenerator = ({ title }) => {
 
 const Header = styled(Box)`
   //background: white;
+  ${({ onClick }) =>
+    onClick &&
+    css`
+      &:hover {
+        cursor: pointer;
+      }
+    `};
   ${({ backgroundImage }) =>
     !backgroundImage &&
     css`

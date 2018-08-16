@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
 import { Flex, Box } from 'rebass'
+import Router from 'next/router'
 
 import { Type } from '@components/typography'
 import { StyledList } from '@components/list/styled'
@@ -42,11 +43,17 @@ const ListContainer = ({ header, items, item, limit, href, as, width = [1, 1 / 2
     !header.action ? (
       <StyledList.Header {...props} />
     ) : (
-      <Link href={header.href ? header.href : href} as={header.as ? header.as : as} prefetch>
-        <a>
-          <StyledList.Header {...props} />
-        </a>
-      </Link>
+      <StyledList.Header
+        {...props}
+        onClick={() =>
+          Router.push(
+            {
+              ...header.href
+            },
+            header.as || as
+          )
+        }
+      />
     )
   const Header = () =>
     header ? (
@@ -57,6 +64,7 @@ const ListContainer = ({ header, items, item, limit, href, as, width = [1, 1 / 2
         backgroundImage={header.background}
         backgroundSize="cover"
         backgroundPosition="center right"
+        minHeight={['100px']}
       >
         <>
           <Type.h2>{header.title}</Type.h2>
