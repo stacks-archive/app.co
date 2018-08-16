@@ -71,7 +71,7 @@ const ListContainer = ({ header, items, item, limit, href, as, width = [1, 1 / 2
           <Type.h2>{header.title}</Type.h2>
           {header.action && (
             <Link href={header.href ? header.href : href} as={header.as ? header.as : as} prefetch>
-              <Button white style={{ marginLeft: 32 }} href={header.href ? header.href : href}>
+              <Button white style={{ marginLeft: 32 }} href={href}>
                 View All
               </Button>
             </Link>
@@ -111,7 +111,8 @@ ListContainer.propTypes = {
   item: PropTypes.node,
   limit: PropTypes.number.isRequired,
   width: PropTypes.arrayOf(PropTypes.number.isRequired),
-  href: PropTypes.string
+  href: PropTypes.string,
+  as: PropTypes.string
 }
 
 export { ListContainer, Items }
