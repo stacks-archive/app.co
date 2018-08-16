@@ -16,7 +16,6 @@ import { slugify } from '@common'
 import { theme } from '@common/styles'
 import { doClearApp } from '@stores/apps'
 
-
 const LinkWithIcon = (props) => {
   const { icon: Icon, link, label, title } = props
   return (
@@ -125,14 +124,13 @@ const Website = (props) =>
       >
         {formatUrl(props.website)}
       </a>
-      {props.Rankings[0].monthlyVisitsCount && (
-        <Type.span fontSize={14} color={theme.colors.grey.mid} ml={3}>
-          {numeral(props.Rankings[0].monthlyVisitsCount || 0).format('0a')}{' '}
-          visits / month
-        </Type.span>
-      )}
-      
-
+      {props.Rankings &&
+        props.Rankings[0] &&
+        props.Rankings[0].monthlyVisitsCount && (
+          <Type.span fontSize={14} color={theme.colors.grey.mid} ml={3}>
+            {numeral(props.Rankings[0].monthlyVisitsCount || 0).format('0a')} visits / month
+          </Type.span>
+        )}
     </Box>
   ) : null
 
