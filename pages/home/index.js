@@ -50,7 +50,22 @@ class HomePage extends React.PureComponent {
           </Page.Section>
         </Page.Section>
         <Page.Section flexDirection="column" px>
-          <AppsList image="g3" single limit={9} filterBy="all" title="Popular Decentralized Apps" href="/all" />
+          <AppsList
+            image="g3"
+            single
+            limit={9}
+            filterBy="all"
+            title="Popular Decentralized Apps"
+            header={{
+              action: {
+                label: 'View All'
+              },
+              href: {
+                pathname: '/all'
+              },
+              as: '/app'
+            }}
+          />
           <FeaturedList
             appNames={['MyCrypto', 'MyEtherWallet', 'Balance.io', 'Coinbase Wallet', 'MetaMask', 'Trust Wallet']}
             title="Ethereum Wallets"

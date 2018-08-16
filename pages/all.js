@@ -11,7 +11,7 @@ class AllAppsPage extends React.PureComponent {
       <Page>
         <Head title='All Apps' />
         <Page.Section flexDirection="column" px>
-          <AppsList single title="All Apps" />
+          <AppsList image="g3" single title="All Apps" />
         </Page.Section>
         <Modal />
       </Page>

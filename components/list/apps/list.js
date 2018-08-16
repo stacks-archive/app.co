@@ -125,7 +125,7 @@ class AppsListComponent extends React.Component {
   }
 
   singleTable() {
-    const { single, platformName, categoryName, title, image, limit, href, ...rest } = this.props
+    const { single, platformName, categoryName, title, image, limit, header, ...rest } = this.props
     const { sortedApps } = this.state
 
     return (
@@ -133,13 +133,7 @@ class AppsListComponent extends React.Component {
         header={{
           title: title || platformName || categoryName,
           background: background(image || title || platformName || categoryName),
-          action: {
-            label: 'View All'
-          },
-          href: {
-            pathname: href
-          },
-          as: href
+          ...header
         }}
         items={sortedApps}
         item={AppItem}
