@@ -60,7 +60,6 @@ class CategoryPage extends React.PureComponent {
       }
     }
     if (query) {
-      console.log('category query', query)
       /**
        * On the client we need to check the query param for what category we're trying to display
        */
