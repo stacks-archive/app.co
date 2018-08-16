@@ -5,7 +5,7 @@ import NewsletterActions from '@stores/newsletter/actions'
 import { StyledTopBar } from '@components/top-bar/styled'
 import Link from 'next/link'
 
-const NavigationComponent = ({ handleClick, openNewsletterModal, ...rest }) => {
+const NavigationComponent = ({ handleClick, openNewsletterModal, footer, ...rest }) => {
   const extraProps = handleClick ? { onClick: () => handleClick() } : {}
   return (
     <StyledTopBar.Navigation {...rest}>
@@ -24,6 +24,11 @@ const NavigationComponent = ({ handleClick, openNewsletterModal, ...rest }) => {
       <Link href="/submit" {...extraProps}>
         <a href="/submit">Add your app</a>
       </Link>
+      {footer && (
+        <Link href="/all">
+          <a href="/all">All Apps</a>
+        </Link>
+      )}
     </StyledTopBar.Navigation>
   )
 }

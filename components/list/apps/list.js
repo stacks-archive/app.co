@@ -61,7 +61,8 @@ class AppsListComponent extends React.Component {
     apps: PropTypes.array.isRequired,
     sectionKeys: PropTypes.array,
     categoryName: PropTypes.string,
-    platformName: PropTypes.string
+    platformName: PropTypes.string,
+    href: PropTypes.string
   }
 
   constructor(props) {
@@ -117,7 +118,7 @@ class AppsListComponent extends React.Component {
             width={[1, 1 / 2, 1 / 3]}
             limit={limit}
             single={false}
-            href={path + '/' + slugify(filter)}
+            href={`${path  }/${  slugify(filter)}`}
             {...rest}
           />
         ) : null
@@ -126,20 +127,22 @@ class AppsListComponent extends React.Component {
   }
 
   singleTable() {
-    const { single, platformName, categoryName, title, image, limit, ...rest } = this.props
+    const { single, platformName, categoryName, title, image, limit, href, ...rest } = this.props
     const { sortedApps } = this.state
 
     return (
       <ListContainer
         header={{
           title: title || platformName || categoryName,
-          background: background(image || title || platformName || categoryName)
+          background: background(image || title || platformName || categoryName),
+          action: { label: 'View All' }
         }}
         items={sortedApps}
         item={AppItem}
         width={[1, 1 / 2, 1 / 3]}
         limit={limit}
         single
+        href={href || false}
         {...rest}
       />
     )
