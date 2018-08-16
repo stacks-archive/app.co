@@ -43,8 +43,6 @@ const mapStateToProps = (state) => ({
   categoryName: selectCategoryName(state)
 })
 
-
-
 const getApps = (props) => {
   const hasFilter = props.platformFilter || props.categoryFilter
   const isAll = hasFilter === 'all'
@@ -118,7 +116,7 @@ class AppsListComponent extends React.Component {
             width={[1, 1 / 2, 1 / 3]}
             limit={limit}
             single={false}
-            href={`${path  }/${  slugify(filter)}`}
+            href={`${path}/${slugify(filter)}`}
             {...rest}
           />
         ) : null
@@ -135,14 +133,19 @@ class AppsListComponent extends React.Component {
         header={{
           title: title || platformName || categoryName,
           background: background(image || title || platformName || categoryName),
-          action: { label: 'View All' }
+          action: {
+            label: 'View All'
+          },
+          href: {
+            pathname: href
+          },
+          as: href
         }}
         items={sortedApps}
         item={AppItem}
         width={[1, 1 / 2, 1 / 3]}
         limit={limit}
         single
-        href={href || false}
         {...rest}
       />
     )
