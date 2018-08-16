@@ -20,9 +20,11 @@ const CardItem = (props) => (
 )
 
 const RankedBy = ({ by, bg, ...rest }) => (
-  <Flex pt={4} alignItems="center" {...rest}>
-    <Type.span>Ranks by:</Type.span>
-    <Box bg={bg} ml={2} px={3} py={1}>
+  <Flex pt={4} alignItems="center" justifyContent="center" {...rest} flexWrap="wrap">
+    <Box mr={2} pb={2}>
+      <Type.span>Ranks&nbsp;by:</Type.span>
+    </Box>
+    <Box bg={bg} px={3} mb={2} py={1}>
       <Type.span color="white">{by}</Type.span>
     </Box>
   </Flex>
@@ -33,7 +35,9 @@ const ListCheckItem = ({ children, ...props }) => (
     <Box mr={3} style={{ transform: 'translateY(3px)' }}>
       <CheckMark />
     </Box>
-    <Type.span color="white" lineHeight={1.5}>{children}</Type.span>
+    <Type.span color="white" lineHeight={1.5}>
+      {children}
+    </Type.span>
   </Flex>
 )
 
@@ -52,12 +56,12 @@ const How = ({ ...props }) => (
       <Heading mb={5} maxWidth={['100%', '800px']}>
         Apps are ranked by reviewers and rewards distributed every 30 days
       </Heading>
-      <Flex maxWidth="960px" width="100%" flexDirection={['column', 'row']}>
+      <Flex maxWidth="960px" width="100%" flexDirection={['column', 'row']} justifyContent="space-between">
         <CardItem>
           <LogoWordmark />
           <RankedBy bg="#11A9BC" by="Get App Clicks" />
         </CardItem>
-        <CardItem mx={[0, 4]}>
+        <CardItem>
           <LogoWordmark />
           <RankedBy bg="#EF6F6F" by="Get App Clicks" />
         </CardItem>

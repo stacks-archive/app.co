@@ -34,7 +34,7 @@ const Why = ({ ...props }) => (
         />
       </Box>
       <Heading mb={5} maxWidth={['100%', '800px']}>
-        We are funding decentralized app teams,<br />simply for being pioneers in the space.
+        We are funding decentralized app teams, simply for being pioneers in the space.
       </Heading>
       <Flex maxWidth="960px" width="100%" flexDirection={['column', 'row']} justifyContent="space-between">
         <CardItem>Ditch advertising and use App Mining as an alternative revenue&nbsp;source.</CardItem>
