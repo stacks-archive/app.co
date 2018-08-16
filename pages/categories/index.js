@@ -22,9 +22,17 @@ const mapStateToProps = (state) => ({
 const PageContent = connect(mapStateToProps)(({ categoryName, category, ...rest }) => (
   <>
     <Head title={categoryName || 'All Categories'} />
-    <Page.Section flexDirection="column" px>
-      <AppsList filterBy="category" single={!!category} limit={category ? undefined : 7} {...rest} />
-    </Page.Section>
+    {category ? (
+      <Page.Section flexDirection="column" px>
+        <AppsList filterBy="category" single={!!category} limit={category ? undefined : 7} {...rest} />
+      </Page.Section>
+    ) : (
+      <Page.Section p={0} pl={[0, 4]} pr={[0, 4]}>
+        <Page.Section wrap flexDirection={['column', 'column', 'row']} p={0}>
+          <CategoriesList limit={false} />
+        </Page.Section>
+      </Page.Section>
+    )}
     <Modal />
   </>
 ))

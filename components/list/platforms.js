@@ -44,7 +44,7 @@ const mergeDedupe = (arr) => [...new Set([].concat(...arr))]
 
 const PlatformsList = connect(mapStateToProps)(({ apps, limit, platforms, auth, storage, noAll, ...rest }) => {
   const all = mergeDedupe([platforms, auth, storage])
-  const items = limit === 0 ? all : ['Blockstack', 'Ethereum', 'Steem', 'IPFS', 'ZeroNet']
+  const items = limit ? ['Blockstack', 'Ethereum', 'Steem', 'IPFS', 'ZeroNet'] : all
   const modifiedArray = items.map((platform) => {
     const slugified = slugify(platform)
     return {
