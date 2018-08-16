@@ -21,13 +21,13 @@ const Header = () => (
 const sections = [
   <>
     <Hero />
-    <Steps />
+    <Steps id="steps" />
   </>,
-  <Earn />,
-  <How />,
-  <Why />,
-  <Closing />,
-  <FAQ />
+  <Earn id="how-to-earn" />,
+  <How id="how-ranking-works" />,
+  <Why id="why" />,
+  <Closing id="register-your-app" />,
+  <FAQ id="faq" />
 ]
 
 const AppMiningPage = () => (
