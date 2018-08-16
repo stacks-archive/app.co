@@ -133,9 +133,7 @@ class AppsListComponent extends React.Component {
         header={{
           title: title || platformName || categoryName,
           background: background(image || title || platformName || categoryName),
-          action: {
-            label: 'View All'
-          },
+          action: href ? { label: 'View All' } : undefined,
           href: {
             pathname: href
           },
@@ -146,6 +144,7 @@ class AppsListComponent extends React.Component {
         width={[1, 1 / 2, 1 / 3]}
         limit={limit}
         single
+        href={href}
         {...rest}
       />
     )

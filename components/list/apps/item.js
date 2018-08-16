@@ -67,7 +67,7 @@ const AppItem = ({
     }
   }
   return (
-    <StyledList.ItemLink
+    <StyledList.Item
       {...rest}
       link
       onClick={(evt) => {
@@ -110,7 +110,7 @@ const AppItem = ({
           </>
         ) : null}
       </Flex>
-    </StyledList.ItemLink>
+    </StyledList.Item>
   )
 }
 
