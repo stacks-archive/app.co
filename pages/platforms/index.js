@@ -4,6 +4,7 @@ import { Page } from '@components/page'
 import { AppsList } from '@components/list/apps'
 import Modal from '@containers/modals/app'
 import Head from '@containers/head'
+import { PlatformsList } from '@components/list/platforms'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import AppStore, { doSelectPlatformFilter, doClearPlatformFilter } from '@stores/apps'
@@ -26,15 +27,23 @@ const PageContent = connect(mapStateToProps, mapDispatchToProps)(
   ({ platformName, platform, platforms, ...rest }) => (
     <>
       <Head title={platformName ? `${platformName} Apps` : 'All Platforms'} />
-      <Page.Section flexDirection="column" px>
-        <AppsList
-          single={!!platform}
-          sectionKeys={platforms}
-          limit={platform ? undefined : 7}
-          filterBy="platform"
-          {...rest}
-        />
-      </Page.Section>
+      {platform ? (
+        <Page.Section flexDirection="column" px>
+          <AppsList
+            single={!!platform}
+            sectionKeys={platforms}
+            limit={platform ? undefined : 7}
+            filterBy="platform"
+            {...rest}
+          />
+        </Page.Section>
+      ) : (
+        <Page.Section p={0} pl={[0, 4]} pr={[0, 4]}>
+          <Page.Section wrap flexDirection={['column', 'column', 'row']} p={0}>
+            <PlatformsList limit={false} />
+          </Page.Section>
+        </Page.Section>
+      )}
       <Modal />
     </>
   )
