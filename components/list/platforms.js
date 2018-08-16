@@ -31,7 +31,10 @@ const PlatformItem = ({ platform, link, image, width, icon: Icon, ...rest }) => 
             <Icon color="currentColor" />
           </Box>
         ) : null}
-        <Type.strong>{platform}</Type.strong>
+
+        <Type.strong>
+          <a href={link.as}>{platform}</a>
+        </Type.strong>
       </Flex>
     </StyledList.ItemLink>
   </Link>

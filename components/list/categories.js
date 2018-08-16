@@ -19,7 +19,9 @@ const CategoryItem = ({ category, link, ...rest }) => (
     <StyledList.ItemLink {...rest} link>
       <Box style={{ flexGrow: 1, maxWidth: '100%' }} px={2}>
         <Type.strong>
-          <Truncate>{category}</Truncate>
+          <Truncate>
+            <a href={link.as}>{category}</a>
+          </Truncate>
         </Type.strong>
       </Box>
     </StyledList.ItemLink>
@@ -55,7 +57,7 @@ const CategoriesList = connect(mapStateToProps)(({ categories, apps, limit = 6, 
 
   return (
     <>
-      <ListContainer items={array} item={CategoryItem} width={[1, 1 / 2]} limit={limit} mx={[2, 0]} {...rest}  />
+      <ListContainer items={array} item={CategoryItem} width={[1, 1 / 2]} limit={limit} mx={[2, 0]} {...rest} />
     </>
   )
 })
