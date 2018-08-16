@@ -46,32 +46,12 @@ class PlatformsPage extends React.PureComponent {
     platforms: PropTypes.array.isRequired
   }
   static async getInitialProps({ req, query, reduxStore }) {
-    if (req) {
-      /**
-       * On the server we need to check the req object for the param
-       */
-      const {
-        params: { platform }
-      } = req
-
-      if (platform) {
-        reduxStore.dispatch(doSelectPlatformFilter(platform))
-        return { platform }
-      } else {
-        reduxStore.dispatch(doClearPlatformFilter())
-      }
-    }
-    if (query) {
-      /**
-       * On the client we need to check the query param for what category we're trying to display
-       */
-      const { platform } = query
-      if (platform) {
-        reduxStore.dispatch(doSelectPlatformFilter(platform))
-        return { platform }
-      } else {
-        reduxStore.dispatch(doClearPlatformFilter())
-      }
+    const platform = req ? req.params.platform : query.platform
+    if (platform) {
+      reduxStore.dispatch(doSelectPlatformFilter(platform))
+      return { platform }
+    } else {
+      reduxStore.dispatch(doClearPlatformFilter())
     }
     return {}
   }
