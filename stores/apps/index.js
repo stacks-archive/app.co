@@ -150,7 +150,9 @@ const makeReducer = (data) => {
           ...state,
           platformFilter: platform,
           filteredApps,
-          platformName
+          platformName,
+          categoryFilter: null,
+          categoryName: null
         }
       }
       case constants.CLEAR_PLATFORM: {
@@ -229,7 +231,9 @@ const makeReducer = (data) => {
           ...state,
           categoryFilter: category,
           filteredApps,
-          categoryName
+          categoryName,
+          platformFilter: null,
+          platformName: null
         }
       }
       case constants.CLEAR_CATEGORY: {
