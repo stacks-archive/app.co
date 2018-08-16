@@ -29,7 +29,7 @@ const PageContent = connect(mapStateToProps)(({ categoryName, category, ...rest 
     ) : (
       <Page.Section p={0} pl={[0, 4]} pr={[0, 4]}>
         <Page.Section wrap flexDirection={['column', 'column', 'row']} p={0}>
-          <CategoriesList limit={false} />
+          <CategoriesList limit={0} width={[1, 1 / 4]} noAll />
         </Page.Section>
       </Page.Section>
     )}

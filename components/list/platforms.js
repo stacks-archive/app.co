@@ -24,14 +24,13 @@ const mapStateToProps = (state) => ({
 
 const PlatformItem = ({ platform, link, image, width, icon: Icon, ...rest }) => (
   <Link href={link.href} as={link.as} prefetch>
-    <StyledList.ItemLink width={width} link href={link.as} {...rest}>
+    <StyledList.ItemLink width={width} link {...rest}>
       <Flex style={{ flexGrow: 1, maxWidth: '100%' }} pr={2}>
         {Icon ? (
           <Box pr={2}>
             <Icon color="currentColor" />
           </Box>
         ) : null}
-
         <Type.strong>
           <a href={link.as}>{platform}</a>
         </Type.strong>
@@ -44,7 +43,7 @@ const mergeDedupe = (arr) => [...new Set([].concat(...arr))]
 
 const PlatformsList = connect(mapStateToProps)(({ apps, limit, platforms, auth, storage, noAll, ...rest }) => {
   const all = mergeDedupe([platforms, auth, storage])
-  const items = limit ? ['Blockstack', 'Ethereum', 'Steem', 'IPFS', 'ZeroNet'] : all
+  const items = limit === 0 ? all : ['Blockstack', 'Ethereum', 'Steem', 'IPFS', 'ZeroNet']
   const modifiedArray = items.map((platform) => {
     const slugified = slugify(platform)
     return {

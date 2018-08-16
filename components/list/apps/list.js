@@ -140,7 +140,6 @@ class AppsListComponent extends React.Component {
         width={[1, 1 / 2, 1 / 3]}
         limit={limit}
         single
-        href={href}
         {...rest}
       />
     )
