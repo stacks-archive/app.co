@@ -66,7 +66,7 @@ class HomePage extends React.PureComponent {
         <Page.Section flexDirection="column" px>
           <FeaturedList title="Decentralized Exchanges" appNames={['Radar Relay', 'IDEX', 'OasisDEX', 'ForkDelta']} />
           <FeaturedList
-            appNames={['MyCrypto', 'MyEtherWallet', 'Balance.io', 'Toshi', 'MetaMask', 'Exodus', 'Trust Wallet']}
+            appNames={['MyCrypto', 'MyEtherWallet', 'Balance.io', 'Coinbase Wallet', 'MetaMask', 'Trust Wallet']}
             title="Ethereum Wallets"
           />
           <FeaturedList
