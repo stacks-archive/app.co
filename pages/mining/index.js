@@ -8,6 +8,7 @@ import { Why } from '@pages/mining/why'
 import { Closing } from '@pages/mining/closing'
 import { FAQ } from '@pages/mining/faq'
 import { Section, HeaderType, Watch } from '@pages/mining/shared'
+import Head from '@containers/head'
 
 const Header = () => (
   <Watch>
@@ -32,6 +33,10 @@ const sections = [
 
 const AppMiningPage = () => (
   <MiningPage>
+    <Head
+      title="App Mining"
+      description="Earn BTC for apps you build with Blockstack. We are funding decentralized app teams simply for being pioneers in the space."
+    />
     <Watch top>
       <Header />
     </Watch>
