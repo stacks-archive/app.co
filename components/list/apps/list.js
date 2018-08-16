@@ -125,14 +125,14 @@ class AppsListComponent extends React.Component {
   }
 
   singleTable() {
-    const { single, platformName, categoryName, title, image, limit, header, ...rest } = this.props
+    const { single, platformName, categoryName, title, image = 'g3', limit, header, ...rest } = this.props
     const { sortedApps } = this.state
 
     return (
       <ListContainer
         header={{
           title: title || platformName || categoryName,
-          background: background(image || title || platformName || categoryName),
+          background: background(title || platformName || categoryName),
           ...header
         }}
         items={sortedApps}

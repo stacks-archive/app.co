@@ -13,7 +13,8 @@ function dedupe(a) {
   return Array.from(new Set(a))
 }
 const background = (title) => {
-  if (!title) return
+  if (!title) return 'url("https://files-cazqqisedw.now.sh/blockstack_platforms-13.png")'
+
   if (title.includes('lockstack')) {
     return 'url("https://files-jkbhagqrri.now.sh/blockstack.png")'
   }
@@ -44,6 +45,6 @@ const background = (title) => {
   if (title.includes('Steem')) {
     return 'url("https://files-jkbhagqrri.now.sh/steem.png")'
   }
-  return null
+  return 'url("https://files-cazqqisedw.now.sh/blockstack_platforms-14.png")'
 }
 export { slugify, dedupe, background }
