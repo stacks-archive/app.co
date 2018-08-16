@@ -40,7 +40,14 @@ const Items = ({ items, item: Item, limit, width, selectedItem, ...rest }) =>
 const ListContainer = ({ header, items, item, limit, href, as, width = [1, 1 / 2], selectedItem, ...rest }) => {
   const Header = () =>
     header ? (
-      <StyledList.Header py={4} px={[3, 4]} title={header.title}>
+      <StyledList.Header
+        py={4}
+        px={[3, 4]}
+        title={header.title}
+        backgroundImage={header.background}
+        backgroundSize="cover"
+        backgroundPosition="center right"
+      >
         <Type.h2>{header.title}</Type.h2>
         {header.action && (
           <Link href={header.href ? header.href : href} as={header.as ? header.as : as} prefetch>

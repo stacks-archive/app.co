@@ -16,7 +16,6 @@ const boxProps = css`
   ${alignItems}
 `
 
-
 const Box = system(
   {
     is: tag
@@ -40,7 +39,11 @@ const Box = system(
   'maxHeight',
   'maxWidth',
   'minWidth',
-  'borders'
+  'borders',
+  'backgroundImage',
+  'backgroundSize',
+  'backgroundPosition',
+  'backgroundRepeat'
 )
 
 const Flex = system(
@@ -53,8 +56,6 @@ const Flex = system(
   'alignItems',
   'justifyContent'
 )
-
-
 
 Box.propTypes = {
   ...space.propTypes,

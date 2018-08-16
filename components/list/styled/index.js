@@ -221,9 +221,9 @@ const headerBgColorGenerator = ({ title }) => {
 }
 
 const Header = styled(Box)`
-  ${headerBgColorGenerator};
-  ${({ white }) =>
-    white &&
+  //background: white;
+  ${({ backgroundImage }) =>
+    !backgroundImage &&
     css`
       background: white;
       h1,
@@ -232,8 +232,10 @@ const Header = styled(Box)`
       h4,
       h5,
       h6 {
-        color: ${theme.colors.blue};
+        color: ${theme.colors.blue} !important;
+        text-shadow: none !important;
       }
+      border: 1px solid ${theme.colors.border};
     `};
   color: white;
   display: flex;

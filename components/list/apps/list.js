@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import sortBy from 'lodash/sortBy'
-import {dedupe} from '@common'
+import { dedupe, background, slugify } from '@common'
 
 import { connect } from 'react-redux'
 
@@ -18,7 +18,6 @@ import {
   selectCategoryName
 } from '@stores/apps/selectors'
 import { selectAppsForPlatform } from '@stores/apps'
-import { slugify } from '@common'
 
 import { ListContainer } from '@components/list/index'
 import AppItem from './item'
@@ -43,6 +42,8 @@ const mapStateToProps = (state) => ({
   platformName: selectPlatformName(state),
   categoryName: selectCategoryName(state)
 })
+
+
 
 const getApps = (props) => {
   const hasFilter = props.platformFilter || props.categoryFilter
@@ -107,18 +108,17 @@ class AppsListComponent extends React.Component {
           }
         }
 
-
         return filteredList.length > 0 ? (
           <ListContainer
-            key={ filter }
-            header={ { title: filter, action: { label: 'View All' }, white: true, ...link } }
-            items={ filteredList }
-            item={ AppItem }
-            width={ [1, 1 / 2, 1 / 3] }
-            limit={ limit }
-            single={ false }
-            href={ path + '/' + slugify(filter) }
-            { ...rest }
+            key={filter}
+            header={{ title: filter, action: { label: 'View All' }, background: background(filter), ...link }}
+            items={filteredList}
+            item={AppItem}
+            width={[1, 1 / 2, 1 / 3]}
+            limit={limit}
+            single={false}
+            href={path + '/' + slugify(filter)}
+            {...rest}
           />
         ) : null
       })
@@ -128,15 +128,19 @@ class AppsListComponent extends React.Component {
   singleTable() {
     const { single, platformName, categoryName, title, limit, ...rest } = this.props
     const { sortedApps } = this.state
+
     return (
       <ListContainer
-        header={ { title: title || platformName || categoryName, white: true } }
-        items={ sortedApps }
-        item={ AppItem }
-        width={ [1, 1 / 2, 1 / 3] }
-        limit={ limit }
+        header={{
+          title: title || platformName || categoryName,
+          background: background(title || platformName || categoryName)
+        }}
+        items={sortedApps}
+        item={AppItem}
+        width={[1, 1 / 2, 1 / 3]}
+        limit={limit}
         single
-        { ...rest }
+        {...rest}
       />
     )
   }

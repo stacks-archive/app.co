@@ -1,6 +1,10 @@
+/**
+ * TODO: this should not be its own component
+ */
 import React from 'react'
 import PropTypes from 'prop-types'
 import sortBy from 'lodash/sortBy'
+import { background } from '@common'
 
 import { connect } from 'react-redux'
 
@@ -42,6 +46,7 @@ class FeaturedListComponent extends React.Component {
       : {}
     const header = {
       title,
+      background: background(title),
       white: true,
       ...link
     }
