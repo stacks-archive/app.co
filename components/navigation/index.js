@@ -9,6 +9,9 @@ const NavigationComponent = ({ handleClick, openNewsletterModal, footer, ...rest
   const extraProps = handleClick ? { onClick: () => handleClick() } : {}
   return (
     <StyledTopBar.Navigation {...rest}>
+      <Link href="/all">
+        <a href="/all">All Apps</a>
+      </Link>
       <Link href="/faq" prefetch {...extraProps}>
         <a href="/faq">Learn more</a>
       </Link>
@@ -24,11 +27,6 @@ const NavigationComponent = ({ handleClick, openNewsletterModal, footer, ...rest
       <Link href="/submit" {...extraProps}>
         <a href="/submit">Add your app</a>
       </Link>
-      {footer && (
-        <Link href="/all">
-          <a href="/all">All Apps</a>
-        </Link>
-      )}
     </StyledTopBar.Navigation>
   )
 }

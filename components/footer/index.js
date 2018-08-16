@@ -6,7 +6,7 @@ import { Flex, Box } from '@components/box'
 const Footer = (props) => (
   <Flex {...props}>
     <Box ml="auto">
-      <Navigation footer />
+      <Navigation />
     </Box>
   </Flex>
 )
