@@ -43,7 +43,7 @@ const Steps = (props) => (
   </Section>
 )
 
-const Hero = ({ ...props }) => (
+const Hero = ({ openModal, ...props }) => (
   <Section
     minHeight={['60vh', '40vh']}
     justifyContent={['center', 'flex-end']}
@@ -58,7 +58,9 @@ const Hero = ({ ...props }) => (
     <Heading mb={[0, 5]} mt={[5, 0]}>
       The better your app,<br />the more Bitcoin you earn.
     </Heading>
-    <MiningButton mt={[6, 0]}>Register your app</MiningButton>
+    <MiningButton mt={[6, 0]} onClick={() => openModal()}>
+      Register your app
+    </MiningButton>
   </Section>
 )
 
