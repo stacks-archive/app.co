@@ -57,11 +57,14 @@ const ListContainer = ({ header, items, item, limit, href, as, width = [1, 1 / 2
     )
 
   const hasBackgroundImage = header && header.background && header.background[0]
+  const hasVisibleActionButton = header && header.action && header.href
+  // background-position: calc(100% + 100px) 0%;
+  // background-size: 1230px;
   const backgroundProps = hasBackgroundImage
     ? {
         backgroundImage: [header.background[0], header.background[1]],
-        backgroundSize: ['cover', '1200px'],
-        backgroundPosition: ['center right', '100% 50%'],
+        backgroundSize: ['cover', '1230px'],
+        backgroundPosition: ['center right', hasVisibleActionButton ? '100% 50%' : 'calc(100% + 100px) center'],
         backgroundRepeat: 'no-repeat',
         alignItems: ['flex-start', 'center'],
         minHeight: ['150px', '100px']

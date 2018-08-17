@@ -4,7 +4,7 @@ function dedupe(a) {
   return Array.from(new Set(a))
 }
 const imageUrl = 'https://appco.imgix.net'
-const desktopParams = '?w=1200&auto=format'
+const desktopParams = '?w=1800&auto=format'
 const mobileParams = '?w=780&auto=format'
 const background = (title) => {
   if (!title) return [null, null]
@@ -59,7 +59,10 @@ const background = (title) => {
   if (title.includes('EOS')) {
     return [`url("${imageUrl}/eos-mobile.png${mobileParams}")`, `url("${imageUrl}/eos-desktop.png${desktopParams}")`]
   }
-  if (title.includes('thereum')) {
+  if (title.includes('Ethereum Wallets')) {
+    return [`url("${imageUrl}/eth-wallets-mobile.png${mobileParams}")`, `url("${imageUrl}/eth-wallets-desktop.png${desktopParams}")`]
+  }
+    if (title.includes('thereum')) {
     return [`url("${imageUrl}/eth-mobile.png${mobileParams}")`, `url("${imageUrl}/eth-desktop.png${desktopParams}")`]
   }
   if (title.includes('Gaia')) {
