@@ -65,6 +65,7 @@ const ListContainer = ({ header, items, item, limit, href, as, width = [1, 1 / 2
         backgroundRepeat: 'no-repeat'
       }
     : {}
+  const buttonVariant = hasBackgroundImage ? { light: true } : { dark: true }
   const Header = () =>
     header ? (
       <HeaderWrapper
@@ -80,7 +81,7 @@ const ListContainer = ({ header, items, item, limit, href, as, width = [1, 1 / 2
           {header.action &&
             header.href && (
               <Link href={header.href ? header.href : href} as={header.as ? header.as : as}>
-                <Button white style={{ marginLeft: 32 }} href={header.as ? header.as : as}>
+                <Button {...buttonVariant} style={{ marginLeft: 32 }} href={header.as ? header.as : as}>
                   View All
                 </Button>
               </Link>
