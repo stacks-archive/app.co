@@ -4,9 +4,7 @@ import { StyledList } from '@components/list/styled'
 import { connect } from 'react-redux'
 import {
   selectApps,
-  selectBlockchainCategories,
-  selectStorageCategories,
-  selectAuthenticationCategories
+  selectAllPlatforms
 } from '@stores/apps/selectors'
 import { ListContainer } from '@components/list/index'
 
@@ -17,9 +15,7 @@ import { renderPlatformIcon } from '@components/svg/platforms'
 
 const mapStateToProps = (state) => ({
   apps: selectApps(state),
-  platforms: selectBlockchainCategories(state),
-  storage: selectStorageCategories(state),
-  auth: selectAuthenticationCategories(state)
+  platforms: selectAllPlatforms(state)
 })
 
 const PlatformItem = ({ platform, link, image, width, icon: Icon, ...rest }) => (
@@ -42,7 +38,7 @@ const PlatformItem = ({ platform, link, image, width, icon: Icon, ...rest }) => 
 const mergeDedupe = (arr) => [...new Set([].concat(...arr))]
 
 const PlatformsList = connect(mapStateToProps)(({ apps, limit, platforms, auth, storage, noAll, ...rest }) => {
-  const all = mergeDedupe([platforms, auth, storage])
+  const all = platforms
   const items = limit === 0 ? all : ['Blockstack', 'Ethereum', 'Steem', 'IPFS', 'ZeroNet']
   const modifiedArray = items.map((platform) => {
     const slugified = slugify(platform)

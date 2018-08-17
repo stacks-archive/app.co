@@ -7,7 +7,7 @@ export const selectPlatformFilter = (state) => state.apps && state.apps.platform
 export const selectAppCategories = (state) => state.apps && state.apps.constants.appConstants.categoryEnums
 
 export const selectAppCategoriesArray = (state) =>
-  state.apps && Object.keys(state.apps.constants.appConstants.categoryEnums)
+  state.apps && state.apps.categories
 export const selectBlockchainCategories = (state) =>
   state.apps && Object.keys(state.apps.constants.appConstants.blockchainEnums)
 export const selectStorageCategories = (state) =>
@@ -25,14 +25,9 @@ export const selectCategoryName = (state) => state.apps && state.apps.categoryNa
 export const selectAppConstants = (state) => state.apps && state.apps.constants.appConstants
 
 export const selectAllPlatforms = (state) => {
-  if (!state.apps || !state.apps.constants) {
-    state.apps.constants = state.constants
+  if (!state.apps || !state.apps.platforms) {
+    state.apps.platforms = state.platforms
   }
 
-  const platforms = Array.prototype.concat.apply([], [
-    selectBlockchainCategories(state),
-    selectAuthenticationCategories(state),
-    selectStorageCategories(state)
-  ])
-  return platforms
+  return state.apps.platforms
 }
