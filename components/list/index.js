@@ -61,21 +61,23 @@ const ListContainer = ({ header, items, item, limit, href, as, width = [1, 1 / 2
         py={4}
         px={[3, 4]}
         title={header.title}
-        backgroundImage={header.background}
-        backgroundSize="1130px"
-        backgroundPosition="100% 50%"
+        backgroundImage={[header.background[0], header.background[1]]}
+        backgroundSize={['cover', '1130px']}
+        backgroundPosition={['center center', '100% 50%']}
         backgroundRepeat="no-repeat"
-        minHeight={['100px']}
+        minHeight={['150px', '100px']}
+        alignItems={['flex-start', 'center']}
       >
         <>
           <Type.h2>{header.title}</Type.h2>
-          {header.action && header.href && (
-            <Link href={header.href ? header.href : href} as={header.as ? header.as : as}>
-              <Button white style={{ marginLeft: 32 }} href={header.as ? header.as : as}>
-                View All
-              </Button>
-            </Link>
-          )}
+          {header.action &&
+            header.href && (
+              <Link href={header.href ? header.href : href} as={header.as ? header.as : as}>
+                <Button white style={{ marginLeft: 32 }} href={header.as ? header.as : as}>
+                  View All
+                </Button>
+              </Link>
+            )}
         </>
       </HeaderWrapper>
     ) : null

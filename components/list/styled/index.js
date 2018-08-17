@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Box, boxProps, A } from '@components/box'
+import { Box, boxProps, Flex } from '@components/box'
 import { space } from 'styled-system'
 import { theme, above, wrapperStyle } from '@common/styles'
 import { animated } from 'react-spring'
@@ -216,7 +216,7 @@ const headerBgColorGenerator = ({ title }) => {
   }
 }
 
-const Header = styled(Box)`
+const Header = styled(Flex)`
   //background: white;
   ${({ onClick }) =>
     onClick &&
