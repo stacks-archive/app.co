@@ -1,6 +1,6 @@
 import Shevy from 'shevyjs'
 import styled, { css } from 'styled-components'
-import { color, space, fontSize } from 'styled-system'
+import { color, space, fontSize, width, textAlign } from 'styled-system'
 
 const shevy = new Shevy()
 
@@ -10,6 +10,8 @@ const baseProps = css`
   line-height: 1.6;
   color: rgba(20, 33, 68, 0.7);
   /* Description */
+  ${textAlign};
+  ${width};
 `
 const P = styled.p`
   ${baseProps};

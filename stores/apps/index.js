@@ -118,6 +118,10 @@ export const selectAppsForPlatform = (apps, platform) =>
 const makeReducer = (data) => {
   let initialState = data
 
+  if (!initialState.apps) {
+    return () => (null)
+  }
+
   if (initialState.apps.apps) {
     initialState = initialState.apps
   } else {
