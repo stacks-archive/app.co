@@ -44,9 +44,11 @@ class FeaturedListComponent extends React.Component {
           }
         }
       : {}
+
+    const bg = image !== 'none' ? background(image || title) : undefined
     const header = {
       title,
-      background: background(image || title),
+      background: bg,
       white: true,
       ...link
     }

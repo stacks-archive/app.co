@@ -55,21 +55,28 @@ const ListContainer = ({ header, items, item, limit, href, as, width = [1, 1 / 2
         }
       />
     )
+
+  const hasBackgroundImage = header && header.background && header.background[0]
+  const backgroundProps = hasBackgroundImage
+    ? {
+        backgroundImage: [header.background[0], header.background[1]],
+        backgroundSize: ['cover', '1130px'],
+        backgroundPosition: ['center center', '100% 50%'],
+        backgroundRepeat: 'no-repeat'
+      }
+    : {}
   const Header = () =>
     header ? (
       <HeaderWrapper
         py={4}
-        px={[3, 4]}
+        px={[4]}
         title={header.title}
-        backgroundImage={[header.background[0], header.background[1]]}
-        backgroundSize={['cover', '1130px']}
-        backgroundPosition={['center center', '100% 50%']}
-        backgroundRepeat="no-repeat"
-        minHeight={['150px', '100px']}
-        alignItems={['flex-start', 'center']}
+        {...backgroundProps}
+        minHeight={[hasBackgroundImage ? '150px' : '100px', '100px']}
+        alignItems={[hasBackgroundImage ? 'flex-start' : 'center', 'center']}
       >
         <>
-          <Type.h2>{header.title}</Type.h2>
+          <Type.h2 maxWidth={[hasBackgroundImage ? '160px' : '100%', '100%']}>{header.title}</Type.h2>
           {header.action &&
             header.href && (
               <Link href={header.href ? header.href : href} as={header.as ? header.as : as}>

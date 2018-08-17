@@ -37,7 +37,7 @@ class HomePage extends React.PureComponent {
             appNames={['Graphite', 'Stealthy', 'Misthos', 'TravelStack', 'Dappy Wallet', 'Coins']}
             title="Popular Blockstack Apps"
             href="/blockstack"
-            hrefAttrs={{ as: '/blockstack', href: { pathname: '/blockstack', query: { platform: 'blockstack' }}}}
+            hrefAttrs={{ as: '/blockstack', href: { pathname: '/blockstack', query: { platform: 'blockstack' } } }}
             filterBy="platforms"
             singular="platform"
             query="blockstack"
@@ -72,12 +72,12 @@ class HomePage extends React.PureComponent {
             title="Ethereum Wallets"
           />
           <FeaturedList
-            image="g1"
+            image="none"
             title="Decentralized Exchanges"
             appNames={['Radar Relay', 'IDEX', 'OasisDEX', 'ForkDelta']}
           />
           <FeaturedList
-            image="g2"
+            image="none"
             appNames={['SteemIt', 'Stealthy', 'Peepeth', 'Mastodon', 'Diaspora', 'DTube']}
             title="Hot Social Dapps"
             href="/categories/social-networking"
@@ -86,7 +86,7 @@ class HomePage extends React.PureComponent {
             query="social-networking"
           />
           <FeaturedList
-            image="g4"
+            image="none"
             appNames={['Graphite', 'Misthos', 'Aragon', 'Gitcoin', 'adChain Registry', 'ETHLance']}
             title="Business Tools"
             href="/categories/business-tools"

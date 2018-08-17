@@ -41,7 +41,10 @@ const background = (title) => {
     ]
   }
   if (title.includes('EOS')) {
-    return ['url("https://files-qxpmkijgff.now.sh/blockstack_platforms-20.png")', 'url("https://files-qxpmkijgff.now.sh/eos.png")']
+    return [
+      'url("https://files-qxpmkijgff.now.sh/blockstack_platforms-20.png")',
+      'url("https://files-qxpmkijgff.now.sh/eos.png")'
+    ]
   }
   if (title.includes('thereum')) {
     return [
@@ -50,17 +53,26 @@ const background = (title) => {
     ]
   }
   if (title.includes('Gaia')) {
-    return ['url("https://files-qxpmkijgff.now.sh/blockstack_platforms-25.png")', 'url("https://files-qxpmkijgff.now.sh/gaia.png")']
+    return [
+      'url("https://files-qxpmkijgff.now.sh/blockstack_platforms-25.png")',
+      'url("https://files-qxpmkijgff.now.sh/gaia.png")'
+    ]
   }
   if (title.includes('IPFS')) {
-    return ['url("https://files-qxpmkijgff.now.sh/blockstack_platforms-23.png")', 'url("https://files-qxpmkijgff.now.sh/ipfs.png")']
+    return [
+      'url("https://files-qxpmkijgff.now.sh/blockstack_platforms-23.png")',
+      'url("https://files-qxpmkijgff.now.sh/ipfs.png")'
+    ]
   }
   if (title.includes('Steem')) {
-    return ['url("https://files-qxpmkijgff.now.sh/blockstack_platforms-24.png")', 'url("https://files-qxpmkijgff.now.sh/steem.png")']
+    return [
+      'url("https://files-qxpmkijgff.now.sh/blockstack_platforms-24.png")',
+      'url("https://files-qxpmkijgff.now.sh/steem.png")'
+    ]
   }
-  return [
-    'url("https://files-qxpmkijgff.now.sh/blockstack_platforms-14.png")',
-    'url("https://files-qxpmkijgff.now.sh/blockstack_platforms-14.png")'
-  ]
+  if (title === 'none') {
+    return [null, null]
+  }
+  return [null, null]
 }
 export { slugify, dedupe, background }
