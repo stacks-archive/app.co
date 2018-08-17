@@ -10,7 +10,7 @@ const Closing = ({ openModal, ...props }) => (
         The better your app, the&nbsp;more Bitcoin you earn
       </Heading>
       <Flex maxWidth="960px" width="100%" alignItems="center" justifyContent="center">
-        <MiningButton onClick={() => openModal()}>Register your app</MiningButton>
+        <MiningButton onClick={() => openModal()}> Register for App Mining</MiningButton>
       </Flex>
     </Section>
   </>
