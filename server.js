@@ -1,6 +1,5 @@
 const express = require('express')
 const next = require('next')
-const LRUCache = require('lru-cache')
 const dotenv = require('dotenv')
 const shrinkRay = require('shrink-ray')
 const cookiesMiddleware = require('universal-cookie-express')
@@ -10,6 +9,7 @@ if (dev) {
   dotenv.config()
 }
 
+const { ssrCache } = require('./common/lib/cache')
 const { getApps } = require('./common/lib/api')
 const RSSController = require('./common/controllers/rss-controller')
 
@@ -20,10 +20,7 @@ const handle = app.getRequestHandler()
 const apiServer = process.env.API_SERVER || 'https://app-co-api-staging.herokuapp.com'
 
 // This is where we cache our rendered HTML pages
-const ssrCache = new LRUCache({
-  max: 10,
-  maxAge: dev ? 1000 * 30 : 1000 * 60 * 60 // 1hour
-})
+
 
 /*
  * NB: make sure to modify this to take into account anything that should trigger
@@ -68,6 +65,7 @@ async function renderAndCache(req, res, pagePath, serverData) {
     console.log('cache miss')
     res.send(html)
   } catch (err) {
+    console.log(err)
     app.renderError(err, req, res, pagePath)
   }
 }
