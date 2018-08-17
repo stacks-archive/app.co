@@ -42,7 +42,6 @@ const processApps = (appsData) => {
 const getApps = (apiServer) =>
   new Promise(async (resolve, reject) => {
     try {
-      console.log('dev', dev)
       if (ssrCache.has(API_CACHE_KEY) && !dev) {
         return resolve(JSON.parse(ssrCache.get(API_CACHE_KEY)))
       }

@@ -12,6 +12,7 @@ if (dev) {
 const { ssrCache } = require('./common/lib/cache')
 const { getApps } = require('./common/lib/api')
 const RSSController = require('./common/controllers/rss-controller')
+const slugify = require('./common/lib/slugify')
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const app = next({ dev })
@@ -71,96 +72,111 @@ async function renderAndCache(req, res, pagePath, serverData) {
 }
 
 app.prepare().then(() => {
-  const server = express()
+  getApps(apiServer).then((apps) => {
+    const server = express()
 
-  server.use(shrinkRay()).use(cookiesMiddleware())
+    server.use(shrinkRay()).use(cookiesMiddleware())
 
-  server.set('views', './common/server-views')
-  server.set('view engine', 'pug')
+    server.set('views', './common/server-views')
+    server.set('view engine', 'pug')
 
-  server.use((req, res, _next) => {
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header('Access-Control-Allow-Headers', '*')
-    _next()
-  })
+    server.use((req, res, _next) => {
+      res.header('Access-Control-Allow-Origin', '*')
+      res.header('Access-Control-Allow-Headers', '*')
+      _next()
+    })
 
-  // Use the `renderAndCache` utility defined below to serve pages
-  server.get('/', (req, res) => {
-    renderAndCache(req, res, '/')
-  })
+    // Use the `renderAndCache` utility defined below to serve pages
+    server.get('/', (req, res) => {
+      renderAndCache(req, res, '/')
+    })
 
-  server.get('/app/:appSlug', (req, res) => {
-    renderAndCache(req, res, '/')
-  })
+    server.get('/app/:appSlug', (req, res) => {
+      renderAndCache(req, res, '/')
+    })
 
-  server.get('/apps', (req, res) => {
-    renderAndCache(req, res, '/')
-  })
+    server.get('/apps', (req, res) => {
+      renderAndCache(req, res, '/')
+    })
 
-  server.get('/platforms', (req, res) => {
-    renderAndCache(req, res, '/platforms')
-  })
-  server.get('/platforms/all', (req, res) => {
-    renderAndCache(req, res, '/platforms/all')
-  })
-  server.get('/platforms/:platform', (req, res) => {
-    renderAndCache(req, res, '/platforms', { platform: req.params.platform })
-  })
+    server.get('/platforms', (req, res) => {
+      renderAndCache(req, res, '/platforms')
+    })
+    server.get('/platforms/all', (req, res) => {
+      renderAndCache(req, res, '/platforms')
+    })
 
-  server.get('/categories', (req, res) => {
-    renderAndCache(req, res, '/categories')
-  })
+    // redirect to top-level page
+    server.get('/platforms/:platform', (req, res) => {
+      res.redirect(`/${req.params.platform}`)
+    })
+    server.get('/platform/:platform', (req, res) => {
+      res.redirect(`/${req.params.platform}`)
+    })
 
-  server.get('/categories/all', (req, res) => {
-    renderAndCache(req, res, '/categories/all')
-  })
-  server.get('/categories/:category', (req, res) => {
-    renderAndCache(req, res, '/categories', { category: req.params.category })
-  })
-  server.get('/category/:category', (req, res) => {
-    res.redirect(`/categories/${req.params.category}`)
-  })
+    server.get('/categories', (req, res) => {
+      renderAndCache(req, res, '/categories')
+    })
 
-  server.get('/faq', (req, res) => {
-    renderAndCache(req, res, '/faq')
+    server.get('/categories/all', (req, res) => {
+      renderAndCache(req, res, '/categories/all')
+    })
+    server.get('/categories/:category', (req, res) => {
+      renderAndCache(req, res, '/categories', { category: req.params.category })
+    })
+    server.get('/category/:category', (req, res) => {
+      res.redirect(`/categories/${req.params.category}`)
+    })
+
+    server.get('/faq', (req, res) => {
+      renderAndCache(req, res, '/faq')
+    })
+
+    server.get('/submit', (req, res) => {
+      renderAndCache(req, res, '/submit')
+    })
+
+    server.get('/admin', (req, res) => {
+      renderAndCache(req, res, '/admin')
+    })
+
+    server.get('/admin/app', (req, res) => {
+      renderAndCache(req, res, '/admin/app')
+    })
+
+    server.get('/admin/pending', (req, res) => {
+      renderAndCache(req, res, '/admin/pending')
+    })
+
+    server.get('/all', (req, res) => {
+      renderAndCache(req, res, '/all')
+    })
+
+    apps.platforms.forEach((platform) => {
+      server.get(`/${slugify(platform)}`, (req, res) => {
+        req.params.platform = platform
+        renderAndCache(req, res, '/platforms', { platform })
+      })
+    })
+
+    server.get('/clear-cache', (req, res) => {
+      if (req.query.key === process.env.API_KEY) {
+        console.log('Clearing cache from API')
+        ssrCache.reset()
+        res.json({ success: true })
+      } else {
+        res.status(400).json({ success: false })
+      }
+    })
+
+    server.use('/rss', RSSController)
+
+    server.get('*', (req, res) => handle(req, res))
+
+    server.listen(port, (err) => {
+      if (err) throw err
+      console.log(`> Ready on http://localhost:${port}`)
+    })
   })
-
-  server.get('/submit', (req, res) => {
-    renderAndCache(req, res, '/submit')
-  })
-
-  server.get('/admin', (req, res) => {
-    renderAndCache(req, res, '/admin')
-  })
-
-  server.get('/admin/app', (req, res) => {
-    renderAndCache(req, res, '/admin/app')
-  })
-
-  server.get('/admin/pending', (req, res) => {
-    renderAndCache(req, res, '/admin/pending')
-  })
-
-  server.get('/all', (req, res) => {
-    renderAndCache(req, res, '/all')
-  })
-
-  server.get('/clear-cache', (req, res) => {
-    if (req.query.key === process.env.API_KEY) {
-      console.log('Clearing cache from API')
-      ssrCache.reset()
-      res.json({ success: true })
-    } else {
-      res.status(400).json({ success: false })
-    }
-  })
-
-  server.use('/rss', RSSController)
-
-  server.get('*', (req, res) => handle(req, res))
-
-  server.listen(port, (err) => {
-    if (err) throw err
-    console.log(`> Ready on http://localhost:${port}`)
-  })
+  
 })

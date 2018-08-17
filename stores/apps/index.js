@@ -145,7 +145,7 @@ const makeReducer = (data) => {
         const filteredApps = selectAppsForPlatform(state.apps, platform)
         const allPlatforms = selectAllPlatforms(state)
         const platformName =
-          allPlatforms.find((_platform) => _platform.toLowerCase() === platform.toLowerCase()) || capitalize(platform)
+          allPlatforms.find((_platform) => slugify(_platform) === platform) || capitalize(platform)
         return {
           ...state,
           platformFilter: platform,

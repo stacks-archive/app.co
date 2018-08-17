@@ -62,12 +62,13 @@ const TagBox = ({ label, tag }) => {
   if (!tag) {
     return null
   }
-  const url = `/platforms/${slugify(tag)}`
+  const slugified = slugify(tag)
+  const url = `/${slugified}`
   return (
     <Box py={4} pr={4}>
       <Type.h5>{label}</Type.h5>
 
-      <TagLink light mt={3} href={url}>
+      <TagLink light mt={3} as={url} href={{ pathname: '/platforms', query: { platform: slugified }}}>
         {tag}
       </TagLink>
     </Box>
@@ -101,7 +102,7 @@ const Header = ({ imageUrl, name, category, description }) => (
       <AppIcon src={imageUrl} alt={name} />
       <Box pl={3}>
         <Type.h3>{name}</Type.h3>
-        <TagLink mt={2} small href={categoryURL(category)}>
+        <TagLink mt={2} small as={categoryURL(category)} href={{ pathname: '/categories', query: { category: slugify(category) }}}>
           {category}
         </TagLink>
       </Box>

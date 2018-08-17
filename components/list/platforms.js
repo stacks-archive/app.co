@@ -48,7 +48,7 @@ const PlatformsList = connect(mapStateToProps)(({ apps, limit, platforms, auth, 
       slug: slugified,
       icon: renderPlatformIcon(slugified),
       link: {
-        as: `/platforms/${slugified}`,
+        as: `/${slugified}`,
         href: {
           pathname: `/platforms`,
           query: {

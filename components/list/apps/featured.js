@@ -32,9 +32,9 @@ class FeaturedListComponent extends React.Component {
   }
 
   render() {
-    const { title, href, filterBy, singular, query, image } = this.props
+    const { title, href, filterBy, singular, query, image, hrefAttrs } = this.props
     const link = href
-      ? {
+      ? hrefAttrs || {
           as: `/${filterBy}/${query}`,
           href: {
             pathname: `/${filterBy}`,
