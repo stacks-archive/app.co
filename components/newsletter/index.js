@@ -23,7 +23,8 @@ class NewsletterClass extends React.Component {
   }
   state = {
     email: null,
-    cookie: getNewsletterCookie(this.props.cookies)
+    cookie: getNewsletterCookie(this.props.cookies),
+    validEmail: true
   }
 
   componentWillMount() {
@@ -46,6 +47,8 @@ class NewsletterClass extends React.Component {
   handleSubmit = (email = this.state.email) => {
     if (email.match(EMAIL_REGEX)) {
       this.props.doSubmitEmail(email, setTimeout(() => this.handleClose(SUBSCRIBED), 5400))
+    } else {
+      this.setState({ validEmail: false })
     }
   }
 
@@ -54,7 +57,7 @@ class NewsletterClass extends React.Component {
 
     const { serverCookies } = this.props
     const serverCookie =
-      serverCookies && serverCookies['BLOCKSTACK_NEWSLETTER'] && JSON.parse(serverCookies['BLOCKSTACK_NEWSLETTER'])
+      serverCookies && serverCookies.BLOCKSTACK_NEWSLETTER && JSON.parse(serverCookies.BLOCKSTACK_NEWSLETTER)
 
     const show = () => {
       if (cookie && cookie.state === CLOSED) return false
@@ -99,8 +102,15 @@ class NewsletterClass extends React.Component {
                 placeholder="Enter your email"
                 value={doingSomething ? text : this.state.email}
                 action={!doingSomething ? () => this.handleSubmit() : null}
-                onChange={(evt) => this.setState({ email: evt.target.value })}
+                onChange={(evt) => this.setState({ email: evt.target.value, validEmail: true })}
               />
+              {!this.state.validEmail && (
+                <>
+                  <Type.span color={theme.colors.red} fontSize={12}>
+                    Please enter a valid email
+                  </Type.span>
+                </>
+              )}
             </StyledNewsletter.Section>
           )}
         </StyledNewsletter.Wrapper>

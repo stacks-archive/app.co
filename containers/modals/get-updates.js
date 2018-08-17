@@ -17,7 +17,8 @@ const EMAIL_REGEX = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-
 
 class GetUpdates extends React.Component {
   state = {
-    email: null
+    email: null,
+    validEmail: true
   }
 
   static propTypes = {
@@ -36,6 +37,8 @@ class GetUpdates extends React.Component {
   handleSubmit = (email = this.state.email) => {
     if (email.match(EMAIL_REGEX)) {
       this.props.doSubmitEmail(email)
+    } else {
+      this.setState({ validEmail: false })
     }
   }
 
@@ -84,8 +87,15 @@ class GetUpdates extends React.Component {
                 placeholder="Enter your email"
                 value={doingSomething ? text : this.state.email}
                 action={!doingSomething ? () => this.handleSubmit() : null}
-                onChange={(evt) => this.setState({ email: evt.target.value })}
+                onChange={(evt) => this.setState({ email: evt.target.value, validEmail: true })}
               />
+              {!this.state.validEmail && (
+                <>
+                  <Type.span color={theme.colors.red} fontSize={12}>
+                    Please enter a valid email
+                  </Type.span>
+                </>
+              )}
             </StyledNewsletter.Section>
           )}
         </StyledModal.Content>
