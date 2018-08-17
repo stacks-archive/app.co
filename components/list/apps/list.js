@@ -54,7 +54,7 @@ const getApps = (props) => {
 class AppsListComponent extends React.Component {
   static propTypes = {
     filterBy: PropTypes.string,
-    single: PropTypes.string,
+    single: PropTypes.bool,
     limit: PropTypes.number,
     apps: PropTypes.array.isRequired,
     sectionKeys: PropTypes.array,
@@ -117,7 +117,6 @@ class AppsListComponent extends React.Component {
             limit={limit}
             single={false}
             href={`${path}/${slugify(filter)}`}
-            {...rest}
           />
         ) : null
       })
@@ -140,7 +139,6 @@ class AppsListComponent extends React.Component {
         width={[1, 1 / 2, 1 / 3]}
         limit={limit}
         single
-        {...rest}
       />
     )
   }

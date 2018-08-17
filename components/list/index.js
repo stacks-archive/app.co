@@ -30,15 +30,31 @@ const Items = ({ items, item: Item, limit, width, selectedItem, ...rest }) =>
     const Component = () => <Item width={width} {...item} key={i} rank={i + 1} {...rest} selected={isSelected} />
     if (limit && limit !== 0) {
       if (i <= limit) {
-        return <Component />
+        return <Component key={i} />
       } else {
         return null
       }
     }
-    return <Component />
+    return <Component key={i} />
   })
 
-const ListContainer = ({ header, items, item, limit, href, as, width = [1, 1 / 2], selectedItem, ...rest }) => {
+const ListContainer = ({
+  header,
+  items,
+  item,
+  limit,
+  href,
+  as,
+  width = [1, 1 / 2],
+  selectedItem,
+  blockchain,
+  storage,
+  authentication,
+  category,
+  apps,
+  serverCookies,
+  ...rest
+}) => {
   const HeaderWrapper = (props) =>
     !header.action ? (
       <StyledList.Header {...props} />

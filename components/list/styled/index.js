@@ -3,6 +3,7 @@ import { Box, boxProps, Flex } from '@components/box'
 import { space } from 'styled-system'
 import { theme, above, wrapperStyle } from '@common/styles'
 import { animated } from 'react-spring'
+import PropTypes from 'prop-types'
 
 const Item = styled(animated.div)`
   display: flex;
@@ -308,6 +309,9 @@ const TableItem = styled(Box)`
 Item.defaultProps = {
   px: [2, 3],
   py: 3
+}
+StyledList.propTypes = {
+  gutter: PropTypes.bool
 }
 
 StyledList.Header = Header
