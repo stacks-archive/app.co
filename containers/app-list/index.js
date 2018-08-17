@@ -1,5 +1,5 @@
 import React from 'react'
-import sortBy from 'lodash/sortby'
+import sortBy from 'lodash/sortBy'
 import Tooltip from '@atlaskit/tooltip'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
