@@ -60,8 +60,8 @@ const ListContainer = ({ header, items, item, limit, href, as, width = [1, 1 / 2
   const backgroundProps = hasBackgroundImage
     ? {
         backgroundImage: [header.background[0], header.background[1]],
-        backgroundSize: ['cover', '1130px'],
-        backgroundPosition: ['center center', '100% 50%'],
+        backgroundSize: ['cover', '1200px'],
+        backgroundPosition: ['center right', '100% 50%'],
         backgroundRepeat: 'no-repeat',
         alignItems: ['flex-start', 'center'],
         minHeight: ['150px', '100px']

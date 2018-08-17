@@ -52,7 +52,6 @@ class HomePage extends React.PureComponent {
         </Page.Section>
         <Page.Section flexDirection="column" px>
           <AppsList
-            image="g3"
             single
             limit={9}
             filterBy="all"
@@ -71,13 +70,8 @@ class HomePage extends React.PureComponent {
             appNames={['MyCrypto', 'MyEtherWallet', 'Balance.io', 'Coinbase Wallet', 'MetaMask', 'Trust Wallet']}
             title="Ethereum Wallets"
           />
+          <FeaturedList title="Decentralized Exchanges" appNames={['Radar Relay', 'IDEX', 'OasisDEX', 'ForkDelta']} />
           <FeaturedList
-            image="none"
-            title="Decentralized Exchanges"
-            appNames={['Radar Relay', 'IDEX', 'OasisDEX', 'ForkDelta']}
-          />
-          <FeaturedList
-            image="none"
             appNames={['SteemIt', 'Stealthy', 'Peepeth', 'Mastodon', 'Diaspora', 'DTube']}
             title="Hot Social Dapps"
             href="/categories/social-networking"
@@ -86,7 +80,6 @@ class HomePage extends React.PureComponent {
             query="social-networking"
           />
           <FeaturedList
-            image="none"
             appNames={['Graphite', 'Misthos', 'Aragon', 'Gitcoin', 'adChain Registry', 'ETHLance']}
             title="Business Tools"
             href="/categories/business-tools"

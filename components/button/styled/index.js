@@ -46,9 +46,9 @@ const StyledButton = styled.a`
   ${({ light }) =>
     light &&
     css`
-      background-color: rgba(20, 33, 68, 0.07);
+      background-color: rgba(255, 255, 255, 0.07);
       &:hover {
-        background-color: rgba(20, 33, 68, 0.1);
+        background-color: rgba(255, 255, 255, 0.1);
       }
     `};
   ${({ white }) =>
