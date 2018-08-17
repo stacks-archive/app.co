@@ -1,10 +1,11 @@
 import * as React from 'react'
 import system from 'system-components'
 import tag from 'clean-tag'
+import { animated } from 'react-spring'
 
 const Box = system(
   {
-    is: tag
+    is: animated(tag)
   },
   'width',
   'space',
@@ -29,7 +30,9 @@ const Box = system(
   'backgroundImage',
   'backgroundPosition',
   'backgroundRepeat',
-  'backgroundSize'
+  'backgroundSize',
+  'zIndex',
+  'overflow'
 )
 
 const SystemFlex = system(
@@ -66,7 +69,32 @@ const Img = system(
   'borders',
   'display'
 )
+const Input = system(
+  {
+    is: tag.input
+  },
+  'width',
+  'space',
+  'fontSize',
+  'color',
+  'flex',
+  'order',
+  'alignSelf',
+  'opacity',
+  'position',
+  'top',
+  'right',
+  'left',
+  'bottom',
+  'minHeight',
+  'borderRadius',
+  'maxHeight',
+  'maxWidth',
+  'minWidth',
+  'borders',
+  'display'
+)
 
 const Flex = (props) => <SystemFlex display="flex" {...props} />
 
-export { Box, Flex, Img }
+export { Box, Flex, Img, Input }

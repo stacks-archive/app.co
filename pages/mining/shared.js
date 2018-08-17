@@ -4,6 +4,9 @@ import { Type } from '@components/typography'
 import Observer from 'react-intersection-observer'
 import { Spring, animated, config } from 'react-spring'
 
+import styled from 'styled-components'
+
+
 const HeaderType = (props) => <Type.h3 color="white" fontSize="23px" fontWeight={300} {...props} />
 const Heading = (props) => <Type.h3 color="white" fontSize={[4, 5]} textAlign="center" fontWeight={200} {...props} />
 const SubHeading = (props) => (
@@ -41,4 +44,4 @@ const Watch = ({ top, ...props }) => {
   )
 }
 
-export { HeaderType, Section, Heading, SubHeading, Watch }
+export { HeaderType, Section, Heading, SubHeading, Watch, Input }
