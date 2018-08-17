@@ -2,7 +2,6 @@ import React from 'react'
 import Modal from '@atlaskit/modal-dialog'
 import TextField from '@atlaskit/field-text'
 import PropTypes from 'prop-types'
-import _ from 'lodash'
 import { CheckboxStateless as Checkbox } from '@atlaskit/checkbox'
 import 'isomorphic-unfetch'
 

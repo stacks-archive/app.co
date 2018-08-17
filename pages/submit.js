@@ -1,6 +1,6 @@
 import React from 'react'
 import TextField from '@atlaskit/field-text'
-import _ from 'lodash'
+import map from 'lodash/map'
 import Select from '@atlaskit/select'
 import { CheckboxStateless as Checkbox } from '@atlaskit/checkbox'
 import 'isomorphic-unfetch'
@@ -51,10 +51,10 @@ class SubmitDapp extends React.Component {
   }
 
   render() {
-    const { appConstants, apiServer } = this.props
+    const { appConstants } = this.props
 
     const enumSelect = (enums, placeholder, props = {}) => {
-      const options = _.map(_.keys(enums), (opt) => ({ label: opt, value: opt }))
+      const options = map(Object.keys(enums), (opt) => ({ label: opt, value: opt }))
       const onChange = (option) => {
         this.setState({ [props.apiAttr || placeholder.toLowerCase()]: option.value })
       }

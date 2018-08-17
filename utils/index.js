@@ -1,4 +1,6 @@
-import _ from 'lodash'
+import map from 'lodash/map'
+import lodashDefaults from 'lodash/defaults'
+import find from 'lodash/find'
 import React from 'react'
 import Select from '@atlaskit/select'
 
@@ -21,7 +23,7 @@ const truncate = (str, options) => {
     length: 50
   }
 
-  const opts = _.defaults(options, defaults)
+  const opts = lodashDefaults(options, defaults)
 
   if (str.length > opts.length) {
     return str.slice(0, opts.length - opts.after.length) + opts.after
@@ -43,7 +45,7 @@ const outboundLink = (app, link) => {
 }
 
 const enumSelect = (enums, placeholder, props = {}) => {
-  const options = _.map(enums, (opt) => ({ label: opt, value: opt }))
+  const options = map(enums, (opt) => ({ label: opt, value: opt }))
   const onChange = (option) => {
     props.onChange({ [props.apiAttr || placeholder.toLowerCase()]: option.value })
   }
@@ -77,7 +79,7 @@ const appStatuses = [
   { label: 'Accepted', value: 'accepted' }
 ]
 
-const appStatusFromValue = (value) => _.find(appStatuses, (status) => status.value === value)
+const appStatusFromValue = (value) => find(appStatuses, (status) => status.value === value)
 
 const capitalize = (lower) => lower.charAt(0).toUpperCase() + lower.substr(1)
 

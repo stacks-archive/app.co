@@ -1,5 +1,5 @@
 import React from 'react'
-import _ from 'lodash'
+import sortBy from 'lodash/sortby'
 import Tooltip from '@atlaskit/tooltip'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -30,7 +30,7 @@ class AppList extends React.Component {
     super(props)
     const hasFilter = props.platformFilter || props.categoryFilter
     const apps = hasFilter ? props.filteredApps : props.apps
-    const sortedApps = _.sortBy(apps, (app) => -getTwitterMentions(app))
+    const sortedApps = sortBy(apps, (app) => -getTwitterMentions(app))
     this.state = {
       showCount: props.show,
       showAll: false,
