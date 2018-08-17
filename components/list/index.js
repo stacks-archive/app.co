@@ -51,7 +51,7 @@ const ListContainer = ({ header, items, item, limit, href, as, width = [1, 1 / 2
               ...header.href
             },
             header.as || as
-          )
+          ).then(() => window.scrollTo(0, 0))
         }
       />
     )
@@ -62,20 +62,15 @@ const ListContainer = ({ header, items, item, limit, href, as, width = [1, 1 / 2
         backgroundImage: [header.background[0], header.background[1]],
         backgroundSize: ['cover', '1130px'],
         backgroundPosition: ['center center', '100% 50%'],
-        backgroundRepeat: 'no-repeat'
+        backgroundRepeat: 'no-repeat',
+        alignItems: ['flex-start', 'center'],
+        minHeight: ['150px', '100px']
       }
-    : {}
+    : { alignItems: 'center', minHeight: ['100px'] }
   const buttonVariant = hasBackgroundImage ? { light: true } : { dark: true }
   const Header = () =>
     header ? (
-      <HeaderWrapper
-        py={4}
-        px={[4]}
-        title={header.title}
-        {...backgroundProps}
-        minHeight={[hasBackgroundImage ? '150px' : '100px', '100px']}
-        alignItems={[hasBackgroundImage ? 'flex-start' : 'center', 'center']}
-      >
+      <HeaderWrapper py={4} px={[3, 4]} title={header.title} {...backgroundProps}>
         <>
           <Type.h2 maxWidth={[hasBackgroundImage ? '160px' : '100%', '100%']}>{header.title}</Type.h2>
           {header.action &&
