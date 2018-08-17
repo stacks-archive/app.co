@@ -70,7 +70,7 @@ class HomePage extends React.PureComponent {
             appNames={['MyCrypto', 'MyEtherWallet', 'Balance.io', 'Coinbase Wallet', 'MetaMask', 'Trust Wallet']}
             title="Ethereum Wallets"
           />
-          <FeaturedList title="Decentralized Exchanges" appNames={['Radar Relay', 'IDEX', 'OasisDEX', 'ForkDelta']} />
+          <FeaturedList title="Decentralized Exchanges" appNames={['Airswap', 'EtherDelta', 'Radar Relay', 'IDEX', 'OasisDEX', 'Paradex', 'Dexy']} />
           <FeaturedList
             appNames={['SteemIt', 'Stealthy', 'Peepeth', 'Mastodon', 'Diaspora', 'DTube']}
             title="Hot Social Dapps"
