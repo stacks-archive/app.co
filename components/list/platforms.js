@@ -4,9 +4,7 @@ import { StyledList } from '@components/list/styled'
 import { connect } from 'react-redux'
 import {
   selectApps,
-  selectBlockchainCategories,
-  selectStorageCategories,
-  selectAuthenticationCategories
+  selectAllPlatforms
 } from '@stores/apps/selectors'
 import { ListContainer } from '@components/list/index'
 
@@ -17,21 +15,21 @@ import { renderPlatformIcon } from '@components/svg/platforms'
 
 const mapStateToProps = (state) => ({
   apps: selectApps(state),
-  platforms: selectBlockchainCategories(state),
-  storage: selectStorageCategories(state),
-  auth: selectAuthenticationCategories(state)
+  platforms: selectAllPlatforms(state)
 })
 
 const PlatformItem = ({ platform, link, image, width, icon: Icon, ...rest }) => (
   <Link href={link.href} as={link.as} prefetch>
-    <StyledList.ItemLink width={width} link href={link.as} {...rest}>
+    <StyledList.ItemLink width={width} link {...rest}>
       <Flex style={{ flexGrow: 1, maxWidth: '100%' }} pr={2}>
         {Icon ? (
           <Box pr={2}>
             <Icon color="currentColor" />
           </Box>
         ) : null}
-        <Type.strong>{platform}</Type.strong>
+        <Type.strong>
+          <a href={link.as}>{platform}</a>
+        </Type.strong>
       </Flex>
     </StyledList.ItemLink>
   </Link>
@@ -40,7 +38,7 @@ const PlatformItem = ({ platform, link, image, width, icon: Icon, ...rest }) => 
 const mergeDedupe = (arr) => [...new Set([].concat(...arr))]
 
 const PlatformsList = connect(mapStateToProps)(({ apps, limit, platforms, auth, storage, noAll, ...rest }) => {
-  const all = mergeDedupe([platforms, auth, storage])
+  const all = platforms
   const items = limit === 0 ? all : ['Blockstack', 'Ethereum', 'Steem', 'IPFS', 'ZeroNet']
   const modifiedArray = items.map((platform) => {
     const slugified = slugify(platform)
@@ -50,7 +48,7 @@ const PlatformsList = connect(mapStateToProps)(({ apps, limit, platforms, auth, 
       slug: slugified,
       icon: renderPlatformIcon(slugified),
       link: {
-        as: `/platforms/${slugified}`,
+        as: `/${slugified}`,
         href: {
           pathname: `/platforms`,
           query: {

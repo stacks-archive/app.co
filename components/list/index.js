@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
 import { Flex, Box } from 'rebass'
+import Router from 'next/router'
 
 import { Type } from '@components/typography'
 import { StyledList } from '@components/list/styled'
@@ -29,27 +30,78 @@ const Items = ({ items, item: Item, limit, width, selectedItem, ...rest }) =>
     const Component = () => <Item width={width} {...item} key={i} rank={i + 1} {...rest} selected={isSelected} />
     if (limit && limit !== 0) {
       if (i <= limit) {
-        return <Component />
+        return <Component key={i} />
       } else {
         return null
       }
     }
-    return <Component />
+    return <Component key={i} />
   })
 
-const ListContainer = ({ header, items, item, limit, href, as, width = [1, 1 / 2], selectedItem, ...rest }) => {
+const ListContainer = ({
+  header,
+  items,
+  item,
+  limit,
+  href,
+  as,
+  width = [1, 1 / 2],
+  selectedItem,
+  blockchain,
+  storage,
+  authentication,
+  category,
+  apps,
+  serverCookies,
+  ...rest
+}) => {
+  const HeaderWrapper = (props) =>
+    !header.action ? (
+      <StyledList.Header {...props} />
+    ) : (
+      <StyledList.Header
+        {...props}
+        onClick={() =>
+          Router.push(
+            {
+              ...header.href
+            },
+            header.as || as
+          ).then(() => window.scrollTo(0, 0))
+        }
+      />
+    )
+
+  const hasBackgroundImage = header && header.background && header.background[0]
+  const hasVisibleActionButton = header && header.action && header.href
+  // background-position: calc(100% + 100px) 0%;
+  // background-size: 1230px;
+  const backgroundProps = hasBackgroundImage
+    ? {
+        backgroundImage: [header.background[0], header.background[1]],
+        backgroundSize: ['cover', '1230px'],
+        backgroundPosition: ['center right', hasVisibleActionButton ? '100% 50%' : 'calc(100% + 100px) center'],
+        backgroundRepeat: 'no-repeat',
+        alignItems: ['flex-start', 'center'],
+        minHeight: ['150px', '100px']
+      }
+    : { alignItems: 'center', minHeight: ['100px'] }
+  const buttonVariant = hasBackgroundImage ? { light: true } : { dark: true }
   const Header = () =>
     header ? (
-      <StyledList.Header py={4} px={[3, 4]} title={header.title}>
-        <Type.h2>{header.title}</Type.h2>
-        {header.action && (
-          <Link href={header.href ? header.href : href} as={header.as ? header.as : as} prefetch>
-            <Button white style={{ marginLeft: 32 }}>
-              View All
-            </Button>
-          </Link>
-        )}
-      </StyledList.Header>
+      <HeaderWrapper py={4} px={[3, 4]} title={header.title} {...backgroundProps}>
+        <>
+          <Type.h2 maxWidth={[hasBackgroundImage ? '160px' : '100%', '100%']}>{header.title}</Type.h2>
+          {header.action &&
+            header.href && (
+              <Link href={header.href ? header.href : href} as={header.as ? header.as : as}>
+                <Button {...buttonVariant} style={{ marginLeft: 32 }} href={header.as ? header.as : as}>
+                  View All
+                </Button>
+              </Link>
+            )}
+        </>
+      </HeaderWrapper>
     ) : null
 
   const itemProps = {
@@ -83,7 +135,8 @@ ListContainer.propTypes = {
   item: PropTypes.node,
   limit: PropTypes.number.isRequired,
   width: PropTypes.arrayOf(PropTypes.number.isRequired),
-  href: PropTypes.string
+  href: PropTypes.string,
+  as: PropTypes.string
 }
 
 export { ListContainer, Items }

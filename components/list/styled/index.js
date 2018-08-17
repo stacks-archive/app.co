@@ -1,8 +1,9 @@
 import styled, { css } from 'styled-components'
-import { Box, boxProps } from '@components/box'
+import { Box, boxProps, Flex } from '@components/box'
 import { space } from 'styled-system'
 import { theme, above, wrapperStyle } from '@common/styles'
 import { animated } from 'react-spring'
+import PropTypes from 'prop-types'
 
 const Item = styled(animated.div)`
   display: flex;
@@ -63,11 +64,7 @@ const Item = styled(animated.div)`
   ${boxProps};
 `
 
-const ItemLink = Item.extend`
-  &:hover {
-    color: ${theme.colors.blue};
-  }
-`
+const ItemLink = Item.withComponent(Box)
 
 const Body = styled(Box)`
   background: white;
@@ -220,10 +217,17 @@ const headerBgColorGenerator = ({ title }) => {
   }
 }
 
-const Header = styled(Box)`
-  ${headerBgColorGenerator};
-  ${({ white }) =>
-    white &&
+const Header = styled(Flex)`
+  //background: white;
+  ${({ onClick }) =>
+    onClick &&
+    css`
+      &:hover {
+        cursor: pointer;
+      }
+    `};
+  ${({ backgroundImage }) =>
+    !backgroundImage &&
     css`
       background: white;
       h1,
@@ -232,8 +236,10 @@ const Header = styled(Box)`
       h4,
       h5,
       h6 {
-        color: ${theme.colors.blue};
+        color: ${theme.colors.blue} !important;
+        text-shadow: none !important;
       }
+      border: 1px solid ${theme.colors.border};
     `};
   color: white;
   display: flex;
@@ -303,6 +309,9 @@ const TableItem = styled(Box)`
 Item.defaultProps = {
   px: [2, 3],
   py: 3
+}
+StyledList.propTypes = {
+  gutter: PropTypes.bool
 }
 
 StyledList.Header = Header

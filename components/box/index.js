@@ -16,7 +16,6 @@ const boxProps = css`
   ${alignItems}
 `
 
-
 const Box = system(
   {
     is: tag
@@ -40,7 +39,41 @@ const Box = system(
   'maxHeight',
   'maxWidth',
   'minWidth',
-  'borders'
+  'borders',
+  'backgroundImage',
+  'backgroundSize',
+  'backgroundPosition',
+  'backgroundRepeat'
+)
+
+const A = system(
+  {
+    is: tag.a
+  },
+  'width',
+  'space',
+  'fontSize',
+  'color',
+  'flex',
+  'order',
+  'alignSelf',
+  'opacity',
+  'display',
+  'position',
+  'top',
+  'right',
+  'left',
+  'bottom',
+  'minHeight',
+  'borderRadius',
+  'maxHeight',
+  'maxWidth',
+  'minWidth',
+  'borders',
+  'backgroundImage',
+  'backgroundSize',
+  'backgroundPosition',
+  'backgroundRepeat'
 )
 
 const Flex = system(
@@ -54,8 +87,6 @@ const Flex = system(
   'justifyContent'
 )
 
-
-
 Box.propTypes = {
   ...space.propTypes,
   ...width.propTypes,
@@ -68,4 +99,4 @@ Box.propTypes = {
   ...color.propTypes
 }
 
-export { Box, Flex, boxProps }
+export { Box, Flex, boxProps, A }

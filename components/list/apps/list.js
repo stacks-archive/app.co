@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import sortBy from 'lodash/sortBy'
-import {dedupe} from '@common'
+import { dedupe, background, slugify } from '@common'
 
 import { connect } from 'react-redux'
 
@@ -18,7 +18,6 @@ import {
   selectCategoryName
 } from '@stores/apps/selectors'
 import { selectAppsForPlatform } from '@stores/apps'
-import { slugify } from '@common'
 
 import { ListContainer } from '@components/list/index'
 import AppItem from './item'
@@ -55,12 +54,13 @@ const getApps = (props) => {
 class AppsListComponent extends React.Component {
   static propTypes = {
     filterBy: PropTypes.string,
-    single: PropTypes.string,
+    single: PropTypes.bool,
     limit: PropTypes.number,
     apps: PropTypes.array.isRequired,
     sectionKeys: PropTypes.array,
     categoryName: PropTypes.string,
-    platformName: PropTypes.string
+    platformName: PropTypes.string,
+    href: PropTypes.string
   }
 
   constructor(props) {
@@ -107,18 +107,16 @@ class AppsListComponent extends React.Component {
           }
         }
 
-
         return filteredList.length > 0 ? (
           <ListContainer
-            key={ filter }
-            header={ { title: filter, action: { label: 'View All' }, white: true, ...link } }
-            items={ filteredList }
-            item={ AppItem }
-            width={ [1, 1 / 2, 1 / 3] }
-            limit={ limit }
-            single={ false }
-            href={ path + '/' + slugify(filter) }
-            { ...rest }
+            key={filter}
+            header={{ title: filter, action: { label: 'View All' }, background: background(filter), ...link }}
+            items={filteredList}
+            item={AppItem}
+            width={[1, 1 / 2, 1 / 3]}
+            limit={limit}
+            single={false}
+            href={`${path}/${slugify(filter)}`}
           />
         ) : null
       })
@@ -126,17 +124,21 @@ class AppsListComponent extends React.Component {
   }
 
   singleTable() {
-    const { single, platformName, categoryName, title, limit, ...rest } = this.props
+    const { single, platformName, categoryName, title, image = 'g3', limit, header, ...rest } = this.props
     const { sortedApps } = this.state
+
     return (
       <ListContainer
-        header={ { title: title || platformName || categoryName, white: true } }
-        items={ sortedApps }
-        item={ AppItem }
-        width={ [1, 1 / 2, 1 / 3] }
-        limit={ limit }
+        header={{
+          title: title || platformName || categoryName,
+          background: background(title || platformName || categoryName),
+          ...header
+        }}
+        items={sortedApps}
+        item={AppItem}
+        width={[1, 1 / 2, 1 / 3]}
+        limit={limit}
         single
-        { ...rest }
       />
     )
   }

@@ -71,6 +71,7 @@ const theme = {
       mid: '#7588A2',
       dark: '#142144'
     }),
+    red: Object.assign('#e74c3c'),
     border: Object.assign(rgba('#7588A2', 0.2), {
       dark: '#7588A2'
     })

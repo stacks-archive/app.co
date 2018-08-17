@@ -38,17 +38,17 @@ const StyledButton = styled.a`
   ${({ dark }) =>
     dark &&
     css`
-      background-color: rgba(20, 33, 68, 0.4);
+      background-color: rgba(20, 33, 68, 0.45);
       &:hover {
-        background-color: rgba(20, 33, 68, 0.6);
+        background-color: rgba(20, 33, 68, 0.56);
       }
     `};
   ${({ light }) =>
     light &&
     css`
-      background-color: rgba(20, 33, 68, 0.07);
+      background-color: rgba(255, 255, 255, 0.07);
       &:hover {
-        background-color: rgba(20, 33, 68, 0.1);
+        background-color: rgba(255, 255, 255, 0.1);
       }
     `};
   ${({ white }) =>

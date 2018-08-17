@@ -23,7 +23,8 @@ class NewsletterClass extends React.Component {
   }
   state = {
     email: null,
-    cookie: getNewsletterCookie(this.props.cookies)
+    cookie: getNewsletterCookie(this.props.cookies),
+    validEmail: true
   }
 
   componentWillMount() {
@@ -45,8 +46,9 @@ class NewsletterClass extends React.Component {
 
   handleSubmit = (email = this.state.email) => {
     if (email.match(EMAIL_REGEX)) {
-      this.props.doSubmitEmail(email)
-      setTimeout(() => this.handleClose(SUBSCRIBED), 5400)
+      this.props.doSubmitEmail(email, setTimeout(() => this.handleClose(SUBSCRIBED), 5400))
+    } else {
+      this.setState({ validEmail: false })
     }
   }
 
@@ -55,7 +57,7 @@ class NewsletterClass extends React.Component {
 
     const { serverCookies } = this.props
     const serverCookie =
-      serverCookies && serverCookies['BLOCKSTACK_NEWSLETTER'] && JSON.parse(serverCookies['BLOCKSTACK_NEWSLETTER'])
+      serverCookies && serverCookies.BLOCKSTACK_NEWSLETTER && JSON.parse(serverCookies.BLOCKSTACK_NEWSLETTER)
 
     const show = () => {
       if (cookie && cookie.state === CLOSED) return false
@@ -78,11 +80,11 @@ class NewsletterClass extends React.Component {
           >
             <CloseIcon color="rgba(255,255,255,0.5)" size={18} />
           </Box>
-          <StyledNewsletter.Svg top={[ 10]} left={['100%', 10]} right={[[10, 'auto']]}>
+          <StyledNewsletter.Svg top={[10]} left={['100%', 10]} right={[[10, 'auto']]}>
             <PlanetsWithGasGiant />
           </StyledNewsletter.Svg>
           <StyledNewsletter.Section width="60%">
-            <Type.h3 color={theme.colors.blue.accent} pl={[0, 0,  68]} py={2} pr={2}>
+            <Type.h3 color={theme.colors.blue.accent} pl={[0, 0, 68]} py={2} pr={2}>
               {doingSomething ? 'Thanks for subscribing!' : 'Get updates'}{' '}
               <Type.span color={theme.colors.grey.light}>
                 {doingSomething
@@ -100,8 +102,15 @@ class NewsletterClass extends React.Component {
                 placeholder="Enter your email"
                 value={doingSomething ? text : this.state.email}
                 action={!doingSomething ? () => this.handleSubmit() : null}
-                onChange={(evt) => this.setState({ email: evt.target.value })}
+                onChange={(evt) => this.setState({ email: evt.target.value, validEmail: true })}
               />
+              {!this.state.validEmail && (
+                <>
+                  <Type.span color={theme.colors.red} fontSize={12}>
+                    Please enter a valid email
+                  </Type.span>
+                </>
+              )}
             </StyledNewsletter.Section>
           )}
         </StyledNewsletter.Wrapper>

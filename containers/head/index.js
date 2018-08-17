@@ -4,6 +4,14 @@ import { string } from 'prop-types'
 
 const defaultTitle = 'App.co, The Universal Dapp Store'
 
+const SmallBlockOne = ({ label1, data1 }) =>
+  label1 && data1 ? (
+    <>
+      <meta name="twitter:label1" value={label1} />
+      <meta name="twitter:data1" value={data1} />
+    </>
+  ) : null
+
 const Head = (props) => (
   <NextHead>
     <meta charSet="UTF-8" />
@@ -21,6 +29,8 @@ const Head = (props) => (
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={props.ogImage} />
     <meta property="og:image" content={props.ogImage} />
+    <meta content="index, follow" />
+    <SmallBlockOne {...props} />
   </NextHead>
 )
 

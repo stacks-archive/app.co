@@ -1,6 +1,10 @@
+/**
+ * TODO: this should not be its own component
+ */
 import React from 'react'
 import PropTypes from 'prop-types'
 import sortBy from 'lodash/sortBy'
+import { background } from '@common'
 
 import { connect } from 'react-redux'
 
@@ -28,9 +32,9 @@ class FeaturedListComponent extends React.Component {
   }
 
   render() {
-    const { title, href, filterBy, singular, query } = this.props
+    const { title, href, filterBy, singular, query, image, hrefAttrs } = this.props
     const link = href
-      ? {
+      ? hrefAttrs || {
           as: `/${filterBy}/${query}`,
           href: {
             pathname: `/${filterBy}`,
@@ -40,8 +44,11 @@ class FeaturedListComponent extends React.Component {
           }
         }
       : {}
+
+    const bg = image !== 'none' ? background(image || title) : undefined
     const header = {
       title,
+      background: bg,
       white: true,
       ...link
     }

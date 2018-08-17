@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { wrapperStyle } from '@common/styles'
-import { display } from 'styled-system'
+import { display, textAlign, alignItems, justifyContent } from 'styled-system'
 
 const Navigation = styled.div`
   display: flex;
@@ -21,6 +21,9 @@ const Navigation = styled.div`
     }
   }
   ${display};
+  ${textAlign};
+  ${alignItems};
+  ${justifyContent};
   ${({ mobile }) =>
     mobile &&
     css`
@@ -31,7 +34,7 @@ const Navigation = styled.div`
       width: 100%;
       left: 0;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: flex-start;
       padding: 20px;
       a {
         font-size: 25px !important;
@@ -39,6 +42,11 @@ const Navigation = styled.div`
         width: 100%;
         display: block;
       }
+    `};
+  ${({ footer }) =>
+    footer &&
+    css`
+      flex-direction: column;
     `};
 `
 const StyledTopBar = styled.div`
