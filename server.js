@@ -3,6 +3,7 @@ const next = require('next')
 const dotenv = require('dotenv')
 const shrinkRay = require('shrink-ray')
 const cookiesMiddleware = require('universal-cookie-express')
+const expressSitemapXml = require('express-sitemap-xml')
 
 const dev = process.env.NODE_ENV !== 'production'
 if (dev) {
@@ -11,6 +12,7 @@ if (dev) {
 
 const { ssrCache } = require('./common/lib/cache')
 const { getApps } = require('./common/lib/api')
+const getSitemapURLs = require('./common/lib/sitemap')
 const RSSController = require('./common/controllers/rss-controller')
 const slugify = require('./common/lib/slugify')
 
@@ -170,6 +172,7 @@ app.prepare().then(() => {
     })
 
     server.use('/rss', RSSController)
+    server.use(expressSitemapXml(getSitemapURLs(apiServer), 'https://app.co'))
 
     server.get('*', (req, res) => handle(req, res))
 

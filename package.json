@@ -43,6 +43,7 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "express-basic-auth": "^1.1.5",
+    "express-sitemap-xml": "^1.0.2",
     "fast-csv": "^2.4.1",
     "googleapis": "^29.0.0",
     "grid-styled": "4.1.0",
