@@ -21,7 +21,7 @@ import { outboundLink } from '@utils'
 class AppDetails extends React.Component {
   static getInitialProps({ req, reduxStore }) {
     const {
-      params: { slug },
+      params: { slug }
     } = req
 
     reduxStore.dispatch(doSelectApp(slug))
@@ -138,9 +138,16 @@ class AppDetails extends React.Component {
 
   render() {
     const app = this.props.selectedApp
+    const smallMetaContent = app.tweets > 0 ? { label1: 'Tweets this Week', data1: app.tweets } : {}
+    const metaContent = {
+      title: `${app.name} on App.co`,
+      description: app.description,
+      ogImage: app.imageUrl,
+      ...smallMetaContent
+    }
     return (
       <>
-        <Head title={app.name} description={app.description} ogImage={app.imageUrl} />
+        <Head {...metaContent} />
         <Header />
         <Hero />
         <Container.Section wrap={1}>
@@ -152,7 +159,7 @@ class AppDetails extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  selectedApp: selectCurrentApp(state),
+  selectedApp: selectCurrentApp(state)
 })
 
 function mapDispatchToProps(dispatch) {
