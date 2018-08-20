@@ -68,7 +68,7 @@ class NewsletterClass extends React.Component {
       return true
     }
 
-    const doingSomething = this.props.submitted || this.props.subscribed
+    const doingSomething = this.props.submitted || this.props.subscribed || this.props.submitting
     const text = this.props.submitting ? 'Loading...' : 'Thanks for subscribing!'
     return show() ? (
       <StyledNewsletter pl={3} py={3} mb={[3, 4]} {...this.props}>

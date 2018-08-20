@@ -46,7 +46,7 @@ class GetUpdates extends React.Component {
     if (!this.props.open) {
       return null
     }
-    const doingSomething = this.props.submitted || this.props.subscribed
+    const doingSomething = this.props.submitted || this.props.subscribed || this.props.submitting
     const text = this.props.submitting ? 'Loading...' : 'Thanks for subscribing!'
     return (
       <StyledModal.Modal>
