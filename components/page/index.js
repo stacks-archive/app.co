@@ -12,7 +12,7 @@ const Page = ({ isErrorPage, children, ...rest }) => (
       {children}
     </StyledPage.Section>
     <StyledPage.Section flexDirection={['column']} alignItems="center" px={[2, 0]}>
-      <Footer pb={3} />
+      <Footer pb={3} isErrorPage={isErrorPage}/>
     </StyledPage.Section>
   </StyledPage>
 )

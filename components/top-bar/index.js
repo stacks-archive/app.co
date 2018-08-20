@@ -33,7 +33,7 @@ const TopBar = ({ isErrorPage, ...props }) => (
           <SearchBar transparent />
         </StyledTopBar.Section>
         <StyledTopBar.Section>
-          <Navigation display={['none', 'flex']} />
+          <Navigation display={['none', 'flex']} isErrorPage={isErrorPage} />
           <Box display={['block', 'none']}>
             <Toggle>
               {({ on, toggle }) => (
@@ -48,6 +48,7 @@ const TopBar = ({ isErrorPage, ...props }) => (
                   </Box>
                   <Navigation
                     mobile
+                    isErrorPage={isErrorPage}
                     on={on}
                     handleClick={() => {
                       toggle()

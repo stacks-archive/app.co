@@ -5,16 +5,25 @@ import NewsletterActions from '@stores/newsletter/actions'
 import { StyledTopBar } from '@components/top-bar/styled'
 import Link from 'next/link'
 
-const NavigationComponent = ({ handleClick, openNewsletterModal, footer, ...rest }) => {
+const ErrorPageLink = ({isErrorPage, children, ...props}) => isErrorPage ? (
+    children
+  ) : (
+    <Link {...props}>
+      {children}
+    </Link>
+  )
+
+const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, footer, ...rest }) => {
   const extraProps = handleClick ? { onClick: () => handleClick() } : {}
+  console.log('error page', isErrorPage)
   return (
     <StyledTopBar.Navigation {...rest}>
-      <Link href="/all">
+      <ErrorPageLink isErrorPage={isErrorPage} href="/all">
         <a href="/all">All Apps</a>
-      </Link>
-      <Link href="/faq" prefetch {...extraProps}>
+      </ErrorPageLink>
+      <ErrorPageLink isErrorPage={isErrorPage} href="/faq" prefetch {...extraProps}>
         <a href="/faq">Learn more</a>
-      </Link>
+      </ErrorPageLink>
       <a
         href="#"
         onClick={(evt) => {
@@ -24,9 +33,9 @@ const NavigationComponent = ({ handleClick, openNewsletterModal, footer, ...rest
       >
         Get Updates
       </a>
-      <Link href="/submit" {...extraProps}>
+      <ErrorPageLink isErrorPage={isErrorPage} href="/submit" {...extraProps}>
         <a href="/submit">Add your app</a>
-      </Link>
+      </ErrorPageLink>
     </StyledTopBar.Navigation>
   )
 }
