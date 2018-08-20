@@ -160,7 +160,9 @@ const ActionBar = () => (
   <Box maxWidth="960px" mx="auto" style={{ transform: 'translateY(-25px)' }}>
     <Box borderTop="1px solid white" />
     <MiningButton mx="auto" width="250px" bg="#EF6F6F" alignItems="center" style={{ transform: 'translateY(-25px)' }}>
-      <Box>View all apps</Box>
+      <Box>
+        <a href="/blockstack" style={{textDecoration: 'none'}}>View all apps</a>
+      </Box>
       <Box ml={2}>
         <ArrowRightIcon color="currentColor" size="1.3rem" style={{ transform: 'translateY(4px)' }} />
       </Box>

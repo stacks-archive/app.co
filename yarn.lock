@@ -7737,12 +7737,6 @@ react-input-autosize@^2.2.1:
   dependencies:
     prop-types "^15.5.8"
 
-react-intersection-observer@^6.1.1:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-6.1.1.tgz#109ab1ce648e993279eb29fe88914195fe814d44"
-  dependencies:
-    invariant "^2.2.4"
-
 react-is@^16.3.1:
   version "16.4.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.4.2.tgz#84891b56c2b6d9efdee577cc83501dfc5ecead88"
