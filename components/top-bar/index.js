@@ -14,16 +14,22 @@ import { Navigation } from '@components/navigation'
 const handleBodyScroll = (on) =>
   on ? document.body.classList.remove('no-scroll') : document.body.classList.add('no-scroll')
 
-const TopBar = (props) => (
+const TopBar = ({ isErrorPage, ...props }) => (
   <Headroom>
     <StyledTopBar {...props}>
       <StyledTopBar.Wrapper wrap>
         <StyledTopBar.Section grow>
-          <Link href="/" prefetch>
+          {isErrorPage ? (
             <a href="/">
               <AppIcon />
             </a>
-          </Link>
+          ) : (
+            <Link href="/">
+              <a href="/">
+                <AppIcon />
+              </a>
+            </Link>
+          )}
           <SearchBar transparent />
         </StyledTopBar.Section>
         <StyledTopBar.Section>

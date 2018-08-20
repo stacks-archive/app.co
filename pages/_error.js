@@ -7,7 +7,7 @@ import { Type } from '@components/typography'
 export default class Error extends React.Component {
   render() {
     return (
-      <Page>
+      <Page isErrorPage>
         <Head />
         <Page.Section flexDirection="column" px>
           <Type.h1 textAlign="center" width="100%">

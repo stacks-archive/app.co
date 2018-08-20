@@ -5,9 +5,9 @@ import { Footer } from '@components/footer'
 
 import { StyledPage } from './styled'
 
-const Page = ({ children, ...rest }) => (
+const Page = ({ isErrorPage, children, ...rest }) => (
   <StyledPage {...rest}>
-    <TopBar />
+    <TopBar isErrorPage={isErrorPage} />
     <StyledPage.Section flexDirection={['column']} alignItems="center" pt={[3, 4]} px={[2, 0]}>
       {children}
     </StyledPage.Section>
