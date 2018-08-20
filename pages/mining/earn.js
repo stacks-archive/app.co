@@ -4,6 +4,7 @@ import { Section, Heading, SubHeading } from '@pages/mining/shared'
 import { Type } from '@components/typography'
 import { Flex, Box, Img } from '@components/mining'
 import { MiningButton } from '@components/mining/button'
+import { EarningsPlaceholder } from '@components/mining/earnings-placeholder'
 import ArrowRightIcon from 'mdi-react/ArrowRightIcon'
 import { AppIcon } from '@components/app-icon'
 
@@ -63,12 +64,30 @@ const Tag = ({ ...rest }) => (
   <AppItemText border="1px solid #646C73" borderRadius="3px" fontSize={1} px={2} ml={2} {...rest} />
 )
 
-const AppItem = ({ name, earnings, tags, i, index, appIcon, length, ...rest }) => {
+const Earnings = ({ background }) => (
+  <div>
+    <span style={{position: 'relative', top: '-3px'}}>$</span>
+    <EarningsPlaceholder background={background} />
+    <EarningsPlaceholder background={background} />
+    <EarningsPlaceholder background={background} />
+    <EarningsPlaceholder background={background} />
+    <EarningsPlaceholder background={background} />
+  </div>
+)
+
+const AppItem = ({ name, earnings, tags, i, index, appIcon, length, backgroundOpacity, ...rest }) => {
+  const earningsBackground = [
+    '#DEDEDE',
+    '#CFCFCF',
+    '#B8B8B8',
+    '#979797',
+    '#828282'
+  ][i]
   const GradientItem = (props) => (
     <Flex
       width={1}
       p={[3, 4]}
-      bg={`rgba(255,255,255, ${index / length + 0.1})`}
+      bg={`rgba(255,255,255, ${backgroundOpacity})`}
       alignItems="center"
       {...props}
       {...rest}
@@ -89,11 +108,11 @@ const AppItem = ({ name, earnings, tags, i, index, appIcon, length, ...rest }) =
     tags && tags.length ? (
       <Flex display={['none', 'flex']}>{tags.map((tag, tagIndex) => <Tag key={tagIndex}>{tag}</Tag>)}</Flex>
     ) : null
-  const AppEarnings = () => (
+  const AppEarnings = ({background}) => (
     <Flex flexDirection={['column', 'row']} ml="auto" alignItems={['flex-end', 'center']}>
-      <AppItemText fontSize={3}>{earnings.usd}</AppItemText>
+      <Earnings background={background} />
       <AppItemText opacity={0.5} ml={3}>
-        {earnings.btc} BTC
+        in BTC
       </AppItemText>
     </Flex>
   )
@@ -102,12 +121,19 @@ const AppItem = ({ name, earnings, tags, i, index, appIcon, length, ...rest }) =
       <AppRank />
       <AppName />
       <AppTags />
-      <AppEarnings />
+      <AppEarnings background={earningsBackground} />
     </GradientItem>
   )
 }
 
-const appsArray = apps.map((app, i) => <AppItem key={i} i={i} index={apps.length - i} length={apps.length} {...app} />)
+const appRowBackgroundOpacities = [
+  1,
+  .89,
+  .76,
+  .6,
+  .5
+]
+const appsArray = apps.map((app, i) => <AppItem key={i} i={i} index={apps.length - i} length={apps.length} {...app} backgroundOpacity={appRowBackgroundOpacities[i]}/>)
 
 const Rankings = (props) => (
   <Section flexDirection="column" {...props}>
@@ -121,7 +147,7 @@ const Rankings = (props) => (
             App.co Rank
           </ListItemText>
           <ListItemText ml={['0', 'auto']} textAlign={['center', 'right']} width={['100%', 'auto']} color="#11A9BC">
-            Estimated October Payouts
+            Announcing payouts soon
           </ListItemText>
         </Flex>,
         ...appsArray
@@ -157,7 +183,7 @@ const Earn = ({ ...props }) => (
       <Heading mb={5}>How much can you earn?</Heading>
       <Box maxWidth={['80%', '500px']}>
         <SubHeading>
-          We currently pay in BTC for legal compliance. We will begin paying Stacks tokens March 2019.
+          We currently pay in BTC for legal compliance. We plan to begin paying Stacks tokens early 2019.
         </SubHeading>
       </Box>
     </Section>
