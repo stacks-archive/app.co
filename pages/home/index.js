@@ -33,6 +33,21 @@ class HomePage extends React.PureComponent {
           <Newsletter serverCookies={this.props.serverCookies} wrap />
         </Page.Section>
         <Page.Section flexDirection="column" px>
+          <AppsList
+            single
+            limit={4}
+            filterBy="all"
+            title="Popular Decentralized Apps"
+            header={{
+              action: {
+                label: 'View All'
+              },
+              href: {
+                pathname: '/all'
+              },
+              as: '/all'
+            }}
+          />
           <FeaturedList
             appNames={['Graphite', 'Stealthy', 'Misthos', 'Travelstack', 'Dappy Wallet', 'Coins', 'Kanstack']}
             title="Popular Blockstack Apps"
@@ -51,21 +66,6 @@ class HomePage extends React.PureComponent {
           </Page.Section>
         </Page.Section>
         <Page.Section flexDirection="column" px>
-          <AppsList
-            single
-            limit={9}
-            filterBy="all"
-            title="Popular Decentralized Apps"
-            header={{
-              action: {
-                label: 'View All'
-              },
-              href: {
-                pathname: '/all'
-              },
-              as: '/all'
-            }}
-          />
           <FeaturedList
             appNames={['MyCrypto', 'MyEtherWallet', 'Balance.io', 'Coinbase Wallet', 'MetaMask', 'Trust Wallet']}
             title="Ethereum Wallets"
