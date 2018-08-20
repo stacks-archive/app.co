@@ -17,13 +17,25 @@ const Question = ({ title, answer, ...rest }) => (
 
 const questions = [
   {
-    title: 'Is this real?',
-    answer: 'Yes'
+    title: 'What is Blockstack?',
+    answer: 'Blockstack is a new internet for decentralized apps that you access through the Blockstack Browser. With Blockstack, there is a new world of apps that let you own your data and maintain your privacy, security and freedom.'
   },
   {
-    title: 'What is App Mining?',
+    title: 'What is App.co?',
     answer:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa dolor illo impedit iusto, laboriosam libero maxime modi mollitia praesentium sed ut voluptates. Consectetur eum laborum omnis optio quod sed veritatis!'
+      'The first ecosystem-wide, universal Dapp Store. App.co currently serves as an aggregator of usable dapps for gaming, social networking, productivity, and financial services. It is a discovery tool for decentralized apps built on Blockstack, Ethereum, EOS, IPFS, Steem, and more.'
+  },
+  {
+    title: 'How to App Rankings Work?',
+    answer: 'Each App Reviewer will be able to define the criteria used to rank applications. We will update everyone with more information as soon as possible.'
+  },
+  {
+    title: 'How to Payouts Work?',
+    answer: 'Bitcoin is paid out each month to a list of top apps on Blockstack. Rankings are determined by a carefully selected group of app reviewers. We will update everyone with more information as soon as possible.'
+  },
+  {
+    title: 'When will App Mining be live?',
+    answer: 'Q4 2018. We will update everyone with more exact timing as soon as possible.'
   }
 ]
 
