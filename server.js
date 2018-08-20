@@ -1,7 +1,7 @@
 const express = require('express')
 const next = require('next')
 const dotenv = require('dotenv')
-const shrinkRay = require('shrink-ray')
+// const shrinkRay = require('shrink-ray')
 const cookiesMiddleware = require('universal-cookie-express')
 const expressSitemapXml = require('express-sitemap-xml')
 
@@ -77,7 +77,7 @@ app.prepare().then(() => {
   getApps(apiServer).then((apps) => {
     const server = express()
 
-    server.use(shrinkRay()).use(cookiesMiddleware())
+    // server.use(shrinkRay()).use(cookiesMiddleware())
 
     server.set('views', './common/server-views')
     server.set('view engine', 'pug')
