@@ -8,6 +8,7 @@ import AppsStore from '@stores/apps'
 import UserStore from '@stores/user'
 import newsletter from '@stores/newsletter'
 import RouterStore from '@stores/router'
+import MiningStore from '@stores/mining/reducer'
 
 export default (data) => {
   const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
@@ -18,7 +19,8 @@ export default (data) => {
     apps: AppsStore.makeReducer(data),
     user: UserStore.reducer,
     newsletter,
-    router: RouterStore.reducer
+    router: RouterStore.reducer,
+    mining: MiningStore
   })
 
   return finalCreateStore(Reducer)
