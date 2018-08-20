@@ -45,10 +45,10 @@ const Steps = ({ openModal, ...props }) => (
 
 const Hero = ({ openModal, ...props }) => (
   <Section
-    minHeight={['60vh', '60vh']}
+    minHeight={['50vh', '50vh']}
     justifyContent={['center', 'flex-end']}
     flexDirection="column"
-    py={4}
+    pyt={1}
     backgroundRepeat="no-repeat"
     backgroundPosition={['top', 'center center']}
     backgroundSize={['400px', '800px']}
