@@ -49,7 +49,7 @@ class HomePage extends React.PureComponent {
             }}
           />
           <FeaturedList
-            appNames={['Graphite', 'Stealthy', 'Misthos', 'Travelstack', 'Dappy Wallet', 'Coins', 'Kanstack']}
+            appNames={['Graphite', 'Stealthy', 'Misthos', 'Travelstack', 'Dappy Wallet', 'Coins']}
             title="Popular Blockstack Apps"
             href="/blockstack"
             hrefAttrs={{ as: '/blockstack', href: { pathname: '/blockstack', query: { platform: 'blockstack' } } }}
