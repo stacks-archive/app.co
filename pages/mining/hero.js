@@ -7,7 +7,7 @@ import { Flex } from '@components/mining'
 
 const ListItemText = (props) => <Type.h4 color="white" fontSize="18px" lineHeight={1.5} fontWeight={400} {...props} />
 
-const Steps = (props) => (
+const Steps = ({ openModal, ...props }) => (
   <Section flexDirection="column" {...props}>
     <MiningList
       width={1}
@@ -19,7 +19,7 @@ const Steps = (props) => (
             1.
           </ListItemText>
           <ListItemText>
-            <a href="#">Register your app</a> on App.co.
+            <a href="#" onClick={() => openModal()}>Register your app</a>.
           </ListItemText>
         </Flex>,
         <Flex p={4}>
@@ -27,7 +27,7 @@ const Steps = (props) => (
             2.
           </ListItemText>
           <ListItemText>
-            <a href="#">Integrate Blockstack</a> decentralized authentication.
+            <a href="https://blockstack.org/tutorials/" target="_blank">Integrate Blockstack</a> decentralized authentication.
           </ListItemText>
         </Flex>,
         <Flex p={4}>
@@ -35,7 +35,7 @@ const Steps = (props) => (
             3.
           </ListItemText>
           <ListItemText>
-            Improve your app. Earn more Bitcoin each month. <a href="#">See rankings.</a>
+            Improve your app. Earn more Bitcoin each month. <a href="/blockstack">See rankings.</a>
           </ListItemText>
         </Flex>
       ]}
