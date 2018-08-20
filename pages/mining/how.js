@@ -56,25 +56,14 @@ const How = ({ ...props }) => (
       <Heading mb={5} maxWidth={['100%', '800px']}>
         Apps are ranked by reviewers and rewards distributed every 30 days
       </Heading>
-      <Flex maxWidth="960px" width="100%" flexDirection={['column', 'row']} justifyContent="space-between">
-        <CardItem>
-          <LogoWordmark />
-          <RankedBy bg="#11A9BC" by="Get App Clicks" />
-        </CardItem>
-        <CardItem>
-          <LogoWordmark />
-          <RankedBy bg="#EF6F6F" by="Get App Clicks" />
-        </CardItem>
-        <CardItem>
-          <LogoWordmark />
-          <RankedBy bg="#2F4EEA" by="Get App Clicks" />
-        </CardItem>
-      </Flex>
 
-      <Box pt={6}>
+      <Box pt={3}>
+        <ListCheckItem>
+          We will announce specific app reviewers shortly.
+        </ListCheckItem>
         <ListCheckItem>Any user-ready app on App.co with Blockstack authentication or storage.</ListCheckItem>
         <ListCheckItem>
-          Reviewers use their proprietary data to rank App.co apps. <a href="#">View rankings.</a>
+          Reviewers use their proprietary data to rank App.co apps. <a href="/blockstack">View rankings.</a>
         </ListCheckItem>
         <ListCheckItem>Reviewers, criteria, and rankings are made public each month.</ListCheckItem>
       </Box>
