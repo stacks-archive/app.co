@@ -30,7 +30,7 @@ const questions = [
     answer: 'Each App Reviewer will be able to define the criteria used to rank applications. We will update everyone with more information as soon as possible.'
   },
   {
-    title: 'How to Payouts Work?',
+    title: 'How do Payouts Work?',
     answer: 'Bitcoin is paid out each month to a list of top apps on Blockstack. Rankings are determined by a carefully selected group of app reviewers. We will update everyone with more information as soon as possible.'
   },
   {

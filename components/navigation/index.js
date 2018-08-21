@@ -15,7 +15,6 @@ const ErrorPageLink = ({isErrorPage, children, ...props}) => isErrorPage ? (
 
 const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, footer, ...rest }) => {
   const extraProps = handleClick ? { onClick: () => handleClick() } : {}
-  console.log('error page', isErrorPage)
   return (
     <StyledTopBar.Navigation {...rest}>
       <ErrorPageLink isErrorPage={isErrorPage} href="/all">
