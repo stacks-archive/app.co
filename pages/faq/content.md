@@ -20,7 +20,7 @@ Today there are thousands of dapps built on protocols like Ethereum, Blockstack,
 
 App.co surfaces the best new dapps every day. It’s a place for blockchain-loving nerds, enthusiasts, and investors to geek out over the latest decentralized tech—from currency exchanges to mutant-feline-marketplaces.
 
-App.co is sponsored by Blockstack, a decentralized app protocol and community. All protocols are welcome on App.co as we’re committed to celebrating an open, decentralized internet for all.
+App.co is sponsored by [Blockstack](https://blockstack.org), a decentralized app protocol and community. All protocols are welcome on App.co as we’re committed to celebrating an open, decentralized internet for all.
 
 Blockstack is the easiest way to start building decentralized, blockchain-based dapps. Our APIs provide decentralized storage, password-less auth, and a scalable foundation for your dapps. And, Blockstack let’s you decouple the personal data you create, from the dapps you use, which makes you the sole owner of that data.
 
