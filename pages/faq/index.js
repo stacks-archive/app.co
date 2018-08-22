@@ -2,6 +2,8 @@ import React from 'react'
 import { Page } from '@components/page'
 import { Newsletter } from '@components/newsletter'
 import Head from '@containers/head'
+import {Box} from '@components/mining'
+
 import Content from './content.md'
 
 class LearnMore extends React.PureComponent {
@@ -15,8 +17,10 @@ class LearnMore extends React.PureComponent {
         <Page.Section px>
           <Newsletter wrap />
         </Page.Section>
-        <Page.Section wrap px py richText bg="white">
-          <Content />
+        <Page.Section wrap px richText bg="white">
+          <Box px={4}>
+            <Content />
+          </Box>
         </Page.Section>
       </Page>
     )

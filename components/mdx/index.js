@@ -28,20 +28,24 @@ const H3 = ({ children, ...rest }) => {
   )
 }
 
+const baseProps = {
+  lineHeight: '1.65'
+}
+
 const Mdx = ({ children }) => (
   <MDXProvider
     components={{
-      h1: H1,
-      h2: H2,
-      h3: H3,
-      h4: Type.h4,
-      h5: Type.h5,
-      h6: Type.h6,
-      p: Type.p,
-      pre: Type.pre,
-      ol: Type.ol,
-      ul: Type.ul,
-      li: Type.li
+      h1: (props) => <H1 mt={6} mb={4} {...props} />,
+      h2: (props) => <H2 {...props} />,
+      h3: (props) => <H3 {...props} />,
+      h4: (props) => <Type.h4 {...props} />,
+      h5: (props) => <Type.h5 {...props} />,
+      h6: (props) => <Type.h6 {...props} />,
+      p: (props) => <Type.p {...baseProps} {...props} />,
+      pre: (props) => <Type.pre {...baseProps} {...props} />,
+      ol: (props) => <Type.ol mt={3} display="inline-block" {...baseProps} {...props} />,
+      ul: (props) => <Type.ul mt={3} display="inline-block" {...baseProps} {...props} />,
+      li: (props) => <Type.li my={2} {...baseProps} {...props} />
     }}
   >
     {children}
