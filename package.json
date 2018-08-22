@@ -46,6 +46,7 @@
     "express-basic-auth": "^1.1.5",
     "express-sitemap-xml": "^1.0.2",
     "fast-csv": "^2.4.1",
+    "fs-extra": "^7.0.0",
     "googleapis": "^29.0.0",
     "grid-styled": "4.1.0",
     "isomorphic-unfetch": "^2.0.0",

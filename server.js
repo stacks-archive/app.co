@@ -4,6 +4,7 @@ const dotenv = require('dotenv')
 // const shrinkRay = require('shrink-ray')
 const cookiesMiddleware = require('universal-cookie-express')
 const expressSitemapXml = require('express-sitemap-xml')
+const fs = require('fs-extra')
 
 const dev = process.env.NODE_ENV !== 'production'
 if (dev) {
@@ -94,6 +95,12 @@ app.prepare().then(() => {
 
     server.use('/rss', RSSController)
     server.use(expressSitemapXml(getSitemapURLs(apiServer), 'https://app.co'))
+
+    server.get('/robots.txt', async (req, res) => {
+      const robots = await fs.readFile('./static/robots.txt')
+      res.header('Content-Type', 'text/plain')
+      res.status(200).send(robots)
+    })
 
     server.get('*', (req, res) => handle(req, res))
 
