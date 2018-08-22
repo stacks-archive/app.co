@@ -18,7 +18,7 @@ const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, fo
   return (
     <StyledTopBar.Navigation {...rest}>
       <ErrorPageLink isErrorPage={isErrorPage} href="/all">
-        <a href="/all">All Apps</a>
+        <a href="/all">All apps</a>
       </ErrorPageLink>
       <ErrorPageLink isErrorPage={isErrorPage} href="/faq" prefetch {...extraProps}>
         <a href="/faq">Learn more</a>
@@ -30,7 +30,7 @@ const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, fo
           openNewsletterModal()
         }}
       >
-        Get Updates
+        Get updates
       </a>
       <ErrorPageLink isErrorPage={isErrorPage} href="/submit" {...extraProps}>
         <a href="/submit">Add your app</a>
