@@ -104,7 +104,7 @@ const AppItem = ({
             <TableItem>{appTag(storageNetwork)}</TableItem>
             <TableItem>{appTag(blockchain)}</TableItem>
             <TableItem style={{ textAlign: 'right', fontSize: '13px', fontWeight: 700 }} width={[0, 0.5 / 4]}>
-              {getTwitterMentions(rest)}
+              {getTwitterMentions(rest).toLocaleString()}
             </TableItem>
           </>
         ) : null}

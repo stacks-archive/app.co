@@ -149,7 +149,7 @@ const StatsItem = ({ Rankings, name }) => {
   }
   return (
     <Flex pt={3} alignItems="center">
-      <Type.h3 pr={2}>{tweets}</Type.h3> <Type.p>Tweets about {name} in the last 7 days</Type.p>
+      <Type.h3 pr={2}>{tweets.toLocaleString()}</Type.h3> <Type.p>tweets about {name} in the past 7 days</Type.p>
     </Flex>
   )
 }
