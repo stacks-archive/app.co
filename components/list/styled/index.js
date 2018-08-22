@@ -16,6 +16,9 @@ const Item = styled(animated.div)`
   @media (max-width: 639px) {
     border-left: 0;
   }
+  a {
+    text-decoration: none;
+  }
   ${({ link, selected }) =>
     link &&
     css`
