@@ -75,7 +75,7 @@ class NewsletterClass extends React.Component {
         <StyledNewsletter.Wrapper>
           <Box
             dark
-            style={{ position: 'absolute', zIndex: 20, right: '6px', top: '6px' }}
+            style={{ position: 'absolute', zIndex: 20, right: '6px', top: '6px', cursor: 'pointer' }}
             onClick={() => this.handleClose()}
           >
             <CloseIcon color="rgba(255,255,255,0.5)" size={18} />
