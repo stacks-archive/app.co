@@ -5,6 +5,7 @@ const dotenv = require('dotenv')
 const cookiesMiddleware = require('universal-cookie-express')
 const expressSitemapXml = require('express-sitemap-xml')
 const fs = require('fs-extra')
+const secure = require('express-force-https')
 
 const dev = process.env.NODE_ENV !== 'production'
 if (dev) {
@@ -44,6 +45,9 @@ app.prepare().then(() => {
   getApps(apiServer).then((apps) => {
     const server = express()
 
+    if (!dev) {
+      server.use(secure)
+    }
     server.use(cookiesMiddleware())
 
     server.set('views', './common/server-views')

@@ -4233,6 +4233,10 @@ express-basic-auth@^1.1.5:
   dependencies:
     basic-auth "^1.1.0"
 
+express-force-https@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/express-force-https/-/express-force-https-1.0.0.tgz#2adb8121a6894616fc78ea05b15bd8d4b855fd0c"
+
 express-sitemap-xml@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/express-sitemap-xml/-/express-sitemap-xml-1.0.2.tgz#c5a1dc13d3a3cfa6cbd70eb50fb6ffd215d14dcc"
