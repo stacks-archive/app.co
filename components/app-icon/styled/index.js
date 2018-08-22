@@ -19,6 +19,11 @@ const StyledAppIcon = styled(Box)`
     css`
       background: linear-gradient(60deg, ${gradient});
     `};
+  ${({ hover }) =>
+    hover &&
+    css`
+      cursor: pointer;
+    `};
   & > div {
     width: ${({ size }) => size}px;
   }

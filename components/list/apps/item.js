@@ -89,7 +89,7 @@ const AppItem = ({
               <Type.p>{rank}</Type.p>
             </Flex>
           ) : null}
-          <AppIcon src={imageUrl} alt={name} size={48} />
+          <AppIcon hover="true" src={imageUrl} alt={name} size={48} />
           <Box style={{ flexGrow: 1, maxWidth: '75%' }} pl={3}>
             <Type.h4 fontSize={16} mt="4px">
               <a href={`/app/${rest.Slugs[0] && rest.Slugs[0].value}`}>{name}</a>
