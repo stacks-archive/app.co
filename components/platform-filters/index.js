@@ -1,5 +1,5 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React from 'react'
+import styled, { css } from 'styled-components'
 
 export const Filters = styled.div`
   display: flex;
@@ -7,7 +7,7 @@ export const Filters = styled.div`
   flex-wrap: wrap;
   // background-color: white;
   // border-radius: 5px;
-`;
+`
 
 export const Filter = styled.a`
   min-width: 33.3%;
@@ -39,24 +39,24 @@ export const Filter = styled.a`
   &:nth-last-child(3) {
     border-radius: 0 0 0 5px;
   }
-`;
+`
 
 export const PlatformTitle = styled.span`
   color: #142144;
   font-size: 15px;
   position: relative;
   top: 2px;
-`;
+`
 
 export const ClearFilter = Filter.extend`
   padding-top: 6px;
-`;
+`
 
 export const FilterSubtitle = styled.p`
   color: rgba(20, 33, 68, 0.5);
   font-size: 14px;
   margin-bottom: 3px;
-`;
+`
 
 export const FilterImage = styled.img`
   max-width: 24px;
@@ -65,4 +65,4 @@ export const FilterImage = styled.img`
   // top: 7px;
   opacity: 0.75;
   margin-right: 10px;
-`;
+`

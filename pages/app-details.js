@@ -1,52 +1,49 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { selectCurrentApp } from '@stores/apps/selectors';
-import Page, { Grid, GridColumn } from '@atlaskit/page';
-import { Flex, Box } from 'grid-styled';
-// import Head from 'next/head';
-import { GithubCircleIcon, TwitterCircleIcon } from 'mdi-react';
-import { Page as Container } from '@containers/page';
-import { Header } from '@containers/header';
-import { Hero } from '@containers/hero';
-import AppIcon from '@containers/app-icon';
-import { doSelectApp } from '@stores/apps';
-import StyledApp from '@components/app-details';
-import { StyledAppList } from '@components/app-list';
-import { Button } from '@components/button';
-import Head from '@containers/head';
+import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { selectCurrentApp } from '@stores/apps/selectors'
+import { Flex, Box } from 'grid-styled'
+import { GithubCircleIcon, TwitterCircleIcon } from 'mdi-react'
+import { Page as Container } from '@containers/page'
+import { Header } from '@containers/header'
+import { Hero } from '@containers/hero'
+import AppIcon from '@containers/app-icon'
+import AppStore, { doSelectApp } from '@stores/apps'
+import StyledApp from '@components/app-details'
+import { StyledAppList } from '@components/app-list'
+import { Button } from '@components/button'
+import Head from '@containers/head'
 
-import AppStore from '@stores/apps';
-import UserStore from '@stores/user';
+import UserStore from '@stores/user'
 
-import { outboundLink } from '@utils';
+import { outboundLink } from '@utils'
 
 class AppDetails extends React.Component {
   static getInitialProps({ req, reduxStore }) {
     const {
-      params: { slug },
-    } = req;
+      params: { slug }
+    } = req
 
-    reduxStore.dispatch(doSelectApp(slug));
+    reduxStore.dispatch(doSelectApp(slug))
 
-    return { slug };
+    return { slug }
   }
 
   appDetails() {
-    const app = this.props.selectedApp;
-    const [ranking] = app.Rankings || [];
-    let tweets = 0;
+    const app = this.props.selectedApp
+    const [ranking] = app.Rankings || []
+    let tweets = 0
     if (ranking) {
-      tweets = ranking.twitterMentions || 0;
+      tweets = ranking.twitterMentions || 0
     }
     return (
       <Flex flexWrap>
-        <Box width={[1, 1, 1/4, 1/4]}>
+        <Box width={[1, 1, 1 / 4, 1 / 4]}>
           <Flex>
-            <Box width={1/3}>
+            <Box width={1 / 3}>
               <AppIcon app={app} />
             </Box>
-            <Box width={2/3}>
+            <Box width={2 / 3}>
               <h2>{app.name}</h2>
             </Box>
           </Flex>
@@ -54,7 +51,7 @@ class AppDetails extends React.Component {
           <Button
             type="button/primary"
             onClick={() => {
-              outboundLink(app);
+              outboundLink(app)
             }}
           >
             Visit Website
@@ -131,39 +128,42 @@ class AppDetails extends React.Component {
           </StyledApp.MainSection>
         </Box>
 
-        <Box width={[1, 1, 1/4, 1/4]}>
+        <Box width={[1, 1, 1 / 4, 1 / 4]}>
           <StyledApp.StatNumber>{tweets}</StyledApp.StatNumber>
           <StyledApp.StatLabel>Tweets about {app.name} in the last 7 days</StyledApp.StatLabel>
         </Box>
       </Flex>
-    );
+    )
   }
 
   render() {
-    const app = this.props.selectedApp;
+    const app = this.props.selectedApp
+    const smallMetaContent = app.tweets > 0 ? { label1: 'Tweets this Week', data1: app.tweets } : {}
+    const metaContent = {
+      title: `${app.name} on App.co`,
+      description: app.description,
+      ogImage: app.imageUrl,
+      ...smallMetaContent
+    }
     return (
       <>
-        <Head
-          title={app.name}
-          description={app.description}
-          ogImage={app.imageUrl}
-        />
+        <Head {...metaContent} />
         <Header />
         <Hero />
         <Container.Section wrap={1}>
           <Container.Section.Content>{this.props.selectedApp && this.appDetails()}</Container.Section.Content>
         </Container.Section>
       </>
-    );
+    )
   }
 }
 
 const mapStateToProps = (state) => ({
-  selectedApp: selectCurrentApp(state),
-});
+  selectedApp: selectCurrentApp(state)
+})
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Object.assign({}, AppStore.actions, UserStore.actions), dispatch);
+  return bindActionCreators(Object.assign({}, AppStore.actions, UserStore.actions), dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(AppDetails)

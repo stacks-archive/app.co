@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { wrapperStyles } from '@common/styles';
+import React from 'react'
+import styled from 'styled-components'
+import { wrapperStyles } from '@common/styles'
 
 const StyledHeader = styled.header`
   position: absolute;
@@ -8,7 +8,7 @@ const StyledHeader = styled.header`
   top: 0;
   left: 0;
   z-index: 20;
-`;
+`
 
 const Wrapper = styled.div`
   padding: 20px;
@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   @media (max-width: 769px) {
     padding: 20px 15px;
   }
-`;
+`
 
 const Section = styled.div`
   display: flex;
@@ -37,7 +37,7 @@ const Section = styled.div`
       padding-left: 10px;
     }
   }
-`;
+`
 
 const Item = styled.div`
   flex-grow: 1;
@@ -55,7 +55,7 @@ const Item = styled.div`
       padding-right: 20px;
     }
   }
-`;
+`
 
 const Link = styled.a`
   color: white;
@@ -67,12 +67,12 @@ const Link = styled.a`
   @media (max-width: 768px) {
     font-size: 0.8rem;
   }
-`;
+`
 
 const LogoLink = styled.a`
   text-decoration: none;
   color: #333333;
-`;
+`
 
 const Logo = styled.div`
   border-radius: 10px;
@@ -96,18 +96,18 @@ const Logo = styled.div`
   @media (min-width: 768px) {
     ${(props) => (props.smShow ? 'display: none;' : '')};
   }
-`;
+`
 
 const LogoImage = styled.img`
   width: 100%;
-`;
+`
 
-StyledHeader.Wrapper = Wrapper;
-StyledHeader.Section = Section;
-StyledHeader.Item = Item;
-StyledHeader.Link = Link;
-StyledHeader.Logo = Logo;
-StyledHeader.LogoLink = LogoLink;
-StyledHeader.LogoImage = LogoImage;
+StyledHeader.Wrapper = Wrapper
+StyledHeader.Section = Section
+StyledHeader.Item = Item
+StyledHeader.Link = Link
+StyledHeader.Logo = Logo
+StyledHeader.LogoLink = LogoLink
+StyledHeader.LogoImage = LogoImage
 
-export { StyledHeader };
+export { StyledHeader }

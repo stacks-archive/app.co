@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Card = styled.div`
   border-radius: 11px;
@@ -11,7 +11,7 @@ const Card = styled.div`
     font-size: 0.8rem;
     line-height: 1.1rem;
   }
-`;
+`
 
 const GrayCard = Card.extend`
   background-color: #b7bbc4;
@@ -22,7 +22,7 @@ const GrayCard = Card.extend`
   h3 {
     color: #142144;
   }
-`;
+`
 
 const SubmitDappIllustration = styled.img`
   position: absolute;
@@ -30,10 +30,10 @@ const SubmitDappIllustration = styled.img`
   right: 0;
   max-width: 100%;
   z-index: 0;
-`;
+`
 
 export default {
   Card,
   GrayCard,
-  SubmitDappIllustration,
-};
+  SubmitDappIllustration
+}

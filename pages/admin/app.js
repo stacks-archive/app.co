@@ -1,26 +1,51 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import queryString from 'query-string';
-import { FieldTextStateless as TextField } from '@atlaskit/field-text';
-import { FieldTextAreaStateless as TextArea } from '@atlaskit/field-text-area';
-import { CheckboxStateless as Checkbox } from '@atlaskit/checkbox';
-import Button from '@atlaskit/button';
-import Select from '@atlaskit/select';
-import NotificationSystem from 'react-notification-system';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import queryString from 'query-string'
+import { FieldTextStateless as TextField } from '@atlaskit/field-text'
+import { FieldTextAreaStateless as TextArea } from '@atlaskit/field-text-area'
+import { CheckboxStateless as Checkbox } from '@atlaskit/checkbox'
+import Button from '@atlaskit/button'
+import Select from '@atlaskit/select'
+import NotificationSystem from 'react-notification-system'
 
-import { enumSelect, appStatuses, appStatusFromValue } from '@utils';
-import Form from '@components/form';
-import AppIcon from '@containers/app-icon';
+import { enumSelect, appStatuses, appStatusFromValue, appRoute } from '@utils'
+import Form from '@components/form'
+import AppIcon from '@containers/app-icon'
 
-import AppStore from '@stores/apps';
-import UserStore from '@stores/user';
+import AppStore from '@stores/apps'
+import UserStore from '@stores/user'
+import {
+  selectAppConstants,
+  selectCurrentApp,
+  selectApps,
+  selectAppCategories,
+  selectApiServer,
+  selectBlockchainCategories,
+  selectStorageCategories,
+  selectAuthenticationCategories
+} from '@stores/apps/selectors'
 
-let AdminLayout = () => '';
+let AdminLayout = () => ''
 
 class App extends React.Component {
+  static propTypes = {
+    apps: PropTypes.array.isRequired,
+    categories: PropTypes.array.isRequired,
+    doSelectApp: PropTypes.func.isRequired,
+    selectedApp: PropTypes.object.isRequired,
+    saveApp: PropTypes.func.isRequired,
+    jwt: PropTypes.string.isRequired,
+    apiServer: PropTypes.string.isRequired,
+    authentications: PropTypes.array.isRequired,
+    blockchains: PropTypes.array.isRequired,
+    storageNetworks: PropTypes.array.isRequired,
+    isSavingApp: PropTypes.bool.isRequired
+  }
+
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       name: '',
       contact: '',
@@ -35,46 +60,68 @@ class App extends React.Component {
       submitting: false,
       openSourceUrl: '',
       registrationIsOpen: false,
-      twitterHandle: '',
-    };
-    this.save = this.save.bind(this);
+      twitterHandle: ''
+    }
+    this.save = this.save.bind(this)
   }
 
   componentDidMount() {
-    AdminLayout = require('../../containers/admin/layout').default;
+    AdminLayout = require('../../containers/admin/layout').default
     if (this.props.apps) {
-      const parsed = queryString.parse(document.location.search);
-      this.props.doSelectApp(parseInt(parsed.id, 10));
+      const parsed = queryString.parse(document.location.search)
+      this.props.doSelectApp(parseInt(parsed.id, 10))
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedApp && this.state.id !== nextProps.selectedApp.id) {
-      this.setState(Object.assign({}, this.state, nextProps.selectedApp));
+      this.setState(Object.assign({}, this.state, nextProps.selectedApp))
     }
   }
 
   save() {
-    console.log(this);
-    this.props.saveApp(this.state, this.props.apiServer, this.props.jwt);
+    this.props.saveApp(this.state, this.props.apiServer, this.props.jwt)
     this.notifications.addNotification({
       message: `${this.state.name} was saved successfully.`,
-      level: 'success',
-    });
+      level: 'success'
+    })
   }
 
   appDetails() {
-    const app = this.props.selectedApp;
-    const constants = this.props.constants.appConstants;
+    const app = this.props.selectedApp
+    const { categories, authentications, storageNetworks, blockchains } = this.props 
     if (!app) {
-      return <h1>Loading</h1>;
+      return <h1>Loading</h1>
     }
+    const appPage = appRoute(app)
+    const ranking = app.Rankings[0]
     return (
       <div>
-        {app && <AppIcon app={app} />}
+        <AppIcon app={app} />
         <h1>{app.name}</h1>
         <br />
         <br />
+        <p><a href={appPage}>{appPage}</a></p>
+        <p>
+          Twitter mentions in the last 7 days:{' '}
+          <strong>{ranking.twitterMentions}</strong>
+        </p>
+        <p>
+          Monthly visits:{' '}
+          <strong>{Math.round(ranking.monthlyVisitsCount)}</strong>
+        </p>
+        <p>
+          Monthly bounce rate:{' '}
+          <strong>{((ranking.monthlyBounceRate || 0) * 100).toFixed(1)}%</strong>
+        </p>
+        <p>
+          Monthly page views:{' '}
+          <strong>{Math.round(ranking.monthlyPageViews)}</strong>
+        </p>
+        <p>
+          Monthly visit duration:{' '}
+          <strong>{Math.round(ranking.monthlyVisitDuration)} seconds</strong>
+        </p>
         <Form.Wrapper>
           <TextField
             value={this.state.name || ''}
@@ -86,11 +133,19 @@ class App extends React.Component {
             onChange={(e) => this.setState({ description: e.target.value })}
             label="Short description (~50 characters)"
           />
+          <small>Currently {this.state.description.length} characters</small>
           <TextField
             value={this.state.website || ''}
             onChange={(e) => this.setState({ website: e.target.value })}
             label="Website"
           />
+          <small><a href={this.state.website} target="_blank">Visit website</a></small>
+          {this.state.website.indexOf('http') !== 0 && (
+            <>
+              <br/>
+              <small>Website URL is not valid</small>
+            </>
+          )}
           <TextField
             value={this.state.contact || ''}
             onChange={(e) => this.setState({ contact: e.target.value })}
@@ -125,31 +180,31 @@ class App extends React.Component {
           />
         </Form.Wrapper>
         <br />
-        {enumSelect(constants.categoryEnums, 'Category', {
+        {enumSelect(categories, 'Category', {
           value: this.state.category,
           onChange: (data) => {
-            this.setState(data);
-          },
+            this.setState(data)
+          }
         })}
-        {enumSelect(constants.blockchainEnums, 'Blockchain', {
+        {enumSelect(blockchains, 'Blockchain', {
           value: this.state.blockchain,
           onChange: (data) => {
-            this.setState(data);
-          },
+            this.setState(data)
+          }
         })}
-        {enumSelect(constants.storageEnums, 'Storage', {
+        {enumSelect(storageNetworks, 'Storage', {
           apiAttr: 'storageNetwork',
           value: this.state.storageNetwork,
           onChange: (data) => {
-            this.setState(data);
-          },
+            this.setState(data)
+          }
         })}
-        {enumSelect(constants.authenticationEnums, 'Authentication', {
+        {enumSelect(authentications, 'Authentication', {
           menuPlacement: 'top',
           value: this.state.authentication,
           onChange: (data) => {
-            this.setState(data);
-          },
+            this.setState(data)
+          }
         })}
         <br />
         <h3>Status:</h3>
@@ -170,7 +225,7 @@ class App extends React.Component {
           </Button>
         )}
       </div>
-    );
+    )
   }
 
   render() {
@@ -178,36 +233,40 @@ class App extends React.Component {
       <div>
         <NotificationSystem
           ref={(c) => {
-            this.notifications = c;
+            this.notifications = c
           }}
         />
         {AdminLayout && (
           <AdminLayout>
             <br />
-            <br />
+              <br />
             {this.appDetails()}
-            <br />
-            <br />
+              <br />
+                <br />
           </AdminLayout>
         )}
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = (state) => ({
-  apps: state.apps.apps,
-  selectedApp: state.apps.selectedApp,
-  apiServer: state.apps.apiServer,
-  constants: state.apps.constants,
+  apps: selectApps(state),
+  selectedApp: selectCurrentApp(state),
+  apiServer: selectApiServer(state),
+  constants: selectAppConstants(state),
+  categories: selectAppCategories(state),
+  blockchains: selectBlockchainCategories(state),
+  authentications: selectAuthenticationCategories(state),
+  storageNetworks: selectStorageCategories(state),
   user: state.user.user,
   jwt: state.user.jwt,
   isSavingApp: state.apps.isSavingApp,
-  savedApp: state.apps.savedApp,
-});
+  savedApp: state.apps.savedApp
+})
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Object.assign({}, AppStore.actions, UserStore.actions), dispatch);
+  return bindActionCreators(Object.assign({}, AppStore.actions, UserStore.actions), dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App)

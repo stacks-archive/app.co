@@ -1,5 +1,5 @@
-import Styled from 'styled-components';
-import { Button as BTN } from '@components/button';
+import Styled from 'styled-components'
+import { Button as BTN } from '@components/button'
 
 const Wrapper = Styled.div`
   background-color: #142144;
@@ -17,7 +17,7 @@ const Wrapper = Styled.div`
   @media (max-width: 768px) {
     padding: 55px 50px;
   }
-`;
+`
 
 const Section = Styled.div`
   width: 40%;
@@ -28,7 +28,7 @@ const Section = Styled.div`
     display: block;
     text-align: center;
   }
-`;
+`
 
 const RightSection = Section.extend`
   float: right;
@@ -41,7 +41,7 @@ const RightSection = Section.extend`
     width: 100%;
     display: block;
   }
-`;
+`
 
 const Input = Styled.input`
   font-size: 14px;
@@ -57,7 +57,7 @@ const Input = Styled.input`
   @media (max-width: 768px) {
     width: 100%;
   }
-`;
+`
 
 const Button = BTN.extend`
   display: inline-block;
@@ -74,12 +74,12 @@ const Button = BTN.extend`
     margin-top: 40px;
     margin-right: 0px;
   }
-`;
+`
 
 export default {
   Wrapper,
   Section,
   RightSection,
   Input,
-  Button,
-};
+  Button
+}

@@ -1,26 +1,32 @@
-import React from 'react';
-import styled from 'styled-components';
-import { wrapperStyles } from '@common/styles';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { TopBar } from '@components/top-bar'
+import { Footer } from '@components/footer'
 
-const StyledPage = styled.div``;
+import { StyledPage } from './styled'
 
-const Section = styled.div`
-  display: flex;
-  padding: 20px 0;
-  ${({ wrap }) => wrap && wrapperStyles()};
-`;
-const Content = styled.div`
-  flex-grow: 1;
-`;
-const Aside = styled.aside`
-  max-width: 250px;
-  width: 100%;
-  flex-shrink: 0;
-  padding: 0 10px;
-`;
+const Page = ({ isErrorPage, children, ...rest }) => (
+  <StyledPage {...rest}>
+    <TopBar isErrorPage={isErrorPage} />
+    <StyledPage.Section flexDirection={['column']} alignItems="center" pt={[3, 4]} px={[2, 0]}>
+      {children}
+    </StyledPage.Section>
+    <StyledPage.Section flexDirection={['column']} alignItems="center" px={[2, 0]}>
+      <Footer pb={3} isErrorPage={isErrorPage}/>
+    </StyledPage.Section>
+  </StyledPage>
+)
 
-StyledPage.Section = Section;
-StyledPage.Content = Content;
-StyledPage.Aside = Aside;
+const pxProps = ({ px }) => (px ? { px: [2, 4] } : {})
+const pyProps = ({ py }) => (py ? { py: [1, 4] } : {})
 
-export { StyledPage };
+const Section = (props) => <StyledPage.Section {...props} {...pxProps(props)} {...pyProps(props)} />
+
+Page.Sidebar = StyledPage.Aside
+Page.Section = Section
+Page.Section.Content = StyledPage.Content
+
+Page.propTypes = {
+  children: PropTypes.node.isRequired
+}
+export { Page }

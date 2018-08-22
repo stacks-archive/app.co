@@ -1,33 +1,28 @@
-import React from 'react';
+import React from 'react'
 
-import Page, { Grid, GridColumn } from '@atlaskit/page';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { Page as Container } from '@containers/page'
+import { Header } from '@containers/header'
+import { Hero } from '@containers/hero'
+import AppList from '@containers/app-list'
+import Head from '@containers/head'
 
-import { Page as Container } from '@containers/page';
-import { Header } from '@containers/header';
-import { Hero } from '@containers/hero';
-import AppList from '@containers/app-list';
-import Head from '@containers/head';
-
-import AppStore from '@stores/apps';
-import { doSelectPlatformFilter } from '@stores/apps';
-import { selectPlatformFilter, selectPlatformName } from '@stores/apps/selectors';
-import UserStore from '@stores/user';
-
-import { capitalize, properTagFromParams } from '@utils';
+import AppStore from '@stores/apps'
+import { doSelectPlatformFilter } from '@stores/apps'
+import { selectPlatformName } from '@stores/apps/selectors'
+import UserStore from '@stores/user'
 
 class Platform extends React.Component {
   static getInitialProps({ req, reduxStore }) {
-
     const {
-      params: { platform },
-    } = req;
+      params: { platform }
+    } = req
 
-    reduxStore.dispatch(doSelectPlatformFilter(platform));
+    reduxStore.dispatch(doSelectPlatformFilter(platform))
 
-    return { platform };
+    return { platform }
   }
 
   render() {
@@ -47,12 +42,11 @@ class Platform extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  platformFilter: selectPlatformFilter(state),
-  platformName: selectPlatformName(state),
-});
+  platformName: selectPlatformName(state)
+})
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Object.assign({}, AppStore.actions, UserStore.actions), dispatch);
+  return bindActionCreators(Object.assign({}, AppStore.actions, UserStore.actions), dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Platform);
+export default connect(mapStateToProps, mapDispatchToProps)(Platform)
