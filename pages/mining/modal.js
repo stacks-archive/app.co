@@ -145,10 +145,10 @@ class MiningModalComponent extends React.PureComponent {
           maxHeight="100vh"
           zIndex={205}
         >
-          <Box position="absolute" top="35px" right="20px" onClick={() => this.props.closeModal()}>
+          <Box position="absolute" top={["55px", "35px"]} right="20px" onClick={() => this.props.closeModal()}>
             <CloseIcon color="white" />
           </Box>
-          <HeaderType mb={5} fontSize={4}>
+          <HeaderType mb={5} mt={[4, 2]} fontSize={4}>
             Register for App Mining
           </HeaderType>
           {this.props.submitting && (
