@@ -14,7 +14,10 @@ import { MiningModal } from '@pages/mining/modal'
 const Header = () => (
   <Section>
     <HeaderType mr={2}>App Mining by</HeaderType> <AppIcon size={32} m={2} />
-    <HeaderType ml={2}>App.co</HeaderType>
+    <HeaderType ml={2}>
+      App.co and{' '}
+      <a href="https://blockstack.org">Blockstack</a>
+    </HeaderType>
   </Section>
 )
 

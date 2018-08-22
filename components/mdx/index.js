@@ -35,7 +35,7 @@ const baseProps = {
 const Mdx = ({ children }) => (
   <MDXProvider
     components={{
-      h1: (props) => <H1 mt={6} mb={4} {...props} />,
+      h1: (props) => <H1 mt={5} mb={4} {...props} />,
       h2: (props) => <H2 {...props} />,
       h3: (props) => <H3 {...props} />,
       h4: (props) => <Type.h4 {...props} />,
@@ -45,7 +45,7 @@ const Mdx = ({ children }) => (
       pre: (props) => <Type.pre {...baseProps} {...props} />,
       ol: (props) => <Type.ol mt={3} display="inline-block" {...baseProps} {...props} />,
       ul: (props) => <Type.ul mt={3} display="inline-block" {...baseProps} {...props} />,
-      li: (props) => <Type.li my={2} {...baseProps} {...props} />
+      li: (props) => <Type.li my="2px" {...baseProps} {...props} />
     }}
   >
     {children}

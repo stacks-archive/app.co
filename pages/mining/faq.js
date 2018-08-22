@@ -26,7 +26,7 @@ const questions = [
       'The first ecosystem-wide, universal Dapp Store. App.co currently serves as an aggregator of usable dapps for gaming, social networking, productivity, and financial services. It is a discovery tool for decentralized apps built on Blockstack, Ethereum, EOS, IPFS, Steem, and more.'
   },
   {
-    title: 'How to App Rankings Work?',
+    title: 'How do App Rankings Work?',
     answer: 'Each App Reviewer will be able to define the criteria used to rank applications. We will update everyone with more information as soon as possible.'
   },
   {

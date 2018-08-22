@@ -3,6 +3,7 @@ import { Page } from '@components/page'
 import { Newsletter } from '@components/newsletter'
 import Head from '@containers/head'
 import {Box} from '@components/mining'
+import { Type } from '@components/typography'
 
 import Content from './content.md'
 
@@ -17,8 +18,11 @@ class LearnMore extends React.PureComponent {
         <Page.Section px>
           <Newsletter wrap />
         </Page.Section>
-        <Page.Section wrap px richText bg="white">
-          <Box px={4}>
+        <Page.Section wrap richText bg="white">
+          <Box p={["32px", "64px"]}>
+            <Type.h1 mt={0} id="whats-a-dapp">
+              What's a Dapp?
+            </Type.h1>
             <Content />
           </Box>
         </Page.Section>

@@ -82,7 +82,7 @@ class SubmitDapp extends React.Component {
     return (
       <Page>
         <Head title="Submit your dapp" description="Submit your dapp to be listed on the Universal Dapp Store." />
-        <Page.Section wrap px py mb={3} richText bg="white">
+        <Page.Section wrap p={["32px", "64px"]} mb={3} richText bg="white">
           {this.state.submitted || this.state.submitting ? (
             <p>Thanks for your submission! We'll get back to you soon.</p>
           ) : (

@@ -66,7 +66,7 @@ class GetUpdates extends React.Component {
           >
             <CloseIcon color="#fff" />
           </StyledModal.CloseButton>
-          <Type.h3 color={theme.colors.blue.accent} >
+          <Type.h3 color={theme.colors.blue.accent} lineHeight={1.5} mb={doingSomething ? 4 : 0}>
             {doingSomething ? 'Thanks for subscribing!' : 'Get updates'}{' '}
             <Type.span color={theme.colors.grey.light}>
               {doingSomething ? "We'll send you the hottest new dapps soon." : 'Discover your next favorite decentralized app!'}

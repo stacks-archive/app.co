@@ -19,16 +19,18 @@ import { doClearApp } from '@stores/apps'
 const LinkWithIcon = (props) => {
   const { icon: Icon, link, label, title } = props
   return (
-    <Box
+    <a
       pr={2}
-      onClick={() => {
+      href={link}
+      onClick={(event) => {
+        event.preventDefault()
         outboundLink(props, link)
       }}
       title={title}
     >
       <Icon color="currentColor" size={28} />
       {label}
-    </Box>
+    </a>
   )
 }
 

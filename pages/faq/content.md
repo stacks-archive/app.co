@@ -1,5 +1,3 @@
-# What's a Dapp?
-
 A dapp is a decentralized app—an application that lets users own their data and runs without any single centralized operator.
 
 If you use traditional apps, your digital rights, privacy, and choices are severely limited. These app ecosystems serve to enrich a small number of powerful corporations by centralizing user identities and data storage.
