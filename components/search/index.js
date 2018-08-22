@@ -61,6 +61,7 @@ class SearchBarClass extends React.Component {
     this.setState({
       query,
       isLoading,
+      results: [],
       searchActive: true,
       oldQuery: ''
     })
