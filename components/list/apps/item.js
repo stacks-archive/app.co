@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Truncate } from 'rebass'
 import { Flex } from 'grid-styled'
 import { connect } from 'react-redux'
 
@@ -95,7 +94,7 @@ const AppItem = ({
               <a href={`/app/${rest.Slugs[0] && rest.Slugs[0].value}`}>{name}</a>
             </Type.h4>
             <SmallText p={0} my={2}>
-              <Truncate>{description}</Truncate>
+              {description}
             </SmallText>
           </Box>
         </Flex>
