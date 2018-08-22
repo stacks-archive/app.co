@@ -96,7 +96,7 @@ const WebsiteButton = (props) => (
 
 const categoryURL = (category) => `/categories/${slugify(category)}`
 
-const Header = ({ imageUrl, name, category, description }) => (
+const Header = ({ imageUrl, name, category, description, handleClose = () => null }) => (
   <>
     <Flex alignItems="center">
       <AppIcon src={imageUrl} alt={name} />
@@ -107,6 +107,7 @@ const Header = ({ imageUrl, name, category, description }) => (
           small
           as={categoryURL(category)}
           href={{ pathname: '/categories', query: { category: slugify(category) } }}
+          onClick={() => handleClose()}
         >
           {category}
         </TagLink>
