@@ -58,28 +58,28 @@ const Twitter = ({ twitterHandle, ...rest }) =>
     />
   ) : null
 
-const TagBox = ({ label, tag }) => {
+const TagBox = ({ label, tag, onClick }) => {
   if (!tag) {
     return null
   }
   const slugified = slugify(tag)
   const url = `/${slugified}`
   return (
-    <Box py={4} pr={4}>
+    <Box py={4} pr={4} onClick={() => onClick()}>
       <Type.h5>{label}</Type.h5>
 
-      <TagLink light mt={3} as={url} href={{ pathname: '/platforms', query: { platform: slugified }}}>
+      <TagLink light mt={3} as={url} href={{ pathname: '/platforms', query: { platform: slugified } }}>
         {tag}
       </TagLink>
     </Box>
   )
 }
 
-const TagsSection = ({ authentication, blockchain, storageNetwork }) => (
+const TagsSection = ({ authentication, blockchain, storageNetwork, handleClose = () => null }) => (
   <Flex alignItems="center">
-    <TagBox label="Storage" tag={storageNetwork} />
-    <TagBox label="Authentication" tag={authentication} />
-    <TagBox label="Blockchain" tag={blockchain} />
+    <TagBox label="Storage" tag={storageNetwork} onClick={() => handleClose()} />
+    <TagBox label="Authentication" tag={authentication} onClick={() => handleClose()} />
+    <TagBox label="Blockchain" tag={blockchain} onClick={() => handleClose()} />
   </Flex>
 )
 
@@ -102,7 +102,12 @@ const Header = ({ imageUrl, name, category, description }) => (
       <AppIcon src={imageUrl} alt={name} />
       <Box pl={3}>
         <Type.h3>{name}</Type.h3>
-        <TagLink mt={2} small as={categoryURL(category)} href={{ pathname: '/categories', query: { category: slugify(category) }}}>
+        <TagLink
+          mt={2}
+          small
+          as={categoryURL(category)}
+          href={{ pathname: '/categories', query: { category: slugify(category) } }}
+        >
           {category}
         </TagLink>
       </Box>
@@ -190,16 +195,8 @@ const AppCard = ({ py, px, my, mx, mr = 'auto', ml = 'auto', mt, mb, style, ...p
   const descNoPeriod =
     props.description[props.description.length - 1] === '.' ? props.description.slice(0, -1) : props.description
   const metaDesc = `${props.name} — ${descNoPeriod}. Explore this and other dapps on App.co, the universal dapp store.`
-  const metaTitle = `${props.name} — App.co`
   return (
     <>
-      {/* <Head>
-        <title>{metaTitle}</title>
-        <meta name="description" content={metaDesc} />
-        <meta property="og:site_name" content="App.co" />
-        <meta property="og:title" content={metaTitle} />
-        <meta property="og:description" content={metaDesc} />
-      </Head> */}
       <Head title={props.name} description={metaDesc} />
       <Box
         width={[1]}

@@ -62,7 +62,7 @@ class ModalClass extends React.Component {
           >
             <CloseIcon />
           </StyledModal.CloseButton>
-          <AppCard {...app} style={{ position: 'relative', zIndex: 10 }} />
+          <AppCard {...app} handleClose={() => this.handleClose(true)} style={{ position: 'relative', zIndex: 10 }} />
         </StyledModal.Content>
         <StyledModal.Backdrop onClick={() => this.handleClose(true)} />
       </StyledModal.Modal>
