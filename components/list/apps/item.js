@@ -89,8 +89,8 @@ const AppItem = ({
             </Flex>
           ) : null}
           <AppIcon hover="true" src={imageUrl} alt={name} size={48} />
-          <Box style={{ flexGrow: 1, maxWidth: '75%' }} pl={3}>
-            <Type.h4 fontSize={16} mt="4px">
+          <Box style={{ flexGrow: 1, maxWidth: '75%' }} pl="16px">
+            <Type.h4 fontSize={16} mt="0">
               <a href={`/app/${rest.Slugs[0] && rest.Slugs[0].value}`}>{name}</a>
             </Type.h4>
             <SmallText p={0} my={2}>
