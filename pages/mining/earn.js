@@ -27,7 +27,7 @@ const apps = [
       btc: 1.2
     },
     tags: ['Blockstack Auth', 'Gaia'],
-    appIcon: 'https://browser.blockstack.org/images/app-icon-graphite-256x256.png'
+    appIcon: 'https://i.imgur.com/mvJfwZb.png'
   },
   {
     name: 'Stealthy',
@@ -36,7 +36,7 @@ const apps = [
       btc: 1.2
     },
     tags: ['Blockstack Auth', 'Gaia'],
-    appIcon: 'https://browser.blockstack.org/images/app-icon-stealthy-256x256.png'
+    appIcon: 'https://pbs.twimg.com/profile_images/970700560239218689/CBJ8wLhN_400x400.jpg'
   },
 
   {
@@ -46,7 +46,7 @@ const apps = [
       btc: 1.2
     },
     tags: ['Blockstack Auth', 'Gaia'],
-    appIcon: 'https://browser.blockstack.org/images/app-icon-misthos-256x256.png'
+    appIcon: 'https://github.com/blockstack/blockstack-browser/blob/3a2e2999ff86effaeb34ecc2199e29c7f6bd27b2/app/images/app-icon-misthos-256x256.png?raw=true'
   },
   {
     name: 'Souq',
@@ -55,7 +55,7 @@ const apps = [
       btc: 1.2
     },
     tags: ['Blockstack Auth', 'Gaia'],
-    appIcon: 'https://browser.blockstack.org/images/app-icon-souq-256x256.png'
+    appIcon: 'https://user-images.githubusercontent.com/1711854/32528468-3007c716-c401-11e7-84e1-d9a57d4ea570.png'
   }
 ]
 
