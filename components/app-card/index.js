@@ -98,10 +98,10 @@ const WebsiteButton = (props) => (
 
 const categoryURL = (category) => `/categories/${slugify(category)}`
 
-const Header = ({ imageUrl, name, category, description, handleClose = () => null }) => (
+const Header = ({ imgixImageUrl, name, category, description, handleClose = () => null }) => (
   <>
     <Flex alignItems="center">
-      <AppIcon src={imageUrl} alt={name} />
+      <AppIcon src={imgixImageUrl} alt={name} />
       <Box pl={3}>
         <Type.h3>{name}</Type.h3>
         <TagLink

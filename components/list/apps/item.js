@@ -42,7 +42,7 @@ const appTag = (tag) => {
 }
 
 const AppItem = ({
-  imageUrl,
+  imgixImageUrl,
   blockchain,
   name,
   authentication,
@@ -88,7 +88,7 @@ const AppItem = ({
               <Type.p>{rank}</Type.p>
             </Flex>
           ) : null}
-          <AppIcon hover="true" src={imageUrl} alt={name} size={48} />
+          <AppIcon hover="true" src={imgixImageUrl} alt={name} size={48} />
           <Box style={{ flexGrow: 1, maxWidth: '75%' }} pl="16px">
             <Type.h4 fontSize={16} mt="0">
               <a href={`/app/${rest.Slugs[0] && rest.Slugs[0].value}`}>{name}</a>
@@ -114,7 +114,7 @@ const AppItem = ({
 }
 
 AppItem.propTypes = {
-  imageUrl: PropTypes.string,
+  imgixImageUrl: PropTypes.string,
   blockchain: PropTypes.string,
   name: PropTypes.string,
   authentication: PropTypes.string,
