@@ -1,7 +1,7 @@
 const express = require('express')
 const next = require('next')
 const dotenv = require('dotenv')
-// const shrinkRay = require('shrink-ray')
+const compression = require('compression')
 const cookiesMiddleware = require('universal-cookie-express')
 const expressSitemapXml = require('express-sitemap-xml')
 const fs = require('fs-extra')
@@ -49,6 +49,7 @@ app.prepare().then(() => {
       server.use(secure)
     }
     server.use(cookiesMiddleware())
+    server.use(compression())
 
     server.set('views', './common/server-views')
     server.set('view engine', 'pug')
