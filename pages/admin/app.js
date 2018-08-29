@@ -102,26 +102,32 @@ class App extends React.Component {
         <br />
         <br />
         <p><a href={appPage}>{appPage}</a></p>
-        <p>
-          Twitter mentions in the last 7 days:{' '}
-          <strong>{ranking.twitterMentions}</strong>
-        </p>
-        <p>
-          Monthly visits:{' '}
-          <strong>{Math.round(ranking.monthlyVisitsCount)}</strong>
-        </p>
-        <p>
-          Monthly bounce rate:{' '}
-          <strong>{((ranking.monthlyBounceRate || 0) * 100).toFixed(1)}%</strong>
-        </p>
-        <p>
-          Monthly page views:{' '}
-          <strong>{Math.round(ranking.monthlyPageViews)}</strong>
-        </p>
-        <p>
-          Monthly visit duration:{' '}
-          <strong>{Math.round(ranking.monthlyVisitDuration)} seconds</strong>
-        </p>
+        {ranking ? (
+          <>
+            <p>
+              Twitter mentions in the last 7 days:{' '}
+              <strong>{ranking.twitterMentions}</strong>
+            </p>
+            <p>
+              Monthly visits:{' '}
+              <strong>{Math.round(ranking.monthlyVisitsCount)}</strong>
+            </p>
+            <p>
+              Monthly bounce rate:{' '}
+              <strong>{((ranking.monthlyBounceRate || 0) * 100).toFixed(1)}%</strong>
+            </p>
+            <p>
+              Monthly page views:{' '}
+              <strong>{Math.round(ranking.monthlyPageViews)}</strong>
+            </p>
+            <p>
+              Monthly visit duration:{' '}
+              <strong>{Math.round(ranking.monthlyVisitDuration)} seconds</strong>
+            </p>
+          </>
+        ) : (
+          <p>No rankings data yet.</p>
+        )}
         <Form.Wrapper>
           <TextField
             value={this.state.name || ''}
