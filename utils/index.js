@@ -46,6 +46,9 @@ const outboundLink = (app, link) => {
 
 const enumSelect = (enums, placeholder, props = {}) => {
   const options = map(enums, (opt) => ({ label: opt, value: opt }))
+  if (!props.required) {
+    options.push({ label: 'None', value: '' })
+  }
   const onChange = (option) => {
     props.onChange({ [props.apiAttr || placeholder.toLowerCase()]: option.value })
   }

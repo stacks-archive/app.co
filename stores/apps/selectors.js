@@ -7,7 +7,7 @@ export const selectPlatformFilter = (state) => state.apps && state.apps.platform
 export const selectAppCategories = (state) => state.apps && state.apps.constants.appConstants.categoryEnums
 
 export const selectAppCategoriesArray = (state) =>
-  state.apps && state.apps.categories
+  state.apps && Object.keys(state.apps.constants.appConstants.categoryEnums)
 export const selectBlockchainCategories = (state) =>
   state.apps && Object.keys(state.apps.constants.appConstants.blockchainEnums)
 export const selectStorageCategories = (state) =>

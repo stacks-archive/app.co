@@ -20,7 +20,7 @@ import {
   selectAppConstants,
   selectCurrentApp,
   selectApps,
-  selectAppCategories,
+  selectAppCategoriesArray,
   selectApiServer,
   selectBlockchainCategories,
   selectStorageCategories,
@@ -34,7 +34,7 @@ class App extends React.Component {
     apps: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     doSelectApp: PropTypes.func.isRequired,
-    selectedApp: PropTypes.object.isRequired,
+    selectedApp: PropTypes.object,
     saveApp: PropTypes.func.isRequired,
     jwt: PropTypes.string.isRequired,
     apiServer: PropTypes.string.isRequired,
@@ -187,6 +187,7 @@ class App extends React.Component {
         </Form.Wrapper>
         <br />
         {enumSelect(categories, 'Category', {
+          required: true,
           value: this.state.category,
           onChange: (data) => {
             this.setState(data)
@@ -261,7 +262,7 @@ const mapStateToProps = (state) => ({
   selectedApp: selectCurrentApp(state),
   apiServer: selectApiServer(state),
   constants: selectAppConstants(state),
-  categories: selectAppCategories(state),
+  categories: selectAppCategoriesArray(state),
   blockchains: selectBlockchainCategories(state),
   authentications: selectAuthenticationCategories(state),
   storageNetworks: selectStorageCategories(state),
