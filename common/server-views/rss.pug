@@ -15,6 +15,6 @@ rss(version='2.0' xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://s
         description= app.description
         pubDate= new Date(app.createdAt).toUTCString()
         guid https://app.co/app/#{app.Slugs[0].value}
-        if app.imageUrl
+        if app.imgixImageUrl
           //- enclosure(url=app.imageUrl.replace('https', 'http') type="image/jpeg" length=200)
-          media:content(url=app.imageUrl, medium="image")
+          media:content(url=app.imgixImageUrl, medium="image")
