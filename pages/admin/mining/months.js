@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import PropTypes from 'prop-types'
+import Link from 'next/link'
 
 import MiningActions from '@stores/mining-admin/actions'
 
@@ -31,10 +32,14 @@ class MiningMonths extends React.Component {
       return (
         <tr>
           <StyledMonths.Td>
-            {date.format('MMMM YYYY')}
+            <Link href={`/admin/mining/months/${month.id}`}>
+              {date.format('MMMM YYYY')}
+            </Link>
           </StyledMonths.Td>
           <StyledMonths.Td textAlign="right">
-            {month.status || 'Not Published'}
+            <Link href={`/admin/mining/months/${month.id}`}>
+              {month.status || 'Not Published'}
+            </Link>
           </StyledMonths.Td>
         </tr>
       )

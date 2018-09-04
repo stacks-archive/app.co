@@ -17,7 +17,14 @@ const Th = Styled.th`
 const Td = Styled.td`
   border-top: 1px solid #e6e9ee;
   text-align: ${props => props.textAlign || 'left'};
-  padding: 2em;
+  a {
+    padding: 2em;
+    display: block;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
 `
 
 export default {
