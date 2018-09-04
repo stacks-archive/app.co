@@ -60,7 +60,9 @@ class App extends React.Component {
       submitting: false,
       openSourceUrl: '',
       registrationIsOpen: false,
-      twitterHandle: ''
+      twitterHandle: '',
+      isKYCVerified: false,
+      BTCAddress: ''
     }
     this.save = this.save.bind(this)
   }
@@ -74,7 +76,7 @@ class App extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedApp && this.state.id !== nextProps.selectedApp.id) {
+    if (nextProps.selectedApp && this.state.id !== nextProps.selectedApp.id && nextProps.selectedApp.status) {
       this.setState(Object.assign({}, this.state, nextProps.selectedApp))
     }
   }
@@ -183,6 +185,19 @@ class App extends React.Component {
             label="Admin Notes"
             value={this.state.notes || ''}
             onChange={(e) => this.setState({ notes: e.target.value })}
+          />
+          <br />
+          <h3>App Mining</h3>
+          <TextField
+            value={this.state.BTCAddress || ''}
+            onChange={(e) => this.setState({ BTCAddress: e.target.value })}
+            label="BTC Address"
+          />
+          <br />
+          <Checkbox
+            isChecked={this.state.isKYCVerified}
+            onChange={() => this.setState({ isKYCVerified: !this.state.isKYCVerified })}
+            label="KYC is completed"
           />
         </Form.Wrapper>
         <br />
