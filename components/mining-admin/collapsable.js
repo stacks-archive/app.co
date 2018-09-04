@@ -5,6 +5,7 @@ export const Section = Styled.section`
   margin-top: 32px;
   h2 {
     font-size: 1em;
+    cursor: pointer;
     padding: 24px 64px 32px 64px;
   } 
 `
@@ -19,7 +20,36 @@ export const Caret = Styled.div`
   transition: transform 0.5s;
   left: -32px;
   position: relative;
+  cursor: pointer;
   top: 15px;
   width: 0;
   height: 0;
+`
+
+export const Container = Styled.div`
+  padding: 32px;
+`
+
+export const Input = Styled.input`
+  background: #f2f4f7;
+  box-sizing: border-box;
+  border: 1px solid #e6e9ee;
+  font-family: inherit;
+  font-size: 1em;
+  padding: 1em;
+  width: 100%;
+`
+
+export const Button = Styled.button`
+  display: block;
+  width: calc(100% - 4em);
+  margin: 0 2em 2em 2em;
+  background: #729ccc;
+  border: none;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  padding: 1em;
 `

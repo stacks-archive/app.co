@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 import MiningActions from '@stores/mining-admin/actions'
 
-import StyledMonths from '@components/mining-admin/months'
+import StyledMonths from '@components/mining-admin/table'
 
 let AdminLayout = () => ''
 

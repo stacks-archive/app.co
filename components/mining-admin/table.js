@@ -1,6 +1,6 @@
 import Styled from 'styled-components'
 
-const Table = Styled.table`
+export const Table = Styled.table`
   width: 100%;
   border-collapse: collapse;
   background: white;
@@ -25,6 +25,12 @@ const Td = Styled.td`
     text-decoration: none;
     color: inherit;
   }
+`
+
+export const FormTd = Styled.td`
+  padding: 32px;
+  border-top: 1px solid #e6e9ee;
+  text-align: ${props => props.textAlign || 'left'};
 `
 
 export default {

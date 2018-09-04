@@ -148,12 +148,14 @@ class AdminHome extends React.Component {
     let item = null
     if (this.props.user.user) {
       const isPending = this.props.router.route === '/admin/pending'
+      const isApps = this.props.router.route.indexOf('/admin/app') === 0
+      const isMining = this.props.router.route.indexOf('/admin/mining') === 0
       stack[0] = [
         <Link href="/admin" key="apps">
           <AkNavigationItem
             text="Apps"
             icon={<DiscoverIcon label="Apps Icon" size="medium" />}
-            isSelected={!isPending}
+            isSelected={isApps}
           />
         </Link>,
         <Link href="/admin/pending" key="pending">
@@ -165,7 +167,7 @@ class AdminHome extends React.Component {
         </Link>,
         <AkNavigationItemGroup title="App Mining" key="appMining">
           <Link href="/admin/mining/months">
-            <AkNavigationItem text="Months" />
+            <AkNavigationItem text="Reports" isSelected={isMining} />
           </Link>
         </AkNavigationItemGroup>,
         <AkNavigationItemGroup title="Authentication" key="authentication">
