@@ -9,6 +9,7 @@ import UserStore from '@stores/user'
 import newsletter from '@stores/newsletter'
 import RouterStore from '@stores/router'
 import MiningStore from '@stores/mining/reducer'
+import AdminMiningReducer from '@stores/mining-admin/reducer'
 
 export default (data) => {
   const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
@@ -20,7 +21,8 @@ export default (data) => {
     user: UserStore.reducer,
     newsletter,
     router: RouterStore.reducer,
-    mining: MiningStore
+    mining: MiningStore,
+    miningAdmin: AdminMiningReducer
   })
 
   return finalCreateStore(Reducer)

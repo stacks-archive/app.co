@@ -163,6 +163,11 @@ class AdminHome extends React.Component {
             isSelected={isPending}
           />
         </Link>,
+        <AkNavigationItemGroup title="App Mining" key="appMining">
+          <Link href="/admin/mining/months">
+            <AkNavigationItem text="Months" />
+          </Link>
+        </AkNavigationItemGroup>,
         <AkNavigationItemGroup title="Authentication" key="authentication">
           <AkNavigationItem text="Log Out" onClick={() => this.props.signOut()} />
         </AkNavigationItemGroup>
