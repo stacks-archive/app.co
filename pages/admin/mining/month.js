@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import PropTypes from 'prop-types'
-import { FieldTextStateless as TextField } from '@atlaskit/field-text'
+import NotificationSystem from 'react-notification-system'
 
 import MiningActions from '@stores/mining-admin/actions'
 
@@ -15,10 +15,23 @@ import { FormTd, Table } from '@components/mining-admin/table'
 let AdminLayout = () => ''
 
 class MiningMonth extends React.Component {
+  state = {
+    purchasedAt: '',
+    purchaseExchangeName: '',
+    BTCTransactionId: '',
+    purchaseConversionRate: ''
+  }
+
   static getInitialProps({ req }) {
     const { id } = req.params
     return {
       id
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.state.purchasedAt && nextProps.month) {
+      this.setState({ ...nextProps.month })
     }
   }
 
@@ -27,13 +40,32 @@ class MiningMonth extends React.Component {
     this.props.fetchMiningMonths()
   }
 
-  month() {
+  save() {
+    const data = { ...this.state }
+    if (this.state.purchasedAt) {
+      const date = moment(this.state.purchasedAt).utcOffset(-4)
+      data.purchasedAt = date.format()
+    } 
+    console.log(data)
+    this.props.saveMonth(data)
+    this.notifications.addNotification({
+      message: `Report for ${this.monthName()} was saved successfully.`,
+      level: 'success'
+    })
+  }
+
+  monthName() {
     const { month } = this.props
     const date = moment(`${month.month} ${month.year}`, 'M YYYY')
+    return date.format('MMMM YYYY')
+  }
+
+  month() {
+    const date = this.monthName()
     return (
       <>
         <StyledMonth.Section>
-          <h1>{date.format('MMMM YYYY')}</h1>
+          <h1>{date}</h1>
         </StyledMonth.Section>
 
         <Collapsable title="BTC transactions">
@@ -45,7 +77,11 @@ class MiningMonth extends React.Component {
                     Purchase Exchange Name
                   </FormTd>
                   <FormTd textAlign="right">
-                    <Input />
+                    <Input 
+                      type="text"
+                      value={this.state.purchaseExchangeName} 
+                      onChange={(evt) => this.setState({purchaseExchangeName: evt.target.value})}
+                    />
                   </FormTd>
                 </tr>
                 <tr>
@@ -53,7 +89,10 @@ class MiningMonth extends React.Component {
                     Purchase date
                   </FormTd>
                   <FormTd textAlign="right">
-                    <Input type="datetime-local" />
+                    <Input type="datetime-local" 
+                      value={moment(this.state.purchasedAt).format('YYYY-MM-DDTHH:mm')}
+                      onChange={(evt) => this.setState({purchasedAt: evt.target.value})} 
+                    />
                   </FormTd>
                 </tr>
                 <tr>
@@ -61,7 +100,10 @@ class MiningMonth extends React.Component {
                     Purchase conversion rate (USD-to-BTC)
                   </FormTd>
                   <FormTd textAlign="right">
-                    <Input type="number"/>
+                    <Input type="number"
+                      value={this.state.purchaseConversionRate}
+                      onChange={(evt) => this.setState({ purchaseConversionRate: evt.target.value })}
+                    />
                   </FormTd>
                 </tr>
                 <tr>
@@ -69,12 +111,15 @@ class MiningMonth extends React.Component {
                     Disbursement transaction ID
                   </FormTd>
                   <FormTd textAlign="right">
-                    <Input />
+                    <Input type="text"
+                      value={this.state.BTCTransactionId}
+                      onChange={(evt) => this.setState({ BTCTransactionId: evt.target.value })}
+                    />
                   </FormTd>
                 </tr>
               </tbody>
             </Table>
-            <Button>Save</Button>
+            <Button onClick={() => this.save()}>Save</Button>
           </div>
         </Collapsable>
 
@@ -92,6 +137,11 @@ class MiningMonth extends React.Component {
   render() {
     return (
       <>
+        <NotificationSystem
+          ref={(c) => {
+            this.notifications = c
+          }}
+        />
         {AdminLayout && (
           <AdminLayout>
             {this.props.month && this.month()}
