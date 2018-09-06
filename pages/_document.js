@@ -49,6 +49,10 @@ injectGlobal`
     padding: 0;
     display: block;
   }
+
+  input::ms-clear {
+    display: none;
+  }
 `
 const GoogleCode = `
             window.dataLayer = window.dataLayer || []; function gtag()
