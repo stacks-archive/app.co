@@ -33,7 +33,7 @@ class MiningMonths extends React.Component {
       })
     })
     const blob = await res.blob()
-    download(blob)
+    download(blob, 'app-mining-rankings.csv', 'text/csv')
   }
 
   monthsList() {
@@ -44,7 +44,7 @@ class MiningMonths extends React.Component {
     return this.props.months.map((month) => {
       const date = moment(`${month.month} ${month.year}`, 'M YYYY')
       return (
-        <tr>
+        <tr key={month.id}>
           <StyledMonths.Td>
             <Link href={`/admin/mining/months/${month.id}`}>
               {date.format('MMMM YYYY')}
