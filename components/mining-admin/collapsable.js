@@ -40,6 +40,8 @@ export const Input = Styled.input`
   width: 100%;
 `
 
+export const Textarea = Input.withComponent('textarea')
+
 export const Button = Styled.button`
   display: block;
   width: calc(100% - 4em);

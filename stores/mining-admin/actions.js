@@ -17,6 +17,14 @@ const savedMiningMonth = () => ({
   type: Constants.SAVED_MINING_MONTH
 })
 
+const savingMiningReport = () => ({
+  type: Constants.SAVING_MINING_REPORT
+})
+
+const savedMiningReport = () => ({
+  type: Constants.SAVED_MINING_REPORT
+})
+
 const fetchMiningMonths = () => async function innerFetchMiningMonths(dispatch, getState) {
   dispatch(fetchingMiningMonths())
   const state = getState()
@@ -35,23 +43,41 @@ const fetchMiningMonths = () => async function innerFetchMiningMonths(dispatch, 
 }
 
 const saveMonth = (month) => async function innerSaveMonth(dispatch, getState) {
-    dispatch(savingMiningMonth())
-    const state = getState()
-    const { apiServer } = state.apps
-    const { jwt } = state.user
-    const url = `${apiServer}/api/admin/monthly-reports/${month.id}`
-    await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(month),
-      headers: new Headers({
-        Authorization: `Bearer ${jwt}`,
-        'Content-Type': 'application/json'
-      })
+  dispatch(savingMiningMonth())
+  const state = getState()
+  const { apiServer } = state.apps
+  const { jwt } = state.user
+  const url = `${apiServer}/api/admin/monthly-reports/${month.id}`
+  await fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(month),
+    headers: new Headers({
+      Authorization: `Bearer ${jwt}`,
+      'Content-Type': 'application/json'
     })
-    dispatch(savedMiningMonth())
-  }
+  })
+  dispatch(savedMiningMonth())
+}
+
+const saveReport = (report) => async function innerSaveReport(dispatch, getState) {
+  dispatch(savingMiningReport())
+  const state = getState()
+  const { apiServer } = state.apps
+  const { jwt } = state.user
+  const url = `${apiServer}/api/admin/monthly-reports/${report.monthId}/upload`
+  await fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(report),
+    headers: new Headers({
+      Authorization: `Bearer ${jwt}`,
+      'Content-Type': 'application/json'
+    })
+  })
+  dispatch(savedMiningReport())
+}
 
 export default {
   fetchMiningMonths,
-  saveMonth
+  saveMonth,
+  saveReport
 }

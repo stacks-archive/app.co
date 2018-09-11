@@ -4,13 +4,16 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 import NotificationSystem from 'react-notification-system'
+import Link from 'next/link'
+import { Box } from 'rebass'
 
 import MiningActions from '@stores/mining-admin/actions'
 
 import StyledMonth from '@components/mining-admin/month'
 import Collapsable from '@containers/admin/collapsable'
 import { Input, Button } from '@components/mining-admin/collapsable'
-import { FormTd, Table } from '@components/mining-admin/table'
+import { FormTd, Table, Td } from '@components/mining-admin/table'
+import { Type } from '@components/typography'
 
 let AdminLayout = () => ''
 
@@ -20,6 +23,17 @@ class MiningMonth extends React.Component {
     purchaseExchangeName: '',
     BTCTransactionId: '',
     purchaseConversionRate: ''
+  }
+
+  static propTypes = {
+    fetchMiningMonths: PropTypes.func.isRequired,
+    saveMonth: PropTypes.func.isRequired,
+    month: PropTypes.object,
+    id: PropTypes.string.isRequired
+  }
+
+  static defaultProps = {
+    month: null
   }
 
   static getInitialProps({ req }) {
@@ -58,6 +72,25 @@ class MiningMonth extends React.Component {
     const { month } = this.props
     const date = moment(`${month.month} ${month.year}`, 'M YYYY')
     return date.format('MMMM YYYY')
+  }
+
+  reviewers() {
+    return this.props.month.MiningReviewerReports.map((report) => (
+        <tr>
+          <Td>
+            <Link href={`/admin/mining/months/${this.props.id}/reports/${report.id}`}>
+              <a>{report.reviewerName}</a>
+            </Link>
+          </Td>
+          <Td>
+            <Link href={`/admin/mining/months/${this.props.id}/reports/${report.id}`}>
+              <a>
+                <Type.span textAlign="right" fontSize="12px">Delete</Type.span>
+              </a>
+            </Link>
+          </Td>
+        </tr>
+      ))
   }
 
   month() {
@@ -124,7 +157,20 @@ class MiningMonth extends React.Component {
         </Collapsable>
 
         <Collapsable title="Reviewer Reports">
-          Child content
+          <Box px={5} py={3} style={{ borderTop: "1px solid #e6e9ee" }}>
+            <Link href={`/admin/mining/months/${this.props.id}/upload-report`}>
+              <a>
+                <Type.span fontSize="12px">
+                  Add Report
+                </Type.span>
+              </a>
+            </Link>
+          </Box>
+          <Table>
+            <tbody>
+              {this.reviewers()}
+            </tbody>
+          </Table>
         </Collapsable>
 
         <Collapsable title="Composite Rankings">

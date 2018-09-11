@@ -14,7 +14,7 @@ const Th = Styled.th`
   color: rgba(0, 0, 0, 0.5)
 `
 
-const Td = Styled.td`
+export const Td = Styled.td`
   border-top: 1px solid #e6e9ee;
   text-align: ${props => props.textAlign || 'left'};
   a {
@@ -24,6 +24,7 @@ const Td = Styled.td`
     width: 100%;
     text-decoration: none;
     color: inherit;
+    // border-bottom: 1px solid rgba(205, 214, 239, 0.7);
   }
 `
 
