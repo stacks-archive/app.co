@@ -4,10 +4,12 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
+import download from 'downloadjs'
 
 import MiningActions from '@stores/mining-admin/actions'
 
 import StyledMonths from '@components/mining-admin/table'
+import StyledMonth from '@components/mining-admin/month'
 
 let AdminLayout = () => ''
 
@@ -20,6 +22,18 @@ class MiningMonths extends React.Component {
   componentDidMount() {
     AdminLayout = require('../../../containers/admin/layout').default // eslint-disable-line global-require
     this.props.fetchMiningMonths()
+  }
+
+  async download() {
+    const { jwt, apiServer } = this.props 
+    const url = `${apiServer}/api/admin/mining-ready-apps`
+    const res = await fetch(url, {
+      headers: new Headers({
+        Authorization: `Bearer ${jwt}`
+      })
+    })
+    const blob = await res.blob()
+    download(blob)
   }
 
   monthsList() {
@@ -48,21 +62,29 @@ class MiningMonths extends React.Component {
 
   months() {
     return (
-      <StyledMonths.Table>
-        <thead>
-          <tr>
-            <StyledMonths.Th>
-              Month
+      <>
+        <StyledMonth.Section mb={4}>
+          <StyledMonth.Content pl={5} fontSize={12}>
+            <a href="javascript:void(0)" onClick={() => { this.download() }}>Download registered apps</a>
+          </StyledMonth.Content>
+        </StyledMonth.Section>
+
+        <StyledMonths.Table>
+          <thead>
+            <tr>
+              <StyledMonths.Th>
+                Month
+              </StyledMonths.Th>
+              <StyledMonths.Th textAlign="right">
+                Status
             </StyledMonths.Th>
-            <StyledMonths.Th textAlign="right">
-              Status
-          </StyledMonths.Th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.monthsList()}
-        </tbody>
-      </StyledMonths.Table>
+            </tr>
+          </thead>
+          <tbody>
+            {this.monthsList()}
+          </tbody>
+        </StyledMonths.Table>
+      </>
     )
   }
 
@@ -84,7 +106,9 @@ class MiningMonths extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  months: state.miningAdmin.months
+  months: state.miningAdmin.months,
+  apiServer: state.apps.apiServer,
+  jwt: state.user.jwt
 })
 
 function mapDispatchToProps(dispatch) {
