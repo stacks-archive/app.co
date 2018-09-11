@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import NotificationSystem from 'react-notification-system'
 import Link from 'next/link'
 import { Box } from 'rebass'
+import Router from 'next/router'
 
 import MiningActions from '@stores/mining-admin/actions'
 
@@ -51,7 +52,7 @@ class MiningMonth extends React.Component {
   }
 
   componentDidMount() {
-    AdminLayout = require('../../../containers/admin/layout').default
+    AdminLayout = require('../../../containers/admin/layout').default // eslint-disable-line global-require
     this.props.fetchMiningMonths()
   }
 
@@ -69,6 +70,11 @@ class MiningMonth extends React.Component {
     })
   }
 
+  deleteReviewer(reviewer) {
+    this.props.deleteReviewer(reviewer)
+    Router.push(document.location.pathname)
+  }
+
   monthName() {
     return monthName(this.props.month)
   }
@@ -77,16 +83,14 @@ class MiningMonth extends React.Component {
     return this.props.month.MiningReviewerReports.map((report) => (
         <tr key={report.id}>
           <Td>
-            <Link href={`/admin/mining/months/${this.props.id}/reports/${report.id}`}>
+            <Link href={`/admin/mining/months/${this.props.id}/reviewers/${report.id}`}>
               <a>{report.reviewerName}</a>
             </Link>
           </Td>
           <Td>
-            <Link href={`/admin/mining/months/${this.props.id}/reports/${report.id}`}>
-              <a>
-                <Type.span textAlign="right" fontSize="12px" display="block">Delete</Type.span>
-              </a>
-            </Link>
+            <a href="javascript:void(0)" onClick={() => this.deleteReviewer(report)}>
+              <Type.span textAlign="right" fontSize="12px" display="block">Delete</Type.span>
+            </a>
           </Td>
         </tr>
       ))

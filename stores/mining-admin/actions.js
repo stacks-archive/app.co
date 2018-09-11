@@ -25,6 +25,14 @@ const savedMiningReport = () => ({
   type: Constants.SAVED_MINING_REPORT
 })
 
+const deletingReviewer = () => ({
+  type: Constants.DELETING_REVIEWER
+})
+
+const deletedReviewer = () => ({
+  type: Constants.DELETED_REVIEWER
+})
+
 const fetchMiningMonths = () => async function innerFetchMiningMonths(dispatch, getState) {
   dispatch(fetchingMiningMonths())
   const state = getState()
@@ -76,8 +84,24 @@ const saveReport = (report) => async function innerSaveReport(dispatch, getState
   dispatch(savedMiningReport())
 }
 
+const deleteReviewer = (reviewer) => async function innerDeleteReviewer(dispatch, getState) {
+  dispatch(deletingReviewer())
+  const state = getState()
+  const { apiServer } = state.apps
+  const { jwt } = state.user
+  const url = `${apiServer}/api/admin/monthly-reports/${reviewer.reportId}/reviewers/${reviewer.id}`
+  await fetch(url, {
+    method: 'DELETE',
+    headers: new Headers({
+      Authorization: `Bearer ${jwt}`
+    })
+  })
+  dispatch(deletedReviewer())
+}
+
 export default {
   fetchMiningMonths,
   saveMonth,
-  saveReport
+  saveReport,
+  deleteReviewer
 }

@@ -1,17 +1,12 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import moment from 'moment'
-import PropTypes from 'prop-types'
 import NotificationSystem from 'react-notification-system'
-import Link from 'next/link'
-import { Box } from 'rebass'
+import Router from 'next/router'
 
 import MiningActions from '@stores/mining-admin/actions'
 
 import StyledMonth from '@components/mining-admin/month'
-import Collapsable from '@containers/admin/collapsable'
-import { Input, Button } from '@components/mining-admin/collapsable'
 import { Table, Th, Thead, SpacedTd as Td } from '@components/mining-admin/table'
 import { Type } from '@components/typography'
 import { monthName } from '@utils/admin'
@@ -28,8 +23,13 @@ class Reviewer extends React.Component {
   }
 
   componentDidMount() {
-    AdminLayout = require('../../../containers/admin/layout').default
+    AdminLayout = require('../../../containers/admin/layout').default // eslint-disable-line global-require
     this.props.fetchMiningMonths()
+  }
+
+  delete() {
+    this.props.deleteReviewer(this.props.reviewer)
+    Router.push(`/admin/mining/months/${this.props.monthId}`)
   }
 
   apps() {
@@ -57,6 +57,9 @@ class Reviewer extends React.Component {
       <>
         <StyledMonth.Section>
           <h1>{reviewer.reviewerName} report for {monthName(month)}</h1>
+          <StyledMonth.Content pl={5} fontSize={12}>
+            <a href="javascript:void(0)" onClick={() => { this.delete() }}>Delete Report</a>
+          </StyledMonth.Content>
         </StyledMonth.Section>
 
         <StyledMonth.Section mt={4}>

@@ -1,4 +1,5 @@
 import Styled from 'styled-components'
+import { space } from 'styled-system'
 
 export const Table = Styled.table`
   width: 100%;
@@ -46,6 +47,8 @@ export const FormTd = Styled.td`
 `
 
 export const UnderlineLink = Styled.a`
+  ${space}
+  display: inline-block;
   text-decoration: underline !important;
   text-decoration-color: rgba(205, 214, 239, 0.7);
 `

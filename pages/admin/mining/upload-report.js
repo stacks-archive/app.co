@@ -32,7 +32,7 @@ class UploadReport extends React.Component {
   }
 
   componentDidMount() {
-    AdminLayout = require('../../../containers/admin/layout').default
+    AdminLayout = require('../../../containers/admin/layout').default // eslint-disable-line global-require
     console.log(this.props)
     this.props.fetchMiningMonths()
   }
