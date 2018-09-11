@@ -14,6 +14,7 @@ import Collapsable from '@containers/admin/collapsable'
 import { Input, Button } from '@components/mining-admin/collapsable'
 import { FormTd, Table, Td } from '@components/mining-admin/table'
 import { Type } from '@components/typography'
+import { monthName } from '@utils/admin'
 
 let AdminLayout = () => ''
 
@@ -69,14 +70,12 @@ class MiningMonth extends React.Component {
   }
 
   monthName() {
-    const { month } = this.props
-    const date = moment(`${month.month} ${month.year}`, 'M YYYY')
-    return date.format('MMMM YYYY')
+    return monthName(this.props.month)
   }
 
   reviewers() {
     return this.props.month.MiningReviewerReports.map((report) => (
-        <tr>
+        <tr key={report.id}>
           <Td>
             <Link href={`/admin/mining/months/${this.props.id}/reports/${report.id}`}>
               <a>{report.reviewerName}</a>
@@ -85,7 +84,7 @@ class MiningMonth extends React.Component {
           <Td>
             <Link href={`/admin/mining/months/${this.props.id}/reports/${report.id}`}>
               <a>
-                <Type.span textAlign="right" fontSize="12px">Delete</Type.span>
+                <Type.span textAlign="right" fontSize="12px" display="block">Delete</Type.span>
               </a>
             </Link>
           </Td>

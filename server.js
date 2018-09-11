@@ -87,6 +87,9 @@ app.prepare().then(() => {
     server.get('/admin/mining/months/:id/upload-report', (req, res) =>
       renderAndCache(req, res, '/admin/mining/upload-report', { monthId: req.params.id })
     )
+    server.get('/admin/mining/months/:monthId/reviewers/:reviewerId', (req, res) =>
+      renderAndCache(req, res, '/admin/mining/reviewer')
+    )
     server.get('/all', (req, res) => renderAndCache(req, res, '/all'))
     apps.platforms.forEach((platform) => {
       server.get(`/${slugify(platform)}`, (req, res) => {
