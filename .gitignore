@@ -10,4 +10,5 @@ yarn-error.log
 *.DS_Store
 now.json
 test-report.csv
+test-report-2.csv
 staging-test-report.csv

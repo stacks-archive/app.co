@@ -7,13 +7,14 @@ import NotificationSystem from 'react-notification-system'
 import Link from 'next/link'
 import { Box } from 'rebass'
 import Router from 'next/router'
+import download from 'downloadjs'
 
 import MiningActions from '@stores/mining-admin/actions'
 
 import StyledMonth from '@components/mining-admin/month'
 import Collapsable from '@containers/admin/collapsable'
 import { Input, Button } from '@components/mining-admin/collapsable'
-import { FormTd, Table, Td } from '@components/mining-admin/table'
+import { FormTd, Table, Td, Thead, Th, SpacedTd } from '@components/mining-admin/table'
 import { Type } from '@components/typography'
 import { monthName } from '@utils/admin'
 
@@ -79,6 +80,18 @@ class MiningMonth extends React.Component {
     return monthName(this.props.month)
   }
 
+  async downloadRankings() {
+    const { jwt, apiServer, id } = this.props
+    const url = `${apiServer}/api/admin/mining-reports/${id}/download-rankings`
+    const res = await fetch(url, {
+      headers: new Headers({
+        Authorization: `Bearer ${jwt}`
+      })
+    })
+    const blob = await res.blob()
+    download(blob, `${this.monthName()} Rankings.csv`, 'text/csv')
+  }
+
   reviewers() {
     return this.props.month.MiningReviewerReports.map((report) => (
         <tr key={report.id}>
@@ -95,6 +108,20 @@ class MiningMonth extends React.Component {
         </tr>
       ))
   }
+
+  composite() {
+    console.log(this.props.month.compositeRankings)
+    return this.props.month.compositeRankings.map((app, index) => (
+      <tr key={app.id}>
+        <SpacedTd>{index + 1}</SpacedTd>
+        <SpacedTd>{app.name}</SpacedTd>
+        <SpacedTd>{app.domain}</SpacedTd>
+        <SpacedTd>{app.BTCAddress}</SpacedTd>
+      </tr>
+    ))
+  }
+
+
 
   month() {
     const date = this.monthName()
@@ -177,7 +204,30 @@ class MiningMonth extends React.Component {
         </Collapsable>
 
         <Collapsable title="Composite Rankings">
-          Child content
+          <StyledMonth.Section>
+            <StyledMonth.Content pl={5} fontSize={12}>
+              <a href="javascript:void(0)">Publish rankings</a>
+              <a 
+                href="javascript:void(0)" 
+                onClick={() => this.downloadRankings() }
+                style={{ display: 'inline-block', marginLeft: '10px' }}>
+                Download Rankings
+              </a>
+            </StyledMonth.Content>
+            <Table>
+              <Thead>
+                <tr>
+                  <Th>Rank</Th>
+                  <Th>App name</Th>
+                  <Th>App domain</Th>
+                  <Th>BTC Address</Th>
+                </tr>
+              </Thead>
+              <tbody>
+                {this.composite()}
+              </tbody>
+            </Table>
+          </StyledMonth.Section>
         </Collapsable>
       </>
     )
@@ -204,7 +254,9 @@ class MiningMonth extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  month: state.miningAdmin.months.find((month) => month.id === parseInt(props.id, 10))
+  month: state.miningAdmin.months.find((month) => month.id === parseInt(props.id, 10)),
+  apiServer: state.apps.apiServer,
+  jwt: state.user.jwt
 })
 
 function mapDispatchToProps(dispatch) {
