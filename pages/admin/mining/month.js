@@ -15,6 +15,7 @@ import StyledMonth from '@components/mining-admin/month'
 import Collapsable from '@containers/admin/collapsable'
 import { Input, Button } from '@components/mining-admin/collapsable'
 import { FormTd, Table, Td, Thead, Th, SpacedTd } from '@components/mining-admin/table'
+import ReportStatus from '@containers/admin/report-status'
 import { Type } from '@components/typography'
 import { monthName } from '@utils/admin'
 
@@ -25,7 +26,8 @@ class MiningMonth extends React.Component {
     purchasedAt: '',
     purchaseExchangeName: '',
     BTCTransactionId: '',
-    purchaseConversionRate: ''
+    purchaseConversionRate: '',
+    status: ''
   }
 
   static propTypes = {
@@ -68,6 +70,18 @@ class MiningMonth extends React.Component {
     this.notifications.addNotification({
       message: `Report for ${this.monthName()} was saved successfully.`,
       level: 'success'
+    })
+  }
+
+  publish() {
+    this.setState({ status: 'published' }, () => {
+      this.save()
+    })
+  }
+
+  unpublish() {
+    this.setState({ status: 'pending' }, () => {
+      this.save()
     })
   }
 
@@ -129,6 +143,9 @@ class MiningMonth extends React.Component {
       <>
         <StyledMonth.Section>
           <h1>{date}</h1>
+          <StyledMonth.Content>
+            <ReportStatus status={this.state.status} />
+          </StyledMonth.Content>
         </StyledMonth.Section>
 
         <Collapsable title="BTC transactions">
@@ -206,7 +223,21 @@ class MiningMonth extends React.Component {
         <Collapsable title="Composite Rankings">
           <StyledMonth.Section>
             <StyledMonth.Content pl={5} fontSize={12}>
-              <a href="javascript:void(0)">Publish rankings</a>
+              {this.state.status !== 'published' ? (
+                <a
+                  href="javascript:void(0)"
+                  onClick={() => this.publish()}
+                >
+                  Publish rankings
+                </a>
+              ) : (
+                <a
+                  href="javascript:void(0)"
+                  onClick={() => this.unpublish()}
+                >
+                  Unpublish rankings
+                </a>
+              )}
               <a 
                 href="javascript:void(0)" 
                 onClick={() => this.downloadRankings() }

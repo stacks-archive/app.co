@@ -10,6 +10,7 @@ import MiningActions from '@stores/mining-admin/actions'
 
 import StyledMonths from '@components/mining-admin/table'
 import StyledMonth from '@components/mining-admin/month'
+import ReportStatus from '@containers/admin/report-status'
 
 let AdminLayout = () => ''
 
@@ -50,11 +51,9 @@ class MiningMonths extends React.Component {
               {date.format('MMMM YYYY')}
             </Link>
           </StyledMonths.Td>
-          <StyledMonths.Td textAlign="right">
-            <Link href={`/admin/mining/months/${month.id}`}>
-              {month.status || 'Not Published'}
-            </Link>
-          </StyledMonths.Td>
+          <StyledMonths.SpacedTd textAlign="right">
+            <ReportStatus status={month.status}/>
+          </StyledMonths.SpacedTd>
         </tr>
       )
     })

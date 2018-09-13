@@ -56,5 +56,6 @@ export const UnderlineLink = Styled.a`
 export default {
   Table,
   Th,
-  Td
+  Td,
+  SpacedTd
 }

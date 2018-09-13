@@ -16,7 +16,7 @@ const Section = Styled.section`
 
 const Content = Styled.div`
   border-top: 1px solid #e6e9ee;
-  padding: 2em 2em 3em 2em;
+  padding: 2em;
   ${space}
   ${fontSize}
 `
