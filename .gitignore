@@ -13,3 +13,5 @@ test-report.csv
 test-report-2.csv
 staging-test-report.csv
 app-mining-rankings.csv
+invalid-report.csv
+invalid-report-2.csv

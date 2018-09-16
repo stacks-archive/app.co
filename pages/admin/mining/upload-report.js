@@ -16,8 +16,10 @@ let AdminLayout = () => ''
 class UploadReport extends React.Component {
   state = {
     reviewerName: '',
-    summary: ''
+    summary: '',
+    errors: []
   }
+
   static getInitialProps({ req }) {
     const { id } = req.params
     return {
@@ -41,20 +43,51 @@ class UploadReport extends React.Component {
     if (nextProps.saved) {
       Router.push(`/admin/mining/months/${this.props.id}`)
     }
+    if (nextProps.uploadError && !this.props.uploadError) {
+      const { errors } = this.state
+      errors.push(nextProps.uploadError)
+      this.setState({ errors })
+    }
   }
 
   save() {
-    // console.log(this)
     const csv = this.csv.current.files[0]
     Papa.parse(csv, { 
       header: true,
-      complete: ({ data }) => {
-        const apps = data.map((app) => ({
+      complete: ({ data, meta }) => {
+        // console.log(rest)
+        const errors = []
+        if (meta.fields.indexOf('App Id') === -1) {
+          errors.push('Spreadsheet does not contain a required "App Id" column')
+        }
+        if (meta.fields.indexOf('Ranking') === -1) {
+          errors.push('Spreadsheet does not contain required column "Ranking"')
+        }
+        const rankings = {}
+        let nonUniqueRankings = false
+        let nanRankings = false
+        const apps = data.map((app) => {
+          const appId = app['App Id']
+          if (rankings[appId]) nonUniqueRankings = true
+          rankings[appId] = true
+          const ranking = parseInt(app.Ranking, 10)
+          if (isNaN(ranking)) nanRankings = true
+          return {
             ...app,
-            appId: app['App Id']
-          }))
+            appId
+          }
+        })
+        if (nonUniqueRankings || nanRankings) {
+          errors.push('Spreadsheet contains at least one value in the "Ranking" that is non-unique or non-numeric')
+        }
+        if (errors.length > 0) {
+          return this.setState({ errors })
+        }
+        this.setState({ errors: [] })
+        const { reviewerName, summary } = this.state
         const report = {
-          ...this.state,
+          reviewerName,
+          summary,
           apps,
           monthId: this.props.id
         }
@@ -64,11 +97,26 @@ class UploadReport extends React.Component {
     })
   }
 
+  errors() {
+    return this.state.errors.map((error) => (
+      <li key={error}>{error}</li>
+    ))
+  }
+
   form() {
     // console.log(Section)
+    const { errors } = this.state
     return (
       <StyledMonth.Section>
         <h2>Add reviewer report for {monthName(this.props.month)}</h2>
+        {errors.length > 0 && (
+          <StyledMonth.Content errors>
+            <p>The following errors were encountered when trying to submit:</p>
+            <ul>
+              {this.errors()}
+            </ul>
+          </StyledMonth.Content>
+        )}
         <div style={{ paddingBottom: '1em' }}>
           <Table>
             <tbody>
@@ -130,7 +178,8 @@ class UploadReport extends React.Component {
 
 const mapStateToProps = (state, props) => ({
   month: state.miningAdmin.months.find((month) => month.id === parseInt(props.id, 10)),
-  saved: state.miningAdmin.reportSaved
+  saved: state.miningAdmin.reportSaved,
+  uploadError: state.miningAdmin.uploadReportError
 })
 
 function mapDispatchToProps(dispatch) {

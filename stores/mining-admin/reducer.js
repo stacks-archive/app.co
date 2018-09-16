@@ -12,10 +12,22 @@ export default (state = initialState, action) => {
         months: action.months
       }
     }
+    case Constants.SAVING_MINING_REPORT: {
+      return {
+        ...state,
+        uploadReportError: null
+      }
+    }
     case Constants.SAVED_MINING_REPORT: {
       return {
         ...state,
         reportSaved: true
+      }
+    }
+    case Constants.ERROR_MINING_REPORT: {
+      return {
+        ...state,
+        uploadReportError: action.message
       }
     }
     default:

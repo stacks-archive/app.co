@@ -33,6 +33,11 @@ const deletedReviewer = () => ({
   type: Constants.DELETED_REVIEWER
 })
 
+const miningReportError = (message) => ({
+  type: Constants.ERROR_MINING_REPORT,
+  message
+})
+
 const fetchMiningMonths = () => async function innerFetchMiningMonths(dispatch, getState) {
   dispatch(fetchingMiningMonths())
   const state = getState()
@@ -73,7 +78,7 @@ const saveReport = (report) => async function innerSaveReport(dispatch, getState
   const { apiServer } = state.apps
   const { jwt } = state.user
   const url = `${apiServer}/api/admin/monthly-reports/${report.monthId}/upload`
-  await fetch(url, {
+  const response = await fetch(url, {
     method: 'POST',
     body: JSON.stringify(report),
     headers: new Headers({
@@ -81,7 +86,11 @@ const saveReport = (report) => async function innerSaveReport(dispatch, getState
       'Content-Type': 'application/json'
     })
   })
-  dispatch(savedMiningReport())
+  const { success, message } = await response.json()
+  if (!success) {
+    return dispatch(miningReportError(message))
+  }
+  return dispatch(savedMiningReport())
 }
 
 const deleteReviewer = (reviewer) => async function innerDeleteReviewer(dispatch, getState) {

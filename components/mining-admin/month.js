@@ -1,4 +1,4 @@
-import Styled from 'styled-components'
+import Styled, { css } from 'styled-components'
 import { space, fontSize } from 'styled-system'
 
 export const Section = Styled.section`
@@ -19,6 +19,9 @@ export const Content = Styled.div`
   padding: 2em;
   ${space}
   ${fontSize}
+  ${({ errors }) => errors && css`
+    background: linear-gradient(white, #fffbea);
+  `}
 `
 
 export default { 
