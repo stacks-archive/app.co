@@ -8,11 +8,10 @@ import download from 'downloadjs'
 
 import MiningActions from '@stores/mining-admin/actions'
 
-import StyledMonths from '@components/mining-admin/table'
+import { Table, Td, SpacedTd, Th } from '@components/mining-admin/table'
 import StyledMonth from '@components/mining-admin/month'
 import ReportStatus from '@containers/admin/report-status'
-
-let AdminLayout = () => ''
+import AdminLayout from '@containers/admin/layout'
 
 class MiningMonths extends React.Component {
   static propTypes = {
@@ -21,7 +20,6 @@ class MiningMonths extends React.Component {
   }
 
   componentDidMount() {
-    AdminLayout = require('../../../containers/admin/layout').default // eslint-disable-line global-require
     this.props.fetchMiningMonths()
   }
 
@@ -46,14 +44,14 @@ class MiningMonths extends React.Component {
       const date = moment(`${month.month} ${month.year}`, 'M YYYY')
       return (
         <tr key={month.id}>
-          <StyledMonths.Td>
+          <Td>
             <Link href={`/admin/mining/months/${month.id}`}>
               {date.format('MMMM YYYY')}
             </Link>
-          </StyledMonths.Td>
-          <StyledMonths.SpacedTd textAlign="right">
+          </Td>
+          <SpacedTd textAlign="right">
             <ReportStatus status={month.status}/>
-          </StyledMonths.SpacedTd>
+          </SpacedTd>
         </tr>
       )
     })
@@ -68,38 +66,34 @@ class MiningMonths extends React.Component {
           </StyledMonth.Content>
         </StyledMonth.Section>
 
-        <StyledMonths.Table>
+        <Table>
           <thead>
             <tr>
-              <StyledMonths.Th>
+              <Th>
                 Month
-              </StyledMonths.Th>
-              <StyledMonths.Th textAlign="right">
+              </Th>
+              <Th textAlign="right">
                 Status
-            </StyledMonths.Th>
+            </Th>
             </tr>
           </thead>
           <tbody>
             {this.monthsList()}
           </tbody>
-        </StyledMonths.Table>
+        </Table>
       </>
     )
   }
 
   render() {
     return (
-      <>
-        {AdminLayout && (
-          <AdminLayout>
-            <br />
-            <br />
-            {this.months()}
-            <br />
-            <br />
-          </AdminLayout>
-        )}
-      </>
+      <AdminLayout>
+        <br />
+        <br />
+        {this.months()}
+        <br />
+        <br />
+      </AdminLayout>
     )
   }
 }

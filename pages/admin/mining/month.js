@@ -124,15 +124,32 @@ class MiningMonth extends React.Component {
   }
 
   composite() {
-    console.log(this.props.month.compositeRankings)
-    return this.props.month.compositeRankings.map((app, index) => (
-      <tr key={app.id}>
-        <SpacedTd>{index + 1}</SpacedTd>
-        <SpacedTd>{app.name}</SpacedTd>
-        <SpacedTd>{app.domain}</SpacedTd>
-        <SpacedTd>{app.BTCAddress}</SpacedTd>
-      </tr>
-    ))
+    // console.log(this.props.month.compositeRankings)
+    const { blockExplorerUrl, BTCTransactionId } = this.props.month
+    return this.props.month.compositeRankings.map((app, index) => {
+      let payment = null
+      this.props.month.MiningAppPayouts.forEach((_payment) => {
+        if (_payment.appId === app.id) {
+          payment = _payment
+        }
+      })
+      return (
+        <tr key={app.id}>
+          <SpacedTd>{index + 1}</SpacedTd>
+          <SpacedTd>{app.name}</SpacedTd>
+          <SpacedTd>{app.domain}</SpacedTd>
+          <SpacedTd>{app.BTCAddress}</SpacedTd>
+          <Td>
+            {payment && (
+              <a href={`${blockExplorerUrl}/${BTCTransactionId}`} target="_blank">
+                {payment.BTCPaymentValue / 10e7}{' '}
+                BTC
+              </a>
+            )}
+          </Td>
+        </tr>
+      )
+    })
   }
 
 
@@ -252,6 +269,7 @@ class MiningMonth extends React.Component {
                   <Th>App name</Th>
                   <Th>App domain</Th>
                   <Th>BTC Address</Th>
+                  <Th>Payment</Th>
                 </tr>
               </Thead>
               <tbody>
