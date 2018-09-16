@@ -13,6 +13,8 @@ import NotificationSystem from 'react-notification-system'
 import { enumSelect, appStatuses, appStatusFromValue, appRoute } from '@utils'
 import Form from '@components/form'
 import AppIcon from '@containers/app-icon'
+import { Section, Content } from '@components/mining-admin/month'
+import AdminLayout from '@containers/admin/layout'
 
 import AppStore from '@stores/apps'
 import UserStore from '@stores/user'
@@ -26,8 +28,6 @@ import {
   selectStorageCategories,
   selectAuthenticationCategories
 } from '@stores/apps/selectors'
-
-let AdminLayout = () => ''
 
 class App extends React.Component {
   static propTypes = {
@@ -68,7 +68,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    AdminLayout = require('../../containers/admin/layout').default
     if (this.props.apps) {
       const parsed = queryString.parse(document.location.search)
       this.props.doSelectApp(parseInt(parsed.id, 10))
@@ -98,176 +97,168 @@ class App extends React.Component {
     const appPage = appRoute(app)
     const ranking = app.Rankings[0]
     return (
-      <div>
-        <AppIcon app={app} />
+      <Section>
         <h1>{app.name}</h1>
-        <br />
-        <br />
-        <p><a href={appPage}>{appPage}</a></p>
-        {ranking ? (
-          <>
-            <p>
-              Twitter mentions in the last 7 days:{' '}
-              <strong>{ranking.twitterMentions}</strong>
-            </p>
-            <p>
-              Monthly visits:{' '}
-              <strong>{Math.round(ranking.monthlyVisitsCount)}</strong>
-            </p>
-            <p>
-              Monthly bounce rate:{' '}
-              <strong>{((ranking.monthlyBounceRate || 0) * 100).toFixed(1)}%</strong>
-            </p>
-            <p>
-              Monthly page views:{' '}
-              <strong>{Math.round(ranking.monthlyPageViews)}</strong>
-            </p>
-            <p>
-              Monthly visit duration:{' '}
-              <strong>{Math.round(ranking.monthlyVisitDuration)} seconds</strong>
-            </p>
-          </>
-        ) : (
-          <p>No rankings data yet.</p>
-        )}
-        <Form.Wrapper>
-          <TextField
-            value={this.state.name || ''}
-            onChange={(e) => this.setState({ name: e.target.value })}
-            label="Dapp Name"
-          />
-          <TextField
-            value={this.state.description || ''}
-            onChange={(e) => this.setState({ description: e.target.value })}
-            label="Short description (~50 characters)"
-          />
-          <small>Currently {this.state.description.length} characters</small>
-          <TextField
-            value={this.state.website || ''}
-            onChange={(e) => this.setState({ website: e.target.value })}
-            label="Website"
-          />
-          <small><a href={this.state.website} target="_blank">Visit website</a></small>
-          {this.state.website.indexOf('http') !== 0 && (
+        <Content>
+          <AppIcon app={app} />
+          <p><a href={appPage}>{appPage}</a></p>
+          {ranking ? (
             <>
-              <br/>
-              <small>Website URL is not valid</small>
+              <p>
+                Twitter mentions in the last 7 days:{' '}
+                <strong>{ranking.twitterMentions}</strong>
+              </p>
+              <p>
+                Monthly visits:{' '}
+                <strong>{Math.round(ranking.monthlyVisitsCount)}</strong>
+              </p>
+              <p>
+                Monthly bounce rate:{' '}
+                <strong>{((ranking.monthlyBounceRate || 0) * 100).toFixed(1)}%</strong>
+              </p>
+              <p>
+                Monthly page views:{' '}
+                <strong>{Math.round(ranking.monthlyPageViews)}</strong>
+              </p>
+              <p>
+                Monthly visit duration:{' '}
+                <strong>{Math.round(ranking.monthlyVisitDuration)} seconds</strong>
+              </p>
             </>
-          )}
-          <TextField
-            value={this.state.contact || ''}
-            onChange={(e) => this.setState({ contact: e.target.value })}
-            label="Contact Email"
-          />
-          <TextField
-            value={this.state.imageUrl || ''}
-            onChange={(e) => this.setState({ imageUrl: e.target.value })}
-            label="Image URL"
-          />
-          <TextField
-            value={this.state.openSourceUrl || ''}
-            onChange={(e) => this.setState({ openSourceUrl: e.target.value })}
-            label="Open Source URL"
-          />
-          <TextField
-            value={this.state.twitterHandle || ''}
-            onChange={(e) => this.setState({ twitterHandle: e.target.value })}
-            label="Twitter Handle"
+          ) : (
+              <p>No rankings data yet.</p>
+            )}
+          <Form.Wrapper>
+            <TextField
+              value={this.state.name || ''}
+              onChange={(e) => this.setState({ name: e.target.value })}
+              label="Dapp Name"
+            />
+            <TextField
+              value={this.state.description || ''}
+              onChange={(e) => this.setState({ description: e.target.value })}
+              label="Short description (~50 characters)"
+            />
+            <small>Currently {this.state.description.length} characters</small>
+            <TextField
+              value={this.state.website || ''}
+              onChange={(e) => this.setState({ website: e.target.value })}
+              label="Website"
+            />
+            <small><a href={this.state.website} target="_blank">Visit website</a></small>
+            {this.state.website.indexOf('http') !== 0 && (
+              <>
+                <br />
+                <small>Website URL is not valid</small>
+              </>
+            )}
+            <TextField
+              value={this.state.contact || ''}
+              onChange={(e) => this.setState({ contact: e.target.value })}
+              label="Contact Email"
+            />
+            <TextField
+              value={this.state.imageUrl || ''}
+              onChange={(e) => this.setState({ imageUrl: e.target.value })}
+              label="Image URL"
+            />
+            <TextField
+              value={this.state.openSourceUrl || ''}
+              onChange={(e) => this.setState({ openSourceUrl: e.target.value })}
+              label="Open Source URL"
+            />
+            <TextField
+              value={this.state.twitterHandle || ''}
+              onChange={(e) => this.setState({ twitterHandle: e.target.value })}
+              label="Twitter Handle"
+            />
+            <br />
+            <Checkbox
+              isChecked={this.state.registrationIsOpen}
+              onChange={() => this.setState({ registrationIsOpen: !this.state.registrationIsOpen })}
+              label="Registration is open to all users"
+            />
+            <br />
+            <TextArea
+              label="Admin Notes"
+              value={this.state.notes || ''}
+              onChange={(e) => this.setState({ notes: e.target.value })}
+            />
+            <br />
+            <h3>App Mining</h3>
+            <TextField
+              value={this.state.BTCAddress || ''}
+              onChange={(e) => this.setState({ BTCAddress: e.target.value })}
+              label="BTC Address"
+            />
+            <br />
+            <Checkbox
+              isChecked={this.state.isKYCVerified}
+              onChange={() => this.setState({ isKYCVerified: !this.state.isKYCVerified })}
+              label="KYC is completed"
+            />
+          </Form.Wrapper>
+          <br />
+          {enumSelect(categories, 'Category', {
+            required: true,
+            value: this.state.category,
+            onChange: (data) => {
+              this.setState(data)
+            }
+          })}
+          {enumSelect(blockchains, 'Blockchain', {
+            value: this.state.blockchain,
+            onChange: (data) => {
+              this.setState(data)
+            }
+          })}
+          {enumSelect(storageNetworks, 'Storage', {
+            apiAttr: 'storageNetwork',
+            value: this.state.storageNetwork,
+            onChange: (data) => {
+              this.setState(data)
+            }
+          })}
+          {enumSelect(authentications, 'Authentication', {
+            menuPlacement: 'top',
+            value: this.state.authentication,
+            onChange: (data) => {
+              this.setState(data)
+            }
+          })}
+          <br />
+          <h3>Status:</h3>
+          <br />
+          <Select
+            className="react-select"
+            options={appStatuses}
+            value={appStatusFromValue(this.state.status)}
+            onChange={({ value }) => this.setState({ status: value })}
           />
           <br />
-          <Checkbox
-            isChecked={this.state.registrationIsOpen}
-            onChange={() => this.setState({ registrationIsOpen: !this.state.registrationIsOpen })}
-            label="Registration is open to all users"
-          />
           <br />
-          <TextArea
-            label="Admin Notes"
-            value={this.state.notes || ''}
-            onChange={(e) => this.setState({ notes: e.target.value })}
-          />
-          <br />
-          <h3>App Mining</h3>
-          <TextField
-            value={this.state.BTCAddress || ''}
-            onChange={(e) => this.setState({ BTCAddress: e.target.value })}
-            label="BTC Address"
-          />
-          <br />
-          <Checkbox
-            isChecked={this.state.isKYCVerified}
-            onChange={() => this.setState({ isKYCVerified: !this.state.isKYCVerified })}
-            label="KYC is completed"
-          />
-        </Form.Wrapper>
-        <br />
-        {enumSelect(categories, 'Category', {
-          required: true,
-          value: this.state.category,
-          onChange: (data) => {
-            this.setState(data)
-          }
-        })}
-        {enumSelect(blockchains, 'Blockchain', {
-          value: this.state.blockchain,
-          onChange: (data) => {
-            this.setState(data)
-          }
-        })}
-        {enumSelect(storageNetworks, 'Storage', {
-          apiAttr: 'storageNetwork',
-          value: this.state.storageNetwork,
-          onChange: (data) => {
-            this.setState(data)
-          }
-        })}
-        {enumSelect(authentications, 'Authentication', {
-          menuPlacement: 'top',
-          value: this.state.authentication,
-          onChange: (data) => {
-            this.setState(data)
-          }
-        })}
-        <br />
-        <h3>Status:</h3>
-        <br />
-        <Select
-          className="react-select"
-          options={appStatuses}
-          value={appStatusFromValue(this.state.status)}
-          onChange={({ value }) => this.setState({ status: value })}
-        />
-        <br />
-        <br />
-        {this.props.isSavingApp ? (
-          <p>Saving {this.state.name}...</p>
-        ) : (
-          <Button appearance="primary" onClick={this.save}>
-            Save
+          {this.props.isSavingApp ? (
+            <p>Saving {this.state.name}...</p>
+          ) : (
+              <Button appearance="primary" onClick={this.save}>
+                Save
           </Button>
-        )}
-      </div>
+            )}
+        </Content>
+      </Section>
     )
   }
 
   render() {
     return (
-      <div>
+      <AdminLayout>
         <NotificationSystem
           ref={(c) => {
             this.notifications = c
           }}
         />
-        {AdminLayout && (
-          <AdminLayout>
-            <br />
-              <br />
-            {this.appDetails()}
-              <br />
-                <br />
-          </AdminLayout>
-        )}
-      </div>
+        {this.appDetails()}
+      </AdminLayout>
     )
   }
 }

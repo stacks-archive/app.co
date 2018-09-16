@@ -1,20 +1,18 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import Link from 'next/link'
 
-import { Page } from '@containers/page'
-import { Header } from '@containers/header'
-import { Hero } from '@containers/hero'
 import { Button } from '@components/button'
-import AppList from '@containers/admin/app-list'
+import AdminLayout from '@containers/admin/layout'
+import { Section } from '@components/mining-admin/month'
+import { Table, Th, Thead, Td, SpacedTd } from '@components/mining-admin/table'
 
 import AppStore from '@stores/apps'
 import UserStore from '@stores/user'
 import { selectApps, selectApiServer } from '@stores/apps/selectors'
 
 import 'isomorphic-unfetch'
-
-let AdminLayout = () => ''
 
 class Admin extends React.Component {
   constructor(props) {
@@ -23,35 +21,66 @@ class Admin extends React.Component {
   }
 
   componentDidMount() {
-    // this.signInWithToken();
-    AdminLayout = require('../../containers/admin/layout').default
-    this.setState({ clientSide: true })
     this.props.handleSignIn(this.props.apiServer)
+  }
+
+  appRows() {
+    const { apps } = this.props
+    return apps.map((app) => (
+      <tr>
+        <Td>
+          <Link href={`/admin/app?id=${app.id}`}>
+            <a>{app.name}</a>
+          </Link>
+        </Td>
+        <SpacedTd>
+          {app.category}
+        </SpacedTd>
+        <SpacedTd>
+          {app.Rankings && app.Rankings[0] && app.Rankings[0].twitterMentions || 0}
+        </SpacedTd>
+        <SpacedTd>
+          {app.status}
+        </SpacedTd>
+      </tr>
+    ))
+  }
+
+  table() {
+    return (
+      <Section>
+        <h1>Apps</h1>
+        <Table>
+          <Thead>
+            <tr>
+              <Th>Name</Th>
+              <Th>Category</Th>
+              <Th>Tweets/Week</Th>
+              <Th>Status</Th>
+            </tr>
+          </Thead>
+          <tbody>
+            {this.appRows()}
+          </tbody>
+        </Table>
+      </Section>
+    )
   }
 
   render() {
     return (
-      <div>
-        {AdminLayout && (
-          <AdminLayout>
-            <h1>Apps</h1>
-              <br />
-                <br />
-            {this.props.user.user ? (
-              <AppList apps={this.props.apps} />
-            ) : (
-              <Button
-                type="button/primary"
-                onClick={() => {
-                  this.props.signIn()
-                }}
-              >
-                Sign In with Blockstack
-              </Button>
-            )}
-          </AdminLayout>
+      <AdminLayout>
+        {this.props.user.user ? this.table() : (
+          <Button
+            type="button/primary"
+            onClick={() => {
+              this.props.signIn()
+            }}
+          >
+            Sign In with Blockstack
+          </Button>
         )}
-      </div>
+      </AdminLayout>
     )
   }
 }

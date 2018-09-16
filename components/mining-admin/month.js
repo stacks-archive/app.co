@@ -1,7 +1,7 @@
 import Styled from 'styled-components'
 import { space, fontSize } from 'styled-system'
 
-const Section = Styled.section`
+export const Section = Styled.section`
   ${space}
   width: 100%;
   background: white;
@@ -14,7 +14,7 @@ const Section = Styled.section`
   }
 `
 
-const Content = Styled.div`
+export const Content = Styled.div`
   border-top: 1px solid #e6e9ee;
   padding: 2em;
   ${space}
