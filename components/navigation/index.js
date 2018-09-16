@@ -13,28 +13,44 @@ const ErrorPageLink = ({isErrorPage, children, ...props}) => isErrorPage ? (
     </Link>
   )
 
-const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, footer, ...rest }) => {
+const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, footer, admin, ...rest }) => {
   const extraProps = handleClick ? { onClick: () => handleClick() } : {}
   return (
     <StyledTopBar.Navigation {...rest}>
-      <ErrorPageLink isErrorPage={isErrorPage} href="/all">
-        <a href="/all">All apps</a>
-      </ErrorPageLink>
-      <ErrorPageLink isErrorPage={isErrorPage} href="/faq" prefetch {...extraProps}>
-        <a href="/faq">Learn more</a>
-      </ErrorPageLink>
-      <a
-        href="#"
-        onClick={(evt) => {
-          evt.preventDefault()
-          openNewsletterModal()
-        }}
-      >
-        Get updates
-      </a>
-      <ErrorPageLink isErrorPage={isErrorPage} href="/submit" {...extraProps}>
-        <a href="/submit">Add your app</a>
-      </ErrorPageLink>
+      {admin ? (
+        <>
+          <Link href="/admin">
+            <a>Apps</a>
+          </Link>
+          <Link href="/admin/pending">
+            <a>Pending</a>
+          </Link>
+          <Link href="/admin/mining/months">
+            <a>Mining</a>
+          </Link>
+        </>
+      ) : (
+        <>
+          <ErrorPageLink isErrorPage={ isErrorPage } href="/all">
+            <a href="/all">All apps</a>
+          </ErrorPageLink>
+          <ErrorPageLink isErrorPage={isErrorPage} href="/faq" prefetch {...extraProps}>
+            <a href="/faq">Learn more</a>
+          </ErrorPageLink>
+          <a
+            href="#"
+            onClick={(evt) => {
+              evt.preventDefault()
+              openNewsletterModal()
+            }}
+          >
+            Get updates
+            </a>
+          <ErrorPageLink isErrorPage={isErrorPage} href="/submit" {...extraProps}>
+            <a href="/submit">Add your app</a>
+          </ErrorPageLink>
+        </>
+      )}
     </StyledTopBar.Navigation>
   )
 }
