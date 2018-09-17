@@ -1,12 +1,13 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+
+import AdminLayout from '@containers/admin/layout'
 import AppList from '@containers/admin/app-list'
 
 import AppStore from '@stores/apps'
 import UserStore from '@stores/user'
-
-let AdminLayout = () => ''
 
 class PendingApps extends React.Component {
   constructor(props) {
@@ -14,28 +15,26 @@ class PendingApps extends React.Component {
     this.state = {}
   }
 
+  static propTypes = {
+    fetchPendingApps: PropTypes.func.isRequired,
+    apiServer: PropTypes.string.isRequired,
+    jwt: PropTypes.string.isRequired,
+    isFetchingPending: PropTypes.bool.isRequired,
+    pendingApps: PropTypes.array
+  }
+
   componentDidMount() {
-    AdminLayout = require('../../containers/admin/layout').default
-    this.setState(Object.assign({}, this.state, { clientSide: true }))
     this.props.fetchPendingApps(this.props.apiServer, this.props.jwt)
   }
 
   render() {
     return (
-      <div>
-        {AdminLayout && (
-          <AdminLayout>
-            <br />
-              <br />
-                <h1>Pending Apps</h1>
-                  <br />
-            {this.props.isFetchingPending && <p>Fetching pending apps...</p>}
+      <AdminLayout>
+        {this.props.isFetchingPending && <p>Fetching pending apps...</p>}
 
-            {this.props.pendingApps && <AppList apps={this.props.pendingApps} />}
-              <br />
-          </AdminLayout>
-        )}
-      </div>
+        {this.props.pendingApps && <AppList apps={this.props.pendingApps} title="Pending Apps" />}
+        <br />
+      </AdminLayout>
     )
   }
 }
