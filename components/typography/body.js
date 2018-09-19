@@ -1,10 +1,5 @@
-import Shevy from 'shevyjs'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { baseProps } from '@components/typography/headings'
-
-const shevy = new Shevy()
-
-const { h5: large, body } = shevy
 
 const P = styled.p`
   ${baseProps};
