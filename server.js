@@ -77,6 +77,11 @@ app.prepare().then(() => {
     server.get('/category/:category', (req, res) => res.redirect(`/categories/${req.params.category}`))
     server.get('/faq', (req, res) => renderAndCache(req, res, '/faq'))
     server.get('/submit', (req, res) => renderAndCache(req, res, '/submit'))
+    server.get('/all', (req, res) => renderAndCache(req, res, '/all'))
+
+    server.get('/app-mining/developer-instructions', (req, res) => renderAndCache(req, res, '/mining/developer-instructions'))
+    server.get('/app-mining/reviewer-instructions', (req, res) => renderAndCache(req, res, '/mining/reviewer-instructions'))
+
     server.get('/admin', (req, res) => renderAndCache(req, res, '/admin'))
     server.get('/admin/app', (req, res) => renderAndCache(req, res, '/admin/app'))
     server.get('/admin/pending', (req, res) => renderAndCache(req, res, '/admin/pending'))
@@ -90,7 +95,9 @@ app.prepare().then(() => {
     server.get('/admin/mining/months/:monthId/reviewers/:reviewerId', (req, res) =>
       renderAndCache(req, res, '/admin/mining/reviewer')
     )
-    server.get('/all', (req, res) => renderAndCache(req, res, '/all'))
+
+    
+
     apps.platforms.forEach((platform) => {
       server.get(`/${slugify(platform)}`, (req, res) => {
         req.params.platform = platform

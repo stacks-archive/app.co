@@ -19,8 +19,8 @@ const Body = styled.div`
 `
 
 const Strong = styled.strong`
-  ${baseProps};
   font-weight: 500;
+  ${baseProps};
 `
 
 const Em = styled.em`

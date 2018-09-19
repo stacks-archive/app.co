@@ -24,6 +24,8 @@ export const selectPlatformName = (state) => state.apps && state.apps.platformNa
 export const selectCategoryName = (state) => state.apps && state.apps.categoryName
 export const selectAppConstants = (state) => state.apps && state.apps.constants.appConstants
 
+export const selectAppMiningApps = (state) => state.apps && state.apps.appMiningApps
+
 export const selectAllPlatforms = (state) => {
   if (!state.apps || !state.apps.platforms) {
     state.apps.platforms = state.platforms

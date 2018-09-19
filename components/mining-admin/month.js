@@ -1,14 +1,15 @@
 import Styled, { css } from 'styled-components'
-import { space, fontSize } from 'styled-system'
+import { space, fontSize, width } from 'styled-system'
 
 export const Section = Styled.section`
   ${space}
+  ${width}
   width: 100%;
   background: white;
   h1 {
     font-size: 1.2em;
   }
-  h1, h2 {
+  h1, h2, h3 {
     padding: 32px;
     line-height: 1.2em;
   }
