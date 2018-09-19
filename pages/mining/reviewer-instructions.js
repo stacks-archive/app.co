@@ -49,7 +49,7 @@ const ReviewerInstructions = () => (
               Return your rankings by the 15th to app.mining@blockstack.org
             </Type.p>
             <Type.p>
-              <Type.strong fontWeight="700">IMPORTANT</Type.strong>: 
+              <Type.strong   fontWeight="700">IMPOR TANT</Type.strong>: 
               We must receive your rankings by the 15th of the month or they won't be considered!
             </Type.p>
             <Type.p>
