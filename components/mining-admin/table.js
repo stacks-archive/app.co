@@ -38,12 +38,12 @@ export const Td = Styled.td`
 export const SpacedTd = Styled(Td)`
   padding: 32px;
   font-weight: 600;
+  text-align: ${({ textAlign }) => textAlign || 'left'}
 `
 
 export const FormTd = Styled.td`
   padding: 32px;
   border-top: 1px solid #e6e9ee;
-  text-align: ${props => props.textAlign || 'left'};
 `
 
 export const UnderlineLink = Styled.a`
@@ -51,6 +51,13 @@ export const UnderlineLink = Styled.a`
   display: inline-block;
   text-decoration: underline !important;
   text-decoration-color: rgba(205, 214, 239, 0.7);
+`
+
+export const SubReward = Styled.span`
+  display: block;
+  font-size: 0.7em;
+  opacity: 0.7;
+  margin-top: 1em;
 `
 
 export default {

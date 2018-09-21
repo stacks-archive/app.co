@@ -25,6 +25,12 @@ export const Content = Styled.div`
   `}
 `
 
+export const Hr = Styled.hr`
+  border: 0;
+  border-top: 1px solid #e6e9ee;
+  margin: 2em 0;
+`
+
 export default { 
   Section, 
   Content 

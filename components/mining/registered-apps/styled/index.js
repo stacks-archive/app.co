@@ -10,7 +10,7 @@ export const AppLink = Styled.a`
   border-top: 1px solid #e6e9ee;
   padding: 32px;
   color: inherit;
-  display: flex;
+  display: flex !important;
   font-weight: inherit;
   text-decoration: none;
 `

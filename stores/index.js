@@ -8,7 +8,7 @@ import AppsStore from '@stores/apps'
 import UserStore from '@stores/user'
 import newsletter from '@stores/newsletter'
 import RouterStore from '@stores/router'
-import MiningStore from '@stores/mining/reducer'
+import makeMiningReducer from '@stores/mining/reducer'
 import AdminMiningReducer from '@stores/mining-admin/reducer'
 
 export default (data) => {
@@ -21,7 +21,7 @@ export default (data) => {
     user: UserStore.reducer,
     newsletter,
     router: RouterStore.reducer,
-    mining: MiningStore,
+    mining: makeMiningReducer(data),
     miningAdmin: AdminMiningReducer
   })
 
