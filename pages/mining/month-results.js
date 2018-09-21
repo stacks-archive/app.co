@@ -10,6 +10,7 @@ import { Table, Th, SpacedTd, Td, Thead, SubReward } from '@components/mining-ad
 import { AppLink, Name, Description, Container } from '@components/mining/registered-apps/styled'
 import { AppIcon } from '@components/app-icon'
 import { Button } from '@components/mining-admin/collapsable'
+import Reviewer from '@components/mining/reviewer'
 
 class MonthResults extends React.Component {
   static getInitialProps(context) {
@@ -53,13 +54,20 @@ class MonthResults extends React.Component {
     ))
   }
 
+  reviewers() {
+    const { report } = this.props
+    return report.MiningReviewerReports.map((reviewer, index) => (
+      <Reviewer reviewer={reviewer} index={index} />
+    ))
+  }
+
   render() {
     const { report } = this.props
     return (
       <Page>
         <Head title={this.title()} />
-        <Flex width={1} px={5} mb={5}>
-          <Box width={[ 1, 2/3 ]}>
+        <Flex width={1} px={5} mb={5} flexDirection={['column', 'column', 'column', 'row']} justifyContent="space-between" flexWrap="wrap">
+          <Box width={[ 1, 1, 1, 2/3 ]}>
             <Section>
               <h2>{this.title()}</h2>
             </Section>
@@ -77,13 +85,13 @@ class MonthResults extends React.Component {
               </tbody>
             </Table>
           </Box>
-          <Box width={[1, 1/3]} ml={3}>
+          <Box width={[1, 1, 1, 1/3]} pl={[0, 0, 0, 3]} pt={[3, 3, 3, 0]}>
             <Section>
               <Content>
                 <Type.p>
-                  <Type.strong>{report.compositeRankings.length} Blockstack apps</Type.strong>{' '}
+                  <Type.strong fontWeight="700">{report.compositeRankings.length} Blockstack apps</Type.strong>{' '}
                   earned
-                  {' '}<Type.strong>{report.formattedTotalRewardsUsd}</Type.strong>{' '}
+                  {' '}<Type.strong fontWeight="700">{report.formattedTotalRewardsUsd}</Type.strong>{' '}
                   in App Mining rewards for the month of {report.humanReadableDate}.
                 </Type.p>
                 <Type.p>
@@ -97,9 +105,8 @@ class MonthResults extends React.Component {
                 <Type.p mt={4} color="#1421446e" fontSize="0.9em">
                   Note: USD values displayed for payouts made in BTC were determined based on the exchange rate at the time of conversion on {report.friendlyPurchasedAt}.
                 </Type.p>
-                {/* <Hr />
-                TODO: reviewer copy and notes
-                <Type.p fontWeight="700">Ranking algorithm notes</Type.p> */}
+                {this.reviewers()}
+                {/* <Type.p fontWeight="700">Ranking algorithm notes</Type.p> */}
               </Content>
             </Section>
           </Box>

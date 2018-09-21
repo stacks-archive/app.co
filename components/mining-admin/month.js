@@ -10,8 +10,10 @@ export const Section = Styled.section`
     font-size: 1.2em;
   }
   h1, h2, h3 {
-    padding: 32px;
-    line-height: 1.2em;
+    &:first-child {
+      padding: 32px;
+      line-height: 1.2em;
+    }
   }
 `
 
@@ -23,6 +25,9 @@ export const Content = Styled.div`
   ${({ errors }) => errors && css`
     background: linear-gradient(white, #fffbea);
   `}
+  p {
+    line-height: 1.5em;
+  }
 `
 
 export const Hr = Styled.hr`
