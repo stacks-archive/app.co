@@ -56,6 +56,21 @@ const getApps = (apiServer) =>
     }
   })
 
+const getAppMiningMonths = (apiServer) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const { months } = await request({
+        uri: `${apiServer}/api/app-mining-months`,
+        json: true
+      })
+      return resolve(months)
+    } catch (error) {
+      console.log('Error when fetching mining months', error)
+      reject(error)
+    }  
+  })
+
 module.exports = {
-  getApps
+  getApps,
+  getAppMiningMonths
 }

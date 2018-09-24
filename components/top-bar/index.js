@@ -14,7 +14,7 @@ import { Navigation } from '@components/navigation'
 const handleBodyScroll = (on) =>
   on ? document.body.classList.remove('no-scroll') : document.body.classList.add('no-scroll')
 
-const TopBar = ({ isErrorPage, ...props }) => (
+const TopBar = ({ isErrorPage, admin, ...props }) => (
   <Headroom>
     <StyledTopBar {...props}>
       <StyledTopBar.Wrapper wrap>
@@ -33,7 +33,7 @@ const TopBar = ({ isErrorPage, ...props }) => (
           <SearchBar transparent />
         </StyledTopBar.Section>
         <StyledTopBar.Section>
-          <Navigation display={['none', 'flex']} isErrorPage={isErrorPage} />
+          <Navigation display={['none', 'flex']} isErrorPage={isErrorPage} admin={admin} />
           <Box display={['block', 'none']}>
             <Toggle>
               {({ on, toggle }) => (
@@ -48,6 +48,7 @@ const TopBar = ({ isErrorPage, ...props }) => (
                   </Box>
                   <Navigation
                     mobile
+                    admin={admin}
                     isErrorPage={isErrorPage}
                     on={on}
                     handleClick={() => {

@@ -3,6 +3,7 @@ import lodashDefaults from 'lodash/defaults'
 import find from 'lodash/find'
 import React from 'react'
 import Select from '@atlaskit/select'
+import moment from 'moment'
 
 const colorHexFromString = (str) => {
   let hash = 0
@@ -117,6 +118,11 @@ const getTwitterMentions = (app) => {
   return 0
 }
 
+const monthName = (month) => {
+  const date = moment(`${month.month} ${month.year}`, 'M YYYY')
+  return date.format('MMMM YYYY')
+}
+
 export {
   colorHexFromString,
   truncate,
@@ -129,5 +135,6 @@ export {
   getTags,
   slugifyCategory,
   properTagFromParam,
-  getTwitterMentions
+  getTwitterMentions,
+  monthName
 }

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import Shevy from 'shevyjs'
+// import Shevy from 'shevyjs'
 import {
   color,
   fontSize,

@@ -13,7 +13,7 @@ if (dev) {
 }
 
 const { ssrCache } = require('./common/lib/cache')
-const { getApps } = require('./common/lib/api')
+const { getApps, getAppMiningMonths } = require('./common/lib/api')
 const getSitemapURLs = require('./common/lib/sitemap')
 const RSSController = require('./common/controllers/rss-controller')
 const slugify = require('./common/lib/slugify')
@@ -28,10 +28,15 @@ async function renderAndCache(req, res, pagePath, serverData) {
   try {
     const data = await getApps(apiServer)
     data.apiServer = apiServer
+    let appMiningMonths = []
+    if (serverData && serverData.fetchMiningResults) {
+      appMiningMonths = await getAppMiningMonths(apiServer)
+    }
 
     const dataToPass = {
       ...data,
-      ...serverData
+      ...serverData,
+      appMiningMonths
     }
     const html = await app.renderToHTML(req, res, pagePath, dataToPass)
     res.send(html)
@@ -77,10 +82,32 @@ app.prepare().then(() => {
     server.get('/category/:category', (req, res) => res.redirect(`/categories/${req.params.category}`))
     server.get('/faq', (req, res) => renderAndCache(req, res, '/faq'))
     server.get('/submit', (req, res) => renderAndCache(req, res, '/submit'))
+    server.get('/all', (req, res) => renderAndCache(req, res, '/all'))
+
+    server.get('/app-mining/developer-instructions', (req, res) => renderAndCache(req, res, '/mining/developer-instructions'))
+    server.get('/app-mining/reviewer-instructions', (req, res) => renderAndCache(req, res, '/mining/reviewer-instructions'))
+    server.get('/app-mining/:date', (req, res) => {
+      const { date } = req.params
+      const [month, year] = date.split('-')
+      renderAndCache(req, res, '/mining/month-results', { month, year, fetchMiningResults: true })
+    })
+
     server.get('/admin', (req, res) => renderAndCache(req, res, '/admin'))
     server.get('/admin/app', (req, res) => renderAndCache(req, res, '/admin/app'))
     server.get('/admin/pending', (req, res) => renderAndCache(req, res, '/admin/pending'))
-    server.get('/all', (req, res) => renderAndCache(req, res, '/all'))
+    server.get('/admin/mining/months', (req, res) => renderAndCache(req, res, '/admin/mining/months'))
+    server.get('/admin/mining/months/:id', (req, res) => 
+      renderAndCache(req, res, '/admin/mining/month', { monthId: req.params.id })
+    )
+    server.get('/admin/mining/months/:id/upload-report', (req, res) =>
+      renderAndCache(req, res, '/admin/mining/upload-report', { monthId: req.params.id })
+    )
+    server.get('/admin/mining/months/:monthId/reviewers/:reviewerId', (req, res) =>
+      renderAndCache(req, res, '/admin/mining/reviewer')
+    )
+
+    
+
     apps.platforms.forEach((platform) => {
       server.get(`/${slugify(platform)}`, (req, res) => {
         req.params.platform = platform

@@ -15,7 +15,8 @@ const constants = {
   FETCHED_PENDING: 'FETCHING_PENDING',
   FETCHED_ADMIN_APPS: 'FETCHED_ADMIN_APPS',
   SELECT_CATEGORY: 'SELECT_CATEGORY',
-  CLEAR_CATEGORY: 'CLEAR_CATEGORY'
+  CLEAR_CATEGORY: 'CLEAR_CATEGORY',
+  FETCHED_APP_MINING_APPS: 'FETCHED_APP_MINING_APPS'
 }
 
 export const doSelectPlatformFilter = (platform) => ({
@@ -73,6 +74,11 @@ const fetchedAdminApps = (apps) => ({
   apps
 })
 
+const fetchedAppMiningApps = (apps) => ({
+  type: constants.FETCHED_APP_MINING_APPS,
+  apps
+})
+
 const fetchAdminApps = (apiServer, jwt) => async (dispatch) => {
   const response = await fetch(`${apiServer}/api/admin/apps`, {
     method: 'GET',
@@ -96,6 +102,14 @@ const fetchPendingApps = (apiServer, jwt) => async (dispatch) => {
   dispatch(fetchedPending(apps))
 }
 
+const fetchAppMiningApps = () => async (dispatch, getState) => {
+  const state = getState()
+  const { apiServer } = state.apps
+  const response = await fetch(`${apiServer}/api/app-mining-apps`)
+  const { apps } = await response.json()
+  dispatch(fetchedAppMiningApps(apps))
+}
+
 const actions = {
   doSelectPlatformFilter,
   doSelectApp,
@@ -103,7 +117,8 @@ const actions = {
   savedApp,
   saveApp,
   fetchPendingApps,
-  fetchAdminApps
+  fetchAdminApps,
+  fetchAppMiningApps
 }
 
 export const selectAppsForPlatform = (apps, platform) =>
@@ -252,6 +267,12 @@ const makeReducer = (data) => {
           }
         }
         return state
+      }
+      case constants.FETCHED_APP_MINING_APPS: {
+        return {
+          ...state,
+          appMiningApps: action.apps
+        }
       }
       default:
         return state

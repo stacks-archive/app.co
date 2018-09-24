@@ -39,7 +39,9 @@
     "import/no-extraneous-dependencies": false,
     "import/prefer-default-export": false,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/forbid-prop-types": [2, { "forbid": ["any"] }]
+    "react/forbid-prop-types": [2, { "forbid": ["any"] }],
+    "jsx-a11y/anchor-is-valid": [0],
+    "no-script-url": [0]
   },
   "settings": {
     "import/resolver": {
