@@ -57,5 +57,8 @@
         }
       }
     }
+  },
+  "globals": {
+    "gtag": true
   }
 }

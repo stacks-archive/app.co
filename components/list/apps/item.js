@@ -12,7 +12,7 @@ import { TagLink } from '@components/tag'
 
 import { doSelectApp } from '@stores/apps'
 import { slugify } from '@common'
-import { getTwitterMentions } from '@utils'
+import { getTwitterMentions, trackPageView } from '@utils'
 
 const rowItemSize = 0.5 / 4
 const TableItem = (props) => (
@@ -60,7 +60,9 @@ const AppItem = ({
     if (!isClickingTag && !altKey) {
       dispatch(doSelectApp(id))
       if (typeof window !== 'undefined') {
-        window.history.pushState({}, name, `/app/${rest.Slugs[0].value}`)
+        const page = `/app/${rest.Slugs[0].value}`
+        window.history.pushState({}, name, page)
+        trackPageView(page)
       }
       event.preventDefault()
     }

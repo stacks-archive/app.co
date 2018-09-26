@@ -45,6 +45,15 @@ const outboundLink = (app, link) => {
   window.open(link || app.website, '_blank')
 }
 
+const trackPageView = (path) => {
+  if (typeof 'gtag' !== 'undefined') {
+    gtag('config', 'UA-119163063-1', {
+      page_path: path || document.location.pathname,
+      page_title: document.title
+    })
+  }
+}
+
 const enumSelect = (enums, placeholder, props = {}) => {
   const options = map(enums, (opt) => ({ label: opt, value: opt }))
   if (!props.required) {
@@ -136,5 +145,6 @@ export {
   slugifyCategory,
   properTagFromParam,
   getTwitterMentions,
-  monthName
+  monthName,
+  trackPageView
 }

@@ -1,19 +1,20 @@
 import App, { Container } from 'next/app'
 import React from 'react'
-import { withRouter } from 'next/router'
 import { Provider } from 'react-redux'
 import { CookiesProvider } from 'react-cookie'
+import Router from 'next/router'
 
 import withReduxStore from '@common/lib/with-redux-store'
 import { Root } from '@containers/root'
 import { theme } from '@common/styles'
 import { ThemeProvider } from 'styled-components'
 import { Mdx } from '@components/mdx'
+import { trackPageView } from '@utils'
 
 import 'isomorphic-unfetch'
 
 class MyApp extends App {
-  static async getInitialProps({ Component, router, ctx }) {
+  static async getInitialProps({ Component, ctx }) {
     let pageProps = {}
 
     /**
@@ -26,6 +27,10 @@ class MyApp extends App {
     }
 
     return { pageProps, cookies }
+  }
+
+  componentDidMount() {
+    Router.router.events.on('routeChangeComplete', trackPageView)
   }
 
   render() {
@@ -49,4 +54,4 @@ class MyApp extends App {
   }
 }
 
-export default withRouter(withReduxStore(MyApp))
+export default withReduxStore(MyApp)
