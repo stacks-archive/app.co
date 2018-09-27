@@ -59,8 +59,8 @@ class UploadReport extends React.Component {
         if (meta.fields.indexOf('App Id') === -1) {
           errors.push('Spreadsheet does not contain a required "App Id" column')
         }
-        if (meta.fields.indexOf('Ranking') === -1) {
-          errors.push('Spreadsheet does not contain required column "Ranking"')
+        if (meta.fields.indexOf('Final Standardized Score') === -1) {
+          errors.push('Spreadsheet does not contain required column "Final Standardized Score"')
         }
         const rankings = {}
         let nonUniqueRankings = false
@@ -69,7 +69,7 @@ class UploadReport extends React.Component {
           const appId = app['App Id']
           if (rankings[appId]) nonUniqueRankings = true
           rankings[appId] = true
-          const ranking = parseInt(app.Ranking, 10)
+          const ranking = parseFloat(app['Final Standardized Score'])
           if (isNaN(ranking)) nanRankings = true
           return {
             ...app,
@@ -77,7 +77,7 @@ class UploadReport extends React.Component {
           }
         })
         if (nonUniqueRankings || nanRankings) {
-          errors.push('Spreadsheet contains at least one value in the "Ranking" that is non-unique or non-numeric')
+          errors.push('Spreadsheet contains at least one value in the "Final Standardized Score" column that is non-numeric')
         }
         if (errors.length > 0) {
           return this.setState({ errors })
@@ -92,6 +92,7 @@ class UploadReport extends React.Component {
         }
         this.props.saveReport(report)
         console.log(report)
+        return true
       }
     })
   }
