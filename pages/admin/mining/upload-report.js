@@ -11,10 +11,12 @@ import StyledMonth from '@components/mining-admin/month'
 import { FormTd, Table } from '@components/mining-admin/table'
 import { Input, Button, Textarea } from '@components/mining-admin/collapsable'
 import AdminLayout from '@containers/admin/layout'
+import reviewers from '@common/lib/reviewers'
+import { Select } from '@components/form'
 
 class UploadReport extends React.Component {
   state = {
-    reviewerName: '',
+    reviewerName: Object.keys(reviewers)[0],
     summary: '',
     errors: []
   }
@@ -100,6 +102,10 @@ class UploadReport extends React.Component {
     ))
   }
 
+  reviewerOptions = () => Object.keys(reviewers).map((name) => (
+        <option value={name} key={name}>{name}</option>
+      ))
+
   form() {
     // console.log(Section)
     const { errors } = this.state
@@ -122,10 +128,13 @@ class UploadReport extends React.Component {
                   Reviewer Name
                 </FormTd>
                 <FormTd>
-                  <Input type="text"
+                  <Select 
+                    name="reviewerName" 
                     value={this.state.reviewerName}
-                    onChange={(evt) => this.setState({reviewerName: evt.target.value })}
-                  />
+                    onChange={(evt) => this.setState({ reviewerName: evt.target.value })}
+                  >
+                    {this.reviewerOptions()}
+                  </Select>
                 </FormTd>
               </tr>
               <tr>
