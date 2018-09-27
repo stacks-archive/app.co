@@ -43,7 +43,6 @@ const fetchMiningMonths = () => async function innerFetchMiningMonths(dispatch, 
   const state = getState()
   const { apiServer } = state.apps
   const { jwt } = state.user
-  console.log(apiServer, jwt)
   const url = `${apiServer}/api/admin/monthly-reports`
   const response = await fetch(url, {
     headers: new Headers({
@@ -51,7 +50,6 @@ const fetchMiningMonths = () => async function innerFetchMiningMonths(dispatch, 
     })
   })
   const { reports } = await response.json()
-  console.log(reports)
   dispatch(fetchedMiningMonths(reports))
 }
 
