@@ -8,7 +8,7 @@ const makeReducer = (data) => {
 
   if (data.appMiningMonths) {
     initialState.appMiningMonths = data.appMiningMonths
-  } else {
+  } else if (data.mining) {
     initialState.appMiningMonths = data.mining.appMiningMonths
   }
 
