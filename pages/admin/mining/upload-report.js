@@ -10,8 +10,7 @@ import MiningActions from '@stores/mining-admin/actions'
 import StyledMonth from '@components/mining-admin/month'
 import { FormTd, Table } from '@components/mining-admin/table'
 import { Input, Button, Textarea } from '@components/mining-admin/collapsable'
-
-let AdminLayout = () => ''
+import AdminLayout from '@containers/admin/layout'
 
 class UploadReport extends React.Component {
   state = {
@@ -34,8 +33,6 @@ class UploadReport extends React.Component {
   }
 
   componentDidMount() {
-    AdminLayout = require('../../../containers/admin/layout').default // eslint-disable-line global-require
-    console.log(this.props)
     this.props.fetchMiningMonths()
   }
 

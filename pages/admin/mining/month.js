@@ -18,8 +18,7 @@ import { FormTd, Table, Td, Thead, Th, SpacedTd } from '@components/mining-admin
 import ReportStatus from '@containers/admin/report-status'
 import { Type } from '@components/typography'
 import { monthName } from '@utils/admin'
-
-let AdminLayout = () => ''
+import AdminLayout from '@containers/admin/layout'
 
 class MiningMonth extends React.Component {
   state = {
@@ -55,7 +54,6 @@ class MiningMonth extends React.Component {
   }
 
   componentDidMount() {
-    AdminLayout = require('../../../containers/admin/layout').default // eslint-disable-line global-require
     this.props.fetchMiningMonths()
   }
 

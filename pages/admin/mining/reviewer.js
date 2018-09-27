@@ -10,8 +10,7 @@ import StyledMonth from '@components/mining-admin/month'
 import { Table, Th, Thead, SpacedTd as Td } from '@components/mining-admin/table'
 import { Type } from '@components/typography'
 import { monthName } from '@utils/admin'
-
-let AdminLayout = () => ''
+import AdminLayout from '@containers/admin/layout'
 
 class Reviewer extends React.Component {
   static getInitialProps({ req }) {
@@ -23,7 +22,6 @@ class Reviewer extends React.Component {
   }
 
   componentDidMount() {
-    AdminLayout = require('../../../containers/admin/layout').default // eslint-disable-line global-require
     this.props.fetchMiningMonths()
   }
 
