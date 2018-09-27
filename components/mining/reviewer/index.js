@@ -4,23 +4,7 @@ import { Img, Description } from '@components/mining/reviewer/styled'
 import { Type } from '@components/typography'
 import { Hr } from '@components/mining-admin/month'
 
-const reviewerData = {
-  'Product Hunt': {
-    website: 'https://producthunt.com',
-    description: 'Product hunt is the place to find the best new products in tech.',
-    logo: 'product-hunt-logo-orange-240.png'
-  },
-  'UserTesting': {
-    website: 'https://usertesting.com',
-    description: 'UserTesting is an on-demand customer experience research platform.',
-    logo: 'usertesting.png'
-  },
-  'Democracy Earth': {
-    description: 'Democracy earth is a platform for borderless peer to peer democracy.',
-    website: 'https://www.democracy.earth/',
-    logo: 'democracyearth.png'
-  }
-}
+import reviewerData from '@common/lib/reviewers'
 
 const Reviewer = ({ reviewer, index }) => {
   const name = reviewer.reviewerName
