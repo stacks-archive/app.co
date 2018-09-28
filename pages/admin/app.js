@@ -195,7 +195,7 @@ class App extends React.Component {
             <Checkbox
               isChecked={this.state.isKYCVerified}
               onChange={() => this.setState({ isKYCVerified: !this.state.isKYCVerified })}
-              label="KYC is completed"
+              label="Tax information is collected"
             />
           </Form.Wrapper>
           <br />
