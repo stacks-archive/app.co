@@ -30,7 +30,7 @@ class MonthResults extends React.Component {
     const { report } = this.props
     return report.compositeRankings.map((app, index) => (
       <tr>
-        <SpacedTd>{index + 1}</SpacedTd>
+        <SpacedTd display={['none', 'table-cell']}>{index + 1}</SpacedTd>
         <Td>
           <AppLink style={{borderTop: 'none'}}>
             <AppIcon src={app.imgixImageUrl} size={48} alt={app.name} />
@@ -66,7 +66,7 @@ class MonthResults extends React.Component {
     return (
       <Page>
         <Head title={this.title()} />
-        <Flex width={1} px={5} mb={5} flexDirection={['column', 'column', 'column', 'row']} justifyContent="space-between" flexWrap="wrap">
+        <Flex width={1} px={[1, 5]} mb={5} flexDirection={['column', 'column', 'column', 'row']} justifyContent="space-between" flexWrap="wrap">
           <Box width={[ 1, 1, 1, 2/3 ]}>
             <Section>
               <h2>{this.title()}</h2>
@@ -74,7 +74,7 @@ class MonthResults extends React.Component {
             <Table>
               <Thead>
                 <tr>
-                  <Th>Rank</Th>
+                  <Th display={['none', 'table-cell']}>Rank</Th>
                   <Th>App</Th>
                   <Th>Monthly Rewards</Th>
                   {/* <Th>Total rewards to date</Th> */}

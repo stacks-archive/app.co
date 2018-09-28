@@ -1,5 +1,5 @@
 import Styled from 'styled-components'
-import { space } from 'styled-system'
+import { space, width, display } from 'styled-system'
 
 export const Table = Styled.table`
   width: 100%;
@@ -8,6 +8,8 @@ export const Table = Styled.table`
 `
 
 export const Th = Styled.th`
+  ${width};
+  ${display};
   text-align: ${props => props.textAlign || 'left'};
   background: linear-gradient(white, #f7f8fb);
   padding: 16px 32px;
@@ -22,6 +24,8 @@ export const Thead = Styled.thead`
 `
 
 export const Td = Styled.td`
+  ${width};
+  ${display};
   border-top: 1px solid #e6e9ee;
   text-align: ${props => props.textAlign || 'left'};
   a {
