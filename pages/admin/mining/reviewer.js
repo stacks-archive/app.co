@@ -32,11 +32,12 @@ class Reviewer extends React.Component {
 
   apps() {
     return this.props.apps.map((ranking) => {
+      console.log(ranking)
       const app = ranking.App
       return (
-        <tr>
+        <tr key={app.id}>
           <Td>
-            {ranking.ranking}.
+            {ranking.standardScore}
           </Td>
           <Td>
             {app.name}
@@ -74,7 +75,7 @@ class Reviewer extends React.Component {
           <Table>
             <Thead>
               <tr>
-                <Th>Rank</Th>
+                <Th>Standardized Score</Th>
                 <Th>App name</Th>
                 <Th textAlign="right">App domain</Th>
               </tr>
