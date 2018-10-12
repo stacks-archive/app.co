@@ -7,13 +7,15 @@ import {
 } from '@stores/newsletter'
 import fetch from 'cross-fetch'
 
-const doSubmitEmail = (email, callback) => async (dispatch) => {
+const doSubmitEmail = (email, callback) => async (dispatch, getState) => {
   dispatch({
     type: SUBMIT_EMAIL_STARTED
   })
 
   try {
-    const url = 'https://app-co-api.herokuapp.com/api/subscribe'
+    const state = getState()
+    const { apiServer } = state.apps
+    const url = `${apiServer}/api/subscribe`
     const data = { email }
     await fetch(url, {
       method: 'POST',
