@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Flex, Box } from 'grid-styled'
+import { Flex, Box } from 'blockstack-ui'
 
 import { Page } from '@components/page'
 import Head from '@containers/head'
 import { Section, Content, Hr } from '@components/mining-admin/month'
-import { Type } from '@components/typography'
+import { Type } from 'blockstack-ui'
 import { Table, Th, SpacedTd, Td, Thead, SubReward } from '@components/mining-admin/table'
 import { AppLink, Name, Description, Container } from '@components/mining/registered-apps/styled'
 import { AppIcon } from '@components/app-icon'

@@ -1,59 +1,7 @@
 import React from 'react'
 import Document, { Head, Main, NextScript } from 'next/document'
-import { injectGlobal, ServerStyleSheet } from 'styled-components'
-import { normalize } from 'polished'
-import { theme } from '@common/styles'
+import { ServerStyleSheet } from 'styled-components'
 
-/**
- * Reset our styles
- */
-injectGlobal`
-  ${normalize()};
-  * {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    box-sizing: border-box;
-  }
-  body, html{
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    background-color: ${theme.colors.grey.light};
-    color: ${theme.colors.grey};
-  }
-  body{
-  &.no-scroll{
-  overflow: hidden; 
-  }
-  }
-  
-  a{
-    &:link,
-    &:visited,
-    &:active{
-      color: ${theme.colors.blue};
-    }
-    &:hover{
-      color: ${theme.colors.blue.light};
-    }
-  }
-  h1, h2, h3, h4, h5, h6{
-    margin: 0;
-    padding: 0;
-  }
-  .headroom{
-    z-index: 99 !important;
-  }
-  hr{
-    background:transparent;
-    border: 1px solid #f2f2f2;
-    margin: 0;
-    padding: 0;
-    display: block;
-  }
-
-  input::ms-clear {
-    display: none;
-  }
-`
 const GoogleCode = `
             window.dataLayer = window.dataLayer || []; function gtag()
             { dataLayer.push(arguments); }

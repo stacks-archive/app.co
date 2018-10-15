@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import Styled from 'styled-components'
 import { Button as BTN } from '@components/button'
 
@@ -30,7 +31,7 @@ const Section = Styled.div`
   }
 `
 
-const RightSection = Section.extend`
+const RightSection = styled(Section)`
   float: right;
   text-align: right;
   margin-top: 20px;
@@ -59,7 +60,7 @@ const Input = Styled.input`
   }
 `
 
-const Button = BTN.extend`
+const Button = styled(BTN)`
   display: inline-block;
   background-color: #0ccaba;
   padding-left: 35px;

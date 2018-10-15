@@ -8,7 +8,7 @@ import {
 } from '@stores/apps/selectors'
 import { ListContainer } from '@components/list/index'
 
-import { Flex, Box } from 'rebass'
+import { Flex, Box } from 'blockstack-ui'
 import Link from 'next/link'
 import { slugify } from '@common'
 import { renderPlatformIcon } from '@components/svg/platforms'
@@ -21,7 +21,7 @@ const mapStateToProps = (state) => ({
 const PlatformItem = ({ platform, link, image, width, icon: Icon, ...rest }) => (
   <Link href={link.href} as={link.as} prefetch>
     <StyledList.ItemLink width={width} link {...rest}>
-      <Flex style={{ flexGrow: 1, maxWidth: '100%' }} pr={2}>
+      <Flex justifyContent="flex-start" style={{ flexGrow: 1, maxWidth: '100%' }} pr={2}>
         {Icon ? (
           <Box pr={2}>
             <Icon color="currentColor" />
@@ -34,8 +34,6 @@ const PlatformItem = ({ platform, link, image, width, icon: Icon, ...rest }) => 
     </StyledList.ItemLink>
   </Link>
 )
-
-const mergeDedupe = (arr) => [...new Set([].concat(...arr))]
 
 const PlatformsList = connect(mapStateToProps)(({ apps, limit, platforms, auth, storage, noAll, ...rest }) => {
   const all = platforms

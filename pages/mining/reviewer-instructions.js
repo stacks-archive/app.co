@@ -3,7 +3,7 @@ import React from 'react'
 import { Page } from '@components/page'
 import { Section, Content } from '@components/mining-admin/month'
 import Head from '@containers/head'
-import { Type } from '@components/typography'
+import { Type } from 'blockstack-ui'
 import { Ol, Li } from '@components/mining/instructions'
 import RegisteredApps from '@components/mining/registered-apps'
 
@@ -49,7 +49,7 @@ const ReviewerInstructions = () => (
               Return your rankings by the 15th to app.mining@blockstack.org
             </Type.p>
             <Type.p>
-              <Type.strong   fontWeight="700">IMPOR TANT</Type.strong>: 
+              <Type.strong   fontWeight="700">IMPOR TANT</Type.strong>:
               We must receive your rankings by the 15th of the month or they won't be considered!
             </Type.p>
             <Type.p>

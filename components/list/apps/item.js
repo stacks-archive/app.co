@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Flex } from 'grid-styled'
+import { Flex, Box } from 'blockstack-ui'
 import { connect } from 'react-redux'
 
 import styled from 'styled-components'
 import { Type } from '@components/typography'
 import { StyledList } from '@components/list/styled'
 import { AppIcon } from '@components/app-icon'
-import { Box } from '@components/box'
 import { TagLink } from '@components/tag'
 
 import { doSelectApp } from '@stores/apps'
@@ -77,7 +76,7 @@ const AppItem = ({
       key={rest.id}
     >
       <Flex width={1} alignItems="center">
-        <Flex width={single ? [1, 0.5] : [1]} alignItems="center">
+        <Flex justifyContent="flex-start" width={single ? [1, 0.5] : [1]} alignItems="center">
           {single ? (
             <Flex
               mr={[3, 3]}

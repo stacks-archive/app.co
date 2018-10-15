@@ -8,7 +8,7 @@ import GetUpdatesModal from '@containers/modals/get-updates'
 import MenuIcon from 'mdi-react/MenuIcon'
 import CloseIcon from 'mdi-react/CloseIcon'
 import { Toggle } from 'react-powerplug'
-import { Box } from '@components/box'
+import { Box } from 'blockstack-ui'
 import { Navigation } from '@components/navigation'
 
 const handleBodyScroll = (on) =>

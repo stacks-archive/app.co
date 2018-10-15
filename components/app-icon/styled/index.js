@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Box } from '@components/box'
+import { Box } from 'blockstack-ui'
 import { rgba } from 'polished'
 import { theme } from '@common/styles'
 

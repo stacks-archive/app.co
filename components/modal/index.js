@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { theme } from '@common/styles'
-import { Box } from 'rebass'
+import { Box } from 'blockstack-ui'
 
 const CloseButton = styled.div`
   opacity: 0.5;

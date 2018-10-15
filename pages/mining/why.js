@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Heading, Section } from '@pages/mining/shared'
 import { Box, Img, Flex } from '@components/mining'
 import { Card } from '@components/mining/card'
-import { Type } from '@components/typography'
+import { Type } from 'blockstack-ui'
 
 const CardItem = ({ children, ...props }) => (
   <Card
@@ -16,9 +16,9 @@ const CardItem = ({ children, ...props }) => (
     my={[4, 0]}
     {...props}
   >
-    <Type.span textAlign="center" color="white" lineHeight={1.5} fontWeight={300}>
+    <Type textAlign="center" color="white" lineHeight={1.5} fontWeight={300}>
       {children}
-    </Type.span>
+    </Type>
   </Card>
 )
 const Why = ({ ...props }) => (

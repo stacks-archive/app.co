@@ -13,7 +13,7 @@ const Card = styled.div`
   }
 `
 
-const GrayCard = Card.extend`
+const GrayCard = styled(Card)`
   background-color: #b7bbc4;
   background-image: url('/static/images/submit-dapp-card-illustration/illustration@3x.png');
   background-position: right bottom;
