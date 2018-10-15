@@ -109,14 +109,11 @@ class MiningModalComponent extends React.PureComponent {
   }
 
   closeModal() {
-    // console.log(this.state)
     const submission = {
       ...this.state,
       isBlockstackIntegrated: this.state.isBlockstackIntegrated === 'yes'
     }
-    // console.log(submission)
     this.props.submitApp(submission, this.props.apiServer)
-    // this.props.closeModal()
   }
 
   render() {
