@@ -1,11 +1,12 @@
+import React from 'react'
 import styled, { css } from 'styled-components'
-import { Box, boxProps, Flex } from '@components/box'
+import { boxProps } from '@components/box'
+import { Box, Flex } from 'blockstack-ui'
 import { space } from 'styled-system'
 import { theme, above, wrapperStyle } from '@common/styles'
-import { animated } from 'react-spring'
 import PropTypes from 'prop-types'
 
-const Item = styled(animated.div)`
+const Item = styled(Box)`
   display: flex;
   align-items: center;
   border-bottom: 1px solid ${theme.colors.border};
@@ -67,7 +68,7 @@ const Item = styled(animated.div)`
   ${boxProps};
 `
 
-const ItemLink = Item.withComponent(Box)
+const ItemLink = (props) => <Item {...props} />
 
 const Body = styled(Box)`
   background: white;

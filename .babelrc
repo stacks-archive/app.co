@@ -1,5 +1,7 @@
 {
-  "presets": ["next/babel"],
+  "presets": [
+    "next/babel"
+  ],
   "plugins": [
     [
       "babel-plugin-styled-components",
@@ -7,10 +9,14 @@
         "ssr": true
       }
     ],
+    "@babel/plugin-transform-regenerator",
+    "@babel/plugin-transform-runtime",
     [
       "module-resolver",
       {
-        "root": ["./"],
+        "root": [
+          "./"
+        ],
         "alias": {
           "@components": "./components",
           "@containers": "./containers",

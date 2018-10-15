@@ -10,7 +10,7 @@ import { Fixed } from 'rebass'
 
 import { HeaderType } from '@pages/mining/shared'
 import { Box, Flex, Input as SystemInput } from '@components/mining'
-import { Type } from '@components/typography'
+import { Type } from 'blockstack-ui'
 import { MiningButton } from '@components/mining/button'
 
 import MiningActions from '@stores/mining/actions'
@@ -45,7 +45,7 @@ const Checkbox = ({ label, active, ...props }) => {
       <Box mr={2}>
         <Icon size={18} color={color} />
       </Box>
-      <Type.span color="rgba(255,255,255,0.5)">{label}</Type.span>
+      <Type color="rgba(255,255,255,0.5)">{label}</Type>
     </Flex>
   )
 }

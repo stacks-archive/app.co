@@ -1,13 +1,14 @@
 import styled, { css } from 'styled-components'
 import { theme } from '@common/styles'
 import { boxProps } from '@components/box'
+import { Box } from 'blockstack-ui'
 
-const StyledTag = styled.div`
+const StyledTag = styled(Box)`
   display: inline-block;
   background-color: ${theme.colors.grey.light};
   border-radius: 5px;
   font-size: 12px;
-  color: #7588A2;
+  color: #7588a2;
   ${({ small }) =>
     small &&
     css`
@@ -34,7 +35,7 @@ StyledTag.defaultProps = {
   py: 1
 }
 
-const StyledTagLink = StyledTag.withComponent('a').extend`
+const StyledTagLink = styled(StyledTag).attrs({ is: 'a' })`
   text-decoration: none;
   &:hover {
     text-decoration: underline;

@@ -3,6 +3,7 @@ import { rgba } from 'polished'
 import { Box } from '@components/box'
 import hash from 'string-hash'
 import color from 'tinycolor2'
+import { theme as SystemTheme } from 'blockstack-ui'
 
 const sizes = {
   xl: 1170,
@@ -61,6 +62,11 @@ const theme = {
     72,
     256
   ],
+  fonts: {
+    normal: SystemTheme.fonts.normal,
+    ui: SystemTheme.fonts.normal,
+    brand: SystemTheme.fonts.normal
+  },
   colors: {
     blue: Object.assign('#142144', {
       light: '#324476',

@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { Flex } from '@components/mining'
-import { Type } from '@components/typography'
+import { Type, Flex } from 'blockstack-ui'
 
 const HeaderType = (props) => <Type.h3 color="white" fontSize="23px" fontWeight={300} {...props} />
 const Heading = (props) => <Type.h3 color="white" fontSize={[4, 5]} textAlign="center" fontWeight={200} {...props} />

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Flex, Box } from '@components/mining/index'
+import { Flex, Box } from 'blockstack-ui'
 
 const MiningListItem = ({ ...rest }) => <Flex {...rest} />
 const RenderItems = ({ items, noItemBorder, ...rest }) => (

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Box } from '@components/box'
+import { Box } from 'blockstack-ui'
 
 const StyledHeroSlider = styled(Box)`
   width: 100%;

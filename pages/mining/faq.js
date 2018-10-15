@@ -2,16 +2,16 @@ import * as React from 'react'
 import { Heading, Section } from '@pages/mining/shared'
 import { Box } from '@components/mining'
 import { MiningList } from '@components/mining/list'
-import { Type } from '@components/typography'
+import { Type } from 'blockstack-ui'
 
 const Question = ({ title, answer, ...rest }) => (
   <Box p={3} {...rest}>
     <Type.h3 fontWeight="300" color="white" pb={3}>
       {title}
     </Type.h3>
-    <Type.span opacity={0.5} lineHeight={1.45} color="white">
+    <Type opacity={0.5} lineHeight={1.45} color="white">
       {answer}
-    </Type.span>
+    </Type>
   </Box>
 )
 

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { MiningButton } from '@components/mining/button'
 import { MiningList } from '@components/mining/list'
 import { Section, Heading } from '@pages/mining/shared'
-import { Type } from '@components/typography'
+import { Type } from 'blockstack-ui'
 import { Flex } from '@components/mining'
 
 const ListItemText = (props) => <Type.h4 color="white" fontSize="18px" lineHeight={1.5} fontWeight={400} {...props} />

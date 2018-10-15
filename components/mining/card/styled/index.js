@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Flex } from '@components/mining/index'
+import { Flex } from 'blockstack-ui'
 
 const StyledCard = styled(Flex)`
   ${({ borders }) =>

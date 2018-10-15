@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Flex } from '@components/mining/index'
+import { Flex } from 'blockstack-ui'
 
 const StyledMiningButton = styled(Flex)`
   background: #11a9bc;
