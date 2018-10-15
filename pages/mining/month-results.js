@@ -1,11 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Flex, Box } from 'blockstack-ui'
-
+import { Flex, Box, Type } from 'blockstack-ui'
 import { Page } from '@components/page'
 import Head from '@containers/head'
 import { Section, Content, Hr } from '@components/mining-admin/month'
-import { Type } from 'blockstack-ui'
 import { Table, Th, SpacedTd, Td, Thead, SubReward } from '@components/mining-admin/table'
 import { AppLink, Name, Description, Container } from '@components/mining/registered-apps/styled'
 import { AppIcon } from '@components/app-icon'
@@ -23,11 +21,12 @@ class MonthResults extends React.Component {
   }
 
   title() {
-    return `App Mining Results for ${this.props.report.humanReadableDate}`
+    return `App Mining Results for ${this.props.report && this.props.report.humanReadableDate}`
   }
 
   rankings() {
     const { report } = this.props
+
     return report.compositeRankings.map((app, index) => (
       <tr>
         <SpacedTd display={['none', 'table-cell']}>{index + 1}</SpacedTd>
