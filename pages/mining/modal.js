@@ -248,10 +248,10 @@ class MiningModalComponent extends React.PureComponent {
               />
               <Label>Does your app have Blockstack Auth integrated?</Label>
               <Box onClick={() => this.handleChange('isBlockstackIntegrated', 'yes')}>
-                <Checkbox label="Yes" active={this.state.isBlockstackIntegrated === 'yes'} />
+                <Checkbox label="Yes, Blockstack Auth is implemented." active={this.state.isBlockstackIntegrated === 'yes'} />
               </Box>
               <Box onClick={() => this.handleChange('isBlockstackIntegrated', 'no')}>
-                <Checkbox label="No" active={this.state.isBlockstackIntegrated === 'no'} />
+                <Checkbox label="No, currently working to implement Blockstack Auth." active={this.state.isBlockstackIntegrated === 'no'} />
               </Box>
               <Flex pt={4}>
                 <MiningButton onClick={() => this.closeModal()}>Submit</MiningButton>
