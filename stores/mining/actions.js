@@ -1,33 +1,35 @@
-import * as Constants from './constants'
 import fetch from 'cross-fetch'
+import { SUBMIT_APP_STARTED, SUBMIT_APP_FINISHED, SUBMIT_APP_ERROR } from './constants'
 
 const submittingApp = () => ({
-  type: Constants.SUBMITTING_APP
+  type: SUBMIT_APP_STARTED
+})
+
+const submittingAppError = () => ({
+  type: SUBMIT_APP_ERROR
 })
 
 const submittedApp = () => ({
-  type: Constants.SUBMITTED_APP
+  type: SUBMIT_APP_FINISHED
 })
 
-const submitApp = (submission, apiServer) => async function innerSubmittingApp(dispatch) {
+const submitApp = (submission, apiServer) => async (dispatch) => {
   dispatch(submittingApp())
-  // send submission
-  console.log(submission)
-  const url = `${apiServer}/api/app-mining-submission`
-  await fetch(url, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json, text/plain, */*',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(submission)
-  })
-  dispatch(submittedApp())
-
-  // setTimeout(() => {
-  //   dispatch(submittedApp())
-  // }, 5000)
-  // dispatch(submittedApp())
+  try {
+    const url = `${apiServer}/api/app-mining-submission`
+    await fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(submission)
+    })
+    dispatch(submittedApp())
+  } catch (error) {
+    dispatch(submittingAppError())
+    throw Error(error)
+  }
 }
 
 export default {
