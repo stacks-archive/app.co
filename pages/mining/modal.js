@@ -132,9 +132,22 @@ const ModalContainer = ({ ...rest }) => (
 
 const emptyValue = (value) => !value || value === ''
 
+const Radios = ({ title, options, name, handleChange, state, ...rest }) => (
+  <Box {...rest}>
+    <Label>{title}</Label>
+    <Box onClick={() => handleChange(name, 'yes')}>
+      <Checkbox label={options[0]} active={state[name] === 'yes'} />
+    </Box>
+    <Box onClick={() => handleChange(name, 'no')}>
+      <Checkbox label={options[1]} active={state[name] === 'no'} />
+    </Box>
+  </Box>
+)
+
 class MiningModalComponent extends React.PureComponent {
   state = {
     isBlockstackIntegrated: 'yes',
+    appIsPublic: 'yes',
     firstName: '',
     lastName: '',
     email: '',
@@ -167,7 +180,8 @@ class MiningModalComponent extends React.PureComponent {
 
     const submission = {
       ...this.state,
-      isBlockstackIntegrated: this.state.isBlockstackIntegrated === 'yes'
+      isBlockstackIntegrated: this.state.isBlockstackIntegrated === 'yes',
+      appIsPublic: this.state.appIsPublic === 'yes'
     }
 
     if (this.validate(submission)) {
@@ -246,13 +260,24 @@ class MiningModalComponent extends React.PureComponent {
                 value={this.state.website}
                 onChange={({ target: { value } }) => this.handleChange('website', value)}
               />
-              <Label>Does your app have Blockstack Auth integrated?</Label>
-              <Box onClick={() => this.handleChange('isBlockstackIntegrated', 'yes')}>
-                <Checkbox label="Yes, Blockstack Auth is implemented." active={this.state.isBlockstackIntegrated === 'yes'} />
-              </Box>
-              <Box onClick={() => this.handleChange('isBlockstackIntegrated', 'no')}>
-                <Checkbox label="No, currently working to implement Blockstack Auth." active={this.state.isBlockstackIntegrated === 'no'} />
-              </Box>
+              <Radios
+                title="Does your app have Blockstack Auth integrated?"
+                options={[
+                  'Yes, Blockstack Auth is implemented.',
+                  'No, currently working to implement Blockstack Auth.'
+                ]}
+                name="isBlockstackIntegrated"
+                state={this.state}
+                handleChange={this.handleChange}
+              />
+              <Radios
+                title="Is your app publicly available?"
+                options={['Yes.', 'No.']}
+                name="appIsPublic"
+                state={this.state}
+                handleChange={this.handleChange}
+                pt={4}
+              />
               <Flex pt={4}>
                 <MiningButton onClick={() => this.closeModal()}>Submit</MiningButton>
               </Flex>
