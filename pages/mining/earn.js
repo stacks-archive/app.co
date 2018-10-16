@@ -7,6 +7,7 @@ import { MiningButton } from '@components/mining/button'
 import ArrowRightIcon from 'mdi-react/ArrowRightIcon'
 import { AppIcon } from '@components/app-icon'
 import { RankingContextConsumer } from '@pages/mining/index'
+import { Hover } from 'react-powerplug'
 
 const ListItemText = (props) => <Type.h4 color="white" fontSize="18px" lineHeight={1.5} fontWeight={400} {...props} />
 const AppItemText = (props) => <ListItemText color="#212D37" {...props} />
@@ -40,18 +41,23 @@ const AppItem = ({
 }) => {
   const earningsBackground = ['#DEDEDE', '#CFCFCF', '#B8B8B8', '#979797', '#828282'][i]
   const GradientItem = (props) => (
-    <Flex
-      is="a"
-      href={`https://${website}?ref=app-mining`}
-      target="_blank"
-      style={{ textDecoration: 'none' }}
-      width={1}
-      p={[3, 4]}
-      bg={`rgba(255,255,255, ${backgroundOpacity})`}
-      alignItems="center"
-      {...props}
-      {...rest}
-    />
+    <Hover>
+      {({ hovered, bind }) => (
+        <Flex
+          is="a"
+          href={`https://${website}?ref=app-mining`}
+          target="_blank"
+          style={{ textDecoration: 'none', transition: '0.2s all ease-in-out' }}
+          width={1}
+          p={[3, 4]}
+          bg={`rgba(255,255,255, ${hovered ? backgroundOpacity + 0.2 : backgroundOpacity - 0.05})`}
+          alignItems="center"
+          {...props}
+          {...rest}
+          {...bind}
+        />
+      )}
+    </Hover>
   )
   const AppRank = () => (
     <AppItemText opacity={0.5} mr={3}>
