@@ -91,6 +91,7 @@ const AppItem = ({
 
 const appRowBackgroundOpacities = [1, 0.89, 0.76, 0.6, 0.5]
 const appsArray = (apps) =>
+  apps &&
   apps.map((app, i) => (
     <AppItem
       key={i}
@@ -105,6 +106,7 @@ const appsArray = (apps) =>
 const Rankings = (props) => (
   <RankingContextConsumer>
     {({ rankings }) => {
+      if (!rankings) return null
       const apps = rankings
         .filter((app, i) => i < 5)
         .map(({ name, formattedUsdRewards, payout, imgixImageUrl, domain }) => ({
