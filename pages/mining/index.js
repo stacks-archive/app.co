@@ -7,6 +7,7 @@ import { How } from '@pages/mining/how'
 import { Why } from '@pages/mining/why'
 import { Closing } from '@pages/mining/closing'
 import { FAQ } from '@pages/mining/faq'
+import { Quotes } from '@pages/mining/quotes'
 import { Section, HeaderType } from '@pages/mining/shared'
 import Head from '@containers/head'
 import { MiningModal } from '@pages/mining/modal'
@@ -30,6 +31,7 @@ const sections = [
     </>
   ),
   (props) => <Earn id="how-to-earn" {...props} />,
+  (props) => <Quotes id="quotes-from-developers" {...props} />,
   (props) => <How id="how-ranking-works" {...props} />,
   (props) => <Why id="why" {...props} />,
   (props) => <Closing id="register-your-app" {...props} />,
@@ -67,10 +69,10 @@ class AppMiningPage extends React.PureComponent {
         />
         {this.state.modalShowing ? <MiningModal closeModal={() => this.closeModal()} /> : null}
         <Header />
-        <RankingContext.Provider value={{rankings: this.props.rankings}}>
-        {sections.map((PageSection, i) => (
-          <PageSection closeModal={() => this.closeModal()} openModal={() => this.openModal()} key={i} />
-        ))}
+        <RankingContext.Provider value={{ rankings: this.props.rankings }}>
+          {sections.map((PageSection, i) => (
+            <PageSection closeModal={() => this.closeModal()} openModal={() => this.openModal()} key={i} />
+          ))}
         </RankingContext.Provider>
       </MiningPage>
     )
