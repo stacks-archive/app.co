@@ -153,6 +153,7 @@ class MiningModalComponent extends React.PureComponent {
     email: '',
     appName: '',
     website: '',
+    repo: '',
     error: null
   }
   componentDidMount() {
@@ -165,9 +166,15 @@ class MiningModalComponent extends React.PureComponent {
 
   handleChange = (key, value) => this.setState({ [key]: value })
 
-  validate = (submission) => {
+  validate = (submission, blacklist) => {
+    const keysToIgnore = [...blacklist, 'error']
     let valid = true
-    Object.entries(submission).forEach(([key, value]) => (emptyValue(value) ? (valid = false) : null))
+    Object.entries(submission).forEach(([key, value]) => {
+      if (!keysToIgnore.find((item) => item === key) && emptyValue(value)) {
+        console.log(`${key} empty:`, emptyValue(value))
+        valid = false
+      }
+    })
     return valid
   }
 
@@ -184,10 +191,10 @@ class MiningModalComponent extends React.PureComponent {
       appIsPublic: this.state.appIsPublic === 'yes'
     }
 
-    if (this.validate(submission)) {
-      this.props.submitApp(submission, this.props.apiServer)
+    if (this.validate(submission, ['repo'])) {
+      return this.props.submitApp(submission, this.props.apiServer)
     }
-    this.setState({ error: 'Please make sure all fields are filled in.' })
+    return this.setState({ error: 'Please make sure all fields are filled in.' })
   }
 
   render() {
@@ -260,6 +267,13 @@ class MiningModalComponent extends React.PureComponent {
                 value={this.state.website}
                 onChange={({ target: { value } }) => this.handleChange('website', value)}
               />
+              <InputGroup
+                label="Public Repository (GitHub, etc)*"
+                name="repo"
+                type="url"
+                value={this.state.repo}
+                onChange={({ target: { value } }) => this.handleChange('repo', value)}
+              />
               <Radios
                 title="Does your app have Blockstack Auth integrated?"
                 options={[
@@ -281,6 +295,9 @@ class MiningModalComponent extends React.PureComponent {
               <Flex pt={4}>
                 <MiningButton onClick={() => this.closeModal()}>Submit</MiningButton>
               </Flex>
+              <Type pt={4} fontSize={1} opacity={0.75}>
+                * Optional Field
+              </Type>
             </>
           ) : null}
         </ModalContainer>
