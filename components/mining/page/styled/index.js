@@ -12,7 +12,7 @@ const Global = createGlobalStyle`  html,
     &:visited,
     &:active {
       text-decoration: underline;
-      color: currentColor;
+      color: currentColor !important;
     }
     &:hover {
       text-decoration: none;

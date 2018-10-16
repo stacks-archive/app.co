@@ -11,12 +11,14 @@ const Quote = ({ quote, ...rest }) => (
 )
 
 const Quotee = ({ photo, name, title, ...rest }) => (
-  <Flex mt={3} alignItems="center" justifyContent="flex-end" {...rest}>
+  <Flex mt={3} alignItems="center" justifyContent={['center', 'flex-end']} {...rest}>
     <Avatar mr={3} photo={photo} />
-    <Type fontSize={2} color={'white'}>
-      {name}
-    </Type>
-    <Type pl={2}>{title}</Type>
+    <Flex alignItems={['flex-start', 'center']} flexDirection={['column', 'row']}>
+      <Type fontSize={2} color="white">
+        {name}
+      </Type>
+      <Type pl={[0, 2]}>{title}</Type>
+    </Flex>
   </Flex>
 )
 
@@ -86,7 +88,7 @@ const Quotes = ({ ...props }) => (
     <Section minHeight="40vh" justifyContent="flex-end" mt={6} flexDirection="column" {...props}>
       <Box mx="auto">
         {quotes.map(({ quote, quotee: { name, title, photo } }, i) => (
-          <Box pb={6} mb={2} key={i} maxWidth={[0.8, '700px']}>
+          <Box pb={6} mb={2} key={i} maxWidth={['100%', '700px']}>
             <Quote quote={quote} />
             <Quotee title={title} photo={photo} name={name} />
           </Box>
