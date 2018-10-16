@@ -9,6 +9,8 @@ import CheckboxBlankCircleOutlineIcon from 'mdi-react/CheckboxBlankCircleOutline
 import CheckboxMarkedCircleOutlineIcon from 'mdi-react/CheckboxMarkedCircleOutlineIcon'
 import { Fixed } from 'rebass'
 
+import { object, string, bool } from 'yup'
+
 import { HeaderType } from '@pages/mining/shared'
 import { Box, Flex, Input as SystemInput } from '@components/mining'
 import { Type } from 'blockstack-ui'
@@ -79,19 +81,19 @@ const AnimatedLabel = ({ focused, position = 'absolute', ...props }) => (
 
 const InputGroup = ({ name, label, type, placeholder, onChange, value, autoFocus, ...rest }) => (
   <Compose components={[Focus, InputPowerplug]}>
-    {({ focused, bind }) => (
+    {(focus) => (
       <Box mb="35px" position="relative" {...rest}>
-        {label ? <AnimatedLabel focused={focused || value !== ''}>{label}</AnimatedLabel> : null}
+        {label ? <AnimatedLabel focused={focus.focused || value}>{label}</AnimatedLabel> : null}
         <Input
           name={name}
           type={type}
           placeholder={placeholder}
           autoFocus={autoFocus}
-          focused={focused}
+          focused={focus.focused}
           onChange={onChange}
           value={value}
           required
-          {...bind}
+          {...focus.bind}
         />
       </Box>
     )}
@@ -135,27 +137,52 @@ const emptyValue = (value) => !value || value === ''
 const Radios = ({ title, options, name, handleChange, state, ...rest }) => (
   <Box {...rest}>
     <Label>{title}</Label>
-    <Box onClick={() => handleChange(name, 'yes')}>
-      <Checkbox label={options[0]} active={state[name] === 'yes'} />
+    <Box onClick={() => handleChange(name, true)}>
+      <Checkbox label={options[0]} active={state[name] === true} />
     </Box>
-    <Box onClick={() => handleChange(name, 'no')}>
-      <Checkbox label={options[1]} active={state[name] === 'no'} />
+    <Box onClick={() => handleChange(name, false)}>
+      <Checkbox label={options[1]} active={state[name] === false} />
     </Box>
   </Box>
 )
 
 class MiningModalComponent extends React.PureComponent {
   state = {
-    isBlockstackIntegrated: 'yes',
-    appIsPublic: 'yes',
-    firstName: '',
-    lastName: '',
-    email: '',
-    appName: '',
-    website: '',
-    repo: '',
+    isBlockstackIntegrated: true,
+    appIsPublic: true,
+    firstName: null,
+    lastName: null,
+    email: null,
+    appName: null,
+    website: null,
+    repo: null,
     error: null
   }
+  schema = object().shape({
+    repo: string()
+      .url()
+      .nullable(),
+    appIsPublic: bool().required(),
+    isBlockstackIntegrated: bool().required(),
+    website: string()
+      .nullable()
+      .url()
+      .required('Please provide a website URL for your dApp.'),
+    email: string()
+      .nullable()
+      .email()
+      .required('Please provide an email address we can reach you at.'),
+    appName: string()
+      .required('Please provide the name of your dApp')
+      .nullable(),
+    lastName: string()
+      .required('Please provide a Last Name.')
+      .nullable(),
+    firstName: string()
+      .required('Please provide a First Name.')
+      .nullable()
+  })
+
   componentDidMount() {
     document.body.classList.add('no-scroll')
   }
@@ -166,35 +193,28 @@ class MiningModalComponent extends React.PureComponent {
 
   handleChange = (key, value) => this.setState({ [key]: value })
 
-  validate = (submission, blacklist) => {
-    const keysToIgnore = [...blacklist, 'error']
-    let valid = true
-    Object.entries(submission).forEach(([key, value]) => {
-      if (!keysToIgnore.find((item) => item === key) && emptyValue(value)) {
-        console.log(`${key} empty:`, emptyValue(value))
-        valid = false
-      }
-    })
-    return valid
-  }
+  closeModal = async () => {
+    const { error, ...submission } = this.state
 
-  closeModal = () => {
-    if (this.state.error) {
+    if (error) {
       this.setState({
         error: null
       })
     }
 
-    const submission = {
-      ...this.state,
-      isBlockstackIntegrated: this.state.isBlockstackIntegrated === 'yes',
-      appIsPublic: this.state.appIsPublic === 'yes'
+    let valid = false
+    try {
+      valid = await this.schema.validate(submission)
+    } catch (e) {
+      if (e.errors && e.errors.length) {
+        return this.setState({ error: e.errors[0] })
+      }
     }
 
-    if (this.validate(submission, ['repo'])) {
+    if (valid) {
       return this.props.submitApp(submission, this.props.apiServer)
     }
-    return this.setState({ error: 'Please make sure all fields are filled in.' })
+    return this.setState({ error: 'Please make sure all fields are filled in correctly.' })
   }
 
   render() {

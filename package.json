@@ -100,7 +100,8 @@
     "system-components": "^3.0.1",
     "tinycolor2": "^1.4.1",
     "twitter": "^1.7.1",
-    "universal-cookie-express": "^2.2.0"
+    "universal-cookie-express": "^2.2.0",
+    "yup": "^0.26.6"
   },
   "devDependencies": {
     "@babel/core": "7.1.2",
