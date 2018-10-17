@@ -15,6 +15,7 @@ import { HeaderType } from '@pages/mining/shared'
 import { Box, Flex, Input as SystemInput } from '@components/mining'
 import { Type } from 'blockstack-ui'
 import { MiningButton } from '@components/mining/button'
+import { trackEvent } from '@utils'
 
 import MiningActions from '@stores/mining/actions'
 import { selectApiServer } from '@stores/apps/selectors'
@@ -220,6 +221,9 @@ class MiningModalComponent extends React.PureComponent {
     }
 
     if (valid) {
+      trackEvent('App Mining Registered', {
+        event_category: 'Mining'
+      })
       return this.props.submitApp(submission, this.props.apiServer)
     }
     return this.setState({ error: 'Please make sure all fields are filled in correctly.' })

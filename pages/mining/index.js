@@ -15,6 +15,7 @@ import { MiningModal } from '@pages/mining/modal'
 import { selectApiServer } from '@stores/apps/selectors'
 import { connect } from 'react-redux'
 import Link from 'next/link'
+import { trackEvent } from '@utils'
 
 const RankingContext = React.createContext({})
 
@@ -71,7 +72,12 @@ class AppMiningPage extends React.PureComponent {
     modalShowing: false
   }
   closeModal = () => this.setState({ modalShowing: false })
-  openModal = () => this.setState({ modalShowing: true })
+  openModal = () => {
+    trackEvent('Open App Mining Registration Modal', {
+      event_category: 'Mining'
+    })
+    this.setState({ modalShowing: true })
+  }
 
   render() {
     return (
