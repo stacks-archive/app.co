@@ -136,13 +136,15 @@ const emptyValue = (value) => !value || value === ''
 
 const Radios = ({ title, options, name, handleChange, state, ...rest }) => (
   <Box {...rest}>
-    <Label>{title}</Label>
+    {title ? <Label>{title}</Label> : null}
     <Box onClick={() => handleChange(name, true)}>
       <Checkbox label={options[0]} active={state[name] === true} />
     </Box>
-    <Box onClick={() => handleChange(name, false)}>
-      <Checkbox label={options[1]} active={state[name] === false} />
-    </Box>
+    {options[1] ? (
+      <Box onClick={() => handleChange(name, false)}>
+        <Checkbox label={options[1]} active={state[name] === false} />
+      </Box>
+    ) : null}
   </Box>
 )
 
@@ -156,6 +158,7 @@ class MiningModalComponent extends React.PureComponent {
     appName: null,
     website: null,
     repo: null,
+    agreeToTerms: false,
     error: null
   }
   schema = object().shape({
@@ -192,9 +195,10 @@ class MiningModalComponent extends React.PureComponent {
   }
 
   handleChange = (key, value) => this.setState({ [key]: value })
+  handleToggle = (key) => this.setState((state) => ({ [key]: !state[key] }))
 
   closeModal = async () => {
-    const { error, website, repo, ...rest } = this.state
+    const { error, agreeToTerms, website, repo, ...rest } = this.state
 
     const supportUrlsWithoutHttp = (url) => url && (url.includes('.') && !url.includes('http') ? `http://${url}` : url)
 
@@ -218,7 +222,23 @@ class MiningModalComponent extends React.PureComponent {
         return this.setState({ error: e.errors[0] })
       }
     }
-
+    if (!agreeToTerms) {
+      return this.setState({
+        error: (
+          <>
+            You must agree to our{' '}
+            <Type is="a" href="/mining/terms">
+              Terms of Service
+            </Type>{' '}
+            and{' '}
+            <Type is="a" href="/mining/privacy">
+              Privacy Policy
+            </Type>{' '}
+            to submit your app.
+          </>
+        )
+      })
+    }
     if (valid) {
       return this.props.submitApp(submission, this.props.apiServer)
     }
@@ -318,6 +338,24 @@ class MiningModalComponent extends React.PureComponent {
                 name="appIsPublic"
                 state={this.state}
                 handleChange={this.handleChange}
+                pt={4}
+              />
+              <Radios
+                options={[
+                  <>
+                    I agree to the{' '}
+                    <Type is="a" href="/mining/terms">
+                      Terms of Service
+                    </Type>{' '}
+                    and{' '}
+                    <Type is="a" href="/mining/privacy">
+                      Privacy Policy
+                    </Type>
+                  </>
+                ]}
+                name="agreeToTerms"
+                state={this.state}
+                handleChange={this.handleToggle}
                 pt={4}
               />
               <Flex pt={4}>
