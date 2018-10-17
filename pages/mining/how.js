@@ -2,7 +2,6 @@ import * as React from 'react'
 import { Heading, Section } from '@pages/mining/shared'
 import { Box, Img, Flex } from '@components/mining'
 import { Card } from '@components/mining/card'
-import { LogoWordmark } from '@components/mining/logo'
 import { Type } from 'blockstack-ui'
 import { CheckMark } from '@components/svg'
 
@@ -63,7 +62,7 @@ const How = ({ ...props }) => (
         </ListCheckItem>
         <ListCheckItem>Any user-ready app on App.co with Blockstack authentication or storage.</ListCheckItem>
         <ListCheckItem>
-          Reviewers use their proprietary data to rank App.co apps. <a href="/blockstack">View rankings.</a>
+          Reviewers use their proprietary data to rank App.co apps. <a href="/mining/september-2018">View rankings.</a>
         </ListCheckItem>
         <ListCheckItem>Reviewers, criteria, and rankings are made public each month.</ListCheckItem>
       </Box>

@@ -15,6 +15,7 @@ import { MiningModal } from '@pages/mining/modal'
 import { selectApiServer } from '@stores/apps/selectors'
 import { connect } from 'react-redux'
 import Link from 'next/link'
+
 const RankingContext = React.createContext({})
 
 const mapStateToProps = (state) => ({
