@@ -165,7 +165,7 @@ const ActionBar = () => (
     <Box borderTop="1px solid white" />
     <MiningButton mx="auto" width="250px" bg="#EF6F6F" alignItems="center" style={{ transform: 'translateY(-25px)' }}>
       <Box>
-        <a href="/app-mining/september-2018" style={{ textDecoration: 'none' }}>
+        <a href="/mining/september-2018" style={{ textDecoration: 'none' }}>
           View all apps
         </a>
       </Box>

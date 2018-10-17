@@ -84,9 +84,9 @@ app.prepare().then(() => {
     server.get('/submit', (req, res) => renderAndCache(req, res, '/submit'))
     server.get('/all', (req, res) => renderAndCache(req, res, '/all'))
 
-    server.get('/app-mining/developer-instructions', (req, res) => renderAndCache(req, res, '/mining/developer-instructions'))
-    server.get('/app-mining/reviewer-instructions', (req, res) => renderAndCache(req, res, '/mining/reviewer-instructions'))
-    server.get('/app-mining/:date', (req, res) => {
+    server.get('/mining/developer-instructions', (req, res) => renderAndCache(req, res, '/mining/developer-instructions'))
+    server.get('/mining/reviewer-instructions', (req, res) => renderAndCache(req, res, '/mining/reviewer-instructions'))
+    server.get('/mining/:date', (req, res) => {
       const { date } = req.params
       const [month, year] = date.split('-')
       renderAndCache(req, res, '/mining/month-results', { month, year, fetchMiningResults: true })
