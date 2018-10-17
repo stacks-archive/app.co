@@ -160,7 +160,7 @@ class MiningModalComponent extends React.PureComponent {
   }
   schema = object().shape({
     repo: string()
-      .url()
+      .url("Looks like the URL for your Public Repository isn't formatted correctly!")
       .nullable(),
     appIsPublic: bool().required(),
     isBlockstackIntegrated: bool().required(),
@@ -194,12 +194,13 @@ class MiningModalComponent extends React.PureComponent {
   handleChange = (key, value) => this.setState({ [key]: value })
 
   closeModal = async () => {
-    const { error, website, ...rest } = this.state
+    const { error, website, repo, ...rest } = this.state
 
-    const supportUrlsWithoutHttp = (url) => (url.includes('.') && !url.includes('http') ? `http://${url}` : url)
+    const supportUrlsWithoutHttp = (url) => url && (url.includes('.') && !url.includes('http') ? `http://${url}` : url)
 
     const submission = {
       ...rest,
+      repo: supportUrlsWithoutHttp(repo),
       website: supportUrlsWithoutHttp(website)
     }
 
