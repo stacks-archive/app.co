@@ -72,7 +72,7 @@ const quotes = [
     quote: `App rewards mining allows Blockusign to focus on what we do best, BUILD! It provides us with the extra incentive to keep forging ahead and iterating in this brand-new ecosystem - without having to worry about finding early stage funding. We truly feel included in this passionate community of people, from around the world, that believe in building the decentralized open web.`,
     quotee: {
       name: 'Nick Tee',
-      photo: null,
+      photo: 'https://file-cpvefljisa.now.sh',
       title: (
         <>
           Founder of{' '}
