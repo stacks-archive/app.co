@@ -42,8 +42,8 @@ class AppMiningPage extends React.PureComponent {
   static async getInitialProps({ query }) {
     if (!query) return {}
     try {
-      // const res = await fetch(`${query.apiServer}/api/app-mining-months`)
-      const res = await fetch(`https://app-co-api.herokuapp.com/api/app-mining-months`)
+      const res = await fetch(`${query.apiServer}/api/app-mining-months`)
+      // const res = await fetch(`https://app-co-api.herokuapp.com/api/app-mining-months`)
       const { months } = await res.json()
       if (months && months.length) {
         return { rankings: months[0].compositeRankings }
