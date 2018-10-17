@@ -110,6 +110,7 @@ app.prepare().then(() => {
     server.get('/faq', (req, res) => renderAndCache(req, res, '/faq'))
     server.get('/submit', (req, res) => renderAndCache(req, res, '/submit'))
     server.get('/all', (req, res) => renderAndCache(req, res, '/all'))
+    server.get('/terms', (req, res) => renderAndCache(req, res, '/terms'))
 
     /**
      * Admin Pages
