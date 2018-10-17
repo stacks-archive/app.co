@@ -166,7 +166,7 @@ class MiningModalComponent extends React.PureComponent {
     isBlockstackIntegrated: bool().required(),
     website: string()
       .nullable()
-      .url()
+      .url('Please make sure your website URL is formatted correctly.')
       .required('Please provide a website URL for your dApp.'),
     email: string()
       .nullable()
@@ -194,7 +194,14 @@ class MiningModalComponent extends React.PureComponent {
   handleChange = (key, value) => this.setState({ [key]: value })
 
   closeModal = async () => {
-    const { error, ...submission } = this.state
+    const { error, website, ...rest } = this.state
+
+    const supportUrlsWithoutHttp = (url) => (url.includes('.') && !url.includes('http') ? `http://${url}` : url)
+
+    const submission = {
+      ...rest,
+      website: supportUrlsWithoutHttp(website)
+    }
 
     if (error) {
       this.setState({
