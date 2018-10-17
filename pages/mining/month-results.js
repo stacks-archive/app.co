@@ -5,8 +5,8 @@ import { Page } from '@components/page'
 import Head from '@containers/head'
 import { bindActionCreators } from 'redux'
 import { Section, Content } from '@components/mining-admin/month'
-import { Table, Th, SpacedTd, Td, Thead, SubReward } from '@components/mining-admin/table'
-import { AppLink, Name, Description, Container } from '@components/mining/registered-apps/styled'
+import { Table, Th, SpacedTd, Td, Thead, SubReward, ClickableTr } from '@components/mining-admin/table'
+import { AppLink, Name, Description, Container, Rank, Rewards } from '@components/mining/registered-apps/styled'
 import { AppIcon } from '@components/app-icon'
 import { Button } from '@components/mining-admin/collapsable'
 import Reviewer from '@components/mining/reviewer'
@@ -40,7 +40,7 @@ class MonthResults extends React.Component {
     const { report } = this.props
 
     return report.compositeRankings.map((app, index) => (
-      <tr>
+      <ClickableTr>
         <SpacedTd display={['none', 'table-cell']}
           style={{ cursor: 'pointer' }} onClick={(evt) => this.handleAppClick(evt, app)}
         >
@@ -50,12 +50,24 @@ class MonthResults extends React.Component {
           <AppLink style={{borderTop: 'none'}}>
             <AppIcon src={app.imgixImageUrl} size={48} alt={app.name} />
             <Container>
-              <Name>{app.name}</Name>
-              <Description>{app.description}</Description>
+              <Name>
+                <Rank>{index + 1}{'. '}</Rank>
+                {app.name}
+              </Name>
+              <Description>
+                <Type.span fontSize="1em" display="block">{app.description}</Type.span>
+                <Rewards>
+                  <Type.strong fontSize="1em">Monthy rewards:</Type.strong>
+                  {' '}{app.formattedUsdRewards} ({app.payout.BTCPaymentValue / 10e7} BTC)
+                </Rewards>
+              </Description>
             </Container>
           </AppLink>
         </Td>
-        <SpacedTd style={{ cursor: 'pointer' }} onClick={(evt) => this.handleAppClick(evt, app)}>
+        <SpacedTd 
+          style={{ cursor: 'pointer' }} 
+          onClick={(evt) => this.handleAppClick(evt, app)}
+          display={['none', 'table-cell']}>
           {app.payout && (
             <>
               {app.formattedUsdRewards}
@@ -65,7 +77,7 @@ class MonthResults extends React.Component {
             </>
           )}
         </SpacedTd>
-      </tr>
+      </ClickableTr>
     ))
   }
 
@@ -93,8 +105,8 @@ class MonthResults extends React.Component {
               <Thead>
                 <tr>
                   <Th display={['none', 'table-cell']}>Rank</Th>
-                  <Th>App</Th>
-                  <Th>Monthly Rewards</Th>
+                  <Th display={['none', 'table-cell']}>App</Th>
+                  <Th display={['none', 'table-cell']}>Monthly Rewards</Th>
                 </tr>
               </Thead>
               <tbody>

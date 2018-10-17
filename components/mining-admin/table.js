@@ -23,6 +23,13 @@ export const Thead = Styled.thead`
   border-top: 1px solid #e6e9ee;
 `
 
+export const ClickableTr = Styled.tr`
+  cursor: pointer;
+  &:hover { 
+    background: #f3f5f9;
+  }
+`
+
 export const Td = Styled.td`
   ${width};
   ${display};
