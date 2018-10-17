@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { MiningPage } from '@components/mining/page'
-import { AppIcon } from '@components/logos'
 import { Hero, Steps } from '@pages/mining/hero'
 import { Earn } from '@pages/mining/earn'
 import { How } from '@pages/mining/how'
@@ -8,7 +7,7 @@ import { Why } from '@pages/mining/why'
 import { Closing } from '@pages/mining/closing'
 import { FAQ } from '@pages/mining/faq'
 import { Quotes } from '@pages/mining/quotes'
-import { Section, HeaderType } from '@pages/mining/shared'
+import { Header } from '@pages/mining/shared'
 import Head from '@containers/head'
 import { Type, Flex } from 'blockstack-ui'
 import { MiningModal } from '@pages/mining/modal'
@@ -22,21 +21,6 @@ const RankingContext = React.createContext({})
 const mapStateToProps = (state) => ({
   apiServer: selectApiServer(state)
 })
-
-const Header = () => (
-  <Section>
-    <HeaderType mr={2}>App Mining by</HeaderType> <AppIcon size={32} m={2} />
-    <HeaderType ml={2}>
-      <a href="https://app.co" target="_blank">
-        App.co
-      </a>{' '}
-      and{' '}
-      <a href="https://blockstack.org" target="_blank">
-        Blockstack
-      </a>
-    </HeaderType>
-  </Section>
-)
 
 const sections = [
   (props) => (
