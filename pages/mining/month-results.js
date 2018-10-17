@@ -3,12 +3,16 @@ import { connect } from 'react-redux'
 import { Flex, Box, Type } from 'blockstack-ui'
 import { Page } from '@components/page'
 import Head from '@containers/head'
-import { Section, Content, Hr } from '@components/mining-admin/month'
+import { bindActionCreators } from 'redux'
+import { Section, Content } from '@components/mining-admin/month'
 import { Table, Th, SpacedTd, Td, Thead, SubReward } from '@components/mining-admin/table'
 import { AppLink, Name, Description, Container } from '@components/mining/registered-apps/styled'
 import { AppIcon } from '@components/app-icon'
 import { Button } from '@components/mining-admin/collapsable'
 import Reviewer from '@components/mining/reviewer'
+import Modal from '@containers/modals/app'
+
+import AppStore from '@stores/apps'
 
 class MonthResults extends React.Component {
   static getInitialProps(context) {
@@ -24,13 +28,25 @@ class MonthResults extends React.Component {
     return `App Mining Results for ${this.props.report && this.props.report.humanReadableDate}`
   }
 
+  handleAppClick(event, app) {
+    const altKey = event.metaKey || event.altKey || event.ctrlKey
+    if (altKey) {
+      return window.open(`/app/${app.slug}`)
+    }
+    return this.props.doSelectApp(app.id)
+  }
+
   rankings() {
     const { report } = this.props
 
     return report.compositeRankings.map((app, index) => (
       <tr>
-        <SpacedTd display={['none', 'table-cell']}>{index + 1}</SpacedTd>
-        <Td>
+        <SpacedTd display={['none', 'table-cell']}
+          style={{ cursor: 'pointer' }} onClick={(evt) => this.handleAppClick(evt, app)}
+        >
+          {index + 1}
+        </SpacedTd>
+        <Td style={{ cursor: 'pointer' }} onClick={(evt) => this.handleAppClick(evt, app)}>
           <AppLink style={{borderTop: 'none'}}>
             <AppIcon src={app.imgixImageUrl} size={48} alt={app.name} />
             <Container>
@@ -39,7 +55,7 @@ class MonthResults extends React.Component {
             </Container>
           </AppLink>
         </Td>
-        <SpacedTd>
+        <SpacedTd style={{ cursor: 'pointer' }} onClick={(evt) => this.handleAppClick(evt, app)}>
           {app.payout && (
             <>
               {app.formattedUsdRewards}
@@ -63,12 +79,15 @@ class MonthResults extends React.Component {
   render() {
     const { report } = this.props
     return (
-      <Page>
+      <Page wrap={false}>
         <Head title={this.title()} />
-        <Flex width={1} px={[1, 5]} mb={5} flexDirection={['column', 'column', 'column', 'row']} justifyContent="space-between" flexWrap="wrap">
+        <Flex width={1} px={[1, 3]} mb={5} flexDirection={['column', 'column', 'column', 'row']} justifyContent="space-between" flexWrap="wrap">
           <Box width={[ 1, 1, 1, 2/3 ]}>
             <Section>
-              <h2>{this.title()}</h2>
+              <h2>
+                {this.title()}
+                {report.name && ` (${report.name})`}
+              </h2>
             </Section>
             <Table>
               <Thead>
@@ -76,7 +95,6 @@ class MonthResults extends React.Component {
                   <Th display={['none', 'table-cell']}>Rank</Th>
                   <Th>App</Th>
                   <Th>Monthly Rewards</Th>
-                  {/* <Th>Total rewards to date</Th> */}
                 </tr>
               </Thead>
               <tbody>
@@ -105,11 +123,11 @@ class MonthResults extends React.Component {
                   Note: USD values displayed for payouts made in BTC were determined based on the exchange rate at the time of conversion on {report.friendlyPurchasedAt}.
                 </Type.p>
                 {this.reviewers()}
-                {/* <Type.p fontWeight="700">Ranking algorithm notes</Type.p> */}
               </Content>
             </Section>
           </Box>
         </Flex>
+        <Modal doGoBack={false}/>
       </Page>
     )
   }
@@ -129,4 +147,8 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps)(MonthResults)
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Object.assign({}, AppStore.actions), dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MonthResults)

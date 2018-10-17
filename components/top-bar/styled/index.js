@@ -61,6 +61,9 @@ const StyledTopBar = styled.div`
 
 const Wrapper = styled.div`
   ${wrapperStyle};
+  ${({ wrap }) => wrap === false && css`
+    max-width: none;
+  `}
   height: 65px;
   display: flex;
   justify-content: space-between;

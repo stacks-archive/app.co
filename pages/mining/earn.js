@@ -36,6 +36,7 @@ const AppItem = ({
   index,
   appIcon,
   length,
+  slug,
   backgroundOpacity,
   ...rest
 }) => {
@@ -45,7 +46,7 @@ const AppItem = ({
       {({ hovered, bind }) => (
         <Flex
           is="a"
-          href={`https://${website}?ref=app-mining`}
+          href={`/app/${slug}`}
           target="_blank"
           style={{ textDecoration: 'none', transition: '0.2s all ease-in-out' }}
           width={1}
@@ -115,16 +116,22 @@ const Rankings = (props) => (
       if (!rankings) return null
       const apps = rankings
         .filter((app, i) => i < 5)
-        .map(({ name, formattedUsdRewards, payout, imgixImageUrl, domain }) => ({
-          name,
-          earnings: {
-            usd: formattedUsdRewards,
-            btc: payout.BTC
-          },
-          tags: ['Blockstack Auth', 'Gaia'],
-          appIcon: imgixImageUrl,
-          website: domain
-        }))
+        .map(({ name, formattedUsdRewards, payout, imgixImageUrl, domain, authentication, storageNetwork, slug }) => {
+          const tags = []
+          if (authentication) tags.push(authentication)
+          if (storageNetwork) tags.push(storageNetwork)
+          return {
+            name,
+            earnings: {
+              usd: formattedUsdRewards,
+              btc: payout.BTC
+            },
+            tags,
+            appIcon: imgixImageUrl,
+            website: domain,
+            slug
+          }
+        })
       return (
         <Section flexDirection="column" {...props}>
           <MiningList

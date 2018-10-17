@@ -14,10 +14,10 @@ import { Navigation } from '@components/navigation'
 const handleBodyScroll = (on) =>
   on ? document.body.classList.remove('no-scroll') : document.body.classList.add('no-scroll')
 
-const TopBar = ({ isErrorPage, admin, ...props }) => (
+const TopBar = ({ isErrorPage, admin, wrap, ...props }) => (
   <Headroom>
     <StyledTopBar {...props}>
-      <StyledTopBar.Wrapper wrap>
+      <StyledTopBar.Wrapper wrap={wrap}>
         <StyledTopBar.Section grow>
           {isErrorPage ? (
             <a href="/">

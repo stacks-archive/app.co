@@ -26,7 +26,8 @@ class MiningMonth extends React.Component {
     purchaseExchangeName: '',
     BTCTransactionId: '',
     purchaseConversionRate: '',
-    status: ''
+    status: '',
+    name: ''
   }
 
   static propTypes = {
@@ -162,6 +163,28 @@ class MiningMonth extends React.Component {
             <ReportStatus status={this.state.status} />
           </StyledMonth.Content>
         </StyledMonth.Section>
+
+        <Collapsable title="General Information">
+          <div style={{ paddingBottom: '1em' }}>
+            <Table>
+              <tbody>
+                <tr>
+                  <FormTd>
+                    Report Name
+                  </FormTd>
+                  <FormTd textAlign="right">
+                    <Input
+                      type="text"
+                      value={this.state.name}
+                      onChange={(evt) => this.setState({ name: evt.target.value })}
+                    />
+                  </FormTd>
+                </tr>
+              </tbody>
+            </Table>
+            <Button onClick={() => this.save()}>Save</Button>
+          </div>
+        </Collapsable>
 
         <Collapsable title="BTC transactions">
           <div style={{paddingBottom: '1em'}}>
