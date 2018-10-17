@@ -2322,15 +2322,14 @@ bl@^1.0.0:
     readable-stream "^2.3.5"
     safe-buffer "^5.1.1"
 
-blockstack-ui@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/blockstack-ui/-/blockstack-ui-0.0.6.tgz#306ce45b09e0a3826d8cbdb38759b08da4c1c26c"
+blockstack-ui@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/blockstack-ui/-/blockstack-ui-0.0.8.tgz#d3c9e062ad71e04e45e6040622445d323ae1c935"
   dependencies:
     clean-element "^1.0.2"
     clean-tag "^2.0.0"
     epitath "^1.0.0-beta.1"
     react-powerplug "^1.0.0-rc.1"
-    shevyjs "^1.1.0"
     styled-system "^3.1.6"
 
 blockstack@^18.0.4:
