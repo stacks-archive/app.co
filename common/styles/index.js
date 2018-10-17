@@ -63,8 +63,7 @@ const theme = {
     256
   ],
   fonts: {
-    normal: SystemTheme.fonts.normal,
-    ui: SystemTheme.fonts.normal,
+    default: SystemTheme.fonts.normal,
     brand: SystemTheme.fonts.normal
   },
   colors: {
