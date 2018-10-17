@@ -1,16 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { Flex, Box } from 'grid-styled'
 
 import { Page } from '@components/page'
 import Head from '@containers/head'
-import { Section, Content, Hr } from '@components/mining-admin/month'
+import { Section, Content } from '@components/mining-admin/month'
 import { Type } from '@components/typography'
 import { Table, Th, SpacedTd, Td, Thead, SubReward } from '@components/mining-admin/table'
 import { AppLink, Name, Description, Container } from '@components/mining/registered-apps/styled'
 import { AppIcon } from '@components/app-icon'
 import { Button } from '@components/mining-admin/collapsable'
 import Reviewer from '@components/mining/reviewer'
+import Modal from '@containers/modals/app'
+
+import AppStore from '@stores/apps'
 
 class MonthResults extends React.Component {
   static getInitialProps(context) {
@@ -26,12 +30,25 @@ class MonthResults extends React.Component {
     return `App Mining Results for ${this.props.report.humanReadableDate}`
   }
 
+  handleAppClick(event, app) {
+    // console.log(app)
+    const altKey = event.metaKey || event.altKey || event.ctrlKey
+    if (altKey) {
+      return window.open(`/app/${app.slug}`)
+    }
+    return this.props.doSelectApp(app.id)
+  }
+
   rankings() {
     const { report } = this.props
     return report.compositeRankings.map((app, index) => (
       <tr>
-        <SpacedTd display={['none', 'table-cell']}>{index + 1}</SpacedTd>
-        <Td>
+        <SpacedTd display={['none', 'table-cell']} 
+          style={{ cursor: 'pointer' }} onClick={(evt) => this.handleAppClick(evt, app)}
+        >
+          {index + 1}
+        </SpacedTd>
+        <Td style={{ cursor: 'pointer' }} onClick={(evt) => this.handleAppClick(evt, app)}>
           <AppLink style={{borderTop: 'none'}}>
             <AppIcon src={app.imgixImageUrl} size={48} alt={app.name} />
             <Container>
@@ -40,7 +57,7 @@ class MonthResults extends React.Component {
             </Container>
           </AppLink>
         </Td>
-        <SpacedTd>
+        <SpacedTd style={{ cursor: 'pointer' }} onClick={(evt) => this.handleAppClick(evt, app)}>
           {app.payout && (
             <>
               {app.formattedUsdRewards}
@@ -114,6 +131,7 @@ class MonthResults extends React.Component {
             </Section>
           </Box>
         </Flex>
+        <Modal doGoBack={false}/>
       </Page>
     )
   }
@@ -133,4 +151,8 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps)(MonthResults)
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Object.assign({}, AppStore.actions), dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MonthResults)

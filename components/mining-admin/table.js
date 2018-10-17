@@ -28,7 +28,7 @@ export const Td = Styled.td`
   ${display};
   border-top: 1px solid #e6e9ee;
   text-align: ${props => props.textAlign || 'left'};
-  a {
+  > a {
     padding: 2em;
     display: block;
     height: 100%;

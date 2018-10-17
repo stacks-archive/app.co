@@ -12,7 +12,12 @@ import { AppCard } from '@components/app-card'
 class ModalClass extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    app: PropTypes.object
+    app: PropTypes.object,
+    doGoBack: PropTypes.bool
+  }
+
+  static defaultProps = {
+    doGoBack: true
   }
 
   handleClose = (goBack) => {
@@ -47,7 +52,7 @@ class ModalClass extends React.Component {
   }
 
   render() {
-    const { app } = this.props
+    const { app, doGoBack } = this.props
     return app ? (
       <StyledModal.Modal>
         <StyledModal.Content width={[1, 0.65, 0.65, 0.5]}>
@@ -58,13 +63,13 @@ class ModalClass extends React.Component {
               right: '30px',
               top: '25px'
             }}
-            onClick={() => this.handleClose(true)}
+            onClick={() => this.handleClose(doGoBack)}
           >
             <CloseIcon />
           </StyledModal.CloseButton>
-          <AppCard {...app} handleClose={() => this.handleClose(true)} style={{ position: 'relative', zIndex: 10 }} />
+          <AppCard {...app} handleClose={() => this.handleClose(doGoBack)} style={{ position: 'relative', zIndex: 10 }} />
         </StyledModal.Content>
-        <StyledModal.Backdrop onClick={() => this.handleClose(true)} />
+        <StyledModal.Backdrop onClick={() => this.handleClose(doGoBack)} />
       </StyledModal.Modal>
     ) : null
   }
