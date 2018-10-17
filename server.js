@@ -110,9 +110,11 @@ app.prepare().then(() => {
     server.get('/faq', (req, res) => renderAndCache(req, res, '/faq'))
     server.get('/submit', (req, res) => renderAndCache(req, res, '/submit'))
     server.get('/all', (req, res) => renderAndCache(req, res, '/all'))
+
     /**
      * Admin Pages
      */
+
     server.get('/admin', (req, res) => renderAndCache(req, res, '/admin'))
     server.get('/admin/app', (req, res) => renderAndCache(req, res, '/admin/app'))
     server.get('/admin/pending', (req, res) => renderAndCache(req, res, '/admin/pending'))

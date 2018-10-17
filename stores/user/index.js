@@ -43,9 +43,9 @@ const handleSignIn = (apiServer) =>
     })
     const json = await response.json()
     dispatch(signedIn(json))
-    setTimeout(() => {
-      document.location = '/admin'
-    }, 1000)
+    // setTimeout(() => {
+    //   document.location = '/admin'
+    // }, 1000)
 
     return true
   }
