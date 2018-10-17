@@ -21,12 +21,16 @@ const TopBar = ({ isErrorPage, admin, wrap, ...props }) => (
         <StyledTopBar.Section grow>
           {isErrorPage ? (
             <a href="/">
-              <AppIcon />
+              <Box size="34px">
+                <AppIcon />
+              </Box>
             </a>
           ) : (
             <Link href="/">
               <a href="/">
-                <AppIcon />
+                <Box size="34px">
+                  <AppIcon />
+                </Box>
               </a>
             </Link>
           )}
