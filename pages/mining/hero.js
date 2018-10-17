@@ -67,7 +67,7 @@ const Hero = ({ openModal, ...props }) => (
       the more Bitcoin you earn.
     </Heading>
     <MiningButton mt={[6, 0]} onClick={() => openModal()}>
-      Register for App Mining
+      Submit your app for qualification
     </MiningButton>
   </Section>
 )
