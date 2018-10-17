@@ -18,6 +18,9 @@ import { trackEvent } from '@utils'
 
 const RankingContext = React.createContext({})
 
+const handleBodyScroll = (on) =>
+  on ? document.body.classList.remove('no-scroll') : document.body.classList.add('no-scroll')
+
 const mapStateToProps = (state) => ({
   apiServer: selectApiServer(state)
 })
@@ -61,6 +64,10 @@ class AppMiningPage extends React.PureComponent {
       event_category: 'Mining'
     })
     this.setState({ modalShowing: true })
+  }
+
+  componentDidMount() {
+    handleBodyScroll(true)
   }
 
   render() {
