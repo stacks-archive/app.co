@@ -26,7 +26,7 @@ class MonthResults extends React.Component {
   }
 
   title() {
-    return `App Mining Results for ${this.props.report && this.props.report.humanReadableDate}`
+    return `App Mining rewards for ${this.props.report && this.props.report.humanReadableDate}`
   }
 
   handleAppClick(event, app) {
