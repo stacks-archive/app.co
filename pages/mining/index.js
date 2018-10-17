@@ -11,8 +11,14 @@ import { Quotes } from '@pages/mining/quotes'
 import { Section, HeaderType } from '@pages/mining/shared'
 import Head from '@containers/head'
 import { MiningModal } from '@pages/mining/modal'
+import { selectApiServer } from '@stores/apps/selectors'
+import { connect } from 'react-redux'
 
 const RankingContext = React.createContext({})
+
+const mapStateToProps = (state) => ({
+  apiServer: selectApiServer(state)
+})
 
 const Header = () => (
   <Section>
@@ -45,10 +51,10 @@ const sections = [
 ]
 
 class AppMiningPage extends React.PureComponent {
-  static async getInitialProps({ query }) {
-    if (!query) return {}
+  static async getInitialProps({ reduxStore }) {
+    const apiServer = selectApiServer(reduxStore.getState())
     try {
-      const res = await fetch(`${query.apiServer}/api/app-mining-months`)
+      const res = await fetch(`${apiServer}/api/app-mining-months`)
       const { months } = await res.json()
       if (months && months.length) {
         return { rankings: months[0].compositeRankings }
@@ -86,4 +92,4 @@ class AppMiningPage extends React.PureComponent {
 
 export const RankingContextConsumer = RankingContext.Consumer
 
-export default AppMiningPage
+export default connect(mapStateToProps)(AppMiningPage)
