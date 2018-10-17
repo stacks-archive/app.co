@@ -49,9 +49,13 @@ export const Button = Styled.button`
   background: #729ccc;
   border: none;
   box-sizing: border-box;
-  color: white;
+  color: white !important;
   cursor: pointer;
   font-size: 1em;
   font-weight: bold;
   padding: 1em;
+  text-align: center;
+  text-decoration: none;
 `
+
+export const ButtonLink = Button.withComponent('a')

@@ -8,7 +8,7 @@ import { Section, Content } from '@components/mining-admin/month'
 import { Table, Th, SpacedTd, Td, Thead, SubReward, ClickableTr } from '@components/mining-admin/table'
 import { AppLink, Name, Description, Container, Rank, Rewards } from '@components/mining/registered-apps/styled'
 import { AppIcon } from '@components/app-icon'
-import { Button } from '@components/mining-admin/collapsable'
+import { ButtonLink } from '@components/mining-admin/collapsable'
 import Reviewer from '@components/mining/reviewer'
 import Modal from '@containers/modals/app'
 
@@ -130,7 +130,7 @@ class MonthResults extends React.Component {
                 <Type.p mb={4}>
                   Are you a Blockstack app developer? Start earning rewards as soon as next month:
                 </Type.p>
-                <Button href="/mining" style={{width: '100%', margin: 0}}>Learn about App Mining</Button>
+                <ButtonLink href="/mining" style={{width: '100%', margin: 0}}>Learn about App Mining</ButtonLink>
                 <Type.p mt={4} color="#1421446e" fontSize="0.9em">
                   Note: USD values displayed for payouts made in BTC were determined based on the exchange rate at the time of conversion on {report.friendlyPurchasedAt}.
                 </Type.p>

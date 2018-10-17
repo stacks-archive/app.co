@@ -111,7 +111,7 @@ const appsArray = (apps) =>
 
 const Rankings = (props) => (
   <RankingContextConsumer>
-    {({ rankings }) => {
+    {({ rankings, month }) => {
       if (!rankings) return null
       const apps = rankings
         .filter((app, i) => i < 5)
@@ -148,7 +148,9 @@ const Rankings = (props) => (
                   width={['100%', 'auto']}
                   color="#11A9BC"
                 >
-                  September 2018 Payouts
+                  {month.humanReadableDate} 
+                  {month.name && ` (${month.name}) `}
+                  Payouts
                 </ListItemText>
               </Flex>,
               ...appsArray(apps)
