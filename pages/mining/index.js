@@ -59,7 +59,7 @@ class AppMiningPage extends React.PureComponent {
       const res = await fetch(`${apiServer}/api/app-mining-months`)
       const { months } = await res.json()
       if (months && months.length) {
-        return { rankings: months[0].compositeRankings }
+        return { rankings: months[0].compositeRankings, month: months[0] }
       } else {
         return {}
       }
@@ -82,20 +82,20 @@ class AppMiningPage extends React.PureComponent {
         />
         {this.state.modalShowing ? <MiningModal closeModal={() => this.closeModal()} /> : null}
         <Header />
-        <RankingContext.Provider value={{ rankings: this.props.rankings }}>
+        <RankingContext.Provider value={{ rankings: this.props.rankings, month: this.props.month }}>
           {sections.map((PageSection, i) => (
             <PageSection closeModal={() => this.closeModal()} openModal={() => this.openModal()} key={i} />
           ))}
         </RankingContext.Provider>
         <Flex justifyContent="center" p={4}>
-          <Link href={'/mining/terms'}>
-            <Type pr={2} href={'/mining/terms'} is="a">
+          <Link href="/mining/terms">
+            <Type pr={2} href="/mining/terms" is="a">
               Terms of Use
             </Type>
           </Link>
           <Type>|</Type>
-          <Link href={'/mining/privacy'}>
-            <Type pl={2} href={'/mining/privacy'} is="a">
+          <Link href="/mining/privacy">
+            <Type pl={2} href="/mining/privacy" is="a">
               Privacy Policy
             </Type>
           </Link>
