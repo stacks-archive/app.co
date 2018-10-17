@@ -41,7 +41,8 @@ const Avatar = ({ photo, ...rest }) => {
         position="relative"
         zIndex="10"
         ml={`${barWidth + smallSize / 2}px`}
-        backgroundImage={`url(${photo})`}
+        bg="#efefef"
+        backgroundImage={photo ? `url(${photo})` : undefined}
         backgroundSize="cover"
         size={bigSize}
         borderRadius={bigSize}
@@ -65,6 +66,22 @@ const quotes = [
       )
     },
     quote: `The hardest part of launching any application, let alone a decentralized application, is bootstrapping it. Even if you’re seeking funding, that process often takes time. Blockstack App Rewards allows an application to focus on building something great rather than diving straight into fundraising.`
+  },
+
+  {
+    quote: `App rewards mining allows Blockusign to focus on what we do best, BUILD! It provides us with the extra incentive to keep forging ahead and iterating in this brand-new ecosystem - without having to worry about finding early stage funding. We truly feel included in this passionate community of people, from around the world, that believe in building the decentralized open web.`,
+    quotee: {
+      name: 'Nick Tee',
+      photo: null,
+      title: (
+        <>
+          Founder of{' '}
+          <Type is="a" href="https://app.co/app/blockusign" target="_blank">
+            Blockusign
+          </Type>
+        </>
+      )
+    }
   },
   {
     quote: `App Mining is crazy, in the best possible way. My favorite thing about using Blockstack is that I didn’t have to worry about it, I implemented auth and storage and it just worked. Now I don’t have to try to secure funding or jump through hoops for anyone else to continue working on Coins, it just works. I can focus on shipping new features and making Coins better. App Mining has immediately changed this from a side hustle to something that I can dedicate real time and effort towards.`,
