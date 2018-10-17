@@ -69,7 +69,10 @@ class MonthResults extends React.Component {
         <Flex width={1} px={[1, 5]} mb={5} flexDirection={['column', 'column', 'column', 'row']} justifyContent="space-between" flexWrap="wrap">
           <Box width={[ 1, 1, 1, 2/3 ]}>
             <Section>
-              <h2>{this.title()}</h2>
+              <h2>
+                {this.title()}
+                {report.name && ` (${report.name})`}
+              </h2>
             </Section>
             <Table>
               <Thead>
