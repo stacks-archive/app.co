@@ -25,7 +25,7 @@ class MonthResults extends React.Component {
   }
 
   title() {
-    return `App Mining Results for ${this.props.report && this.props.report.humanReadableDate}`
+    return `App Mining rewards for ${this.props.report && this.props.report.humanReadableDate}`
   }
 
   handleAppClick(event, app) {
@@ -118,7 +118,7 @@ class MonthResults extends React.Component {
                 <Type.p mb={4}>
                   Are you a Blockstack app developer? Start earning rewards as soon as next month:
                 </Type.p>
-                <Button href="/mining" style={{width: '100%', margin: 0}}>Register your app</Button>
+                <Button href="/mining" style={{width: '100%', margin: 0}}>Learn about App Mining</Button>
                 <Type.p mt={4} color="#1421446e" fontSize="0.9em">
                   Note: USD values displayed for payouts made in BTC were determined based on the exchange rate at the time of conversion on {report.friendlyPurchasedAt}.
                 </Type.p>
