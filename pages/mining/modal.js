@@ -228,11 +228,11 @@ class MiningModalComponent extends React.PureComponent {
         error: (
           <>
             You must agree to our{' '}
-            <Type is="a" href="/mining/terms">
+            <Type is="a" target="_blank" href="/mining/terms">
               Terms of Service
             </Type>{' '}
             and{' '}
-            <Type is="a" href="/mining/privacy">
+            <Type is="a" target="_blank" href="/mining/privacy">
               Privacy Policy
             </Type>{' '}
             to submit your app.
@@ -348,11 +348,11 @@ class MiningModalComponent extends React.PureComponent {
                 options={[
                   <>
                     I agree to the{' '}
-                    <Type is="a" href="/mining/terms">
+                    <Type is="a" target="_blank" href="/mining/terms">
                       Terms of Service
                     </Type>{' '}
                     and{' '}
-                    <Type is="a" href="/mining/privacy">
+                    <Type is="a" target="_blank" href="/mining/privacy">
                       Privacy Policy
                     </Type>
                   </>
