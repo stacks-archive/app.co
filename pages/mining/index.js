@@ -10,10 +10,11 @@ import { FAQ } from '@pages/mining/faq'
 import { Quotes } from '@pages/mining/quotes'
 import { Section, HeaderType } from '@pages/mining/shared'
 import Head from '@containers/head'
+import { Type, Flex } from 'blockstack-ui'
 import { MiningModal } from '@pages/mining/modal'
 import { selectApiServer } from '@stores/apps/selectors'
 import { connect } from 'react-redux'
-
+import Link from 'next/link'
 const RankingContext = React.createContext({})
 
 const mapStateToProps = (state) => ({
@@ -85,6 +86,19 @@ class AppMiningPage extends React.PureComponent {
             <PageSection closeModal={() => this.closeModal()} openModal={() => this.openModal()} key={i} />
           ))}
         </RankingContext.Provider>
+        <Flex justifyContent="center" p={4}>
+          <Link href={'/mining/terms'}>
+            <Type pr={2} href={'/mining/terms'} is="a">
+              Terms of Use
+            </Type>
+          </Link>
+          <Type>|</Type>
+          <Link href={'/mining/privacy'}>
+            <Type pl={2} href={'/mining/privacy'} is="a">
+              Privacy Policy
+            </Type>
+          </Link>
+        </Flex>
       </MiningPage>
     )
   }
