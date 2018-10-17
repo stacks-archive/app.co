@@ -224,7 +224,7 @@ class MiningModalComponent extends React.PureComponent {
           <CloseButton onClick={() => this.props.closeModal()} />
           <Flex flexDirection="column" mb={4} mt={[4, 2]}>
             <HeaderType mb={2} fontSize={4}>
-              Register for App Mining
+              Submit your app for qualification
             </HeaderType>
             {this.state.error ? (
               <Flex

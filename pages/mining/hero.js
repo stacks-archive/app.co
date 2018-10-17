@@ -19,7 +19,10 @@ const Steps = ({ openModal, ...props }) => (
             1.
           </ListItemText>
           <ListItemText>
-            <a href="#" onClick={() => openModal()}>Register your app</a>.
+            <a href="https://docs.blockstack.org/browser/hello-blockstack.html" target="_blank">
+              Integrate Blockstack
+            </a>{' '}
+            decentralized authentication.
           </ListItemText>
         </Flex>,
         <Flex p={4}>
@@ -27,7 +30,10 @@ const Steps = ({ openModal, ...props }) => (
             2.
           </ListItemText>
           <ListItemText>
-            <a href="https://docs.blockstack.org/browser/hello-blockstack.html" target="_blank">Integrate Blockstack</a> decentralized authentication.
+            <a href="#" onClick={() => openModal()}>
+              Submit your app for qualification
+            </a>
+            .
           </ListItemText>
         </Flex>,
         <Flex p={4}>
@@ -56,7 +62,9 @@ const Hero = ({ openModal, ...props }) => (
     {...props}
   >
     <Heading mb={[0, 5]} mt={[5, 0]}>
-      The better your app,<br />the more Bitcoin you earn.
+      The better your app,
+      <br />
+      the more Bitcoin you earn.
     </Heading>
     <MiningButton mt={[6, 0]} onClick={() => openModal()}>
       Register for App Mining
