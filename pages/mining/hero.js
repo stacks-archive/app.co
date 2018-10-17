@@ -27,7 +27,7 @@ const Steps = ({ openModal, ...props }) => (
             2.
           </ListItemText>
           <ListItemText>
-            <a href="https://blockstack.org/tutorials/" target="_blank">Integrate Blockstack</a> decentralized authentication.
+            <a href="https://docs.blockstack.org/browser/hello-blockstack.html" target="_blank">Integrate Blockstack</a> decentralized authentication.
           </ListItemText>
         </Flex>,
         <Flex p={4}>
