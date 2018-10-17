@@ -27,6 +27,10 @@ const GlobalStyles = createGlobalStyle`
     background-color: ${theme.colors.grey.light};
     color: ${theme.colors.grey};
   }
+  
+  ol li ol {
+  list-style-type: upper-alpha;
+  }
   body{
   &.no-scroll{
   overflow: hidden; 
