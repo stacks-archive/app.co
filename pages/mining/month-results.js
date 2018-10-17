@@ -81,9 +81,9 @@ class MonthResults extends React.Component {
   render() {
     const { report } = this.props
     return (
-      <Page>
+      <Page wrap={false}>
         <Head title={this.title()} />
-        <Flex width={1} px={[1, 5]} mb={5} flexDirection={['column', 'column', 'column', 'row']} justifyContent="space-between" flexWrap="wrap">
+        <Flex width={1} px={[1, 3]} mb={5} flexDirection={['column', 'column', 'column', 'row']} justifyContent="space-between" flexWrap="wrap">
           <Box width={[ 1, 1, 1, 2/3 ]}>
             <Section>
               <h2>
