@@ -14,7 +14,6 @@ const AppItemText = (props) => <ListItemText color="#212D37" {...props} />
 const Tag = ({ ...rest }) => (
   <AppItemText border="1px solid #646C73" borderRadius="3px" fontSize={1} px={2} ml={2} {...rest} />
 )
-
 const Earnings = ({ index, btc, usd }) => (
   <Flex flexDirection="column" alignItems="flex-end">
     <Type fontSize="20px" color="#212D37">
