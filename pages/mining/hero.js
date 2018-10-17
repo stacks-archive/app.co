@@ -35,7 +35,7 @@ const Steps = ({ openModal, ...props }) => (
             3.
           </ListItemText>
           <ListItemText>
-            Improve your app. Earn more Bitcoin each month. <a href="/blockstack">See rankings.</a>
+            Improve your app. Earn more Bitcoin each month. <a href="/app-mining/september-2018">See rankings.</a>
           </ListItemText>
         </Flex>
       ]}
