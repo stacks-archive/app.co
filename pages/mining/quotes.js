@@ -82,21 +82,6 @@ const quotes = [
         </>
       )
     }
-  },
-  {
-    quote: `App Mining is crazy, in the best possible way. My favorite thing about using Blockstack is that I didn’t have to worry about it, I implemented auth and storage and it just worked. Now I don’t have to try to secure funding or jump through hoops for anyone else to continue working on Coins, it just works. I can focus on shipping new features and making Coins better. App Mining has immediately changed this from a side hustle to something that I can dedicate real time and effort towards.`,
-    quotee: {
-      name: 'Thomas Osmonson',
-      photo: 'https://file-czxbgvwqwm.now.sh',
-      title: (
-        <>
-          Founder of{' '}
-          <Type is="a" href="https://coinsapp.co" target="_blank">
-            Coins
-          </Type>
-        </>
-      )
-    }
   }
 ]
 
