@@ -59,7 +59,7 @@ const quotes = [
       title: (
         <>
           Founder of{' '}
-          <Type is="a" href="https://graphitedocs.com" target="_blank">
+          <Type is="a" href="https://app.co/app/graphite" target="_blank">
             Graphite Docs
           </Type>
         </>
