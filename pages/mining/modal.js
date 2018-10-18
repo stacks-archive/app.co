@@ -229,7 +229,10 @@ class MiningModalComponent extends React.PureComponent {
           <>
             You must agree to our{' '}
             <Type is="a" target="_blank" href="/mining/terms">
-              Terms of Service
+              App Mining Terms,
+            </Type>{' '}
+            <Type is="a" target="_blank" href="/terms">
+              App.co Terms,
             </Type>{' '}
             and{' '}
             <Type is="a" target="_blank" href="/mining/privacy">
@@ -349,7 +352,10 @@ class MiningModalComponent extends React.PureComponent {
                   <>
                     I agree to the{' '}
                     <Type is="a" target="_blank" href="/mining/terms">
-                      Terms of Service
+                      App Mining Terms,
+                    </Type>{' '}
+                    <Type is="a" target="_blank" href="/terms">
+                      App.co Terms,
                     </Type>{' '}
                     and{' '}
                     <Type is="a" target="_blank" href="/mining/privacy">
