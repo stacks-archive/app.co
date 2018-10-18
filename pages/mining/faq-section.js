@@ -3,9 +3,9 @@ import { Heading, Section } from '@pages/mining/shared'
 import { Box } from '@components/mining'
 import styled from 'styled-components'
 
-import Content from './faq.md'
+import Content from './faq-content.md'
 
-const FAQwrapper = styled(Box)`
+export const FAQwrapper = styled(Box)`
   & h2 {
     font-weight: 300;
     margin-top: 40px;

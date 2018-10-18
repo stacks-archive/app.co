@@ -70,6 +70,7 @@ app.prepare().then(() => {
      * Mining Pages
      */
     server.get('/mining', (req, res) => renderAndCache(req, res, '/mining'))
+    server.get('/mining/faq', (req, res) => renderAndCache(req, res, '/mining/faq'))
     server.get('/mining/terms', (req, res) => renderAndCache(req, res, '/mining/terms'))
     server.get('/mining/privacy', (req, res) => renderAndCache(req, res, '/mining/privacy'))
     server.get('/mining/developer-instructions', (req, res) =>
