@@ -8,8 +8,8 @@ import { CheckMark } from '@components/svg'
 const CardItem = (props) => (
   <Card
     alignItems="center"
-    justifyContent="center"
-    width={['100%', 'calc(33.333% - 20px)']}
+    justifyContent="space-between"
+    width={['100%', 'calc(50% - 20px)']}
     flexDirection="column"
     px={[3, 4]}
     py={4}
@@ -26,6 +26,19 @@ const RankedBy = ({ by, bg, ...rest }) => (
     <Box bg={bg} px={3} mb={2} py={1}>
       <Type color="white">{by}</Type>
     </Box>
+  </Flex>
+)
+
+const Reviewers = (props) => (
+  <Flex justifyContent="space-between" pb={4} width={1} maxWidth="700px">
+    <CardItem>
+      <Box is="img" maxWidth="100%" src="https://file-jrmzurtxvq.now.sh/" alt="Product Hunt" />
+      <RankedBy by="Hunter Ratings" bg="#11A9BC" />
+    </CardItem>
+    <CardItem>
+      <Box is="img" maxWidth="100%" src="https://file-xmrrjpxqmb.now.sh" alt="Democracy Earth" />
+      <RankedBy by="Hunter Ratings" bg="#EF6F6F" />
+    </CardItem>
   </Flex>
 )
 
@@ -58,7 +71,15 @@ const How = ({ ...props }) => (
 
       <Box pt={3}>
         <ListCheckItem>
-          We will announce specific app reviewers shortly.
+          We are currently partnered with{' '}
+          <a href="https://producthunt.com" target="_blank">
+            Product Hunt
+          </a>{' '}
+          and{' '}
+          <a href="https://www.democracy.earth/" target="_blank">
+            Democracy Earth
+          </a>{' '}
+          as our app reviewers.
         </ListCheckItem>
         <ListCheckItem>Any user-ready app on App.co with Blockstack authentication or storage.</ListCheckItem>
         <ListCheckItem>
