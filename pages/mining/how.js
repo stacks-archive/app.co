@@ -58,7 +58,11 @@ const How = ({ ...props }) => (
 
       <Box pt={3}>
         <ListCheckItem>
-          We will announce specific app reviewers shortly.
+          We are currently partnered with{' '}
+          <a href="https://producthunt.com" target="_blank">Product Hunt</a>
+          {' '}and{' '}
+          <a href="https://www.democracy.earth/" target="_blank">Democracy Earth</a>
+          {' '}as our app reviewers.
         </ListCheckItem>
         <ListCheckItem>Any user-ready app on App.co with Blockstack authentication or storage.</ListCheckItem>
         <ListCheckItem>
