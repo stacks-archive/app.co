@@ -148,7 +148,7 @@ const Rankings = (props) => (
                   width={['100%', 'auto']}
                   color="#11A9BC"
                 >
-                  {month.humanReadableDate} 
+                  {month.humanReadableDate}
                   {month.name && ` (${month.name}) `}
                   Payouts
                 </ListItemText>
@@ -172,7 +172,7 @@ const ActionBar = () => (
         </a>
       </Box>
       <Box ml={2}>
-        <ArrowRightIcon color="currentColor" size="1.3rem" style={{ transform: 'translateY(4px)' }} />
+        <ArrowRightIcon color="currentColor" size="20px" style={{ transform: 'translateY(4px)' }} />
       </Box>
     </MiningButton>
   </Box>
