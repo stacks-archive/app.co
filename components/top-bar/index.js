@@ -8,25 +8,29 @@ import GetUpdatesModal from '@containers/modals/get-updates'
 import MenuIcon from 'mdi-react/MenuIcon'
 import CloseIcon from 'mdi-react/CloseIcon'
 import { Toggle } from 'react-powerplug'
-import { Box } from '@components/box'
+import { Box } from 'blockstack-ui'
 import { Navigation } from '@components/navigation'
 
 const handleBodyScroll = (on) =>
   on ? document.body.classList.remove('no-scroll') : document.body.classList.add('no-scroll')
 
-const TopBar = ({ isErrorPage, admin, ...props }) => (
+const TopBar = ({ isErrorPage, admin, wrap, ...props }) => (
   <Headroom>
     <StyledTopBar {...props}>
-      <StyledTopBar.Wrapper wrap>
+      <StyledTopBar.Wrapper wrap={wrap}>
         <StyledTopBar.Section grow>
           {isErrorPage ? (
             <a href="/">
-              <AppIcon />
+              <Box size="34px">
+                <AppIcon />
+              </Box>
             </a>
           ) : (
             <Link href="/">
               <a href="/">
-                <AppIcon />
+                <Box size="34px">
+                  <AppIcon />
+                </Box>
               </a>
             </Link>
           )}

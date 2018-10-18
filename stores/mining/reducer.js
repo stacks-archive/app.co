@@ -1,4 +1,4 @@
-import * as Constants from './constants'
+import { SUBMIT_APP_STARTED, SUBMIT_APP_FINISHED } from '@stores/mining/constants'
 
 const makeReducer = (data) => {
   const initialState = {
@@ -12,15 +12,15 @@ const makeReducer = (data) => {
     initialState.appMiningMonths = data.mining.appMiningMonths
   }
 
-  const reducer = (state = initialState, action) => {
-    switch (action.type) {
-      case Constants.SUBMITTING_APP:
+  const reducer = (state = initialState, { type, payload }) => {
+    switch (type) {
+      case SUBMIT_APP_STARTED:
         return {
           ...state,
           isSubmitting: true,
           hasSubmitted: false
         }
-      case Constants.SUBMITTED_APP:
+      case SUBMIT_APP_FINISHED:
         return {
           ...state,
           isSubmitting: false,

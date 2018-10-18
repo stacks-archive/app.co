@@ -1,13 +1,9 @@
-import styled, { injectGlobal } from 'styled-components'
-import { Box } from '@components/mining'
+import React from 'react'
+import { createGlobalStyle } from 'styled-components'
+import { Box } from 'blockstack-ui'
 
-const StyledMiningPage = styled(Box)`
-  background: #212d37;
-  overflow: hidden;
-  min-height: 100vh;
-  width: 100%;
-
-  html, body {
+const Global = createGlobalStyle`  html,
+  body {
     background: #212d37;
   }
 
@@ -16,12 +12,16 @@ const StyledMiningPage = styled(Box)`
     &:visited,
     &:active {
       text-decoration: underline;
-      color: currentColor;
+      color: currentColor !important;
     }
     &:hover {
       text-decoration: none;
     }
-  }
-`
+  }`
 
-export { StyledMiningPage }
+export const StyledMiningPage = ({ children, ...rest }) => (
+  <Box bg="#212d37" overflow={'hidden'} minHeight={'100vh'} width={1} {...rest}>
+    <Global />
+    {children}
+  </Box>
+)

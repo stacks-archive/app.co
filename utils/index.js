@@ -54,6 +54,12 @@ const trackPageView = (path) => {
   }
 }
 
+const trackEvent = (action, opts) => {
+  if (typeof 'gtag' !== 'undefined') {
+    gtag('event', action, opts)
+  }
+}
+
 const enumSelect = (enums, placeholder, props = {}) => {
   const options = map(enums, (opt) => ({ label: opt, value: opt }))
   if (!props.required) {
@@ -146,5 +152,6 @@ export {
   properTagFromParam,
   getTwitterMentions,
   monthName,
-  trackPageView
+  trackPageView,
+  trackEvent
 }

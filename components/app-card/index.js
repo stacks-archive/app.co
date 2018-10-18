@@ -1,8 +1,8 @@
 import React from 'react'
-import { Flex } from 'grid-styled'
+import { Flex } from 'blockstack-ui'
 import { GithubCircleIcon, TwitterCircleIcon, ArrowLeftIcon } from 'mdi-react'
 import Link from 'next/link'
-import { Box } from 'rebass'
+import { Box } from 'blockstack-ui'
 import numeral from 'numeral'
 
 import { Type } from '@components/typography'

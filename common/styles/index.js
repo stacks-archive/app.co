@@ -3,6 +3,7 @@ import { rgba } from 'polished'
 import { Box } from '@components/box'
 import hash from 'string-hash'
 import color from 'tinycolor2'
+import { theme as SystemTheme } from 'blockstack-ui'
 
 const sizes = {
   xl: 1170,
@@ -61,6 +62,10 @@ const theme = {
     72,
     256
   ],
+  fonts: {
+    default: SystemTheme.fonts.default,
+    brand: SystemTheme.fonts.default
+  },
   colors: {
     blue: Object.assign('#142144', {
       light: '#324476',
@@ -71,7 +76,7 @@ const theme = {
       mid: '#7588A2',
       dark: '#142144'
     }),
-    red: Object.assign('#e74c3c'),
+    red: Object.assign('#e74c3c', {}),
     border: Object.assign(rgba('#7588A2', 0.2), {
       dark: '#7588A2'
     })
@@ -105,33 +110,5 @@ const gradientFromString = (string, stop1 = 0, stop2 = 100) => {
 
   return `${c1_} ${stop1}%, ${c2} ${stop2}%`
 }
-
-const gradients = `
-      background-image: linear-gradient(-135deg, rgb(254, 182, 146) 10%, rgb(234, 84, 85) 200%);
-      background-image: linear-gradient(-135deg, rgb(255, 246, 183) 10%, rgb(246, 65, 108) 200%);
-      background-image: linear-gradient(-135deg, rgb(67, 203, 255) 10%, rgb(151, 8, 204) 200%);
-      background-image: linear-gradient(-135deg, rgb(94, 252, 232) 10%, rgb(115, 110, 254) 200%);
-      background-image: linear-gradient(-135deg, rgb(250, 215, 161) 10%, rgb(233, 109, 113) 200%);
-      background-image: linear-gradient(-135deg, rgb(146, 255, 192) 10%, rgb(0, 38, 97) 200%);
-      background-image: linear-gradient(-135deg, rgb(238, 173, 146) 10%, rgb(96, 24, 220) 200%);
-      background-image: linear-gradient(-135deg, rgb(82, 229, 231) 10%, rgb(19, 12, 183) 200%);
-      background-image: linear-gradient(-135deg, rgb(121, 241, 164) 10%, rgb(14, 92, 173) 200%);
-      background-image: linear-gradient(-135deg, rgb(42, 250, 223) 10%, rgb(76, 131, 255) 200%);
-      background-image: linear-gradient(-135deg, rgb(255, 248, 134) 10%, rgb(240, 114, 182) 200%);
-      background-image: linear-gradient(-135deg, rgb(151, 171, 255) 10%, rgb(18, 53, 151) 200%);
-      background-image: linear-gradient(-135deg, rgb(238, 154, 229) 10%, rgb(89, 97, 249) 200%);
-      background-image: linear-gradient(-135deg, rgb(255, 211, 165) 10%, rgb(253, 101, 133) 200%);
-      background-image: linear-gradient(-135deg, rgb(194, 255, 216) 10%, rgb(70, 94, 251) 200%);
-      background-image: linear-gradient(-135deg, rgb(101, 253, 240) 10%, rgb(29, 111, 163) 200%);
-      background-image: linear-gradient(-135deg, rgb(255, 122, 245) 10%, rgb(81, 49, 98) 200%);
-      background-image: linear-gradient(-135deg, rgb(255, 233, 133) 10%, rgb(250, 116, 43) 200%);
-      background-image: linear-gradient(-135deg, rgb(255, 166, 183) 10%, rgb(30, 42, 210) 200%);
-      background-image: linear-gradient(-135deg, rgb(255, 170, 133) 10%, rgb(179, 49, 95) 200%);
-      background-image: linear-gradient(-135deg, rgb(114, 237, 242) 10%, rgb(81, 81, 229) 200%);
-      background-image: linear-gradient(-135deg, rgb(255, 157, 108) 10%, rgb(187, 78, 117) 200%);
-      background-image: linear-gradient(-135deg, rgb(59, 38, 103) 10%, rgb(188, 120, 236) 200%);
-      background-image: linear-gradient(-135deg, rgb(60, 140, 231) 10%, rgb(0, 234, 255) 200%);
-      background-image: linear-gradient(-135deg, rgb(250, 178, 255) 10%, rgb(25, 4, 229) 200%);
-      `
 
 export { wrapper, wrapperStyles, wrapperStyle, theme, gradientFromString }

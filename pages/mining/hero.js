@@ -2,7 +2,7 @@ import * as React from 'react'
 import { MiningButton } from '@components/mining/button'
 import { MiningList } from '@components/mining/list'
 import { Section, Heading } from '@pages/mining/shared'
-import { Type } from '@components/typography'
+import { Type } from 'blockstack-ui'
 import { Flex } from '@components/mining'
 
 const ListItemText = (props) => <Type.h4 color="white" fontSize="18px" lineHeight={1.5} fontWeight={400} {...props} />
@@ -19,7 +19,10 @@ const Steps = ({ openModal, ...props }) => (
             1.
           </ListItemText>
           <ListItemText>
-            <a href="#" onClick={() => openModal()}>Register your app</a>.
+            <a href="https://docs.blockstack.org/browser/hello-blockstack.html" target="_blank">
+              Integrate Blockstack
+            </a>{' '}
+            decentralized authentication.
           </ListItemText>
         </Flex>,
         <Flex p={4}>
@@ -27,7 +30,10 @@ const Steps = ({ openModal, ...props }) => (
             2.
           </ListItemText>
           <ListItemText>
-            <a href="https://blockstack.org/tutorials/" target="_blank">Integrate Blockstack</a> decentralized authentication.
+            <a href="#" onClick={() => openModal()}>
+              Submit your app for qualification
+            </a>
+            .
           </ListItemText>
         </Flex>,
         <Flex p={4}>
@@ -35,7 +41,7 @@ const Steps = ({ openModal, ...props }) => (
             3.
           </ListItemText>
           <ListItemText>
-            Improve your app. Earn more Bitcoin each month. <a href="/blockstack">See rankings.</a>
+            Improve your app. Earn more Bitcoin each month. <a href="/mining/september-2018">See rankings.</a>
           </ListItemText>
         </Flex>
       ]}
@@ -56,10 +62,12 @@ const Hero = ({ openModal, ...props }) => (
     {...props}
   >
     <Heading mb={[0, 5]} mt={[5, 0]}>
-      The better your app,<br />the more Bitcoin you earn.
+      The better your app,
+      <br />
+      the more Bitcoin you earn.
     </Heading>
     <MiningButton mt={[6, 0]} onClick={() => openModal()}>
-      Register for App Mining
+      Submit your app for qualification
     </MiningButton>
   </Section>
 )

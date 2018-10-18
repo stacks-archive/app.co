@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { position, top, left, right, bottom } from 'styled-system'
-import { Box } from '@components/box'
+import { Box } from 'blockstack-ui'
 import { above, below, theme, wrapperStyle } from '@common/styles'
 
 const StyledNewsletter = styled(Box)`

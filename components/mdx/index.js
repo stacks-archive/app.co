@@ -35,17 +35,18 @@ const baseProps = {
 const Mdx = ({ children }) => (
   <MDXProvider
     components={{
-      h1: (props) => <H1 mt={5} mb={4} {...props} />,
-      h2: (props) => <H2 {...props} />,
-      h3: (props) => <H3 {...props} />,
-      h4: (props) => <Type.h4 {...props} />,
-      h5: (props) => <Type.h5 {...props} />,
-      h6: (props) => <Type.h6 {...props} />,
-      p: (props) => <Type.p {...baseProps} {...props} />,
-      pre: (props) => <Type.pre {...baseProps} {...props} />,
-      ol: (props) => <Type.ol mt={3} display="inline-block" {...baseProps} {...props} />,
-      ul: (props) => <Type.ul mt={3} display="inline-block" {...baseProps} {...props} />,
-      li: (props) => <Type.li my="2px" {...baseProps} {...props} />
+      h1: (props) => <H1 color="currentColor" mt={5} mb={4} {...props} />,
+      h2: (props) => <H2 color="currentColor" {...props} />,
+      h3: (props) => <H3 pt={3} color="currentColor" {...props} />,
+      h4: (props) => <Type.h4 color="currentColor" {...props} />,
+      h5: (props) => <Type.h5 color="currentColor" {...props} />,
+      h6: (props) => <Type.h6 color="currentColor" {...props} />,
+      p: (props) => <Type.p color="currentColor" {...baseProps} {...props} />,
+      strong: (props) => <Type.strong display="inline" fontWeight="700" color="currentColor" {...baseProps} {...props} />,
+      pre: (props) => <Type.pre color="currentColor" {...baseProps} {...props} />,
+      ol: (props) => <Type.ol color="currentColor" mt={3} display="inline-block" {...baseProps} {...props} />,
+      ul: (props) => <Type.ul color="currentColor" mt={3} display="inline-block" {...baseProps} {...props} />,
+      li: (props) => <Type.li color="currentColor" my="2px" {...baseProps} {...props} />
     }}
   >
     {children}

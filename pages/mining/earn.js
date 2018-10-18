@@ -1,97 +1,63 @@
 import * as React from 'react'
 import { MiningList } from '@components/mining/list'
 import { Section, Heading, SubHeading } from '@pages/mining/shared'
-import { Type } from '@components/typography'
-import { Flex, Box, Img } from '@components/mining'
+import { Type, Flex, Box } from 'blockstack-ui'
+import { Img } from '@components/mining'
 import { MiningButton } from '@components/mining/button'
-import { EarningsPlaceholder } from '@components/mining/earnings-placeholder'
 import ArrowRightIcon from 'mdi-react/ArrowRightIcon'
 import { AppIcon } from '@components/app-icon'
+import { RankingContextConsumer } from '@pages/mining/index'
+import { Hover } from 'react-powerplug'
 
 const ListItemText = (props) => <Type.h4 color="white" fontSize="18px" lineHeight={1.5} fontWeight={400} {...props} />
-
-const apps = [
-  {
-    name: 'Sovereign',
-    earnings: {
-      usd: '$15,000',
-      btc: 1.2
-    },
-    tags: ['Blockstack Auth', 'Gaia'],
-    appIcon: 'https://i.imgur.com/xFn761F.png'
-  },
-  {
-    name: 'Graphite Docs',
-    earnings: {
-      usd: '$12,500',
-      btc: 1.2
-    },
-    tags: ['Blockstack Auth', 'Gaia'],
-    appIcon: 'https://i.imgur.com/mvJfwZb.png'
-  },
-  {
-    name: 'Stealthy',
-    earnings: {
-      usd: '$11,120',
-      btc: 1.2
-    },
-    tags: ['Blockstack Auth', 'Gaia'],
-    appIcon: 'https://pbs.twimg.com/profile_images/970700560239218689/CBJ8wLhN_400x400.jpg'
-  },
-
-  {
-    name: 'Misthos',
-    earnings: {
-      usd: '$10,800',
-      btc: 1.2
-    },
-    tags: ['Blockstack Auth', 'Gaia'],
-    appIcon: 'https://github.com/blockstack/blockstack-browser/blob/3a2e2999ff86effaeb34ecc2199e29c7f6bd27b2/app/images/app-icon-misthos-256x256.png?raw=true'
-  },
-  {
-    name: 'Souq',
-    earnings: {
-      usd: '$10,000',
-      btc: 1.2
-    },
-    tags: ['Blockstack Auth', 'Gaia'],
-    appIcon: 'https://user-images.githubusercontent.com/1711854/32528468-3007c716-c401-11e7-84e1-d9a57d4ea570.png'
-  }
-]
-
 const AppItemText = (props) => <ListItemText color="#212D37" {...props} />
 const Tag = ({ ...rest }) => (
   <AppItemText border="1px solid #646C73" borderRadius="3px" fontSize={1} px={2} ml={2} {...rest} />
 )
-
-const Earnings = ({ background }) => (
-  <div>
-    <span style={{position: 'relative', top: '-3px'}}>$</span>
-    <EarningsPlaceholder background={background} />
-    <EarningsPlaceholder background={background} />
-    <EarningsPlaceholder background={background} />
-    <EarningsPlaceholder background={background} />
-    <EarningsPlaceholder background={background} />
-  </div>
+const Earnings = ({ index, btc, usd }) => (
+  <Flex flexDirection="column" alignItems="flex-end">
+    <Type fontSize="20px" color="#212D37">
+      {usd}
+    </Type>
+    <Flex pt={2} opacity={0.5} color="#212D37">
+      <Type fontSize={2}>{btc.toFixed(3)}</Type>
+      <Type pl={2}>BTC</Type>
+    </Flex>
+  </Flex>
 )
 
-const AppItem = ({ name, earnings, tags, i, index, appIcon, length, backgroundOpacity, ...rest }) => {
-  const earningsBackground = [
-    '#DEDEDE',
-    '#CFCFCF',
-    '#B8B8B8',
-    '#979797',
-    '#828282'
-  ][i]
+const AppItem = ({
+  website,
+  name,
+  earnings: { btc, usd },
+  tags,
+  i,
+  index,
+  appIcon,
+  length,
+  slug,
+  backgroundOpacity,
+  ...rest
+}) => {
+  const earningsBackground = ['#DEDEDE', '#CFCFCF', '#B8B8B8', '#979797', '#828282'][i]
   const GradientItem = (props) => (
-    <Flex
-      width={1}
-      p={[3, 4]}
-      bg={`rgba(255,255,255, ${backgroundOpacity})`}
-      alignItems="center"
-      {...props}
-      {...rest}
-    />
+    <Hover>
+      {({ hovered, bind }) => (
+        <Flex
+          is="a"
+          href={`/app/${slug}`}
+          target="_blank"
+          style={{ textDecoration: 'none', transition: '0.2s all ease-in-out' }}
+          width={1}
+          p={[3, 4]}
+          bg={`rgba(255,255,255, ${hovered ? backgroundOpacity + 0.2 : backgroundOpacity - 0.05})`}
+          alignItems="center"
+          {...props}
+          {...rest}
+          {...bind}
+        />
+      )}
+    </Hover>
   )
   const AppRank = () => (
     <AppItemText opacity={0.5} mr={3}>
@@ -101,19 +67,22 @@ const AppItem = ({ name, earnings, tags, i, index, appIcon, length, backgroundOp
   const AppName = () => (
     <Flex alignItems="center">
       <AppIcon mr={3} src={appIcon} alt={name} size={42} />
-      <AppItemText fontWeight="500" pr={3}>{name}</AppItemText>
+      <AppItemText fontWeight="500" pr={3}>
+        {name}
+      </AppItemText>
     </Flex>
   )
   const AppTags = () =>
     tags && tags.length ? (
-      <Flex display={['none', 'flex']}>{tags.map((tag, tagIndex) => <Tag key={tagIndex}>{tag}</Tag>)}</Flex>
+      <Flex display={['none', 'flex']}>
+        {tags.map((tag, tagIndex) => (
+          <Tag key={tagIndex}>{tag}</Tag>
+        ))}
+      </Flex>
     ) : null
-  const AppEarnings = ({background}) => (
+  const AppEarnings = ({ background }) => (
     <Flex flexDirection={['column', 'row']} ml="auto" alignItems={['flex-end', 'center']}>
-      <Earnings background={background} />
-      <AppItemText opacity={0.5} ml={3}>
-        in BTC
-      </AppItemText>
+      <Earnings btc={btc} usd={usd} background={background} />
     </Flex>
   )
   return (
@@ -126,34 +95,71 @@ const AppItem = ({ name, earnings, tags, i, index, appIcon, length, backgroundOp
   )
 }
 
-const appRowBackgroundOpacities = [
-  1,
-  .89,
-  .76,
-  .6,
-  .5
-]
-const appsArray = apps.map((app, i) => <AppItem key={i} i={i} index={apps.length - i} length={apps.length} {...app} backgroundOpacity={appRowBackgroundOpacities[i]}/>)
+const appRowBackgroundOpacities = [1, 0.89, 0.76, 0.6, 0.5]
+const appsArray = (apps) =>
+  apps &&
+  apps.map((app, i) => (
+    <AppItem
+      key={i}
+      i={i}
+      index={apps.length - i}
+      length={apps.length}
+      {...app}
+      backgroundOpacity={appRowBackgroundOpacities[i]}
+    />
+  ))
 
 const Rankings = (props) => (
-  <Section flexDirection="column" {...props}>
-    <MiningList
-      width={1}
-      maxWidth="850px"
-      noItemBorder
-      items={[
-        <Flex width={1} p={4}>
-          <ListItemText opacity={0.5} mr={3} display={['none', 'block']}>
-            App.co Rank
-          </ListItemText>
-          <ListItemText ml={['0', 'auto']} textAlign={['center', 'right']} width={['100%', 'auto']} color="#11A9BC">
-            Announcing payouts soon
-          </ListItemText>
-        </Flex>,
-        ...appsArray
-      ]}
-    />
-  </Section>
+  <RankingContextConsumer>
+    {({ rankings, month }) => {
+      if (!rankings) return null
+      const apps = rankings
+        .filter((app, i) => i < 5)
+        .map(({ name, formattedUsdRewards, payout, imgixImageUrl, domain, authentication, storageNetwork, slug }) => {
+          const tags = []
+          if (authentication) tags.push(authentication)
+          if (storageNetwork) tags.push(storageNetwork)
+          return {
+            name,
+            earnings: {
+              usd: formattedUsdRewards,
+              btc: payout.BTC
+            },
+            tags,
+            appIcon: imgixImageUrl,
+            website: domain,
+            slug
+          }
+        })
+      return (
+        <Section flexDirection="column" {...props}>
+          <MiningList
+            width={1}
+            maxWidth="850px"
+            noItemBorder
+            items={[
+              <Flex width={1} p={4}>
+                <ListItemText opacity={0.5} mr={3} display={['none', 'block']}>
+                  App Mining Rank
+                </ListItemText>
+                <ListItemText
+                  ml={['0', 'auto']}
+                  textAlign={['center', 'right']}
+                  width={['100%', 'auto']}
+                  color="#11A9BC"
+                >
+                  {month.humanReadableDate} 
+                  {month.name && ` (${month.name}) `}
+                  Payouts
+                </ListItemText>
+              </Flex>,
+              ...appsArray(apps)
+            ]}
+          />
+        </Section>
+      )
+    }}
+  </RankingContextConsumer>
 )
 
 const ActionBar = () => (
@@ -161,7 +167,9 @@ const ActionBar = () => (
     <Box borderTop="1px solid white" />
     <MiningButton mx="auto" width="250px" bg="#EF6F6F" alignItems="center" style={{ transform: 'translateY(-25px)' }}>
       <Box>
-        <a href="/blockstack" style={{textDecoration: 'none'}}>View all apps</a>
+        <a href="/mining/september-2018" style={{ textDecoration: 'none' }}>
+          View all apps
+        </a>
       </Box>
       <Box ml={2}>
         <ArrowRightIcon color="currentColor" size="1.3rem" style={{ transform: 'translateY(4px)' }} />
@@ -185,7 +193,8 @@ const Earn = ({ ...props }) => (
       <Heading mb={5}>How much can you earn?</Heading>
       <Box maxWidth={['80%', '500px']}>
         <SubHeading>
-          We currently pay in BTC for legal compliance. We plan to begin paying Stacks tokens early 2019 provided compliance with all applicable law.
+          We currently pay in BTC for legal compliance. We plan to begin paying Stacks tokens early 2019 provided
+          compliance with all applicable law.
         </SubHeading>
       </Box>
     </Section>

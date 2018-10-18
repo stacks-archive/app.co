@@ -5,7 +5,7 @@ import moment from 'moment'
 import PropTypes from 'prop-types'
 import NotificationSystem from 'react-notification-system'
 import Link from 'next/link'
-import { Box } from 'rebass'
+import { Box } from 'blockstack-ui'
 import Router from 'next/router'
 import download from 'downloadjs'
 
@@ -26,7 +26,8 @@ class MiningMonth extends React.Component {
     purchaseExchangeName: '',
     BTCTransactionId: '',
     purchaseConversionRate: '',
-    status: ''
+    status: '',
+    name: ''
   }
 
   static propTypes = {
@@ -62,7 +63,7 @@ class MiningMonth extends React.Component {
     if (this.state.purchasedAt) {
       const date = moment(this.state.purchasedAt).utcOffset(-4)
       data.purchasedAt = date.format()
-    } 
+    }
     console.log(data)
     this.props.saveMonth(data)
     this.notifications.addNotification({
@@ -163,6 +164,28 @@ class MiningMonth extends React.Component {
           </StyledMonth.Content>
         </StyledMonth.Section>
 
+        <Collapsable title="General Information">
+          <div style={{ paddingBottom: '1em' }}>
+            <Table>
+              <tbody>
+                <tr>
+                  <FormTd>
+                    Report Name
+                  </FormTd>
+                  <FormTd textAlign="right">
+                    <Input
+                      type="text"
+                      value={this.state.name}
+                      onChange={(evt) => this.setState({ name: evt.target.value })}
+                    />
+                  </FormTd>
+                </tr>
+              </tbody>
+            </Table>
+            <Button onClick={() => this.save()}>Save</Button>
+          </div>
+        </Collapsable>
+
         <Collapsable title="BTC transactions">
           <div style={{paddingBottom: '1em'}}>
             <Table>
@@ -172,9 +195,9 @@ class MiningMonth extends React.Component {
                     Purchase Exchange Name
                   </FormTd>
                   <FormTd textAlign="right">
-                    <Input 
+                    <Input
                       type="text"
-                      value={this.state.purchaseExchangeName} 
+                      value={this.state.purchaseExchangeName}
                       onChange={(evt) => this.setState({purchaseExchangeName: evt.target.value})}
                     />
                   </FormTd>
@@ -184,9 +207,9 @@ class MiningMonth extends React.Component {
                     Purchase date
                   </FormTd>
                   <FormTd textAlign="right">
-                    <Input type="datetime-local" 
+                    <Input type="datetime-local"
                       value={moment(this.state.purchasedAt).format('YYYY-MM-DDTHH:mm')}
-                      onChange={(evt) => this.setState({purchasedAt: evt.target.value})} 
+                      onChange={(evt) => this.setState({purchasedAt: evt.target.value})}
                     />
                   </FormTd>
                 </tr>
@@ -253,8 +276,8 @@ class MiningMonth extends React.Component {
                   Unpublish rankings
                 </a>
               )}
-              <a 
-                href="javascript:void(0)" 
+              <a
+                href="javascript:void(0)"
                 onClick={() => this.downloadRankings() }
                 style={{ display: 'inline-block', marginLeft: '10px' }}>
                 Download Rankings

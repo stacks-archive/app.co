@@ -48,7 +48,7 @@ export const PlatformTitle = styled.span`
   top: 2px;
 `
 
-export const ClearFilter = Filter.extend`
+export const ClearFilter = styled(Filter)`
   padding-top: 6px;
 `
 

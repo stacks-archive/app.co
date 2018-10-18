@@ -66,37 +66,62 @@ app.prepare().then(() => {
     })
 
     server.get('/', (req, res) => renderAndCache(req, res, '/'))
+    /**
+     * Mining Pages
+     */
     server.get('/mining', (req, res) => renderAndCache(req, res, '/mining'))
+    server.get('/mining/faq', (req, res) => renderAndCache(req, res, '/mining/faq'))
+    server.get('/mining/terms', (req, res) => renderAndCache(req, res, '/mining/terms'))
+    server.get('/mining/privacy', (req, res) => renderAndCache(req, res, '/mining/privacy'))
+    server.get('/mining/developer-instructions', (req, res) =>
+      renderAndCache(req, res, '/mining/developer-instructions')
+    )
+    server.get('/mining/reviewer-instructions', (req, res) => renderAndCache(req, res, '/mining/reviewer-instructions'))
+    server.get('/mining/:date', (req, res) => {
+      const { date } = req.params
+      const [month, year] = date.split('-')
+      renderAndCache(req, res, '/mining/month-results', { month, year, fetchMiningResults: true })
+    })
+
+    /**
+     * App Pages
+     */
     server.get('/app/:appSlug', (req, res) => renderAndCache(req, res, '/'))
     server.get('/apps', (req, res) => renderAndCache(req, res, '/'))
+    /**
+     * Platforms
+     */
     server.get('/platforms', (req, res) => renderAndCache(req, res, '/platforms'))
     server.get('/platforms/all', (req, res) => renderAndCache(req, res, '/platforms'))
     // redirect to top-level page
     server.get('/platforms/:platform', (req, res) => res.redirect(`/${req.params.platform}`))
     server.get('/platform/:platform', (req, res) => res.redirect(`/${req.params.platform}`))
+    /**
+     * Categories
+     */
     server.get('/categories', (req, res) => renderAndCache(req, res, '/categories'))
     server.get('/categories/all', (req, res) => renderAndCache(req, res, '/categories/all'))
     server.get('/categories/:category', (req, res) =>
       renderAndCache(req, res, '/categories', { category: req.params.category })
     )
     server.get('/category/:category', (req, res) => res.redirect(`/categories/${req.params.category}`))
+    /**
+     * General Pages
+     */
     server.get('/faq', (req, res) => renderAndCache(req, res, '/faq'))
     server.get('/submit', (req, res) => renderAndCache(req, res, '/submit'))
     server.get('/all', (req, res) => renderAndCache(req, res, '/all'))
+    server.get('/terms', (req, res) => renderAndCache(req, res, '/terms'))
 
-    server.get('/app-mining/developer-instructions', (req, res) => renderAndCache(req, res, '/mining/developer-instructions'))
-    server.get('/app-mining/reviewer-instructions', (req, res) => renderAndCache(req, res, '/mining/reviewer-instructions'))
-    server.get('/app-mining/:date', (req, res) => {
-      const { date } = req.params
-      const [month, year] = date.split('-')
-      renderAndCache(req, res, '/mining/month-results', { month, year, fetchMiningResults: true })
-    })
+    /**
+     * Admin Pages
+     */
 
     server.get('/admin', (req, res) => renderAndCache(req, res, '/admin'))
     server.get('/admin/app', (req, res) => renderAndCache(req, res, '/admin/app'))
     server.get('/admin/pending', (req, res) => renderAndCache(req, res, '/admin/pending'))
     server.get('/admin/mining/months', (req, res) => renderAndCache(req, res, '/admin/mining/months'))
-    server.get('/admin/mining/months/:id', (req, res) => 
+    server.get('/admin/mining/months/:id', (req, res) =>
       renderAndCache(req, res, '/admin/mining/month', { monthId: req.params.id })
     )
     server.get('/admin/mining/months/:id/upload-report', (req, res) =>
@@ -105,8 +130,6 @@ app.prepare().then(() => {
     server.get('/admin/mining/months/:monthId/reviewers/:reviewerId', (req, res) =>
       renderAndCache(req, res, '/admin/mining/reviewer')
     )
-
-    
 
     apps.platforms.forEach((platform) => {
       server.get(`/${slugify(platform)}`, (req, res) => {

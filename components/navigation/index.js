@@ -5,13 +5,8 @@ import NewsletterActions from '@stores/newsletter/actions'
 import { StyledTopBar } from '@components/top-bar/styled'
 import Link from 'next/link'
 
-const ErrorPageLink = ({isErrorPage, children, ...props}) => isErrorPage ? (
-    children
-  ) : (
-    <Link {...props}>
-      {children}
-    </Link>
-  )
+const ErrorPageLink = ({ isErrorPage, children, ...props }) =>
+  isErrorPage ? children : <Link {...props}>{children}</Link>
 
 const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, footer, admin, ...rest }) => {
   const extraProps = handleClick ? { onClick: () => handleClick() } : {}
@@ -31,11 +26,14 @@ const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, fo
         </>
       ) : (
         <>
-          <ErrorPageLink isErrorPage={ isErrorPage } href="/all">
+          <ErrorPageLink isErrorPage={isErrorPage} href="/all">
             <a href="/all">All apps</a>
           </ErrorPageLink>
           <ErrorPageLink isErrorPage={isErrorPage} href="/faq" prefetch {...extraProps}>
             <a href="/faq">Learn more</a>
+          </ErrorPageLink>
+          <ErrorPageLink isErrorPage={isErrorPage} href="/mining" prefetch {...extraProps}>
+            <a href="/mining">App Mining</a>
           </ErrorPageLink>
           <a
             href="#"
@@ -45,7 +43,7 @@ const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, fo
             }}
           >
             Get updates
-            </a>
+          </a>
           <ErrorPageLink isErrorPage={isErrorPage} href="/submit" {...extraProps}>
             <a href="/submit">Add your app</a>
           </ErrorPageLink>
@@ -57,6 +55,9 @@ const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, fo
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({ ...NewsletterActions }, dispatch)
 
-const Navigation = connect(null, mapDispatchToProps)(NavigationComponent)
+const Navigation = connect(
+  null,
+  mapDispatchToProps
+)(NavigationComponent)
 
-export {Navigation}
+export { Navigation }

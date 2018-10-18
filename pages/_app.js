@@ -3,15 +3,69 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { CookiesProvider } from 'react-cookie'
 import Router from 'next/router'
-
 import withReduxStore from '@common/lib/with-redux-store'
 import { Root } from '@containers/root'
 import { theme } from '@common/styles'
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { Mdx } from '@components/mdx'
 import { trackPageView } from '@utils'
-
 import 'isomorphic-unfetch'
+import { normalize } from 'polished'
+
+/**
+ * Reset our styles
+ */
+const GlobalStyles = createGlobalStyle`
+  ${normalize()};
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+  }
+  body, html{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-color: ${theme.colors.grey.light};
+    color: ${theme.colors.grey};
+  }
+  
+  ol li ol {
+  list-style-type: upper-alpha;
+  }
+  body{
+  &.no-scroll{
+  overflow: hidden; 
+  }
+  }
+  
+  a{
+    &:link,
+    &:visited,
+    &:active{
+      color: ${theme.colors.blue};
+    }
+    &:hover{
+      color: ${theme.colors.blue.light};
+    }
+  }
+  h1, h2, h3, h4, h5, h6{
+    margin: 0;
+    padding: 0;
+  }
+  .headroom{
+    z-index: 99 !important;
+  }
+  hr{
+    background:transparent;
+    border: 1px solid #f2f2f2;
+    margin: 0;
+    padding: 0;
+    display: block;
+  }
+
+  input::ms-clear {
+    display: none;
+  }
+`
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -43,7 +97,10 @@ class MyApp extends App {
             <Container>
               <Provider store={reduxStore}>
                 <Root>
-                  <Component {...pageProps} serverCookies={this.props.cookies} />
+                  <>
+                    <GlobalStyles />
+                    <Component {...pageProps} serverCookies={this.props.cookies} />
+                  </>
                 </Root>
               </Provider>
             </Container>

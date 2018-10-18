@@ -1,26 +1,28 @@
 import * as React from 'react'
 import { MiningPage } from '@components/mining/page'
-import { AppIcon } from '@components/logos'
 import { Hero, Steps } from '@pages/mining/hero'
 import { Earn } from '@pages/mining/earn'
 import { How } from '@pages/mining/how'
 import { Why } from '@pages/mining/why'
 import { Closing } from '@pages/mining/closing'
-import { FAQ } from '@pages/mining/faq'
-import { Section, HeaderType } from '@pages/mining/shared'
+import { FAQ } from '@pages/mining/faq-section'
+import { Quotes } from '@pages/mining/quotes'
+import { Header, Footer } from '@pages/mining/shared'
 import Head from '@containers/head'
+
 import { MiningModal } from '@pages/mining/modal'
+import { selectApiServer } from '@stores/apps/selectors'
+import { connect } from 'react-redux'
+import { trackEvent } from '@utils'
 
-const Header = () => (
-  <Section>
-    <HeaderType mr={2}>App Mining by</HeaderType> <AppIcon size={32} m={2} />
-    <HeaderType ml={2}>
-      App.co and{' '}
-      <a href="https://blockstack.org">Blockstack</a>
-    </HeaderType>
-  </Section>
-)
+const RankingContext = React.createContext({})
 
+const handleBodyScroll = (on) =>
+  on ? document.body.classList.remove('no-scroll') : document.body.classList.add('no-scroll')
+
+const mapStateToProps = (state) => ({
+  apiServer: selectApiServer(state)
+})
 
 const sections = [
   (props) => (
@@ -30,6 +32,7 @@ const sections = [
     </>
   ),
   (props) => <Earn id="how-to-earn" {...props} />,
+  (props) => <Quotes id="quotes-from-developers" {...props} />,
   (props) => <How id="how-ranking-works" {...props} />,
   (props) => <Why id="why" {...props} />,
   (props) => <Closing id="register-your-app" {...props} />,
@@ -37,11 +40,34 @@ const sections = [
 ]
 
 class AppMiningPage extends React.PureComponent {
+  static async getInitialProps({ reduxStore }) {
+    const apiServer = selectApiServer(reduxStore.getState())
+    try {
+      const res = await fetch(`${apiServer}/api/app-mining-months`)
+      const { months } = await res.json()
+      if (months && months.length) {
+        return { rankings: months[0].compositeRankings, month: months[0] }
+      } else {
+        return {}
+      }
+    } catch (error) {
+      return {}
+    }
+  }
   state = {
     modalShowing: false
   }
   closeModal = () => this.setState({ modalShowing: false })
-  openModal = () => this.setState({ modalShowing: true })
+  openModal = () => {
+    trackEvent('Open App Mining Registration Modal', {
+      event_category: 'Mining'
+    })
+    this.setState({ modalShowing: true })
+  }
+
+  componentDidMount() {
+    handleBodyScroll(true)
+  }
 
   render() {
     return (
@@ -52,12 +78,17 @@ class AppMiningPage extends React.PureComponent {
         />
         {this.state.modalShowing ? <MiningModal closeModal={() => this.closeModal()} /> : null}
         <Header />
-        {sections.map((PageSection, i) => (
-          <PageSection closeModal={() => this.closeModal()} openModal={() => this.openModal()} key={i}/>
-        ))}
+        <RankingContext.Provider value={{ rankings: this.props.rankings, month: this.props.month }}>
+          {sections.map((PageSection, i) => (
+            <PageSection closeModal={() => this.closeModal()} openModal={() => this.openModal()} key={i} />
+          ))}
+        </RankingContext.Provider>
+        <Footer />
       </MiningPage>
     )
   }
 }
 
-export default AppMiningPage
+export const RankingContextConsumer = RankingContext.Consumer
+
+export default connect(mapStateToProps)(AppMiningPage)

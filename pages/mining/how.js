@@ -2,8 +2,7 @@ import * as React from 'react'
 import { Heading, Section } from '@pages/mining/shared'
 import { Box, Img, Flex } from '@components/mining'
 import { Card } from '@components/mining/card'
-import { LogoWordmark } from '@components/mining/logo'
-import { Type } from '@components/typography'
+import { Type } from 'blockstack-ui'
 import { CheckMark } from '@components/svg'
 
 const CardItem = (props) => (
@@ -22,10 +21,10 @@ const CardItem = (props) => (
 const RankedBy = ({ by, bg, ...rest }) => (
   <Flex pt={4} alignItems="center" justifyContent="center" {...rest} flexWrap="wrap">
     <Box mr={2} pb={2}>
-      <Type.span>Ranks&nbsp;by:</Type.span>
+      <Type>Ranks&nbsp;by:</Type>
     </Box>
     <Box bg={bg} px={3} mb={2} py={1}>
-      <Type.span color="white">{by}</Type.span>
+      <Type color="white">{by}</Type>
     </Box>
   </Flex>
 )
@@ -35,9 +34,9 @@ const ListCheckItem = ({ children, ...props }) => (
     <Box mr={3} style={{ transform: 'translateY(3px)' }}>
       <CheckMark />
     </Box>
-    <Type.span color="white" lineHeight={1.5}>
+    <Type color="white" lineHeight={1.5}>
       {children}
-    </Type.span>
+    </Type>
   </Flex>
 )
 
@@ -63,7 +62,7 @@ const How = ({ ...props }) => (
         </ListCheckItem>
         <ListCheckItem>Any user-ready app on App.co with Blockstack authentication or storage.</ListCheckItem>
         <ListCheckItem>
-          Reviewers use their proprietary data to rank App.co apps. <a href="/blockstack">View rankings.</a>
+          Reviewers use their proprietary data to rank App.co apps. <a href="/mining/september-2018">View rankings.</a>
         </ListCheckItem>
         <ListCheckItem>Reviewers, criteria, and rankings are made public each month.</ListCheckItem>
       </Box>

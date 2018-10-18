@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box } from '@components/mining/index'
+import { Box } from 'blockstack-ui'
 
 const AppCoLogo = ({ size = 50, ...rest }) => (
   <Box {...rest}>

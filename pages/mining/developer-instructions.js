@@ -3,7 +3,7 @@ import React from 'react'
 import { Page } from '@components/page'
 import { Section, Content } from '@components/mining-admin/month'
 import Head from '@containers/head'
-import { Type } from '@components/typography'
+import { Type } from 'blockstack-ui'
 import { Ol, Li } from '@components/mining/instructions'
 import RegisteredApps from '@components/mining/registered-apps'
 
