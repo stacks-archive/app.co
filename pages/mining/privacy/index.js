@@ -1,10 +1,11 @@
 import * as React from 'react'
 import { MiningPage } from '@components/mining/page'
-import { Header } from '@pages/mining/shared'
+import { Header, Footer } from '@pages/mining/shared'
 import Head from '@containers/head'
 import { Flex, Type, Box } from 'blockstack-ui'
 import ArrowLeftIcon from 'mdi-react/ArrowLeftIcon'
 import Link from 'next/link'
+
 import Markdown from './content.md'
 
 const Content = (props) => <Flex flexDirection="column" width={1} maxWidth="780px" {...props} />
@@ -31,6 +32,7 @@ class AppMiningPrivacyPolicy extends React.PureComponent {
           <Content color="white">
             <Markdown />
           </Content>
+          <Footer />
         </Box>
       </MiningPage>
     )

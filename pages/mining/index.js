@@ -7,13 +7,12 @@ import { Why } from '@pages/mining/why'
 import { Closing } from '@pages/mining/closing'
 import { FAQ } from '@pages/mining/faq-section'
 import { Quotes } from '@pages/mining/quotes'
-import { Header } from '@pages/mining/shared'
+import { Header, Footer } from '@pages/mining/shared'
 import Head from '@containers/head'
-import { Type, Flex } from 'blockstack-ui'
+
 import { MiningModal } from '@pages/mining/modal'
 import { selectApiServer } from '@stores/apps/selectors'
 import { connect } from 'react-redux'
-import Link from 'next/link'
 import { trackEvent } from '@utils'
 
 const RankingContext = React.createContext({})
@@ -84,19 +83,7 @@ class AppMiningPage extends React.PureComponent {
             <PageSection closeModal={() => this.closeModal()} openModal={() => this.openModal()} key={i} />
           ))}
         </RankingContext.Provider>
-        <Flex justifyContent="center" p={4}>
-          <Link href="/mining/terms">
-            <Type pr={2} href="/mining/terms" is="a">
-              Terms of Use
-            </Type>
-          </Link>
-          <Type>|</Type>
-          <Link href="/mining/privacy">
-            <Type pl={2} href="/mining/privacy" is="a">
-              Privacy Policy
-            </Type>
-          </Link>
-        </Flex>
+        <Footer />
       </MiningPage>
     )
   }
