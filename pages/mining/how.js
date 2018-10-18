@@ -9,11 +9,12 @@ const CardItem = (props) => (
   <Card
     alignItems="center"
     justifyContent="space-between"
-    width={['100%', 'calc(50% - 20px)']}
+    width={['80%', 'calc(50% - 20px)']}
     flexDirection="column"
     px={[3, 4]}
     py={4}
-    my={[2, 0]}
+    mb={[6, 0]}
+    mx={['auto', 0]}
     {...props}
   />
 )
@@ -30,14 +31,14 @@ const RankedBy = ({ by, bg, ...rest }) => (
 )
 
 const Reviewers = (props) => (
-  <Flex justifyContent="space-between" pb={4} width={1} maxWidth="700px">
+  <Flex justifyContent="space-between" flexDirection={['column', 'row']} pb={[0, 5]} width={1} maxWidth="700px">
     <CardItem>
       <Box is="img" maxWidth="100%" src="https://file-jrmzurtxvq.now.sh/" alt="Product Hunt" />
       <RankedBy by="Hunter Ratings" bg="#11A9BC" />
     </CardItem>
     <CardItem>
-      <Box is="img" maxWidth="100%" src="https://file-xmrrjpxqmb.now.sh" alt="Democracy Earth" />
-      <RankedBy by="Hunter Ratings" bg="#EF6F6F" />
+      <Box is="img" maxWidth="100%" src="https://file-mqtzgelfak.now.sh/" alt="Democracy Earth" />
+      <RankedBy by="Community Votes" bg="#EF6F6F" />
     </CardItem>
   </Flex>
 )
@@ -68,6 +69,8 @@ const How = ({ ...props }) => (
       <Heading mb={5} maxWidth={['100%', '800px']}>
         Apps are ranked by reviewers and rewards distributed every 30 days
       </Heading>
+
+      <Reviewers />
 
       <Box pt={3}>
         <ListCheckItem>
