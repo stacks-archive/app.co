@@ -172,7 +172,7 @@ const ActionBar = () => (
         </a>
       </Box>
       <Box ml={2}>
-        <ArrowRightIcon color="currentColor" size="1.3rem" style={{ transform: 'translateY(4px)' }} />
+        <ArrowRightIcon color="currentColor" size="30px" style={{ transform: 'translateY(4px)' }} />
       </Box>
     </MiningButton>
   </Box>
