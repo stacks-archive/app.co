@@ -193,8 +193,7 @@ const Earn = ({ ...props }) => (
       <Heading mb={5}>How much can you earn?</Heading>
       <Box maxWidth={['80%', '500px']}>
         <SubHeading>
-          We currently pay in BTC for legal compliance. We plan to begin paying Stacks tokens early 2019 provided
-          compliance with all applicable law.
+          App Mining payouts are currently paid in Bitcoin.
         </SubHeading>
       </Box>
     </Section>
