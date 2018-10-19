@@ -65,13 +65,12 @@ const quotes = [
         </>
       )
     },
-    quote: `The hardest part of launching any application, let alone a decentralized application, is bootstrapping it. Even if you’re seeking funding, that process often takes time. Blockstack App Rewards allows an application to focus on building something great rather than diving straight into fundraising.`
+    quote: `The hardest part of launching any application, let alone a decentralized application, is bootstrapping it. Even if you’re seeking funding, that process often takes time. Blockstack App Mining allows an application to focus on building something great rather than diving straight into fundraising.`
   },
-
   {
-    quote: `App rewards mining allows Blockusign to focus on what we do best, BUILD! It provides us with the extra incentive to keep forging ahead and iterating in this brand-new ecosystem - without having to worry about finding early stage funding. We truly feel included in this passionate community of people, from around the world, that believe in building the decentralized open web.`,
+    quote: `App mining allows Blockusign to focus on what we do best, BUILD! It provides us with the extra incentive to keep forging ahead and iterating in this brand-new ecosystem - without having to worry about finding early stage funding. We truly feel included in this passionate community of people, from around the world, that believe in building the decentralized open web.`,
     quotee: {
-      name: 'Nick Tee',
+      name: 'Nick Theile',
       photo: 'https://file-cpvefljisa.now.sh',
       title: (
         <>
