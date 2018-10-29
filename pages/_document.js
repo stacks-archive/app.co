@@ -8,6 +8,10 @@ const GoogleCode = `
             gtag('js', new Date()); gtag('config', 'UA-119163063-1');
           `
 
+const DriftChatCode = `
+"use strict"; !function() { var t = window.driftt = window.drift = window.driftt || []; if (!t.init) { if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice.")); t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], t.factory = function(e) { return function() { var n = Array.prototype.slice.call(arguments); return n.unshift(e), t.push(n), t; }; }, t.methods.forEach(function(e) { t[e] = t.factory(e); }), t.load = function(t) { var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script"); o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js"; var i = document.getElementsByTagName("script")[0]; i.parentNode.insertBefore(o, i); }; } }(); drift.SNIPPET_VERSION = '0.3.1'; drift.load('46aa9a6p5e2d');
+`
+
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
     const sheet = new ServerStyleSheet()
@@ -30,6 +34,7 @@ export default class MyDocument extends Document {
             async="async"
           />
           <script dangerouslySetInnerHTML={{ __html: GoogleCode }} />
+          <script dangerouslySetInnerHTML={{ __html: DriftChatCode }} />
           {this.props.styleTags}
         </Head>
         <body>
