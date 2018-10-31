@@ -11,10 +11,11 @@ rss(version='2.0' xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://s
     each app in apps
       item
         title= app.name
-        link https://app.co/app/#{app.Slugs[0].value}
+        - slug = app.Slugs[0] ? app.slugs[0].value : app.id
+        link https://app.co/app/#{slug}
         description= app.description
         pubDate= new Date(app.createdAt).toUTCString()
-        guid https://app.co/app/#{app.Slugs[0].value}
+        guid https://app.co/app/#{slug}
         if app.imgixImageUrl
           //- enclosure(url=app.imageUrl.replace('https', 'http') type="image/jpeg" length=200)
           media:content(url=app.imgixImageUrl, medium="image")
