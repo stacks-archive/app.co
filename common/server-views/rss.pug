@@ -11,7 +11,7 @@ rss(version='2.0' xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://s
     each app in apps
       item
         title= app.name
-        - slug = app.Slugs[0] ? app.slugs[0].value : app.id
+        - slug = app.Slugs && app.Slugs[0] ? app.slugs[0].value : app.id
         link https://app.co/app/#{slug}
         description= app.description
         pubDate= new Date(app.createdAt).toUTCString()
