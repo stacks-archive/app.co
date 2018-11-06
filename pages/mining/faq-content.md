@@ -50,6 +50,8 @@ At the time of our App Mining Alpha, the App Reviewers were: Product Hunt and De
 
 Apps are ranked by App Reviewers. Typically these are entities that have some proprietary methodology that helps them make objective judgements for why one app might be better than another. For example, Product Hunt can tap into their community data to determine relative app popularity. Each App Reviewer determines the data, formula and personnel they wish to utilize. Reviewers are required to periodically publish their methodology to ensure transparency.
 
+We've published a [detailed explanation of our ranking algorithm](https://blog.app.co/how-app-minings-ranking-algorithm-works/) on our blog, where you can learn more.
+
 ## How will App Mining evolve overtime?
 
 All plans listed below are subject to change, legal approval, and applicable law.
