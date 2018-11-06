@@ -16,14 +16,14 @@ class AppMiningPrivacyPolicy extends React.PureComponent {
     return (
       <MiningPage>
         <Head
-          title="Privacy Policy - App Mining"
+          title="FAQ - App Mining"
           description="Earn BTC for apps you build with Blockstack. We are funding decentralized app teams simply for being pioneers in the space."
         />
         <Header />
         <Box maxWidth="780px" width={1} mx="auto" px={4}>
           <Content>
             <Link href="/mining">
-              <Flex is="a" href={'/mining'} alignItems="center">
+              <Flex is="a" href="/mining" alignItems="center">
                 <ArrowLeftIcon />
                 <Type>Back to App Mining</Type>
               </Flex>

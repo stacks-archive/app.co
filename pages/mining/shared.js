@@ -10,19 +10,22 @@ const SubHeading = (props) => (
 )
 const Section = (props) => <Flex alignItems="center" justifyContent="center" py={4} px={3} {...props} />
 
-const Footer = () => <Flex justifyContent="center" p={4}>
-          <Link href="/mining/terms">
-            <Type pr={2} href="/mining/terms" is="a">
-              Terms of Use
-            </Type>
-          </Link>
-          <Type>|</Type>
-          <Link href="/mining/privacy">
-            <Type pl={2} href="/mining/privacy" is="a">
-              Privacy Policy
-            </Type>
-          </Link>
-        </Flex>
+const Footer = () => (
+  <Flex justifyContent="center" p={4}>
+    <Link href="/mining/terms" passHref>
+      <Type pr={2} is="a">
+        Terms of Use
+      </Type>
+    </Link>
+    <Type>|</Type>
+    <Link href="/privacy" passHref>
+      <Type pl={2} is="a">
+        Privacy Policy
+      </Type>
+    </Link>
+  </Flex>
+)
+
 const Header = () => (
   <Section>
     <HeaderType mr={2}>App Mining by</HeaderType>{' '}

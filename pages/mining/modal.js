@@ -235,7 +235,7 @@ class MiningModalComponent extends React.PureComponent {
               App.co Terms,
             </Type>{' '}
             and{' '}
-            <Type is="a" target="_blank" href="/mining/privacy">
+            <Type is="a" target="_blank" href="/privacy">
               Privacy Policy
             </Type>{' '}
             to submit your app.
@@ -358,7 +358,7 @@ class MiningModalComponent extends React.PureComponent {
                       App.co Terms,
                     </Type>{' '}
                     and{' '}
-                    <Type is="a" target="_blank" href="/mining/privacy">
+                    <Type is="a" target="_blank" href="/privacy">
                       Privacy Policy
                     </Type>
                   </>

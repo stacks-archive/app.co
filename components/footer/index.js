@@ -10,6 +10,7 @@ const Footer = ({ isErrorPage, admin, ...props }) => (
         admin={admin}
         display={['block', 'flex']} 
         justifyContent="center" 
+        footer
         alignItems="center" 
         textAlign={['center']} 
         isErrorPage={isErrorPage}

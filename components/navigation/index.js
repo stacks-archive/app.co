@@ -44,6 +44,11 @@ const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, fo
           >
             Get updates
           </a>
+          {footer && (
+            <ErrorPageLink isErrorPage={isErrorPage} href="/privacy" prefetch>
+              <a href="/privacy">Privacy Policy</a>
+            </ErrorPageLink>
+          )}
           <ErrorPageLink isErrorPage={isErrorPage} href="/submit" {...extraProps}>
             <a href="/submit">Add your app</a>
           </ErrorPageLink>
