@@ -27,6 +27,10 @@ In Oct 2018, we also ran an App Mining Alpha with 22 Blockstack apps with a tota
 To start the registration for App Mining, go to [App.co/mining](http://app.co/mining)
 You’ll need to add Blockstack Auth as a login option for your app. In the future, App Mining may reward apps that have taken steps to further decentralize, such as utilizing Gaia storage or the publishing your app to the Blockstack Naming System.
 
+## Does my code repository need to be public?
+
+In short, no. Your application code can be public or private. 
+
 ## Is Blockstack Auth difficult to integrate?
 
 If you’re already building your app with JavaScript, adding Blockstack authentication is easy! We have [docs](https://docs.blockstack.org/), [tutorials](https://docs.blockstack.org/browser/hello-blockstack.html), and thorough [API references](https://blockstack.github.io/blockstack.js/) for you to learn from. In short, you can do everything with a few lines of code:
