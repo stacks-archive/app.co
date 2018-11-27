@@ -48,7 +48,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       name: '',
-      contact: '',
+      contactEmail: '',
       website: '',
       description: '',
       imageUrl: '',
@@ -153,8 +153,8 @@ class App extends React.Component {
               </>
             )}
             <TextField
-              value={this.state.contact || ''}
-              onChange={(e) => this.setState({ contact: e.target.value })}
+              value={this.state.contactEmail || ''}
+              onChange={(e) => this.setState({ contactEmail: e.target.value })}
               label="Contact Email"
             />
             <TextField

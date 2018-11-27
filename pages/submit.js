@@ -18,7 +18,7 @@ class SubmitDapp extends React.Component {
     super(props)
     this.state = {
       name: '',
-      contact: '',
+      contactEmail: '',
       website: '',
       description: '',
       imageUrl: '',
@@ -106,8 +106,8 @@ class SubmitDapp extends React.Component {
                   label="Website"
                 />
                 <TextField
-                  value={this.state.contact}
-                  onChange={(e) => this.setState({ contact: e.target.value })}
+                  value={this.state.contactEmail}
+                  onChange={(e) => this.setState({ contactEmail: e.target.value })}
                   label="Contact Email"
                 />
                 <TextField
@@ -145,76 +145,6 @@ class SubmitDapp extends React.Component {
         </Page.Section>
       </Page>
     )
-
-    // return (
-    //   <div>
-    //     <Header data={this.props.data} />
-    //     <Hero />
-    //     <Page.Section wrap={1}>
-    //       <Page.Section.Content>
-    //         {this.state.submitted || this.state.submitting ? (
-    //           <p>Thanks for your submission! We'll get back to you soon.</p>
-    //         ) : (
-    //           <div>
-    //             Please share some details. We will review and approve your submission shortly.
-    //             <Form.Wrapper>
-    //               <TextField
-    //                 value={this.state.name}
-    //                 onChange={(e) => this.setState({ name: e.target.value })}
-    //                 label="Dapp Name"
-    //               />
-    //               <TextField
-    //                 value={this.state.description}
-    //                 onChange={(e) => this.setState({ description: e.target.value })}
-    //                 label="Short description (~50 characters)"
-    //                 maxLength={50}
-    //               />
-    //               <TextField
-    //                 value={this.state.website}
-    //                 onChange={(e) => this.setState({ website: e.target.value })}
-    //                 label="Website"
-    //               />
-    //               <TextField
-    //                 value={this.state.contact}
-    //                 onChange={(e) => this.setState({ contact: e.target.value })}
-    //                 label="Contact Email"
-    //               />
-    //               <TextField
-    //                 value={this.state.imageUrl}
-    //                 onChange={(e) => this.setState({ imageUrl: e.target.value })}
-    //                 label="Image URL"
-    //               />
-    //               <TextField
-    //                 value={this.state.openSourceUrl}
-    //                 onChange={(e) => this.setState({ openSourceUrl: e.target.value })}
-    //                 label="Open Source URL"
-    //               />
-    //               <TextField
-    //                 value={this.state.twitterHandle}
-    //                 onChange={(e) => this.setState({ twitterHandle: e.target.value })}
-    //                 label="Twitter Handle"
-    //               />
-    //               <br />
-    //               <Checkbox
-    //                 isChecked={this.state.registrationIsOpen}
-    //                 onChange={() => this.setState({ registrationIsOpen: !this.state.registrationIsOpen })}
-    //                 label="Registration is open to all users"
-    //               />
-    //             </Form.Wrapper>
-    //             {enumSelect(appConstants.categoryEnums, 'Category')}
-    //             {enumSelect(appConstants.blockchainEnums, 'Blockchain')}
-    //             {enumSelect(appConstants.storageEnums, 'Storage', { apiAttr: 'storageNetwork' })}
-    //             {enumSelect(appConstants.authenticationEnums, 'Authentication', { menuPlacement: 'top' })}
-    //             <br />
-    //             <Button onClick={this.submit} type="button/primary">
-    //               Submit
-    //             </Button>
-    //           </div>
-    //         )}
-    //       </Page.Section.Content>
-    //     </Page.Section>
-    //   </div>
-    // )
   }
 }
 
