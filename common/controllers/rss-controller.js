@@ -9,11 +9,12 @@ const apiServer = process.env.API_SERVER || 'https://app-co-api.herokuapp.com'
 const router = express.Router()
 
 router.get('/', async (req, res) => {
-  const { apps } = await getApps(apiServer)
-  const sorted = _.sortBy(apps, (app) => -new Date(app.createdAt).getTime())
+  let { apps } = await getApps(apiServer)
+  apps = _.sortBy(apps, (app) => -new Date(app.createdAt).getTime())
+  apps = _.filter(apps, (app) => app.category !== 'Sample Blockstack Apps')
   res.type('application/rss+xml')
   res.render('rss', {
-    apps: sorted
+    apps
   })
 })
 
