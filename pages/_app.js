@@ -6,6 +6,7 @@ import Router from 'next/router'
 import withReduxStore from '@common/lib/with-redux-store'
 import { Root } from '@containers/root'
 import { theme } from '@common/styles'
+import { theme as BlockstackTheme } from 'blockstack-ui'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { Mdx } from '@components/mdx'
 import { trackPageView } from '@utils'
@@ -16,6 +17,7 @@ import { normalize } from 'polished'
  * Reset our styles
  */
 const GlobalStyles = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,400,600');
   ${normalize()};
   * {
     -webkit-font-smoothing: antialiased;
@@ -93,7 +95,7 @@ class MyApp extends App {
     return (
       <CookiesProvider>
         <Mdx>
-          <ThemeProvider theme={theme}>
+          <ThemeProvider theme={BlockstackTheme}>
             <Container>
               <Provider store={reduxStore}>
                 <Root>
