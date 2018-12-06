@@ -5,6 +5,8 @@ import debounce from 'lodash.debounce'
 
 const API = 'https://app-co-api.herokuapp.com/api/blockstack-subscribe'
 
+export const NewsletterContext = React.createContext()
+
 class NewsletterWrapper extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -80,9 +82,12 @@ class NewsletterWrapper extends React.PureComponent {
     }
   }
 
-  doSubmit = async () => {
+  doSubmit = async (e) => {
+    if (e && e.preventDefault) {
+      e.preventDefault() // to prevent page reload when user submits via hitting return
+    }
     if (!this.state.isValid) {
-      console.log('not valid!')
+      console.debug('not valid!')
       return null
     }
 
@@ -95,14 +100,18 @@ class NewsletterWrapper extends React.PureComponent {
 
         if (data.success) {
           this.success()
+          return this.state.value
         } else {
           this.setError(data.error)
+          return false
         }
       } catch (error) {
         this.setError(error.message)
+        return false
       }
     } else if (this.state.error) {
       this.setState({ showError: true })
+      return false
     }
   }
 
@@ -112,13 +121,13 @@ class NewsletterWrapper extends React.PureComponent {
       isValid: this.state.value !== '' && this.state.isValid,
       error: this.state.showError && this.state.error,
       success: this.state.success,
-      doSubmit: this.doSubmit,
+      doSubmit: this.props.onSubmit ? (e) => this.props.onSubmit(() => this.doSubmit(e)) : this.doSubmit,
       value: this.state.value,
       bind: {
         onChange: (e) => this.onChange(e)
       }
     }
-    return this.props.children(props)
+    return <NewsletterContext.Provider value={props}>{this.props.children(props)}</NewsletterContext.Provider>
   }
 }
 

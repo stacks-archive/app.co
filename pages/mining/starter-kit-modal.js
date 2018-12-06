@@ -3,6 +3,7 @@ import { Modal, Flex, Type, Input, Box, Button } from 'blockstack-ui'
 import { State } from 'react-powerplug'
 import { BuildGraphic, RegisterGraphic } from '@components/mining/svg'
 import { Newsletter } from '@components/mining/newsletter'
+import { NewsletterContext } from '@components/mining/newsletter/container'
 
 const ModalComponent = (props) => (
   <Flex position="relative" maxWidth={600} width={'100%'} p={4} flexDirection="column" bg="white" {...props} />
@@ -21,46 +22,58 @@ const header = (props) => (
   />
 )
 
-const InitialView = ({ handleSubmit }) => (
-  <>
-    <Type color="blue" lineHeight={1.5} maxWidth="80%" fontSize={5} fontFamily="brand">
-      Get your App Mining Starter Kit
-    </Type>
-    <Box pt={4}>
-      <Box>
-        <Newsletter hideButton variant="ui" placeholder="Enter your email address">
-          {({ doSubmit, component: Component, isValid }) => {
-            return (
-              <>
-                <Component />
+const InitialView = ({ setState, view, handleSubmit }) => {
+  return (
+    <>
+      <Type color="blue" lineHeight={1.5} maxWidth="80%" fontSize={5} fontFamily="brand">
+        Get your App Mining Starter Kit
+      </Type>
+      <Box pt={4}>
+        <Box>
+          <Newsletter
+            onSubmit={async (doSubmit) => {
+              const email = await doSubmit()
+              if (email && view === 'initial') {
+                setState({ view: 'success', value: email })
+              }
+            }}
+            hideButton
+            variant="ui"
+            placeholder="Enter your email address"
+          >
+            <NewsletterContext.Consumer>
+              {({ doSubmit, loading, isValid }) => (
                 <Box pt={5}>
                   <Button
                     disabled={!isValid}
-                    onClick={() => {
-                      console.log('submit')
-                      doSubmit()
+                    onClick={async () => {
+                      const email = await doSubmit()
+                      if (email && view === 'initial') {
+                        setState({ view: 'success', value: email })
+                      }
                     }}
                     width={1}
                     height="auto"
                     py={2}
                   >
-                    Submit
+                    {loading ? 'Loading...' : 'Submit'}
                   </Button>
                 </Box>
-              </>
-            )
-          }}
-        </Newsletter>
+              )}
+            </NewsletterContext.Consumer>
+          </Newsletter>
+        </Box>
       </Box>
-    </Box>
-  </>
-)
+    </>
+  )
+}
 
-const SuccessView = ({ email = 'PLACEHOLDER@email.com' }) => (
+const SuccessView = ({ value }) => (
   <Box color="blue.dark" lineHeight={1.35}>
     <Box pb={6}>
       <Type fontSize={3}>
-        <Type fontWeight="bold">Welcome to App Mining!</Type> We emailed your App Mining starter kit to {email}.
+        <Type fontWeight="bold">Welcome to App Mining!</Type> We emailed your App Mining Starter Kit to <em>{value}</em>
+        .
       </Type>
     </Box>
     <Flex pb={6} alignItems="center">
@@ -71,7 +84,12 @@ const SuccessView = ({ email = 'PLACEHOLDER@email.com' }) => (
         <Type pb={4} fontSize={2} fontWeight="bold">
           New to Blockstack? Need to integrate Blockstack authentication?
         </Type>
-        <Type>Learn how with our Zero-to-Dapp tutorial.</Type>
+        {/**
+         * TODO: add link
+         */}
+        <Type is="a" href="#">
+          Learn how with our Zero-to-Dapp tutorial.
+        </Type>
       </Box>
     </Flex>
     <Flex alignItems="center">
@@ -82,6 +100,9 @@ const SuccessView = ({ email = 'PLACEHOLDER@email.com' }) => (
         <Type pb={4} fontSize={2} fontWeight="bold">
           Have a user-ready Blocstack app?
         </Type>
+        {/**
+         * TODO: add link
+         */}
         <Type>Register on App.co and complete the App Mining Ready steps.</Type>
       </Box>
     </Flex>
@@ -93,7 +114,13 @@ const StarterKitModal = ({ ...rest }) => (
   <Modal component={ModalComponent} header={header} {...rest}>
     <State initial={{ view: 'initial' }}>
       {({ state, setState }) => (
-        <>{state.view === 'initial' ? <InitialView handleSubmit={() => handleSubmit(setState)} /> : <SuccessView />}</>
+        <>
+          {state.view === 'initial' ? (
+            <InitialView view={state.view} setState={setState} handleSubmit={() => handleSubmit(setState)} />
+          ) : (
+            <SuccessView value={state.value} />
+          )}
+        </>
       )}
     </State>
   </Modal>

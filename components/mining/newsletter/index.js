@@ -67,7 +67,6 @@ const InputComponent = ({
           placeholder={placeholder}
           disabled={success}
           type="email"
-          value={value}
           px={undefined}
           pl={5}
           pr={!hideButton ? '62px' : 5}
@@ -84,58 +83,33 @@ const Newsletter = ({
   variant = 'marketing',
   border = '2px solid',
   children,
+  list = 'e36d5dc9',
+  from = 'hello@app.co',
+  onSubmit,
   ...props
 }) => (
-  <NewsletterWrapper list="e36d5dc9" from="hello@app.co">
+  <NewsletterWrapper onSubmit={onSubmit} list={list} from={from}>
     {({ bind, isValid, loading, error, success, doSubmit, value }) => {
-      return children && typeof children === 'function' ? (
-        children({
-          loading,
-          hideSuccess,
-          hideButton,
-          success,
-          doSubmit,
-          border,
-          variant,
-          placeholder,
-          bind,
-          isValid,
-          error,
-          value,
-          component: (inputProps) => (
-            <InputComponent
-              value={value}
-              loading={loading}
-              hideSuccess={hideSuccess}
-              hideButton={hideButton}
-              success={success}
-              doSubmit={doSubmit}
-              border={border}
-              variant={variant}
-              placeholder={placeholder}
-              bind={bind}
-              isValid={isValid}
-              error={error}
-              {...inputProps}
-            />
-          )
-        })
-      ) : (
-        <InputComponent
-          value={value}
-          loading={loading}
-          hideSuccess={hideSuccess}
-          hideButton={hideButton}
-          success={success}
-          doSubmit={doSubmit}
-          border={border}
-          variant={variant}
-          placeholder={placeholder}
-          bind={bind}
-          isValid={isValid}
-          error={error}
-          {...props}
-        />
+      const inputProps = {
+        value,
+        loading,
+        hideSuccess,
+        hideButton,
+        success,
+        doSubmit,
+        border,
+        variant,
+        placeholder,
+        bind,
+        isValid,
+        error,
+        ...props
+      }
+      return (
+        <>
+          <InputComponent {...inputProps} />
+          {children}
+        </>
       )
     }}
   </NewsletterWrapper>
