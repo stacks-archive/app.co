@@ -1,61 +1,56 @@
 import React from 'react'
-import { Flex, Box, Type, Button } from 'blockstack-ui'
+import { Flex, Box, Type } from 'blockstack-ui'
 import { Title, Wrapper, Section } from '@pages/mining/shared'
 import { Newsletter } from '@components/mining/newsletter'
 
-const sections = [
-  {
-    graphic: null,
-    button: {
-      label: 'Build',
-      action: () => console.log('build')
-    },
-    text: `Learn to build your app and integrate Blockstack auth.`
-  },
-  {
-    graphic: null,
-    button: {
-      label: 'Register',
-      action: () => console.log('register')
-    },
-    text: `Register your functional  app on App.co.`
-  },
-  {
-    graphic: null,
-    button: {
-      label: 'Improve',
-      action: () => console.log('improve')
-    },
-    text: `Improve your app. Improve your rank. Earn more BTC.`
-  }
-]
-
-const Steps = ({ ...rest }) => (
-  <Flex justifyContent={['center', 'center', 'space-between']} flexWrap="wrap" {...rest}>
-    {sections.map(({ graphic, button, text }, i) => (
-      <Flex pt={7} alignItems="center" justifyContent="center" key={i} flexDirection="column">
-        <Box bg="blue.light" size={200} />
-        <Box py={6}>
-          <Button height="auto" pt={'9px'} pb={2}>
-            {button.label}
-          </Button>
-        </Box>
-        <Box maxWidth={220} textAlign="center">
-          <Type>{text}</Type>
-        </Box>
-      </Flex>
-    ))}
-  </Flex>
-)
+const Avatar = ({ photo, ...rest }) => {
+  const bigSize = 48
+  return (
+    <Box position="relative" {...rest}>
+      <Box
+        position="relative"
+        zIndex="10"
+        mr={4}
+        bg="#efefef"
+        backgroundImage={photo ? `url(${photo})` : undefined}
+        backgroundSize="cover"
+        size={bigSize}
+        borderRadius={bigSize}
+      />
+    </Box>
+  )
+}
 
 const quotes = [
   {
-    quote: 'App Mining allowed me to focus on building something great rather than diving straight into fundraising.',
-    quotee: `Justin Hunter, founder of Graphite Docs`
+    quotee: {
+      name: 'Justin Hunter',
+      photo: 'https://file-rqdiorjzfy.now.sh/',
+      title: (
+        <>
+          Founder of{' '}
+          <Type is="a" href="https://app.co/app/graphite" target="_blank">
+            Graphite Docs
+          </Type>
+        </>
+      )
+    },
+    quote: `App Mining allowed me to focus on building something great rather than diving straight into fundraising.`
   },
   {
-    quote: 'App Mining allowed me to focus on building something great rather than diving straight into fundraising.',
-    quotee: `Justin Hunter, founder of Graphite Docs`
+    quote: `Allows us to focus  on what we do best, build! It’s an extra incentive to forge ahead in this new ecosystem.`,
+    quotee: {
+      name: 'Nick Theile',
+      photo: 'https://file-cpvefljisa.now.sh',
+      title: (
+        <>
+          Founder of{' '}
+          <Type is="a" href="https://app.co/app/blockusign" target="_blank">
+            Blockusign
+          </Type>
+        </>
+      )
+    }
   }
 ]
 
@@ -81,13 +76,14 @@ const TextSection = ({ ...rest }) => (
 const Quotes = ({ ...rest }) => (
   <Flex width={1} justifyContent="space-between" flexWrap="wrap" {...rest}>
     {quotes.map(({ quote, quotee }, i) => (
-      <Box width={[1, 0.45]} mr={[0, 5]} pb={[8, 0]}>
-        <Type color="blue.dark" fontWeight={300} fontSize={4} fontFamily="brand" lineHeight={1.75}>
-          "{quote}"
+      <Box width={[1, 0.45]} mr={[0, 5]} pb={[8, 0]} key={i}>
+        <Type color="blue.dark" fontWeight={300} fontSize={3} fontFamily="brand" lineHeight={1.75}>
+          {quote}
         </Type>
         <Flex pt={6} alignItems={'center'}>
-          <Box bg="blue.mid" size={48} borderRadius={48} mr={4} />
-          <Type>{quotee}</Type>
+          <Avatar photo={quotee.photo} />
+          <Type pr={2}>{quotee.name}</Type>
+          <Type>{quotee.title}</Type>
         </Flex>
       </Box>
     ))}
@@ -103,6 +99,8 @@ const PioneersSection = ({ apps, ...rest }) => (
         <Flex flexWrap="wrap" mt={5} alignItems="center" justifyContent="flex-start">
           {apps.map((app) => (
             <Box
+              is="a"
+              target="_blank"
               mr={6}
               mb={6}
               size={[54, 72]}
@@ -112,6 +110,7 @@ const PioneersSection = ({ apps, ...rest }) => (
               backgroundSize="cover"
               boxShadow="card"
               flexShrink={0}
+              href={`https://app.co/app/${app.Slugs[0].value}`}
             />
           ))}
         </Flex>
