@@ -22,9 +22,11 @@ class AppMiningPage extends React.Component {
   static async getInitialProps({ reduxStore }) {
     try {
       const res = await fetch(`https://app-co-api.herokuapp.com/api/app-mining-months`)
+      const faqRes = await fetch('https://docs.blockstack.org/develop/faq-data.json')
+      const faq = await faqRes.json()
       const { months } = await res.json()
       if (months && months.length) {
-        return { rankings: months[0].compositeRankings, month: months[0], months }
+        return { rankings: months[0].compositeRankings, month: months[0], months, faq: faq.faqs }
       } else {
         return {}
       }
@@ -50,7 +52,7 @@ class AppMiningPage extends React.Component {
           <HowMuchSection apps={this.props.rankings} />
           <RankingSection apps={this.props.rankings} />
           <PioneersSection apps={this.props.rankings} />
-          <FAQSection apps={this.props.rankings} />
+          <FAQSection faq={this.props.faq} apps={this.props.rankings} />
         </MiningPage>
       </ModalRoot>
     )
