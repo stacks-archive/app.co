@@ -12,7 +12,7 @@ import { Mdx } from '@components/mdx'
 import { trackPageView } from '@utils'
 import 'isomorphic-unfetch'
 import { normalize } from 'polished'
-
+import smoothscroll from 'smoothscroll-polyfill'
 /**
  * Reset our styles
  */
@@ -28,6 +28,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     background-color: ${theme.colors.grey.light};
     color: ${theme.colors.grey};
+    scroll-behavior: smooth;
   }
   
   ol li ol {
@@ -86,6 +87,7 @@ class MyApp extends App {
   }
 
   componentDidMount() {
+    smoothscroll.polyfill()
     Router.router.events.on('routeChangeComplete', trackPageView)
   }
 

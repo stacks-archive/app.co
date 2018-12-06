@@ -50,29 +50,32 @@ const Steps = ({ ...rest }) => (
 )
 
 const StartAppMiningSection = ({ ...rest }) => (
-  <Section bg="white" {...rest}>
-    <Wrapper>
-      <Flex width={[1]} flexShrink={0} flexDirection="column">
-        <Title>Start App Mining</Title>
-        <Steps mt={8} />
-        <Flex mt={8} flexDirection="column" alignItems="center" justifyContent="center">
-          <Type pt={6} pb={6}>
-            Detailed registration instructions?{' '}
-            <Type is="a" href="#">
-              App Mining Docs.
+  <>
+    <div id="learn-more" />
+    <Section bg="white" {...rest}>
+      <Wrapper>
+        <Flex width={[1]} flexShrink={0} flexDirection="column">
+          <Title>Start App Mining</Title>
+          <Steps mt={8} />
+          <Flex mt={8} flexDirection="column" alignItems="center" justifyContent="center">
+            <Type pt={6} pb={6}>
+              Detailed registration instructions?{' '}
+              <Type is="a" href="#">
+                App Mining Docs.
+              </Type>
             </Type>
-          </Type>
-          <Type>
-            Want to verify your app is completely registered? A list of{' '}
-            <Type is="a" href="#">
-              all App Mining Ready apps
+            <Type>
+              Want to verify your app is completely registered? A list of{' '}
+              <Type is="a" href="#">
+                all App Mining Ready apps
+              </Type>
+              .{' '}
             </Type>
-            .{' '}
-          </Type>
+          </Flex>
         </Flex>
-      </Flex>
-    </Wrapper>
-  </Section>
+      </Wrapper>
+    </Section>
+  </>
 )
 
 export { StartAppMiningSection }

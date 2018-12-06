@@ -18,6 +18,10 @@ const Time = ({ ...rest }) => (
   </>
 )
 
+const handleSmoothScroll = () => {
+  document.querySelector('#learn-more').scrollIntoView({ behavior: 'smooth' })
+}
+
 const CallToAction = ({ ...rest }) => (
   <OpenModal component={StarterKitModal}>
     {({ bind: modalBind }) => (
@@ -76,24 +80,38 @@ const SubtitleBTC = ({ ...rest }) => (
 )
 
 const LearnMore = ({ ...rest }) => (
-  <Flex
-    display={['none', 'none', 'flex']}
-    position={['absolute']}
-    pt={8}
-    pb={8}
-    flexDirection="column"
-    alignItems="center"
-    justifyContent="center"
-    bottom={['-180px', '-120px']}
-    {...rest}
-  >
-    <Box pb={5}>
-      <Type color="white">Learn how to win</Type>
-    </Box>
-    <Flex alignItems="center" justifyContent="center" transform="rotate(90deg)">
-      <ArrowIcon color="white" />
-    </Flex>
-  </Flex>
+  <Hover>
+    {({ bind, hovered }) => (
+      <Flex
+        display={['none', 'none', 'flex']}
+        position={['absolute']}
+        pt={8}
+        is="a"
+        href="#learn-more"
+        pb={8}
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        transition="0.08s all ease-in-out"
+        bottom={['-180px', '-120px']}
+        transform={hovered ? 'translateY(10px)' : 'none'}
+        {...bind}
+        {...rest}
+      >
+        <Box pb={5}>
+          <Type color={hovered ? 'white' : 'blue.mid'}>Learn how to win</Type>
+        </Box>
+        <Flex
+          color={hovered ? 'blue.accent' : 'blue.mid'}
+          alignItems="center"
+          justifyContent="center"
+          transform="rotate(90deg)"
+        >
+          <ArrowIcon color="currentColor" />
+        </Flex>
+      </Flex>
+    )}
+  </Hover>
 )
 
 const Hero = ({ apps, ...rest }) => (
