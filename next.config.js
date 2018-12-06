@@ -8,7 +8,7 @@ const withBundleAnalyzer = require("@zeit/next-bundle-analyzer")
 module.exports = withBundleAnalyzer(withMDX({
   exportPathMap: async function (defaultPathMap) {
     return {
-      '/': { page: '/mining/index' },
+      '/': { page: '/mining' },
     }
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx'],

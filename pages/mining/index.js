@@ -9,6 +9,7 @@ import { HowMuchSection } from '@pages/mining/sections/how-much-earn'
 import { RankingSection } from '@pages/mining/sections/ranking'
 import { PioneersSection } from '@pages/mining/sections/pioneers'
 import { FAQSection } from '@pages/mining/sections/faq'
+import { ModalRoot } from 'blockstack-ui'
 
 const handleBodyScroll = (on) =>
   on ? document.body.classList.remove('no-scroll') : document.body.classList.add('no-scroll')
@@ -19,7 +20,6 @@ const mapStateToProps = (state) => ({
 
 class AppMiningPage extends React.Component {
   static async getInitialProps({ reduxStore }) {
-
     try {
       const res = await fetch(`https://app-co-api.herokuapp.com/api/app-mining-months`)
       const { months } = await res.json()
@@ -39,18 +39,20 @@ class AppMiningPage extends React.Component {
 
   render() {
     return (
-      <MiningPage>
-        <Head
-          title="App Mining"
-          description="Earn BTC for apps you build with Blockstack. We are funding decentralized app teams simply for being pioneers in the space."
-        />
-        <Hero minHeight="100vh" apps={this.props.rankings} />
-        <StartAppMiningSection />
-        <HowMuchSection apps={this.props.rankings} />
-        <RankingSection apps={this.props.rankings} />
-        <PioneersSection apps={this.props.rankings} />
-        <FAQSection apps={this.props.rankings} />
-      </MiningPage>
+      <ModalRoot>
+        <MiningPage>
+          <Head
+            title="App Mining"
+            description="Earn BTC for apps you build with Blockstack. We are funding decentralized app teams simply for being pioneers in the space."
+          />
+          <Hero minHeight="100vh" apps={this.props.rankings} />
+          <StartAppMiningSection />
+          <HowMuchSection apps={this.props.rankings} />
+          <RankingSection apps={this.props.rankings} />
+          <PioneersSection apps={this.props.rankings} />
+          <FAQSection apps={this.props.rankings} />
+        </MiningPage>
+      </ModalRoot>
     )
   }
 }

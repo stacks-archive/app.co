@@ -42,7 +42,7 @@ const Steps = ({ ...rest }) => (
           </Button>
         </Box>
         <Box maxWidth={220} textAlign="center">
-          <Type>{text}</Type>
+          <Type lineHeight={1.5}>{text}</Type>
         </Box>
       </Flex>
     ))}

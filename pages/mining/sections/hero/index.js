@@ -1,10 +1,10 @@
 import React from 'react'
-import { Flex, Box, Type } from 'blockstack-ui'
+import { Flex, Box, Type, OpenModal } from 'blockstack-ui'
 import { BitcoinIcon } from 'mdi-react'
 import { Title, Wrapper, Section, Logo, AppItem } from '@pages/mining/shared'
 import { ArrowIcon } from '@components/mining/svg'
 import { Hover } from 'react-powerplug'
-
+import { StarterKitModal } from '@pages/mining/starter-kit-modal'
 
 const Apps = ({ apps, ...rest }) => (
   <Box position="relative" width={1} {...rest}>
@@ -19,35 +19,40 @@ const Time = ({ ...rest }) => (
 )
 
 const CallToAction = ({ ...rest }) => (
-  <Hover>
-    {({ hovered, bind }) => (
-      <Box transform={hovered ? 'translateY(-5px)' : 'unset'} transition={'0.1s all ease-in-out'} {...rest}>
-        <Flex
-          bg={hovered ? 'white' : 'blue.accent'}
-          alignItems="center"
-          justifyContent="center"
-          p={5}
-          color={hovered ? 'blue' : 'blue.dark'}
-          cursor={hovered ? 'pointer' : 'unset'}
-          transition="0.1s all ease-in-out"
-          {...bind}
-        >
-          <Type fontWeight={400} fontSize={[3, 4]}>
-            Get your App Mining Starter Kit
-          </Type>
-          <Box pl={2} pt={1}>
-            <ArrowIcon strokeWidth={1.5} />
-          </Box>
-        </Flex>
+  <OpenModal component={StarterKitModal}>
+    {({ bind: modalBind }) => (
+      <Hover>
+        {({ hovered, bind }) => (
+          <Box transform={hovered ? 'translateY(-5px)' : 'unset'} transition={'0.1s all ease-in-out'} {...rest}>
+            <Flex
+              bg={hovered ? 'white' : 'blue.accent'}
+              alignItems="center"
+              justifyContent="center"
+              p={5}
+              color={hovered ? 'blue' : 'blue.dark'}
+              cursor={hovered ? 'pointer' : 'unset'}
+              transition="0.1s all ease-in-out"
+              {...bind}
+              {...modalBind}
+            >
+              <Type fontWeight={400} fontSize={[3, 4]}>
+                Get your App Mining Starter Kit
+              </Type>
+              <Box pl={2} pt={1}>
+                <ArrowIcon strokeWidth={1.5} />
+              </Box>
+            </Flex>
 
-        <Flex bg="#081537" alignItems="center" justifyContent="center" p={4}>
-          <Type color="white" fontWeight={400} fontSize={2}>
-            Next ranking starts in <Time />
-          </Type>
-        </Flex>
-      </Box>
+            <Flex bg="#081537" alignItems="center" justifyContent="center" p={4}>
+              <Type color="white" fontWeight={400} fontSize={2}>
+                Next ranking starts in <Time />
+              </Type>
+            </Flex>
+          </Box>
+        )}
+      </Hover>
     )}
-  </Hover>
+  </OpenModal>
 )
 
 const SubtitleBTC = ({ ...rest }) => (
@@ -76,10 +81,18 @@ const LearnMore = ({ ...rest }) => (
     position={['absolute']}
     pt={8}
     pb={8}
-    bottom={['-180px', '-100px']}
+    flexDirection="column"
+    alignItems="center"
+    justifyContent="center"
+    bottom={['-180px', '-120px']}
     {...rest}
   >
-    <Type color="white">Learn how to win</Type>
+    <Box pb={5}>
+      <Type color="white">Learn how to win</Type>
+    </Box>
+    <Flex alignItems="center" justifyContent="center" transform="rotate(90deg)">
+      <ArrowIcon color="white" />
+    </Flex>
   </Flex>
 )
 

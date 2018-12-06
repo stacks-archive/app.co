@@ -1,7 +1,7 @@
 import React from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
-import { Title, Wrapper, Section, Logo, AppItem } from '@pages/mining/shared'
-import { Dots, DotsLine, DemoEarthLogo, ProductHuntLogo } from '@components/mining/svg'
+import { Title, Wrapper, Section } from '@pages/mining/shared'
+import { Dots, DotsLine, DemoEarthLogo, ProductHuntLogo, CameraIcon } from '@components/mining/svg'
 
 const texts = [
   'Any app on App.co with Blockstack auth or storage can be ranked.',
@@ -79,16 +79,26 @@ const RankingSection = ({ apps, ...rest }) => (
         pt={7}
       >
         <Box width={1}>
-          <Flex color={'blue.dark'} alignItems="center" bg="white" p={6}>
+          <Flex color={'blue.dark'} alignItems="center" bg="white" px={[4, 6]} py={6}>
             <Flex alignItems="center">
               <Type mr={4} fontSize={4} fontFamily="brand">
                 1
               </Type>
-              <Box mr={4} size={72} border={1} borderColor="blue.dark" borderRadius={16} />
+              <Flex
+                mr={4}
+                size={72}
+                border={1}
+                borderColor="blue.dark"
+                borderRadius={16}
+                alignItems={'center'}
+                justifyContent="center"
+              >
+                <CameraIcon />
+              </Flex>
             </Flex>
             <Flex ml="auto">
-              <Type fontSize={5} fontWeight={300} fontFamily="brand">
-                Payout this month: $100,000
+              <Type lineHeight={1.5} fontSize={5} fontWeight={300} fontFamily="brand">
+                <Type opacity={0.5} fontWeight={['bold', 300]} fontSize={[2, 5]}>Payout this&nbsp;month:</Type> $100,000
               </Type>
             </Flex>
           </Flex>

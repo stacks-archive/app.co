@@ -5,7 +5,7 @@ import debounce from 'lodash.debounce'
 
 const API = 'https://app-co-api.herokuapp.com/api/blockstack-subscribe'
 
-class NewsletterWrapper extends React.Component {
+class NewsletterWrapper extends React.PureComponent {
   constructor(props) {
     super(props)
   }
@@ -21,11 +21,13 @@ class NewsletterWrapper extends React.Component {
 
   schema = string().email('Invalid email.')
 
-  submit = async (email) =>
+  submit = async (value) =>
     fetch(API, {
       method: 'POST',
       body: JSON.stringify({
-        email
+        email: value,
+        from: this.props.from,
+        list: this.props.list
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -78,10 +80,11 @@ class NewsletterWrapper extends React.Component {
     }
   }
 
-  doSubmit = async (e) => {
-    e.preventDefault()
-
-    if (!this.state.isValid) return null
+  doSubmit = async () => {
+    if (!this.state.isValid) {
+      console.log('not valid!')
+      return null
+    }
 
     this.loading()
 
@@ -110,6 +113,7 @@ class NewsletterWrapper extends React.Component {
       error: this.state.showError && this.state.error,
       success: this.state.success,
       doSubmit: this.doSubmit,
+      value: this.state.value,
       bind: {
         onChange: (e) => this.onChange(e)
       }

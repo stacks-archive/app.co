@@ -1,6 +1,7 @@
 import React from 'react'
 import { Flex, Box, Type, Button } from 'blockstack-ui'
 import { Title, Wrapper, Section } from '@pages/mining/shared'
+import { State } from 'react-powerplug'
 
 const Row = ({ name, index, imgixImageUrl, formattedUsdRewards, ...rest }) => (
   <Flex mb={'1px'} py={5} bg={'white'}>
@@ -34,7 +35,7 @@ const Row = ({ name, index, imgixImageUrl, formattedUsdRewards, ...rest }) => (
   </Flex>
 )
 
-const Table = ({ apps, ...rest }) => {
+const Table = ({ apps, state, ...rest }) => {
   return (
     <Box width={1}>
       <Flex mb={'1px'} py={4} bg={'white'}>
@@ -51,9 +52,12 @@ const Table = ({ apps, ...rest }) => {
           </Flex>
         </Flex>
       </Flex>
-      {apps.map((app, i) => (
-        <Row key={i} index={i} {...app} />
-      ))}
+      <>
+        {apps.map(
+          (app, i) =>
+            state.all ? <Row key={i} index={i} {...app} /> : i < 5 ? <Row key={i} index={i} {...app} /> : null
+        )}
+      </>
     </Box>
   )
 }
@@ -71,7 +75,20 @@ const HowMuchSection = ({ apps, ...rest }) => (
         </Box>
 
         <Flex mt={8} width={1} flexDirection="column" alignItems="center" justifyContent="center">
-          <Table apps={apps} />
+          <State initial={{ all: false }}>
+            {({ state, setState }) => (
+              <>
+                <Table state={state} apps={apps} />
+                {!state.all ? (
+                  <Box pt={5}>
+                    <Button height="auto" py={2} onClick={() => setState({ all: true })}>
+                      View More
+                    </Button>
+                  </Box>
+                ) : null}
+              </>
+            )}
+          </State>
         </Flex>
       </Flex>
     </Wrapper>

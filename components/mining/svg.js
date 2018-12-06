@@ -156,6 +156,17 @@ const ArrowIcon = ({ color = 'currentColor', strokeWidth = 1, ...props }) => (
   </svg>
 )
 
+const CameraIcon = ({ color = 'currentColor' }) => (
+  <svg width="48" height="35" viewBox="0 0 48 35" fill="none">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M7.5 1H11.5C11.7762 1 12 1.22388 12 1.5C12 1.77612 11.7762 2 11.5 2H7.5C7.22385 2 7 1.77612 7 1.5C7 1.22388 7.22385 1 7.5 1ZM6.08536 2C6.03009 1.84351 6 1.67529 6 1.5C6 0.671631 6.67157 0 7.5 0H11.5C12.3284 0 13 0.671631 13 1.5C13 1.67529 12.9699 1.84351 12.9146 2H45.193C46.7836 2 48 3.24194 48 4.66138V32.3386C48 33.8467 46.7836 35 45.193 35H2.80702C1.21637 35 0 33.8467 0 32.3386V4.66138C0 3.15332 1.21637 2 2.80702 2H6.08536ZM11.5 3H7.5H2.80702C1.71776 3 1 3.75513 1 4.66138V32.3386C1 33.2449 1.71776 34 2.80702 34H45.193C46.2823 34 47 33.2449 47 32.3386V4.66138C47 3.82251 46.2601 3 45.193 3H11.5ZM14 18.5C14 13.3379 18.392 9 24 9C29.608 9 34 13.3379 34 18.5C34 23.6621 29.608 28 24 28C18.476 28 14 23.7424 14 18.5ZM24 8C17.8783 8 13 12.7478 13 18.5C13 24.3435 17.9739 29 24 29C30.1217 29 35 24.2522 35 18.5C35 12.7478 30.1217 8 24 8ZM38 9C38 8.46655 38.4 8 39 8C39.6 8 40 8.46655 40 9C40 9.53345 39.5333 10 39 10C38.4667 10 38 9.53345 38 9Z"
+      fill={color}
+    />
+  </svg>
+)
+
 const DotsLine = ({ color = '#EF6F70' }) => (
   <svg width="49" height="148" viewBox="0 0 49 148" fill="none">
     <path d="M0.5 0.5V147.5H48.5" stroke={color} strokeDasharray="2 4" />
@@ -760,4 +771,14 @@ const Dots = ({ color = '#EF6F70' }) => (
   </svg>
 )
 
-export { ArrowIcon, DotsLine, Dots, DemoEarthLogo, ProductHuntLogo, ImproveGraphic, BuildGraphic, RegisterGraphic }
+export {
+  ArrowIcon,
+  DotsLine,
+  Dots,
+  DemoEarthLogo,
+  ProductHuntLogo,
+  ImproveGraphic,
+  BuildGraphic,
+  RegisterGraphic,
+  CameraIcon
+}

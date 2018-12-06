@@ -38,31 +38,106 @@ const Overlay = ({ label = 'Processing...', ...rest }) => (
     </Type>
   </Box>
 )
-const Newsletter = (props) => (
-  <NewsletterWrapper>
-    {({ bind, isValid, loading, error, success, doSubmit }) => (
-      <Box py={5} width={[1]} {...props}>
-        <Box position="relative">
-          <Button cursor={isValid ? 'pointer' : undefined} disabled={!isValid} onClick={doSubmit} />
-          {loading ? <Overlay /> : null}
-          {success ? <Overlay label="Thanks for Subscribing!" /> : null}
-          <form onSubmit={doSubmit}>
-            <Input
-              width={[1]}
-              border="2px solid"
-              variant="marketing"
-              placeholder="Subscribe for updates"
-              disabled={success}
-              type="email"
-              px={undefined}
-              pl={5}
-              pr={'62px'}
-              {...bind}
+
+const InputComponent = ({
+  loading,
+  hideSuccess,
+  hideButton,
+  success,
+  doSubmit,
+  border,
+  variant,
+  placeholder,
+  bind,
+  isValid,
+  error,
+  value,
+  ...rest
+}) => (
+  <Box py={5} width={[1]} {...rest}>
+    <Box position="relative">
+      {hideButton ? null : <Button cursor={isValid ? 'pointer' : undefined} disabled={!isValid} onClick={doSubmit} />}
+      {loading ? <Overlay /> : null}
+      {!hideSuccess && success ? <Overlay label="Thanks for Subscribing!" /> : null}
+      <form onSubmit={doSubmit}>
+        <Input
+          width={[1]}
+          border={border}
+          variant={variant}
+          placeholder={placeholder}
+          disabled={success}
+          type="email"
+          value={value}
+          px={undefined}
+          pl={5}
+          pr={!hideButton ? '62px' : 5}
+          {...bind}
+        />
+      </form>
+    </Box>
+  </Box>
+)
+const Newsletter = ({
+  placeholder = 'Subscribe for updates',
+  hideButton,
+  hideSuccess,
+  variant = 'marketing',
+  border = '2px solid',
+  children,
+  ...props
+}) => (
+  <NewsletterWrapper list="e36d5dc9" from="hello@app.co">
+    {({ bind, isValid, loading, error, success, doSubmit, value }) => {
+      return children && typeof children === 'function' ? (
+        children({
+          loading,
+          hideSuccess,
+          hideButton,
+          success,
+          doSubmit,
+          border,
+          variant,
+          placeholder,
+          bind,
+          isValid,
+          error,
+          value,
+          component: (inputProps) => (
+            <InputComponent
+              value={value}
+              loading={loading}
+              hideSuccess={hideSuccess}
+              hideButton={hideButton}
+              success={success}
+              doSubmit={doSubmit}
+              border={border}
+              variant={variant}
+              placeholder={placeholder}
+              bind={bind}
+              isValid={isValid}
+              error={error}
+              {...inputProps}
             />
-          </form>
-        </Box>
-      </Box>
-    )}
+          )
+        })
+      ) : (
+        <InputComponent
+          value={value}
+          loading={loading}
+          hideSuccess={hideSuccess}
+          hideButton={hideButton}
+          success={success}
+          doSubmit={doSubmit}
+          border={border}
+          variant={variant}
+          placeholder={placeholder}
+          bind={bind}
+          isValid={isValid}
+          error={error}
+          {...props}
+        />
+      )
+    }}
   </NewsletterWrapper>
 )
 
