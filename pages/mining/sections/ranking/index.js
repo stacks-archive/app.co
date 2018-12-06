@@ -74,7 +74,7 @@ const RankingSection = ({ apps, ...rest }) => (
       <Flex width={1} flexShrink={1} flexDirection="column">
         <Title maxWidth={'100%'}>Apps are ranked by expert reviewers</Title>
         <Type pt={5} color="white">
-          Rankings are combined and payouts sent every 30 days
+          Rankings are combined and payouts sent every 30 days.
         </Type>
       </Flex>
       <Flex
