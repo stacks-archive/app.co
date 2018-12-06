@@ -2,7 +2,7 @@ import React from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
 import { Title, Wrapper, Section } from '@pages/mining/shared'
 import { Dots, DotsLine, DemoEarthLogo, ProductHuntLogo, CameraIcon } from '@components/mining/svg'
-
+import { Hover } from 'react-powerplug'
 const texts = [
   'Any app on App.co with Blockstack auth or storage can be ranked.',
   'Expert reviewers use their proprietary data to evaluate apps.',
@@ -23,41 +23,49 @@ const TextSection = ({ ...rest }) => (
 )
 
 const Ranker = ({ logo: Logo, children, color, ...rest }) => (
-  <Box
-    overflow="hidden"
-    ml={5}
-    bg="#081537"
-    width={[1, 1, 1, 'auto']}
-    border={1}
-    borderColor={color}
-    pl={4}
-    pr={[4, 4, 4, 7]}
-    pt={4}
-    pb={7}
-    mt={[4, 4, 4, 0]}
-    position="relative"
-    zIndex={5}
-    textAlign={['center', 'center', 'left']}
-    {...rest}
-  >
-    {Logo ? (
-      <Box pb={4} pt={3}>
-        <Logo />
+  <Hover>
+    {({ hovered, bind }) => (
+      <Box
+        overflow="hidden"
+        ml={5}
+        bg="#081537"
+        width={[1, 1, 1, 'auto']}
+        border={1}
+        borderColor={color}
+        pl={4}
+        pr={[4, 4, 4, 7]}
+        pt={4}
+        pb={7}
+        mt={[4, 4, 4, 0]}
+        position="relative"
+        zIndex={5}
+        textAlign={['center', 'center', 'left']}
+        transition="0.1s all ease-in-out"
+        transform={hovered ? 'translateY(-6px)' : 'none'}
+        boxShadow={hovered ? `${color} 0px 0px 15px` : `transparent 0px 0px 10px`}
+        {...bind}
+        {...rest}
+      >
+        {Logo ? (
+          <Box pb={4} pt={3}>
+            <Logo />
+          </Box>
+        ) : null}
+        <Type color={color}>{children}</Type>
+        <Flex position="absolute" bottom="-3px" left={0}>
+          <Box>
+            <Dots color={color} />
+          </Box>
+          <Box ml={'3px'}>
+            <Dots color={color} />
+          </Box>
+          <Box ml={'3px'}>
+            <Dots color={color} />
+          </Box>
+        </Flex>
       </Box>
-    ) : null}
-    <Type color={color}>{children}</Type>
-    <Flex position="absolute" bottom="-3px" left={0}>
-      <Box>
-        <Dots color={color} />
-      </Box>
-      <Box ml={'3px'}>
-        <Dots color={color} />
-      </Box>
-      <Box ml={'3px'}>
-        <Dots color={color} />
-      </Box>
-    </Flex>
-  </Box>
+    )}
+  </Hover>
 )
 
 const RankingSection = ({ apps, ...rest }) => (
@@ -98,7 +106,10 @@ const RankingSection = ({ apps, ...rest }) => (
             </Flex>
             <Flex ml="auto">
               <Type lineHeight={1.5} fontSize={5} fontWeight={300} fontFamily="brand">
-                <Type opacity={0.5} fontWeight={['bold', 300]} fontSize={[2, 5]}>Payout this&nbsp;month:</Type> $100,000
+                <Type opacity={0.5} fontWeight={['bold', 300]} fontSize={[2, 5]}>
+                  Payout this&nbsp;month:
+                </Type>{' '}
+                $100,000
               </Type>
             </Flex>
           </Flex>
@@ -112,11 +123,24 @@ const RankingSection = ({ apps, ...rest }) => (
             pl={[5, 5, 5, 7]}
             pr={6}
           >
-            <Ranker logo={ProductHuntLogo} mt={0} color={'#EF6F70'}>
+            <Ranker
+              is="a"
+              href="https://blog.producthunt.com/only-the-best-dapps-were-joining-blockstack-s-app-reviewer-program-%EF%B8%8F-6085bea0f501"
+              target="_blank"
+              logo={ProductHuntLogo}
+              mt={0}
+              color={'#EF6F70'}
+            >
               Ranks with Product Hunt
               <br /> community upvotes and activity.
             </Ranker>
-            <Ranker logo={DemoEarthLogo} color={'#1ADAD9'}>
+            <Ranker
+              is="a"
+              href="https://words.democracy.earth/democratic-app-ranking-democracy-earth-to-represent-blockstack-community-vote-on-app-mining-7ec8360bdc30"
+              target="_blank"
+              logo={DemoEarthLogo}
+              color={'#1ADAD9'}
+            >
               Ranks by polling the Blockstack
               <br /> investor community.
             </Ranker>
