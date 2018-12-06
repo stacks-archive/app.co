@@ -18,12 +18,10 @@ const Time = ({ ...rest }) => (
   </>
 )
 
-const handleSmoothScroll = () => {
-  document.querySelector('#learn-more').scrollIntoView({ behavior: 'smooth' })
-}
+const OpenStarterKitModal = ({ ...rest }) => <OpenModal component={StarterKitModal} {...rest} />
 
 const CallToAction = ({ ...rest }) => (
-  <OpenModal component={StarterKitModal}>
+  <OpenStarterKitModal>
     {({ bind: modalBind }) => (
       <Hover>
         {({ hovered, bind }) => (
@@ -56,7 +54,7 @@ const CallToAction = ({ ...rest }) => (
         )}
       </Hover>
     )}
-  </OpenModal>
+  </OpenStarterKitModal>
 )
 
 const SubtitleBTC = ({ ...rest }) => (
@@ -139,4 +137,4 @@ const Hero = ({ apps, ...rest }) => (
   </Section>
 )
 
-export { Hero }
+export { Hero, OpenStarterKitModal }

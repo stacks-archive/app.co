@@ -4,6 +4,7 @@ import { State } from 'react-powerplug'
 import { BuildGraphic, RegisterGraphic } from '@components/mining/svg'
 import { Newsletter } from '@components/mining/newsletter'
 import { NewsletterContext } from '@components/mining/newsletter/container'
+import { ArrowIcon } from '@components/mining/svg'
 
 const ModalComponent = (props) => (
   <Flex position="relative" maxWidth={600} width={'100%'} p={4} flexDirection="column" bg="white" {...props} />
@@ -55,6 +56,7 @@ const InitialView = ({ setState, view, handleSubmit }) => {
                     width={1}
                     height="auto"
                     py={2}
+                    icon={!loading ? ArrowIcon : undefined}
                   >
                     {loading ? 'Loading...' : 'Submit'}
                   </Button>

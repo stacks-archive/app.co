@@ -1,7 +1,9 @@
 import React from 'react'
-import { Flex, Box, Type } from 'blockstack-ui'
+import { Flex, Box, Type, Button } from 'blockstack-ui'
 import { Title, Wrapper, Section } from '@pages/mining/shared'
 import { Newsletter } from '@components/mining/newsletter'
+import { OpenStarterKitModal } from '@pages/mining/sections/hero'
+import { ArrowIcon } from '@components/mining/svg'
 
 const Avatar = ({ photo, ...rest }) => {
   const bigSize = 48
@@ -134,7 +136,13 @@ const PioneersSection = ({ apps, ...rest }) => (
     <Flex width={1} position="relative">
       <Wrapper alignItems="center" justifyContent="center" position="relative" zIndex={2}>
         <Box max="auto" width={1} maxWidth={500}>
-          <Newsletter />
+          <OpenStarterKitModal>
+            {({ bind }) => (
+              <Button height="auto" pt="15px" pb="13px" icon={ArrowIcon} width={1} {...bind}>
+                Subscribe for Updates
+              </Button>
+            )}
+          </OpenStarterKitModal>
         </Box>
       </Wrapper>
       <Box position="absolute" bg={'blue.light'} height="50%" bottom={0} left={0} width={1} />
