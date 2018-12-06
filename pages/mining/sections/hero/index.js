@@ -74,7 +74,7 @@ const SubtitleBTC = ({ ...rest }) => (
     <Type fontFamily={'brand'} pl={4} lineHeight={1.55}>
       The better your app,
       <br />
-      the more Bitcoin you earn.
+      the more you earn.
     </Type>
   </Flex>
 )

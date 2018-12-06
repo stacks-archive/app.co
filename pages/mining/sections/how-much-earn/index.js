@@ -67,13 +67,6 @@ const HowMuchSection = ({ apps, ...rest }) => (
     <Wrapper>
       <Flex width={[1]} flexShrink={0} flexDirection="column">
         <Title maxWidth="100%">How much can you earn?</Title>
-        <Box pt={7} maxWidth={600} lineHeight={1.85}>
-          <Type>
-            We currently pay in BTC for legal compliance. We plan to begin paying Stacks tokens early 2019 provided
-            compliance with all applicable law.
-          </Type>
-        </Box>
-
         <Flex mt={8} width={1} flexDirection="column" alignItems="center" justifyContent="center">
           <State initial={{ all: false }}>
             {({ state, setState }) => (
