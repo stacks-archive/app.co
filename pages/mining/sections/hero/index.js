@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Box, Type, OpenModal } from 'blockstack-ui'
-import { BitcoinIcon } from 'mdi-react'
+import { CurrencyUsdIcon } from 'mdi-react'
 import { Title, Wrapper, Section, Logo, AppItem } from '@pages/mining/shared'
 import { ArrowIcon } from '@components/mining/svg'
 import { Hover } from 'react-powerplug'
@@ -69,7 +69,7 @@ const SubtitleBTC = ({ ...rest }) => (
       border={1}
       borderRadius={80}
     >
-      <BitcoinIcon />
+      <CurrencyUsdIcon />
     </Flex>
     <Type fontFamily={'brand'} pl={4} lineHeight={1.55}>
       The better your app,
