@@ -1,7 +1,6 @@
 import React from 'react'
 import { Flex, Box, Type, Button } from 'blockstack-ui'
 import { Title, Wrapper, Section } from '@pages/mining/shared'
-import { Newsletter } from '@components/mining/newsletter'
 import { OpenStarterKitModal } from '@pages/mining/sections/hero'
 import { ArrowIcon } from '@components/mining/svg'
 
@@ -57,7 +56,7 @@ const quotes = [
 ]
 
 const texts = [
-  'Add Blockstack auth to your existing app and get a second revenue source.',
+  'Any app with Blockstack auth or storage can register for App Mining.',
   'Skip VC fundraising, focus on your users, and get paid each month.',
   'Ditch advertising and use App Mining as an alternative revenue source.'
 ]
