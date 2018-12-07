@@ -1,24 +1,26 @@
 import React from 'react'
 import { Flex, Box, Type, Button } from 'blockstack-ui'
 import { Title, Wrapper, Section } from '@pages/mining/shared'
-import { BuildGraphic, ImproveGraphic, RegisterGraphic } from '@components/mining/svg'
+import { BuildGraphic, ImproveGraphic, RegisterGraphic, ArrowIcon } from '@components/mining/svg'
 
 const sections = [
   {
     graphic: BuildGraphic,
     button: {
       label: 'Build',
-      action: () => console.log('build')
+      href: 'https://docs.blockstack.org/develop/zero_to_dapp_1.html',
+      target: '_blank'
     },
-    text: `Learn to build your app and integrate Blockstack auth.`
+    text: 'Learn to build your app and integrate Blockstack auth.`'
   },
   {
     graphic: RegisterGraphic,
     button: {
       label: 'Register',
-      action: () => console.log('register')
+      href: 'https://app.co/submit',
+      target: '_blank'
     },
-    text: `Register your functional  app on App.co.`
+    text: `Register your functional app on App.co.`
   },
   {
     graphic: ImproveGraphic,
@@ -34,10 +36,9 @@ const Steps = ({ ...rest }) => (
   <Flex justifyContent={['center', 'center', 'space-between']} flexWrap="wrap" {...rest}>
     {sections.map(({ graphic: Graphic, button, text }, i) => (
       <Flex pt={7} alignItems="center" justifyContent="center" key={i} flexDirection="column">
-        {/*<Box bg="blue.light" size={200} />*/}
         {Graphic ? <Graphic /> : null}
         <Box py={6}>
-          <Button height="auto" pt={'9px'} pb={2}>
+          <Button icon={ArrowIcon} height="auto" pt={'9px'} pb={2}>
             {button.label}
           </Button>
         </Box>
@@ -60,12 +61,15 @@ const StartAppMiningSection = ({ ...rest }) => (
           <Flex mt={8} flexDirection="column" alignItems="center" justifyContent="center">
             <Type pt={6} pb={6}>
               Detailed registration instructions?{' '}
-              <Type is="a" href="#">
+              <Type is="a" href="https://docs.blockstack.org/develop/mining_intro.html" target="_blank">
                 App Mining Docs.
               </Type>
             </Type>
             <Type>
               Want to verify your app is completely registered? A list of{' '}
+              {/**
+               * TODO: add link here
+               */}
               <Type is="a" href="#">
                 all App Mining Ready apps
               </Type>
