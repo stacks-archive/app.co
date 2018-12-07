@@ -8,6 +8,7 @@ const sections = [
     graphic: BuildGraphic,
     button: {
       label: 'Build',
+      is: 'a',
       href: 'https://docs.blockstack.org/develop/zero_to_dapp_1.html',
       target: '_blank'
     },
@@ -17,6 +18,7 @@ const sections = [
     graphic: RegisterGraphic,
     button: {
       label: 'Register',
+      is: 'a',
       href: 'https://app.co/submit',
       target: '_blank'
     },
@@ -25,8 +27,7 @@ const sections = [
   {
     graphic: ImproveGraphic,
     button: {
-      label: 'Improve',
-      action: () => console.log('improve')
+      label: 'Improve'
     },
     text: `Improve your app. Improve your rank. Earn more BTC.`
   }
@@ -34,12 +35,12 @@ const sections = [
 
 const Steps = ({ ...rest }) => (
   <Flex justifyContent={['center', 'center', 'space-between']} flexWrap="wrap" {...rest}>
-    {sections.map(({ graphic: Graphic, button, text }, i) => (
+    {sections.map(({ graphic: Graphic, button: { label, ...buttonProps }, text }, i) => (
       <Flex pt={7} alignItems="center" justifyContent="center" key={i} flexDirection="column">
         {Graphic ? <Graphic /> : null}
         <Box py={6}>
-          <Button icon={ArrowIcon} height="auto" pt={'9px'} pb={2}>
-            {button.label}
+          <Button color="white !important" icon={ArrowIcon} height="auto" pt={'9px'} pb={2} {...buttonProps}>
+            {label}
           </Button>
         </Box>
         <Box maxWidth={220} textAlign="center">
