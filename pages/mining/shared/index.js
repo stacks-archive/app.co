@@ -1,7 +1,39 @@
 import * as React from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
+import { Hover } from 'react-powerplug'
+import { ArrowIcon } from '@components/mining/svg'
 
 const SectionContext = React.createContext({})
+
+const LearnMore = ({ label = 'Learn how to win', color = 'blue.mid', hoverColor = 'white', ...rest }) => (
+  <Hover>
+    {({ bind, hovered }) => (
+      <Flex
+        style={{ cursor: hovered ? 'pointer' : 'unset' }}
+
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        transition="0.08s all ease-in-out"
+        transform={hovered ? 'translateY(10px)' : 'none'}
+        {...bind}
+        {...rest}
+      >
+        <Box pb={5}>
+          <Type color={hovered ? hoverColor : color}>{label}</Type>
+        </Box>
+        <Flex
+          color={hovered ? hoverColor : color}
+          alignItems="center"
+          justifyContent="center"
+          transform="rotate(90deg)"
+        >
+          <ArrowIcon color="currentColor" />
+        </Flex>
+      </Flex>
+    )}
+  </Hover>
+)
 
 const Title = ({ ...rest }) => (
   <SectionContext.Consumer>
@@ -112,4 +144,4 @@ const AppItem = ({ app, index, length, ...rest }) => (
   </Flex>
 )
 
-export { Title, Wrapper, Section, Logo, AppItem, SectionContext }
+export { Title, Wrapper, Section, Logo, AppItem, SectionContext, LearnMore }

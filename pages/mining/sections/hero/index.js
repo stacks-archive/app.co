@@ -1,8 +1,7 @@
 import React from 'react'
 import { Flex, Box, Type, OpenModal } from 'blockstack-ui'
 import { CurrencyUsdIcon } from 'mdi-react'
-import { Title, Wrapper, Section, Logo, AppItem } from '@pages/mining/shared'
-import { ArrowIcon } from '@components/mining/svg'
+import { Title, Wrapper, Section, Logo, AppItem, LearnMore } from '@pages/mining/shared'
 import { Hover } from 'react-powerplug'
 import { StarterKitModal } from '@pages/mining/starter-kit-modal'
 
@@ -81,41 +80,6 @@ const SubtitleBTC = ({ ...rest }) => (
   </Flex>
 )
 
-const LearnMore = ({ ...rest }) => (
-  <Hover>
-    {({ bind, hovered }) => (
-      <Flex
-        display={['none', 'none', 'flex']}
-        position={['absolute']}
-        pt={8}
-        is="a"
-        href="#learn-more"
-        pb={8}
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        transition="0.08s all ease-in-out"
-        bottom={['-180px', '-180px']}
-        transform={hovered ? 'translateY(10px)' : 'none'}
-        {...bind}
-        {...rest}
-      >
-        <Box pb={5}>
-          <Type color={hovered ? 'white' : 'blue.mid'}>Learn how to win</Type>
-        </Box>
-        <Flex
-          color={hovered ? 'blue.accent' : 'blue.mid'}
-          alignItems="center"
-          justifyContent="center"
-          transform="rotate(90deg)"
-        >
-          <ArrowIcon color="currentColor" />
-        </Flex>
-      </Flex>
-    )}
-  </Hover>
-)
-
 const Hero = ({ apps, ...rest }) => (
   <Section overflow="hidden" bg="blue.dark" {...rest}>
     <Wrapper>
@@ -135,7 +99,15 @@ const Hero = ({ apps, ...rest }) => (
       >
         <CallToAction width={1} />
         <Apps apps={apps} mt={7} />
-        <LearnMore />
+        <LearnMore
+          display={['none', 'none', 'flex']}
+          position={['absolute']}
+          pt={8}
+          pb={8}
+          bottom={['-180px', '-180px']}
+          is="a"
+          href="#learn-more"
+        />
       </Flex>
     </Wrapper>
   </Section>

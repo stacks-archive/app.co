@@ -1,24 +1,35 @@
 import React from 'react'
 import { Flex, Box, Type, Button } from 'blockstack-ui'
-import { Title, Wrapper, Section } from '@pages/mining/shared'
+import { Title, Wrapper, Section, LearnMore } from '@pages/mining/shared'
 import { State } from 'react-powerplug'
 
-const Row = ({ name, index, imgixImageUrl, formattedUsdRewards, ...rest }) => (
+const Pill = ({ ...rest }) => <Box ml={4} py={1} fontSize={0} borderRadius={30} px={4} bg="blue.mid" {...rest} />
+
+const Row = ({ name, index, imgixImageUrl, formattedUsdRewards, storageNetwork, authentication, ...rest }) => (
   <Flex mb={'1px'} py={5} bg={'white'}>
     <Flex width={[40, 60]} alignItems={'center'} justifyContent="center">
-      {index + 1}
+      <Type fontFamily="brand">{index + 1}</Type>
     </Flex>
     <Flex alignItems="center">
-      <Box
-        size={[30, 42]}
-        backgroundImage={`url(${imgixImageUrl})`}
-        backgroundSize="cover"
-        boxShadow="card"
-        borderRadius={12}
-      />
-      <Type ml={4} fontSize={2} fontWeight={600} color="blue.dark">
-        {name}
-      </Type>
+      <Flex
+        style={{ textDecoration: 'none' }}
+        alignItems="center"
+        is="a"
+        href={`https://app.co/app/${rest.Slugs[0].value}`}
+      >
+        <Box
+          size={[24]}
+          backgroundImage={`url(${imgixImageUrl})`}
+          backgroundSize="cover"
+          boxShadow="card"
+          borderRadius={4}
+        />
+        <Type ml={4} fontSize={2} fontWeight={400} color="blue.dark">
+          {name}
+        </Type>
+      </Flex>
+      {authentication === 'Blockstack' ? <Pill>Blockstack Auth</Pill> : null}
+      {storageNetwork === 'Gaia' ? <Pill>Gaia</Pill> : null}
     </Flex>
     <Flex ml="auto" alignItems="center">
       <Flex px={5}>
@@ -38,8 +49,8 @@ const Row = ({ name, index, imgixImageUrl, formattedUsdRewards, ...rest }) => (
 const Table = ({ apps, state, ...rest }) => {
   return (
     <Box width={1}>
-      <Flex mb={'1px'} py={4} bg={'white'}>
-        <Type pl={4}>
+      <Flex mb={'1px'} py={5} bg={'white'}>
+        <Type pl={5}>
           <Type display={['none', 'inline']}>Current App Mining</Type> Rank
         </Type>
 
@@ -78,9 +89,13 @@ const HowMuchSection = ({ apps, ...rest }) => (
                 <Table state={state} apps={apps} />
                 {!state.all ? (
                   <Box pt={5}>
-                    <Button height="auto" py={2} onClick={() => setState({ all: true })}>
-                      View More
-                    </Button>
+                    <LearnMore
+                      position="static"
+                      color="blue.dark"
+                      hoverColor="blue"
+                      label={'Show more apps'}
+                      onClick={() => setState({ all: true })}
+                    />
                   </Box>
                 ) : null}
               </>
