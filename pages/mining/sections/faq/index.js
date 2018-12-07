@@ -6,7 +6,7 @@ import { LinkVariantIcon as LinkIcon } from 'mdi-react'
 import { Hover, State } from 'react-powerplug'
 
 const FAQSection = ({ faq, ...rest }) => (
-  <Section pt={6} bg="blue.light" {...rest}>
+  <Section pt={8} bg="blue.light" {...rest}>
     <Wrapper>
       <Flex width={[1]} flexShrink={0} flexDirection="column">
         <Title maxWidth="100%" pt={8} pb={0}>

@@ -117,7 +117,7 @@ const PioneersSection = ({ apps, ...rest }) => (
         </Flex>
         <Quotes pt={8} />
         <TextSection pt={8} />
-        <Flex alignItems="center" justifyContent="center" mt={7} pt={9} pb={6}>
+        <Flex alignItems="center" justifyContent="center" mt={7} pt={9} pb={7}>
           <Type
             fontSize={5}
             color="blue"
@@ -137,7 +137,7 @@ const PioneersSection = ({ apps, ...rest }) => (
         <Box max="auto" width={1} maxWidth={500}>
           <OpenStarterKitModal>
             {({ bind }) => (
-              <Button height="auto" pt="15px" pb="13px" icon={ArrowIcon} width={1} {...bind}>
+              <Button height="auto" pt="16px" pb="15px" icon={ArrowIcon} width={1} {...bind}>
                 Subscribe for Updates
               </Button>
             )}
