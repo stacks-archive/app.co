@@ -8,7 +8,7 @@ const Title = ({ ...rest }) => (
     {({ bg }) => (
       <Type
         color={bg === 'blue.dark' ? 'white' : 'blue'}
-        fontSize={[7, 7, 7, 8]}
+        fontSize={[7, 7, 7, '42px']}
         fontFamily="brand"
         fontWeight={300}
         maxWidth={500}
@@ -76,8 +76,8 @@ const getActiveStyles = (index, length) => {
     position: 'absolute',
     zIndex: length - index,
     top: '0px',
-    transform: `translateY(${(index - 1) * 10}px) scale(${1 -
-      Number(`0.${String(index / 3).replace('.', '')}`) +
+    transform: `translateY(${(index - 1) * 18}px) scale(${1 -
+      Number(`0.${String(index / 2).replace('.', '')}`) +
       0.04})`,
     left: 0,
     opacity: 1 * Number(`0.${length - index}`) + 0.1
@@ -87,7 +87,7 @@ const getActiveStyles = (index, length) => {
 const AppItem = ({ app, index, length, ...rest }) => (
   <Flex
     alignItems="center"
-    p={4}
+    p={5}
     bg="white"
     width={1}
     borderRadius={4}
@@ -103,10 +103,11 @@ const AppItem = ({ app, index, length, ...rest }) => (
       bg="white"
       borderRadius={[10, 16]}
       boxShadow="card"
+      opacity={index !== 1 ? '0' : 1}
     />
     <Box fontSize={3} pl={4} color="blue.dark">
-      <Type fontWeight={600}>{app.name}</Type> <Type>earned</Type>{' '}
-      <Type fontWeight={600}>{app.formattedUsdRewards}</Type>
+      <Type fontWeight={400}>{app.name}</Type> <Type opacity={0.5}>earned</Type>{' '}
+      <Type fontWeight={400}>{app.formattedUsdRewards}</Type>
     </Box>
   </Flex>
 )

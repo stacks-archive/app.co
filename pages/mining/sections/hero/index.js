@@ -8,7 +8,7 @@ import { StarterKitModal } from '@pages/mining/starter-kit-modal'
 
 const Apps = ({ apps, ...rest }) => (
   <Box position="relative" width={1} {...rest}>
-    {apps.map((item, i) => (i < 4 ? <AppItem app={item} key={1 + i} index={1 + i} length={4} /> : null))}
+    {apps.map((item, i) => (i < 3 ? <AppItem app={item} key={1 + i} index={1 + i} length={4} /> : null))}
   </Box>
 )
 
@@ -25,27 +25,31 @@ const CallToAction = ({ ...rest }) => (
     {({ bind: modalBind }) => (
       <Hover>
         {({ hovered, bind }) => (
-          <Box transform={hovered ? 'translateY(-5px)' : 'unset'} transition={'0.1s all ease-in-out'} {...rest}>
+          <Box
+            borderRadius={2}
+            overflow="hidden"
+            transform={hovered ? 'translateY(-5px)' : 'unset'}
+            transition={'0.1s all ease-in-out'}
+            {...rest}
+          >
             <Flex
               bg={hovered ? 'white' : 'blue.accent'}
               alignItems="center"
               justifyContent="center"
-              p={5}
+              px={5}
+              py={6}
               color={hovered ? 'blue' : 'blue.dark'}
               cursor={hovered ? 'pointer' : 'unset'}
               transition="0.1s all ease-in-out"
               {...bind}
               {...modalBind}
             >
-              <Type fontWeight={400} fontSize={[3, 4]}>
+              <Type fontWeight={400} fontSize={3}>
                 Get your App Mining Starter Kit
               </Type>
-              <Box pl={2} pt={1}>
-                <ArrowIcon strokeWidth={1.5} />
-              </Box>
             </Flex>
 
-            <Flex bg="#081537" alignItems="center" justifyContent="center" p={4}>
+            <Flex bg="#081537" alignItems="center" justifyContent="center" p={5}>
               <Type color="white" fontWeight={400} fontSize={2}>
                 Next ranking starts in <Time />
               </Type>
@@ -91,7 +95,7 @@ const LearnMore = ({ ...rest }) => (
         alignItems="center"
         justifyContent="center"
         transition="0.08s all ease-in-out"
-        bottom={['-180px', '-120px']}
+        bottom={['-180px', '-180px']}
         transform={hovered ? 'translateY(10px)' : 'none'}
         {...bind}
         {...rest}
@@ -113,11 +117,11 @@ const LearnMore = ({ ...rest }) => (
 )
 
 const Hero = ({ apps, ...rest }) => (
-  <Section bg="blue.dark" {...rest}>
+  <Section overflow="hidden" bg="blue.dark" {...rest}>
     <Wrapper>
       <Flex width={[1, 1, 0.5, 0.6]} flexShrink={1} flexDirection="column">
         <Logo pb={7} />
-        <Title>Every 30 days we&nbsp;payout $100k to the best apps.</Title>
+        <Title fontSize={[7, 7, 7, 8]}>Every 30 days we&nbsp;payout $100k to the best apps.</Title>
         <SubtitleBTC pt={7} />
       </Flex>
       <Flex
