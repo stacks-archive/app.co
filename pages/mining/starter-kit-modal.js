@@ -86,10 +86,7 @@ const SuccessView = ({ value }) => (
         <Type pb={4} fontSize={2} fontWeight="bold">
           New to Blockstack? Need to integrate Blockstack authentication?
         </Type>
-        {/**
-         * TODO: add link
-         */}
-        <Type is="a" href="#">
+        <Type is="a" href="https://docs.blockstack.org/develop/zero_to_dapp_1.html" target="_blank">
           Learn how with our Zero-to-Dapp tutorial.
         </Type>
       </Box>
@@ -105,7 +102,12 @@ const SuccessView = ({ value }) => (
         {/**
          * TODO: add link
          */}
-        <Type>Register on App.co and complete the App Mining Ready steps.</Type>
+        <Type>
+          <Type is="a" href="https://app.co/submit" target="_blank">
+            Register on App.co
+          </Type>{' '}
+          and complete the App Mining Ready steps.
+        </Type>
       </Box>
     </Flex>
   </Box>
