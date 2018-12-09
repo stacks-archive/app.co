@@ -56,7 +56,7 @@ const quotes = [
 ]
 
 const texts = [
-  'Any app with Blockstack auth or storage can register for App Mining.',
+  'Add Blockstack auth to your existing app and get a second revenue source.',
   'Skip VC fundraising, focus on your users, and get paid each month.',
   'Ditch advertising and use App Mining as an alternative revenue source.'
 ]
