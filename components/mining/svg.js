@@ -149,10 +149,25 @@ const ProductHuntLogo = ({ color = 'white', strokeWidth = 1, ...props }) => (
     />
   </svg>
 )
+
 const ArrowIcon = ({ color = 'currentColor', strokeWidth = 1, ...props }) => (
   <svg width="30" height="15" viewBox="0 0 30 15" fill="none" {...props}>
     <path d="M17.5935 1.83716L28.2381 7.5L17.5935 13.1628V1.83716Z" stroke={color} strokeWidth={strokeWidth} />
     <line x1="27.1309" y1="7.5" x2="-0.000722885" y2="7.5" stroke={color} strokeWidth={strokeWidth} />
+  </svg>
+)
+const Logo = ({ color = 'currentColor', dotsColor = 'white', ...props }) => (
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M0 3.24C0 2.08213 0 1.5032 0.232469 1.06414C0.420069 0.709825 0.709825 0.420069 1.06414 0.232469C1.5032 0 2.08213 0 3.24 0H28.76C29.9179 0 30.4968 0 30.9359 0.232469C31.2902 0.420069 31.5799 0.709825 31.7675 1.06414C32 1.5032 32 2.08213 32 3.24V28.76C32 29.9179 32 30.4968 31.7675 30.9359C31.5799 31.2902 31.2902 31.5799 30.9359 31.7675C30.4968 32 29.9179 32 28.76 32H3.24C2.08213 32 1.5032 32 1.06414 31.7675C0.709825 31.5799 0.420069 31.2902 0.232469 30.9359C0 30.4968 0 29.9179 0 28.76V3.24Z"
+      fill={color}
+    />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M15 8H17V10H15V8ZM23 13H25V15H23V13ZM25 18H23V20H25V18ZM25 23H23V25H25V23ZM17 23H15V25H17V23ZM15 18H17V20H15V18ZM17 13H15V15H17V13ZM9 23H7V25H9V23ZM7 18H9V20H7V18Z"
+      fill={dotsColor}
+    />
   </svg>
 )
 
@@ -780,5 +795,6 @@ export {
   ImproveGraphic,
   BuildGraphic,
   RegisterGraphic,
-  CameraIcon
+  CameraIcon,
+  Logo
 }

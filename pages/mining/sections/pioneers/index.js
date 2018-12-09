@@ -1,7 +1,7 @@
 import React from 'react'
 import { Flex, Box, Type, Button } from 'blockstack-ui'
-import { Title, Wrapper, Section } from '@pages/mining/shared'
-import { OpenStarterKitModal } from '@pages/mining/sections/hero'
+import { Title, Wrapper, Section, OpenStarterKitModal } from '@pages/mining/shared'
+
 import { ArrowIcon } from '@components/mining/svg'
 
 const Avatar = ({ photo, ...rest }) => {

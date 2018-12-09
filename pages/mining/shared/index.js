@@ -1,16 +1,24 @@
 import * as React from 'react'
-import { Flex, Box, Type } from 'blockstack-ui'
+import { Flex, Box, Type, OpenModal } from 'blockstack-ui'
 import { Hover } from 'react-powerplug'
 import { ArrowIcon } from '@components/mining/svg'
+import { StarterKitModal } from '@pages/mining/starter-kit-modal'
 
 const SectionContext = React.createContext({})
+
+const OpenStarterKitModal = ({ ...rest }) => <OpenModal component={StarterKitModal} {...rest} />
+
+const Countdown = ({ ...rest }) => (
+  <>
+    <Type fontWeight="bolder">22D</Type> : <Type fontWeight="bolder">11H</Type> : <Type fontWeight="bolder">05M</Type>
+  </>
+)
 
 const LearnMore = ({ label = 'Learn how to win', color = 'blue.mid', hoverColor = 'white', ...rest }) => (
   <Hover>
     {({ bind, hovered }) => (
       <Flex
         style={{ cursor: hovered ? 'pointer' : 'unset' }}
-
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
@@ -144,4 +152,60 @@ const AppItem = ({ app, index, length, ...rest }) => (
   </Flex>
 )
 
-export { Title, Wrapper, Section, Logo, AppItem, SectionContext, LearnMore }
+const CallToAction = ({ hideTimer, buttonProps = {}, ...rest }) => (
+  <OpenStarterKitModal>
+    {({ bind: modalBind }) => (
+      <Hover>
+        {({ hovered, bind }) => (
+          <Box
+            borderRadius={2}
+            overflow="hidden"
+            transform={hovered ? 'translateY(-5px)' : 'unset'}
+            transition={'0.1s all ease-in-out'}
+            {...rest}
+          >
+            <Flex
+              bg={hovered ? 'white' : 'blue.accent'}
+              alignItems="center"
+              justifyContent="center"
+              px={5}
+              py={6}
+              color={hovered ? 'blue' : 'blue.dark'}
+              cursor={hovered ? 'pointer' : 'unset'}
+              transition="0.1s all ease-in-out"
+               fontWeight={400} fontSize={3}
+              {...buttonProps}
+              {...bind}
+              {...modalBind}
+            >
+              <Type>
+                Get your App Mining Starter Kit
+              </Type>
+            </Flex>
+
+            {!hideTimer ? (
+              <Flex bg="#081537" alignItems="center" justifyContent="center" p={5}>
+                <Type color="white" fontWeight={400} fontSize={2}>
+                  Next ranking starts in <Countdown />
+                </Type>
+              </Flex>
+            ) : null}
+          </Box>
+        )}
+      </Hover>
+    )}
+  </OpenStarterKitModal>
+)
+
+export {
+  Title,
+  Wrapper,
+  Section,
+  Logo,
+  AppItem,
+  SectionContext,
+  LearnMore,
+  Countdown,
+  CallToAction,
+  OpenStarterKitModal
+}

@@ -10,6 +10,7 @@ import { RankingSection } from '@pages/mining/sections/ranking'
 import { PioneersSection } from '@pages/mining/sections/pioneers'
 import { FAQSection } from '@pages/mining/sections/faq'
 import { ModalRoot } from 'blockstack-ui'
+import { Header } from '@components/mining/header'
 
 const handleBodyScroll = (on) =>
   on ? document.body.classList.remove('no-scroll') : document.body.classList.add('no-scroll')
@@ -47,7 +48,9 @@ class AppMiningPage extends React.Component {
             title="App Mining"
             description="Earn BTC for apps you build with Blockstack. We are funding decentralized app teams simply for being pioneers in the space."
           />
-          <Hero minHeight="100vh" apps={this.props.rankings} />
+          <Header />
+
+          <Hero minHeight="100vh" apps={this.props.rankings} position="relative" zIndex={25} />
           <StartAppMiningSection />
           <HowMuchSection apps={this.props.rankings} />
           <RankingSection apps={this.props.rankings} />

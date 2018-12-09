@@ -1544,6 +1544,11 @@
     humps "^2.0.1"
     prop-types "^15.5.7"
 
+"@integreat-app/react-sticky-headroom@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@integreat-app/react-sticky-headroom/-/react-sticky-headroom-1.0.3.tgz#86422db44a4410ed1eea1e23cfdc478593a19748"
+  integrity sha512-MwFZGLGakviQraDqxozRsFTBbgr7/b6c5/4PUpiJidBZd6lk0bvNpY+XSop22t8MdS0JckUV9DFta386/VyBbg==
+
 "@mdx-js/loader@^0.15.0", "@mdx-js/loader@^0.15.5":
   version "0.15.5"
   resolved "https://registry.yarnpkg.com/@mdx-js/loader/-/loader-0.15.5.tgz#db482485d744662c6981f4053faf42d7a4ada13b"

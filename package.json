@@ -31,6 +31,7 @@
     "@fortawesome/fontawesome-free-brands": "^5.0.13",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "@fortawesome/react-fontawesome": "^0.0.20",
+    "@integreat-app/react-sticky-headroom": "^1.0.3",
     "@mdx-js/loader": "^0.15.5",
     "@mdx-js/mdx": "^0.15.5",
     "@mdx-js/tag": "^0.15.0",
