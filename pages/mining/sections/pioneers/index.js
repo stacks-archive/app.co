@@ -96,7 +96,7 @@ const PioneersSection = ({ apps, ...rest }) => (
     <Wrapper>
       <Flex width={[1]} flexShrink={0} flexDirection="column">
         <Title maxWidth="100%">We are honored to fund the pioneers of the decentralized internet</Title>
-        <Type pt={8}>App Mining Pioneers: Alpha Run, Oct 2018</Type>
+        <Type pt={8}>App Mining Pioneers: Alpha Run, September 2018</Type>
         <Flex flexWrap="wrap" mt={5} alignItems="center" justifyContent="flex-start">
           {apps.map((app) => (
             <Box
