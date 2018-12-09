@@ -4,7 +4,7 @@ import { Title, Wrapper, Section } from '@pages/mining/shared'
 import { Dots, DotsLine, DemoEarthLogo, ProductHuntLogo, CameraIcon } from '@components/mining/svg'
 import { Hover } from 'react-powerplug'
 const texts = [
-  'Any app on App.co with Blockstack auth or storage can be ranked.',
+  'Any app with Blockstack auth or storage can register for App Mining.',
   'Expert reviewers use their proprietary data to evaluate apps.',
   'Reviewers, criteria, and rankings are made public each month.'
 ]
