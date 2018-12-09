@@ -8,6 +8,36 @@ const texts = [
   'Expert reviewers use their proprietary data to evaluate apps.',
   'Reviewers, criteria, and rankings are made public each month.'
 ]
+import { Spring, animated } from 'react-spring'
+
+const DotsAnimation = ({ color, hovered }) => (
+  <Spring after={{ to: { x: 0 } }} native from={{ x: 0 }} to={{ x: hovered ? -25 : 0 }} config={{ duration: 2000 }}>
+    {({ x }) => (
+      <Flex
+        is={animated.div}
+        position="absolute"
+        bottom="-3px"
+        left={0}
+        style={{
+          transform: x.interpolate((x) => `translateX(${x}%)`)
+        }}
+      >
+        <Box>
+          <Dots color={color} />
+        </Box>
+        <Box ml={'3px'}>
+          <Dots color={color} />
+        </Box>
+        <Box ml={'3px'}>
+          <Dots color={color} />
+        </Box>
+        <Box ml={'3px'}>
+          <Dots color={color} />
+        </Box>
+      </Flex>
+    )}
+  </Spring>
+)
 
 const TextSection = ({ ...rest }) => (
   <Flex lineHeight={1.6} justifyContent="space-between" flexWrap="wrap">
@@ -35,7 +65,7 @@ const Ranker = ({ logo: Logo, children, color, ...rest }) => (
         pl={4}
         pr={[4, 4, 4, 7]}
         pt={4}
-        pb={7}
+        pb={6}
         mt={[4, 4, 4, 0]}
         position="relative"
         zIndex={5}
@@ -47,22 +77,14 @@ const Ranker = ({ logo: Logo, children, color, ...rest }) => (
         {...rest}
       >
         {Logo ? (
-          <Box pb={4} pt={3}>
+          <Box pb={2}>
             <Logo />
           </Box>
         ) : null}
-        <Type color={color}>{children}</Type>
-        <Flex position="absolute" bottom="-3px" left={0}>
-          <Box>
-            <Dots color={color} />
-          </Box>
-          <Box ml={'3px'}>
-            <Dots color={color} />
-          </Box>
-          <Box ml={'3px'}>
-            <Dots color={color} />
-          </Box>
-        </Flex>
+        <Type pb={2} color={color}>
+          {children}
+        </Type>
+        <DotsAnimation hovered={hovered} color={color} />
       </Box>
     )}
   </Hover>

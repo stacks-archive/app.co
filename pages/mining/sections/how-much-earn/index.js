@@ -3,14 +3,19 @@ import { Flex, Box, Type, Button } from 'blockstack-ui'
 import { Title, Wrapper, Section, LearnMore } from '@pages/mining/shared'
 import { State } from 'react-powerplug'
 
-const Pill = ({ ...rest }) => <Box ml={4} py={1} fontSize={0} borderRadius={30} px={4} bg="blue.mid" {...rest} />
+const Pill = ({ display, ...rest }) => (
+  <Box ml={4} py={2} fontSize={0} borderRadius={30} px={4} bg="#E4ECF1" display={display}>
+    <Type {...rest} opacity={0.75} />
+  </Box>
+)
+/* Rectangle 4 */
 
 const Row = ({ name, index, imgixImageUrl, formattedUsdRewards, storageNetwork, authentication, ...rest }) => (
   <Flex mb={'1px'} py={5} bg={'white'}>
     <Flex width={[40, 60]} alignItems={'center'} justifyContent="center">
       <Type fontFamily="brand">{index + 1}</Type>
     </Flex>
-    <Flex alignItems="center">
+    <Flex width={5 / 7} alignItems="center">
       <Flex
         style={{ textDecoration: 'none' }}
         alignItems="center"
@@ -28,18 +33,18 @@ const Row = ({ name, index, imgixImageUrl, formattedUsdRewards, storageNetwork, 
           {name}
         </Type>
       </Flex>
-      {authentication === 'Blockstack' ? <Pill>Blockstack Auth</Pill> : null}
-      {storageNetwork === 'Gaia' ? <Pill>Gaia</Pill> : null}
+      {authentication === 'Blockstack' ? <Pill display={['none', 'none', 'flex']}>Blockstack Auth</Pill> : null}
+      {storageNetwork === 'Gaia' ? <Pill display={['none', 'none', 'flex']}>Gaia</Pill> : null}
     </Flex>
-    <Flex ml="auto" alignItems="center">
-      <Flex px={5}>
+    <Flex width={2 / 7} ml="auto" alignItems="center">
+      <Flex justifyContent="flex-end" textAlign="right" width={[1, 1 / 2]} pr={6}>
         <Type fontFamily="brand" color="blue">
-          {formattedUsdRewards}
+          {formattedUsdRewards.split('.')[0]}
         </Type>
       </Flex>
-      <Flex px={5} display={['none', 'flex']}>
+      <Flex justifyContent="flex-end" textAlign="right" width={1 / 2} pr={5} display={['none', 'flex']}>
         <Type fontFamily="brand" color="blue">
-          {formattedUsdRewards}
+          {formattedUsdRewards.split('.')[0]}
         </Type>
       </Flex>
     </Flex>
@@ -50,16 +55,16 @@ const Table = ({ apps, state, ...rest }) => {
   return (
     <Box width={1}>
       <Flex mb={'1px'} py={5} bg={'white'}>
-        <Type pl={5}>
+        <Type width={5 / 7} pl={5}>
           <Type display={['none', 'inline']}>Current App Mining</Type> Rank
         </Type>
 
-        <Flex ml="auto" alignItems="center">
-          <Flex px={5}>
-            <Type>Last Month</Type>
+        <Flex width={2 / 7} ml="auto" alignItems="center">
+          <Flex justifyContent="flex-end" textAlign="right" width={[1, 1 / 2]} pr={5}>
+            <Type style={{whiteSpace: 'nowrap'}}>Last Month</Type>
           </Flex>
-          <Flex display={['none', 'flex']} px={5}>
-            <Type>Lifetime</Type>
+          <Flex justifyContent="flex-end" textAlign="right" width={1 / 2} display={['none', 'flex']} pr={5}>
+            <Type style={{whiteSpace: 'nowrap'}}>Lifetime</Type>
           </Flex>
         </Flex>
       </Flex>
