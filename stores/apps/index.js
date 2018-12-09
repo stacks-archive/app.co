@@ -134,7 +134,7 @@ const makeReducer = (data) => {
   let initialState = data
 
   if (!initialState.apps) {
-    return () => (null)
+    return () => null
   }
 
   if (initialState.apps.apps) {
@@ -163,8 +163,7 @@ const makeReducer = (data) => {
         const { platform } = action
         const filteredApps = selectAppsForPlatform(state.apps, platform)
         const allPlatforms = selectAllPlatforms(state)
-        const platformName =
-          allPlatforms.find((_platform) => slugify(_platform) === platform) || capitalize(platform)
+        const platformName = allPlatforms.find((_platform) => slugify(_platform) === platform) || capitalize(platform)
         return {
           ...state,
           platformFilter: platform,
