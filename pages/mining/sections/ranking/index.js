@@ -43,7 +43,7 @@ const TextSection = ({ ...rest }) => (
   <Flex lineHeight={1.6} justifyContent="space-between" flexWrap="wrap">
     {texts.map((text, i) => (
       <Box key={i} pt={7} width={['100%', '28%']}>
-        <Box bg="blue.accent" height={'1px'} width={80} />
+        <Box bg="white" opacity={0.25} height={'1px'} width={80} />
         <Type pt={6} color="white">
           {text}
         </Type>
@@ -95,7 +95,7 @@ const RankingSection = ({ apps, ...rest }) => (
     <Wrapper flexDirection="column">
       <Flex width={1} flexShrink={1} flexDirection="column">
         <Title maxWidth={'100%'}>Apps are ranked by expert reviewers</Title>
-        <Type pt={5} color="white">
+        <Type pt={6} fontSize={3} color="white">
           Rankings are combined and payouts sent every 30 days.
         </Type>
       </Flex>
@@ -171,7 +171,6 @@ const RankingSection = ({ apps, ...rest }) => (
             </Box>
           </Flex>
         </Box>
-
         <TextSection />
       </Flex>
     </Wrapper>
