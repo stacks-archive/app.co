@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Flex, Type } from 'blockstack-ui'
 import StickyHeadroom from '@integreat-app/react-sticky-headroom'
-import { Logo } from '@components/mining/svg'
+import { OutlinedLogo } from '@components/mining/svg'
 import { CallToAction, Countdown, Wrapper } from '../shared'
 
 const Header = ({ ...rest }) => {
@@ -22,8 +22,8 @@ const Header = ({ ...rest }) => {
         <Wrapper justifyContent="space-between" alignItems="center">
           <Flex alignItems="center">
             <Flex alignItems="center">
-              <Flex pr={2} color="blue">
-                <Logo />
+              <Flex pr={2} size={32} color="blue.accent">
+                <OutlinedLogo />
               </Flex>
               <Type color="white" pr={1}>
                 App Mining:{' '}
@@ -48,4 +48,4 @@ const Header = ({ ...rest }) => {
     </StickyHeadroom>
   )
 }
-export {Header}
+export { Header }

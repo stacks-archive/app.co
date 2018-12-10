@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Flex, Box, Type, OpenModal } from 'blockstack-ui'
 import { Hover } from 'react-powerplug'
-import { ArrowIcon } from '@components/mining/svg'
+import { ArrowIcon, OutlinedLogo } from '@components/mining/svg'
 import { StarterKitModal } from '@pages/mining/starter-kit-modal'
 
 const SectionContext = React.createContext({})
@@ -87,7 +87,9 @@ const Section = ({ bg, ...rest }) => (
 const Logo = ({ ...rest }) => (
   <Box {...rest}>
     <Flex alignItems="center">
-      <Box size={32} bg="blue" mr={3} />
+      <Box size={32} color="blue.accent" mr={3}>
+        <OutlinedLogo />
+      </Box>
       <Type textTransform="uppercase" letterSpacing="1px" color="white" fontWeight="bolder" fontSize={3}>
         App Mining
       </Type>
