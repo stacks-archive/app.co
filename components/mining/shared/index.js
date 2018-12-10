@@ -147,7 +147,7 @@ const AppItem = ({ app, index, length, ...rest }) => (
     />
     <Box fontSize={3} pl={4} color="blue.dark">
       <Type fontWeight={400}>{app.name}</Type> <Type opacity={0.5}>earned</Type>{' '}
-      <Type fontWeight={400}>{app.formattedUsdRewards}</Type>
+      <Type fontWeight={400}>{app.formattedUsdRewards.split('.')[0]}</Type>
     </Box>
   </Flex>
 )
@@ -173,14 +173,13 @@ const CallToAction = ({ hideTimer, buttonProps = {}, ...rest }) => (
               color={hovered ? 'blue' : 'blue.dark'}
               cursor={hovered ? 'pointer' : 'unset'}
               transition="0.1s all ease-in-out"
-               fontWeight={400} fontSize={3}
+              fontWeight={400}
+              fontSize={3}
               {...buttonProps}
               {...bind}
               {...modalBind}
             >
-              <Type>
-                Get your App Mining Starter Kit
-              </Type>
+              <Type>Get your App Mining Starter Kit</Type>
             </Flex>
 
             {!hideTimer ? (
@@ -196,9 +195,6 @@ const CallToAction = ({ hideTimer, buttonProps = {}, ...rest }) => (
     )}
   </OpenStarterKitModal>
 )
-
-
-
 
 export {
   Title,
