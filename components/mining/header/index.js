@@ -15,7 +15,7 @@ const Header = ({ ...rest }) => {
         top={0}
         left={0}
         width={1}
-        zIndex={20}
+        zIndex={999}
         display={['none', 'none', 'flex']}
         {...rest}
       >

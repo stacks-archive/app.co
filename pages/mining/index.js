@@ -56,7 +56,7 @@ class AppMiningPage extends React.Component {
           />
           <Header />
 
-          <Hero minHeight="100vh" apps={this.props.rankings} position="relative" zIndex={25} />
+          <Hero minHeight="100vh" apps={this.props.rankings} position="relative" zIndex={1000} />
           <StartAppMiningSection />
           <HowMuchSection apps={this.props.rankings} />
           <RankingSection apps={this.props.rankings} />
