@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Box, Type, Button } from 'blockstack-ui'
-import { Title, Wrapper, Section } from '@pages/mining/shared'
+import { Title, Wrapper, Section } from '@pages/../../../../components/mining/shared'
 import { slugify } from '@utils'
 import { LinkVariantIcon as LinkIcon } from 'mdi-react'
 import { Hover, State } from 'react-powerplug'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Box, Type, Button } from 'blockstack-ui'
-import { Title, Wrapper, Section, OpenStarterKitModal } from '@pages/mining/shared'
+import { Title, Wrapper, Section, OpenStarterKitModal } from '@pages/../../../../components/mining/shared'
 
 import { ArrowIcon } from '@components/mining/svg'
 

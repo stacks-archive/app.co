@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
-import { Title, Wrapper, Section } from '@pages/mining/shared'
+import { Title, Wrapper, Section } from '@pages/../../../../components/mining/shared'
 import { Dots, DotsLine, DemoEarthLogo, ProductHuntLogo, CameraIcon } from '@components/mining/svg'
 import { Hover } from 'react-powerplug'
 const texts = [

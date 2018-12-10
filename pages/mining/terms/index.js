@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { MiningPage } from '@components/mining/page'
-import { Header, Footer } from '@pages/mining/shared'
+import { Header, Footer } from '@pages/../../../components/mining/shared'
 import Head from '@containers/head'
 import { Flex, Type, Box } from 'blockstack-ui'
 import ArrowLeftIcon from 'mdi-react/ArrowLeftIcon'

@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { Page } from '@components/page'
 import { Section, Content } from '@components/mining-admin/month'
 import Head from '@containers/head'
