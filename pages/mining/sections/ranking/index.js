@@ -8,35 +8,22 @@ const texts = [
   'Expert reviewers use their proprietary data to evaluate apps.',
   'Reviewers, criteria, and rankings are made public each month.'
 ]
-import { Spring, animated } from 'react-spring'
 
 const DotsAnimation = ({ color, hovered }) => (
-  <Spring after={{ to: { x: 0 } }} native from={{ x: 0 }} to={{ x: hovered ? -25 : 0 }} config={{ duration: 2000 }}>
-    {({ x }) => (
-      <Flex
-        is={animated.div}
-        position="absolute"
-        bottom="-3px"
-        left={0}
-        style={{
-          transform: x.interpolate((x) => `translateX(${x}%)`)
-        }}
-      >
-        <Box>
-          <Dots color={color} />
-        </Box>
-        <Box ml={'3px'}>
-          <Dots color={color} />
-        </Box>
-        <Box ml={'3px'}>
-          <Dots color={color} />
-        </Box>
-        <Box ml={'3px'}>
-          <Dots color={color} />
-        </Box>
-      </Flex>
-    )}
-  </Spring>
+  <Flex position="absolute" bottom="-3px" left={0}>
+    <Box>
+      <Dots color={color} />
+    </Box>
+    <Box ml={'3px'}>
+      <Dots color={color} />
+    </Box>
+    <Box ml={'3px'}>
+      <Dots color={color} />
+    </Box>
+    <Box ml={'3px'}>
+      <Dots color={color} />
+    </Box>
+  </Flex>
 )
 
 const TextSection = ({ ...rest }) => (
