@@ -51,7 +51,7 @@ const Row = ({ name, index, imgixImageUrl, formattedUsdRewards, storageNetwork, 
   </Flex>
 )
 
-const Table = ({ apps, state, ...rest }) => {
+const Table = ({ apps, state, limit = 7, ...rest }) => {
   return (
     <Box width={1}>
       <Flex mb={'1px'} py={5} bg={'white'}>
@@ -71,7 +71,7 @@ const Table = ({ apps, state, ...rest }) => {
       <>
         {apps.map(
           (app, i) =>
-            state.all ? <Row key={i} index={i} {...app} /> : i < 5 ? <Row key={i} index={i} {...app} /> : null
+            state.all ? <Row key={i} index={i} {...app} /> : i < limit ? <Row key={i} index={i} {...app} /> : null
         )}
       </>
     </Box>
