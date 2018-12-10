@@ -95,7 +95,7 @@ const RankingSection = ({ apps, ...rest }) => (
         position="relative"
         pt={7}
       >
-        <Box width={1} borderRadius={4} overflow="hidden">
+        <Box width={1} borderRadius={4} overflow="hidden" style={{ willChange: 'transform' }}>
           <Flex color={'blue.dark'} alignItems="center" bg="white" px={[4, 6]} py={6}>
             <Flex alignItems="center">
               <Type mr={4} fontSize={4} fontFamily="brand">
