@@ -8,20 +8,20 @@ const Pill = ({ display, ...rest }) => (
     <Type {...rest} opacity={0.75} />
   </Box>
 )
-/* Rectangle 4 */
 
 const Row = ({ name, index, imgixImageUrl, formattedUsdRewards, storageNetwork, authentication, ...rest }) => (
   <Flex mb={'1px'} py={5} bg={'white'}>
     <Flex width={[40, 60]} alignItems={'center'} justifyContent="center">
       <Type fontFamily="brand">{index + 1}</Type>
     </Flex>
-    <Flex width={5 / 7} alignItems="center">
-      <Flex
-        style={{ textDecoration: 'none' }}
-        alignItems="center"
-        is="a"
-        href={`https://app.co/app/${rest.Slugs[0].value}`}
-      >
+    <Flex
+      width={5 / 7}
+      style={{ textDecoration: 'none' }}
+      alignItems="center"
+      is="a"
+      href={rest.Slugs && rest.Slugs.length ? `https://app.co/app/${rest.Slugs[0].value}` : undefined}
+    >
+      <Flex alignItems="center">
         <Box
           size={[24]}
           backgroundImage={`url(${imgixImageUrl})`}
@@ -61,10 +61,10 @@ const Table = ({ apps, state, ...rest }) => {
 
         <Flex width={2 / 7} ml="auto" alignItems="center">
           <Flex justifyContent="flex-end" textAlign="right" width={[1, 1 / 2]} pr={5}>
-            <Type style={{whiteSpace: 'nowrap'}}>Last Month</Type>
+            <Type style={{ whiteSpace: 'nowrap' }}>Last Month</Type>
           </Flex>
           <Flex justifyContent="flex-end" textAlign="right" width={1 / 2} display={['none', 'flex']} pr={5}>
-            <Type style={{whiteSpace: 'nowrap'}}>Lifetime</Type>
+            <Type style={{ whiteSpace: 'nowrap' }}>Lifetime</Type>
           </Flex>
         </Flex>
       </Flex>
@@ -83,11 +83,11 @@ const HowMuchSection = ({ apps, ...rest }) => (
     <Wrapper>
       <Flex width={[1]} flexShrink={0} flexDirection="column">
         <Title maxWidth="100%">How much can you earn?</Title>
-        <Type pt={5}>
+        <Type maxWidth={700} lineHeight={1.65} pt={6}>
           We currently pay in BTC for legal compliance. We plan to begin paying Stacks tokens early 2019 provided
           compliance with all applicable law.
         </Type>
-        <Flex mt={8} width={1} flexDirection="column" alignItems="center" justifyContent="center">
+        <Flex mt={7} width={1} flexDirection="column" alignItems="center" justifyContent="center">
           <State initial={{ all: false }}>
             {({ state, setState }) => (
               <>
