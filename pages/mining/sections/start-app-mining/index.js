@@ -57,7 +57,7 @@ const StartAppMiningSection = ({ ...rest }) => (
     <Section bg="white" {...rest}>
       <Wrapper>
         <Flex width={[1]} flexShrink={0} flexDirection="column">
-          <Title>Get started with App Mining.</Title>
+          <Title maxWidth="100%">Get started with App Mining.</Title>
           <Steps mt={8} />
           <Flex mt={8} flexDirection="column" alignItems="center" justifyContent="center">
             <Type pt={6} pb={6}>
