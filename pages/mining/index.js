@@ -11,6 +11,7 @@ import { PioneersSection } from '@pages/mining/sections/pioneers'
 import { FAQSection } from '@pages/mining/sections/faq'
 import { ModalRoot } from 'blockstack-ui'
 import { Header } from '@components/mining/header'
+import { NextApps } from '@pages/mining/sections/ready-apps'
 
 const handleBodyScroll = (on) =>
   on ? document.body.classList.remove('no-scroll') : document.body.classList.add('no-scroll')
@@ -22,12 +23,17 @@ const mapStateToProps = (state) => ({
 class AppMiningPage extends React.Component {
   static async getInitialProps({ reduxStore }) {
     try {
-      const res = await fetch(`https://app-co-api.herokuapp.com/api/app-mining-months`)
-      const faqRes = await fetch('https://docs.blockstack.org/develop/faq-data.json')
-      const faq = await faqRes.json()
-      const { months } = await res.json()
+      const promises = await Promise.all([
+        fetch(`https://app-co-api.herokuapp.com/api/app-mining-months`),
+        fetch('https://docs.blockstack.org/develop/faq-data.json'),
+        fetch(`https://app-co-api.herokuapp.com/api/app-mining-apps`)
+      ])
+      const { months } = await promises[0].json()
+      const { faqs } = await promises[1].json()
+      const { apps } = await promises[2].json()
+
       if (months && months.length) {
-        return { rankings: months[0].compositeRankings, month: months[0], months, faq: faq.faqs }
+        return { rankings: months[0].compositeRankings, month: months[0], months, faq: faqs, apps }
       } else {
         return {}
       }
@@ -55,6 +61,7 @@ class AppMiningPage extends React.Component {
           <HowMuchSection apps={this.props.rankings} />
           <RankingSection apps={this.props.rankings} />
           <PioneersSection apps={this.props.rankings} />
+          <NextApps apps={this.props.apps} />
           <FAQSection faq={this.props.faq} apps={this.props.rankings} />
         </MiningPage>
       </ModalRoot>

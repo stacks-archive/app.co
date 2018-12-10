@@ -1,7 +1,7 @@
 import React from 'react'
 import { Flex, Box, Type, OpenModal } from 'blockstack-ui'
 import { CurrencyUsdIcon } from 'mdi-react'
-import { Title, Wrapper, Section, Logo, AppItem, LearnMore, CallToAction } from '@pages/../../../../components/mining/shared'
+import { Title, Wrapper, Section, Logo, AppItem, LearnMore, CallToAction } from '@components/mining/shared'
 
 const Apps = ({ apps, ...rest }) => (
   <Box position="relative" width={1} {...rest}>

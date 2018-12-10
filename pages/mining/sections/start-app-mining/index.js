@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Box, Type, Button } from 'blockstack-ui'
-import { Title, Wrapper, Section } from '@pages/../../../../components/mining/shared'
+import { Title, Wrapper, Section } from '@components/mining/shared'
 import { BuildGraphic, ImproveGraphic, RegisterGraphic, ArrowIcon } from '@components/mining/svg'
 
 const sections = [

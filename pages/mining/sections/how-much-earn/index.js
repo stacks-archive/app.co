@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Box, Type, Button } from 'blockstack-ui'
-import { Title, Wrapper, Section, LearnMore } from '@pages/../../../../components/mining/shared'
+import { Title, Wrapper, Section, LearnMore } from '@components/mining/shared'
 import { State } from 'react-powerplug'
 
 const Pill = ({ display, ...rest }) => (

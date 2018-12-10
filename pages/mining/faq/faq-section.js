@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Heading, Section } from '@pages/../../../components/mining/shared'
+import { Heading, Section } from '@pages/mining/shared'
 import { Box } from '@components/mining'
 import styled from 'styled-components'
 

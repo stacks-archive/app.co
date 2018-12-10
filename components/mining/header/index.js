@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { Flex, Type } from 'blockstack-ui'
-import { CallToAction, Countdown, Wrapper } from '@pages/../shared'
 import StickyHeadroom from '@integreat-app/react-sticky-headroom'
 import { Logo } from '@components/mining/svg'
+import { CallToAction, Countdown, Wrapper } from '../shared'
 
 const Header = ({ ...rest }) => {
   return (
