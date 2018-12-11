@@ -3,16 +3,22 @@ import { Flex, Box, Type, OpenModal } from 'blockstack-ui'
 import { Hover } from 'react-powerplug'
 import { ArrowIcon, OutlinedLogo } from '@components/mining/svg'
 import { StarterKitModal } from '@pages/mining/starter-kit-modal'
+import Counter from 'react-countdown-now'
 
 const SectionContext = React.createContext({})
 
 const OpenStarterKitModal = ({ ...rest }) => <OpenModal component={StarterKitModal} {...rest} />
 
-const Countdown = ({ ...rest }) => (
+const renderer = ({ hours, minutes, days, seconds }) => (
   <>
-    <Type fontWeight="bolder">22D</Type> : <Type fontWeight="bolder">11H</Type> : <Type fontWeight="bolder">05M</Type>
+    <Type fontWeight="bolder">{days}D</Type> : <Type fontWeight="bolder">{hours}H</Type> :{' '}
+    <Type fontWeight="bolder">{minutes}M</Type> : <Type fontWeight="bolder">{seconds}S</Type>
   </>
 )
+const Countdown = ({ ...rest }) => {
+  const nextDate = new Date(2019, 0, 4)
+  return <Counter renderer={renderer} date={nextDate} />
+}
 
 const LearnMore = ({ label = 'Learn how to win', color = 'blue.mid', hoverColor = 'white', ...rest }) => (
   <Hover>
@@ -107,26 +113,31 @@ const Logo = ({ ...rest }) => (
   </Box>
 )
 
-const getActiveStyles = (index, length) => {
-  if (index === 1) {
+const sizes = [1, 0.95, 0.9, 0.89]
+const opacity = [1, 0.46, 0.25, 0.15]
+const offset = [0, 21, 40, 60]
+
+const getActiveStyles = (active, index, length) => {
+  if (active === index) {
     return {
       zIndex: 20,
-      position: 'relative'
+      position: 'relative',
+      transform: `translateY(${offset[0]}px) scale(${sizes[0]})`,
+      opacity: opacity[0]
     }
   }
+  const number = index - active < 0 ? length + (index - active) : index - active
   return {
     position: 'absolute',
     zIndex: length - index,
     top: '0px',
-    transform: `translateY(${(index - 1) * 18}px) scale(${1 -
-      Number(`0.${String(index / 2).replace('.', '')}`) +
-      0.04})`,
+    transform: `translateY(${offset[number]}px) scale(${sizes[number]})`,
     left: 0,
-    opacity: 1 * Number(`0.${length - index}`) + 0.1
+    opacity: opacity[number]
   }
 }
 
-const AppItem = ({ app, index, length, ...rest }) => (
+const AppItem = ({ app, active, index, length, ...rest }) => (
   <Flex
     alignItems="center"
     p={5}
@@ -135,7 +146,10 @@ const AppItem = ({ app, index, length, ...rest }) => (
     borderRadius={4}
     boxShadow="card"
     {...rest}
-    {...getActiveStyles(index, length)}
+    {...getActiveStyles(active, index, length)}
+    style={{
+      transition: '0.5s all ease-in-out'
+    }}
   >
     <Box
       size={[40, 60]}
@@ -145,7 +159,10 @@ const AppItem = ({ app, index, length, ...rest }) => (
       bg="white"
       borderRadius={[10, 16]}
       boxShadow="card"
-      opacity={index !== 1 ? '0' : 1}
+      style={{
+        transition: '0.5s all ease-in-out'
+      }}
+      opacity={index !== active ? 0 : 1}
     />
     <Box fontSize={3} pl={4} color="blue.dark">
       <Type fontWeight={400}>{app.name}</Type> <Type opacity={0.5}>earned</Type>{' '}
@@ -186,8 +203,17 @@ const CallToAction = ({ hideTimer, buttonProps = {}, ...rest }) => (
 
             {!hideTimer ? (
               <Flex bg="#081537" alignItems="center" justifyContent="center" p={5}>
-                <Type color="white" fontWeight={400} fontSize={2}>
-                  Next ranking starts in <Countdown />
+                <Type display="flex" flexDirection={['column', 'row']} color="white" fontWeight={400} fontSize={2}>
+                  <Type
+                    style={{
+                      whiteSpace: 'nowrap'
+                    }}
+                  >
+                    Next ranking starts in
+                  </Type>
+                  <Type pl={[0, 1]} pt={[2, 0]}>
+                    <Countdown />
+                  </Type>
                 </Type>
               </Flex>
             ) : null}
