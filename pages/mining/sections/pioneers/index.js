@@ -92,7 +92,7 @@ const Quotes = ({ ...rest }) => (
 )
 
 const PioneersSection = ({ apps, ...rest }) => (
-  <Section flexDirection="column" pb={0} bg="white" {...rest}>
+  <Section style={{ willChange: 'transform' }} flexDirection="column" pb={0} bg="white" {...rest}>
     <Wrapper>
       <Flex width={[1]} flexShrink={0} flexDirection="column">
         <Title maxWidth="100%">We are honored to fund the pioneers of the decentralized internet</Title>
