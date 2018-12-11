@@ -9,10 +9,28 @@ const SectionContext = React.createContext({})
 
 const OpenStarterKitModal = ({ ...rest }) => <OpenModal component={StarterKitModal} {...rest} />
 
+const TimeLabel = ({ ...rest }) => <Type pl="1px" fontWeight={500} opacity={0.7} {...rest} />
 const renderer = ({ hours, minutes, days, seconds }) => (
   <>
-    <Type fontWeight="bolder">{days}D</Type> : <Type fontWeight="bolder">{hours}H</Type> :{' '}
-    <Type fontWeight="bolder">{minutes}M</Type> : <Type fontWeight="bolder">{seconds}S</Type>
+    <Type fontWeight="bolder">
+      {days}
+      <TimeLabel>D</TimeLabel>
+    </Type>{' '}
+    :{' '}
+    <Type fontWeight="bolder">
+      {hours}
+      <TimeLabel>H</TimeLabel>
+    </Type>{' '}
+    :{' '}
+    <Type fontWeight="bolder">
+      {minutes}
+      <TimeLabel>M</TimeLabel>
+    </Type>{' '}
+    :{' '}
+    <Type fontWeight="bolder">
+      {seconds}
+      <TimeLabel>S</TimeLabel>
+    </Type>
   </>
 )
 const Countdown = ({ ...rest }) => {
