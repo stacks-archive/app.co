@@ -4,7 +4,8 @@ import StickyHeadroom from '@integreat-app/react-sticky-headroom'
 import { OutlinedLogo } from '@components/mining/svg'
 import { CallToAction, Countdown, Wrapper } from '../shared'
 
-const Header = ({ ...rest }) => {
+
+const Header = ({ showOnMobile, ...rest }) => {
   return (
     <StickyHeadroom scrollHeight={90}>
       <Flex
@@ -16,7 +17,7 @@ const Header = ({ ...rest }) => {
         left={0}
         width={1}
         zIndex={999}
-        display={['none', 'none', 'flex']}
+        display={showOnMobile ? 'flex' : ['none', 'none', 'flex']}
         {...rest}
       >
         <Wrapper justifyContent="space-between" alignItems="center">
@@ -33,7 +34,7 @@ const Header = ({ ...rest }) => {
               Next ranking starts in <Countdown />
             </Type>
           </Flex>
-          <Flex>
+          <Flex display={['none', 'none', 'flex']}>
             <CallToAction
               buttonProps={{
                 py: 4,
