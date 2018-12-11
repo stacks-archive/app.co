@@ -27,7 +27,10 @@ const sections = [
   {
     graphic: ImproveGraphic,
     button: {
-      label: 'Improve'
+      label: 'Improve',
+      is: 'a',
+      href: 'https://app.co/mining/apps',
+      target: '_blank'
     },
     text: `Improve your app. Improve your rank. Earn more BTC.`
   }
