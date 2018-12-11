@@ -11,7 +11,6 @@ import { PioneersSection } from '@pages/mining/sections/pioneers'
 import { FAQSection } from '@pages/mining/sections/faq'
 import { ModalRoot } from 'blockstack-ui'
 import { Header } from '@components/mining/header'
-import { NextApps } from '@pages/mining/sections/ready-apps'
 
 const handleBodyScroll = (on) =>
   on ? document.body.classList.remove('no-scroll') : document.body.classList.add('no-scroll')
@@ -61,7 +60,6 @@ class AppMiningPage extends React.Component {
           <HowMuchSection apps={this.props.rankings} />
           <RankingSection apps={this.props.rankings} />
           <PioneersSection apps={this.props.rankings} />
-          <NextApps apps={this.props.apps} />
           <FAQSection faq={this.props.faq} apps={this.props.rankings} />
         </MiningPage>
       </ModalRoot>
