@@ -12,7 +12,7 @@ const sections = [
       href: 'https://docs.blockstack.org/develop/zero_to_dapp_1.html',
       target: '_blank'
     },
-    text: 'Learn to build your app and integrate Blockstack auth.`'
+    text: 'Learn to build your app and integrate Blockstack auth.'
   },
   {
     graphic: RegisterGraphic,
