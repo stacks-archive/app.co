@@ -19,7 +19,8 @@ class RegisteredApps extends React.Component {
     if (!apps) {
       return ''
     }
-    return apps.map((app) => (
+    return apps.filter((app) => app.miningReady === true)
+      .map((app) => (
       <AppLink href={app.website} target="_blank">
         <Img src={app.imgixImageUrl} />
         <Container>
