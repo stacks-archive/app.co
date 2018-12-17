@@ -24,7 +24,7 @@ class AppMiningPage extends React.Component {
     try {
       const promises = await Promise.all([
         fetch(`https://app-co-api.herokuapp.com/api/app-mining-months`),
-        fetch('https://docs.blockstack.org/develop/faq-data.json'),
+        fetch(`https://app-co-api.herokuapp.com/api/mining-faq`),
         fetch(`https://app-co-api.herokuapp.com/api/app-mining-apps`)
       ])
       const { months } = await promises[0].json()

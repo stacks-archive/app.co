@@ -20,6 +20,14 @@ export default class MyDocument extends Document {
     return { ...page, styleTags }
   }
 
+  constructor(props) {
+    super(props)
+    const { __NEXT_DATA__, ids } = props
+    if (ids) {
+      __NEXT_DATA__.ids = ids
+    }
+  }
+
   render() {
     return (
       <html lang="en">
@@ -35,7 +43,14 @@ export default class MyDocument extends Document {
           />
           <script dangerouslySetInnerHTML={{ __html: GoogleCode }} />
           <script dangerouslySetInnerHTML={{ __html: CrispChatCode }} />
-          <script type="text/javascript" src="https://a.optmnstr.com/app/js/api.min.js" data-account="54556" data-user="48381" async />
+
+          <script
+            type="text/javascript"
+            src="https://a.optmnstr.com/app/js/api.min.js"
+            data-account="54556"
+            data-user="48381"
+            async
+          />
           {this.props.styleTags}
         </Head>
         <body>

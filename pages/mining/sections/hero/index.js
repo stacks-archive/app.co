@@ -3,10 +3,19 @@ import { Flex, Box, Type } from 'blockstack-ui'
 import { CurrencyUsdIcon } from 'mdi-react'
 import { Title, Wrapper, Section, Logo, AppItem, LearnMore, CallToAction } from '@components/mining/shared'
 import { State } from 'react-powerplug'
+
+function arrayRotateOne(arr, reverse) {
+  if (reverse) arr.unshift(arr.pop())
+  else arr.push(arr.shift())
+  return arr
+}
+
 const Apps = ({ apps, ...rest }) => {
   const limit = 2
+  let items = [apps[0], apps[1], apps[2]]
+
   return (
-    <State initial={{ active: 1 }}>
+    <State initial={{ active: 1, items }}>
       {({ state, setState }) => {
         const handleClick = () => {
           setState((s) => {
@@ -25,17 +34,10 @@ const Apps = ({ apps, ...rest }) => {
 
         return (
           <Box position="relative" width={1} {...rest}>
-            {apps.map(
+            {state.items.map(
               (item, i) =>
                 i <= limit ? (
-                  <AppItem
-                    app={item}
-                    active={state.active}
-                    onClick={handleClick}
-                    key={1 + i}
-                    index={i + 1}
-                    length={limit + 1}
-                  />
+                  <AppItem app={item} active={state.active} key={1 + i} index={i + 1} length={limit + 1} />
                 ) : null
             )}
           </Box>
