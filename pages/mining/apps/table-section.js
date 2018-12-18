@@ -102,14 +102,19 @@ const AllApps = ({ apps, ...rest }) => (
   <Section bg="blue.light" {...rest}>
     <Wrapper>
       <Flex width={[1]} flexShrink={0} flexDirection="column">
-        <Title maxWidth="100%">All App Mining apps.</Title>
-        <Type maxWidth={700} lineHeight={1.65} pt={6}>
-          Apps listed below are currently{' '}
+        <Title maxWidth="100%">App Mining Eligibility</Title>
+        <Type maxWidth={780} lineHeight={1.65} pt={6}>
+          All of the apps listed below are currently{' '}
           <Type is="a" href="/apps/blockstack" target="_blank">
             registered with App.co
-          </Type>{' '}
-          and are eligible for App Mining. The list includes apps which participate in the program currently, new apps
-          that will be included in the next ranking, and all other App Mining eligible apps.
+          </Type>
+          , apps that are marked <Type fontWeight="bold">Ready</Type> will be included in the next ranking. Apps that
+          include Blockstack Auth that are marked <Type fontWeight="bold">Not Ready</Type> can qualify for App Mining by{' '}
+          <Type is="a" href="https://docs.blockstack.org/develop/mining_enroll.html" target="_blank">
+            enrolling in the program
+          </Type>
+          . As stated in our documentation, sample applications created by following our tutorials cannot be enrolled
+          for App Mining.
         </Type>
         <Flex mt={7} width={1} flexDirection="column" alignItems="center" justifyContent="center">
           <Table apps={apps} />
