@@ -6,6 +6,11 @@ const withMDX = require('@zeit/next-mdx')({
 const withBundleAnalyzer = require("@zeit/next-bundle-analyzer")
 
 module.exports = withBundleAnalyzer(withMDX({
+  exportPathMap: async function (defaultPathMap) {
+    return {
+      '/': { page: '/mining' },
+    }
+  },
   pageExtensions: ['js', 'jsx', 'md', 'mdx'],
   webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
     config.resolve = webpackConfig.resolve

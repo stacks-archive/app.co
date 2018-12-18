@@ -6,26 +6,30 @@ import Router from 'next/router'
 import withReduxStore from '@common/lib/with-redux-store'
 import { Root } from '@containers/root'
 import { theme } from '@common/styles'
+import { theme as BlockstackTheme } from 'blockstack-ui'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { Mdx } from '@components/mdx'
 import { trackPageView } from '@utils'
 import 'isomorphic-unfetch'
 import { normalize } from 'polished'
-
+import smoothscroll from 'smoothscroll-polyfill'
 /**
  * Reset our styles
  */
 const GlobalStyles = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,400,600');
   ${normalize()};
   * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     box-sizing: border-box;
+    font-variant-numeric: tabular-nums;
   }
   body, html{
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     background-color: ${theme.colors.grey.light};
     color: ${theme.colors.grey};
+    scroll-behavior: smooth;
   }
   
   ol li ol {
@@ -84,6 +88,7 @@ class MyApp extends App {
   }
 
   componentDidMount() {
+    smoothscroll.polyfill()
     Router.router.events.on('routeChangeComplete', trackPageView)
   }
 
@@ -93,7 +98,7 @@ class MyApp extends App {
     return (
       <CookiesProvider>
         <Mdx>
-          <ThemeProvider theme={theme}>
+          <ThemeProvider theme={BlockstackTheme}>
             <Container>
               <Provider store={reduxStore}>
                 <Root>

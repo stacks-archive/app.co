@@ -8,17 +8,23 @@ export const selectAppCategories = (state) => state.apps && state.apps.constants
 
 export const selectAppCategoriesArray = (state) =>
   state.apps && Object.keys(state.apps.constants.appConstants.categoryEnums)
+
 export const selectBlockchainCategories = (state) =>
   state.apps && Object.keys(state.apps.constants.appConstants.blockchainEnums)
+
 export const selectStorageCategories = (state) =>
   state.apps && Object.keys(state.apps.constants.appConstants.storageEnums)
+
 export const selectAuthenticationCategories = (state) =>
   state.apps && Object.keys(state.apps.constants.appConstants.authenticationEnums)
 
 export const selectAppAuthenticationEnums = (state) =>
   state.apps && state.apps.constants.appConstants.authenticationEnums
+
 export const selectAppStorageEnums = (state) => state.apps && state.apps.constants.appConstants.storageEnums
+
 export const selectAppBlockchainEnums = (state) => state.apps && state.apps.constants.appConstants.blockchainEnums
+
 export const selectCategoryFilter = (state) => state.apps && state.apps.categoryFilter
 export const selectPlatformName = (state) => state.apps && state.apps.platformName
 export const selectCategoryName = (state) => state.apps && state.apps.categoryName

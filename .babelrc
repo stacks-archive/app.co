@@ -1,7 +1,5 @@
 {
-  "presets": [
-    "next/babel"
-  ],
+  "presets": ["next/babel"],
   "plugins": [
     [
       "babel-plugin-styled-components",
@@ -14,9 +12,7 @@
     [
       "module-resolver",
       {
-        "root": [
-          "./"
-        ],
+        "root": ["./"],
         "alias": {
           "@components": "./components",
           "@containers": "./containers",

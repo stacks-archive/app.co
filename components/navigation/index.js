@@ -11,7 +11,7 @@ const ErrorPageLink = ({ isErrorPage, children, ...props }) =>
 const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, footer, admin, ...rest }) => {
   const extraProps = handleClick ? { onClick: () => handleClick() } : {}
   return (
-    <StyledTopBar.Navigation {...rest}>
+    <StyledTopBar.Navigation flexWrap={footer ? 'wrap' : undefined} {...rest}>
       {admin ? (
         <>
           <Link href="/admin">
@@ -45,9 +45,17 @@ const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, fo
             Get updates
           </a>
           {footer && (
-            <ErrorPageLink isErrorPage={isErrorPage} href="/privacy" prefetch>
-              <a href="/privacy">Privacy Policy</a>
-            </ErrorPageLink>
+            <>
+              <ErrorPageLink isErrorPage={isErrorPage} href="/privacy" prefetch>
+                <a href="/privacy">Privacy Policy</a>
+              </ErrorPageLink>
+              <ErrorPageLink isErrorPage={isErrorPage} href="/terms" prefetch>
+                <a href="/terms">Terms of Use</a>
+              </ErrorPageLink>
+              <ErrorPageLink isErrorPage={isErrorPage} href="/mining/terms" prefetch>
+                <a href="/mining/terms">App Mining Terms</a>
+              </ErrorPageLink>
+            </>
           )}
           <ErrorPageLink isErrorPage={isErrorPage} href="/submit" {...extraProps}>
             <a href="/submit">Add your app</a>

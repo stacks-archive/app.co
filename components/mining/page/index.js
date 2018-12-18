@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { StyledMiningPage } from '@components/mining/page/styled'
+import { Flex } from 'blockstack-ui'
 
-const MiningPage = ({ ...props }) => <StyledMiningPage {...props} />
+const MiningPage = ({ ...rest }) => <Flex flexDirection="column" color="blue.dark" minHeight="100vh" bg={'blue.dark'} {...rest} />
 
 export { MiningPage }
