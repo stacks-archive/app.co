@@ -105,7 +105,11 @@ const SuccessView = ({ value }) => (
           <Type is="a" href="https://app.co/submit" target="_blank">
             Register on App.co
           </Type>{' '}
-          and complete the App Mining Ready steps.
+          and complete the{' '}
+          <Type is="a" href="https://docs.blockstack.org/develop/mining_enroll.html#provide-pay-out-and-tax-materials" target="_blank">
+            App Mining Ready steps
+          </Type>
+          .
         </Type>
       </Box>
     </Flex>
