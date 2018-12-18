@@ -98,11 +98,12 @@ const FormSection = ({ fields, handleChange, errors, message, setState, ...rest 
                       handleChange({
                         target: {
                           name: field.name,
-                          value: e.value
+                          value: e ? e.value : null
                         }
                       })(setState)
                     }
                     error={errors && field && errors[field.name] && errors[field.name]}
+                    isClearable
                     {...field}
                   />
                 </Flex>
@@ -277,7 +278,6 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
       name: 'category',
       required: true,
       label: 'Category',
-      is: Select,
       width: '100%',
       type: 'select',
       placeholder: 'Social networking',
@@ -287,7 +287,6 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
     {
       name: 'blockchain',
       label: 'Blockchain',
-      is: Select,
       width: '100%',
       type: 'select',
       placeholder: 'Bitcoin',
@@ -296,7 +295,6 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
     {
       name: 'storageNetwork',
       label: 'Storage',
-      is: Select,
       width: '100%',
       type: 'select',
       placeholder: 'IPFS',
@@ -305,7 +303,6 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
     {
       name: 'authentication',
       label: 'Authentication',
-      is: Select,
       width: '100%',
       type: 'select',
       placeholder: 'Blockstack',
