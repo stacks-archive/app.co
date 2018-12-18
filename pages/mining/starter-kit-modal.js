@@ -77,8 +77,8 @@ const SuccessView = ({ value }) => (
         .
       </Type>
     </Box>
-    <Flex pb={6} alignItems="center">
-      <Box pr={4}>
+    <Flex pb={6} alignItems="center" flexDirection={['column', 'row']}>
+      <Box pr={[0, 4]} pb={[4, 0]}>
         <BuildGraphic />
       </Box>
       <Box>
@@ -90,8 +90,8 @@ const SuccessView = ({ value }) => (
         </Type>
       </Box>
     </Flex>
-    <Flex alignItems="center">
-      <Box pr={4}>
+    <Flex alignItems="center" flexDirection={['column', 'row']}>
+      <Box pr={[0, 4]} pb={[4, 0]}>
         <RegisterGraphic />
       </Box>
       <Box>
