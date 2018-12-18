@@ -102,7 +102,7 @@ const SuccessView = ({ value }) => (
          * TODO: add link
          */}
         <Type>
-          <Type is="a" href="https://app.co/submit" target="_blank">
+          <Type is="a" href="/submit" target="_blank">
             Register on App.co
           </Type>{' '}
           and complete the{' '}
