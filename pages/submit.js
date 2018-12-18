@@ -225,7 +225,7 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
       message: 'Will appear on App.co category pages and search.',
       placeholder: 'A chat app for crypto.',
       maxLength: 50,
-      validation: string().required('Please enter a description.')
+      validation: string().required('Please enter a short description.')
     },
     {
       name: 'website',
@@ -234,7 +234,7 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
       type: 'url',
       placeholder: 'https://satoshi.chat/',
       validation: string()
-        .required('Please enter the apps website.')
+        .required('Please enter a website.')
         .url('Must be a valid URL with http/https.')
     },
     {
@@ -325,7 +325,23 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
       name: 'disclaimers',
       required: true,
       type: 'checkbox',
-      label: <>I agree to the App.co Terms, Privacy Policy, and App Mining Terms</>,
+      label: (
+        <>
+          I agree to the{' '}
+          <Type is="a" href="/terms" target="_blank">
+            App.co Terms
+          </Type>
+          ,{' '}
+          <Type is="a" href="/privacy" target="_blank">
+            Privacy Policy
+          </Type>
+          , and{' '}
+          <Type is="a" href="/mining/terms" target="_blank">
+            App Mining Terms
+          </Type>
+          .
+        </>
+      ),
       validation: boolean().required('To submit an app, you must accept these terms.')
     }
   ]
