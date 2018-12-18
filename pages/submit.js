@@ -235,7 +235,7 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
       placeholder: 'https://satoshi.chat/',
       validation: string()
         .required('Please enter the apps website.')
-        .url('Must be a valid URL')
+        .url('Must be a valid URL with http/https.')
     },
     {
       name: 'appIconUrl',
@@ -246,7 +246,7 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
       placeholder: 'https://example.com/app_icon.png',
       validation: string()
         .required('Please provide an icon.')
-        .url('Must be a valid URL')
+        .url('Must be a valid URL with http/https.')
     },
     {
       name: 'openSourceUrl',
@@ -254,7 +254,7 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
       label: 'Open source URL',
       type: 'url',
       placeholder: 'https://github.com/SatoshiChat',
-      validation: string().url('Must be a valid URL')
+      validation: string().url('Must be a valid URL with http/https.')
     },
     {
       name: 'twitterHandle',
