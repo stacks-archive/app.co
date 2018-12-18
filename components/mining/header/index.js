@@ -21,7 +21,7 @@ const Header = ({ showOnMobile, link, ...rest }) => {
       >
         <Wrapper justifyContent="space-between" alignItems="center">
           <Flex alignItems="center">
-            <Flex alignItems="center">
+            <Flex alignItems="center" flexGrow={1}>
               <Flex pr={2} size={32} color="blue.accent">
                 <OutlinedLogo />
               </Flex>
@@ -38,8 +38,14 @@ const Header = ({ showOnMobile, link, ...rest }) => {
                 App Mining
               </Type>
             </Flex>
-            <Type color="blue.mid">
-              Next ranking starts in <Countdown />
+            <Type
+              display="inline-flex"
+              flexDirection={['column', 'column', 'column', 'row']}
+              color="blue.mid"
+              pl={[2, 2, 2, 0]}
+              flexGrow={1}
+            >
+              Next ranking starts in <Countdown pl={[0, 0, 0, 2]} />
             </Type>
           </Flex>
           <Flex display={['none', 'none', 'flex']}>

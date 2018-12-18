@@ -20,17 +20,18 @@ const Row = ({
   lifetimeEarnings,
   ...rest
 }) => (
-  <Flex mb={'1px'} py={5} bg={'white'}>
+  <Flex
+    style={{ textDecoration: 'none' }}
+    is="a"
+    href={rest.Slugs && rest.Slugs.length ? `https://app.co/app/${rest.Slugs[0].value}` : undefined}
+    mb={'1px'}
+    py={5}
+    bg={'white'}
+  >
     <Flex width={[40, 60]} alignItems={'center'} justifyContent="center">
       <Type fontFamily="brand">{index + 1}</Type>
     </Flex>
-    <Flex
-      width={[1 / 2, 1 / 2, 2 / 3]}
-      style={{ textDecoration: 'none' }}
-      alignItems="center"
-      is="a"
-      href={rest.Slugs && rest.Slugs.length ? `https://app.co/app/${rest.Slugs[0].value}` : undefined}
-    >
+    <Flex width={[1 / 2, 1 / 2, 2 / 3]} alignItems="center">
       <Flex alignItems="center">
         <Box
           size={[24]}
@@ -108,7 +109,7 @@ const AllApps = ({ apps, ...rest }) => (
             registered with App.co
           </Type>{' '}
           and are eligible for App Mining. The list includes apps which participate in the program currently, new apps
-          that will be include in the next ranking, and all other App Mining eligible apps.
+          that will be included in the next ranking, and all other App Mining eligible apps.
         </Type>
         <Flex mt={7} width={1} flexDirection="column" alignItems="center" justifyContent="center">
           <Table apps={apps} />
