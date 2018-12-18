@@ -1,8 +1,9 @@
 import styled, { css } from 'styled-components'
 import { wrapperStyle } from '@common/styles'
 import { display, textAlign, alignItems, justifyContent } from 'styled-system'
+import { Flex } from 'blockstack-ui'
 
-const Navigation = styled.div`
+const Navigation = styled(Flex)`
   display: flex;
   a {
     &:link,
@@ -61,10 +62,11 @@ const StyledTopBar = styled.div`
 
 const Wrapper = styled.div`
   ${wrapperStyle};
-  ${({ wrap }) => wrap === false && css`
-    max-width: none;
-  `}
-  height: 65px;
+  ${({ wrap }) =>
+    wrap === false &&
+    css`
+      max-width: none;
+    `} height: 65px;
   display: flex;
   justify-content: space-between;
   align-items: center;

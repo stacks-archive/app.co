@@ -74,8 +74,8 @@ const StartAppMiningSection = ({ ...rest }) => (
               {/**
                * TODO: add link here
                */}
-              <Type is="a" href="#">
-                all App Mining Ready apps
+              <Type is="a" href="/mining/apps">
+                all App Mining eligible apps
               </Type>
               .{' '}
             </Type>

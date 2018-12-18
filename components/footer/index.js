@@ -6,13 +6,13 @@ import { Flex, Box } from '@components/box'
 const Footer = ({ isErrorPage, admin, ...props }) => (
   <Flex {...props}>
     <Box ml="auto">
-      <Navigation 
+      <Navigation
         admin={admin}
-        display={['block', 'flex']} 
-        justifyContent="center" 
+        display={['block', 'flex']}
+        justifyContent="center"
         footer
-        alignItems="center" 
-        textAlign={['center']} 
+        alignItems="center"
+        textAlign={['center']}
         isErrorPage={isErrorPage}
       />
     </Box>
