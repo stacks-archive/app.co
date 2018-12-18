@@ -101,10 +101,14 @@ const AllApps = ({ apps, ...rest }) => (
   <Section bg="blue.light" {...rest}>
     <Wrapper>
       <Flex width={[1]} flexShrink={0} flexDirection="column">
-        <Title maxWidth="100%">App Mining ready apps</Title>
+        <Title maxWidth="100%">All App Mining apps.</Title>
         <Type maxWidth={700} lineHeight={1.65} pt={6}>
-          Apps listed below are currently registered with App.co and meet all requirements for the App Mining program.
-          The list includes new apps which have not been ranked yet, but will be include in the next ranking.
+          Apps listed below are currently{' '}
+          <Type is="a" href="/apps/blockstack" target="_blank">
+            registered with App.co
+          </Type>{' '}
+          and are eligible for App Mining. The list includes apps which participate in the program currently, new apps
+          that will be include in the next ranking, and all other App Mining eligible apps.
         </Type>
         <Flex mt={7} width={1} flexDirection="column" alignItems="center" justifyContent="center">
           <Table apps={apps} />
