@@ -108,7 +108,7 @@ const AllApps = ({ apps, ...rest }) => (
           <Type is="a" href="/apps/blockstack" target="_blank">
             registered with App.co
           </Type>
-          , apps that are marked <Type fontWeight="bold">Ready</Type> will be included in the next ranking. Apps that
+          . Apps that are marked <Type fontWeight="bold">Ready</Type> will be included in the next ranking. Apps that
           include Blockstack Auth that are marked <Type fontWeight="bold">Not Ready</Type> can qualify for App Mining by{' '}
           <Type is="a" href="https://docs.blockstack.org/develop/mining_enroll.html" target="_blank">
             enrolling in the program
