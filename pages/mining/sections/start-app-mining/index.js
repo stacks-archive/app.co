@@ -19,7 +19,7 @@ const sections = [
     button: {
       label: 'Register',
       is: 'a',
-      href: 'https://app.co/submit',
+      href: '/submit',
       target: '_blank'
     },
     text: `Register your functional app on App.co.`
@@ -29,7 +29,7 @@ const sections = [
     button: {
       label: 'Improve',
       is: 'a',
-      href: 'https://app.co/mining/apps',
+      href: '/mining/apps',
       target: '_blank'
     },
     text: `Improve your app. Improve your rank. Earn more BTC.`

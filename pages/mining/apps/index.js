@@ -38,7 +38,7 @@ class AppMiningPage extends React.Component {
             title="App Mining"
             description="Earn BTC for apps you build with Blockstack. We are funding decentralized app teams simply for being pioneers in the space."
           />
-          <Header showOnMobile />
+          <Header link showOnMobile />
 
           <AllApps pt={120} apps={this.props.apps} />
         </MiningPage>

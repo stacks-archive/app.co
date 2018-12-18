@@ -32,7 +32,14 @@ class AppMiningPage extends React.Component {
       const { apps } = await promises[2].json()
 
       if (months && months.length) {
-        return { rankings: months[0].compositeRankings, month: months[0], months, faq: faqs, apps }
+        const rankings = months[months.length - 1].compositeRankings.map((app) => {
+          const appWithLifetimeEarnings = apps.find((otherApp) => otherApp.name === app.name)
+          return {
+            ...appWithLifetimeEarnings,
+            ...app
+          }
+        })
+        return { rankings, month: months[months.length - 1], months, faq: faqs, apps }
       } else {
         return {}
       }
@@ -59,7 +66,7 @@ class AppMiningPage extends React.Component {
           <StartAppMiningSection />
           <HowMuchSection apps={this.props.rankings} />
           <RankingSection apps={this.props.rankings} />
-          <PioneersSection apps={this.props.rankings} />
+          <PioneersSection apps={this.props.months[0].compositeRankings} />
           <FAQSection faq={this.props.faq} apps={this.props.rankings} />
         </MiningPage>
       </ModalRoot>

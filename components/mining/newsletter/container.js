@@ -28,7 +28,7 @@ class NewsletterWrapper extends React.PureComponent {
       method: 'POST',
       body: JSON.stringify({
         email: value,
-        from: this.props.from,
+        SOURCE: this.props.SOURCE,
         list: this.props.list
       }),
       headers: {

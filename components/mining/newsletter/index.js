@@ -84,11 +84,11 @@ const Newsletter = ({
   border = '2px solid',
   children,
   list = 'e36d5dc9',
-  from = 'hello@app.co',
+  source: SOURCE = 'app.co starter kit',
   onSubmit,
   ...props
 }) => (
-  <NewsletterWrapper onSubmit={onSubmit} list={list} from={from}>
+  <NewsletterWrapper onSubmit={onSubmit} list={list} SOURCE={SOURCE}>
     {({ bind, isValid, loading, error, success, doSubmit, value }) => {
       const inputProps = {
         value,

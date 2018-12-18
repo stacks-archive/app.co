@@ -1,14 +1,25 @@
 import React from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
 import { Title, Wrapper, Section } from '@components/mining/shared'
+import numeral from 'numeral'
 
-const Pill = ({ display, ...rest }) => (
-  <Box ml={4} py={2} fontSize={0} borderRadius={30} px={4} bg="#E4ECF1" display={display}>
-    <Type {...rest} opacity={0.75} />
+const Pill = ({ display, children, ...rest }) => (
+  <Box ml={4} py={2} fontSize={0} borderRadius={30} px={4} bg="#E4ECF1" display={display} {...rest}>
+    <Type fontWeight={500}>{children}</Type>
   </Box>
 )
 
-const Row = ({ name, index, imgixImageUrl, formattedUsdRewards, storageNetwork, authentication, ...rest }) => (
+const Row = ({
+  name,
+  index,
+  imgixImageUrl,
+  formattedUsdRewards,
+  storageNetwork,
+  authentication,
+  miningReady,
+  lifetimeEarnings,
+  ...rest
+}) => (
   <Flex mb={'1px'} py={5} bg={'white'}>
     <Flex width={[40, 60]} alignItems={'center'} justifyContent="center">
       <Type fontFamily="brand">{index + 1}</Type>
@@ -34,12 +45,20 @@ const Row = ({ name, index, imgixImageUrl, formattedUsdRewards, storageNetwork, 
       </Flex>
     </Flex>
     <Flex width={[1 / 2, 1 / 2, 1 / 2, 1 / 3]} ml="auto" alignItems="center">
-      <Flex justifyContent="flex-start" textAlign="right" width={[1, 1 / 2]} pr={6}>
-        <Pill>Ready</Pill>
+      <Flex
+        justifyContent="flex-start"
+        textAlign="right"
+        width={[1, 1, 1 / 2]}
+        pr={6}
+        display={['none', 'none', 'flex']}
+      >
+        <Pill bg={miningReady ? 'blue.accent' : 'red'} color={miningReady ? 'dark.blue' : 'white'}>
+          {miningReady ? 'Ready' : 'Not Ready'}
+        </Pill>
       </Flex>
-      <Flex justifyContent="flex-end" textAlign="right" width={1 / 2} pr={5} display={['none', 'flex']}>
+      <Flex justifyContent="flex-end" textAlign="right" width={[1, 1, 1 / 2]} pr={5}>
         <Type fontFamily="brand" color="blue">
-          {formattedUsdRewards ? formattedUsdRewards.split('.')[0] : '--'}
+          {lifetimeEarnings ? numeral(String(lifetimeEarnings).split('.')[0]).format('$0,0') : '--'}
         </Type>
       </Flex>
     </Flex>
@@ -55,10 +74,16 @@ const Table = ({ apps }) => {
         </Type>
 
         <Flex flexGrow={1} width={[1 / 2, 1 / 2, 1 / 2, 1 / 3]} ml="auto" alignItems="center">
-          <Flex justifyContent="flex-end" textAlign="right" width={[1, 1 / 2]} pr={5}>
+          <Flex
+            justifyContent="flex-end"
+            textAlign="right"
+            width={[1, 1, 1 / 2]}
+            pr={5}
+            display={['none', 'none', 'flex']}
+          >
             <Type style={{ whiteSpace: 'nowrap' }}>App Mining Ready</Type>
           </Flex>
-          <Flex justifyContent="flex-end" textAlign="right" width={1 / 2} display={['none', 'flex']} pr={5}>
+          <Flex justifyContent="flex-end" textAlign="right" width={[1, 1, 1 / 2]} pr={5}>
             <Type style={{ whiteSpace: 'nowrap' }}>Lifetime</Type>
           </Flex>
         </Flex>

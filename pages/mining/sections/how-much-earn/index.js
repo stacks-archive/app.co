@@ -2,6 +2,7 @@ import React from 'react'
 import { Flex, Box, Type, Button } from 'blockstack-ui'
 import { Title, Wrapper, Section, LearnMore } from '@components/mining/shared'
 import { State } from 'react-powerplug'
+import numeral from 'numeral'
 
 const Pill = ({ display, ...rest }) => (
   <Box ml={4} py={2} fontSize={0} borderRadius={30} px={4} bg="#E4ECF1" display={display}>
@@ -9,7 +10,16 @@ const Pill = ({ display, ...rest }) => (
   </Box>
 )
 
-const Row = ({ name, index, imgixImageUrl, formattedUsdRewards, storageNetwork, authentication, ...rest }) => (
+const Row = ({
+  name,
+  index,
+  imgixImageUrl,
+  formattedUsdRewards,
+  storageNetwork,
+  authentication,
+  lifetimeEarnings,
+  ...rest
+}) => (
   <Flex mb={'1px'} py={5} bg={'white'}>
     <Flex width={[40, 60]} alignItems={'center'} justifyContent="center">
       <Type fontFamily="brand">{index + 1}</Type>
@@ -44,7 +54,7 @@ const Row = ({ name, index, imgixImageUrl, formattedUsdRewards, storageNetwork, 
       </Flex>
       <Flex justifyContent="flex-end" textAlign="right" width={1 / 2} pr={5} display={['none', 'flex']}>
         <Type fontFamily="brand" color="blue">
-          {formattedUsdRewards.split('.')[0]}
+          {lifetimeEarnings ? numeral(String(lifetimeEarnings).split('.')[0]).format('$0,0') : '--'}
         </Type>
       </Flex>
     </Flex>

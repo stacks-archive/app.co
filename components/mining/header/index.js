@@ -4,8 +4,7 @@ import StickyHeadroom from '@integreat-app/react-sticky-headroom'
 import { OutlinedLogo } from '@components/mining/svg'
 import { CallToAction, Countdown, Wrapper } from '../shared'
 
-
-const Header = ({ showOnMobile, ...rest }) => {
+const Header = ({ showOnMobile, link, ...rest }) => {
   return (
     <StickyHeadroom scrollHeight={90}>
       <Flex
@@ -26,11 +25,20 @@ const Header = ({ showOnMobile, ...rest }) => {
               <Flex pr={2} size={32} color="blue.accent">
                 <OutlinedLogo />
               </Flex>
-              <Type color="white" pr={1}>
-                App Mining:{' '}
+              <Type
+                letterSpacing="0.1rem"
+                textTransform="uppercase"
+                fontWeight="bold"
+                style={{ textDecoration: 'none' }}
+                is={link ? 'a' : undefined}
+                href={link ? '/mining' : undefined}
+                color="white !important"
+                pr={2}
+              >
+                App Mining
               </Type>
             </Flex>
-            <Type color="white">
+            <Type color="blue.mid">
               Next ranking starts in <Countdown />
             </Type>
           </Flex>
