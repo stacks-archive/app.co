@@ -96,7 +96,7 @@ const SuccessView = ({ value }) => (
       </Box>
       <Box>
         <Type pb={4} fontSize={2} fontWeight="bold">
-          Have a user-ready Blocstack app?
+          Have a user-ready Blockstack app?
         </Type>
         {/**
          * TODO: add link
