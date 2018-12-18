@@ -68,10 +68,10 @@ const FormSection = ({ fields, handleChange, errors, message, setState, ...rest 
                       type="radio"
                       name={field.name}
                       value={option.value}
-                      id={option.value}
+                      id={String(option.value)}
                       onChange={(e) => handleChange(e)(setState)}
                     />
-                    <Field.Label pb={0} pl={2} is="label" htmlFor={option.value}>
+                    <Field.Label pb={0} pl={2} is="label" htmlFor={String(option.value)}>
                       {option.label}
                     </Field.Label>
                   </Flex>
