@@ -3,9 +3,10 @@ import Head from '@containers/head'
 import { MiningPage } from '@components/mining/page'
 import { selectApiServer } from '@stores/apps/selectors'
 import { connect } from 'react-redux'
-import {AllApps} from '@pages/mining/apps/table-section'
+import { AllApps } from '@pages/mining/apps/table-section'
 import { ModalRoot } from 'blockstack-ui'
 import { Header } from '@components/mining/header'
+import { Footer } from '@components/mining/footer'
 
 const handleBodyScroll = (on) =>
   on ? document.body.classList.remove('no-scroll') : document.body.classList.add('no-scroll')
@@ -41,6 +42,7 @@ class AppMiningPage extends React.Component {
           <Header link showOnMobile />
 
           <AllApps pt={120} apps={this.props.apps} />
+          <Footer />
         </MiningPage>
       </ModalRoot>
     )
