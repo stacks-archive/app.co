@@ -11,27 +11,27 @@ const OpenStarterKitModal = ({ ...rest }) => <OpenModal component={StarterKitMod
 
 const TimeLabel = ({ ...rest }) => <Type pl="1px" fontWeight={500} opacity={0.7} {...rest} />
 const renderer = ({ hours, minutes, days, seconds }) => (
-  <>
+  <Flex flexShrink={0} style={{ whiteSpace: 'nowrap' }}>
     <Type fontWeight="bolder">
       {days}
       <TimeLabel>D</TimeLabel>
-    </Type>{' '}
-    :{' '}
+    </Type>
+    &nbsp;:&nbsp;
     <Type fontWeight="bolder">
       {hours}
       <TimeLabel>H</TimeLabel>
-    </Type>{' '}
-    :{' '}
+    </Type>
+    &nbsp;:&nbsp;
     <Type fontWeight="bolder">
       {minutes}
       <TimeLabel>M</TimeLabel>
-    </Type>{' '}
-    :{' '}
+    </Type>
+    &nbsp;:&nbsp;
     <Type fontWeight="bolder">
       {seconds}
       <TimeLabel>S</TimeLabel>
     </Type>
-  </>
+  </Flex>
 )
 const Countdown = ({ ...rest }) => {
   const nextDate = new Date(2019, 0, 4)
@@ -211,7 +211,7 @@ const CallToAction = ({ hideTimer, buttonProps = {}, ...rest }) => (
               cursor={hovered ? 'pointer' : 'unset'}
               transition="0.1s all ease-in-out"
               fontWeight={400}
-              fontSize={3}
+              fontSize={[2, 3, 3]}
               {...buttonProps}
               {...bind}
               {...modalBind}
@@ -221,7 +221,15 @@ const CallToAction = ({ hideTimer, buttonProps = {}, ...rest }) => (
 
             {!hideTimer ? (
               <Flex bg="#081537" alignItems="center" justifyContent="center" p={5}>
-                <Type display="flex" flexDirection={['column', 'row']} color="white" fontWeight={400} fontSize={2}>
+                <Type
+                  display="flex"
+                  alignItems={['center']}
+                  justifyContent={['center']}
+                  flexDirection={['column', 'row']}
+                  color="white"
+                  fontWeight={400}
+                  fontSize={2}
+                >
                   <Type
                     style={{
                       whiteSpace: 'nowrap'
