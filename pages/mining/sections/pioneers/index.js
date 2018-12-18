@@ -144,7 +144,7 @@ const PioneersSection = ({ apps, ...rest }) => (
           </OpenStarterKitModal>
         </Box>
       </Wrapper>
-      <Box position="absolute" bg={'blue.light'} height="50%" bottom={0} left={0} width={1} />
+      <Box position="absolute" bg={'blue.light'} height="100%" bottom={'-50%'} left={0} width={1} />
     </Flex>
   </Section>
 )
