@@ -15,12 +15,26 @@ import Modal from '@containers/modals/app'
 import AppStore from '@stores/apps'
 
 class MonthResults extends React.Component {
-  static getInitialProps(context) {
+  static async getInitialProps(context) {
     const { month, year } = context.query
 
-    return {
-      month,
-      year
+    try {
+      const response = await fetch(`https://app-co-api.herokuapp.com/api/app-mining-months`)
+      const { months } = await response.json()
+      const foundReport = months.find(
+        (report) => report.monthName.toLowerCase() === month.toLowerCase() && report.year === parseInt(year, 10)
+      )
+
+      return {
+        report: foundReport,
+        month,
+        year
+      }
+    } catch (error) {
+      return {
+        month,
+        year
+      }
     }
   }
 
@@ -41,39 +55,45 @@ class MonthResults extends React.Component {
 
     return report.compositeRankings.map((app, index) => (
       <ClickableTr>
-        <SpacedTd display={['none', 'table-cell']}
-          style={{ cursor: 'pointer' }} onClick={(evt) => this.handleAppClick(evt, app)}
+        <SpacedTd
+          display={['none', 'table-cell']}
+          style={{ cursor: 'pointer' }}
+          onClick={(evt) => this.handleAppClick(evt, app)}
         >
           {index + 1}
         </SpacedTd>
         <Td style={{ cursor: 'pointer' }} onClick={(evt) => this.handleAppClick(evt, app)}>
-          <AppLink style={{borderTop: 'none'}}>
+          <AppLink style={{ borderTop: 'none' }}>
             <AppIcon src={app.imgixImageUrl} size={48} alt={app.name} />
             <Container>
               <Name>
-                <Rank>{index + 1}{'. '}</Rank>
+                <Rank>
+                  {index + 1}
+                  {'. '}
+                </Rank>
                 {app.name}
               </Name>
               <Description>
-                <Type.span fontSize="1em" display="block">{app.description}</Type.span>
+                <Type.span fontSize="1em" display="block">
+                  {app.description}
+                </Type.span>
                 <Rewards>
-                  <Type.strong fontSize="1em">Monthy rewards:</Type.strong>
-                  {' '}{app.formattedUsdRewards} ({app.payout.BTCPaymentValue / 10e7} BTC)
+                  <Type.strong fontSize="1em">Monthy rewards:</Type.strong> {app.formattedUsdRewards} (
+                  {app.payout.BTCPaymentValue / 10e7} BTC)
                 </Rewards>
               </Description>
             </Container>
           </AppLink>
         </Td>
-        <SpacedTd 
-          style={{ cursor: 'pointer' }} 
+        <SpacedTd
+          style={{ cursor: 'pointer' }}
           onClick={(evt) => this.handleAppClick(evt, app)}
-          display={['none', 'table-cell']}>
+          display={['none', 'table-cell']}
+        >
           {app.payout && (
             <>
               {app.formattedUsdRewards}
-              <SubReward>
-                ({app.payout.BTCPaymentValue / 10e7} BTC)
-              </SubReward>
+              <SubReward>({app.payout.BTCPaymentValue / 10e7} BTC)</SubReward>
             </>
           )}
         </SpacedTd>
@@ -83,9 +103,7 @@ class MonthResults extends React.Component {
 
   reviewers() {
     const { report } = this.props
-    return report.MiningReviewerReports.map((reviewer, index) => (
-      <Reviewer reviewer={reviewer} index={index} />
-    ))
+    return report.MiningReviewerReports.map((reviewer, index) => <Reviewer reviewer={reviewer} index={index} />)
   }
 
   render() {
@@ -93,8 +111,15 @@ class MonthResults extends React.Component {
     return (
       <Page wrap={false}>
         <Head title={this.title()} />
-        <Flex width={1} px={[1, 3]} mb={5} flexDirection={['column', 'column', 'column', 'row']} justifyContent="space-between" flexWrap="wrap">
-          <Box width={[ 1, 1, 1, 2/3 ]}>
+        <Flex
+          width={1}
+          px={[1, 3]}
+          mb={5}
+          flexDirection={['column', 'column', 'column', 'row']}
+          justifyContent="space-between"
+          flexWrap="wrap"
+        >
+          <Box width={[1, 1, 1, 2 / 3]}>
             <Section>
               <h2>
                 {this.title()}
@@ -109,53 +134,37 @@ class MonthResults extends React.Component {
                   <Th display={['none', 'table-cell']}>Monthly Rewards</Th>
                 </tr>
               </Thead>
-              <tbody>
-                {this.rankings()}
-              </tbody>
+              <tbody>{this.rankings()}</tbody>
             </Table>
           </Box>
-          <Box width={[1, 1, 1, 1/3]} pl={[0, 0, 0, 3]} pt={[3, 3, 3, 0]}>
+          <Box width={[1, 1, 1, 1 / 3]} pl={[0, 0, 0, 3]} pt={[3, 3, 3, 0]}>
             <Section>
               <Content>
                 <Type.p>
-                  <Type.strong fontWeight="700">{report.compositeRankings.length} Blockstack apps</Type.strong>{' '}
-                  earned
-                  {' '}<Type.strong fontWeight="700">{report.formattedTotalRewardsUsd}</Type.strong>{' '}
-                  in App Mining rewards for the month of {report.humanReadableDate}.
+                  <Type.strong fontWeight="700">{report.compositeRankings.length} Blockstack apps</Type.strong> earned{' '}
+                  <Type.strong fontWeight="700">{report.formattedTotalRewardsUsd}</Type.strong> in App Mining rewards
+                  for the month of {report.humanReadableDate}.
                 </Type.p>
                 <Type.p>
-                  These decentralized apps have guaranteed users control over their identity by implementing
-                  {' '}<a href="https://blockstack.org">Blockstack authentication</a>.
+                  These decentralized apps have guaranteed users control over their identity by implementing{' '}
+                  <a href="https://blockstack.org">Blockstack authentication</a>.
                 </Type.p>
-                <Type.p mb={4}>
-                  Are you a Blockstack app developer? Start earning rewards as soon as next month:
-                </Type.p>
-                <ButtonLink href="/mining" style={{width: '100%', margin: 0}}>Learn about App Mining</ButtonLink>
+                <Type.p mb={4}>Are you a Blockstack app developer? Start earning rewards as soon as next month:</Type.p>
+                <ButtonLink href="/mining" style={{ width: '100%', margin: 0 }}>
+                  Learn about App Mining
+                </ButtonLink>
                 <Type.p mt={4} color="#1421446e" fontSize="0.9em">
-                  Note: USD values displayed for payouts made in BTC were determined based on the exchange rate at the time of conversion on {report.friendlyPurchasedAt}.
+                  Note: USD values displayed for payouts made in BTC were determined based on the exchange rate at the
+                  time of conversion on {report.friendlyPurchasedAt}.
                 </Type.p>
                 {this.reviewers()}
               </Content>
             </Section>
           </Box>
         </Flex>
-        <Modal doGoBack={false}/>
+        <Modal doGoBack={false} />
       </Page>
     )
-  }
-}
-
-const mapStateToProps = (state, ownProps) => {
-  let foundReport
-  const { month, year } = ownProps
-  state.mining.appMiningMonths.forEach((report) => {
-    const sameMonth = report.monthName.toLowerCase() === month.toLowerCase()
-    if (sameMonth && (report.year === parseInt(year, 10))) {
-      foundReport = report
-    }
-  })
-  return {
-    report: foundReport
   }
 }
 
@@ -163,4 +172,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(Object.assign({}, AppStore.actions), dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MonthResults)
+export default connect(
+  null,
+  mapDispatchToProps
+)(MonthResults)

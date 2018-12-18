@@ -143,7 +143,7 @@ class UploadReport extends React.Component {
                   Spreadsheet
                 </FormTd>
                 <FormTd>
-                  <Input type="file" innerRef={this.csv}/>
+                  <Input type="file" ref={this.csv}/>
                 </FormTd>
               </tr>
               <tr>

@@ -3,7 +3,7 @@ import { Section } from '@components/mining-admin/month'
 import { AppLink, Img, Container, Name, Description } from '@components/mining/registered-apps/styled'
 
 const AppsList = ({ apps }) => {
-  return apps.map((app) => (
+  return apps.filter((app) => app.miningReady === true).map((app) => (
     <AppLink href={app.website} target="_blank">
       <Img src={app.imgixImageUrl} />
       <Container>
