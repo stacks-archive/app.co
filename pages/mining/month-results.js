@@ -42,28 +42,16 @@ class MonthResults extends React.Component {
     return `App Mining rewards for ${this.props.report && this.props.report.humanReadableDate}`
   }
 
-  handleAppClick(event, app) {
-    const altKey = event.metaKey || event.altKey || event.ctrlKey
-    if (altKey) {
-      return window.open(`/app/${app.slug}`)
-    }
-    return this.props.doSelectApp(app.id)
-  }
-
   rankings() {
     const { report } = this.props
 
     return report.compositeRankings.map((app, index) => (
       <ClickableTr>
-        <SpacedTd
-          display={['none', 'table-cell']}
-          style={{ cursor: 'pointer' }}
-          onClick={(evt) => this.handleAppClick(evt, app)}
-        >
+        <SpacedTd display={['none', 'table-cell']} style={{ cursor: 'pointer' }}>
           {index + 1}
         </SpacedTd>
-        <Td style={{ cursor: 'pointer' }} onClick={(evt) => this.handleAppClick(evt, app)}>
-          <AppLink style={{ borderTop: 'none' }}>
+        <Td style={{ cursor: 'pointer' }}>
+          <AppLink href={`/app/${app.slug}`} target="_blank" style={{ borderTop: 'none' }}>
             <AppIcon src={app.imgixImageUrl} size={48} alt={app.name} />
             <Container>
               <Name>
@@ -85,11 +73,7 @@ class MonthResults extends React.Component {
             </Container>
           </AppLink>
         </Td>
-        <SpacedTd
-          style={{ cursor: 'pointer' }}
-          onClick={(evt) => this.handleAppClick(evt, app)}
-          display={['none', 'table-cell']}
-        >
+        <SpacedTd style={{ cursor: 'pointer' }} display={['none', 'table-cell']}>
           {app.payout && (
             <>
               {app.formattedUsdRewards}
