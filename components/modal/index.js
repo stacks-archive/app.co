@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { theme } from '@common/styles'
 import { Box } from 'blockstack-ui'
 
-const CloseButton = styled.div`
+export const CloseButton = styled.div`
   opacity: 0.5;
   &:hover {
     opacity: 1;
@@ -23,7 +23,7 @@ const CloseButton = styled.div`
     `};
 `
 
-const Modal = styled.div`
+export const Modal = styled.div`
   position: fixed;
   height: 100vh;
   top: 0;
@@ -39,7 +39,7 @@ const Modal = styled.div`
     display: block;
   }
 `
-const Backdrop = styled.div`
+export const Backdrop = styled.div`
   position: fixed;
   height: 100vh;
   top: 0;
@@ -63,7 +63,7 @@ const Backdrop = styled.div`
   }
 `
 
-const Content = styled(Box)`
+export const Content = styled(Box)`
   background-color: white;
   border-radius: 4px;
   position: relative;
