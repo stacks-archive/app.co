@@ -89,7 +89,9 @@ class MyApp extends App {
 
   componentDidMount() {
     smoothscroll.polyfill()
-    Router.router.events.on('routeChangeComplete', trackPageView)
+    if (document.location.pathname.indexOf('/admin') !== 0) {
+      Router.router.events.on('routeChangeComplete', trackPageView)
+    }
   }
 
   render() {
