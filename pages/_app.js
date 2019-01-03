@@ -88,10 +88,10 @@ class MyApp extends App {
   }
 
   componentDidMount() {
-    // if ((typeof(document) !== 'undefined') && document.location.pathname.indexOf('/admin') !== 0) {
-    //   smoothscroll.polyfill()
-    //   Router.router.events.on('routeChangeComplete', trackPageView)
-    // }
+    smoothscroll.polyfill()
+    if ((typeof(document) !== 'undefined') && document.location.pathname.indexOf('/admin') !== 0) {
+      Router.router.events.on('routeChangeComplete', trackPageView)
+    }
   }
 
   render() {
