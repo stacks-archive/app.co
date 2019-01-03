@@ -218,7 +218,7 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
       validation: string().required('Please enter the app name.')
     },
     {
-      name: 'descriptionShort',
+      name: 'description',
       required: true,
       label: 'Short description',
       hint: 'Max 50 char.',
