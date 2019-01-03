@@ -139,7 +139,9 @@ class App extends React.Component {
               onChange={(e) => this.setState({ description: e.target.value })}
               label="Short description (~50 characters)"
             />
-            <small>Currently {this.state.description.length} characters</small>
+            {this.state.description && (
+              <small>Currently {this.state.description.length} characters</small>
+            )}
             <TextField
               value={this.state.website || ''}
               onChange={(e) => this.setState({ website: e.target.value })}
