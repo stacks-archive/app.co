@@ -45,8 +45,7 @@ const handleChange = (e) => (setState) => {
   }))
 }
 
-const FormSection = ({ fields, handleChange, errors, message, setState, ...rest }) => {
-  return (
+const FormSection = ({ fields, handleChange, errors, message, setState, ...rest }) => (
     <>
       {fields.map((field, i) => {
         if (field.type === 'radio') {
@@ -163,7 +162,6 @@ const FormSection = ({ fields, handleChange, errors, message, setState, ...rest 
       <Bar />
     </>
   )
-}
 
 const Submit = ({ appConstants, setState, state, errors, submit, loading, success, ...rest }) => {
   const personal = [
@@ -238,7 +236,7 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
         .url('Must be a valid URL with http/https.')
     },
     {
-      name: 'appIconUrl',
+      name: 'imageUrl',
       required: true,
       label: 'App icon URL',
       type: 'url',
@@ -488,8 +486,8 @@ class SubmitDapp extends React.Component {
         <Page.Section wrap p={['32px', '64px']} mb={3} richText bg="white">
           {this.state.success ? (
             <>
-              <Box width={'100%'} textAlign="center">
-                <Box pb={6} width={'100%'}>
+              <Box width="100%" textAlign="center">
+                <Box pb={6} width="100%">
                   <Type mx="auto" fontSize={5} fontWeight="bold">
                     Success!
                   </Type>
