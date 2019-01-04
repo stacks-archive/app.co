@@ -36,7 +36,7 @@ const Renderer = ({ hours, minutes, days, seconds, ...rest }) => (
 )
 
 const Countdown = ({ ...rest }) => {
-  const nextDate = new Date(2019, 0, 4, 23, 59)
+  const nextDate = new Date(2019, 0, 4, 23, 59, 59)
   return <Counter renderer={(props) => <Renderer {...props} {...rest} />} date={nextDate} />
 }
 
