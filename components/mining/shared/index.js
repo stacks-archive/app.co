@@ -37,15 +37,15 @@ const Renderer = ({ hours, minutes, days, seconds, ...rest }) => (
 
 const Countdown = ({ ...rest }) => {
   // set initial date of jan 4 2019
-  let nextDate = new Date(2019, 0, 4, 23, 59, 59)
+  let nextDate = new Date(2019, 0, 4, 23, 59, 59).toLocaleString('en-US', { timeZone: 'America/New_York' })
 
   const currentDate = new Date()
-  const day = currentDate.getDate()
-  const month = currentDate.getMonth()
+  const day = currentDate.getDate().toLocaleString('en-US', { timeZone: 'America/New_York' })
+  const month = currentDate.getMonth().toLocaleString('en-US', { timeZone: 'America/New_York' })
 
   // aside from Jan, we want to have the deadline be the end of the first day of each month.
   if ((month === 0 && day > 4) || month > 0) {
-    nextDate = new Date(2019, month + 1, 1, 23, 59, 59)
+    nextDate = new Date(2019, month + 1, 1, 23, 59, 59).toLocaleString('en-US', { timeZone: 'America/New_York' })
   }
   return <Counter renderer={(props) => <Renderer {...props} {...rest} />} date={nextDate} />
 }
