@@ -10,6 +10,7 @@ const SectionContext = React.createContext({})
 const OpenStarterKitModal = ({ ...rest }) => <OpenModal component={StarterKitModal} {...rest} />
 
 const TimeLabel = ({ ...rest }) => <Type pl="1px" fontWeight={500} opacity={0.7} {...rest} />
+
 const Renderer = ({ hours, minutes, days, seconds, ...rest }) => (
   <Flex flexShrink={0} style={{ whiteSpace: 'nowrap' }} {...rest}>
     <Type fontWeight="bolder">
@@ -33,8 +34,9 @@ const Renderer = ({ hours, minutes, days, seconds, ...rest }) => (
     </Type>
   </Flex>
 )
+
 const Countdown = ({ ...rest }) => {
-  const nextDate = new Date(2019, 0, 4)
+  const nextDate = new Date(2019, 0, 4, 23, 59)
   return <Counter renderer={(props) => <Renderer {...props} {...rest} />} date={nextDate} />
 }
 
