@@ -42,7 +42,6 @@ const Countdown = ({ ...rest }) => {
     nextDate = DateTime.local(2019, month + 1, 1, 23, 59, 59).setZone('America/New_York')
   }
 
-  console.log(nextDate.isValid, 'validity')
   return <Counter now={() => currentDate} renderer={(props) => <Renderer {...props} {...rest} />} date={nextDate.ts} />
 }
 
