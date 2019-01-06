@@ -39,7 +39,8 @@ const quotes = [
     quote: `App Mining allowed me to focus on building something great rather than diving straight into fundraising.`
   },
   {
-    quote: `Allows us to focus  on what we do best, build! It’s an extra incentive to forge ahead in this new ecosystem.`,
+    quote: `Allows us to focus 
+on what we do best, build! It’s an extra incentive to forge ahead in this new ecosystem.`,
     quotee: {
       name: 'Nick Theile',
       photo: 'https://file-cpvefljisa.now.sh',
@@ -65,7 +66,7 @@ const TextSection = ({ ...rest }) => (
   <Flex lineHeight={1.6} justifyContent="space-between" flexWrap="wrap" {...rest}>
     {texts.map((text, i) => (
       <Box key={i} pt={7} width={['100%', '28%']}>
-        <Box bg="blue" height={'1px'} width={80} />
+        <Box bg="blue" height="1px" width={80} />
         <Type pt={6} color="blue.dark">
           {text}
         </Type>
@@ -81,7 +82,7 @@ const Quotes = ({ ...rest }) => (
         <Type color="blue.dark" fontWeight={300} fontSize={3} fontFamily="brand" lineHeight={1.75}>
           {quote}
         </Type>
-        <Flex pt={6} alignItems={'center'}>
+        <Flex pt={6} alignItems="center">
           <Avatar photo={quotee.photo} />
           <Type pr={1}>{quotee.name}, </Type>
           <Type>{quotee.title}</Type>
@@ -111,6 +112,7 @@ const PioneersSection = ({ apps, ...rest }) => (
               backgroundSize="cover"
               boxShadow="card"
               flexShrink={0}
+              key={app.id}
               href={`https://app.co/app/${app.Slugs[0].value}`}
             />
           ))}
@@ -124,7 +126,7 @@ const PioneersSection = ({ apps, ...rest }) => (
             fontFamily="brand"
             lineHeight={1.7}
             fontWeight={300}
-            textAlign={'center'}
+            textAlign="center"
             maxWidth={700}
           >
             Not quite ready to mine, but want the latest App Mining updates?
@@ -144,7 +146,7 @@ const PioneersSection = ({ apps, ...rest }) => (
           </OpenStarterKitModal>
         </Box>
       </Wrapper>
-      <Box position="absolute" bg={'blue.light'} height="100%" bottom={'-50%'} left={0} width={1} />
+      <Box position="absolute" bg="blue.light" height="100%" bottom="-50%" left={0} width={1} />
     </Flex>
   </Section>
 )
