@@ -3,41 +3,17 @@ import { Flex, Box, Type, OpenModal } from 'blockstack-ui'
 import { Hover } from 'react-powerplug'
 import { ArrowIcon, OutlinedLogo } from '@components/mining/svg'
 import { StarterKitModal } from '@pages/mining/starter-kit-modal'
-import Counter from 'react-countdown-now'
+
+import dynamic from 'next/dynamic'
 
 const SectionContext = React.createContext({})
 
 const OpenStarterKitModal = ({ ...rest }) => <OpenModal component={StarterKitModal} {...rest} />
 
-const TimeLabel = ({ ...rest }) => <Type pl="1px" fontWeight={500} opacity={0.7} {...rest} />
-const Renderer = ({ hours, minutes, days, seconds, ...rest }) => (
-  <Flex flexShrink={0} style={{ whiteSpace: 'nowrap' }} {...rest}>
-    <Type fontWeight="bolder">
-      {days}
-      <TimeLabel>D</TimeLabel>
-    </Type>
-    &nbsp;:&nbsp;
-    <Type fontWeight="bolder">
-      {hours}
-      <TimeLabel>H</TimeLabel>
-    </Type>
-    &nbsp;:&nbsp;
-    <Type fontWeight="bolder">
-      {minutes}
-      <TimeLabel>M</TimeLabel>
-    </Type>
-    &nbsp;:&nbsp;
-    <Type fontWeight="bolder">
-      {seconds}
-      <TimeLabel>S</TimeLabel>
-    </Type>
-  </Flex>
-)
-const Countdown = ({ ...rest }) => {
-  const nextDate = new Date(2019, 0, 4)
-  return <Counter renderer={(props) => <Renderer {...props} {...rest} />} date={nextDate} />
-}
-
+const Countdown = dynamic(() => import('../countdown'), {
+  ssr: false,
+  loading: () => <>...</>
+})
 const LearnMore = ({ label = 'Learn how to win', color = 'blue.mid', hoverColor = 'white', ...rest }) => (
   <Hover>
     {({ bind, hovered }) => (
