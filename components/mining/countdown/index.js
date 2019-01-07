@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { Flex, Type } from 'blockstack-ui'
-
 import Counter from 'react-countdown-now'
 import { DateTime } from 'luxon'
 
@@ -30,20 +29,26 @@ const Renderer = ({ hours, minutes, days, seconds, ...rest }) => (
   </Flex>
 )
 
-const Countdown = ({ ...rest }) => {
-  // set initial date of jan 4 2019
-  let nextDate = DateTime.local(2019, 1, 4, 23, 59, 59).setZone('America/New_York')
+class Countdown extends React.PureComponent {
+  getDate = () => {
+    // set initial date of jan 4 2019
+    let nextDate = DateTime.local(2019, 1, 4, 23, 59, 59).setZone('America/New_York')
 
-  const currentDate = DateTime.local().setZone('America/New_York')
-  const { day, month } = currentDate
+    const currentDate = DateTime.local().setZone('America/New_York')
+    const { day, month } = currentDate
 
-  // aside from Jan, we want to have the deadline be the end of the first day of each month.
-  if ((month === 1 && day > 4) || month > 1) {
-    nextDate = DateTime.local(2019, month + 1, 1, 23, 59, 59).setZone('America/New_York')
+    // aside from Jan, we want to have the deadline be the end of the first day of each month.
+    if ((month === 1 && day > 4) || month > 1) {
+      nextDate = DateTime.local(2019, month + 1, 1, 23, 59, 59).setZone('America/New_York')
+    }
+
+    return { nextDate }
   }
+  render() {
+    const { nextDate } = this.getDate()
 
-  return <Counter now={() => currentDate} renderer={(props) => <Renderer {...props} {...rest} />} date={nextDate.ts} />
+    return <Counter renderer={(props) => <Renderer {...props} {...this.props} />} date={nextDate.ts} />
+  }
 }
-
 
 export default Countdown
