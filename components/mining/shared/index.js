@@ -43,7 +43,7 @@ const LearnMore = ({ label = 'Learn how to win', color = 'blue.mid', hoverColor 
   </Hover>
 )
 
-const Title = ({ ...rest }) => (
+const Title = ({ style, ...rest }) => (
   <SectionContext.Consumer>
     {({ bg }) => (
       <Type
@@ -53,6 +53,10 @@ const Title = ({ ...rest }) => (
         fontWeight={300}
         maxWidth={500}
         lineHeight={1.4}
+        style={{
+          hyphens: 'auto',
+          ...style
+        }}
         {...rest}
       />
     )}
