@@ -39,7 +39,7 @@ class Countdown extends React.PureComponent {
 
     // aside from Jan, we want to have the deadline be the end of the first day of each month.
     if ((month === 1 && day > 4) || month > 1) {
-      nextDate = DateTime.local(2019, month + 1, 1, 23, 59, 59).setZone('America/New_York')
+      nextDate = DateTime.local(2019, month + 1, 1, 0, 1).setZone('America/New_York')
     }
 
     return { nextDate }
