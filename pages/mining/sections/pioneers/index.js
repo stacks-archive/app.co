@@ -84,8 +84,12 @@ const Quotes = ({ ...rest }) => (
         </Type>
         <Flex pt={6} alignItems="center">
           <Avatar photo={quotee.photo} />
-          <Type pr={1}>{quotee.name}, </Type>
-          <Type>{quotee.title}</Type>
+          <Box lineHeight={1.65}>
+            <Type display="inline" pr={1}>
+              {quotee.name},
+            </Type>{' '}
+            <Type display="inline">{quotee.title}</Type>
+          </Box>
         </Flex>
       </Box>
     ))}
