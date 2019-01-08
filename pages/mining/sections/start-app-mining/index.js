@@ -62,19 +62,21 @@ const StartAppMiningSection = ({ ...rest }) => (
         <Flex width={[1]} flexShrink={0} flexDirection="column">
           <Title maxWidth="100%">Get started with App Mining.</Title>
           <Steps mt={8} />
-          <Flex mt={8} flexDirection="column" alignItems="center" justifyContent="center">
+          <Flex lineHeight={1.65} mt={8} flexDirection="column" alignItems="center" justifyContent="center">
             <Type pt={6} pb={6}>
               Detailed registration instructions?{' '}
-              <Type is="a" href="https://docs.blockstack.org/develop/mining_intro.html" target="_blank">
+              <Type
+                display="inline"
+                is="a"
+                href="https://docs.blockstack.org/develop/mining_intro.html"
+                target="_blank"
+              >
                 App Mining Docs.
               </Type>
             </Type>
             <Type>
               Want to verify your app is completely registered? A list of{' '}
-              {/**
-               * TODO: add link here
-               */}
-              <Type is="a" href="/mining/apps">
+              <Type display="inline" is="a" href="/mining/apps">
                 all App Mining eligible apps
               </Type>
               .{' '}
