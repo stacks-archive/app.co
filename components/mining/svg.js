@@ -205,7 +205,15 @@ const DotsLine = ({ color = '#EF6F70' }) => (
 )
 
 const ImproveGraphic = ({ color = '#4410FF' }) => (
-  <svg width="181" height="130" viewBox="0 0 181 130" fill="none">
+  <svg
+    viewBox="0 0 181 130"
+    fill="none"
+    style={{
+      width: '100%',
+      maxWidth: '100%',
+      display: 'block'
+    }}
+  >
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -216,7 +224,15 @@ const ImproveGraphic = ({ color = '#4410FF' }) => (
 )
 
 const BuildGraphic = ({ color = '#4410FF' }) => (
-  <svg width="181" height="132" viewBox="0 0 181 132" fill="none">
+  <svg
+    viewBox="0 0 181 132"
+    fill="none"
+    style={{
+      width: '100%',
+      maxWidth: '100%',
+      display: 'block'
+    }}
+  >
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -226,7 +242,15 @@ const BuildGraphic = ({ color = '#4410FF' }) => (
   </svg>
 )
 const RegisterGraphic = ({ color = '#4410FF' }) => (
-  <svg width="181" height="130" viewBox="0 0 181 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    viewBox="0 0 181 130"
+    fill="none"
+    style={{
+      width: '100%',
+      maxWidth: '100%',
+      display: 'block'
+    }}
+  >
     <path
       fillRule="evenodd"
       clipRule="evenodd"

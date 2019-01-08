@@ -40,7 +40,7 @@ const Steps = ({ ...rest }) => (
   <Flex justifyContent={['center', 'center', 'space-between']} flexWrap="wrap" {...rest}>
     {sections.map(({ graphic: Graphic, button: { label, ...buttonProps }, text }, i) => (
       <Flex pt={7} alignItems="center" justifyContent="center" key={i} flexDirection="column">
-        {Graphic ? <Graphic /> : null}
+        {Graphic ? <Box width="180px"><Graphic /></Box> : null}
         <Box py={6}>
           <Button color="white !important" icon={ArrowIcon} height="auto" pt={'9px'} pb={2} {...buttonProps}>
             {label}
