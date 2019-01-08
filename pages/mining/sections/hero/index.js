@@ -34,11 +34,10 @@ const Apps = ({ apps, ...rest }) => {
 
         return (
           <Box position="relative" width={1} {...rest}>
-            {state.items.map(
-              (item, i) =>
-                i <= limit ? (
-                  <AppItem app={item} active={state.active} key={1 + i} index={i + 1} length={limit + 1} />
-                ) : null
+            {state.items.map((item, i) =>
+              i <= limit ? (
+                <AppItem app={item} active={state.active} key={1 + i} index={i + 1} length={limit + 1} />
+              ) : null
             )}
           </Box>
         )
@@ -55,13 +54,13 @@ const SubtitleBTC = ({ ...rest }) => (
       size={48}
       borderColor="blue.accent"
       border={1}
+      flexShrink="0"
       borderRadius={80}
     >
       <CurrencyUsdIcon />
     </Flex>
-    <Type fontFamily={'brand'} pl={4} lineHeight={1.55}>
-      The better your app,
-      <br />
+    <Type fontFamily="brand" pl={4} lineHeight={1.55}>
+      The better your app, <Box is="br" display={['none', 'unset', 'unset', 'unset']} />
       the more you earn.
     </Type>
   </Flex>
@@ -73,7 +72,7 @@ const Hero = ({ apps, ...rest }) => (
       <Flex width={[1, 1, 0.5, 0.6]} flexShrink={1} flexDirection="column">
         <Logo pb={7} />
         <Title fontSize={[7, 7, 7, 8]}>Every 30 days we&nbsp;payout $100k to the best apps.</Title>
-        <SubtitleBTC pt={7} />
+        <SubtitleBTC display={['none', 'flex', 'flex', 'flex']} pt={7} />
       </Flex>
       <Flex
         pl={[0, 0, 8, 0]}
@@ -85,6 +84,7 @@ const Hero = ({ apps, ...rest }) => (
         position="relative"
       >
         <CallToAction width={1} />
+        <SubtitleBTC display={['flex', 'none', 'none', 'none']} pt={7} />
         <Apps apps={apps} mt={7} />
         <LearnMore
           display={['none', 'none', 'flex']}
