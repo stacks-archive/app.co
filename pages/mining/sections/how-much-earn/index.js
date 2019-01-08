@@ -103,7 +103,7 @@ const HowMuchSection = ({ apps, ...rest }) => (
               <>
                 <Table state={state} apps={apps} />
                 {!state.all ? (
-                  <Box pt={5}>
+                  <Box pt={7}>
                     <LearnMore
                       position="static"
                       color="blue.dark"
