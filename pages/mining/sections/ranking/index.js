@@ -44,7 +44,7 @@ const Ranker = ({ logo: Logo, children, color, ...rest }) => (
     {({ hovered, bind }) => (
       <Box
         overflow="hidden"
-        ml={5}
+        ml={[0, 0, 0, 5]}
         bg="#081537"
         width={[1, 1, 1, 'auto']}
         border={1}
@@ -130,7 +130,7 @@ const RankingSection = ({ apps, ...rest }) => (
             bg="#081537"
             position="relative"
             pl={[5, 5, 5, 7]}
-            pr={6}
+            pr={5}
           >
             <Ranker
               is="a"
@@ -153,7 +153,7 @@ const RankingSection = ({ apps, ...rest }) => (
               Ranks by polling the Blockstack
               <br /> investor community.
             </Ranker>
-            <Box left={[25, 25, 25, 35]} top={0} position="absolute">
+            <Box left={35} top={0} position="absolute">
               <DotsLine />
             </Box>
           </Flex>
