@@ -98,19 +98,19 @@ const PioneersSection = ({ apps, ...rest }) => (
       <Flex width={[1]} flexShrink={0} flexDirection="column">
         <Title maxWidth="100%">We are honored to fund the pioneers of the decentralized internet</Title>
         <Type pt={8}>App Mining Pioneers: Alpha Run, September 2018</Type>
-        <Flex flexWrap="wrap" mt={5} alignItems="center" justifyContent="flex-start">
+        <Flex flexWrap="wrap" mt={7} alignItems="center" justifyContent="flex-start">
           {apps.map((app) => (
             <Box
               is="a"
               target="_blank"
-              mr={6}
-              mb={6}
-              size={[54, 72]}
+              mr={[5, 7]}
+              mb={[5, 7]}
+              size={[55, 65]}
               borderRadius={16}
               backgroundImage={`url(${app.imgixImageUrl})`}
               title={app.name}
               backgroundSize="cover"
-              boxShadow="card"
+              boxShadow="0px 4px 10px rgba(0, 0, 0, 0.15)"
               flexShrink={0}
               key={app.id}
               href={`https://app.co/app/${app.Slugs[0].value}`}
