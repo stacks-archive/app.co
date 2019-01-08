@@ -48,7 +48,7 @@ const Title = ({ ...rest }) => (
     {({ bg }) => (
       <Type
         color={bg === 'blue.dark' ? 'white' : 'blue'}
-        fontSize={[7, 7, 7, '42px']}
+        fontSize={[5, 6, 7, 7, '42px']}
         fontFamily="brand"
         fontWeight={300}
         maxWidth={500}
