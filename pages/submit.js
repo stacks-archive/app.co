@@ -46,122 +46,124 @@ const handleChange = (e) => (setState) => {
 }
 
 const FormSection = ({ fields, handleChange, errors, message, setState, ...rest }) => (
-    <>
-      {fields.map((field, i) => {
-        if (field.type === 'radio') {
-          if (!field.options || field.options.length !== 2) {
-            console.log('Radio type fields need 2 options (true/false)')
-            return null
-          }
-          return (
-            <React.Fragment key={i}>
+  <>
+    {fields.map((field, i) => {
+      if (field.type === 'radio') {
+        if (!field.options || field.options.length !== 2) {
+          console.log('Radio type fields need 2 options (true/false)')
+          return null
+        }
+        return (
+          <React.Fragment key={i}>
+            <Field.LabelAdvanced
+              pb={3}
+              label={field.label}
+              error={errors && field && errors[field.name] && errors[field.name]}
+            />
+            <Box pb={4}>
+              {field.options.map((option, i) => (
+                <Flex pb={3} alignItems="center" key={i}>
+                  <input
+                    type="radio"
+                    name={field.name}
+                    value={option.value}
+                    id={String(option.value)}
+                    onChange={(e) => handleChange(e)(setState)}
+                  />
+                  <Field.Label pb={0} pl={2} is="label" htmlFor={String(option.value)}>
+                    {option.label}
+                  </Field.Label>
+                </Flex>
+              ))}
+            </Box>
+          </React.Fragment>
+        )
+      }
+      if (field.type === 'select') {
+        return (
+          <React.Fragment key={i}>
+            <Box pb={4}>
               <Field.LabelAdvanced
                 pb={3}
+                required={field.required}
+                hint={field.hint}
+                message={field.message}
                 label={field.label}
                 error={errors && field && errors[field.name] && errors[field.name]}
               />
-              <Box pb={4}>
-                {field.options.map((option, i) => (
-                  <Flex pb={3} alignItems="center" key={i}>
-                    <input
-                      type="radio"
-                      name={field.name}
-                      value={option.value}
-                      id={String(option.value)}
-                      onChange={(e) => handleChange(e)(setState)}
-                    />
-                    <Field.Label pb={0} pl={2} is="label" htmlFor={String(option.value)}>
-                      {option.label}
-                    </Field.Label>
-                  </Flex>
-                ))}
-              </Box>
-            </React.Fragment>
-          )
-        }
-        if (field.type === 'select') {
-          return (
-            <React.Fragment key={i}>
-              <Box pb={4}>
+              <Flex pb={3} alignItems="center">
+                <Select
+                  onChange={(e) =>
+                    handleChange({
+                      target: {
+                        name: field.name,
+                        value: e ? e.value : null
+                      }
+                    })(setState)
+                  }
+                  error={errors && field && errors[field.name] && errors[field.name]}
+                  isClearable
+                  {...field}
+                />
+              </Flex>
+            </Box>
+          </React.Fragment>
+        )
+      }
+      if (field.type === 'checkbox') {
+        return (
+          <React.Fragment key={i}>
+            <Box pb={4}>
+              <Flex pb={3} alignItems="center">
+                <input
+                  type="checkbox"
+                  name={field.name}
+                  id={field.name}
+                  onChange={(e) =>
+                    console.log('checkbox', e.target.checked) ||
+                    handleChange({
+                      persist: e.persist,
+                      target: {
+                        name: e.target.name,
+                        value: e.target.checked
+                      }
+                    })(setState)
+                  }
+                />
                 <Field.LabelAdvanced
-                  pb={3}
-                  required={field.required}
-                  hint={field.hint}
-                  message={field.message}
+                  labelProps={{
+                    pb: !!(errors && field && errors[field.name] && errors[field.name]) ? 2 : 0
+                  }}
+                  pl={2}
                   label={field.label}
                   error={errors && field && errors[field.name] && errors[field.name]}
+                  htmlFor={field.name}
                 />
-                <Flex pb={3} alignItems="center">
-                  <Select
-                    onChange={(e) =>
-                      handleChange({
-                        target: {
-                          name: field.name,
-                          value: e ? e.value : null
-                        }
-                      })(setState)
-                    }
-                    error={errors && field && errors[field.name] && errors[field.name]}
-                    isClearable
-                    {...field}
-                  />
-                </Flex>
-              </Box>
-            </React.Fragment>
-          )
-        }
-        if (field.type === 'checkbox') {
-          return (
-            <React.Fragment key={i}>
-              <Box pb={4}>
-                <Flex pb={3} alignItems="center">
-                  <input
-                    type="checkbox"
-                    name={field.name}
-                    id={field.name}
-                    onChange={(e) =>
-                      console.log('checkbox', e.target.checked) ||
-                      handleChange({
-                        persist: e.persist,
-                        target: {
-                          name: e.target.name,
-                          value: e.target.checked
-                        }
-                      })(setState)
-                    }
-                  />
-                  <Field.LabelAdvanced
-                    pb={0}
-                    pl={2}
-                    label={field.label}
-                    error={errors && field && errors[field.name] && errors[field.name]}
-                    htmlFor={field.name}
-                  />
-                </Flex>
-                {field.message ? (
-                  <Field.Message maxWidth={400} lineHeight={1.5}>
-                    {field.message}
-                  </Field.Message>
-                ) : null}
-              </Box>
-            </React.Fragment>
-          )
-        }
-        return (
-          <Field
-            noValidate="novalidate"
-            onChange={(e) => handleChange(e)(setState)}
-            key={i}
-            error={errors && field && errors[field.name] && errors[field.name]}
-            {...field}
-          />
+              </Flex>
+              {field.message ? (
+                <Field.Message maxWidth={400} lineHeight={1.5}>
+                  {field.message}
+                </Field.Message>
+              ) : null}
+            </Box>
+          </React.Fragment>
         )
-      })}
-      {message ? <Box pb={4}>{message}</Box> : null}
+      }
+      return (
+        <Field
+          noValidate="novalidate"
+          onChange={(e) => handleChange(e)(setState)}
+          key={i}
+          error={errors && field && errors[field.name] && errors[field.name]}
+          {...field}
+        />
+      )
+    })}
+    {message ? <Box pb={4}>{message}</Box> : null}
 
-      <Bar />
-    </>
-  )
+    <Bar />
+  </>
+)
 
 const Submit = ({ appConstants, setState, state, errors, submit, loading, success, ...rest }) => {
   const personal = [
