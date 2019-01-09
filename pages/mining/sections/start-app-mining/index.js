@@ -40,7 +40,11 @@ const Steps = ({ ...rest }) => (
   <Flex justifyContent={['center', 'center', 'space-between']} flexWrap="wrap" {...rest}>
     {sections.map(({ graphic: Graphic, button: { label, ...buttonProps }, text }, i) => (
       <Flex pt={7} alignItems="center" justifyContent="center" key={i} flexDirection="column">
-        {Graphic ? <Box width="180px"><Graphic /></Box> : null}
+        {Graphic ? (
+          <Box width="180px">
+            <Graphic />
+          </Box>
+        ) : null}
         <Box py={6}>
           <Button color="white !important" icon={ArrowIcon} height="auto" pt={'9px'} pb={2} {...buttonProps}>
             {label}
@@ -61,8 +65,8 @@ const StartAppMiningSection = ({ ...rest }) => (
       <Wrapper>
         <Flex width={[1]} flexShrink={0} flexDirection="column">
           <Title maxWidth="100%">Get started with App Mining.</Title>
-          <Steps mt={8} />
-          <Flex lineHeight={1.65} mt={8} flexDirection="column" alignItems="center" justifyContent="center">
+          <Steps mt={[0, 8]} />
+          <Flex lineHeight={1.65} mt={[4, 8]} flexDirection="column" alignItems="center" justifyContent="center">
             <Type pt={6} pb={6}>
               Detailed registration instructions?{' '}
               <Type
