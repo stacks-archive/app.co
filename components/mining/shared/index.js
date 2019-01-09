@@ -200,7 +200,15 @@ const CallToAction = ({ hideTimer, buttonProps = {}, ...rest }) => (
             </Flex>
 
             {!hideTimer ? (
-              <Flex bg="#081537" alignItems="center" justifyContent="center" p={5}>
+              <Flex
+                bg="#081537"
+                alignItems="center"
+                justifyContent="center"
+                p={5}
+                cursor={hovered ? 'pointer' : 'unset'}
+                {...bind}
+                {...modalBind}
+              >
                 <Type
                   display="flex"
                   alignItems={['center']}
@@ -242,6 +250,3 @@ export {
   CallToAction,
   OpenStarterKitModal
 }
-
-
-
