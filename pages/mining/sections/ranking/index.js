@@ -56,7 +56,7 @@ const Ranker = ({ logo: Logo, children, color, ...rest }) => (
         mt={[4, 4, 4, 0]}
         position="relative"
         zIndex={5}
-        textAlign={['center', 'center', 'left']}
+        textAlign="left"
         transition="0.1s all ease-in-out"
         transform={hovered ? 'translateY(-6px)' : 'none'}
         boxShadow={hovered ? `${color} 0px 0px 15px` : `transparent 0px 0px 10px`}
