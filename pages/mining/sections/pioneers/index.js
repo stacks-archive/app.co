@@ -65,7 +65,7 @@ const texts = [
 const TextSection = ({ ...rest }) => (
   <Flex lineHeight={1.6} justifyContent="space-between" flexWrap="wrap" {...rest}>
     {texts.map((text, i) => (
-      <Box key={i} pt={7} width={['100%', '28%']}>
+      <Box key={i} pt={[7]} width={['100%', '28%']}>
         <Box bg="blue" height="1px" width={80} />
         <Type pt={6} color="blue.dark">
           {text}
@@ -78,7 +78,7 @@ const TextSection = ({ ...rest }) => (
 const Quotes = ({ ...rest }) => (
   <Flex width={1} justifyContent="space-between" flexWrap="wrap" {...rest}>
     {quotes.map(({ quote, quotee }, i) => (
-      <Box width={[1, 0.45]} mr={[0, 5]} pb={[8, 0]} key={i}>
+      <Box width={[1, 0.45]} mr={[0, 5]} pb={[i !== quotes.length - 1 ? 7 : 0, 0]} key={i}>
         <Type color="blue.dark" fontWeight={300} fontSize={3} fontFamily="brand" lineHeight={1.75}>
           {quote}
         </Type>
