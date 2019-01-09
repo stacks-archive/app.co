@@ -9,7 +9,7 @@ const FAQSection = ({ faq, apps, ...rest }) => (
   <Section bg="blue.light" pt={8} {...rest}>
     <Wrapper>
       <Flex width={[1]} flexShrink={0} flexDirection="column">
-        <Title maxWidth="100%" pt={8} pb={0}>
+        <Title maxWidth="100%" pt={[0, 8]} pb={0}>
           Frequently Asked Questions
         </Title>
         <Box width={1} mt={8} color="blue.dark" pl={4} borderLeft={'5px solid'} borderColor="blue.mid">
