@@ -24,22 +24,19 @@ const Header = ({ showOnMobile, link, ...rest }) => {
               <OutlinedLogo />
             </Flex>
             <Type
-              letterSpacing="0.1rem"
-              textTransform="uppercase"
-              fontWeight="bold"
               style={{ textDecoration: 'none' }}
               is={link ? 'a' : undefined}
               href={link ? '/mining' : undefined}
               color="white !important"
               pr={2}
             >
-              App Mining
+              App Mining:
             </Type>
           </Flex>
           <Type
             display="inline-flex"
             flexDirection={['column', 'column', 'column', 'row']}
-            color="blue.mid"
+            color="white"
             pl={[2, 2, 2, 0]}
             flexGrow={1}
           >
@@ -51,7 +48,7 @@ const Header = ({ showOnMobile, link, ...rest }) => {
             buttonProps={{
               py: 4,
               px: [4, 4, 4, 6],
-              fontSize: [2, 2, 2, 3]
+              fontSize: [2]
             }}
             hideTimer
           />
