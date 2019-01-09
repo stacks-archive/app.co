@@ -101,15 +101,18 @@ const PioneersSection = ({ apps, ...rest }) => (
     <Wrapper>
       <Flex width={[1]} flexShrink={0} flexDirection="column">
         <Title maxWidth="100%">We are honored to fund the pioneers of the decentralized internet</Title>
-        <Type pt={8}>App Mining Pioneers: Alpha Run, September 2018</Type>
-        <Flex flexWrap="wrap" mt={7} alignItems="center" justifyContent="flex-start">
+        <Type pt={[5, 7, 8]} lineHeight={1.65}>
+          App Mining Pioneers: Alpha Run, September 2018
+        </Type>
+        <Flex flexWrap="wrap" mt={7} alignItems="center" justifyContent={['space-evenly', 'flex-start', 'flex-start']}>
           {apps.map((app) => (
             <Box
               is="a"
               target="_blank"
-              mr={[5, 7]}
-              mb={[5, 7]}
-              size={[55, 65]}
+              mr={[0, 5, 7]}
+              mb={[6, 5, 7]}
+              mx={[3, undefined, undefined]}
+              size={[45, 55, 65]}
               borderRadius={16}
               backgroundImage={`url(${app.imgixImageUrl})`}
               title={app.name}
@@ -121,9 +124,9 @@ const PioneersSection = ({ apps, ...rest }) => (
             />
           ))}
         </Flex>
-        <Quotes pt={8} />
-        <TextSection pt={8} />
-        <Flex alignItems="center" justifyContent="center" mt={7} pt={9} pb={7}>
+        <Quotes pt={[5, 8]} />
+        <TextSection pt={[0, 8]} />
+        <Flex alignItems="center" justifyContent="center" mt={[0, 7]} pt={[8]} pb={[8, 7]}>
           <Type
             fontSize={5}
             color="blue"
