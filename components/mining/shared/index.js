@@ -64,7 +64,7 @@ const Title = ({ style, ...rest }) => (
 )
 const Wrapper = ({ ...rest }) => (
   <Flex
-    maxWidth={1280}
+    maxWidth={1180}
     px={[6, 8]}
     width={'100%'}
     mx={'auto'}
