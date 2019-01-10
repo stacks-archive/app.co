@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Box, Type, Button } from 'blockstack-ui'
-import { Title, Wrapper, Section } from '@components/mining/shared'
+import { Title, Wrapper, Section, ObservedSection } from '@components/mining/shared'
 import { BuildGraphic, ImproveGraphic, RegisterGraphic, ArrowIcon } from '@components/mining/svg'
 
 const sections = [
@@ -61,8 +61,8 @@ const Steps = ({ ...rest }) => (
 const StartAppMiningSection = ({ ...rest }) => (
   <>
     <div id="learn-more" />
-    <Section bg="white" {...rest}>
-      <Wrapper>
+    <ObservedSection bg="white" {...rest}>
+      {({inView}) => <Wrapper inView={inView} observed>
         <Flex width={[1]} flexShrink={0} flexDirection="column">
           <Title maxWidth="100%">Get started with App Mining.</Title>
           <Steps mt={[0, 8]} />
@@ -87,8 +87,8 @@ const StartAppMiningSection = ({ ...rest }) => (
             </Type>
           </Flex>
         </Flex>
-      </Wrapper>
-    </Section>
+      </Wrapper>}
+    </ObservedSection>
   </>
 )
 

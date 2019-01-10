@@ -3,6 +3,7 @@ import { Flex, Box, Type, OpenModal } from 'blockstack-ui'
 import { Hover } from 'react-powerplug'
 import { ArrowIcon, OutlinedLogo } from '@components/mining/svg'
 import { StarterKitModal } from '@pages/mining/starter-kit-modal'
+import { InView } from 'react-intersection-observer'
 
 import dynamic from 'next/dynamic'
 
@@ -62,13 +63,16 @@ const Title = ({ style, ...rest }) => (
     )}
   </SectionContext.Consumer>
 )
-const Wrapper = ({ ...rest }) => (
+const Wrapper = ({ observed, inView, ...rest }) => (
   <Flex
     maxWidth={1180}
     px={[6, 8]}
     width={'100%'}
     mx={'auto'}
     flexDirection={['column', 'column', 'row', 'row']}
+    opacity={!observed ? 1 : inView ? 1 : 0}
+    transform={!observed ? 'none' : inView ? 'none' : 'translateY(-20px)'}
+    transition="0.35s 0.15s all ease-in-out"
     {...rest}
   />
 )
@@ -86,6 +90,16 @@ const Section = ({ bg, ...rest }) => (
       {...rest}
     />
   </SectionContext.Provider>
+)
+
+const ObservedSection = ({ children, ...rest }) => (
+  <InView rootMargin="60px" threshold={0.1}>
+    {({ inView, ref }) => (
+      <div ref={ref}>
+        <Section {...rest}>{children({ inView })}</Section>
+      </div>
+    )}
+  </InView>
 )
 
 const Logo = ({ ...rest }) => (
@@ -248,5 +262,6 @@ export {
   LearnMore,
   Countdown,
   CallToAction,
+  ObservedSection,
   OpenStarterKitModal
 }

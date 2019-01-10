@@ -1,7 +1,17 @@
 import React from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
 import { CurrencyUsdIcon } from 'mdi-react'
-import { Title, Wrapper, Section, Logo, AppItem, LearnMore, CallToAction } from '@components/mining/shared'
+import {
+  Title,
+  Wrapper,
+  Section,
+  Logo,
+  AppItem,
+  ObservedSection,
+  LearnMore,
+  CallToAction,
+  SectionContext
+} from '@components/mining/shared'
 import { State } from 'react-powerplug'
 
 function arrayRotateOne(arr, reverse) {
@@ -67,37 +77,39 @@ const SubtitleBTC = ({ ...rest }) => (
 )
 
 const Hero = ({ apps, ...rest }) => (
-  <Section pb={[9, 8, '12vh']} overflow="hidden" bg="blue.dark" {...rest}>
-    <Wrapper>
-      <Flex width={[1, 1, 0.5, 0.6]} flexShrink={1} flexDirection="column">
-        <Logo pb={7} />
-        <Title fontSize={[7, 7, 7, 8]}>Every 30 days we&nbsp;payout $100k to the best apps.</Title>
-        <SubtitleBTC display={['none', 'flex', 'flex', 'flex']} pt={7} />
-      </Flex>
-      <Flex
-        pl={[0, 0, 8, 0]}
-        alignItems="center"
-        justifyContent="center"
-        pt={[7, 7, 0, 0]}
-        flexGrow={1}
-        flexDirection="column"
-        position="relative"
-      >
-        <CallToAction width={1} />
-        <SubtitleBTC display={['flex', 'none', 'none', 'none']} pt={7} />
-        <Apps apps={apps} mt={7} />
-        <LearnMore
-          display={['none', 'none', 'flex']}
-          position={['absolute']}
-          pt={8}
-          pb={8}
-          bottom={['-180px', '-180px']}
-          is="a"
-          href="#learn-more"
-        />
-      </Flex>
-    </Wrapper>
-  </Section>
+  <ObservedSection pb={[9, 8, '12vh']} overflow="hidden" bg="blue.dark" {...rest}>
+    {({ inView }) => (
+      <Wrapper inView={inView} observed>
+        <Flex width={[1, 1, 0.5, 0.6]} flexShrink={1} flexDirection="column">
+          <Logo pb={7} />
+          <Title fontSize={[7, 7, 7, 8]}>Every 30 days we&nbsp;payout $100k to the best apps.</Title>
+          <SubtitleBTC display={['none', 'flex', 'flex', 'flex']} pt={7} />
+        </Flex>
+        <Flex
+          pl={[0, 0, 8, 0]}
+          alignItems="center"
+          justifyContent="center"
+          pt={[7, 7, 0, 0]}
+          flexGrow={1}
+          flexDirection="column"
+          position="relative"
+        >
+          <CallToAction width={1} />
+          <SubtitleBTC display={['flex', 'none', 'none', 'none']} pt={7} />
+          <Apps apps={apps} mt={7} />
+          <LearnMore
+            display={['none', 'none', 'flex']}
+            position={['absolute']}
+            pt={8}
+            pb={8}
+            bottom={['-180px', '-180px']}
+            is="a"
+            href="#learn-more"
+          />
+        </Flex>
+      </Wrapper>
+    )}
+  </ObservedSection>
 )
 
 export { Hero }

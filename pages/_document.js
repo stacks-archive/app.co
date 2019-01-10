@@ -35,6 +35,7 @@ export default class MyDocument extends Document {
           <link rel="shortcut icon" href="/static/images/favicon/favicon-96x96.png" />
           <meta name="viewport" content="width=device-width,initial-scale=1" />
           <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119163063-1" />
+          <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver" />
           <script
             src="https://my.hellobar.com/cefe56c097b8691a6036dcfe8feea1fd6c5c736b.js"
             type="text/javascript"

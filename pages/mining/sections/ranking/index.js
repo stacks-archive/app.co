@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
-import { Title, Wrapper, Section } from '@components/mining/shared'
+import { Title, Wrapper, Section, ObservedSection } from '@components/mining/shared'
 import { Dots, DotsLine, DemoEarthLogo, ProductHuntLogo, CameraIcon } from '@components/mining/svg'
 import { Hover } from 'react-powerplug'
 const texts = [
@@ -78,8 +78,8 @@ const Ranker = ({ logo: Logo, children, color, ...rest }) => (
 )
 
 const RankingSection = ({ apps, ...rest }) => (
-  <Section bg="blue.dark" {...rest}>
-    <Wrapper flexDirection="column">
+  <ObservedSection bg="blue.dark" {...rest}>
+    {({inView}) => <Wrapper inView={inView} observed flexDirection="column">
       <Flex width={1} flexShrink={1} flexDirection="column">
         <Title maxWidth={'100%'}>Apps are ranked by expert reviewers</Title>
         <Type pt={6} fontSize={3} color="white">
@@ -160,8 +160,8 @@ const RankingSection = ({ apps, ...rest }) => (
         </Box>
         <TextSection />
       </Flex>
-    </Wrapper>
-  </Section>
+    </Wrapper>}
+  </ObservedSection>
 )
 
 export { RankingSection }

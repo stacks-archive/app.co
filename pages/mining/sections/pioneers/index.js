@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Box, Type, Button } from 'blockstack-ui'
-import { Title, Wrapper, Section, OpenStarterKitModal } from '@components/mining/shared'
+import { Title, Wrapper, ObservedSection as Section, OpenStarterKitModal } from '@components/mining/shared'
 
 import { ArrowIcon } from '@components/mining/svg'
 
@@ -98,63 +98,72 @@ const Quotes = ({ ...rest }) => (
 
 const PioneersSection = ({ apps, ...rest }) => (
   <Section style={{ willChange: 'transform' }} flexDirection="column" pb={0} bg="white" {...rest}>
-    <Wrapper>
-      <Flex width={[1]} flexShrink={0} flexDirection="column">
-        <Title maxWidth="100%">We are honored to fund the pioneers of the decentralized internet</Title>
-        <Type pt={[5, 7, 8]} lineHeight={1.65}>
-          App Mining Pioneers: Alpha Run, September 2018
-        </Type>
-        <Flex flexWrap="wrap" mt={7} alignItems="center" justifyContent={['space-evenly', 'flex-start', 'flex-start']}>
-          {apps.map((app) => (
-            <Box
-              is="a"
-              target="_blank"
-              mr={[0, 5, 7]}
-              mb={[6, 5, 7]}
-              mx={[3, undefined, undefined]}
-              size={[45, 55, 65]}
-              borderRadius={16}
-              backgroundImage={`url(${app.imgixImageUrl})`}
-              title={app.name}
-              backgroundSize="cover"
-              boxShadow="0px 4px 10px rgba(0, 0, 0, 0.15)"
-              flexShrink={0}
-              key={app.id}
-              href={`https://app.co/app/${app.Slugs[0].value}`}
-            />
-          ))}
+    {({ inView }) => (
+      <>
+        <Wrapper inView={inView} observed>
+          <Flex width={[1]} flexShrink={0} flexDirection="column">
+            <Title maxWidth="100%">We are honored to fund the pioneers of the decentralized internet</Title>
+            <Type pt={[5, 7, 8]} lineHeight={1.65}>
+              App Mining Pioneers: Alpha Run, September 2018
+            </Type>
+            <Flex
+              flexWrap="wrap"
+              mt={7}
+              alignItems="center"
+              justifyContent={['space-evenly', 'flex-start', 'flex-start']}
+            >
+              {apps.map((app) => (
+                <Box
+                  is="a"
+                  target="_blank"
+                  mr={[0, 5, 7]}
+                  mb={[6, 5, 7]}
+                  mx={[3, undefined, undefined]}
+                  size={[45, 55, 65]}
+                  borderRadius={16}
+                  backgroundImage={`url(${app.imgixImageUrl})`}
+                  title={app.name}
+                  backgroundSize="cover"
+                  boxShadow="0px 4px 10px rgba(0, 0, 0, 0.15)"
+                  flexShrink={0}
+                  key={app.id}
+                  href={`https://app.co/app/${app.Slugs[0].value}`}
+                />
+              ))}
+            </Flex>
+            <Quotes pt={[5, 8]} />
+            <TextSection pt={[0, 8]} />
+            <Flex alignItems="center" justifyContent="center" mt={[0, 7]} pt={[8]} pb={[8, 7]}>
+              <Type
+                fontSize={5}
+                color="blue"
+                fontFamily="brand"
+                lineHeight={1.7}
+                fontWeight={300}
+                textAlign="center"
+                maxWidth={700}
+              >
+                Not quite ready to mine, but want the latest App Mining updates?
+              </Type>
+            </Flex>
+          </Flex>
+        </Wrapper>
+        <Flex width={1} position="relative">
+          <Wrapper alignItems="center" justifyContent="center" position="relative" zIndex={2}>
+            <Box max="auto" width={1} maxWidth={500}>
+              <OpenStarterKitModal>
+                {({ bind }) => (
+                  <Button height="auto" pt="16px" pb="15px" icon={ArrowIcon} width={1} {...bind}>
+                    Subscribe for Updates
+                  </Button>
+                )}
+              </OpenStarterKitModal>
+            </Box>
+          </Wrapper>
+          <Box position="absolute" bg="blue.light" height="100%" bottom="-50%" left={0} width={1} />
         </Flex>
-        <Quotes pt={[5, 8]} />
-        <TextSection pt={[0, 8]} />
-        <Flex alignItems="center" justifyContent="center" mt={[0, 7]} pt={[8]} pb={[8, 7]}>
-          <Type
-            fontSize={5}
-            color="blue"
-            fontFamily="brand"
-            lineHeight={1.7}
-            fontWeight={300}
-            textAlign="center"
-            maxWidth={700}
-          >
-            Not quite ready to mine, but want the latest App Mining updates?
-          </Type>
-        </Flex>
-      </Flex>
-    </Wrapper>
-    <Flex width={1} position="relative">
-      <Wrapper alignItems="center" justifyContent="center" position="relative" zIndex={2}>
-        <Box max="auto" width={1} maxWidth={500}>
-          <OpenStarterKitModal>
-            {({ bind }) => (
-              <Button height="auto" pt="16px" pb="15px" icon={ArrowIcon} width={1} {...bind}>
-                Subscribe for Updates
-              </Button>
-            )}
-          </OpenStarterKitModal>
-        </Box>
-      </Wrapper>
-      <Box position="absolute" bg="blue.light" height="100%" bottom="-50%" left={0} width={1} />
-    </Flex>
+      </>
+    )}
   </Section>
 )
 
