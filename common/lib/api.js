@@ -21,7 +21,7 @@ const processApps = (appsData) => {
     counts[category] = 0
   })
   appsData.apps.forEach((app) => {
-    if (app.categoryId === 14) { // blockstack sample apps
+    if (app.categoryID === 14) { // blockstack sample apps
       return true
     }
     const appPlatforms = _.uniq([

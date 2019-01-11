@@ -121,11 +121,11 @@ const actions = {
   fetchAppMiningApps
 }
 
-export const selectAppsForPlatform = (apps, platform) =>
+export const selectAppsForPlatform = (apps, platform) => 
   apps.filter((app) => {
     const tags = getTags(app)
-    if (platform === 'blockstack') {
-      return app.authentication === 'Blockstack' || app.storageNetwork === 'Gaia'
+    if (platform.toLowerCase() === 'blockstack') {
+      return (app.authentication === 'Blockstack' || app.storageNetwork === 'Gaia') && app.categoryID !== 14
     }
     return !!tags.find((tag) => tag.toLowerCase() === platform.toLowerCase())
   })
@@ -160,6 +160,7 @@ const makeReducer = (data) => {
   const reducer = (state = initialState, action) => {
     switch (action.type) {
       case constants.SELECT_PLATFORM: {
+        console.log(action.type)
         const { platform } = action
         const filteredApps = selectAppsForPlatform(state.apps, platform)
         const allPlatforms = selectAllPlatforms(state)
