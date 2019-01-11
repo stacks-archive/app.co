@@ -444,7 +444,7 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
             />
           ))}
           {errors ? <ErrorMessage /> : null}
-          <Button>{loading ? 'Loading...' : 'Submit'}</Button>
+          <Button>{loading ? 'Loading...' : 'Done'}</Button>
         </form>
       </Flex>
     </Box>
