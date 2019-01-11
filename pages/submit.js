@@ -132,12 +132,12 @@ const FormSection = ({ fields, handleChange, errors, message, setState, ...rest 
                 />
                 <Field.LabelAdvanced
                   labelProps={{
-                    pb: !!(errors && field && errors[field.name] && errors[field.name]) ? 2 : 0
+                    pb: !!(errors && field && errors[field.name] && errors[field.name]) ? 2 : 0,
+                    htmlFor: field.name
                   }}
                   pl={2}
                   label={field.label}
                   error={errors && field && errors[field.name] && errors[field.name]}
-                  htmlFor={field.name}
                 />
               </Flex>
               {field.message ? (
