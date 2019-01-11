@@ -116,11 +116,11 @@ const PioneersSection = ({ apps, ...rest }) => (
                 <Box
                   is="a"
                   target="_blank"
-                  mr={[0, 5, 7]}
-                  mb={[6, 5, 7]}
+                  mr={[0, 5, 6]}
+                  mb={[6, 5, 6]}
                   mx={[3, undefined, undefined]}
-                  size={[45, 55, 65]}
-                  borderRadius={16}
+                  size={[35, 45, 55, 65]}
+                  borderRadius={[6, 12, 18]}
                   backgroundImage={`url(${app.imgixImageUrl})`}
                   title={app.name}
                   backgroundSize="cover"

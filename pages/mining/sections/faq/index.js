@@ -6,11 +6,18 @@ import { LinkVariantIcon as LinkIcon } from 'mdi-react'
 import { Hover } from 'react-powerplug'
 
 const FAQSection = ({ faq, apps, ...rest }) => (
-  <Section bg="blue.light" pt={8} {...rest}>
+  <Section
+    bg="blue.light"
+    pt={8}
+    inViewProps={{
+      threshold: 0
+    }}
+    {...rest}
+  >
     {({ inView }) => (
-      <Wrapper inView={inView} observed>
+      <Wrapper maxWidth={820} inView={inView} observed>
         <Flex width={[1]} flexShrink={0} flexDirection="column">
-          <Title maxWidth="100%" pt={[0, 8]} pb={0}>
+          <Title textAlign="center" maxWidth="80%" mx="auto" pt={[0, 8]} pb={0}>
             Frequently Asked Questions
           </Title>
           <Box width={1} mt={8} color="blue.dark" pl={4} borderLeft={'5px solid'} borderColor="blue.mid">

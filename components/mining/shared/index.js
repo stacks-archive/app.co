@@ -92,8 +92,8 @@ const Section = ({ bg, ...rest }) => (
   </SectionContext.Provider>
 )
 
-const ObservedSection = ({ children, ...rest }) => (
-  <InView rootMargin="60px" threshold={0.1}>
+const ObservedSection = ({ children, inViewProps = {}, ...rest }) => (
+  <InView rootMargin="60px" threshold={0.1} {...inViewProps}>
     {({ inView, ref }) => (
       <div ref={ref}>
         <Section {...rest}>{children({ inView })}</Section>

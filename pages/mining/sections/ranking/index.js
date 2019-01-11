@@ -3,14 +3,32 @@ import { Flex, Box, Type } from 'blockstack-ui'
 import { Title, Wrapper, Section, ObservedSection } from '@components/mining/shared'
 import { Dots, DotsLine, DemoEarthLogo, ProductHuntLogo, CameraIcon, TryMyUILogo } from '@components/mining/svg'
 import { Hover } from 'react-powerplug'
+import { Keyframes, animated, config } from 'react-spring'
+
 const texts = [
   'Any app with Blockstack auth or storage can register for App Mining.',
   'Expert reviewers use their proprietary data to evaluate apps.',
   'Reviewers, criteria, and rankings are made public each month.'
 ]
+const Content = Keyframes.Spring(async (next) => {
+  // None of this will cause React to render, the component renders only once :-)
+  while (true) {
+    await next({
+      from: { transform: 'translateX(-5%)' },
+      to: { transform: 'translateX(-30%)' },
+      reset: true,
+      config: {
+        duration: 5000,
+        tension: 0,
+        friction: 0,
+        precision: 1
+      }
+    })
+  }
+})
 
-const DotsAnimation = ({ color, hovered }) => (
-  <Flex position="absolute" bottom="-3px" left={0}>
+const DotsAnimation = ({ position = 0, color }) => (
+  <Flex is={animated.div} position="absolute" bottom="-3px" style={{ transform: `translateX(${position}%)` }}>
     <Box>
       <Dots color={color} />
     </Box>
@@ -39,7 +57,7 @@ const TextSection = ({ ...rest }) => (
   </Flex>
 )
 
-const Ranker = ({ logo: Logo, children, color, ...rest }) => (
+const Ranker = ({ position, logo: Logo, children, color, ...rest }) => (
   <Hover>
     {({ hovered, bind }) => (
       <Box
@@ -72,7 +90,7 @@ const Ranker = ({ logo: Logo, children, color, ...rest }) => (
         <Type pb={2} color={color}>
           {children}
         </Type>
-        <DotsAnimation hovered={hovered} color={color} />
+        <DotsAnimation position={position} hovered={hovered} color={color} />
       </Box>
     )}
   </Hover>
@@ -141,6 +159,7 @@ const RankingSection = ({ apps, ...rest }) => (
                 logo={ProductHuntLogo}
                 mt={0}
                 color="#da552f"
+                position={-70}
               >
                 Ranks with Product Hunt
                 <br /> community upvotes and activity.
@@ -151,6 +170,7 @@ const RankingSection = ({ apps, ...rest }) => (
                 target="_blank"
                 logo={DemoEarthLogo}
                 color="#00c091"
+                position={-12}
               >
                 Ranks by polling the Blockstack
                 <br /> investor community.
@@ -161,6 +181,7 @@ const RankingSection = ({ apps, ...rest }) => (
                 target="_blank"
                 logo={TryMyUILogo}
                 color="#92c856"
+                position={-5}
               >
                 Ranks by user testing
                 <br /> and usability metrics.
