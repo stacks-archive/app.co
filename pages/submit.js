@@ -168,7 +168,7 @@ const FormSection = ({ fields, handleChange, errors, message, setState, ...rest 
 const Submit = ({ appConstants, setState, state, errors, submit, loading, success, ...rest }) => {
   const personal = [
     {
-      name: 'userBuilt',
+      name: 'isSubmittingOwnApp',
       required: true,
       type: 'radio',
       label: 'Did you build this app?',
@@ -186,7 +186,7 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
       validation: boolean().required('Required.')
     },
     {
-      name: 'name',
+      name: 'submitterName',
       required: true,
       label: 'Your Name',
       placeholder: 'Satoshi Nakamoto',
@@ -203,7 +203,7 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
         .required('Your email is required.')
     },
     {
-      name: 'source',
+      name: 'referralSource',
       required: false,
       label: 'How did you learn about App.co or App Mining?',
       placeholder: 'Hacker News'
@@ -211,7 +211,7 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
   ]
   const appDetails = [
     {
-      name: 'appName',
+      name: 'name',
       required: true,
       label: 'App Name',
       placeholder: 'Satoshi Chat',
