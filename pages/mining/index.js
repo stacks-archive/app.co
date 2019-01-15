@@ -59,7 +59,8 @@ class AppMiningPage extends React.Component {
         <MiningPage>
           <Head
             title="App Mining"
-            description="Earn BTC for apps you build with Blockstack. We are funding decentralized app teams simply for being pioneers in the space."
+            description="Earn cash for apps you build with Blockstack. We are funding decentralized app teams simply for being pioneers in the space."
+            ogImage="https://file-ahacqdtjqm.now.sh"
           />
           <Header />
 

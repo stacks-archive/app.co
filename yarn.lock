@@ -2964,10 +2964,10 @@ bl@^1.0.0:
     readable-stream "^2.3.5"
     safe-buffer "^5.1.1"
 
-blockstack-ui@^0.0.69:
-  version "0.0.69"
-  resolved "https://registry.yarnpkg.com/blockstack-ui/-/blockstack-ui-0.0.69.tgz#1c6af4b4f9b1d091784244c8c10f6b20697db483"
-  integrity sha512-S3FaYPa2CyhaO8ZciVtoZdrJVvNV9hh03ms6fuYmwyzW57ri1JLLvhayXwlkeJWx4GjOSvvlBO/oykoPfRWHeA==
+blockstack-ui@^0.0.71:
+  version "0.0.71"
+  resolved "https://registry.yarnpkg.com/blockstack-ui/-/blockstack-ui-0.0.71.tgz#29920e57fbb270a85cd8afdebbf628a6b468cedf"
+  integrity sha512-IPxlf++89g0O0bGyNDNf4afWAqefvNzOOJFcy5teFt3J+TWoBcy1Di17VYT+NzPzX4pn2t85UwmQBz8Ny8rieA==
   dependencies:
     epitath "^1.0.0-beta.1"
     html-tags "^2.0.0"
