@@ -58,6 +58,7 @@ const FormSection = ({ fields, handleChange, errors, message, setState, ...rest 
             <Field.LabelAdvanced
               pb={3}
               label={field.label}
+              required={field.required}
               error={errors && field && errors[field.name] && errors[field.name]}
             />
             <Box pb={4}>
@@ -136,6 +137,7 @@ const FormSection = ({ fields, handleChange, errors, message, setState, ...rest 
                     htmlFor: field.name
                   }}
                   pl={2}
+                  required={field.required}
                   label={field.label}
                   error={errors && field && errors[field.name] && errors[field.name]}
                 />
@@ -383,11 +385,8 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
               errorCount += 1
             } else if (field.validation) {
               try {
-                console.log('trying: ', field.name, value)
                 await field.validation.validate(value)
-                console.log(field.name, 'is valid')
               } catch (e) {
-                console.log('catch', errorsObj)
                 errorsObj = {
                   ...errorsObj,
                   [field.name]: e.errors[0]
@@ -463,6 +462,19 @@ class SubmitDapp extends React.Component {
     const { apiServer } = this.props
     const url = `${apiServer}/api/submit`
     this.setState({ loading: true })
+
+    /**
+     * Clean twitter handle of @ sign
+     */
+    let twitterHandle = this.state.values && this.state.values.twitterHandle
+    if (twitterHandle && twitterHandle.includes('@')) {
+      twitterHandle = twitterHandle.replace('@', '')
+    }
+    const values = {
+      ...this.state.values,
+      twitterHandle
+    }
+
     try {
       await fetch(url, {
         method: 'POST',
@@ -470,7 +482,7 @@ class SubmitDapp extends React.Component {
           Accept: 'application/json, text/plain, */*',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(this.state.values)
+        body: JSON.stringify(values)
       })
       this.setState({ success: true, loading: false })
     } catch (e) {
