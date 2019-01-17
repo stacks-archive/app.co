@@ -8,10 +8,6 @@ const API = 'https://app-co-api.herokuapp.com/api/blockstack-subscribe'
 export const NewsletterContext = React.createContext()
 
 class NewsletterWrapper extends React.PureComponent {
-  constructor(props) {
-    super(props)
-  }
-
   state = {
     loading: false,
     success: false,
@@ -21,7 +17,10 @@ class NewsletterWrapper extends React.PureComponent {
     error: null
   }
 
-  schema = string().email('Invalid email.')
+  schema = string()
+    .email('Invalid email.')
+    .nullable()
+    .required('Please enter an email.')
 
   submit = async (value) =>
     fetch(API, {
@@ -38,7 +37,6 @@ class NewsletterWrapper extends React.PureComponent {
 
   handleChange = debounce(async (value) => {
     this.setState({ value })
-    await this.validate(value)
   }, 200)
 
   onChange = ({ target }) => this.handleChange(target.value)
@@ -86,15 +84,13 @@ class NewsletterWrapper extends React.PureComponent {
     if (e && e.preventDefault) {
       e.preventDefault() // to prevent page reload when user submits via hitting return
     }
-    if (!this.state.isValid) {
-      console.debug('not valid!')
-      return null
-    }
 
-    this.loading()
+    await this.validate(this.state.value)
 
     if (this.state.isValid && this.state.value) {
       try {
+        this.loading()
+
         const res = await this.submit(this.state.value)
         const data = await res.json()
 

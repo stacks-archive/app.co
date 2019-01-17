@@ -46,127 +46,131 @@ const handleChange = (e) => (setState) => {
 }
 
 const FormSection = ({ fields, handleChange, errors, message, setState, ...rest }) => (
-    <>
-      {fields.map((field, i) => {
-        if (field.type === 'radio') {
-          if (!field.options || field.options.length !== 2) {
-            console.log('Radio type fields need 2 options (true/false)')
-            return null
-          }
-          return (
-            <React.Fragment key={i}>
+  <>
+    {fields.map((field, i) => {
+      if (field.type === 'radio') {
+        if (!field.options || field.options.length !== 2) {
+          console.log('Radio type fields need 2 options (true/false)')
+          return null
+        }
+        return (
+          <React.Fragment key={i}>
+            <Field.LabelAdvanced
+              pb={3}
+              label={field.label}
+              required={field.required}
+              error={errors && field && errors[field.name] && errors[field.name]}
+            />
+            <Box pb={4}>
+              {field.options.map((option, i) => (
+                <Flex pb={3} alignItems="center" key={i}>
+                  <input
+                    type="radio"
+                    name={field.name}
+                    value={option.value}
+                    id={String(option.value)}
+                    onChange={(e) => handleChange(e)(setState)}
+                  />
+                  <Field.Label pb={0} pl={2} is="label" htmlFor={String(option.value)}>
+                    {option.label}
+                  </Field.Label>
+                </Flex>
+              ))}
+            </Box>
+          </React.Fragment>
+        )
+      }
+      if (field.type === 'select') {
+        return (
+          <React.Fragment key={i}>
+            <Box pb={4}>
               <Field.LabelAdvanced
                 pb={3}
+                required={field.required}
+                hint={field.hint}
+                message={field.message}
                 label={field.label}
                 error={errors && field && errors[field.name] && errors[field.name]}
               />
-              <Box pb={4}>
-                {field.options.map((option, i) => (
-                  <Flex pb={3} alignItems="center" key={i}>
-                    <input
-                      type="radio"
-                      name={field.name}
-                      value={option.value}
-                      id={String(option.value)}
-                      onChange={(e) => handleChange(e)(setState)}
-                    />
-                    <Field.Label pb={0} pl={2} is="label" htmlFor={String(option.value)}>
-                      {option.label}
-                    </Field.Label>
-                  </Flex>
-                ))}
-              </Box>
-            </React.Fragment>
-          )
-        }
-        if (field.type === 'select') {
-          return (
-            <React.Fragment key={i}>
-              <Box pb={4}>
+              <Flex pb={3} alignItems="center">
+                <Select
+                  onChange={(e) =>
+                    handleChange({
+                      target: {
+                        name: field.name,
+                        value: e ? e.value : null
+                      }
+                    })(setState)
+                  }
+                  error={errors && field && errors[field.name] && errors[field.name]}
+                  isClearable
+                  {...field}
+                />
+              </Flex>
+            </Box>
+          </React.Fragment>
+        )
+      }
+      if (field.type === 'checkbox') {
+        return (
+          <React.Fragment key={i}>
+            <Box pb={4}>
+              <Flex pb={3} alignItems="center">
+                <input
+                  type="checkbox"
+                  name={field.name}
+                  id={field.name}
+                  onChange={(e) =>
+                    console.log('checkbox', e.target.checked) ||
+                    handleChange({
+                      persist: e.persist,
+                      target: {
+                        name: e.target.name,
+                        value: e.target.checked
+                      }
+                    })(setState)
+                  }
+                />
                 <Field.LabelAdvanced
-                  pb={3}
+                  labelProps={{
+                    pb: !!(errors && field && errors[field.name] && errors[field.name]) ? 2 : 0,
+                    htmlFor: field.name
+                  }}
+                  pl={2}
                   required={field.required}
-                  hint={field.hint}
-                  message={field.message}
                   label={field.label}
                   error={errors && field && errors[field.name] && errors[field.name]}
                 />
-                <Flex pb={3} alignItems="center">
-                  <Select
-                    onChange={(e) =>
-                      handleChange({
-                        target: {
-                          name: field.name,
-                          value: e ? e.value : null
-                        }
-                      })(setState)
-                    }
-                    error={errors && field && errors[field.name] && errors[field.name]}
-                    isClearable
-                    {...field}
-                  />
-                </Flex>
-              </Box>
-            </React.Fragment>
-          )
-        }
-        if (field.type === 'checkbox') {
-          return (
-            <React.Fragment key={i}>
-              <Box pb={4}>
-                <Flex pb={3} alignItems="center">
-                  <input
-                    type="checkbox"
-                    name={field.name}
-                    id={field.name}
-                    onChange={(e) =>
-                      console.log('checkbox', e.target.checked) ||
-                      handleChange({
-                        persist: e.persist,
-                        target: {
-                          name: e.target.name,
-                          value: e.target.checked
-                        }
-                      })(setState)
-                    }
-                  />
-                  <Field.LabelAdvanced
-                    pb={0}
-                    pl={2}
-                    label={field.label}
-                    error={errors && field && errors[field.name] && errors[field.name]}
-                    htmlFor={field.name}
-                  />
-                </Flex>
-                {field.message ? (
-                  <Field.Message maxWidth={400} lineHeight={1.5}>
-                    {field.message}
-                  </Field.Message>
-                ) : null}
-              </Box>
-            </React.Fragment>
-          )
-        }
-        return (
-          <Field
-            noValidate="novalidate"
-            onChange={(e) => handleChange(e)(setState)}
-            key={i}
-            error={errors && field && errors[field.name] && errors[field.name]}
-            {...field}
-          />
+              </Flex>
+              {field.message ? (
+                <Field.Message maxWidth={400} lineHeight={1.5}>
+                  {field.message}
+                </Field.Message>
+              ) : null}
+            </Box>
+          </React.Fragment>
         )
-      })}
-      {message ? <Box pb={4}>{message}</Box> : null}
+      }
+      return (
+        <Field
+          noValidate="novalidate"
+          onChange={(e) => handleChange(e)(setState)}
+          key={i}
+          error={errors && field && errors[field.name] && errors[field.name]}
+          {...field}
+        />
+      )
+    })}
+    {message ? <Box pb={4}>{message}</Box> : null}
 
-      <Bar />
-    </>
-  )
+    <Bar />
+  </>
+)
 
 const Submit = ({ appConstants, setState, state, errors, submit, loading, success, ...rest }) => {
   const personal = [
     {
-      name: 'userBuilt',
+      name: 'isSubmittingOwnApp',
       required: true,
       type: 'radio',
       label: 'Did you build this app?',
@@ -184,7 +188,7 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
       validation: boolean().required('Required.')
     },
     {
-      name: 'name',
+      name: 'submitterName',
       required: true,
       label: 'Your Name',
       placeholder: 'Satoshi Nakamoto',
@@ -201,7 +205,7 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
         .required('Your email is required.')
     },
     {
-      name: 'source',
+      name: 'referralSource',
       required: false,
       label: 'How did you learn about App.co or App Mining?',
       placeholder: 'Hacker News'
@@ -209,7 +213,7 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
   ]
   const appDetails = [
     {
-      name: 'appName',
+      name: 'name',
       required: true,
       label: 'App Name',
       placeholder: 'Satoshi Chat',
@@ -262,7 +266,10 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
     }
   ]
 
-  const generateOptions = (enums) => Object.keys(enums).map((opt) => ({ label: opt, value: opt }))
+  const generateOptions = (enums) =>
+    Object.keys(enums)
+      .sort((a, b) => (a.toLowerCase() !== b.toLowerCase() ? (a.toLowerCase() < b.toLowerCase() ? -1 : 1) : 0))
+      .map((opt) => ({ label: opt, value: opt }))
 
   const categoryOptions = {
     category: generateOptions(appConstants.categoryEnums),
@@ -381,11 +388,8 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
               errorCount += 1
             } else if (field.validation) {
               try {
-                console.log('trying: ', field.name, value)
                 await field.validation.validate(value)
-                console.log(field.name, 'is valid')
               } catch (e) {
-                console.log('catch', errorsObj)
                 errorsObj = {
                   ...errorsObj,
                   [field.name]: e.errors[0]
@@ -442,7 +446,7 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
             />
           ))}
           {errors ? <ErrorMessage /> : null}
-          <Button>{loading ? 'Loading...' : 'Submit'}</Button>
+          <Button>{loading ? 'Loading...' : 'Submit App'}</Button>
         </form>
       </Flex>
     </Box>
@@ -461,6 +465,19 @@ class SubmitDapp extends React.Component {
     const { apiServer } = this.props
     const url = `${apiServer}/api/submit`
     this.setState({ loading: true })
+
+    /**
+     * Clean twitter handle of @ sign
+     */
+    let twitterHandle = this.state.values && this.state.values.twitterHandle
+    if (twitterHandle && twitterHandle.includes('@')) {
+      twitterHandle = twitterHandle.replace('@', '')
+    }
+    const values = {
+      ...this.state.values,
+      twitterHandle
+    }
+
     try {
       await fetch(url, {
         method: 'POST',
@@ -468,7 +485,7 @@ class SubmitDapp extends React.Component {
           Accept: 'application/json, text/plain, */*',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(this.state.values)
+        body: JSON.stringify(values)
       })
       this.setState({ success: true, loading: false })
     } catch (e) {

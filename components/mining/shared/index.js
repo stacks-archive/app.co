@@ -3,6 +3,7 @@ import { Flex, Box, Type, OpenModal } from 'blockstack-ui'
 import { Hover } from 'react-powerplug'
 import { ArrowIcon, OutlinedLogo } from '@components/mining/svg'
 import { StarterKitModal } from '@pages/mining/starter-kit-modal'
+import { InView } from 'react-intersection-observer'
 
 import dynamic from 'next/dynamic'
 
@@ -43,28 +44,35 @@ const LearnMore = ({ label = 'Learn how to win', color = 'blue.mid', hoverColor 
   </Hover>
 )
 
-const Title = ({ ...rest }) => (
+const Title = ({ style, ...rest }) => (
   <SectionContext.Consumer>
     {({ bg }) => (
       <Type
         color={bg === 'blue.dark' ? 'white' : 'blue'}
-        fontSize={[7, 7, 7, '42px']}
+        fontSize={[5, 6, 7, 7, '42px']}
         fontFamily="brand"
         fontWeight={300}
         maxWidth={500}
         lineHeight={1.4}
+        style={{
+          hyphens: 'auto',
+          ...style
+        }}
         {...rest}
       />
     )}
   </SectionContext.Consumer>
 )
-const Wrapper = ({ ...rest }) => (
+const Wrapper = ({ observed, inView, ...rest }) => (
   <Flex
-    maxWidth={1280}
+    maxWidth={1180}
     px={[6, 8]}
     width={'100%'}
     mx={'auto'}
     flexDirection={['column', 'column', 'row', 'row']}
+    opacity={!observed ? 1 : inView ? 1 : 0}
+    transform={!observed ? 'none' : inView ? 'none' : 'translateY(-20px)'}
+    transition="0.35s 0.15s all ease-in-out"
     {...rest}
   />
 )
@@ -82,6 +90,16 @@ const Section = ({ bg, ...rest }) => (
       {...rest}
     />
   </SectionContext.Provider>
+)
+
+const ObservedSection = ({ children, inViewProps = {}, ...rest }) => (
+  <InView rootMargin="60px" threshold={0.1} {...inViewProps}>
+    {({ inView, ref }) => (
+      <div ref={ref}>
+        <Section {...rest}>{children({ inView })}</Section>
+      </div>
+    )}
+  </InView>
 )
 
 const Logo = ({ ...rest }) => (
@@ -196,7 +214,15 @@ const CallToAction = ({ hideTimer, buttonProps = {}, ...rest }) => (
             </Flex>
 
             {!hideTimer ? (
-              <Flex bg="#081537" alignItems="center" justifyContent="center" p={5}>
+              <Flex
+                bg="#081537"
+                alignItems="center"
+                justifyContent="center"
+                p={5}
+                cursor={hovered ? 'pointer' : 'unset'}
+                {...bind}
+                {...modalBind}
+              >
                 <Type
                   display="flex"
                   alignItems={['center']}
@@ -236,5 +262,6 @@ export {
   LearnMore,
   Countdown,
   CallToAction,
+  ObservedSection,
   OpenStarterKitModal
 }

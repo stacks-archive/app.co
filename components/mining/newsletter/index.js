@@ -1,6 +1,7 @@
 import React from 'react'
-import { Box, Input, Flex, Type } from 'blockstack-ui'
+import { Box, Field, Flex, Type } from 'blockstack-ui'
 import { ArrowIcon } from '@components/mining/svg'
+
 import NewsletterWrapper from './container'
 
 const Button = ({ disabled, ...rest }) => (
@@ -20,23 +21,27 @@ const Button = ({ disabled, ...rest }) => (
   </Flex>
 )
 
-const Overlay = ({ label = 'Processing...', ...rest }) => (
-  <Box
+const Overlay = ({ label = 'Processing...', loading, ...rest }) => (
+  <Flex
+    alignItems="center"
+    justifyContent="center"
     position="absolute"
     px={5}
-    left={'10px'}
-    top={'15px'}
-    bg={'white'}
-    width={'calc(100% - 20px)'}
+    left="10px"
+    top="10px"
+    bg="white"
+    width="calc(100% - 20px)"
+    height="43px"
     zIndex="99999"
-    style={{ whiteSpace: 'nowrap' }}
+    style={{ whiteSpace: 'nowrap', transition: '0.25s all ease-in-out', pointerEvents: 'none' }}
     textAlign="center"
+    opacity={loading ? 1 : 0}
     {...rest}
   >
     <Type style={{ whiteSpace: 'nowrap' }} color="blue" fontFamily="brand">
       {label}
     </Type>
-  </Box>
+  </Flex>
 )
 
 const InputComponent = ({
@@ -54,13 +59,13 @@ const InputComponent = ({
   value,
   ...rest
 }) => (
-  <Box py={5} width={[1]} {...rest}>
+  <Box width={[1]} style={{ pointerEvents: loading ? 'none' : 'unset' }} {...rest}>
     <Box position="relative">
-      {hideButton ? null : <Button cursor={isValid ? 'pointer' : undefined} disabled={!isValid} onClick={doSubmit} />}
-      {loading ? <Overlay /> : null}
+      {hideButton ? null : <Button cursor={isValid ? 'pointer' : undefined}  disabled={!isValid} onClick={doSubmit} />}
+      <Overlay loading={loading} />
       {!hideSuccess && success ? <Overlay label="Thanks for Subscribing!" /> : null}
       <form onSubmit={doSubmit}>
-        <Input
+        <Field
           width={[1]}
           border={border}
           variant={variant}
@@ -69,6 +74,7 @@ const InputComponent = ({
           type="email"
           px={undefined}
           pl={5}
+          error={error}
           pr={!hideButton ? '62px' : 5}
           {...bind}
         />

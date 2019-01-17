@@ -128,6 +128,18 @@ class App extends React.Component {
           ) : (
               <p>No rankings data yet.</p>
             )}
+          <p>
+            How did you hear about us?{' '}
+            <code>{app.referralSource}</code>
+          </p>
+          <p>
+            Are you submitting your own app?{' '}
+            <code>{app.isSubmittingOwnApp ? 'Yes' : 'No'}</code>
+          </p>
+          <p>
+            Submitted By:{' '}
+            <code>{app.submitterName}</code>
+          </p>
           <Form.Wrapper>
             <TextField
               value={this.state.name || ''}
@@ -147,7 +159,7 @@ class App extends React.Component {
               onChange={(e) => this.setState({ website: e.target.value })}
               label="Website"
             />
-            <small><a href={this.state.website} target="_blank">Visit website</a></small>
+            <small><a href={this.state.website} target="_blank" rel="noopener noreferrer">Visit website</a></small>
             {this.state.website.indexOf('http') !== 0 && (
               <>
                 <br />

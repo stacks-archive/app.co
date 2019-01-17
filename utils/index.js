@@ -60,6 +60,12 @@ const trackEvent = (action, opts) => {
   }
 }
 
+const customEventWithDefaults = (action) =>
+  trackEvent(action, {
+    page_path: document.location.pathname,
+    page_title: document.title
+  })
+
 const enumSelect = (enums, placeholder, props = {}) => {
   const options = map(enums, (opt) => ({ label: opt, value: opt }))
   if (!props.required) {
@@ -125,14 +131,15 @@ const properTagFromParam = (param, enums) =>
 
 const slugifyCategory = (category) => category.toLowerCase().replace(' ', '-')
 
-function slugify(text)
-{
-  return text.toString().toLowerCase()
-    .replace(/\s+/g, '-')           // Replace spaces with -
-    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-    .replace(/^-+/, '')             // Trim - from start of text
-    .replace(/-+$/, '');            // Trim - from end of text
+function slugify(text) {
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, '-') // Replace spaces with -
+    .replace(/[^\w\-]+/g, '') // Remove all non-word chars
+    .replace(/\-\-+/g, '-') // Replace multiple - with single -
+    .replace(/^-+/, '') // Trim - from start of text
+    .replace(/-+$/, '') // Trim - from end of text
 }
 
 const getTwitterMentions = (app) => {

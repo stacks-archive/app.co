@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Box, Type, Button } from 'blockstack-ui'
-import { Title, Wrapper, Section, LearnMore } from '@components/mining/shared'
+import { Title, Wrapper, Section, LearnMore, ObservedSection } from '@components/mining/shared'
 import { State } from 'react-powerplug'
 import numeral from 'numeral'
 
@@ -89,8 +89,8 @@ const Table = ({ apps, state, limit = 7, ...rest }) => {
 }
 
 const HowMuchSection = ({ apps, ...rest }) => (
-  <Section bg="blue.light" {...rest}>
-    <Wrapper>
+  <ObservedSection bg="blue.light" {...rest}>
+    {({inView}) => <Wrapper inView={inView} observed>
       <Flex width={[1]} flexShrink={0} flexDirection="column">
         <Title maxWidth="100%">How much can you earn?</Title>
         <Type maxWidth={700} lineHeight={1.65} pt={6}>
@@ -103,7 +103,7 @@ const HowMuchSection = ({ apps, ...rest }) => (
               <>
                 <Table state={state} apps={apps} />
                 {!state.all ? (
-                  <Box pt={5}>
+                  <Box pt={7}>
                     <LearnMore
                       position="static"
                       color="blue.dark"
@@ -118,8 +118,8 @@ const HowMuchSection = ({ apps, ...rest }) => (
           </State>
         </Flex>
       </Flex>
-    </Wrapper>
-  </Section>
+    </Wrapper>}
+  </ObservedSection>
 )
 
 export { HowMuchSection }

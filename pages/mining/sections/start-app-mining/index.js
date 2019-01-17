@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Box, Type, Button } from 'blockstack-ui'
-import { Title, Wrapper, Section } from '@components/mining/shared'
+import { Title, Wrapper, Section, ObservedSection } from '@components/mining/shared'
 import { BuildGraphic, ImproveGraphic, RegisterGraphic, ArrowIcon } from '@components/mining/svg'
 
 const sections = [
@@ -40,7 +40,11 @@ const Steps = ({ ...rest }) => (
   <Flex justifyContent={['center', 'center', 'space-between']} flexWrap="wrap" {...rest}>
     {sections.map(({ graphic: Graphic, button: { label, ...buttonProps }, text }, i) => (
       <Flex pt={7} alignItems="center" justifyContent="center" key={i} flexDirection="column">
-        {Graphic ? <Graphic /> : null}
+        {Graphic ? (
+          <Box width="180px">
+            <Graphic />
+          </Box>
+        ) : null}
         <Box py={6}>
           <Button color="white !important" icon={ArrowIcon} height="auto" pt={'9px'} pb={2} {...buttonProps}>
             {label}
@@ -57,32 +61,34 @@ const Steps = ({ ...rest }) => (
 const StartAppMiningSection = ({ ...rest }) => (
   <>
     <div id="learn-more" />
-    <Section bg="white" {...rest}>
-      <Wrapper>
+    <ObservedSection bg="white" {...rest}>
+      {({inView}) => <Wrapper inView={inView} observed>
         <Flex width={[1]} flexShrink={0} flexDirection="column">
           <Title maxWidth="100%">Get started with App Mining.</Title>
-          <Steps mt={8} />
-          <Flex mt={8} flexDirection="column" alignItems="center" justifyContent="center">
+          <Steps mt={[0, 8]} />
+          <Flex lineHeight={1.65} mt={[4, 8]} flexDirection="column" alignItems="center" justifyContent="center">
             <Type pt={6} pb={6}>
               Detailed registration instructions?{' '}
-              <Type is="a" href="https://docs.blockstack.org/develop/mining_intro.html" target="_blank">
+              <Type
+                display="inline"
+                is="a"
+                href="https://docs.blockstack.org/develop/mining_intro.html"
+                target="_blank"
+              >
                 App Mining Docs.
               </Type>
             </Type>
             <Type>
               Want to verify your app is completely registered? A list of{' '}
-              {/**
-               * TODO: add link here
-               */}
-              <Type is="a" href="/mining/apps">
+              <Type display="inline" is="a" href="/mining/apps">
                 all App Mining eligible apps
               </Type>
               .{' '}
             </Type>
           </Flex>
         </Flex>
-      </Wrapper>
-    </Section>
+      </Wrapper>}
+    </ObservedSection>
   </>
 )
 

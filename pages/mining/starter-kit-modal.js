@@ -1,12 +1,12 @@
 import React from 'react'
 import { Modal, Flex, Type, Box, Button } from 'blockstack-ui'
-import { State } from 'react-powerplug'
+import { State, Hover } from 'react-powerplug'
 import { BuildGraphic, RegisterGraphic, ArrowIcon } from '@components/mining/svg'
 import { Newsletter } from '@components/mining/newsletter'
 import { NewsletterContext } from '@components/mining/newsletter/container'
 
 const ModalComponent = (props) => (
-  <Flex position="relative" maxWidth={600} width={'100%'} p={4} flexDirection="column" bg="white" {...props} />
+  <Flex position="relative" maxWidth={600} width={'100%'} flexDirection="column" bg="white" {...props} />
 )
 const header = (props) => (
   <Flex
@@ -24,7 +24,7 @@ const header = (props) => (
 
 const InitialView = ({ setState, view, handleSubmit }) => {
   return (
-    <>
+    <Box p={6}>
       <Type color="blue" lineHeight={1.5} maxWidth="80%" fontSize={5} fontFamily="brand">
         Get your App Mining Starter Kit
       </Type>
@@ -65,60 +65,92 @@ const InitialView = ({ setState, view, handleSubmit }) => {
           </Newsletter>
         </Box>
       </Box>
-    </>
+    </Box>
   )
 }
 
+const Item = ({ graphic: Graphic, title, link, cta, ...rest }) => (
+  <Hover>
+    {({ hovered, bind }) => (
+      <Flex
+        py={[4]}
+        px={[4, 6]}
+        display={['block', 'flex', 'flex', 'flex']}
+        bg="white"
+        boxShadow="card"
+        borderRadius="6px"
+        is="a"
+        href={link}
+        target="_blank"
+        alignItems="center"
+        flexDirection={['column', 'row', 'row', 'row']}
+        transition="0.08s all ease-in-out"
+        transform={hovered ? 'translateY(-5px)' : 'none'}
+        {...rest}
+        {...bind}
+      >
+        <Box width={['80px', '120px', '140px']} pr={[4, 5]} py={4} flexShrink={0}>
+          <Graphic />
+        </Box>
+        <Box lineHeight={1.65}>
+          <Type pb={2} fontSize={3} fontWeight="500" color={hovered ? 'blue' : 'blue.dark'}>
+            {title}
+          </Type>
+          <Type>{cta}</Type>
+        </Box>
+      </Flex>
+    )}
+  </Hover>
+)
+
 const SuccessView = ({ value }) => (
-  <Box color="blue.dark" lineHeight={1.35}>
+  <Flex
+    p={[4, 6]}
+    bg="blue.light"
+    justifyContent="center"
+    flexDirection="column"
+    flexGrow={1}
+    color="blue.dark"
+    lineHeight={1.35}
+    display={['block', 'flex', 'flex', 'flex']}
+  >
     <Box pb={6}>
+      <Box pb={4}>
+        <Type color="blue" lineHeight={1.5} maxWidth="80%" fontSize={5} fontFamily="brand">
+          Welcome to App Mining!
+        </Type>
+      </Box>
       <Type fontSize={3}>
-        <Type fontWeight="bold">Welcome to App Mining!</Type> We emailed your App Mining Starter Kit to <em>{value}</em>
-        .
+        We emailed your App Mining Starter Kit to <em>{value}</em>.
       </Type>
     </Box>
-    <Flex pb={6} alignItems="center" flexDirection={['column', 'row']}>
-      <Box pr={[0, 4]} pb={[4, 0]}>
-        <BuildGraphic />
-      </Box>
-      <Box>
-        <Type pb={4} fontSize={2} fontWeight="bold">
-          New to Blockstack? Need to integrate Blockstack authentication?
-        </Type>
-        <Type is="a" href="https://docs.blockstack.org/develop/zero_to_dapp_1.html" target="_blank">
-          Learn how with our Zero-to-Dapp tutorial.
-        </Type>
-      </Box>
-    </Flex>
-    <Flex alignItems="center" flexDirection={['column', 'row']}>
-      <Box pr={[0, 4]} pb={[4, 0]}>
-        <RegisterGraphic />
-      </Box>
-      <Box>
-        <Type pb={4} fontSize={2} fontWeight="bold">
-          Have a user-ready Blockstack app?
-        </Type>
-        {/**
-         * TODO: add link
-         */}
-        <Type>
-          <Type is="a" href="/submit" target="_blank">
-            Register on App.co
-          </Type>{' '}
-          and complete the{' '}
-          <Type is="a" href="https://docs.blockstack.org/develop/mining_enroll.html#provide-pay-out-and-tax-materials" target="_blank">
-            App Mining Ready steps
-          </Type>
-          .
-        </Type>
-      </Box>
-    </Flex>
-  </Box>
+    <Item
+      graphic={BuildGraphic}
+      link="https://docs.blockstack.org/develop/zero_to_dapp_1.html"
+      title="New to Blockstack?"
+      cta="Need to integrate Blockstack authentication? Learn how with our Zero-to-Dapp tutorial."
+      mb={4}
+    />
+    <Item
+      graphic={RegisterGraphic}
+      link="/submit"
+      title="Have a user-ready Blockstack app?"
+      cta="Register on App.co and complete the App Mining Ready steps."
+    />
+  </Flex>
 )
 
 const handleSubmit = (setState) => setState({ view: 'success' })
 const StarterKitModal = ({ ...rest }) => (
-  <Modal component={ModalComponent} header={header} {...rest}>
+  <Modal
+    alignItems={['center', 'unset']}
+    height={['100vh', 'unset']}
+    maxHeight="100vh"
+    component={ModalComponent}
+    header={header}
+    p="0 !important"
+    {...rest}
+  >
     <State initial={{ view: 'initial' }}>
       {({ state, setState }) => (
         <>
