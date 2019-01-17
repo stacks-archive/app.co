@@ -266,7 +266,10 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
     }
   ]
 
-  const generateOptions = (enums) => Object.keys(enums).map((opt) => ({ label: opt, value: opt }))
+  const generateOptions = (enums) =>
+    Object.keys(enums)
+      .sort((a, b) => (a.toLowerCase() !== b.toLowerCase() ? (a.toLowerCase() < b.toLowerCase() ? -1 : 1) : 0))
+      .map((opt) => ({ label: opt, value: opt }))
 
   const categoryOptions = {
     category: generateOptions(appConstants.categoryEnums),
