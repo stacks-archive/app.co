@@ -4,9 +4,10 @@ import { State, Hover } from 'react-powerplug'
 import { BuildGraphic, RegisterGraphic, ArrowIcon } from '@components/mining/svg'
 import { Newsletter } from '@components/mining/newsletter'
 import { NewsletterContext } from '@components/mining/newsletter/container'
+import { trackEvent } from '@utils'
 
 const ModalComponent = (props) => (
-  <Flex position="relative" maxWidth={600} width={'100%'} flexDirection="column" bg="white" {...props} />
+  <Flex position="relative" maxWidth={600} width="100%" flexDirection="column" bg="white" {...props} />
 )
 const header = (props) => (
   <Flex
@@ -22,8 +23,7 @@ const header = (props) => (
   />
 )
 
-const InitialView = ({ setState, view, handleSubmit }) => {
-  return (
+const InitialView = ({ setState, view, handleSubmit }) => (
     <Box p={6}>
       <Type color="blue" lineHeight={1.5} maxWidth="80%" fontSize={5} fontFamily="brand">
         Get your App Mining Starter Kit
@@ -67,7 +67,6 @@ const InitialView = ({ setState, view, handleSubmit }) => {
       </Box>
     </Box>
   )
-}
 
 const Item = ({ graphic: Graphic, title, link, cta, ...rest }) => (
   <Hover>
@@ -129,11 +128,13 @@ const SuccessView = ({ value }) => (
       link="https://docs.blockstack.org/develop/zero_to_dapp_1.html"
       title="New to Blockstack?"
       cta="Need to integrate Blockstack authentication? Learn how with our Zero-to-Dapp tutorial."
+      onClick={() => trackEvent('Starter Kit Click Zero-to-Dapp') }
       mb={4}
     />
     <Item
       graphic={RegisterGraphic}
       link="/submit"
+      onClick={() => trackEvent('Starter Kit Click to Submit Page')}
       title="Have a user-ready Blockstack app?"
       cta="Register on App.co and complete the App Mining Ready steps."
     />
@@ -141,28 +142,31 @@ const SuccessView = ({ value }) => (
 )
 
 const handleSubmit = (setState) => setState({ view: 'success' })
-const StarterKitModal = ({ ...rest }) => (
-  <Modal
-    alignItems={['center', 'unset']}
-    height={['100vh', 'unset']}
-    maxHeight="100vh"
-    component={ModalComponent}
-    header={header}
-    p="0 !important"
-    {...rest}
-  >
-    <State initial={{ view: 'initial' }}>
-      {({ state, setState }) => (
-        <>
-          {state.view === 'initial' ? (
-            <InitialView view={state.view} setState={setState} handleSubmit={() => handleSubmit(setState)} />
-          ) : (
-            <SuccessView value={state.value} />
-          )}
-        </>
-      )}
-    </State>
-  </Modal>
-)
+const StarterKitModal = ({ ...rest }) => {
+  trackEvent('Open App Mining Starter Kit Modal')
+  return (
+    <Modal
+      alignItems={['center', 'unset']}
+      height={['100vh', 'unset']}
+      maxHeight="100vh"
+      component={ModalComponent}
+      header={header}
+      p="0 !important"
+      {...rest}
+    >
+      <State initial={{ view: 'initial' }}>
+        {({ state, setState }) => (
+          <>
+            {state.view === 'initial' ? (
+              <InitialView view={state.view} setState={setState} handleSubmit={() => handleSubmit(setState)} />
+            ) : (
+                <SuccessView value={state.value} />
+              )}
+          </>
+        )}
+      </State>
+    </Modal>
+  )
+}
 
 export { StarterKitModal }

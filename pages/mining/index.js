@@ -12,6 +12,7 @@ import { FAQSection } from '@pages/mining/sections/faq'
 import { ModalRoot } from 'blockstack-ui'
 import { Header } from '@components/mining/header'
 import { Footer } from '@components/mining/footer'
+import { trackEvent } from '@utils'
 
 const handleBodyScroll = (on) =>
   on ? document.body.classList.remove('no-scroll') : document.body.classList.add('no-scroll')
@@ -51,6 +52,7 @@ class AppMiningPage extends React.Component {
 
   componentDidMount() {
     handleBodyScroll(true)
+    trackEvent('View Mining Landing Page')
   }
 
   render() {
