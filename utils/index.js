@@ -46,17 +46,18 @@ const outboundLink = (app, link) => {
 }
 
 const trackPageView = (path) => {
-  if (typeof 'gtag' !== 'undefined') {
-    gtag('config', 'UA-119163063-1', {
-      page_path: path || document.location.pathname,
-      page_title: document.title
-    })
+  if (typeof 'analytics' !== 'undefined') {
+    const opts = {}
+    if (path) {
+      opts.path = path
+    }
+    analytics.page(path)
   }
 }
 
 const trackEvent = (action, opts) => {
-  if (typeof 'gtag' !== 'undefined') {
-    gtag('event', action, opts)
+  if (typeof 'analytics' !== 'undefined') {
+    analytics.track(action, opts)
   }
 }
 
