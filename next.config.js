@@ -18,6 +18,9 @@ module.exports = withBundleAnalyzer(withMDX({
   },
   analyzeServer: ["server", "both"].includes(process.env.BUNDLE_ANALYZE),
   analyzeBrowser: ["browser", "both"].includes(process.env.BUNDLE_ANALYZE),
+  publicRuntimeConfig: {
+    segmentWriteKey: process.env.SEGMENT_WRITE_KEY || 'ytmyrpwXzhFF34b0CpNxzdYTRcEFRMzq'
+  },
   bundleAnalyzerConfig: {
     server: {
       analyzerMode: 'static',
