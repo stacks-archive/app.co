@@ -17,5 +17,4 @@ rss(version='2.0' xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://s
         pubDate= new Date(app.createdAt).toUTCString()
         guid https://app.co/app/#{slug}
         if app.imgixImageUrl
-          //- enclosure(url=app.imageUrl.replace('https', 'http') type="image/jpeg" length=200)
-          media:content(url=app.imgixImageUrl, medium="image")
+          media:content(url=`${app.imgixImageUrl}?fm=png`, medium="image")
