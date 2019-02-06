@@ -9,7 +9,19 @@ import dynamic from 'next/dynamic'
 
 const SectionContext = React.createContext({})
 
-const OpenStarterKitModal = ({ ...rest }) => <OpenModal component={StarterKitModal} {...rest} />
+const defaultContent = {
+  initial: {
+    title: 'Get your App Mining Starter Kit'
+  },
+  success: {
+    title: 'Welcome to App Mining',
+    body: 'We emailed your App Mining Starter Kit to'
+  }
+}
+
+const OpenStarterKitModal = ({ content = defaultContent, ...rest }) => (
+  <OpenModal component={(props) => <StarterKitModal {...props} content={content} />} {...rest} />
+)
 
 const Countdown = dynamic(() => import('../countdown'), {
   ssr: false,
