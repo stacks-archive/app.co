@@ -1,6 +1,7 @@
 import * as React from 'react'
 import Head from '@containers/head'
 import { MiningPage } from '@components/mining/page'
+import { API_URL } from '@common/constants'
 import { selectApiServer } from '@stores/apps/selectors'
 import { connect } from 'react-redux'
 import { StartAppMiningSection } from '@pages/mining/sections/start-app-mining'
@@ -24,9 +25,9 @@ class AppMiningPage extends React.Component {
   static async getInitialProps({ reduxStore }) {
     try {
       const promises = await Promise.all([
-        fetch(`https://app-co-api.herokuapp.com/api/app-mining-months`),
-        fetch(`https://app-co-api.herokuapp.com/api/mining-faq`),
-        fetch(`https://app-co-api.herokuapp.com/api/app-mining-apps`)
+        fetch(`${API_URL}/app-mining-months`),
+        fetch(`${API_URL}/mining-faq`),
+        fetch(`${API_URL}/app-mining-apps`)
       ])
       const { months } = await promises[0].json()
       const { faqs } = await promises[1].json()
