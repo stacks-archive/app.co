@@ -41,7 +41,24 @@ class AppMiningPage extends React.Component {
             ...app
           }
         })
-        return { rankings, month: months[months.length - 1], months, faq: faqs, apps }
+
+        const rankingMonths = months.map((month) =>
+          {
+                const theApps = month.compositeRankings.map((app) => {
+            const appWithLifetimeEarnings = apps.find((otherApp) => otherApp.name === app.name)
+            return {
+              ...appWithLifetimeEarnings,
+              ...app
+            }
+          })
+
+            return {
+              ...month,
+              apps: theApps
+            }
+          }
+        )
+        return { rankings, month: months[months.length - 1], months, rankingMonths, faq: faqs, apps }
       } else {
         return {}
       }
@@ -67,7 +84,7 @@ class AppMiningPage extends React.Component {
 
           <Hero minHeight="100vh" apps={this.props.rankings} position="relative" zIndex={1000} />
           <StartAppMiningSection />
-          <HowMuchSection apps={this.props.rankings} />
+          <HowMuchSection apps={this.props.rankings} months={this.props.rankingMonths} />
           <RankingSection apps={this.props.rankings} />
           <PioneersSection apps={this.props.months[0].compositeRankings} />
           <FAQSection faq={this.props.faq} apps={this.props.rankings} />
