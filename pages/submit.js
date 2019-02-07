@@ -458,7 +458,19 @@ class SubmitDapp extends React.Component {
     values: {},
     loading: false,
     success: false,
-    errors: {}
+    errors: {},
+    referralCode: null,
+    refSource: null
+  }
+
+  componentDidMount() {
+    const { search } = document.location
+    const referralCode = search.match(/referralCode=(\w+)/)[1]
+    const refSource = search.match(/refSource=(\w+)/)[1]
+    this.setState({ // eslint-disable-line react/no-did-mount-set-state
+      referralCode,
+      refSource
+    })
   }
 
   submit = async () => {
@@ -473,9 +485,13 @@ class SubmitDapp extends React.Component {
     if (twitterHandle && twitterHandle.includes('@')) {
       twitterHandle = twitterHandle.replace('@', '')
     }
+
+    const { referralCode, refSource } = this.state
     const values = {
       ...this.state.values,
-      twitterHandle
+      twitterHandle,
+      referralCode,
+      refSource
     }
 
     try {
