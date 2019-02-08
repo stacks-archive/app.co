@@ -178,7 +178,10 @@
     "ignore": [
       ".next/*",
       ".next",
-      "pages/*"
+      "pages/*",
+      "utils/*",
+      "components/*",
+      "containers/*"
     ]
   },
   "engines": {
