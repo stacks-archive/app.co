@@ -1,5 +1,6 @@
 import React from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
+import { Transition, animated } from 'react-spring';
 import { Title, Wrapper, Section, ObservedSection } from '@components/mining/shared'
 import { Dots, DotsLine, DemoEarthLogo, ProductHuntLogo, CameraIcon, TryMyUILogo } from '@components/mining/svg'
 import { Hover } from 'react-powerplug'
