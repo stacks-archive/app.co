@@ -1,6 +1,7 @@
 import React from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
 import { CurrencyUsdIcon } from 'mdi-react'
+import { Transition, animated, interpolate } from 'react-spring';
 import {
   Title,
   Wrapper,
@@ -12,6 +13,7 @@ import {
   CallToAction,
   SectionContext
 } from '@components/mining/shared'
+import { lerp } from '@utils';
 import { State } from 'react-powerplug'
 
 function arrayRotateOne(arr, reverse) {
@@ -21,36 +23,63 @@ function arrayRotateOne(arr, reverse) {
 }
 
 const Apps = ({ apps, ...rest }) => {
+  const styles = {
+    outer: { width: 1 },
+    cell: {
+      position: 'absolute',
+      willChange: 'transform, height, opacity',
+      width: '100%'
+    }
+  };
   const limit = 2
-  let items = [apps[0], apps[1], apps[2]]
+  const items = [apps[0], apps[1], apps[2]];
 
   return (
     <State initial={{ active: 1, items }}>
       {({ state, setState }) => {
-        const handleClick = () => {
-          setState((s) => {
-            if (s.active > limit) {
-              return {
-                active: 1
-              }
-            } else {
-              return {
-                active: s.active + 1
-              }
-            }
-          })
-        }
-        const timeout = setTimeout(handleClick, 3000)
+        const handleClick = (curState) => {
+          if (curState.active > limit) return setState({ active: 1});
+
+          return setState({ active: curState.active + 1 });
+        };
+
+        const sortedItems = state.items.slice(state.active, state.items.length).concat(state.items.slice(0, state.active));
+
+        let displayData = sortedItems.map((child, index) => {
+          const y = 20 * index;
+          const opacity = 1 / (index + 1);
+          const scale = 1 - (.05 * index);
+          return { opacity, scale, y, child, index };
+        });
 
         return (
-          <Box position="relative" width={1} {...rest}>
-            {state.items.map((item, i) =>
-              i <= limit ? (
-                <AppItem app={item} active={state.active} key={1 + i} index={i + 1} length={limit + 1} />
-              ) : null
-            )}
+          <Box {...styles.outer}>
+            <Transition
+              native
+              items={displayData}
+              keys={item => item.child.id}
+              from={{ opacity: 0, scale: 0 }}
+              leave={{ opacity: 0, scale: 0 }}
+              enter={({ opacity, scale, y }) => ({ opacity, scale, y })}
+              update={({ opacity, scale, y }) => ([{ opacity }, {scale, y}])}
+              trail={100}
+              onRest={() => setTimeout(() => handleClick(state), 5000)}
+            >
+              {({ child }, state, index) => ({ opacity, scale, y }) => (
+                <animated.div
+                  style={{
+                    ...styles.cell,
+                    opacity,
+                    zIndex: displayData.length - index,
+                    transform: interpolate([scale, y], (scale, y) => `translateY(${y}px) scale(${scale})`)
+                  }}
+                >
+                  <AppItem app={child } active={state.active} length={limit + 1} />
+                </animated.div>
+              )}
+            </Transition>
           </Box>
-        )
+        );
       }}
     </State>
   )

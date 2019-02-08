@@ -32,6 +32,20 @@ const truncate = (str, options) => {
   return str
 }
 
+/**
+ * Linearly interpolates between two values
+ *
+ * @method lerp
+ * @param  {Number} v0      the starting value to interpolate
+ * @param  {Number} v1      the ending value to interpolate
+ * @param  {Number} t   the change to interpolate at
+ * @return {Number}         the value at alpha
+ **/
+const lerp = (v0, v1, t) => {
+  return v0 * (1 - t) + v1 * t;
+};
+
+
 const outboundLink = (app, link) => {
   if (typeof gtag !== 'undefined') {
     gtag('event', 'outgoing_click', {
@@ -156,20 +170,21 @@ const monthName = (month) => {
 }
 
 export {
-  colorHexFromString,
-  truncate,
-  outboundLink,
-  enumSelect,
+  appRoute,
   appStatuses,
   appStatusFromValue,
-  appRoute,
   capitalize,
+  colorHexFromString,
+  enumSelect,
   getTags,
-  slugifyCategory,
-  properTagFromParam,
   getTwitterMentions,
+  lerp,
   monthName,
-  trackPageView,
+  outboundLink,
+  properTagFromParam,
+  slugify,
+  slugifyCategory,
   trackEvent,
-  slugify
+  trackPageView,
+  truncate
 }

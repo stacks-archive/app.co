@@ -149,16 +149,18 @@ const getActiveStyles = (active, index, length) => {
   }
 }
 
-const AppItem = ({ app, active, index, length, ...rest }) => (
+const AppItem = ({ app, active, length, ...rest }) => (
   <Flex
     alignItems="center"
     p={5}
     bg="white"
+    position="absolute"
+    top="0"
+    left="0"
     width={1}
     borderRadius={4}
     boxShadow="card"
     {...rest}
-    {...getActiveStyles(active, index, length)}
     style={{
       transition: '0.5s all ease-in-out'
     }}
@@ -174,7 +176,6 @@ const AppItem = ({ app, active, index, length, ...rest }) => (
       style={{
         transition: '0.5s all ease-in-out'
       }}
-      opacity={index !== active ? 0 : 1}
     />
     <Box fontSize={3} pl={4} color="blue.dark">
       <Type fontWeight={400}>{app.name}</Type> <Type opacity={0.5}>earned</Type>{' '}
