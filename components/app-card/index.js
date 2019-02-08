@@ -1,8 +1,8 @@
 import React from 'react'
-import { Flex } from 'blockstack-ui'
+import { Flex, Box, Type as NewType } from 'blockstack-ui'
 import { GithubCircleIcon, TwitterCircleIcon, ArrowLeftIcon } from 'mdi-react'
 import Link from 'next/link'
-import { Box } from 'blockstack-ui'
+
 import numeral from 'numeral'
 
 import { Type } from '@components/typography'
@@ -133,13 +133,11 @@ const Website = (props) =>
       >
         {formatUrl(props.website)}
       </a>
-      {props.Rankings &&
-        props.Rankings[0] &&
-        props.Rankings[0].monthlyVisitsCount && (
-          <Type.span fontSize={14} color={theme.colors.grey.mid} ml={3}>
-            {numeral(props.Rankings[0].monthlyVisitsCount || 0).format('0a')} visits / month
-          </Type.span>
-        )}
+      {props.Rankings && props.Rankings[0] && props.Rankings[0].monthlyVisitsCount && (
+        <Type.span fontSize={14} color={theme.colors.grey.mid} ml={3}>
+          {numeral(props.Rankings[0].monthlyVisitsCount || 0).format('0a')} visits / month
+        </Type.span>
+      )}
     </Box>
   ) : null
 
@@ -157,8 +155,8 @@ const StatsItem = ({ Rankings, name }) => {
 }
 
 const ClaimApp = ({ name }) => (
-  <Box>
-    <a href={`mailto:hello@app.co?subject=I want to claim ${name}`}>Is this your app? Claim it now.</a>
+  <Box mb={3}>
+    Is this your app? <a href={`mailto:hello@app.co?subject=I want to claim ${name}`}>Claim it now.</a>
   </Box>
 )
 
@@ -182,7 +180,7 @@ const HomeLink = (props) => (
   </div>
 )
 
-const AppCard = ({ py, px, my, mx, mr = 'auto', ml = 'auto', mt, mb, style, ...props }) => {
+const AppCard = ({ py, px, my, mx, mr = 'auto', ml = 'auto', mt, mb, style, appMiningData, ...props }) => {
   const appCardStyleProps = {
     py,
     px,
@@ -225,6 +223,40 @@ const AppCard = ({ py, px, my, mx, mr = 'auto', ml = 'auto', mt, mb, style, ...p
         <TagsSection {...props} />
         <hr />
         <StatsItem {...props} />
+        {appMiningData ? (
+          <Flex justifyContent="space-between" alignItems="center" borderRadius={6} mt={1} mb={4} p={4} bg="blue.dark">
+            <Box mr={2}>
+              <NewType fontFamily="brand" color="white" fontSize={3}>
+                App Mining
+              </NewType>
+              <Box pt={2} maxWidth={280}>
+                <NewType color="blue.mid" lineHeight={1.5}>
+                  Every 30 days we payout $100k to the best Blockstack apps.{' '}
+                  <Box is="span" color="blue.accent">
+                    <NewType is="a" href="/mining" target="_blank" color="currentColor !important">
+                      Learn More.
+                    </NewType>
+                  </Box>
+                </NewType>
+              </Box>
+            </Box>
+            <Box>
+              <Box fontWeight="600" color="white">
+                <NewType lineHeight={1.5} fontSize={1}>
+                  Total Earnings
+                </NewType>
+              </Box>
+              <Box pt={2}>
+                <NewType color="blue.accent" fontSize={3}>
+                  {numeral(appMiningData.lifetimeEarnings).format('$0,0')}
+                </NewType>
+              </Box>
+            </Box>
+          </Flex>
+        ) : null}
+        <Box mt={2} mb={5}>
+          <hr />
+        </Box>
         <ClaimApp {...props} />
       </Box>
     </>
