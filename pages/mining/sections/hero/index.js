@@ -49,7 +49,7 @@ const Apps = ({ apps, ...rest }) => {
           const y = 20 * index;
           const opacity = 1 / (index + 1);
           const scale = 1 - (.05 * index);
-          return { child, index, opacity, scale, y };
+          return { child, opacity, scale, y };
         });
 
         return (
@@ -58,14 +58,11 @@ const Apps = ({ apps, ...rest }) => {
               native
               items={displayData}
               keys={item => item.child.id}
-              initial={null}
+              initial={() => setTimeout(() => handleClick(state), 5000)}
               from={{ opacity: 0, scale: 0 }}
               leave={{ opacity: 0, scale: 0 }}
               enter={({ opacity, scale, y }) => ({ opacity, scale, y })}
-              update={({ index, opacity, scale, y }) => ([
-                index === 2 ? { opacity: 0 } : { opacity },
-                { opacity, scale, y }
-              ])}
+              update={({ opacity, scale, y }) => ({ opacity, scale, y })}
               trail={100}
               onRest={() => setTimeout(() => handleClick(state), 5000)}
             >
