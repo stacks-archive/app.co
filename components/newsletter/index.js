@@ -14,6 +14,7 @@ import { withCookies, Cookies } from 'react-cookie'
 import { getNewsletterCookie, setNewsletterCookie, CLOSED, SUBSCRIBED } from '@common/lib/cookies'
 
 import { StyledNewsletter } from './styled'
+import { trackEvent } from '@utils'
 
 const EMAIL_REGEX = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
 
@@ -68,9 +69,14 @@ class NewsletterClass extends React.Component {
       return true
     }
 
+    const doShow = show()
+    if (doShow) {
+      trackEvent('Open Get Updates Modal')
+    }
+
     const doingSomething = this.props.submitted || this.props.subscribed || this.props.submitting
     const text = this.props.submitting ? 'Loading...' : 'Thanks for subscribing!'
-    return show() ? (
+    return doShow ? (
       <StyledNewsletter pl={3} py={3} mb={[3, 4]} {...this.props}>
         <StyledNewsletter.Wrapper>
           <Box
