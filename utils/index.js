@@ -32,6 +32,25 @@ const truncate = (str, options) => {
   return str
 }
 
+const trackPageView = (path) => {
+  if (typeof 'analytics' !== 'undefined') {
+    const opts = {}
+    if (path) {
+      opts.path = path
+    }
+    // set a timeout to wait until page render, which updates <title> and others
+    setTimeout(() => {
+      analytics.page(path)
+    }, 1000)
+  }
+}
+
+const trackEvent = (action, opts) => {
+  if (typeof 'analytics' !== 'undefined') {
+    analytics.track(action, opts)
+  }
+}
+
 const outboundLink = (app, link) => {
   if (typeof gtag !== 'undefined') {
     gtag('event', 'outgoing_click', {
@@ -42,23 +61,14 @@ const outboundLink = (app, link) => {
       url: link || app.website
     })
   }
+  trackEvent('outgoing_click', {
+    event_label: app.name,
+    event_category: 'Apps',
+    app_name: app.name,
+    app_id: app.id,
+    url: link || app.website
+  })
   window.open(link || app.website, '_blank')
-}
-
-const trackPageView = (path) => {
-  if (typeof 'analytics' !== 'undefined') {
-    const opts = {}
-    if (path) {
-      opts.path = path
-    }
-    analytics.page(path)
-  }
-}
-
-const trackEvent = (action, opts) => {
-  if (typeof 'analytics' !== 'undefined') {
-    analytics.track(action, opts)
-  }
 }
 
 const customEventWithDefaults = (action) =>
