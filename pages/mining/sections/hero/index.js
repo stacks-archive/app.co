@@ -24,7 +24,6 @@ function arrayRotateOne(arr, reverse) {
 
 const Apps = ({ apps, ...rest }) => {
   const styles = {
-    outer: { width: 1 },
     cell: {
       position: 'absolute',
       willChange: 'transform, height, opacity',
@@ -53,7 +52,7 @@ const Apps = ({ apps, ...rest }) => {
         });
 
         return (
-          <Box {...styles.outer}>
+          <Box position='relative' width={1} {...rest}>
             <Transition
               native
               items={displayData}
