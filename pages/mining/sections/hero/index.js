@@ -36,7 +36,7 @@ const Apps = ({ apps, ...rest }) => {
   return (
     <State initial={{ active: 1, items }}>
       {({ state, setState }) => {
-        const handleClick = (curState) => {
+        const cycleItems = (curState) => {
           if (curState.active > limit) return setState({ active: 1});
 
           return setState({ active: curState.active + 1 });
@@ -58,13 +58,13 @@ const Apps = ({ apps, ...rest }) => {
               native
               items={displayData}
               keys={item => item.child.id}
-              initial={() => setTimeout(() => handleClick(state), 5000)}
+              initial={() => setTimeout(() => cycleItems(state), 5000)}
               from={{ opacity: 0, scale: 0 }}
               leave={{ opacity: 0, scale: 0 }}
               enter={({ opacity, scale, y }) => ({ opacity, scale, y })}
               update={({ opacity, scale, y }) => ({ opacity, scale, y })}
               trail={100}
-              onRest={() => setTimeout(() => handleClick(state), 5000)}
+              onRest={() => setTimeout(() => cycleItems(state), 5000)}
             >
               {({ child }, state, index) => ({ opacity, scale, y }) => (
                 <animated.div
