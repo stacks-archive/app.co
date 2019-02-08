@@ -129,27 +129,7 @@ const sizes = [1, 0.95, 0.9, 0.89]
 const opacity = [1, 0.46, 0.25, 0.15]
 const offset = [0, 21, 40, 60]
 
-const getActiveStyles = (active, index, length) => {
-  if (active === index) {
-    return {
-      zIndex: 20,
-      position: 'relative',
-      transform: `translateY(${offset[0]}px) scale(${sizes[0]})`,
-      opacity: opacity[0]
-    }
-  }
-  const number = index - active < 0 ? length + (index - active) : index - active
-  return {
-    position: 'absolute',
-    zIndex: length - index,
-    top: '0px',
-    transform: `translateY(${offset[number]}px) scale(${sizes[number]})`,
-    left: 0,
-    opacity: opacity[number]
-  }
-}
-
-const AppItem = ({ app, active, length, ...rest }) => (
+const AppItem = ({ app, ...rest }) => (
   <Flex
     alignItems="center"
     p={5}

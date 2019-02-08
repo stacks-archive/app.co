@@ -42,13 +42,14 @@ const Apps = ({ apps, ...rest }) => {
           return setState({ active: curState.active + 1 });
         };
 
-        const sortedItems = state.items.slice(state.active, state.items.length).concat(state.items.slice(0, state.active));
+        const { active, items } = state;
+        const sortedItems = items.slice(active, items.length).concat(items.slice(0, active));
 
         let displayData = sortedItems.map((child, index) => {
           const y = 20 * index;
           const opacity = 1 / (index + 1);
           const scale = 1 - (.05 * index);
-          return { opacity, scale, y, child, index };
+          return { child, index, opacity, scale, y };
         });
 
         return (
@@ -57,10 +58,14 @@ const Apps = ({ apps, ...rest }) => {
               native
               items={displayData}
               keys={item => item.child.id}
+              initial={null}
               from={{ opacity: 0, scale: 0 }}
               leave={{ opacity: 0, scale: 0 }}
               enter={({ opacity, scale, y }) => ({ opacity, scale, y })}
-              update={({ opacity, scale, y }) => ([{ opacity }, {scale, y}])}
+              update={({ index, opacity, scale, y }) => ([
+                index === 2 ? { opacity: 0 } : { opacity },
+                { opacity, scale, y }
+              ])}
               trail={100}
               onRest={() => setTimeout(() => handleClick(state), 5000)}
             >
@@ -73,7 +78,7 @@ const Apps = ({ apps, ...rest }) => {
                     transform: interpolate([scale, y], (scale, y) => `translateY(${y}px) scale(${scale})`)
                   }}
                 >
-                  <AppItem app={child } active={state.active} length={limit + 1} />
+                  <AppItem app={child } />
                 </animated.div>
               )}
             </Transition>
