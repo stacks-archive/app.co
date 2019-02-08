@@ -143,7 +143,9 @@ const SuccessView = ({ value }) => (
 
 const handleSubmit = (setState) => setState({ view: 'success' })
 const StarterKitModal = ({ ...rest }) => {
-  trackEvent('Open App Mining Starter Kit Modal')
+  if (rest.visible) {
+    trackEvent('Open App Mining Starter Kit Modal')
+  }
   return (
     <Modal
       alignItems={['center', 'unset']}
