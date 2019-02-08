@@ -23,13 +23,6 @@ function arrayRotateOne(arr, reverse) {
 }
 
 const Apps = ({ apps, ...rest }) => {
-  const styles = {
-    cell: {
-      position: 'absolute',
-      willChange: 'transform, height, opacity',
-      width: '100%'
-    }
-  };
   const limit = 2
   const items = [apps[0], apps[1], apps[2]];
 
@@ -67,16 +60,18 @@ const Apps = ({ apps, ...rest }) => {
               onRest={() => setTimeout(() => cycleItems(state), 5000)}
             >
               {({ child }, state, index) => ({ opacity, scale, y }) => (
-                <animated.div
+                <Flex
+                  is={animated.div}
+                  position='absolute'
+                  width='100%'
                   style={{
-                    ...styles.cell,
                     opacity,
                     zIndex: displayData.length - index,
                     transform: interpolate([scale, y], (scale, y) => `translateY(${y}px) scale(${scale})`)
                   }}
                 >
                   <AppItem app={child } />
-                </animated.div>
+                </Flex>
               )}
             </Transition>
           </Box>
