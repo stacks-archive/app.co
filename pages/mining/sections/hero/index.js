@@ -55,7 +55,10 @@ const Apps = ({ apps, ...rest }) => {
               from={{ opacity: 0, scale: 0 }}
               leave={{ opacity: 0, scale: 0 }}
               enter={({ opacity, scale, y }) => ({ opacity, scale, y })}
-              update={({ opacity, scale, y }) => ({ opacity, scale, y })}
+              update={({ index, opacity, scale, y }) => ([
+                index === displayData.length - 1 ? { opacity: 0, scale: 1.2 } : { opacity },
+                {opacity , scale, y }
+              ])}
               trail={100}
               onRest={() => setTimeout(() => cycleItems(state), 5000)}
             >

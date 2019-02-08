@@ -141,9 +141,6 @@ const AppItem = ({ app, ...rest }) => (
     borderRadius={4}
     boxShadow="card"
     {...rest}
-    style={{
-      transition: '0.5s all ease-in-out'
-    }}
   >
     <Box
       size={[40, 60]}
@@ -153,9 +150,6 @@ const AppItem = ({ app, ...rest }) => (
       bg="white"
       borderRadius={[10, 16]}
       boxShadow="card"
-      style={{
-        transition: '0.5s all ease-in-out'
-      }}
     />
     <Box fontSize={3} pl={4} color="blue.dark">
       <Type fontWeight={400}>{app.name}</Type> <Type opacity={0.5}>earned</Type>{' '}
