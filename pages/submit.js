@@ -465,12 +465,14 @@ class SubmitDapp extends React.Component {
 
   componentDidMount() {
     const { search } = document.location
-    const referralCode = search.match(/referralCode=(\w+)/)[1]
-    const refSource = search.match(/refSource=(\w+)/)[1]
-    this.setState({ // eslint-disable-line react/no-did-mount-set-state
-      referralCode,
-      refSource
-    })
+    if (search) {
+      const referralCode = search.match(/referralCode=(\w+)/)[1]
+      const refSource = search.match(/refSource=(\w+)/)[1]
+      this.setState({ // eslint-disable-line react/no-did-mount-set-state
+        referralCode,
+        refSource
+      })
+    }
   }
 
   submit = async () => {
