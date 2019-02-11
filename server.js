@@ -22,7 +22,7 @@ const port = parseInt(process.env.PORT, 10) || 3000
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
-const apiServer = process.env.API_SERVER || 'https://app-co-api.herokuapp.com'
+const apiServer = 'https://app-co-api.herokuapp.com'
 
 async function renderAndCache(req, res, pagePath, serverData) {
   try {
