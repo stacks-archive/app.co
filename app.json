@@ -1,7 +1,7 @@
 {
   "name": "app.co",
   "scripts": {
-    "postdeploy": "next build"
+    "postbuild": "next build"
   },
   "env": {
     "API_KEY": {
