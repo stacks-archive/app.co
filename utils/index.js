@@ -159,6 +159,11 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+const getDecimalPlaces = (value) => {
+  if(Math.floor(value) === value) return 0;
+  return value.toString().split(".")[1].length || 0;
+}
+
 export {
   appRoute,
   appStatuses,
@@ -166,6 +171,7 @@ export {
   capitalize,
   colorHexFromString,
   enumSelect,
+  getDecimalPlaces,
   getRandomInt,
   getTags,
   getTwitterMentions,

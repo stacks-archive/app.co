@@ -4,7 +4,7 @@ import { Flex, Box, Type } from 'blockstack-ui'
 import { Keyframes, Transition, animated, interpolate } from 'react-spring';
 import { Title, Wrapper, Section, ObservedSection } from '@components/mining/shared'
 import { Dots, DotsLine, DemoEarthLogo, ProductHuntLogo, CameraIcon, TryMyUILogo } from '@components/mining/svg'
-import { getRandomInt } from '@utils';
+import { getDecimalPlaces, getRandomInt } from '@utils';
 import { Hover, State } from 'react-powerplug'
 
 const texts = [
@@ -164,6 +164,7 @@ const RankingAnimation = ({ apps }) => {
               leave={{ opacity: 0, y: -elementHeight }}
               enter={({ payout }) => ([{ opacity: 1, y: 0 }, { payout }])}
               onRest={() => setTimeout(() => cycleItems(state), 5000)}
+              config={key => key === 'payout' ? { duration: 1500 } : {}}
             >
               {(item, state, index) => ({ opacity, payout, y }) => (
                 <Flex
@@ -191,7 +192,7 @@ const RankingAnimation = ({ apps }) => {
                     alignItems={'center'}
                     justifyContent="center"
                   >
-                    {item.image}
+                    <CameraIcon />
                   </Flex>
                   <Flex ml="auto">
                     <Type lineHeight={1.5} fontSize={5} fontWeight={300} fontFamily="brand">
@@ -199,7 +200,10 @@ const RankingAnimation = ({ apps }) => {
                         Payout this&nbsp;month:
                       </Type>{' '}
                       <Box is={animated.span}>
-                        {payout}
+                        {payout.interpolate(payout => {
+                          const payoutStr = Math.floor(payout).toString();
+                          return payoutStr.padStart(6 - payoutStr.length, '0');
+                        })}
                       </Box>
                     </Type>
                   </Flex>
