@@ -199,7 +199,7 @@ const RankingAnimation = ({ apps }) => {
                       <Type opacity={0.5} fontWeight={['bold', 300]} fontSize={[2, 5]}>
                         Payout this&nbsp;month:
                       </Type>{' '}
-                      <Box is={animated.span}>
+                      <Box is={animated.div} display='inline-block' width={85}>
                         {payout.interpolate(payout => {
                           const payoutStr = Math.floor(payout).toString();
                           return payoutStr.padStart(6 - payoutStr.length, '0');
