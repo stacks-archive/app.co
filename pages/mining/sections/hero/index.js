@@ -13,7 +13,6 @@ import {
   CallToAction,
   SectionContext
 } from '@components/mining/shared'
-import { lerp } from '@utils';
 import { State } from 'react-powerplug'
 
 function arrayRotateOne(arr, reverse) {

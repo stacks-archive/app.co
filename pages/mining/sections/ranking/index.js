@@ -1,8 +1,10 @@
+import { times } from 'lodash';
 import React from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
-import { Transition, animated, interpolate } from 'react-spring';
+import { Keyframes, Transition, animated, interpolate } from 'react-spring';
 import { Title, Wrapper, Section, ObservedSection } from '@components/mining/shared'
 import { Dots, DotsLine, DemoEarthLogo, ProductHuntLogo, CameraIcon, TryMyUILogo } from '@components/mining/svg'
+import { getRandomInt } from '@utils';
 import { Hover, State } from 'react-powerplug'
 
 const texts = [
@@ -75,11 +77,47 @@ const Ranker = ({ position, logo: Logo, children, color, logoProps = {}, ...rest
         <Type pb={2} pt={[2, 2, 0, 0]} color={color}>
           {children}
         </Type>
-        <DotsAnimation position={position} hovered={hovered} color={color} />
+        <GraphAnimation position={position} color={color} rows={5} count={10}/>
+      {/*  <DotsAnimation position={position} hovered={hovered} color={color} /> */}
       </Box>
     )}
   </Hover>
 )
+
+const GraphAnimation = ({ color, count, position, rows }) => {
+  const columnArray = new Array(count);
+
+  const ColumnAnimation = Keyframes.Spring(async next => {
+    while (true) {
+      await next({
+        from: { t: 0 },
+        to: { t: 1 }
+      });
+    }
+  });
+
+  return (
+    <Flex is={animated.div} position="absolute" bottom="-3px" style={{ transform: `translateX(${position}%)` }}>
+      <Box>
+        <ColumnAnimation
+          native
+          keys={columnArray}
+          config={{ duration: 200 }}
+        >
+          {items => props => (
+            <animated.div>
+              {times(count, () => {
+                return times(getRandomInt(0, rows), () => (
+                  <Box height={5} width={5} backgroundColor={color} />
+                ));
+              })}
+            </animated.div>
+          )}
+        </ColumnAnimation>
+      </Box>
+    </Flex>
+  )
+}
 
 const RankingAnimation = ({ apps }) => {
   const elementHeight = 136;
@@ -131,6 +169,8 @@ const RankingAnimation = ({ apps }) => {
                 <Flex
                   is={animated.div}
                   alignItems="center"
+                  position='absolute'
+                  width='100%'
                   flex={1}
                   px={[4, 6]}
                   py={6}
