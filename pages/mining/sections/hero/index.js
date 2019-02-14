@@ -23,8 +23,9 @@ function arrayRotateOne(arr, reverse) {
 }
 
 const Apps = ({ apps, ...rest }) => {
-  const limit = 2
-  const items = [apps[0], apps[1], apps[2]];
+  const limit = 4;
+  const visible = 3;
+  const items = [apps[0], apps[1], apps[2], apps[3]];
 
   return (
     <State initial={{ active: 1, items }}>
@@ -42,8 +43,20 @@ const Apps = ({ apps, ...rest }) => {
           const y = 20 * index;
           const opacity = 1 / (index + 1);
           const scale = 1 - (.05 * index);
-          return { child, opacity, scale, y };
+          return { child, index, opacity, scale, y };
         });
+
+        const onUpdate = ({ index, opacity, scale, y }) => {
+          if (index >= visible) {
+            return [{ opacity: 0, scale: 1.05, y: -20 }, { scale, y }];
+          }
+
+          if (index === visible - 1) {
+            return { opacity, scale, y };
+          }
+
+          return ([{}, { opacity, scale, y }]);
+        }
 
         return (
           <Box position='relative' width={1} {...rest}>
@@ -55,11 +68,7 @@ const Apps = ({ apps, ...rest }) => {
               from={{ opacity: 0, scale: 0 }}
               leave={{ opacity: 0, scale: 0 }}
               enter={({ opacity, scale, y }) => ({ opacity, scale, y })}
-              update={({ index, opacity, scale, y }) => ([
-                index === displayData.length - 1 ? { opacity: 0, scale: 1.2 } : { opacity },
-                {opacity , scale, y }
-              ])}
-              trail={100}
+              update={(item) => onUpdate(item)}
               onRest={() => setTimeout(() => cycleItems(state), 5000)}
             >
               {({ child }, state, index) => ({ opacity, scale, y }) => (
