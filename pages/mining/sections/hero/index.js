@@ -81,7 +81,7 @@ const Apps = ({ apps, ...rest }) => {
                     transform: interpolate([scale, y], (scale, y) => `translateY(${y}px) scale(${scale})`)
                   }}
                 >
-                  <AppItem app={child } />
+                  <AppItem app={child} />
                 </Flex>
               )}
             </Transition>
