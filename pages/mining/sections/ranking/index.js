@@ -1,9 +1,9 @@
 import { times } from 'lodash';
 import React from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
-import { Keyframes, Transition, animated, interpolate } from 'react-spring';
+import { Keyframes, Trail, Transition, animated, interpolate } from 'react-spring';
 import { Title, Wrapper, Section, ObservedSection } from '@components/mining/shared'
-import { Dots, DotsLine, DemoEarthLogo, ProductHuntLogo, CameraIcon, TryMyUILogo } from '@components/mining/svg'
+import { Dots, DotsLine, DemoEarthLogo, ProductHuntLogo, CameraIcon, TryMyUILogo, VerticalDotLine } from '@components/mining/svg'
 import { getDecimalPlaces, getRandomInt } from '@utils';
 import { Hover, State } from 'react-powerplug'
 
@@ -77,7 +77,7 @@ const Ranker = ({ position, logo: Logo, children, color, logoProps = {}, ...rest
         <Type pb={2} pt={[2, 2, 0, 0]} color={color}>
           {children}
         </Type>
-        <GraphAnimation position={position} color={color} rows={5} count={10}/>
+        <GraphAnimation position={position} color={color} rows={5} count={100}/>
       {/*  <DotsAnimation position={position} hovered={hovered} color={color} /> */}
       </Box>
     )}
@@ -86,35 +86,43 @@ const Ranker = ({ position, logo: Logo, children, color, logoProps = {}, ...rest
 
 const GraphAnimation = ({ color, count, position, rows }) => {
   const columnArray = new Array(count);
-
-  const ColumnAnimation = Keyframes.Spring(async next => {
-    while (true) {
-      await next({
-        from: { t: 0 },
-        to: { t: 1 }
-      });
-    }
-  });
+  for (let i = 0; i < count; i++) {
+    columnArray[i] = { key: i };
+  }
 
   return (
-    <Flex is={animated.div} position="absolute" bottom="-3px" style={{ transform: `translateX(${position}%)` }}>
-      <Box>
-        <ColumnAnimation
-          native
-          keys={columnArray}
-          config={{ duration: 200 }}
-        >
-          {items => props => (
-            <animated.div>
-              {times(count, () => {
-                return times(getRandomInt(0, rows), () => (
-                  <Box height={5} width={5} backgroundColor={color} />
-                ));
-              })}
-            </animated.div>
-          )}
-        </ColumnAnimation>
-      </Box>
+    <Flex
+      bottom={0}
+      left={0}
+      overflow='hidden'
+      position='absolute'
+      right={0}
+      top={0}
+      zIndex={-1}
+    >
+      <Trail
+        native
+        items={columnArray}
+        keys={item => item.key}
+        from={{ y: 0 }}
+        to={(item) => { y: getRandomInt(0, 20) * 3 }}
+      >
+        {(item, index) => props => (
+          <Flex
+            is={animated.div}
+            position='absolute'
+            left={`${index * 5}px`}
+            top="40%"
+            width={5}
+            height={100}
+            style={{
+              transform: props.y.interpolate(y => `translate(0, ${y}px)`)
+            }}
+          >
+            <VerticalDotLine color={color} />
+          </Flex>
+        )}
+      </Trail>
     </Flex>
   )
 }
@@ -162,9 +170,11 @@ const RankingAnimation = ({ apps }) => {
               keys={item => item.id}
               from={{ opacity: 0, payout: 0, y: elementHeight }}
               leave={{ opacity: 0, y: -elementHeight }}
-              enter={({ payout }) => ([{ opacity: 1, y: 0 }, { payout }])}
+              enter={({ payout }) => ([
+                { opacity: 1, y: 0 },
+                { payout, config: { duration: 1000 } }
+              ])}
               onRest={() => setTimeout(() => cycleItems(state), 5000)}
-              config={key => key === 'payout' ? { duration: 1500 } : {}}
             >
               {(item, state, index) => ({ opacity, payout, y }) => (
                 <Flex
@@ -202,7 +212,7 @@ const RankingAnimation = ({ apps }) => {
                       <Box is={animated.div} display='inline-block' width={85}>
                         {payout.interpolate(payout => {
                           const payoutStr = Math.floor(payout).toString();
-                          return payoutStr.padStart(6 - payoutStr.length, '0');
+                          return `$${payoutStr.padStart(6 - payoutStr.length, '0')}`;
                         })}
                       </Box>
                     </Type>

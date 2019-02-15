@@ -315,6 +315,47 @@ const RegisterGraphic = ({ color = '#4410FF' }) => (
   </svg>
 )
 
+const VerticalDotLine = ({ color = '#EF6F70' }) => (
+  <svg width="3" height="108"viewbox="0 0 3 108" fill="none">
+  <rect fill={color} x="1" y="2" width="1" height="1"/>
+  <rect fill={color} x="1" y="5" width="1" height="1"/>
+  <rect fill={color} x="1" y="8" width="1" height="1"/>
+  <rect fill={color} x="1" y="11" width="1" height="1"/>
+  <rect fill={color} x="1" y="14" width="1" height="1"/>
+  <rect fill={color} x="1" y="17" width="1" height="1"/>
+  <rect fill={color} x="1" y="20" width="1" height="1"/>
+  <rect fill={color} x="1" y="23" width="1" height="1"/>
+  <rect fill={color} x="1" y="26" width="1" height="1"/>
+  <rect fill={color} x="1" y="29" width="1" height="1"/>
+  <rect fill={color} x="1" y="32" width="1" height="1"/>
+  <rect fill={color} x="1" y="35" width="1" height="1"/>
+  <rect fill={color} x="1" y="38" width="1" height="1"/>
+  <rect fill={color} x="1" y="41" width="1" height="1"/>
+  <rect fill={color} x="1" y="44" width="1" height="1"/>
+  <rect fill={color} x="1" y="47" width="1" height="1"/>
+  <rect fill={color} x="1" y="50" width="1" height="1"/>
+  <rect fill={color} x="1" y="53" width="1" height="1"/>
+  <rect fill={color} x="1" y="56" width="1" height="1"/>
+  <rect fill={color} x="1" y="59" width="1" height="1"/>
+  <rect fill={color} x="1" y="62" width="1" height="1"/>
+  <rect fill={color} x="1" y="65" width="1" height="1"/>
+  <rect fill={color} x="1" y="68" width="1" height="1"/>
+  <rect fill={color} x="1" y="71" width="1" height="1"/>
+  <rect fill={color} x="1" y="74" width="1" height="1"/>
+  <rect fill={color} x="1" y="77" width="1" height="1"/>
+  <rect fill={color} x="1" y="80" width="1" height="1"/>
+  <rect fill={color} x="1" y="83" width="1" height="1"/>
+  <rect fill={color} x="1" y="86" width="1" height="1"/>
+  <rect fill={color} x="1" y="89" width="1" height="1"/>
+  <rect fill={color} x="1" y="92" width="1" height="1"/>
+  <rect fill={color} x="1" y="95" width="1" height="1"/>
+  <rect fill={color} x="1" y="98" width="1" height="1"/>
+  <rect fill={color} x="1" y="101" width="1" height="1"/>
+  <rect fill={color} x="1" y="104" width="1" height="1"/>
+  <rect fill={color} x="1" y="107" width="1" height="1"/>
+  </svg>
+)
+
 const Dots = ({ color = '#EF6F70' }) => (
   <svg width="273" height="25" viewBox="0 0 273 25" fill="none">
     <path d="M1 4H0V5H1V4Z" fill={color} />
@@ -893,5 +934,6 @@ export {
   CameraIcon,
   Logo,
   TryMyUILogo,
-  OutlinedLogo
+  OutlinedLogo,
+  VerticalDotLine
 }
