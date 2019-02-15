@@ -1,4 +1,9 @@
 {
+  "version": 2,
   "public": false,
-  "alias": "appco.blockstack.sh"
+  "name": "app.co-www",
+  "builds": [{ "src": "next.config.js", "use": "@now/next" }, { "src": "server.js", "use": "@now/node" }],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
