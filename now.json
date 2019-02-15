@@ -5,5 +5,9 @@
   "builds": [{ "src": "next.config.js", "use": "@now/next" }, { "src": "server.js", "use": "@now/node" }],
   "env": {
     "NODE_ENV": "production"
+  },
+  "github": {
+    "autoAlias": false,
+    "silent": true
   }
 }
