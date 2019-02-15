@@ -78,7 +78,6 @@ const Ranker = ({ position, logo: Logo, children, color, logoProps = {}, ...rest
           {children}
         </Type>
         <GraphAnimation position={position} color={color} rows={5} count={100}/>
-      {/*  <DotsAnimation position={position} hovered={hovered} color={color} /> */}
       </Box>
     )}
   </Hover>
@@ -90,6 +89,15 @@ const GraphAnimation = ({ color, count, position, rows }) => {
     columnArray[i] = { key: i };
   }
 
+  const Animation = Keyframes.Trail(async next => {
+    while (true) {
+      await next({
+        from: { y: getRandomInt(0, 11) },
+        to: { y: getRandomInt(0, 11) }
+      })
+    };
+  })
+
   return (
     <Flex
       bottom={0}
@@ -100,19 +108,19 @@ const GraphAnimation = ({ color, count, position, rows }) => {
       top={0}
       zIndex={-1}
     >
-      <Trail
+      <Animation
         native
+        reset
         items={columnArray}
         keys={item => item.key}
-        from={{ y: 0 }}
-        to={(item) => { y: getRandomInt(0, 20) * 3 }}
+        config={{ duration: 1000 }}
       >
         {(item, index) => props => (
           <Flex
             is={animated.div}
             position='absolute'
             left={`${index * 5}px`}
-            top="40%"
+            bottom="-50%"
             width={5}
             height={100}
             style={{
@@ -122,7 +130,7 @@ const GraphAnimation = ({ color, count, position, rows }) => {
             <VerticalDotLine color={color} />
           </Flex>
         )}
-      </Trail>
+      </Animation>
     </Flex>
   )
 }
