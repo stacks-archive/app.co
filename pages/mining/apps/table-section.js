@@ -18,17 +18,18 @@ const Row = ({
   authentication,
   miningReady,
   lifetimeEarnings,
+  description,
   ...rest
 }) => (
   <Flex
     style={{ textDecoration: 'none' }}
     is="a"
     href={rest.Slugs && rest.Slugs.length ? `https://app.co/app/${rest.Slugs[0].value}` : undefined}
-    mb={'1px'}
+    mb="1px"
     py={5}
-    bg={'white'}
+    bg="white"
   >
-    <Flex width={[40, 60]} alignItems={'center'} justifyContent="center">
+    <Flex width={[40, 60]} alignItems="center" justifyContent="center">
       <Type fontFamily="brand">{index + 1}</Type>
     </Flex>
     <Flex width={[1 / 2, 1 / 2, 2 / 3]} alignItems="center">
@@ -42,6 +43,8 @@ const Row = ({
         />
         <Type ml={4} fontSize={2} fontWeight={400} color="blue.dark">
           {name}
+          <br/>
+          <Type mt={1} fontSize={1}>{description}</Type>
         </Type>
       </Flex>
     </Flex>
@@ -66,10 +69,9 @@ const Row = ({
   </Flex>
 )
 
-const Table = ({ apps }) => {
-  return (
+const Table = ({ apps }) => (
     <Box width={1}>
-      <Flex mb={'1px'} py={5} bg={'white'}>
+      <Flex mb="1px" py={5} bg="white">
         <Type flexShrink={1} width={[1 / 2, 1 / 2, 2 / 3]} pl={5}>
           <Type display={['none', 'inline']}>Current App Mining</Type> Rank
         </Type>
@@ -96,7 +98,6 @@ const Table = ({ apps }) => {
       </>
     </Box>
   )
-}
 
 const AllApps = ({ apps, ...rest }) => (
   <Section bg="blue.light" {...rest}>
