@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Flex, Box } from 'blockstack-ui'
 import { connect } from 'react-redux'
+import Router from 'next/router'
 
 import styled from 'styled-components'
 import { Type } from '@components/typography'
@@ -64,6 +65,8 @@ const AppItem = ({
         trackPageView(page)
       }
       event.preventDefault()
+    } else if (altKey && !href && !isClickingTag) {
+      window.open(`/app/${rest.Slugs[0].value}`, '_blank')
     }
   }
   return (
