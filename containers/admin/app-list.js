@@ -1,8 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
+import download from 'downloadjs'
+import { connect } from 'react-redux'
 
 import { Table, Th, Thead, Td, SpacedTd } from '@components/mining-admin/table'
-import { Section } from '@components/mining-admin/month'
+import { Section, Content } from '@components/mining-admin/month'
 
 const appRows = (apps) => apps.map((app) => (
   <tr>
@@ -23,23 +25,48 @@ const appRows = (apps) => apps.map((app) => (
   </tr>
 ))
 
-const AppList = ({apps, title}) => (
-  <Section>
-    <h1>{title}</h1>
-    <Table>
-      <Thead>
-        <tr>
-          <Th>Name</Th>
-          <Th>Category</Th>
-          <Th>Tweets/Week</Th>
-          <Th>Status</Th>
-        </tr>
-      </Thead>
-      <tbody>
-        {appRows(apps)}
-      </tbody>
-    </Table>
-  </Section>
-)
+class AppList extends React.Component {
+  async downloadAllApps() {
+    const { jwt, apiServer } = this.props
+    const url = `${apiServer}/api/admin/download-apps`
+    const res = await fetch(url, {
+      headers: new Headers({
+        Authorization: `Bearer ${jwt}`
+      })
+    })
+    const blob = await res.blob()
+    download(blob, 'App-co Apps.csv', 'text/csv')
+  }
 
-export default AppList
+  render() {
+    const { apps, title } = this.props
+    return (
+      <Section>
+        <h1>{title}</h1>
+        <Content>
+          <a href="javascript:void(0)" onClick={() => this.downloadAllApps()}>Download all apps</a>
+        </Content>
+        <Table>
+          <Thead>
+            <tr>
+              <Th>Name</Th>
+              <Th>Category</Th>
+              <Th>Tweets/Week</Th>
+              <Th>Status</Th>
+            </tr>
+          </Thead>
+          <tbody>
+            {appRows(apps)}
+          </tbody>
+        </Table>
+      </Section>
+    )
+  }
+}
+
+const mapStateToProps = (state) => ({
+  apiServer: state.apps.apiServer,
+  jwt: state.user.jwt
+})
+
+export default connect(mapStateToProps)(AppList)
