@@ -261,8 +261,8 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
     {
       name: 'twitterHandle',
       required: false,
-      label: 'Twitter handle',
-      placeholder: 'SatoshiChat'
+      label: "Application's Twitter handle",
+      placeholder: '@SatoshiChat'
     }
   ]
 
