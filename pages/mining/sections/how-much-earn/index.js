@@ -22,53 +22,66 @@ const Row = ({
   lifetimeEarnings,
   ...rest
 }) => (
-  <Flex mb={'1px'} py={5} bg={'white'}>
-    <Flex width={[40, 60]} alignItems={'center'} justifyContent="center">
-      <Type fontFamily="brand">{index + 1}</Type>
-    </Flex>
-    <Flex
-      width={5 / 8}
-      style={{ textDecoration: 'none' }}
-      alignItems={['flex-start', 'flex-start', 'flex-start', 'center']}
-      is="a"
-      href={rest.Slugs && rest.Slugs.length ? `https://app.co/app/${rest.Slugs[0].value}` : undefined}
-      flexDirection={['column', 'column', 'column', 'row']}
-    >
-      <Flex alignItems="center">
-        <Box
-          size={[24]}
-          backgroundImage={`url(${imgixImageUrl})`}
-          backgroundSize="cover"
-          boxShadow="card"
-          borderRadius={4}
-        />
-        <Type ml={4} fontSize={2} fontWeight={400} color="blue.dark">
-          {name}
-        </Type>
-      </Flex>
+  <Hover>
+    {({ hovered, bind }) => (
       <Flex
-        display={authentication === 'Blockstack' || storageNetwork === 'Gaia' ? 'flex' : 'none'}
-        alignItems="center"
-        pt={[3, 3, 3, 0]}
-        pl={[0, 0, 0, 3]}
+        mb={'1px'}
+        py={5}
+        bg={'white'}
+        borderLeft="3px solid"
+        borderColor={hovered ? 'blue' : 'transparent'}
+        is="a"
+        transition="0.1s all ease-in-out"
+        href={rest.Slugs && rest.Slugs.length ? `https://app.co/app/${rest.Slugs[0].value}` : undefined}
+        target="_blank"
+        style={{ textDecoration: 'none' }}
+        {...bind}
       >
-        {authentication === 'Blockstack' ? <Pill display={['none', 'none', 'flex']}>Blockstack Auth</Pill> : null}
-        {storageNetwork === 'Gaia' ? <Pill display={['none', 'none', 'flex']}>Gaia</Pill> : null}
+        <Flex width={[40, 60]} alignItems={'center'} justifyContent="center">
+          <Type fontFamily="brand">{index + 1}</Type>
+        </Flex>
+        <Flex
+          width={5 / 8}
+          alignItems={['flex-start', 'flex-start', 'flex-start', 'center']}
+          flexDirection={['column', 'column', 'column', 'row']}
+        >
+          <Flex alignItems="center">
+            <Box
+              size={[24]}
+              backgroundImage={`url(${imgixImageUrl})`}
+              backgroundSize="cover"
+              boxShadow="card"
+              borderRadius={4}
+            />
+            <Type ml={4} fontSize={2} fontWeight={400} color="blue.dark">
+              {name}
+            </Type>
+          </Flex>
+          <Flex
+            display={authentication === 'Blockstack' || storageNetwork === 'Gaia' ? 'flex' : 'none'}
+            alignItems="center"
+            pt={[3, 3, 3, 0]}
+            pl={[0, 0, 0, 3]}
+          >
+            {authentication === 'Blockstack' ? <Pill display={['none', 'none', 'flex']}>Blockstack Auth</Pill> : null}
+            {storageNetwork === 'Gaia' ? <Pill display={['none', 'none', 'flex']}>Gaia</Pill> : null}
+          </Flex>
+        </Flex>
+        <Flex width={[2 / 3, 2 / 3, 3 / 8]} ml="auto" alignItems="center">
+          <Flex justifyContent={['flex-end', 'center']} textAlign="center" width={[1, 1 / 2]} pr={6}>
+            <Type fontFamily="brand" color="blue">
+              {formattedUsdRewards.split('.')[0]}
+            </Type>
+          </Flex>
+          <Flex justifyContent="flex-end" textAlign="right" width={1 / 2} pr={5} display={['none', 'flex']}>
+            <Type fontFamily="brand" color="blue">
+              {lifetimeEarnings ? numeral(String(lifetimeEarnings).split('.')[0]).format('$0,0') : '--'}
+            </Type>
+          </Flex>
+        </Flex>
       </Flex>
-    </Flex>
-    <Flex width={[2 / 3, 2 / 3, 3 / 8]} ml="auto" alignItems="center">
-      <Flex justifyContent={['flex-end', 'center']} textAlign="center" width={[1, 1 / 2]} pr={6}>
-        <Type fontFamily="brand" color="blue">
-          {formattedUsdRewards.split('.')[0]}
-        </Type>
-      </Flex>
-      <Flex justifyContent="flex-end" textAlign="right" width={1 / 2} pr={5} display={['none', 'flex']}>
-        <Type fontFamily="brand" color="blue">
-          {lifetimeEarnings ? numeral(String(lifetimeEarnings).split('.')[0]).format('$0,0') : '--'}
-        </Type>
-      </Flex>
-    </Flex>
-  </Flex>
+    )}
+  </Hover>
 )
 
 const ArrowButton = ({ disabled, icon: Icon, ...rest }) => (
