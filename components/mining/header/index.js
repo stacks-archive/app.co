@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Flex, Type } from 'blockstack-ui'
+import { Flex, Type, AppMiningLogo } from 'blockstack-ui'
 import { OutlinedLogo } from '@components/mining/svg'
 import { CallToAction, Countdown, Wrapper } from '../shared'
 
@@ -20,25 +20,22 @@ const Header = ({ showOnMobile, link, ...rest }) => {
       <Wrapper justifyContent="space-between" alignItems="center">
         <Flex alignItems="center">
           <Flex alignItems="center" flexGrow={1}>
-            <Flex pr={2} size={32} color="blue.accent">
-              <OutlinedLogo />
-            </Flex>
-            <Type
+            <Flex
               style={{ textDecoration: 'none' }}
               is={link ? 'a' : undefined}
               href={link ? '/mining' : undefined}
-              color="white !important"
               pr={2}
             >
-              App Mining:
-            </Type>
+              <AppMiningLogo typeSize={20} invert />
+            </Flex>
           </Flex>
           <Type
             display="inline-flex"
             flexDirection={['column', 'column', 'column', 'row']}
             color="white"
-            pl={[2, 2, 2, 0]}
+            pl={2}
             flexGrow={1}
+            pt={"2px"}
           >
             Next ranking starts in <Countdown pl={[0, 0, 0, 2]} />
           </Type>
