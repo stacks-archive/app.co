@@ -171,9 +171,12 @@ const HowMuchSection = ({ apps, months, ...rest }) => (
                     <Box pb={3} textAlign="right" color="blue">
                       <Type
                         is="a"
+                        target="_blank"
                         href={`/mining/${dayjs(
                           months[state.month].monthName + ' ' + months[state.month].year.toString()
-                        ).format('mmmm-yyyy')}`}
+                        )
+                          .format('MMMM-YYYY')
+                          .toLowerCase()}`}
                       >
                         See Full Report
                       </Type>
