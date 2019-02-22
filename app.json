@@ -1,8 +1,5 @@
 {
   "name": "app.co",
-  "scripts": {
-    "postbuild": "next build"
-  },
   "env": {
     "API_KEY": {
       "required": true
