@@ -2,7 +2,7 @@ import React from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
 import { Hover, State } from 'react-powerplug'
 import { Title, Wrapper, LearnMore, ObservedSection } from '@components/mining/shared'
-
+import dayjs from 'dayjs'
 import numeral from 'numeral'
 import { ChevronRightIcon, ChevronLeftIcon } from 'mdi-react'
 
@@ -106,7 +106,7 @@ const ArrowButton = ({ disabled, icon: Icon, ...rest }) => (
 const Table = ({ apps, state, limit = 7, months, decrementMonth, incrementMonth, ...rest }) => {
   return (
     <Box width={1}>
-      <Flex mb="1px" py={5} bg="white">
+      <Flex fontWeight="bold" mb="1px" py={5} bg="white">
         <Type width={[1 / 3, 5 / 8]} pl={5}>
           <Type display={['none', 'inline']}>App Mining</Type> Rank
         </Type>
@@ -167,7 +167,52 @@ const HowMuchSection = ({ apps, months, ...rest }) => (
                 const setMonth = (index) => setState({ month: index })
 
                 return (
-                  <Flex flexDirection={['column', 'row']} width={1}>
+                  <Box width={1}>
+                    <Box pb={3} textAlign="right" color="blue">
+                      <Type
+                        is="a"
+                        href={`/mining/${dayjs(
+                          months[state.month].monthName + ' ' + months[state.month].year.toString()
+                        ).format('mmmm-yyyy')}`}
+                      >
+                        See Full Report
+                      </Type>
+                    </Box>
+                    <Box display={['none', 'block']} width={[1]}>
+                      <Flex flexWrap="wrap" justifyContent="flex-end" flexDirection="row-reverse" flexGrow={1}>
+                        <Box flexGrow={1} bg="white" mb="1px" />
+                        {months.map((month, i) => (
+                          <Hover>
+                            {({ hovered, bind }) => (
+                              <Box
+                                mr={'1px'}
+                                textAlign={['center']}
+                                borderBottom="3px solid"
+                                bg="white"
+                                color="blue.dark"
+                                borderColor={i === state.month ? 'blue' : hovered ? 'blue.mid' : 'transparent'}
+                                py={4}
+                                px={4}
+                                mb="1px"
+                                key={i}
+                                cursor={hovered ? 'pointer' : 'unset'}
+                                onClick={() => setMonth(i)}
+                                transition="0.1s all ease-in-out"
+                                {...bind}
+                              >
+                                <Type
+                                  opacity={hovered || i === state.month ? 1 : 0.7}
+                                  fontWeight={i === state.month ? 'bold' : '400'}
+                                >
+                                  {dayjs(month.monthName + ' ' + month.year.toString()).format("MMM 'YY ")}
+                                </Type>
+                              </Box>
+                            )}
+                          </Hover>
+                        ))}
+                      </Flex>
+                    </Box>
+
                     <Box order={[2, 1]} flexGrow={1}>
                       <Table
                         limit={8}
@@ -189,57 +234,7 @@ const HowMuchSection = ({ apps, months, ...rest }) => (
                         </Box>
                       ) : null}
                     </Box>
-                    <Box width={[1, 1 / 4]} minWidth="180px" pl={[0, 4]} order={[1, 2]}>
-                      <Box position="sticky" top="110px">
-                        <Box
-                          display={['none', 'block']}
-                          bg="white"
-                          color="blue.dark"
-                          borderRadius={2}
-                          py={5}
-                          px={4}
-                          mb="1px"
-                        >
-                          <Type lineHeight={1.45} fontSize={2}>
-                            Monthly Results
-                          </Type>
-                        </Box>
-                        <Flex flexGrow={1} flexDirection={['row-reverse', 'column-reverse']}>
-                          {months.map((month, i) => (
-                            <Hover>
-                              {({ hovered, bind }) => (
-                                <Box
-                                  textAlign={['center', 'left']}
-                                  flexGrow={1}
-                                  borderLeft="3px solid"
-                                  bg="white"
-                                  color="blue.dark"
-                                  borderColor={i === state.month ? 'blue' : hovered ? 'blue.mid' : 'transparent'}
-                                  py={4}
-                                  px={4}
-                                  mb="1px"
-                                  key={i}
-                                  cursor={hovered ? 'pointer' : 'unset'}
-                                  onClick={() => setMonth(i)}
-                                  transition="0.1s all ease-in-out"
-                                  {...bind}
-                                >
-                                  <Type
-                                    opacity={hovered || i === state.month ? 1 : 0.7}
-                                    fontWeight={i === state.month ? 'bold' : '400'}
-                                  >
-                                    <Type display={['none', 'inline']}>{month.monthName}</Type>
-                                    <Type display={['inline', 'none']}>{month.month}</Type>{' '}
-                                    {month.year.toString().replace('20', "'")}
-                                  </Type>
-                                </Box>
-                              )}
-                            </Hover>
-                          ))}
-                        </Flex>
-                      </Box>
-                    </Box>
-                  </Flex>
+                  </Box>
                 )
               }}
             </State>

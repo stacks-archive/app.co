@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { Flex, Type, AppMiningLogo } from 'blockstack-ui'
-import { OutlinedLogo } from '@components/mining/svg'
 import { CallToAction, Countdown, Wrapper } from '../shared'
 
 const Header = ({ showOnMobile, link, ...rest }) => {
@@ -35,7 +34,7 @@ const Header = ({ showOnMobile, link, ...rest }) => {
             color="white"
             pl={2}
             flexGrow={1}
-            pt={"2px"}
+            pt={'2px'}
           >
             Next ranking starts in <Countdown pl={[0, 0, 0, 2]} />
           </Type>
