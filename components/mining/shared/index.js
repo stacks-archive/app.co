@@ -249,7 +249,7 @@ const CallToAction = ({ hideTimer, buttonProps = {}, ...rest }) => (
                       whiteSpace: 'nowrap'
                     }}
                   >
-                    Next ranking starts in
+                    Next ranking starts on
                   </Type>
                   <Type pl={[0, 1]} pt={[2, 0]}>
                     <Countdown />

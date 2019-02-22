@@ -36,7 +36,7 @@ const Header = ({ showOnMobile, link, ...rest }) => {
             flexGrow={1}
             pt={'2px'}
           >
-            Next ranking starts in <Countdown pl={[0, 0, 0, 2]} />
+            Next ranking starts on <Countdown pl={[0, 0, 0, 2]} />
           </Type>
         </Flex>
         <Flex display={['none', 'none', 'flex']}>
