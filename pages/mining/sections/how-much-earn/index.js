@@ -1,7 +1,9 @@
 import React from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
 import { Hover, State } from 'react-powerplug'
-import { Title, Wrapper, LearnMore, ObservedSection } from '@components/mining/shared'
+import { Title, Wrapper, ObservedSection } from '@components/mining/shared'
+import { ArrowIcon } from '@components/mining/svg'
+
 import dayjs from 'dayjs'
 import numeral from 'numeral'
 import { ChevronRightIcon, ChevronLeftIcon } from 'mdi-react'
@@ -113,9 +115,7 @@ const Table = ({ apps, state, limit = 7, months, decrementMonth, incrementMonth,
         <Flex style={{ userSelect: 'none' }} width={[2 / 3, 2 / 3, 3 / 8]} ml="auto" alignItems="center">
           <Flex alignItems="center" justifyContent={['flex-end', 'center']} textAlign="center" width={[1, 1 / 2]}>
             <ArrowButton icon={ChevronLeftIcon} onClick={decrementMonth} pt={1} px={2} disabled={state.month === 0} />
-            <Type style={{ whiteSpace: 'nowrap' }}>
-              {months[state.month].monthName} {months[state.month].year.toString().replace('20', "'")}
-            </Type>
+            <Type style={{ whiteSpace: 'nowrap' }}>Payout</Type>
             <ArrowButton
               icon={ChevronRightIcon}
               onClick={incrementMonth}
@@ -140,13 +140,16 @@ const HowMuchSection = ({ apps, months, ...rest }) => (
   <ObservedSection bg="blue.light" {...rest}>
     {({ inView }) => (
       <Wrapper inView={inView} observed>
-        <Flex width={[1]} flexShrink={0} flexDirection="column">
-          <Title maxWidth="100%">How much can you earn?</Title>
-          <Type maxWidth={700} lineHeight={1.65} pt={6}>
+        <Flex width={[1]} flexShrink={0} justifyContent="center" flexDirection="column">
+          <Title mx="auto" maxWidth="100%" textAlign="center">
+            How much can you earn?
+          </Title>
+          <Type mx="auto" maxWidth={700} lineHeight={1.85} pt={6} textAlign="center">
             We currently pay in BTC for legal compliance. We plan to begin paying Stacks tokens early 2019 provided
-            compliance with all applicable law.
+            compliance with all applicable law. See below how much apps have earned in the equivalent of USD each month
+            based on their rank.
           </Type>
-          <Flex mt={7} width={1} flexDirection="column" alignItems="center" justifyContent="center">
+          <Flex mt={6} width={1} flexDirection="column" alignItems="center" justifyContent="center">
             <State initial={{ all: false, showMenu: false, month: months.length - 1 }}>
               {({ state, setState }) => {
                 const decrementMonth = () => {
@@ -168,46 +171,35 @@ const HowMuchSection = ({ apps, months, ...rest }) => (
 
                 return (
                   <Box width={1}>
-                    <Box pb={3} textAlign="right" color="blue">
-                      <Type
-                        is="a"
-                        target="_blank"
-                        href={`/mining/${dayjs(
-                          months[state.month].monthName + ' ' + months[state.month].year.toString()
-                        )
-                          .format('MMMM-YYYY')
-                          .toLowerCase()}`}
-                      >
-                        See Full Report
-                      </Type>
-                    </Box>
                     <Box display={['none', 'block']} width={[1]}>
-                      <Flex flexWrap="wrap" justifyContent="flex-end" flexDirection="row-reverse" flexGrow={1}>
-                        <Box flexGrow={1} bg="white" mb="1px" />
+                      <Flex flexWrap="wrap" justifyContent="center" flexDirection="row-reverse" flexGrow={1} pb={6}>
                         {months.map((month, i) => (
                           <Hover>
                             {({ hovered, bind }) => (
                               <Box
-                                mr={'1px'}
+                                mx={2}
+                                mb={2}
                                 textAlign={['center']}
-                                borderBottom="3px solid"
-                                bg="white"
-                                color="blue.dark"
+                                bg={state.month === i ? 'blue.dark' : hovered ? 'blue' : 'blue.mid'}
+                                color={state.month === i ? 'white' : hovered ? 'white' : 'blue.dark'}
                                 borderColor={i === state.month ? 'blue' : hovered ? 'blue.mid' : 'transparent'}
-                                py={4}
+                                py={2}
                                 px={4}
-                                mb="1px"
                                 key={i}
+                                borderRadius="20px"
                                 cursor={hovered ? 'pointer' : 'unset'}
                                 onClick={() => setMonth(i)}
                                 transition="0.1s all ease-in-out"
                                 {...bind}
                               >
                                 <Type
+                                  fontWeight={600}
+                                  lineHeight={0.9}
+                                  pb="4px"
                                   opacity={hovered || i === state.month ? 1 : 0.7}
-                                  fontWeight={i === state.month ? 'bold' : '400'}
+                                  fontSize={1}
                                 >
-                                  {dayjs(month.monthName + ' ' + month.year.toString()).format("MMM 'YY ")}
+                                  {dayjs(month.monthName + ' ' + month.year.toString()).format('MMM YYYY ')}
                                 </Type>
                               </Box>
                             )}
@@ -225,17 +217,37 @@ const HowMuchSection = ({ apps, months, ...rest }) => (
                         decrementMonth={decrementMonth}
                         incrementMonth={incrementMonth}
                       />
-                      {!state.all ? (
-                        <Box pt={7}>
-                          <LearnMore
-                            position="static"
-                            color="blue.dark"
-                            hoverColor="blue"
-                            label={'Show more apps'}
-                            onClick={() => setState({ all: true })}
-                          />
-                        </Box>
-                      ) : null}
+                      <Box pt={6}>
+                        <Hover>
+                          {({ hovered, bind }) => (
+                            <Flex
+                              is="a"
+                              target="_blank"
+                              href={`/mining/${dayjs(
+                                months[state.month].monthName + ' ' + months[state.month].year.toString()
+                              )
+                                .format('MMMM-YYYY')
+                                .toLowerCase()}`}
+                              position="static"
+                              hoverColor="blue"
+                              textAlign="center"
+                              width={1}
+                              alignItems="center"
+                              justifyContent="center"
+                              fontFamily="brand"
+                              style={{
+                                textDecoration: 'none'
+                              }}
+                              {...bind}
+                            >
+                              <Type color={hovered ? 'blue' : 'blue.dark'} pr={2}>
+                                See Full Report
+                              </Type>
+                              <ArrowIcon color={hovered ? 'blue' : 'blue.dark'} width="25px" />
+                            </Flex>
+                          )}
+                        </Hover>
+                      </Box>
                     </Box>
                   </Box>
                 )
