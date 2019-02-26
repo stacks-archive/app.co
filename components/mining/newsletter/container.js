@@ -43,6 +43,8 @@ class NewsletterWrapper extends React.PureComponent {
 
   setError = (error) =>
     this.setState({
+      loading: false,
+      showError: true,
       error
     })
 
@@ -98,6 +100,7 @@ class NewsletterWrapper extends React.PureComponent {
           this.success()
           return this.state.value
         } else {
+          console.log('DATA', data)
           this.setError(data.error)
           return false
         }
