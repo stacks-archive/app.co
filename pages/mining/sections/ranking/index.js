@@ -140,7 +140,7 @@ const GraphAnimation = ({ color, count, position, rows }) => {
               config={{ duration: 3000 }}
               onRest={() => {
                 toggleAnimation(false);
-                setTimeout(() => toggleAnimation(true), 4000);
+                setTimeout(() => toggleAnimation(true), 5000);
               }}
             >
               {columnArray.map((item, index) => props => (
