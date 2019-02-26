@@ -223,7 +223,7 @@ const AppCard = ({ py, px, my, mx, mr = 'auto', ml = 'auto', mt, mb, style, appM
         <TagsSection {...props} />
         <hr />
         <StatsItem {...props} />
-        {appMiningData ? (
+        {appMiningData && appMiningData.lifetimeEarnings && appMiningData.lifetimeEarnings !== 0 ? (
           <Flex justifyContent="space-between" alignItems="center" borderRadius={6} mt={1} mb={4} p={4} bg="blue.dark">
             <Box mr={2}>
               <NewType fontFamily="brand" color="white" fontSize={3}>
