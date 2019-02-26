@@ -171,17 +171,14 @@ const RankingAnimation = ({ apps }) => {
   const animationData = [
     {
       id: 0,
-      image: CameraIcon,
       payout: 20000
     },
     {
       id: 1,
-      image: Dots,
       payout: 16000
     },
     {
       id: 2,
-      image: CameraIcon,
       payout: 12800
     }
   ];
@@ -251,7 +248,7 @@ const RankingAnimation = ({ apps }) => {
                       <Box is={animated.div} display='inline-block' width={85}>
                         {payout.interpolate(payout => {
                           const payoutStr = Math.floor(payout).toString();
-                          return `$${payoutStr.padStart(6 - payoutStr.length, '0')}`;
+                          return `$${payoutStr.padStart(5, '0')}`;
                         })}
                       </Box>
                     </Type>
