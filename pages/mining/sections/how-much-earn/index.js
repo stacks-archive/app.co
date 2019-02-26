@@ -172,7 +172,7 @@ const HowMuchSection = ({ apps, months, ...rest }) => (
                 return (
                   <Box width={1}>
                     <Box display={['none', 'block']} width={[1]}>
-                      <Flex flexWrap="wrap" justifyContent="center" flexDirection="row-reverse" flexGrow={1} pb={6}>
+                      <Flex flexWrap="wrap" justifyContent="center" flexDirection="row" flexGrow={1} pb={6}>
                         {months.map((month, i) => (
                           <Hover>
                             {({ hovered, bind }) => (

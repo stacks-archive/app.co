@@ -62,6 +62,16 @@ class HomePage extends React.PureComponent {
           <Newsletter serverCookies={this.props.serverCookies} wrap />
         </Page.Section>
         <Page.Section flexDirection="column" px>
+          <FeaturedList
+            appNames={this.props.rankings.map((app) => app.name)}
+            title="Popular Blockstack Apps"
+            href="/blockstack"
+            hrefAttrs={{ as: '/blockstack', href: { pathname: '/blockstack', query: { platform: 'blockstack' } } }}
+            filterBy="platforms"
+            singular="platform"
+            query="blockstack"
+            limit={23}
+          />
           <AppsList
             single
             limit={4}
@@ -76,16 +86,6 @@ class HomePage extends React.PureComponent {
               },
               as: '/all'
             }}
-          />
-          <FeaturedList
-            appNames={this.props.rankings.map((app) => app.name)}
-            title="Popular Blockstack Apps"
-            href="/blockstack"
-            hrefAttrs={{ as: '/blockstack', href: { pathname: '/blockstack', query: { platform: 'blockstack' } } }}
-            filterBy="platforms"
-            singular="platform"
-            query="blockstack"
-            limit={23}
           />
         </Page.Section>
 
