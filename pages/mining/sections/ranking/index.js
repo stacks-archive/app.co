@@ -1,10 +1,10 @@
 import { times } from 'lodash';
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
 import { Spring, Trail, Transition, animated, interpolate } from 'react-spring';
 import { Title, Wrapper, Section, ObservedSection } from '@components/mining/shared'
 import { Dots, DotsLine, DemoEarthLogo, ProductHuntLogo, CameraIcon, TryMyUILogo, VerticalDotLine } from '@components/mining/svg'
-import { getDecimalPlaces, getRandomInt } from '@utils';
+import { getDecimalPlaces, getSeededRandom, getRandomInt } from '@utils';
 import { Hover, State } from 'react-powerplug'
 
 const texts = [
@@ -81,28 +81,29 @@ const Ranker = ({ position, logo: Logo, children, color, logoProps = {}, ...rest
       </Box>
     )}
   </Hover>
-)
+);
 
-class DurationTrail extends React.Component {
-  getValues = () => this.ref.getValues();
-
-  render() {
-    const { children, delay = 0, ms = 50, keys, onRest, ...props } = this.props;
-
-    return children.map((child, i) => {
-      return (
-        <Spring
-          ref={ref => i === 0 && (this.ref = ref)}
-          key={keys[i]}
-          {...props}
-          delay={0}
-          onRest={i === children.length - 1 ? onRest : null}
-          children={child}
-        />
-      )
-    })
-  }
-}
+const DurationTrail = ({
+  children,
+  delay = 0,
+  keys,
+  ms = 50,
+  onRest,
+  ...props
+}) => (
+  <Fragment>
+    {children.map((child, i) => (
+      <Spring
+        {...props}
+        children={child}
+        delay={0}
+        key={keys[i]}
+        onRest={i === children.length - 1 ? onRest : null}
+      />
+    ))
+    }
+  </Fragment>
+);
 
 const GraphAnimation = ({ color, count, position, rows }) => {
   const columnArray = new Array(count);
@@ -111,16 +112,6 @@ const GraphAnimation = ({ color, count, position, rows }) => {
       key: i,
       seed: getRandomInt(0, count)
     };
-  }
-
-  const getSeededRandom = (seed = 0, max = 0, min = 11) => {
-    max = max || 1;
-    min = min || 0;
-
-    seed = (seed * 9301 + 49297) % 233280;
-    var rnd = seed / 233280;
-
-    return Math.floor(min + rnd * (max - min));
   }
 
   return (

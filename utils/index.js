@@ -159,6 +159,13 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+const getSeededRandom = (seed = 0, min = 0, max = 11) => {
+  seed = (seed * 9301 + 49297) % 233280;
+  const rnd = seed / 233280;
+
+  return Math.floor(min + rnd * (max - min));
+}
+
 const getDecimalPlaces = (value) => {
   if(Math.floor(value) === value) return 0;
   return value.toString().split(".")[1].length || 0;
@@ -172,6 +179,7 @@ export {
   colorHexFromString,
   enumSelect,
   getDecimalPlaces,
+  getSeededRandom,
   getRandomInt,
   getTags,
   getTwitterMentions,
