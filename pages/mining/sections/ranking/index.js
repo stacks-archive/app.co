@@ -94,11 +94,11 @@ const DurationTrail = ({
   <Fragment>
     {children.map((child, i) => (
       <Spring
-        {...props}
         children={child}
         delay={0}
         key={keys[i]}
         onRest={i === children.length - 1 ? onRest : null}
+        {...props}
       />
     ))
     }
@@ -115,41 +115,54 @@ const GraphAnimation = ({ color, count, position, rows }) => {
   }
 
   return (
-    <Flex
-      bottom={0}
-      left={0}
-      overflow='hidden'
-      position='absolute'
-      right={0}
-      top={0}
-      zIndex={-1}
-    >
-      <DurationTrail
-        native
-        from={{ seed: 1 }}
-        to={{ seed: 500 }}
-        items={columnArray}
-        keys={columnArray.map(item => item.key)}
-        delay={0}
-        config={{ duration: 3000 }}
-      >
-        {columnArray.map((item, index) => props => (
+    <State initial={{ reset: false }}>
+      {({ state, setState }) => {
+        const toggleAnimation = (reset) => setState({ reset });
+
+        return (
           <Flex
-            is={animated.div}
+            bottom={0}
+            left={0}
+            overflow='hidden'
             position='absolute'
-            left={`${index * 5}px`}
-            bottom="-50%"
-            width={5}
-            height={100}
-            style={{
-              transform: props.seed.interpolate(seed => `translate(0, ${getSeededRandom(item.seed + Math.floor(seed))}px)`)
-            }}
+            right={0}
+            top={0}
+            zIndex={-1}
           >
-            <VerticalDotLine color={color} />
+            <DurationTrail
+              native
+              reset={state.reset}
+              from={{ seed: 1 }}
+              to={{ seed: 500 }}
+              items={columnArray}
+              keys={columnArray.map(item => item.key)}
+              delay={0}
+              config={{ duration: 3000 }}
+              onRest={() => {
+                toggleAnimation(false);
+                setTimeout(() => toggleAnimation(true), 4000);
+              }}
+            >
+              {columnArray.map((item, index) => props => (
+                <Flex
+                  is={animated.div}
+                  position='absolute'
+                  left={`${index * 5}px`}
+                  bottom="-50%"
+                  width={5}
+                  height={100}
+                  style={{
+                    transform: props.seed.interpolate(seed => `translate(0, ${getSeededRandom(item.seed + Math.floor(seed))}px)`)
+                  }}
+                >
+                  <VerticalDotLine color={color} />
+                </Flex>
+              ))}
+            </DurationTrail>
           </Flex>
-        ))}
-      </DurationTrail>
-    </Flex>
+        )
+      }}
+    </State>
   )
 }
 
