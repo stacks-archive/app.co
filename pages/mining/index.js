@@ -1,7 +1,6 @@
 import * as React from 'react'
 import Head from '@containers/head'
 import { MiningPage } from '@components/mining/page'
-import { API_URL } from '@common/constants'
 import { selectApiServer } from '@stores/apps/selectors'
 import { connect } from 'react-redux'
 import { StartAppMiningSection } from '@pages/mining/sections/start-app-mining'
@@ -23,11 +22,12 @@ const mapStateToProps = (state) => ({
 
 class AppMiningPage extends React.Component {
   static async getInitialProps({ reduxStore }) {
+    const api = selectApiServer(reduxStore.getState())
     try {
       const promises = await Promise.all([
-        fetch(`${API_URL}/app-mining-months`),
-        fetch(`${API_URL}/mining-faq`),
-        fetch(`${API_URL}/app-mining-apps`)
+        fetch(`${api}/api/app-mining-months`),
+        fetch(`${api}/api/mining-faq`),
+        fetch(`${api}/api/app-mining-apps`)
       ])
       const { months } = await promises[0].json()
       const { faqs } = await promises[1].json()
@@ -42,9 +42,8 @@ class AppMiningPage extends React.Component {
           }
         })
 
-        const rankingMonths = months.map((month) =>
-          {
-                const theApps = month.compositeRankings.map((app) => {
+        const rankingMonths = months.map((month) => {
+          const theApps = month.compositeRankings.map((app) => {
             const appWithLifetimeEarnings = apps.find((otherApp) => otherApp.name === app.name)
             return {
               ...appWithLifetimeEarnings,
@@ -52,12 +51,11 @@ class AppMiningPage extends React.Component {
             }
           })
 
-            return {
-              ...month,
-              apps: theApps
-            }
+          return {
+            ...month,
+            apps: theApps
           }
-        )
+        })
         return { rankings, month: months[months.length - 1], months, rankingMonths, faq: faqs, apps }
       } else {
         return {}

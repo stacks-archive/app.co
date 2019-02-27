@@ -1,5 +1,4 @@
 import React from 'react'
-import { API_URL } from '@common/constants'
 import { Page } from '@components/page'
 import { Newsletter } from '@components/newsletter'
 import { FeaturedList, AppsList } from '@components/list/apps'
@@ -8,15 +7,17 @@ import { doSelectApp } from '@stores/apps'
 import { PlatformsList } from '@components/list/platforms'
 import Modal from '@containers/modals/app'
 import Head from '@containers/head'
+import { selectApiServer } from '@stores/apps/selectors'
 
 class HomePage extends React.PureComponent {
   static async getInitialProps({ req, reduxStore }) {
+    const api = selectApiServer(reduxStore.getState())
     let props = {}
     try {
       const promises = await Promise.all([
-        fetch(`${API_URL}/app-mining-months`),
-        fetch(`${API_URL}/mining-faq`),
-        fetch(`${API_URL}/app-mining-apps`)
+        fetch(`${api}/api/app-mining-months`),
+        fetch(`${api}/api/mining-faq`),
+        fetch(`${api}/api/app-mining-apps`)
       ])
       const { months } = await promises[0].json()
       const { faqs } = await promises[1].json()
