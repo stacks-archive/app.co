@@ -3,7 +3,7 @@ import { CloseIcon } from 'mdi-react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { selectCurrentApp } from '@stores/apps/selectors'
+import { selectCurrentApp, selectAppMiningApps } from '@stores/apps/selectors'
 import { doClearApp } from '@stores/apps'
 
 import StyledModal from '@components/modal'
@@ -52,7 +52,9 @@ class ModalClass extends React.Component {
   }
 
   render() {
-    const { app, doGoBack } = this.props
+    const { app, doGoBack, appMiningApps } = this.props
+    const appMiningData =
+      app && appMiningApps && appMiningApps.length ? appMiningApps.find((a) => a.name === app.name) : null
     return app ? (
       <StyledModal.Modal>
         <StyledModal.Content width={[1, 0.65, 0.65, 0.5]}>
@@ -67,7 +69,12 @@ class ModalClass extends React.Component {
           >
             <CloseIcon />
           </StyledModal.CloseButton>
-          <AppCard {...app} handleClose={() => this.handleClose(doGoBack)} style={{ position: 'relative', zIndex: 10 }} />
+          <AppCard
+            {...app}
+            appMiningData={appMiningData}
+            handleClose={() => this.handleClose(doGoBack)}
+            style={{ position: 'relative', zIndex: 10 }}
+          />
         </StyledModal.Content>
         <StyledModal.Backdrop onClick={() => this.handleClose(doGoBack)} />
       </StyledModal.Modal>
@@ -76,7 +83,8 @@ class ModalClass extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  app: selectCurrentApp(state)
+  app: selectCurrentApp(state),
+  appMiningApps: selectAppMiningApps(state)
 })
 
 const Modal = connect(mapStateToProps)(ModalClass)

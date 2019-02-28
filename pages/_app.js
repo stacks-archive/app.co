@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { CookiesProvider } from 'react-cookie'
 import Router from 'next/router'
 import withReduxStore from '@common/lib/with-redux-store'
+import { appsActions } from '@stores/apps'
 import { Root } from '@containers/root'
 import { theme } from '@common/styles'
 import { theme as BlockstackTheme } from 'blockstack-ui'
@@ -72,7 +73,7 @@ const GlobalStyles = createGlobalStyle`
 `
 
 class MyApp extends App {
-  static async getInitialProps({ Component, ctx }) {
+  static async getInitialProps({ Component, ctx, ...rest }) {
     let pageProps = {}
 
     /**
@@ -84,12 +85,14 @@ class MyApp extends App {
       pageProps = await Component.getInitialProps(ctx)
     }
 
+    await appsActions.fetchAppMiningApps()(ctx.reduxStore.dispatch, ctx.reduxStore.getState)
+
     return { pageProps, cookies }
   }
 
   componentDidMount() {
     smoothscroll.polyfill()
-    if ((typeof(document) !== 'undefined') && document.location.pathname.indexOf('/admin') !== 0) {
+    if (typeof document !== 'undefined' && document.location.pathname.indexOf('/admin') !== 0) {
       Router.router.events.on('routeChangeComplete', trackPageView)
     }
   }

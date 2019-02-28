@@ -2741,10 +2741,10 @@ bl@^1.0.0:
     readable-stream "^2.3.5"
     safe-buffer "^5.1.1"
 
-blockstack-ui@^0.0.71:
-  version "0.0.71"
-  resolved "https://registry.yarnpkg.com/blockstack-ui/-/blockstack-ui-0.0.71.tgz#29920e57fbb270a85cd8afdebbf628a6b468cedf"
-  integrity sha512-IPxlf++89g0O0bGyNDNf4afWAqefvNzOOJFcy5teFt3J+TWoBcy1Di17VYT+NzPzX4pn2t85UwmQBz8Ny8rieA==
+blockstack-ui@^0.0.73:
+  version "0.0.73"
+  resolved "https://registry.yarnpkg.com/blockstack-ui/-/blockstack-ui-0.0.73.tgz#1e419f49b447e87d56f0aefe0f89477b4b83d8be"
+  integrity sha512-wMxBoIkG1vos4KZ5g3OdUV9OGLaVQSwNh0fD3J1lsEliklPbTvuc2119FxywBH0boRUuTB87PsSg3tQpLuV7og==
   dependencies:
     epitath "^1.0.0-beta.1"
     html-tags "^2.0.0"

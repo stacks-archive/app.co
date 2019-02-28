@@ -151,7 +151,17 @@ const PioneersSection = ({ apps, ...rest }) => (
         <Flex width={1} position="relative">
           <Wrapper alignItems="center" justifyContent="center" position="relative" zIndex={2}>
             <Box max="auto" width={1} maxWidth={500}>
-              <OpenStarterKitModal>
+              <OpenStarterKitModal
+                content={{
+                  initial: {
+                    title: 'Subscribe for Updates'
+                  },
+                  success: {
+                    title: 'Thank you!',
+                    body: 'We will send updates about App Mining to'
+                  }
+                }}
+              >
                 {({ bind }) => (
                   <Button height="auto" pt="16px" pb="15px" icon={ArrowIcon} width={1} {...bind}>
                     Subscribe for Updates

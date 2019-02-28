@@ -1,7 +1,7 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { selectCurrentApp } from '@stores/apps/selectors'
+import { selectCurrentApp, selectAppMiningApps } from '@stores/apps/selectors'
 import { Flex, Box } from 'blockstack-ui'
 import { GithubCircleIcon, TwitterCircleIcon } from 'mdi-react'
 import { Page as Container } from '@containers/page'
@@ -17,6 +17,7 @@ import Head from '@containers/head'
 import UserStore from '@stores/user'
 
 import { outboundLink } from '@utils'
+import app from '@pages/admin/app'
 
 class AppDetails extends React.Component {
   static getInitialProps({ req, reduxStore }) {
@@ -30,12 +31,15 @@ class AppDetails extends React.Component {
   }
 
   appDetails() {
-    const app = this.props.selectedApp
+    const { selectedApp: app, appMiningApps } = this.props
+
     const [ranking] = app.Rankings || []
     let tweets = 0
     if (ranking) {
       tweets = ranking.twitterMentions || 0
     }
+
+    const isAppMiningApp = appMiningApps.find((appMiningapp) => appMiningapp.name === app.name)
     return (
       <Flex flexWrap>
         <Box width={[1, 1, 1 / 4, 1 / 4]}>
@@ -57,16 +61,15 @@ class AppDetails extends React.Component {
             Visit Website
           </Button>
           <br />
-          {app.openSourceUrl &&
-            app.openSourceUrl.indexOf('github.com') !== -1 && (
-              <>
-                <StyledApp.BrandLink href={app.openSourceUrl} target="_blank">
-                  <GithubCircleIcon color="currentColor" />
-                  View on Github
-                </StyledApp.BrandLink>
-                <br />
-              </>
-            )}
+          {app.openSourceUrl && app.openSourceUrl.indexOf('github.com') !== -1 && (
+            <>
+              <StyledApp.BrandLink href={app.openSourceUrl} target="_blank">
+                <GithubCircleIcon color="currentColor" />
+                View on Github
+              </StyledApp.BrandLink>
+              <br />
+            </>
+          )}
 
           {app.twitterHandle && (
             <>
@@ -159,11 +162,15 @@ class AppDetails extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  selectedApp: selectCurrentApp(state)
+  selectedApp: selectCurrentApp(state),
+  appMiningApps: selectAppMiningApps(state)
 })
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(Object.assign({}, AppStore.actions, UserStore.actions), dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppDetails)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AppDetails)

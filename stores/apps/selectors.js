@@ -2,6 +2,7 @@
 export const selectApps = (state) => state.apps && state.apps.apps
 export const selectApiServer = (state) => state.apps && state.apps.apiServer
 export const selectCurrentApp = (state) => state.apps && state.apps.selectedApp
+
 export const selectFilteredApps = (state) => state.apps && state.apps.filteredApps
 export const selectPlatformFilter = (state) => state.apps && state.apps.platformFilter
 export const selectAppCategories = (state) => state.apps && state.apps.constants.appConstants.categoryEnums
