@@ -1,6 +1,7 @@
 import React from 'react'
 import { Flex, Box, Type, Button } from 'blockstack-ui'
-import { Title, Wrapper, Section, ObservedSection } from '@components/mining/shared'
+import Link from 'next/link'
+import { Title, Wrapper, ObservedSection } from '@components/mining/shared'
 import { BuildGraphic, ImproveGraphic, RegisterGraphic, ArrowIcon } from '@components/mining/svg'
 import { trackEvent } from '@utils'
 
@@ -80,15 +81,25 @@ const StartAppMiningSection = ({ ...rest }) => (
                 is="a"
                 href="https://docs.blockstack.org/develop/mining_intro.html"
                 target="_blank"
+                onClick={() => trackEvent('App Mining Get Started Click - Detailed Docs')}
               >
                 App Mining Docs.
               </Type>
             </Type>
             <Type>
               Want to verify your app is completely registered? A list of{' '}
-              <Type display="inline" is="a" href="/mining/apps">
-                all App Mining eligible apps
-              </Type>
+              <Link
+                passHref
+                href="/mining/apps"
+              >
+                <Type
+                  display="inline"
+                  is="a"
+                  onClick={() => trackEvent('App Mining Get Started Click - Eligible Apps')}
+                >
+                  all App Mining eligible apps
+                </Type>
+              </Link>
               .{' '}
             </Type>
           </Flex>
