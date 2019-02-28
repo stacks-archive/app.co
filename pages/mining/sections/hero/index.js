@@ -22,22 +22,25 @@ function arrayRotateOne(arr, reverse) {
 }
 
 const Apps = ({ apps, ...rest }) => {
+  const delay = 1100;
   const limit = 4;
   const visible = 3;
   const items = [apps[0], apps[1], apps[2], apps[3]];
 
   return (
-    <State initial={{ active: 1, items }}>
+    <State initial={{ active: 0, items }}>
       {({ state, setState }) => {
         const cycleItems = (curState) => {
-          if (curState.active > limit) return setState({ active: 1});
+          if (curState.active + 1 >= items.length) {
+            return setState({ active: 0 });
+          }
 
           return setState({ active: curState.active + 1 });
         };
 
         const { active, items } = state;
-        const sortedItems = items.slice(active, items.length).concat(items.slice(0, active));
 
+        const sortedItems = items.slice(active, items.length).concat(items.slice(0, active));
         let displayData = sortedItems.map((child, index) => {
           const y = 20 * index;
           const opacity = 1 / (index + 1);
@@ -46,6 +49,7 @@ const Apps = ({ apps, ...rest }) => {
         });
 
         const onUpdate = ({ index, opacity, scale, y }) => {
+
           if (index >= visible) {
             return [{ opacity: 0, scale: 1.05, y: -20 }, { scale, y }];
           }
@@ -62,13 +66,13 @@ const Apps = ({ apps, ...rest }) => {
             <Transition
               native
               items={displayData}
-              keys={item => item.child.id}
-              initial={() => setTimeout(() => cycleItems(state), 5000)}
+              keys={(item) => item.child.id}
+              initial={() => setTimeout(() => cycleItems(state), delay)}
               from={{ opacity: 0, scale: 0 }}
               leave={{ opacity: 0, scale: 0 }}
               enter={({ opacity, scale, y }) => ({ opacity, scale, y })}
               update={(item) => onUpdate(item)}
-              onRest={() => setTimeout(() => cycleItems(state), 5000)}
+              onRest={() => setTimeout(() => cycleItems(state), delay)}
             >
               {({ child }, state, index) => ({ opacity, scale, y }) => (
                 <Flex
