@@ -133,11 +133,11 @@ const GraphAnimation = ({ color, count, position, rows }) => {
               native
               reset={true}
               from={{ seed: 1 }}
-              to={{ seed: 500 }}
+              to={{ seed: 100 }}
               items={columnArray}
               keys={columnArray.map(item => item.key)}
               delay={0}
-              config={{ duration: 3000 }}
+              config={{ duration: 2500 }}
             >
               {columnArray.map((item, index) => props => (
                 <Flex
