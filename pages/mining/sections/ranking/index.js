@@ -115,51 +115,43 @@ const GraphAnimation = ({ color, count, position, rows }) => {
   }
 
   return (
-    <State initial={{ reset: false }}>
-      {({ state, setState }) => {
-        const toggleAnimation = (reset) => setState({ reset });
-
-        return (
+    <Flex
+      bottom={0}
+      left={0}
+      overflow='hidden'
+      position='absolute'
+      right={0}
+      top={0}
+      zIndex={-1}
+    >
+      <DurationTrail
+        native
+        reset={true}
+        from={{ seed: 1 }}
+        to={{ seed: 100 }}
+        items={columnArray}
+        keys={columnArray.map(item => item.key)}
+        delay={0}
+        config={{ duration: 2200 }}
+      >
+        {columnArray.map((item, index) => props => (
           <Flex
-            bottom={0}
-            left={0}
-            overflow='hidden'
+            is={animated.div}
             position='absolute'
-            right={0}
-            top={0}
-            zIndex={-1}
+            left={`${index * 5}px`}
+            bottom="-50%"
+            width={5}
+            height={100}
+            style={{
+              transform: props.seed.interpolate(seed => `translate(0, ${getSeededRandom(item.seed + Math.floor(seed))}px)`)
+            }}
           >
-            <DurationTrail
-              native
-              reset={true}
-              from={{ seed: 1 }}
-              to={{ seed: 100 }}
-              items={columnArray}
-              keys={columnArray.map(item => item.key)}
-              delay={0}
-              config={{ duration: 2200 }}
-            >
-              {columnArray.map((item, index) => props => (
-                <Flex
-                  is={animated.div}
-                  position='absolute'
-                  left={`${index * 5}px`}
-                  bottom="-50%"
-                  width={5}
-                  height={100}
-                  style={{
-                    transform: props.seed.interpolate(seed => `translate(0, ${getSeededRandom(item.seed + Math.floor(seed))}px)`)
-                  }}
-                >
-                  <VerticalDotLine color={color} />
-                </Flex>
-              ))}
-            </DurationTrail>
+            <VerticalDotLine color={color} />
           </Flex>
-        )
-      }}
-    </State>
-  )
+        ))}
+      </DurationTrail>
+    </Flex>
+  );
 }
 
 const RankingAnimation = ({ activeItem, apps, items, onRest }) => {
