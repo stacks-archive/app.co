@@ -137,7 +137,7 @@ const GraphAnimation = ({ color, count, position, rows }) => {
               items={columnArray}
               keys={columnArray.map(item => item.key)}
               delay={0}
-              config={{ duration: 2500 }}
+              config={{ duration: 2200 }}
             >
               {columnArray.map((item, index) => props => (
                 <Flex
