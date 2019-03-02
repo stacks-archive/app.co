@@ -166,9 +166,77 @@ const GraphAnimation = ({ color, count, position, rows }) => {
   )
 }
 
-const RankingAnimation = ({ apps }) => {
+const RankingAnimation = ({ activeItem, apps, items, onRest }) => {
   const elementHeight = 136;
-  const animationData = [
+
+  return (
+    <Box
+      bg="white"
+      color={'blue.dark'}
+      height={136}
+    >
+      <Transition
+        native
+        items={[items[activeItem]]}
+        keys={item => item.id}
+        from={{ opacity: 0, payout: 0, y: elementHeight }}
+        leave={{ opacity: 0, y: -elementHeight }}
+        enter={({ payout }) => ([
+          { opacity: 1, y: 0 },
+          { payout, config: { duration: 1000 } }
+        ])}
+        onRest={() => setTimeout(onRest, 5000)}
+      >
+        {(item, state, index) => ({ opacity, payout, y }) => (
+          <Flex
+            is={animated.div}
+            alignItems="center"
+            position='absolute'
+            width='100%'
+            flex={1}
+            px={[4, 6]}
+            py={6}
+            style={{
+              opacity,
+              transform: y.interpolate((y) => `translateY(${y}px)`)
+            }}
+          >
+            <Type mr={4} fontSize={4} fontFamily="brand">
+              {item.id + 1}
+            </Type>
+            <Flex
+              mr={4}
+              size={72}
+              border={1}
+              borderColor="blue.dark"
+              borderRadius={16}
+              alignItems={'center'}
+              justifyContent="center"
+            >
+              <CameraIcon />
+            </Flex>
+            <Flex ml="auto">
+              <Type lineHeight={1.5} fontSize={5} fontWeight={300} fontFamily="brand">
+                <Type opacity={0.5} fontWeight={['bold', 300]} fontSize={[2, 5]}>
+                  Payout this&nbsp;month:
+                </Type>{' '}
+                <Box is={animated.div} display='inline-block' width={95}>
+                  {payout.interpolate(payout => {
+                    const payoutStr = Math.floor(payout).toString();
+                    return `$${payoutStr.padStart(5, '0')}`;
+                  })}
+                </Box>
+              </Type>
+            </Flex>
+          </Flex>
+        )}
+      </Transition>
+    </Box>
+  );
+}
+
+const RankingSection = ({ apps, ...rest }) => {
+  const carouselData = [
     {
       id: 0,
       payout: 20000
@@ -183,87 +251,6 @@ const RankingAnimation = ({ apps }) => {
     }
   ];
 
-  return (
-    <State initial={{ active: 0, animationData }}>
-      {({ state, setState }) => {
-        const cycleItems = (curState) => {
-          if (curState.active + 1 >= animationData.length) return setState({ active: 0 });
-
-          return setState({ active: curState.active + 1 });
-        };
-
-        const { active, animationData } = state;
-
-        return (
-          <Box
-            bg="white"
-            color={'blue.dark'}
-            height={136}
-          >
-            <Transition
-              native
-              items={[animationData[active]]}
-              keys={item => item.id}
-              from={{ opacity: 0, payout: 0, y: elementHeight }}
-              leave={{ opacity: 0, y: -elementHeight }}
-              enter={({ payout }) => ([
-                { opacity: 1, y: 0 },
-                { payout, config: { duration: 1000 } }
-              ])}
-              onRest={() => setTimeout(() => cycleItems(state), 5000)}
-            >
-              {(item, state, index) => ({ opacity, payout, y }) => (
-                <Flex
-                  is={animated.div}
-                  alignItems="center"
-                  position='absolute'
-                  width='100%'
-                  flex={1}
-                  px={[4, 6]}
-                  py={6}
-                  style={{
-                    opacity,
-                    transform: y.interpolate((y) => `translateY(${y}px)`)
-                  }}
-                >
-                  <Type mr={4} fontSize={4} fontFamily="brand">
-                    {item.id + 1}
-                  </Type>
-                  <Flex
-                    mr={4}
-                    size={72}
-                    border={1}
-                    borderColor="blue.dark"
-                    borderRadius={16}
-                    alignItems={'center'}
-                    justifyContent="center"
-                  >
-                    <CameraIcon />
-                  </Flex>
-                  <Flex ml="auto">
-                    <Type lineHeight={1.5} fontSize={5} fontWeight={300} fontFamily="brand">
-                      <Type opacity={0.5} fontWeight={['bold', 300]} fontSize={[2, 5]}>
-                        Payout this&nbsp;month:
-                      </Type>{' '}
-                      <Box is={animated.div} display='inline-block' width={95}>
-                        {payout.interpolate(payout => {
-                          const payoutStr = Math.floor(payout).toString();
-                          return `$${payoutStr.padStart(5, '0')}`;
-                        })}
-                      </Box>
-                    </Type>
-                  </Flex>
-                </Flex>
-              )}
-            </Transition>
-          </Box>
-        );
-      }}
-    </State>
-  );
-}
-
-const RankingSection = ({ apps, ...rest }) => {
   return (
     <ObservedSection bg="blue.dark" {...rest}>
       {({ inView }) => (
@@ -283,64 +270,85 @@ const RankingSection = ({ apps, ...rest }) => {
             position="relative"
             pt={7}
           >
-            <Box width={1} borderRadius={4} overflow="hidden" style={{ willChange: 'transform' }}>
-              <RankingAnimation apps={apps} />
-              <Flex
-                overflow="hidden"
-                flexWrap="wrap"
-                lineHeight={1.5}
-                p={6}
-                bg="#081537"
-                position="relative"
-                pl={[5, 5, 5, 7]}
-                pr={5}
-                pt={[7, 7, 6, 6]}
-              >
-                <Ranker
-                  is="a"
-                  href="https://blog.producthunt.com/only-the-best-dapps-were-joining-blockstack-s-app-reviewer-program-%EF%B8%8F-6085bea0f501"
-                  target="_blank"
-                  logo={ProductHuntLogo}
-                  mt={0}
-                  color="#da552f"
-                  position={-70}
-                  logoProps={{
-                    minWidth: [180, 150, 150, 180]
-                  }}
-                >
-                  Ranks with Product Hunt
-                  <Box is="br" display={['none', 'none', 'none', 'unset']} /> community upvotes and activity.
-                </Ranker>
-                <Ranker
-                  is="a"
-                  href="https://words.democracy.earth/democratic-app-ranking-democracy-earth-to-represent-blockstack-community-vote-on-app-mining-7ec8360bdc30"
-                  target="_blank"
-                  logo={DemoEarthLogo}
-                  logoProps={{
-                    minWidth: [200, 152, 152, 200]
-                  }}
-                  color="#00c091"
-                  position={-12}
-                >
-                  Ranks by polling the Blockstack
-                  <Box is="br" display={['none', 'none', 'none', 'unset']} /> investor community.
-                </Ranker>
-                <Ranker
-                  is="a"
-                  href="https://www.trymyui.com/blog/2019/01/09/trymyui-partners-with-blockstack-to-rate-blockchain-based-apps/"
-                  target="_blank"
-                  logo={TryMyUILogo}
-                  color="#92c856"
-                  position={-5}
-                >
-                  Ranks by user testing
-                  <Box is="br" display={['none', 'none', 'none', 'unset']} /> and usability metrics.
-                </Ranker>
-                <Box left={35} top={0} position="absolute">
-                  <DotsLine />
-                </Box>
-              </Flex>
-            </Box>
+            <State initial={{ activeCarouselItem: 0 }}>
+              {({ state, setState }) => {
+                const cycleItems = () => {
+                  if (curState.activeCarouselItem + 1 >= carouselData.length) {
+                    return setState({ activeCarouselItem: 0 });
+                  }
+
+                  return setState({
+                    activeCarouselItem: state.activeCarouselItem + 1
+                  });
+                };
+
+                return (
+                  <Box width={1} borderRadius={4} overflow="hidden" style={{ willChange: 'transform' }}>
+                    <RankingAnimation
+                      activeItem={state.activeCarouselItem}
+                      items={carouselData}
+                      apps={apps}
+                      onRest={cycleItems}
+                    />
+                    <Flex
+                      overflow="hidden"
+                      flexWrap="wrap"
+                      lineHeight={1.5}
+                      p={6}
+                      bg="#081537"
+                      position="relative"
+                      pl={[5, 5, 5, 7]}
+                      pr={5}
+                      pt={[7, 7, 6, 6]}
+                    >
+                      <Ranker
+                        is="a"
+                        href="https://blog.producthunt.com/only-the-best-dapps-were-joining-blockstack-s-app-reviewer-program-%EF%B8%8F-6085bea0f501"
+                        target="_blank"
+                        logo={ProductHuntLogo}
+                        mt={0}
+                        color="#da552f"
+                        position={-70}
+                        logoProps={{
+                          minWidth: [180, 150, 150, 180]
+                        }}
+                      >
+                        Ranks with Product Hunt
+                        <Box is="br" display={['none', 'none', 'none', 'unset']} /> community upvotes and activity.
+                      </Ranker>
+                      <Ranker
+                        is="a"
+                        href="https://words.democracy.earth/democratic-app-ranking-democracy-earth-to-represent-blockstack-community-vote-on-app-mining-7ec8360bdc30"
+                        target="_blank"
+                        logo={DemoEarthLogo}
+                        logoProps={{
+                          minWidth: [200, 152, 152, 200]
+                        }}
+                        color="#00c091"
+                        position={-12}
+                      >
+                        Ranks by polling the Blockstack
+                        <Box is="br" display={['none', 'none', 'none', 'unset']} /> investor community.
+                      </Ranker>
+                      <Ranker
+                        is="a"
+                        href="https://www.trymyui.com/blog/2019/01/09/trymyui-partners-with-blockstack-to-rate-blockchain-based-apps/"
+                        target="_blank"
+                        logo={TryMyUILogo}
+                        color="#92c856"
+                        position={-5}
+                      >
+                        Ranks by user testing
+                        <Box is="br" display={['none', 'none', 'none', 'unset']} /> and usability metrics.
+                      </Ranker>
+                      <Box left={35} top={0} position="absolute">
+                        <DotsLine />
+                      </Box>
+                    </Flex>
+                  </Box>
+                );
+              }}
+            </State>
             <TextSection />
           </Flex>
         </Wrapper>
