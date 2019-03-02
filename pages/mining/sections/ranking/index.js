@@ -138,10 +138,6 @@ const GraphAnimation = ({ color, count, position, rows }) => {
               keys={columnArray.map(item => item.key)}
               delay={0}
               config={{ duration: 3000 }}
-              onRest={() => {
-                toggleAnimation(false);
-                setTimeout(() => toggleAnimation(true), 5000);
-              }}
             >
               {columnArray.map((item, index) => props => (
                 <Flex
@@ -273,7 +269,7 @@ const RankingSection = ({ apps, ...rest }) => {
             <State initial={{ activeCarouselItem: 0 }}>
               {({ state, setState }) => {
                 const cycleItems = () => {
-                  if (curState.activeCarouselItem + 1 >= carouselData.length) {
+                  if (state.activeCarouselItem + 1 >= carouselData.length) {
                     return setState({ activeCarouselItem: 0 });
                   }
 
