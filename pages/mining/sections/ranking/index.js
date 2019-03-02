@@ -131,7 +131,7 @@ const GraphAnimation = ({ color, count, position, rows }) => {
           >
             <DurationTrail
               native
-              reset={state.reset}
+              reset={true}
               from={{ seed: 1 }}
               to={{ seed: 500 }}
               items={columnArray}
