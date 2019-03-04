@@ -21,14 +21,15 @@ class FeaturedListComponent extends React.Component {
     query: PropTypes.string,
     singular: PropTypes.string,
     filterBy: PropTypes.string,
-    href: PropTypes.string
+    href: PropTypes.string,
+    limit: PropTypes.number
   }
 
   getFilteredApps() {
     const { allApps, appNames } = this.props
     let filtered = allApps.filter((app) => appNames.indexOf(app.name) !== -1)
     filtered = sortBy(filtered, (app) => appNames.indexOf(app.name))
-    return filtered
+    return [...new Set(filtered)]
   }
 
   render() {
@@ -64,6 +65,7 @@ class FeaturedListComponent extends React.Component {
         width={[1, 1 / 2, 1 / 3]}
         single={false}
         href={href}
+        limit={this.props.limit}
       />
     )
   }

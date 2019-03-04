@@ -121,7 +121,7 @@ const actions = {
   fetchAppMiningApps
 }
 
-export const selectAppsForPlatform = (apps, platform) => 
+export const selectAppsForPlatform = (apps, platform) =>
   apps.filter((app) => {
     const tags = getTags(app)
     if (platform.toLowerCase() === 'blockstack') {
@@ -287,3 +287,5 @@ export default {
   constants,
   actions
 }
+
+export { actions as appsActions }

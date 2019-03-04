@@ -43,6 +43,8 @@ class NewsletterWrapper extends React.PureComponent {
 
   setError = (error) =>
     this.setState({
+      loading: false,
+      showError: true,
       error
     })
 
