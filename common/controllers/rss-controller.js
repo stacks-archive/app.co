@@ -11,7 +11,8 @@ const router = express.Router()
 router.get('/', async (req, res) => {
   let { apps } = await getApps(apiServer)
   apps = _.sortBy(apps, (app) => -new Date(app.createdAt).getTime())
-  apps = _.filter(apps, (app) => app.category !== 'Sample Blockstack Apps')
+  const forbiddenCategories = ['Sample Blockstack Apps', 'Pyramid Schemes']
+  apps = _.filter(apps, (app) => forbiddenCategories.indexOf(app.category) === -1)
   res.type('application/rss+xml')
   res.render('rss', {
     apps
