@@ -209,10 +209,7 @@ const RankingAnimation = ({ activeItem, apps, items, onRest }) => {
                   Payout this&nbsp;month:
                 </Type>{' '}
                 <Box is={animated.div} display='inline-block' width={95}>
-                  {payout.interpolate(payout => {
-                    const payoutStr = Math.floor(payout).toString();
-                    return `$${payoutStr.padStart(5, '0')}`;
-                  })}
+                  {payout.interpolate(payout =>  `$${Math.floor(payout).toString()}`)}
                 </Box>
               </Type>
             </Flex>
