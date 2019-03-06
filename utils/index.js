@@ -166,10 +166,11 @@ const getSeededRandom = (seed = 0, min = 0, max = 11) => {
   return Math.floor(min + rnd * (max - min));
 }
 
-const getDecimalPlaces = (value) => {
-  if(Math.floor(value) === value) return 0;
-  return value.toString().split(".")[1].length || 0;
-}
+const numberWithCommas = (x) => {
+  const parts = x.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return parts.join(".");
+};
 
 export {
   appRoute,
@@ -178,12 +179,12 @@ export {
   capitalize,
   colorHexFromString,
   enumSelect,
-  getDecimalPlaces,
   getSeededRandom,
   getRandomInt,
   getTags,
   getTwitterMentions,
   monthName,
+  numberWithCommas,
   outboundLink,
   properTagFromParam,
   slugify,

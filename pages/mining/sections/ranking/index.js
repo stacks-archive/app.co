@@ -4,7 +4,7 @@ import { Flex, Box, Type } from 'blockstack-ui'
 import { Spring, Trail, Transition, animated, interpolate } from 'react-spring';
 import { Title, Wrapper, Section, ObservedSection } from '@components/mining/shared'
 import { Dots, DotsLine, DemoEarthLogo, ProductHuntLogo, CameraIcon, TryMyUILogo, VerticalDotLine } from '@components/mining/svg'
-import { getDecimalPlaces, getSeededRandom, getRandomInt } from '@utils';
+import { getSeededRandom, getRandomInt, numberWithCommas } from '@utils';
 import { Hover, State } from 'react-powerplug'
 
 const texts = [
@@ -209,7 +209,7 @@ const RankingAnimation = ({ activeItem, apps, items, onRest }) => {
                   Payout this&nbsp;month:
                 </Type>{' '}
                 <Box is={animated.div} display='inline-block' width={95}>
-                  {payout.interpolate(payout =>  `$${Math.floor(payout).toString()}`)}
+                  {payout.interpolate(payout =>  `$${numberWithCommas(Math.floor(payout))}`)}
                 </Box>
               </Type>
             </Flex>
