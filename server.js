@@ -6,6 +6,7 @@ const cookiesMiddleware = require('universal-cookie-express')
 const expressSitemapXml = require('express-sitemap-xml')
 const fs = require('fs-extra')
 const secure = require('express-force-https')
+const morgan = require('morgan')
 
 const dev = process.env.NODE_ENV !== 'production'
 if (dev) {
@@ -46,6 +47,30 @@ async function renderAndCache(req, res, pagePath, serverData) {
   }
 }
 
+const oldConsoleError = console.error
+const oldConsoleWarn = console.warn
+
+const checkMatch = (args, match) => {
+  if (!args[0] || !args[0].indexOf) return false
+  return args[0].indexOf(match) !== -1
+}
+
+console.error = (...args) => {
+  if (checkMatch(args, 'Warning: React does not recognize')) return
+  if (checkMatch(args, 'Warning: Failed prop type')) return
+  if (checkMatch(args, 'for a non-boolean attribute') ) return
+  if (checkMatch(args, 'Warning: Invalid value for prop')) return
+  if (checkMatch(args, 'Failed to retrieve initialize state from localStorage')) return
+  if (checkMatch(args, 'Unable to persist state to localStorage')) return
+  oldConsoleError(...args)
+}
+
+console.warn = (...args) => {
+  if (checkMatch(args, 'Failed to retrieve initialize state from localStorage')) return
+  if (checkMatch(args, 'Unable to persist state to localStorage')) return
+  oldConsoleWarn(...args)
+}
+
 app.prepare().then(() => {
   getApps(apiServer).then((apps) => {
     const server = express()
@@ -53,6 +78,7 @@ app.prepare().then(() => {
     if (!dev) {
       server.use(secure)
     }
+    server.use(morgan('combined'))
     server.use(cookiesMiddleware())
     server.use(compression())
 
