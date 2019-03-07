@@ -67,7 +67,7 @@ class HomePage extends React.PureComponent {
             appNames={this.props.rankings.map((app) => app.name)}
             title="Popular Blockstack Apps"
             href="/blockstack"
-            hrefAttrs={{ as: '/blockstack', href: { pathname: '/blockstack', query: { platform: 'blockstack' } } }}
+            hrefAttrs={{ as: '/blockstack', href: { pathname: '/platforms', query: { platform: 'blockstack' } } }}
             filterBy="platforms"
             singular="platform"
             query="blockstack"
