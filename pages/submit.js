@@ -10,6 +10,8 @@ import { Select } from '@components/mining/select'
 import { AlertOutlineIcon } from 'mdi-react'
 import debounce from 'lodash.debounce'
 
+import { trackEvent } from '@utils'
+
 const ErrorMessage = ({
   message = `Whoops! Please check the form for errors and try again.`,
   icon: Icon = AlertOutlineIcon,
@@ -261,8 +263,8 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
     {
       name: 'twitterHandle',
       required: false,
-      label: 'Twitter handle',
-      placeholder: 'SatoshiChat'
+      label: "Application's Twitter handle",
+      placeholder: '@SatoshiChat'
     }
   ]
 
@@ -411,6 +413,7 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
     e && e.preventDefault()
     const validation = await validate()
     if (validation.count > 0) {
+      trackEvent('App Submission Page - Validation Errors')
       setState(() => ({
         errorCount: validation.count,
         errors: validation.errors
@@ -461,6 +464,10 @@ class SubmitDapp extends React.Component {
     errors: {}
   }
 
+  componentDidMount() {
+    trackEvent('App Submission Page - Page Load')
+  }
+
   submit = async () => {
     const { apiServer } = this.props
     const url = `${apiServer}/api/submit`
@@ -487,8 +494,10 @@ class SubmitDapp extends React.Component {
         },
         body: JSON.stringify(values)
       })
+      trackEvent('App Submission Page - Submission Success')
       this.setState({ success: true, loading: false })
     } catch (e) {
+      trackEvent('App Submission Page - Submission Error')
       this.setState({ success: false, loading: false, globalError: e.message })
       console.error(e.message)
     }
