@@ -3,6 +3,8 @@ import fetch from 'cross-fetch'
 import { string } from 'yup'
 import debounce from 'lodash.debounce'
 
+import { trackEvent } from '@utils'
+
 const API = 'https://app-co-api.herokuapp.com/api/blockstack-subscribe'
 
 export const NewsletterContext = React.createContext()
@@ -43,6 +45,8 @@ class NewsletterWrapper extends React.PureComponent {
 
   setError = (error) =>
     this.setState({
+      loading: false,
+      showError: true,
       error
     })
 
@@ -95,13 +99,16 @@ class NewsletterWrapper extends React.PureComponent {
         const data = await res.json()
 
         if (data.success) {
+          trackEvent('Starter Kit Submission Success')
           this.success()
           return this.state.value
         } else {
+          trackEvent('Starter Kit Submission Error')
           this.setError(data.error)
           return false
         }
       } catch (error) {
+        trackEvent('Starter Kit Submission Success')
         this.setError(error.message)
         return false
       }

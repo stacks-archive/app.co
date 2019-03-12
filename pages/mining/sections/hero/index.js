@@ -1,24 +1,8 @@
 import React from 'react'
-import { Flex, Box, Type } from 'blockstack-ui'
+import { Flex, Box, Type, AppMiningLogo } from 'blockstack-ui'
 import { CurrencyUsdIcon } from 'mdi-react'
-import {
-  Title,
-  Wrapper,
-  Section,
-  Logo,
-  AppItem,
-  ObservedSection,
-  LearnMore,
-  CallToAction,
-  SectionContext
-} from '@components/mining/shared'
+import { Title, Wrapper, AppItem, ObservedSection, LearnMore, CallToAction } from '@components/mining/shared'
 import { State } from 'react-powerplug'
-
-function arrayRotateOne(arr, reverse) {
-  if (reverse) arr.unshift(arr.pop())
-  else arr.push(arr.shift())
-  return arr
-}
 
 const Apps = ({ apps, ...rest }) => {
   const limit = 2
@@ -81,7 +65,7 @@ const Hero = ({ apps, ...rest }) => (
     {({ inView }) => (
       <Wrapper inView={inView} observed>
         <Flex width={[1, 1, 0.5, 0.6]} flexShrink={1} flexDirection="column">
-          <Logo pb={7} />
+          <AppMiningLogo typeSize={22} pb={5} invert />
           <Title fontSize={[7, 7, 7, 8]}>Every 30 days we&nbsp;payout $100k to the best apps.</Title>
           <SubtitleBTC display={['none', 'flex', 'flex', 'flex']} pt={7} />
         </Flex>

@@ -7,6 +7,8 @@ import {
 } from '@stores/newsletter'
 import fetch from 'cross-fetch'
 
+import { trackEvent } from '@utils'
+
 const doSubmitEmail = (email, callback) => async (dispatch, getState) => {
   dispatch({
     type: SUBMIT_EMAIL_STARTED
@@ -25,10 +27,12 @@ const doSubmitEmail = (email, callback) => async (dispatch, getState) => {
       },
       body: JSON.stringify(data)
     })
+    trackEvent('Get Updates Success')
     if (callback) {
       callback()
     }
   } catch (error) {
+    trackEvent('Get Updates Error')
     dispatch({
       type: SUBMIT_EMAIL_ERROR,
       error

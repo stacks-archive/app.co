@@ -59,6 +59,7 @@
     }
   },
   "globals": {
-    "gtag": true
+    "gtag": true,
+    "analytics": true
   }
 }

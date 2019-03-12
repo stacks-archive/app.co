@@ -9,7 +9,19 @@ import dynamic from 'next/dynamic'
 
 const SectionContext = React.createContext({})
 
-const OpenStarterKitModal = ({ ...rest }) => <OpenModal component={StarterKitModal} {...rest} />
+const defaultContent = {
+  initial: {
+    title: 'Get your App Mining Starter Kit'
+  },
+  success: {
+    title: 'Welcome to App Mining',
+    body: 'We emailed your App Mining Starter Kit to'
+  }
+}
+
+const OpenStarterKitModal = ({ content = defaultContent, ...rest }) => (
+  <OpenModal component={(props) => <StarterKitModal {...props} content={content} />} {...rest} />
+)
 
 const Countdown = dynamic(() => import('../countdown'), {
   ssr: false,
@@ -237,7 +249,7 @@ const CallToAction = ({ hideTimer, buttonProps = {}, ...rest }) => (
                       whiteSpace: 'nowrap'
                     }}
                   >
-                    Next ranking starts in
+                    Next ranking starts on
                   </Type>
                   <Type pl={[0, 1]} pt={[2, 0]}>
                     <Countdown />

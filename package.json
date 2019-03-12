@@ -39,7 +39,7 @@
     "@zeit/next-mdx": "^1.2.0",
     "async": "^2.6.0",
     "blockstack": "^18.1.0",
-    "blockstack-ui": "^0.0.71",
+    "blockstack-ui": "^0.0.73",
     "cheerio": "^1.0.0-rc.2",
     "clean-tag": "^2.0.0",
     "color-name": "^1.1.4",
@@ -65,7 +65,7 @@
     "lru-cache": "^4.1.3",
     "luxon": "^1.9.0",
     "mdi-react": "4.4.0",
-    "next": "^7.0.2-canary.50",
+    "next": "^8.0.0",
     "next-router-events": "^2.1.0",
     "nprogress": "^0.2.0",
     "nuka-carousel": "^4.3.5",
@@ -76,10 +76,10 @@
     "prop-types": "^15.6.1",
     "pug": "^2.0.3",
     "query-string": "^6.1.0",
-    "react": "^16.6.3",
+    "react": "^16.8.1",
     "react-cookie": "^2.2.0",
     "react-countdown-now": "^1.3.0",
-    "react-dom": "^16.6.3",
+    "react-dom": "^16.8.1",
     "react-hash-avatar": "^0.0.2",
     "react-headroom": "^2.2.2",
     "react-intersection-observer": "^6.4.1",
@@ -178,7 +178,10 @@
     "ignore": [
       ".next/*",
       ".next",
-      "pages/*"
+      "pages/*",
+      "utils/*",
+      "components/*",
+      "containers/*"
     ]
   },
   "engines": {

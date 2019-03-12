@@ -1,5 +1,5 @@
 import React from 'react'
-import { theme } from 'blockstack-ui'
+import { Box, theme } from 'blockstack-ui'
 
 const DemoEarthLogo = ({ color = 'white', strokeWidth = 1, ...props }) => (
   <svg
@@ -167,11 +167,21 @@ const ProductHuntLogo = ({ bg = theme.colors.blue.dark, color = 'white', strokeW
   </svg>
 )
 
-const ArrowIcon = ({ color = 'currentColor', strokeWidth = 1, ...props }) => (
-  <svg width="30" height="15" viewBox="0 0 30 15" fill="none" {...props}>
-    <path d="M17.5935 1.83716L28.2381 7.5L17.5935 13.1628V1.83716Z" stroke={color} strokeWidth={strokeWidth} />
-    <line x1="27.1309" y1="7.5" x2="-0.000722885" y2="7.5" stroke={color} strokeWidth={strokeWidth} />
-  </svg>
+const ArrowIcon = ({ color = 'currentColor', strokeWidth = 1, width = '30px', ...props }) => (
+  <Box display="inline-block" color={color} {...props}>
+    <Box
+      is="svg"
+      display="inline-block"
+      viewBox="0 0 30 15"
+      fill="none"
+      style={{
+        width
+      }}
+    >
+      <path d="M17.5935 1.83716L28.2381 7.5L17.5935 13.1628V1.83716Z" stroke="currentColor" strokeWidth={strokeWidth} />
+      <line x1="27.1309" y1="7.5" x2="-0.000722885" y2="7.5" stroke="currentColor" strokeWidth={strokeWidth} />
+    </Box>
+  </Box>
 )
 const Logo = ({ color = 'currentColor', dotsColor = 'white', ...props }) => (
   <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Flex, Type } from 'blockstack-ui'
 import Counter from 'react-countdown-now'
 import { DateTime } from 'luxon'
+import dayjs from 'dayjs'
 
 const TimeLabel = ({ ...rest }) => <Type pl="1px" fontWeight={500} opacity={0.7} {...rest} />
 
@@ -47,7 +48,7 @@ class Countdown extends React.PureComponent {
   render() {
     const { nextDate } = this.getDate()
 
-    return <Counter renderer={(props) => <Renderer {...props} {...this.props} />} date={nextDate.ts} />
+    return <>{dayjs(nextDate.ts).format('MMMM DD, YYYY')}</>
   }
 }
 
