@@ -23,10 +23,10 @@ const header = (props) => (
   />
 )
 
-const InitialView = ({ setState, view, handleSubmit }) => (
+const InitialView = ({ setState, view, content }) => (
     <Box p={6}>
       <Type color="blue" lineHeight={1.5} maxWidth="80%" fontSize={5} fontFamily="brand">
-        Get your App Mining Starter Kit
+        {content.title}
       </Type>
       <Box pt={4}>
         <Box>
@@ -102,7 +102,7 @@ const Item = ({ graphic: Graphic, title, link, cta, ...rest }) => (
   </Hover>
 )
 
-const SuccessView = ({ value }) => (
+const SuccessView = ({ value, content }) => (
   <Flex
     p={[4, 6]}
     bg="blue.light"
@@ -116,11 +116,11 @@ const SuccessView = ({ value }) => (
     <Box pb={6}>
       <Box pb={4}>
         <Type color="blue" lineHeight={1.5} maxWidth="80%" fontSize={5} fontFamily="brand">
-          Welcome to App Mining!
+          {content.title}
         </Type>
       </Box>
       <Type fontSize={3}>
-        We emailed your App Mining Starter Kit to <em>{value}</em>.
+        {content.body} <em>{value}</em>.
       </Type>
     </Box>
     <Item
@@ -142,7 +142,7 @@ const SuccessView = ({ value }) => (
 )
 
 const handleSubmit = (setState) => setState({ view: 'success' })
-const StarterKitModal = ({ ...rest }) => {
+const StarterKitModal = ({ content, ...rest }) => {
   if (rest.visible) {
     trackEvent('Open App Mining Starter Kit Modal')
   }
@@ -160,9 +160,14 @@ const StarterKitModal = ({ ...rest }) => {
         {({ state, setState }) => (
           <>
             {state.view === 'initial' ? (
-              <InitialView view={state.view} setState={setState} handleSubmit={() => handleSubmit(setState)} />
+              <InitialView
+                content={content.initial}
+                view={state.view}
+                setState={setState}
+                handleSubmit={() => handleSubmit(setState)}
+              />
             ) : (
-                <SuccessView value={state.value} />
+                <SuccessView content={content.success} value={state.value} />
               )}
           </>
         )}
@@ -170,5 +175,6 @@ const StarterKitModal = ({ ...rest }) => {
     </Modal>
   )
 }
+  
 
 export { StarterKitModal }

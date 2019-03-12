@@ -7,9 +7,38 @@ import { doSelectApp } from '@stores/apps'
 import { PlatformsList } from '@components/list/platforms'
 import Modal from '@containers/modals/app'
 import Head from '@containers/head'
+import { selectApiServer } from '@stores/apps/selectors'
 
 class HomePage extends React.PureComponent {
-  static getInitialProps({ req, reduxStore }) {
+  static async getInitialProps({ req, reduxStore }) {
+    const api = selectApiServer(reduxStore.getState())
+    let props = {}
+    try {
+      const promises = await Promise.all([
+        fetch(`${api}/api/app-mining-months`),
+        fetch(`${api}/api/mining-faq`),
+        fetch(`${api}/api/app-mining-apps`)
+      ])
+      const { months } = await promises[0].json()
+      const { faqs } = await promises[1].json()
+      const { apps } = await promises[2].json()
+
+      if (months && months.length) {
+        const rankings = months[months.length - 1].compositeRankings.map((app) => {
+          const appWithLifetimeEarnings = apps.find((otherApp) => otherApp.name === app.name)
+          return {
+            ...appWithLifetimeEarnings,
+            ...app
+          }
+        })
+        props = { rankings, month: months[months.length - 1], months, faq: faqs, apps }
+      } else {
+        props = {}
+      }
+    } catch (error) {
+      props = {}
+    }
+
     if (req) {
       const {
         params: { appSlug }
@@ -18,11 +47,12 @@ class HomePage extends React.PureComponent {
       reduxStore.dispatch(doSelectApp(appSlug))
 
       return {
+        ...props,
         appSlug
       }
     }
 
-    return {}
+    return props
   }
 
   render() {
@@ -33,6 +63,16 @@ class HomePage extends React.PureComponent {
           <Newsletter serverCookies={this.props.serverCookies} wrap />
         </Page.Section>
         <Page.Section flexDirection="column" px>
+          <FeaturedList
+            appNames={this.props.rankings.map((app) => app.name)}
+            title="Popular Blockstack Apps"
+            href="/blockstack"
+            hrefAttrs={{ as: '/blockstack', href: { pathname: '/blockstack', query: { platform: 'blockstack' } } }}
+            filterBy="platforms"
+            singular="platform"
+            query="blockstack"
+            limit={23}
+          />
           <AppsList
             single
             limit={4}
@@ -48,15 +88,6 @@ class HomePage extends React.PureComponent {
               as: '/all'
             }}
           />
-          <FeaturedList
-            appNames={['Graphite', 'Stealthy', 'Misthos', 'Travelstack', 'Dappy Wallet', 'Coins']}
-            title="Popular Blockstack Apps"
-            href="/blockstack"
-            hrefAttrs={{ as: '/blockstack', href: { pathname: '/blockstack', query: { platform: 'blockstack' } } }}
-            filterBy="platforms"
-            singular="platform"
-            query="blockstack"
-          />
         </Page.Section>
 
         <Page.Section p={0} pl={[0, 4]} pr={[0, 4]}>
@@ -70,7 +101,10 @@ class HomePage extends React.PureComponent {
             appNames={['MyCrypto', 'MyEtherWallet', 'Balance.io', 'Coinbase Wallet', 'MetaMask', 'Trust Wallet']}
             title="Ethereum Wallets"
           />
-          <FeaturedList title="Decentralized Exchanges" appNames={['Airswap', 'EtherDelta', 'Radar Relay', 'IDEX', 'OasisDEX', 'Paradex', 'Dexy']} />
+          <FeaturedList
+            title="Decentralized Exchanges"
+            appNames={['Airswap', 'EtherDelta', 'Radar Relay', 'IDEX', 'OasisDEX', 'Paradex', 'Dexy']}
+          />
           <FeaturedList
             appNames={['SteemIt', 'Stealthy', 'Peepeth', 'Mastodon', 'Diaspora', 'DTube']}
             title="Hot Social Dapps"

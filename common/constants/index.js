@@ -1,3 +1,2 @@
-const headerHeight = '88px'
+export const headerHeight = '88px'
 
-export { headerHeight }
