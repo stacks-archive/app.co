@@ -140,6 +140,14 @@ class App extends React.Component {
             Submitted By:{' '}
             <code>{app.submitterName}</code>
           </p>
+          <p>
+            Referral Code:{' '}
+            <code>{app.referralCode}</code>
+          </p>
+          <p>
+            Referral Source:{' '}
+            <code>{app.refSource}</code>
+          </p>
           <Form.Wrapper>
             <TextField
               value={this.state.name || ''}
