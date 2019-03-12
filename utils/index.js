@@ -33,7 +33,7 @@ const truncate = (str, options) => {
 }
 
 const trackPageView = (path) => {
-  if (typeof 'analytics' !== 'undefined') {
+  if (typeof analytics !== 'undefined') {
     const opts = {}
     if (path) {
       opts.path = path
