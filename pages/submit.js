@@ -10,6 +10,8 @@ import { Select } from '@components/mining/select'
 import { AlertOutlineIcon } from 'mdi-react'
 import debounce from 'lodash.debounce'
 
+import { trackEvent } from '@utils'
+
 const ErrorMessage = ({
   message = `Whoops! Please check the form for errors and try again.`,
   icon: Icon = AlertOutlineIcon,
@@ -411,6 +413,7 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
     e && e.preventDefault()
     const validation = await validate()
     if (validation.count > 0) {
+      trackEvent('App Submission Page - Validation Errors')
       setState(() => ({
         errorCount: validation.count,
         errors: validation.errors
@@ -458,7 +461,25 @@ class SubmitDapp extends React.Component {
     values: {},
     loading: false,
     success: false,
-    errors: {}
+    errors: {},
+    referralCode: null,
+    refSource: null
+  }
+
+  componentDidMount() {
+    const { search } = document.location
+    if (search) {
+      const referralCode = search.match(/referralCode=(\w+)/)[1]
+      const refSource = search.match(/refSource=(\w+)/)[1]
+      this.setState({ // eslint-disable-line react/no-did-mount-set-state
+        referralCode,
+        refSource
+      })
+    }
+  }
+
+  componentDidMount() {
+    trackEvent('App Submission Page - Page Load')
   }
 
   submit = async () => {
@@ -473,9 +494,13 @@ class SubmitDapp extends React.Component {
     if (twitterHandle && twitterHandle.includes('@')) {
       twitterHandle = twitterHandle.replace('@', '')
     }
+
+    const { referralCode, refSource } = this.state
     const values = {
       ...this.state.values,
-      twitterHandle
+      twitterHandle,
+      referralCode,
+      refSource
     }
 
     try {
@@ -487,8 +512,10 @@ class SubmitDapp extends React.Component {
         },
         body: JSON.stringify(values)
       })
+      trackEvent('App Submission Page - Submission Success')
       this.setState({ success: true, loading: false })
     } catch (e) {
+      trackEvent('App Submission Page - Submission Error')
       this.setState({ success: false, loading: false, globalError: e.message })
       console.error(e.message)
     }

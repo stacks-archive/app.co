@@ -8,6 +8,8 @@ import { selectApps } from '@stores/apps/selectors'
 import debounce from 'lodash/debounce'
 import { Focus } from 'react-powerplug'
 
+import { trackEvent } from '@utils'
+
 const mapStateToProps = (state) => ({
   apps: selectApps(state)
 })
@@ -50,6 +52,7 @@ class SearchBarClass extends React.Component {
       document.body.classList.add('no-scroll')
     }
     setTimeout(() => {
+      trackEvent('search_query', { query })
       this.setState({
         results,
         isLoading: false
