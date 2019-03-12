@@ -46,7 +46,7 @@ const trackPageView = (path) => {
 }
 
 const trackEvent = (action, opts) => {
-  if (typeof 'analytics' !== 'undefined') {
+  if (typeof analytics !== 'undefined') {
     analytics.track(action, opts)
   }
 }
