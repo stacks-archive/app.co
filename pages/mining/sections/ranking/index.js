@@ -69,15 +69,15 @@ const Ranker = ({ position, logo: Logo, children, color, logoProps = {}, ...rest
         {...bind}
         {...rest}
       >
-        {Logo ? (
-          <Box color="white" maxWidth={100} pb={2} {...logoProps}>
-            <Logo />
-          </Box>
-        ) : null}
-        <Type pb={2} pt={[2, 2, 0, 0]} color={color}>
-          {children}
-        </Type>
-        <GraphAnimation position={position} color={color} rows={5} count={60}/>
+          {Logo ? (
+            <Box color="white" maxWidth={100} pb={2} {...logoProps}>
+              <Logo />
+            </Box>
+          ) : null}
+          <Type pb={2} pt={[2, 2, 0, 0]} color={color}>
+            {children}
+          </Type>
+          <GraphAnimation position={position} color={color} rows={5} count={150}/>
       </Box>
     )}
   </Hover>
@@ -139,7 +139,7 @@ const GraphAnimation = ({ color, count, position, rows }) => {
             is={animated.div}
             position='absolute'
             left={`${index * 5}px`}
-            bottom="-50%"
+            bottom={"-50%"}
             width={5}
             height={100}
             style={{
