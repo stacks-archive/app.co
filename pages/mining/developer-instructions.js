@@ -8,7 +8,7 @@ import RegisteredApps from '@components/mining/registered-apps'
 
 class DeveloperInstructions extends React.Component {
   static async getInitialProps() {
-    const response = await fetch(`https://app-co-api.herokuapp.com/api/app-mining-apps`)
+    const response = await fetch(`https://api.app.co/api/app-mining-apps`)
     const { apps } = await response.json()
     return { apps }
   }

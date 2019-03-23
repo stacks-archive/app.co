@@ -17,8 +17,9 @@ const mapStateToProps = (state) => ({
 
 class AppMiningPage extends React.Component {
   static async getInitialProps({ reduxStore }) {
+    const api = selectApiServer(reduxStore.getState())
     try {
-      const response = await fetch(`https://app-co-api.herokuapp.com/api/app-mining-apps`)
+      const response = await fetch(`${api}/api/app-mining-apps`)
       const { apps } = await response.json()
 
       return { apps }

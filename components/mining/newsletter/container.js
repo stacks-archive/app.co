@@ -5,7 +5,7 @@ import debounce from 'lodash.debounce'
 
 import { trackEvent } from '@utils'
 
-const API = 'https://app-co-api.herokuapp.com/api/blockstack-subscribe'
+const API = 'https://api.app.co/api/blockstack-subscribe'
 
 export const NewsletterContext = React.createContext()
 
