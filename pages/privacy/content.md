@@ -16,6 +16,8 @@ Careers: If you apply for a career on our website, we receive information about 
 
 Communications: If you contact us directly, we may receive additional information about you. For example, when you contact us for customer support, we may receive your name, email address, phone number, the contents of a message or attachments that you may send to us, and other information you choose to provide.
 
+Information from third party services: We may receive information about you, such as name and email address, from third party partners such as investment platforms that you use to invest in our services.
+
 ### Information We Collect Automatically From Your Use of the Services
 
 When you use our website, we and our third party service providers may collect information from you through automated means, such as cookies, web beacons, and web server logs. By using the website and communicating with us through email, you consent to the placement of cookies, beacons, and similar technologies in your browser and on emails in accordance with this Privacy Policy. The information collected in this manner may include IP address, browser characteristics, device IDs and characteristics, operating system version, language preferences, referring URLs, and information about the usage of our Services.
