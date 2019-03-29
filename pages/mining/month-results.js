@@ -19,7 +19,7 @@ class MonthResults extends React.Component {
     const { month, year } = context.query
 
     try {
-      const response = await fetch(`https://app-co-api.herokuapp.com/api/app-mining-months`)
+      const response = await fetch(`https://api.app.co/api/app-mining-months`)
       const { months } = await response.json()
       const foundReport = months.find(
         (report) => report.monthName.toLowerCase() === month.toLowerCase() && report.year === parseInt(year, 10)

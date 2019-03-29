@@ -4,7 +4,7 @@ const _ = require('lodash')
 const { getApps } = require('../lib/api')
 // const { makeFeed } = require('./common/lib/rss');
 
-const apiServer = process.env.API_SERVER || 'https://app-co-api.herokuapp.com'
+const apiServer = process.env.API_SERVER || 'https://api.app.co'
 
 const router = express.Router()
 
