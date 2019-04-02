@@ -14,7 +14,7 @@ if (dev) {
 }
 
 const { ssrCache } = require('./common/lib/cache')
-const { getApps, getAppMiningMonths } = require('./common/lib/api')
+const { getApps, getAppMiningMonths, getRankedBlockstackApps } = require('./common/lib/api')
 const getSitemapURLs = require('./common/lib/sitemap')
 const RSSController = require('./common/controllers/rss-controller')
 const slugify = require('./common/lib/slugify')
@@ -27,7 +27,10 @@ const apiServer = process.env.API_SERVER || 'https://api.app.co'
 
 async function renderAndCache(req, res, pagePath, serverData) {
   try {
-    const data = await getApps(apiServer)
+    const [data, blockstackRankedApps] = await Promise.all([
+      getApps(apiServer),
+      getRankedBlockstackApps(apiServer)
+    ])
     data.apiServer = apiServer
     let appMiningMonths = []
     if (serverData && serverData.fetchMiningResults) {
@@ -37,6 +40,7 @@ async function renderAndCache(req, res, pagePath, serverData) {
     const dataToPass = {
       ...data,
       ...serverData,
+      blockstackRankedApps,
       appMiningMonths
     }
     const html = await app.renderToHTML(req, res, pagePath, dataToPass)

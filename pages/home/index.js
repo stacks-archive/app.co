@@ -7,37 +7,12 @@ import { doSelectApp } from '@stores/apps'
 import { PlatformsList } from '@components/list/platforms'
 import Modal from '@containers/modals/app'
 import Head from '@containers/head'
-import { selectApiServer } from '@stores/apps/selectors'
+import { selectRankedBlockstackApps } from '@stores/apps/selectors'
 
 class HomePage extends React.PureComponent {
   static async getInitialProps({ req, reduxStore }) {
-    const api = selectApiServer(reduxStore.getState())
-    let props = {}
-    try {
-      const promises = await Promise.all([
-        fetch(`${api}/api/app-mining-months`),
-        fetch(`${api}/api/mining-faq`),
-        fetch(`${api}/api/app-mining-apps`)
-      ])
-      const { months } = await promises[0].json()
-      const { faqs } = await promises[1].json()
-      const { apps } = await promises[2].json()
-
-      if (months && months.length) {
-        const rankings = months[months.length - 1].compositeRankings.map((app) => {
-          const appWithLifetimeEarnings = apps.find((otherApp) => otherApp.name === app.name)
-          return {
-            ...appWithLifetimeEarnings,
-            ...app
-          }
-        })
-        props = { rankings, month: months[months.length - 1], months, faq: faqs, apps }
-      } else {
-        props = {}
-      }
-    } catch (error) {
-      props = {}
-    }
+    const rankings = selectRankedBlockstackApps(reduxStore.getState())
+    const props = { rankings }
 
     if (req) {
       const {
