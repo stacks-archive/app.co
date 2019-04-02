@@ -33,6 +33,8 @@ export const selectAppConstants = (state) => state.apps && state.apps.constants.
 
 export const selectAppMiningApps = (state) => state.apps && state.apps.appMiningApps
 
+export const selectRankedBlockstackApps = (state) => state.apps && state.apps.blockstackRankedApps
+
 export const selectAllPlatforms = (state) => {
   if (!state.apps || !state.apps.platforms) {
     state.apps.platforms = state.platforms

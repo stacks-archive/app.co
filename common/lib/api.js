@@ -5,6 +5,7 @@ const { ssrCache } = require('./cache')
 
 const dev = process.env.NODE_ENV !== 'production'
 const API_CACHE_KEY = 'API_CACHE_KEY'
+const BLOCKSTACK_RANKED_APPS_KEY = 'BLOCKSTACK_RANKED_APPS_KEY'
 
 const processApps = (appsData) => {
   let categories = Object.keys(appsData.constants.appConstants.categoryEnums)
@@ -74,7 +75,26 @@ const getAppMiningMonths = (apiServer) =>
     }  
   })
 
+const getRankedBlockstackApps = async (api) => {
+  try {
+    if (ssrCache.has(BLOCKSTACK_RANKED_APPS_KEY) && !dev) {
+      return JSON.parse(ssrCache.get(BLOCKSTACK_RANKED_APPS_KEY))
+    }
+    const months = await getAppMiningMonths(api)
+
+    const rankings = months[months.length - 1].compositeRankings
+
+    ssrCache.set(BLOCKSTACK_RANKED_APPS_KEY, JSON.stringify(rankings))
+    return rankings
+  } catch (error) {
+    console.error('error when fetching ranked apps', error)
+    return []
+  }
+  
+}
+
 module.exports = {
   getApps,
-  getAppMiningMonths
+  getAppMiningMonths,
+  getRankedBlockstackApps
 }
