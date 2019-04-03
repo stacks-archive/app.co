@@ -8,7 +8,7 @@ import styled from 'styled-components'
 
 const IframeStyles = styled.div`
   iframe {
-    max-width: 100%;
+    max-width: 100% !important;
   }
 `
 
