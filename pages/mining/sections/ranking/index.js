@@ -212,7 +212,7 @@ const RankingSection = ({ apps, ...rest }) => (
                 position={-5}
               >
                 Ranks by 'awareness' level
-                <Box is="br" display={['none', 'none', 'none', 'unset']} /> based on mentions and reach.
+                <Box is="br" display={['none', 'none', 'none', 'unset']} /> based on the online reach the app generates.
               </Ranker>
               <Ranker
                 key="nil"
@@ -226,7 +226,7 @@ const RankingSection = ({ apps, ...rest }) => (
                 color="#b077ff"
                 position={-25}
               >
-                Ranks based on how well they protect <Box is="br" display={['none', 'none', 'none', 'unset']} />
+                Ranks based on how well apps protect <Box is="br" display={['none', 'none', 'none', 'unset']} />
                 the fundamental digital rights of users.
               </Ranker>
               <Box left={35} top={0} position="absolute">
