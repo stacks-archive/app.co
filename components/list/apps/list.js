@@ -142,6 +142,7 @@ class AppsListComponent extends React.Component {
         }}
         items={sortedApps}
         item={AppItem}
+        showTweets={!platformName || platformName.toLowerCase() !== 'blockstack'}
         width={[1, 1 / 2, 1 / 3]}
         limit={limit}
         single
