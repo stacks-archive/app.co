@@ -8,9 +8,9 @@ import { Type } from '@components/typography'
 import { StyledList } from '@components/list/styled'
 import { Button } from '@components/button'
 
-const HeaderItem = (props) => <StyledList.TableItem width={[0, 0.5 / 4]} height={['0px', '50px']} {...props} />
+const HeaderItem = ({ showTweets, ...props }) => <StyledList.TableItem width={[0, 0.5 / (showTweets ? 4 : 3)]} height={['0px', '50px']} {...props} />
 
-const ListTableHeader = () => (
+const ListTableHeader = ({ showTweets }) => (
   <StyledList.Body.Header height={['0px', '50px']}>
     <Flex px={3} py={[0, 3]} width={[0, 1]}>
       <Box width={[0, 0.5]} style={{ overflow: 'hidden' }}>
@@ -19,7 +19,9 @@ const ListTableHeader = () => (
       <HeaderItem>Auth</HeaderItem>
       <HeaderItem>Storage</HeaderItem>
       <HeaderItem>Blockchain</HeaderItem>
-      <HeaderItem style={{ textAlign: 'right' }}>Tweets/Week</HeaderItem>
+      {showTweets && (
+        <HeaderItem style={{ textAlign: 'right' }}>Tweets/Week</HeaderItem>
+      )}
     </Flex>
   </StyledList.Body.Header>
 )
@@ -53,6 +55,7 @@ const ListContainer = ({
   category,
   apps,
   serverCookies,
+  showTweets,
   ...rest
 }) => {
   const HeaderWrapper = (props) =>
@@ -116,7 +119,7 @@ const ListContainer = ({
     <StyledList mb={[3, 4]} {...rest}>
       <Header />
       <StyledList.Body>
-        {rest.single ? <ListTableHeader /> : null}
+        {rest.single ? <ListTableHeader showTweets={showTweets} /> : null}
         <Items {...itemProps} single={rest.single} />
       </StyledList.Body>
     </StyledList>
@@ -124,7 +127,8 @@ const ListContainer = ({
 }
 ListContainer.defautProps = {
   limit: 7,
-  width: [1, 1 / 2]
+  width: [1, 1 / 2],
+  showTweets: true
 }
 ListContainer.propTypes = {
   header: PropTypes.shape({
@@ -136,7 +140,8 @@ ListContainer.propTypes = {
   limit: PropTypes.number.isRequired,
   width: PropTypes.arrayOf(PropTypes.number.isRequired),
   href: PropTypes.string,
-  as: PropTypes.string
+  as: PropTypes.string,
+  showTweets: PropTypes.bool
 }
 
 export { ListContainer, Items }

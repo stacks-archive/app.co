@@ -77,7 +77,7 @@ const getAppMiningMonths = (apiServer) =>
 
 const getRankedBlockstackApps = async (api) => {
   try {
-    if (ssrCache.has(BLOCKSTACK_RANKED_APPS_KEY) && !dev) {
+    if (ssrCache.has(BLOCKSTACK_RANKED_APPS_KEY)) {
       return JSON.parse(ssrCache.get(BLOCKSTACK_RANKED_APPS_KEY))
     }
     const months = await getAppMiningMonths(api)
