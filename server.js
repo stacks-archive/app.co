@@ -25,8 +25,21 @@ const handle = app.getRequestHandler()
 
 const apiServer = process.env.API_SERVER || 'https://api.app.co'
 
+const pageCacheKey = (req) => {
+  // return `req`
+  const { path } = req
+  if (path.indexOf('admin') !== -1) {
+    return null
+  }
+  return `page-cache-key-${path}`
+}
+
 async function renderAndCache(req, res, pagePath, serverData) {
   try {
+    const cacheKey = pageCacheKey(req)
+    if (cacheKey && ssrCache.has(cacheKey) && !dev) {
+      res.send(ssrCache.get(cacheKey))
+    }
     const [data, blockstackRankedApps] = await Promise.all([
       getApps(apiServer),
       getRankedBlockstackApps(apiServer)
@@ -44,6 +57,9 @@ async function renderAndCache(req, res, pagePath, serverData) {
       appMiningMonths
     }
     const html = await app.renderToHTML(req, res, pagePath, dataToPass)
+    if (cacheKey) {
+      ssrCache.set(cacheKey, html)
+    }
     res.send(html)
   } catch (err) {
     console.log(err)
