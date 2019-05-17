@@ -18,6 +18,11 @@ const reviewerData = {
     description: 'New Internet Labs is building a browser for the new internet.',
     website: 'https://www.newinternetlabs.com/',
     logo: 'nil.png'
+  },
+  'Awario': {
+    description: 'Awario gathers data from around the web to determine social reach.',
+    website: 'https://awario.com',
+    logo: 'awario.png'
   }
 }
 
