@@ -1,5 +1,5 @@
 # app.co - 20min build
-FROM node:alpine as base
+FROM node:10.15.3-alpine as base
 # FROM blockstack/node:latest as base
 WORKDIR /usr/src
 COPY package.json yarn.lock /usr/src/
