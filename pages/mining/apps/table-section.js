@@ -106,7 +106,7 @@ const AllApps = ({ apps, ...rest }) => (
         <Title maxWidth="100%">App Mining Eligibility</Title>
         <Type maxWidth={780} lineHeight={1.65} pt={6}>
           All of the apps listed below are currently{' '}
-          <Type is="a" href="/apps/blockstack" target="_blank">
+          <Type is="a" href="/blockstack" target="_blank">
             registered with App.co
           </Type>
           . Apps that are marked <Type fontWeight="bold">Ready</Type> will be included in the next ranking. Apps that
