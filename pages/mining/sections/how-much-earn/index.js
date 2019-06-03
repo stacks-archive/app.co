@@ -27,9 +27,9 @@ const Row = ({
   <Hover>
     {({ hovered, bind }) => (
       <Flex
-        mb={'1px'}
+        mb="1px"
         py={5}
-        bg={'white'}
+        bg="white"
         borderLeft="3px solid"
         borderColor={hovered ? 'blue' : 'transparent'}
         is="a"
@@ -39,7 +39,7 @@ const Row = ({
         style={{ textDecoration: 'none' }}
         {...bind}
       >
-        <Flex width={[40, 60]} alignItems={'center'} justifyContent="center">
+        <Flex width={[40, 60]} alignItems="center" justifyContent="center">
           <Type fontFamily="brand">{index + 1}</Type>
         </Flex>
         <Flex
@@ -105,8 +105,7 @@ const ArrowButton = ({ disabled, icon: Icon, ...rest }) => (
   </Hover>
 )
 
-const Table = ({ apps, state, limit = 7, months, decrementMonth, incrementMonth, ...rest }) => {
-  return (
+const Table = ({ apps, state, limit = 7, months, decrementMonth, incrementMonth, ...rest }) => (
     <Box width={1}>
       <Flex fontWeight="bold" mb="1px" py={5} bg="white">
         <Type width={[1 / 3, 5 / 8]} pl={5}>
@@ -134,7 +133,6 @@ const Table = ({ apps, state, limit = 7, months, decrementMonth, incrementMonth,
       </>
     </Box>
   )
-}
 
 const HowMuchSection = ({ apps, months, ...rest }) => (
   <ObservedSection bg="blue.light" {...rest}>
@@ -199,7 +197,7 @@ const HowMuchSection = ({ apps, months, ...rest }) => (
                                   opacity={hovered || i === state.month ? 1 : 0.7}
                                   fontSize={1}
                                 >
-                                  {dayjs(month.monthName + ' ' + month.year.toString()).format('MMM YYYY ')}
+                                  {`${month.monthName.slice(0,3)} ${month.year.toString().slice(2)}`}
                                 </Type>
                               </Box>
                             )}
@@ -224,7 +222,7 @@ const HowMuchSection = ({ apps, months, ...rest }) => (
                               is="a"
                               target="_blank"
                               href={`/mining/${dayjs(
-                                months[state.month].monthName + ' ' + months[state.month].year.toString()
+                                `${months[state.month].monthName  } ${  months[state.month].year.toString()}`
                               )
                                 .format('MMMM-YYYY')
                                 .toLowerCase()}`}
