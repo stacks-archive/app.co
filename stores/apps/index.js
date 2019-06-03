@@ -122,7 +122,6 @@ const actions = {
 }
 
 export const selectAppsForPlatform = (apps, platform, blockstackRankedApps) => {
-  // console.log(blockstackRankedApps)
   if (platform.toLowerCase() === 'blockstack') {
     return blockstackRankedApps || []
   } else {
@@ -167,7 +166,6 @@ const makeReducer = (data) => {
   const reducer = (state = initialState, action) => {
     switch (action.type) {
       case constants.SELECT_PLATFORM: {
-        // console.log(action.type)
         const { platform } = action
         const { blockstackRankedApps } = state
         const filteredApps = selectAppsForPlatform(state.apps, platform, blockstackRankedApps)
