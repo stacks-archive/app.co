@@ -46,7 +46,7 @@ const Mdx = ({ children }) => (
       pre: (props) => <Type.pre color="currentColor" {...baseProps} {...props} />,
       ol: (props) => <Type.ol color="currentColor" mt={3} display="inline-block" {...baseProps} {...props} />,
       ul: (props) => <Type.ul color="currentColor" mt={3} display="inline-block" {...baseProps} {...props} />,
-      li: (props) => <Type.li color="currentColor" my="2px" {...baseProps} {...props} />
+      li: (props) => <Type.li color="currentColor" my="10px" {...baseProps} {...props} />
     }}
   >
     {children}
