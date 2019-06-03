@@ -38,7 +38,10 @@ async function renderAndCache(req, res, pagePath, serverData) {
   try {
     const cacheKey = pageCacheKey(req)
     if (cacheKey && ssrCache.has(cacheKey) && !dev) {
+      console.log('Cache hit:', req.path)
       res.send(ssrCache.get(cacheKey))
+    } else {
+      console.log('Cache miss:', req.path)
     }
     const [data, blockstackRankedApps] = await Promise.all([
       getApps(apiServer),
