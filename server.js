@@ -108,6 +108,20 @@ app.prepare().then(() => {
       renderAndCache(req, res, '/mining/developer-instructions')
     )
     server.get('/mining/reviewer-instructions', (req, res) => renderAndCache(req, res, '/mining/reviewer-instructions'))
+
+    server.get('/mining/latest', async (req, res) => {
+      try {
+        const months = await getAppMiningMonths(apiServer)
+        const latest = months[months.length - 1]
+        const slug = slugify(latest.humanReadableDate)
+        res.redirect(`/mining/${slug}`)
+      } catch (error) {
+        console.error(error)
+        res.redirect('/mining')
+      }
+    })
+
+
     server.get('/mining/:date', (req, res) => {
       const { date } = req.params
       const [month, year] = date.split('-')
