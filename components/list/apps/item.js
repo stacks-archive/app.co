@@ -69,7 +69,7 @@ const AppItem = ({
       window.open(`/app/${rest.Slugs[0].value}`, '_blank')
     }
   }
-  const rowSize = rest.Ranking ? (0.5 / 4) : (0.5 / 3)
+  const rowSize = rest.Rankings ? (0.5 / 4) : (0.5 / 2)
   return (
     <StyledList.Item
       {...rest}
