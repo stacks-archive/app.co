@@ -4,7 +4,7 @@ FROM node:10.15.3-alpine as base
 WORKDIR /usr/src
 COPY package.json yarn.lock /usr/src/
 RUN apk update
-RUN RUN apk add --repository https://dl-3.alpinelinux.org/alpine/edge/community/ --update-cache \
+RUN apk add --repository https://dl-3.alpinelinux.org/alpine/edge/community/ --update-cache \
   python \
   py-pip \
   make \
