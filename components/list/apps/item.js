@@ -107,11 +107,13 @@ const AppItem = ({
           <>
             <TableItem rowSize={rowSize}>{appTag(authentication)}</TableItem>
             <TableItem rowSize={rowSize}>{appTag(storageNetwork)}</TableItem>
-            <TableItem rowSize={rowSize}>{appTag(blockchain)}</TableItem>
             {rest.Rankings && (
-              <TableItem style={{ textAlign: 'right', fontSize: '13px', fontWeight: 700 }} width={[0, 0.5 / 4]}>
-                {getTwitterMentions(rest).toLocaleString()}
-              </TableItem>
+              <>
+                <TableItem rowSize={rowSize}>{appTag(blockchain)}</TableItem>
+                <TableItem style={{ textAlign: 'right', fontSize: '13px', fontWeight: 700 }} width={[0, 0.5 / 4]}>
+                  {getTwitterMentions(rest).toLocaleString()}
+                </TableItem>
+              </>
             )}
           </>
         ) : null}

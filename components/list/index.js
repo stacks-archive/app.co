@@ -8,7 +8,7 @@ import { Type } from '@components/typography'
 import { StyledList } from '@components/list/styled'
 import { Button } from '@components/button'
 
-const HeaderItem = ({ showTweets, ...props }) => <StyledList.TableItem width={[0, 0.5 / (showTweets ? 4 : 3)]} height={['0px', '50px']} {...props} />
+const HeaderItem = ({ showTweets, ...props }) => <StyledList.TableItem width={[0, 0.5 / (showTweets ? 4 : 2)]} height={['0px', '50px']} {...props} />
 
 const ListTableHeader = ({ showTweets }) => (
   <StyledList.Body.Header height={['0px', '50px']}>
@@ -18,9 +18,11 @@ const ListTableHeader = ({ showTweets }) => (
       </Box>
       <HeaderItem>Auth</HeaderItem>
       <HeaderItem>Storage</HeaderItem>
-      <HeaderItem>Blockchain</HeaderItem>
       {showTweets && (
-        <HeaderItem style={{ textAlign: 'right' }}>Tweets/Week</HeaderItem>
+        <>
+          <HeaderItem>Blockchain</HeaderItem>
+          <HeaderItem style={{ textAlign: 'right' }}>Tweets/Week</HeaderItem>
+        </>
       )}
     </Flex>
   </StyledList.Body.Header>
