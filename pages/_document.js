@@ -3,8 +3,8 @@ import Document, { Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 import getConfig from 'next/config'
 
-const CrispChatCode = `
-window.$crisp=[];window.CRISP_WEBSITE_ID="ca68d628-52e4-43d9-9558-683bf42e05d2";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
+const HappyFoxCode = `
+window.HFCHAT_CONFIG = { EMBED_TOKEN: '4b938070-600d-11e9-a17f-8d51a82b8e0a', ASSETS_URL: 'https://widget.happyfoxchat.com/visitor' }; (function () { var scriptTag = document.createElement('script') scriptTag.type = 'text/javascript' scriptTag.async = true scriptTag.src = window.HFCHAT_CONFIG.ASSETS_URL + '/js/widget-loader.js' var s = document.getElementsByTagName('script')[0] s.parentNode.insertBefore(scriptTag, s) })()
 `
 
 export default class MyDocument extends Document {
@@ -47,7 +47,7 @@ export default class MyDocument extends Document {
             charSet="utf-8"
             async="async"
           />
-          <script dangerouslySetInnerHTML={{ __html: CrispChatCode }} />
+          <script dangerouslySetInnerHTML={{ __html: HappyFoxCode }} />
           <script dangerouslySetInnerHTML={{ __html: SegmentCode }} />
 
           <script

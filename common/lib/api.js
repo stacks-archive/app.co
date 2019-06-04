@@ -6,6 +6,7 @@ const { ssrCache } = require('./cache')
 const dev = process.env.NODE_ENV !== 'production'
 const API_CACHE_KEY = 'API_CACHE_KEY'
 const BLOCKSTACK_RANKED_APPS_KEY = 'BLOCKSTACK_RANKED_APPS_KEY'
+const MINING_RESULTS_KEY = 'MINING_RESULTS_KEY'
 
 const processApps = (appsData) => {
   let categories = Object.keys(appsData.constants.appConstants.categoryEnums)
@@ -64,14 +65,19 @@ const getApps = (apiServer) =>
 const getAppMiningMonths = (apiServer) =>
   new Promise(async (resolve, reject) => {
     try {
+      if (ssrCache.has(MINING_RESULTS_KEY)) {
+        return resolve(JSON.parse(ssrCache.get(MINING_RESULTS_KEY)))
+      }
       const { months } = await request({
         uri: `${apiServer}/api/app-mining-months`,
         json: true
       })
+
+      ssrCache.set(MINING_RESULTS_KEY, JSON.stringify(months))
       return resolve(months)
     } catch (error) {
       console.log('Error when fetching mining months', error)
-      reject(error)
+      return reject(error)
     }  
   })
 
