@@ -15,8 +15,8 @@ import { slugify } from '@common'
 import { getTwitterMentions, trackPageView } from '@utils'
 
 const rowItemSize = 0.5 / 4
-const TableItem = (props) => (
-  <StyledList.TableItem width={[0, rowItemSize]} style={{ textAlign: 'left', overflow: 'hidden' }} {...props} />
+const TableItem = ({ rowSize=rowItemSize, ...props }) => (
+  <StyledList.TableItem width={[0, rowSize]} style={{ textAlign: 'left', overflow: 'hidden' }} {...props} />
 )
 
 const SmallText = styled(Type.span)`
@@ -69,6 +69,7 @@ const AppItem = ({
       window.open(`/app/${rest.Slugs[0].value}`, '_blank')
     }
   }
+  const rowSize = rest.Rankings ? (0.5 / 4) : (0.5 / 2)
   return (
     <StyledList.Item
       {...rest}
@@ -104,12 +105,16 @@ const AppItem = ({
         </Flex>
         {single ? (
           <>
-            <TableItem>{appTag(authentication)}</TableItem>
-            <TableItem>{appTag(storageNetwork)}</TableItem>
-            <TableItem>{appTag(blockchain)}</TableItem>
-            <TableItem style={{ textAlign: 'right', fontSize: '13px', fontWeight: 700 }} width={[0, 0.5 / 4]}>
-              {getTwitterMentions(rest).toLocaleString()}
-            </TableItem>
+            <TableItem rowSize={rowSize}>{appTag(authentication)}</TableItem>
+            <TableItem rowSize={rowSize}>{appTag(storageNetwork)}</TableItem>
+            {rest.Rankings && (
+              <>
+                <TableItem rowSize={rowSize}>{appTag(blockchain)}</TableItem>
+                <TableItem style={{ textAlign: 'right', fontSize: '13px', fontWeight: 700 }} width={[0, 0.5 / 4]}>
+                  {getTwitterMentions(rest).toLocaleString()}
+                </TableItem>
+              </>
+            )}
           </>
         ) : null}
       </Flex>

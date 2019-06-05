@@ -44,10 +44,14 @@ const mapStateToProps = (state) => ({
 })
 
 const getApps = (props) => {
+  console.log('getapps start')
   const hasFilter = props.platformFilter || props.categoryFilter
   const isAll = (props.filterBy === 'all') || (hasFilter === 'all')
   const apps = hasFilter && !isAll ? props.filteredApps : props.apps
-  const sortedApps = sortBy(apps, (app) => -getTwitterMentions(app))
+  let sortedApps = apps
+  if (!props.platformFilter || (props.platformFilter.toLowerCase() !== 'blockstack')) {
+    sortedApps = sortBy(apps, (app) => -getTwitterMentions(app))
+  }
   return sortedApps
 }
 
@@ -60,7 +64,8 @@ class AppsListComponent extends React.Component {
     sectionKeys: PropTypes.array,
     categoryName: PropTypes.string,
     platformName: PropTypes.string,
-    href: PropTypes.string
+    href: PropTypes.string,
+    blockstackRankedApps: PropTypes.array.isRequired
   }
 
   constructor(props) {
@@ -81,7 +86,7 @@ class AppsListComponent extends React.Component {
   }
 
   multilist() {
-    const { filterBy = 'category', single, limit, apps, sectionKeys, ...rest } = this.props
+    const { filterBy = 'category', single, limit, apps, sectionKeys, blockstackRankedApps, platformName, ...rest } = this.props
     const items = sectionKeys ? dedupe(sectionKeys) : rest[filterBy]
 
     return (
@@ -93,7 +98,7 @@ class AppsListComponent extends React.Component {
           filteredList = apps.filter((app) => app.category === filter)
           path = `/categories`
         } else {
-          filteredList = selectAppsForPlatform(apps, filter)
+          filteredList = selectAppsForPlatform(apps, filter, blockstackRankedApps)
           path = `/platforms`
         }
 
@@ -116,6 +121,7 @@ class AppsListComponent extends React.Component {
             width={[1, 1 / 2, 1 / 3]}
             limit={limit}
             single={false}
+            showTweets={!platformName || platformName.toLowerCase() !== 'blockstack'}
             href={`${path}/${slugify(filter)}`}
           />
         ) : null
@@ -136,6 +142,7 @@ class AppsListComponent extends React.Component {
         }}
         items={sortedApps}
         item={AppItem}
+        showTweets={!platformName || platformName.toLowerCase() !== 'blockstack'}
         width={[1, 1 / 2, 1 / 3]}
         limit={limit}
         single
