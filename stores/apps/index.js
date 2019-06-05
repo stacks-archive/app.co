@@ -1,7 +1,7 @@
 import assignIn from 'lodash/assignIn'
 
 import { getTags, capitalize } from '@utils'
-import { selectAllPlatforms } from '@stores/apps/selectors'
+import { selectAllPlatforms, selectRankedBlockstackApps } from '@stores/apps/selectors'
 import { slugify } from '@common'
 
 const constants = {
@@ -121,14 +121,19 @@ const actions = {
   fetchAppMiningApps
 }
 
-export const selectAppsForPlatform = (apps, platform) =>
-  apps.filter((app) => {
-    const tags = getTags(app)
-    if (platform.toLowerCase() === 'blockstack') {
-      return (app.authentication === 'Blockstack' || app.storageNetwork === 'Gaia') && app.categoryID !== 14
-    }
-    return !!tags.find((tag) => tag.toLowerCase() === platform.toLowerCase())
-  })
+export const selectAppsForPlatform = (apps, platform, blockstackRankedApps) => {
+  if (platform.toLowerCase() === 'blockstack') {
+    return blockstackRankedApps || []
+  } else {
+    return apps.filter((app) => {
+      const tags = getTags(app)
+      if (platform.toLowerCase() === 'blockstack') {
+        return (app.authentication === 'Blockstack' || app.storageNetwork === 'Gaia') && app.categoryID !== 14
+      }
+      return !!tags.find((tag) => tag.toLowerCase() === platform.toLowerCase())
+    })
+  }
+}
 
 const makeReducer = (data) => {
   let initialState = data
@@ -155,14 +160,15 @@ const makeReducer = (data) => {
     }
 
     initialState = assignIn(data, emptyState)
+
   }
 
   const reducer = (state = initialState, action) => {
     switch (action.type) {
       case constants.SELECT_PLATFORM: {
-        console.log(action.type)
         const { platform } = action
-        const filteredApps = selectAppsForPlatform(state.apps, platform)
+        const { blockstackRankedApps } = state
+        const filteredApps = selectAppsForPlatform(state.apps, platform, blockstackRankedApps)
         const allPlatforms = selectAllPlatforms(state)
         const platformName = allPlatforms.find((_platform) => slugify(_platform) === platform) || capitalize(platform)
         return {
