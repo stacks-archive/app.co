@@ -68,15 +68,33 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.apps) {
-      const parsed = queryString.parse(document.location.search)
-      this.props.doSelectApp(parseInt(parsed.id, 10))
-    }
+    this.fetchApp()
+    // this.props.doSelectApp(parseInt(parsed.id, 10))
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedApp && this.state.id !== nextProps.selectedApp.id && nextProps.selectedApp.status) {
       this.setState(Object.assign({}, this.state, nextProps.selectedApp))
+    }
+  }
+
+  async fetchApp() {
+    const { id } = queryString.parse(document.location.search)
+    const { jwt, apiServer } = this.props
+    // console.log(id, jwt)
+    if (id && jwt) {
+      const request = await fetch(`${apiServer}/api/admin/apps/${id}`, {
+        method: 'GET',
+        headers: new Headers({
+          Authorization: `Bearer ${jwt}`,
+          'Content-Type': 'application/json'
+        })
+      })
+      const app = await request.json()
+      this.setState((state) => ({
+        ...state,
+        ...app
+      }))
     }
   }
 
@@ -89,12 +107,14 @@ class App extends React.Component {
   }
 
   appDetails() {
-    const app = this.props.selectedApp
+    // const app = this.props.selectedApp
+    // const { name } = this.state;
+    const app = this.state
     const { categories, authentications, storageNetworks, blockchains } = this.props 
-    if (!app) {
+    if (!app.name) {
       return <h1>Loading</h1>
     }
-    const appPage = appRoute(app)
+    const appPage = appRoute(this.state)
     const ranking = app.Rankings[0]
     return (
       <Section>
