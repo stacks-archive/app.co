@@ -123,7 +123,19 @@ const actions = {
 
 export const selectAppsForPlatform = (apps, platform, blockstackRankedApps) => {
   if (platform.toLowerCase() === 'blockstack') {
-    return blockstackRankedApps || []
+    const rankedApps = blockstackRankedApps || []
+    const rankedAppsById = {}
+    rankedApps.forEach((app) => { rankedAppsById[app.id] = true })
+    apps.forEach((app) => {
+      if (!rankedAppsById[app.id]) {
+        const isBlockstack = (app.authentication === 'Blockstack' || app.storageNetwork === 'Gaia') && app.categoryID !== 14
+        if (isBlockstack) {
+          const { Rankings, ...rest } = app
+          rankedApps.push(rest)
+        }
+      }
+    })
+    return rankedApps
   } else {
     return apps.filter((app) => {
       const tags = getTags(app)
