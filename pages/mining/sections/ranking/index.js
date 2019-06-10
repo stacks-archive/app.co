@@ -25,13 +25,13 @@ const DotsAnimation = ({ position = 0, color }) => (
     <Box>
       <Dots color={color} />
     </Box>
-    <Box ml={'3px'}>
+    <Box ml="3px">
       <Dots color={color} />
     </Box>
-    <Box ml={'3px'}>
+    <Box ml="3px">
       <Dots color={color} />
     </Box>
-    <Box ml={'3px'}>
+    <Box ml="3px">
       <Dots color={color} />
     </Box>
   </Flex>
@@ -41,7 +41,7 @@ const TextSection = ({ ...rest }) => (
   <Flex lineHeight={1.6} justifyContent="space-between" flexWrap="wrap">
     {texts.map((text, i) => (
       <Box key={i} pt={7} width={['100%', '28%']}>
-        <Box bg="white" opacity={0.25} height={'1px'} width={80} />
+        <Box bg="white" opacity={0.25} height="1px" width={80} />
         <Type pt={6} color="white">
           {text}
         </Type>
@@ -64,7 +64,7 @@ const RankerContainer = ({
     overflow="hidden"
     ml={[0, 0, 5, 5]}
     bg="#081537"
-    width={[1, 1, '28.333%', '28.333%']}
+    width={[1, 1, '45%', '45%']}
     flexGrow={1}
     border={1}
     borderColor={color}
@@ -108,7 +108,7 @@ const RankingSection = ({ apps, ...rest }) => (
     {({ inView }) => (
       <Wrapper inView={inView} observed flexDirection="column">
         <Flex width={1} flexShrink={1} flexDirection="column">
-          <Title maxWidth={'100%'}>Apps are ranked by expert reviewers</Title>
+          <Title maxWidth="100%">Apps are ranked by expert reviewers</Title>
           <Type pt={6} fontSize={3} color="white">
             Rankings are combined and payouts sent every 30 days.
           </Type>
@@ -123,7 +123,7 @@ const RankingSection = ({ apps, ...rest }) => (
           pt={7}
         >
           <Box width={1} borderRadius={4} overflow="hidden" style={{ willChange: 'transform' }}>
-            <Flex color={'blue.dark'} alignItems="center" bg="white" px={[4, 6]} py={6}>
+            <Flex color="blue.dark" alignItems="center" bg="white" px={[4, 6]} py={6}>
               <Flex alignItems="center">
                 <Type mr={4} fontSize={4} fontFamily="brand">
                   1
@@ -134,7 +134,7 @@ const RankingSection = ({ apps, ...rest }) => (
                   border={1}
                   borderColor="blue.dark"
                   borderRadius={16}
-                  alignItems={'center'}
+                  alignItems="center"
                   justifyContent="center"
                 >
                   <CameraIcon />
@@ -174,21 +174,6 @@ const RankingSection = ({ apps, ...rest }) => (
               >
                 Ranks with Product Hunt
                 <Box is="br" display={['none', 'none', 'none', 'unset']} /> community upvotes and activity.
-              </Ranker>
-              <Ranker
-                key="de"
-                is="a"
-                href="https://words.democracy.earth/democratic-app-ranking-democracy-earth-to-represent-blockstack-community-vote-on-app-mining-7ec8360bdc30"
-                target="_blank"
-                logo={DemoEarthLogo}
-                logoProps={{
-                  minWidth: [200, 152, 152, 200]
-                }}
-                color="#00c091"
-                position={-12}
-              >
-                Ranks by polling the Blockstack
-                <Box is="br" display={['none', 'none', 'none', 'unset']} /> investor community.
               </Ranker>
               <Ranker
                 key="try"
