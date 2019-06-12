@@ -62,7 +62,11 @@ class App extends React.Component {
       registrationIsOpen: false,
       twitterHandle: '',
       isKYCVerified: false,
-      BTCAddress: ''
+      BTCAddress: '',
+      stacksAddress: '',
+      hasCollectedKYC: false,
+      hasAcceptedSECTerms: false,
+      hasAcceptedTerms: false
     }
     this.save = this.save.bind(this)
   }
@@ -234,10 +238,34 @@ class App extends React.Component {
               label="BTC Address"
             />
             <br />
+            <TextField
+              value={this.state.stacksAddress || ''}
+              onChange={(e) => this.setState({ stacksAddress: e.target.value })}
+              label="Stacks Address"
+            />
+            <br />
             <Checkbox
               isChecked={this.state.isKYCVerified}
               onChange={() => this.setState({ isKYCVerified: !this.state.isKYCVerified })}
               label="Tax information is collected"
+            />
+            <br />
+            <Checkbox
+              isChecked={this.state.hasAcceptedSECTerms}
+              onChange={() => this.setState({ hasAcceptedSECTerms: !this.state.hasAcceptedSECTerms })}
+              label="SEC terms accepted"
+            />
+            <br />
+            <Checkbox
+              isChecked={this.state.hasCollectedKYC}
+              onChange={() => this.setState({ hasCollectedKYC: !this.state.hasCollectedKYC })}
+              label="KYC is completed"
+            />
+            <br />
+            <Checkbox
+              isChecked={this.state.hasAcceptedTerms}
+              onChange={() => this.setState({ hasAcceptedTerms: !this.state.hasAcceptedTerms })}
+              label="Terms accepted"
             />
           </Form.Wrapper>
           <br />
