@@ -37,7 +37,8 @@ const pageCacheKey = (req) => {
 async function renderAndCache(req, res, pagePath, serverData) {
   try {
     const cacheKey = pageCacheKey(req)
-    if (cacheKey && ssrCache.has(cacheKey) && !dev) {
+    const USE_CACHE = false
+    if (USE_CACHE && cacheKey && ssrCache.has(cacheKey) && !dev) {
       console.log('Cache hit:', req.path)
       res.send(ssrCache.get(cacheKey))
     } else {
