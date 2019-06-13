@@ -26,7 +26,7 @@ const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
 
   return (
     <Flex style={{ display: display ? 'flex' : 'none' }}>
-      <Box width={1} mt={5}>
+      <Box width={1} mt={0}>
         <Field
           name="btcAddress"
           label="Bitcoin Address"
