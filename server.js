@@ -28,7 +28,9 @@ const apiServer = process.env.API_SERVER || 'https://api.app.co'
 const pageCacheKey = (req) => {
   // return `req`
   const { path } = req
-  if (path.indexOf('admin') !== -1) {
+  const isAdmin = path.indexOf('admin') !== -1
+  const isMaker = path.indexOf('maker') !== -1
+  if (isAdmin || isMaker) {
     return null
   }
   return `page-cache-key-${path}`
@@ -197,6 +199,11 @@ app.prepare().then(() => {
     server.get('/admin/mining/months/:monthId/reviewers/:reviewerId', (req, res) =>
       renderAndCache(req, res, '/admin/mining/reviewer')
     )
+
+    /**
+     * Maker pages
+     */
+    server.get('/maker/:accessToken', (req, res) => renderAndCache(req, res, '/maker', { accessToken: req.params.accessToken }))
 
     apps.platforms.forEach((platform) => {
       server.get(`/${slugify(platform)}`, (req, res) => {
