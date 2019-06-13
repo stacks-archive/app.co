@@ -5,9 +5,9 @@ export const SidebarButton = Styled.div`
   text-align: center;
   padding: 20px 0;
   box-sizing: border-box;
-  background-color: ${({ active }) => active ? '#e5e5ff' : 'white'};
+  background-color: ${({ active }) => active ? '#201f6d26' : 'white'};
   &:hover {
     cursor: pointer;
-    background-color: ${({ active }) => active ? '#e5e5ff' : '#f8f8ff'};
+    background-color: ${({ active }) => active ? '#201f6d26' : '#201f6d0d'};
   }
 `

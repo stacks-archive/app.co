@@ -49,7 +49,7 @@ export default class MakerPortal extends React.Component {
           <Box width={1}>
             <Section>
               <Flex>
-                <Box width="200px" style={{ borderRight: '1px solid gray' }}>
+                <Box width="200px" style={{ borderRight: '1px solid #e4e4e4' }}>
                   <Maker.SidebarButton active={section === SECTIONS.PAYMENT} onClick={() => this.setState({ section: SECTIONS.PAYMENT })}>
                     Payment Details
                   </Maker.SidebarButton>
