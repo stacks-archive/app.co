@@ -172,6 +172,10 @@ class App extends React.Component {
             Referral Source:{' '}
             <code>{app.refSource}</code>
           </p>
+          <p>
+            Access Token:{' '}
+            <code>{app.accessToken}</code>
+          </p>
           <Form.Wrapper>
             <TextField
               value={this.state.name || ''}
