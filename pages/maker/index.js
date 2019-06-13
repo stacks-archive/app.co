@@ -6,6 +6,12 @@ import { Page } from '@components/page'
 import Head from '@containers/head'
 import Maker from '@components/maker'
 
+const SECTIONS = {
+  PAYMENT: 'payment',
+  ID: 'identity',
+  ESIGN: 'esign'
+}
+
 export default class MakerPortal extends React.Component {
   static async getInitialProps({ query, reduxStore }) {
     const { accessToken } = query
@@ -22,8 +28,13 @@ export default class MakerPortal extends React.Component {
     }
   }
 
+  state = {
+    section: SECTIONS.PAYMENT
+  }
+
   render() {
     const { app, apiServer, accessToken } = this.props
+    const { section } = this.state
     return (
       <Page wrap={false}>
         <Head title={app.name} />
@@ -38,21 +49,21 @@ export default class MakerPortal extends React.Component {
           <Box width={1}>
             <Section>
               <Flex>
-                <Box width="200px">
-                  <Maker.SidebarButton>
+                <Box width="200px" style={{ borderRight: '1px solid gray' }}>
+                  <Maker.SidebarButton active={section === SECTIONS.PAYMENT} onClick={() => this.setState({ section: SECTIONS.PAYMENT })}>
                     Payment Details
                   </Maker.SidebarButton>
-                  <Maker.SidebarButton>
+                  <Maker.SidebarButton active={section === SECTIONS.ID} onClick={() => this.setState({ section: SECTIONS.ID })}>
                     Identity Verification
                   </Maker.SidebarButton>
-                  <Maker.SidebarButton>
+                  <Maker.SidebarButton active={section === SECTIONS.ESIGN} onClick={() => this.setState({ section: SECTIONS.ESIGN })}>
                     Document Signing
                   </Maker.SidebarButton>
                 </Box>
                 <Box flexGrow={1}>
                   <Content>
                     <Type fontSize={3} fontWeight={500}>{app.name}</Type>
-                    <Maker.PaymentDetails app={app} apiServer={apiServer} accessToken={accessToken} />
+                    <Maker.PaymentDetails app={app} apiServer={apiServer} accessToken={accessToken} display={section === SECTIONS.PAYMENT} />
                   </Content>
                 </Box>
               </Flex>

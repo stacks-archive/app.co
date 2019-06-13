@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Flex, Box, Field, Button } from 'blockstack-ui'
 
-const PaymentDetails = ({ app, apiServer, accessToken }) => {
+const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
   const [btcAddress, setBTCAddress] = useState(app.BTCAddress)
   const [stxAddress, setSTXAddress] = useState(app.stacksAddress)
   const [saving, setSaving] = useState(false)
@@ -25,7 +25,7 @@ const PaymentDetails = ({ app, apiServer, accessToken }) => {
   }
 
   return (
-    <Flex>
+    <Flex style={{ display: display ? 'flex' : 'none' }}>
       <Box width={1} mt={5}>
         <Field
           name="btcAddress"
