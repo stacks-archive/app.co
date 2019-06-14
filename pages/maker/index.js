@@ -64,6 +64,7 @@ export default class MakerPortal extends React.Component {
                   <Type fontSize={3} fontWeight={500} py={6} px={6}>{app.name}</Type>
                   <Content>
                     <Maker.PaymentDetails app={app} apiServer={apiServer} accessToken={accessToken} display={section === SECTIONS.PAYMENT} />
+                    <Maker.ParticipationAgreement app={app} apiServer={apiServer} accessToken={accessToken} display={section === SECTIONS.ESIGN} />
                   </Content>
                 </Box>
               </Flex>
