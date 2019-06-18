@@ -18,7 +18,13 @@ const KYC = ({ app, accessToken, apiServer, display }) => {
     <Flex style={{ display: display ? 'flex' : 'none' }}>
       <Box width={1} mt={0}>
         {embedURL ? (
-          <iframe src={embedURL} title="Document" width="100%" height="700px" allow="camera" />
+          <>
+            {app.hasCollectedKYC ? (
+              <Type>Your identity has been verified.</Type>
+            ) : (
+              <iframe src={embedURL} title="Document" width="100%" height="700px" allow="camera" />
+            )}
+          </>
         ) : (
           <>
             <Type mb={4}>
