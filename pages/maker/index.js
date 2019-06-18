@@ -65,6 +65,7 @@ export default class MakerPortal extends React.Component {
                   <Content>
                     <Maker.PaymentDetails app={app} apiServer={apiServer} accessToken={accessToken} display={section === SECTIONS.PAYMENT} />
                     <Maker.ParticipationAgreement app={app} apiServer={apiServer} accessToken={accessToken} display={section === SECTIONS.ESIGN} />
+                    <Maker.KYC app={app} apiServer={apiServer} accessToken={accessToken} display={section === SECTIONS.ID} />
                   </Content>
                 </Box>
               </Flex>

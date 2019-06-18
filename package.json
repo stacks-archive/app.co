@@ -38,7 +38,7 @@
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-mdx": "^1.2.0",
     "async": "^2.6.0",
-    "blockstack": "^18.1.0",
+    "blockstack": "^19.2.1",
     "blockstack-ui": "^0.0.77",
     "cheerio": "^1.0.0-rc.2",
     "clean-tag": "^2.0.0",
@@ -187,6 +187,6 @@
     ]
   },
   "engines": {
-    "node": "10.15.3"
+    "node": "^10.4"
   }
 }

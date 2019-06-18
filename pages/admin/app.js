@@ -254,17 +254,20 @@ class App extends React.Component {
               label="Tax information is collected"
             />
             <br />
-            <Checkbox
+            {/* <Checkbox
               isChecked={this.state.hasAcceptedSECTerms}
               onChange={() => this.setState({ hasAcceptedSECTerms: !this.state.hasAcceptedSECTerms })}
               label="SEC terms accepted"
-            />
+            /> */}
             <br />
-            <Checkbox
-              isChecked={this.state.hasCollectedKYC}
-              onChange={() => this.setState({ hasCollectedKYC: !this.state.hasCollectedKYC })}
-              label="KYC is completed"
-            />
+            <p>
+              KYC is verified:{' '}
+              <strong>{JSON.stringify(!!this.state.hasCollectedKYC)}</strong>
+            </p>
+            <p>
+              Participation Agreement signed:{' '}
+              <strong>{JSON.stringify(!!this.state.hasAcceptedSECTerms)}</strong>
+            </p>
             <br />
             <Checkbox
               isChecked={this.state.hasAcceptedTerms}
