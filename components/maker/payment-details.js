@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Flex, Box, Field, Button } from 'blockstack-ui'
+import { Flex, Box, Field, Button, Type } from 'blockstack-ui'
 
 const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
   const [btcAddress, setBTCAddress] = useState(app.BTCAddress)
@@ -27,6 +27,15 @@ const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
   return (
     <Flex style={{ display: display ? 'flex' : 'none' }}>
       <Box width={1} mt={0}>
+        <Type mb={5}>
+          Presently, App Mining payments are made to a Bitcoin (BTC) address. In the future, payments will be made to a Stacks (STX) address. Your app cannot participate in App Mining without Blockstack having both address types on file.
+        </Type>
+        <Type mb={5}>
+          Please provide a BTC and a STX address. For information on obtaining a STX address, see the
+          {' '}
+          <a href="https://docs.blockstack.org/org/wallet-use.html#receive-stacks">Stacks wallet documentation</a>
+          {'.'}
+        </Type>
         <Field
           name="btcAddress"
           label="Bitcoin Address"
