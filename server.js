@@ -38,7 +38,7 @@ async function renderAndCache(req, res, pagePath, serverData) {
   try {
     const cacheKey = pageCacheKey(req)
     const USE_CACHE = true
-    if (USE_CACHE && cacheKey && ssrCache.has(cacheKey)) {
+    if (USE_CACHE && cacheKey && ssrCache.has(cacheKey) && !dev) {
       console.log('Cache hit:', req.path)
       res.setHeader('x-cache', 'HIT')
       return res.send(ssrCache.get(cacheKey))
