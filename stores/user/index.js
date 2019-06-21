@@ -1,4 +1,8 @@
-import * as blockstack from 'blockstack'
+import { UserSession, AppConfig } from 'blockstack'
+
+const host = typeof document === 'undefined' ? 'https://app.co' : document.location.origin
+const appConfig = new AppConfig(['store_write'], host)
+const userSession = new UserSession({ appConfig })
 
 const initialState = {
   userId: null,
@@ -31,7 +35,7 @@ const signOut = () => ({
 
 const handleSignIn = (apiServer) =>
   async function innerHandleSignIn(dispatch) {
-    const token = blockstack.getAuthResponseToken()
+    const token = userSession.getAuthResponseToken()
     if (!token) {
       return true
     }
@@ -53,7 +57,7 @@ const handleSignIn = (apiServer) =>
 const signIn = () => {
   const redirect = `${window.location.origin}/admin`
   const manifest = `${window.location.origin}/static/manifest.json`
-  blockstack.redirectToSignIn(redirect, manifest)
+  userSession.redirectToSignIn(redirect, manifest)
   return signingIn()
 }
 
