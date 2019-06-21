@@ -37,10 +37,11 @@ const pageCacheKey = (req) => {
 async function renderAndCache(req, res, pagePath, serverData) {
   try {
     const cacheKey = pageCacheKey(req)
-    const USE_CACHE = false
-    if (USE_CACHE && cacheKey && ssrCache.has(cacheKey) && !dev) {
+    const USE_CACHE = true
+    if (USE_CACHE && cacheKey && ssrCache.has(cacheKey)) {
       console.log('Cache hit:', req.path)
-      res.send(ssrCache.get(cacheKey))
+      res.setHeader('x-cache', 'HIT')
+      return res.send(ssrCache.get(cacheKey))
     } else {
       console.log('Cache miss:', req.path)
     }
@@ -64,10 +65,10 @@ async function renderAndCache(req, res, pagePath, serverData) {
     if (cacheKey) {
       ssrCache.set(cacheKey, html)
     }
-    res.send(html)
+    return res.send(html)
   } catch (err) {
     console.log(err)
-    app.renderError(err, req, res, pagePath)
+    return app.renderError(err, req, res, pagePath)
   }
 }
 
