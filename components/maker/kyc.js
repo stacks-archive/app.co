@@ -28,15 +28,16 @@ const KYC = ({ app, accessToken, apiServer, display }) => {
         ) : (
           <>
             <Type mb={4}>
-              Click the button below to initiate our KYC (know your customer) process.
-              This step is required, and allows us to verify your identity before this app
-              can participate in App Mining.
+              We need to confirm your identity before you can participate in App Mining.
             </Type>
             <Type mb={4} display="block">
-              Once you initiate this process, you have 60 days to complete it.
+              We are ready to pay you Bitcoin and Stacks tokens for building a great Blockstack app, but we also need to comply with all applicable laws.
+            </Type>
+            <Type mb={4} display="block">
+              You have 60 days from today to complete this process.
             </Type>
             <Button onClick={initiateKYC} mt={4}>
-              {loading ? 'Loading..' : 'Begin'}
+              {loading ? 'Loading..' : 'Begin Verification'}
             </Button>
           </>
         )}
