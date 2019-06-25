@@ -33,7 +33,7 @@ const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
         <Type mb={5}>
           Please provide a BTC and a STX address. For information on obtaining a STX address, see the
           {' '}
-          <a href="https://docs.blockstack.org/org/wallet-use.html#receive-stacks">Stacks wallet documentation</a>
+          <a href="https://docs.blockstack.org/org/wallet-use.html">Stacks wallet documentation</a>
           {'.'}
         </Type>
         <Field
