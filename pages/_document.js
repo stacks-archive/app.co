@@ -3,9 +3,9 @@ import Document, { Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 import getConfig from 'next/config'
 
-const HappyFoxCode = `
-window.HFCHAT_CONFIG = { EMBED_TOKEN: '4b938070-600d-11e9-a17f-8d51a82b8e0a', ASSETS_URL: 'https://widget.happyfoxchat.com/visitor' }; (function () { var scriptTag = document.createElement('script'); scriptTag.type = 'text/javascript'; scriptTag.async = true; scriptTag.src = window.HFCHAT_CONFIG.ASSETS_URL + '/js/widget-loader.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(scriptTag, s) })()
-`
+// const HappyFoxCode = `
+// window.HFCHAT_CONFIG = { EMBED_TOKEN: '4b938070-600d-11e9-a17f-8d51a82b8e0a', ASSETS_URL: 'https://widget.happyfoxchat.com/visitor' }; (function () { var scriptTag = document.createElement('script'); scriptTag.type = 'text/javascript'; scriptTag.async = true; scriptTag.src = window.HFCHAT_CONFIG.ASSETS_URL + '/js/widget-loader.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(scriptTag, s) })()
+// `
 
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
@@ -47,12 +47,16 @@ export default class MyDocument extends Document {
             charSet="utf-8"
             async="async"
           />
+<<<<<<< HEAD
           {/* There is no npm package for this... */}
           <script
             type="text/javascript"
             src="https://s3.amazonaws.com/eversign-embedded-js-library/eversign.embedded.latest.js"
           />
           <script dangerouslySetInnerHTML={{ __html: HappyFoxCode }} />
+=======
+          {/* <script dangerouslySetInnerHTML={{ __html: HappyFoxCode }} /> */}
+>>>>>>> no happy fox code - it overlaps a different opt in
           <script dangerouslySetInnerHTML={{ __html: SegmentCode }} />
 
           <script
