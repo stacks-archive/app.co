@@ -9,7 +9,8 @@ import Maker from '@components/maker'
 const SECTIONS = {
   PAYMENT: 'payment',
   ID: 'identity',
-  ESIGN: 'esign'
+  ESIGN: 'esign',
+  STATUS: 'status'
 }
 
 export default class MakerPortal extends React.Component {
@@ -50,22 +51,60 @@ export default class MakerPortal extends React.Component {
             <Section>
               <Flex>
                 <Box width="200px" style={{ borderRight: '1px solid #e4e4e4', minWidth: '200px' }}>
-                  <Maker.SidebarButton active={section === SECTIONS.PAYMENT} onClick={() => this.setState({ section: SECTIONS.PAYMENT })}>
+                  <Maker.SidebarButton
+                    active={section === SECTIONS.PAYMENT}
+                    onClick={() => this.setState({ section: SECTIONS.PAYMENT })}
+                  >
                     Payment Details
                   </Maker.SidebarButton>
-                  <Maker.SidebarButton active={section === SECTIONS.ID} onClick={() => this.setState({ section: SECTIONS.ID })}>
+                  <Maker.SidebarButton
+                    active={section === SECTIONS.ID}
+                    onClick={() => this.setState({ section: SECTIONS.ID })}
+                  >
                     Identity Verification
                   </Maker.SidebarButton>
-                  <Maker.SidebarButton active={section === SECTIONS.ESIGN} onClick={() => this.setState({ section: SECTIONS.ESIGN })}>
+                  <Maker.SidebarButton
+                    active={section === SECTIONS.ESIGN}
+                    onClick={() => this.setState({ section: SECTIONS.ESIGN })}
+                  >
                     Document Signing
+                  </Maker.SidebarButton>
+                  <Maker.SidebarButton
+                    active={section === SECTIONS.STATUS}
+                    onClick={() => this.setState({ section: SECTIONS.STATUS })}
+                  >
+                    App Mining Status
                   </Maker.SidebarButton>
                 </Box>
                 <Box flexGrow={1}>
-                  <Type fontSize={3} fontWeight={500} py={6} px={6}>{app.name}</Type>
+                  <Type fontSize={3} fontWeight={500} py={6} px={6}>
+                    {app.name}
+                  </Type>
                   <Content>
-                    <Maker.PaymentDetails app={app} apiServer={apiServer} accessToken={accessToken} display={section === SECTIONS.PAYMENT} />
-                    <Maker.ParticipationAgreement app={app} apiServer={apiServer} accessToken={accessToken} display={section === SECTIONS.ESIGN} />
-                    <Maker.KYC app={app} apiServer={apiServer} accessToken={accessToken} display={section === SECTIONS.ID} />
+                    <Maker.PaymentDetails
+                      app={app}
+                      apiServer={apiServer}
+                      accessToken={accessToken}
+                      display={section === SECTIONS.PAYMENT}
+                    />
+                    <Maker.ParticipationAgreement
+                      app={app}
+                      apiServer={apiServer}
+                      accessToken={accessToken}
+                      display={section === SECTIONS.ESIGN}
+                    />
+                    <Maker.KYC
+                      app={app}
+                      apiServer={apiServer}
+                      accessToken={accessToken}
+                      display={section === SECTIONS.ID}
+                    />
+                    <Maker.Status
+                      app={app}
+                      apiServer={apiServer}
+                      accessToken={accessToken}
+                      display={section === SECTIONS.STATUS}
+                    />
                   </Content>
                 </Box>
               </Flex>
