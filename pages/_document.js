@@ -4,7 +4,7 @@ import { ServerStyleSheet } from 'styled-components'
 import getConfig from 'next/config'
 
 const HappyFoxCode = `
-window.HFCHAT_CONFIG = { EMBED_TOKEN: '4b938070-600d-11e9-a17f-8d51a82b8e0a', ASSETS_URL: 'https://widget.happyfoxchat.com/visitor' }; (function () { var scriptTag = document.createElement('script') scriptTag.type = 'text/javascript' scriptTag.async = true scriptTag.src = window.HFCHAT_CONFIG.ASSETS_URL + '/js/widget-loader.js' var s = document.getElementsByTagName('script')[0] s.parentNode.insertBefore(scriptTag, s) })()
+window.HFCHAT_CONFIG = { EMBED_TOKEN: '4b938070-600d-11e9-a17f-8d51a82b8e0a', ASSETS_URL: 'https://widget.happyfoxchat.com/visitor' }; (function () { var scriptTag = document.createElement('script'); scriptTag.type = 'text/javascript'; scriptTag.async = true; scriptTag.src = window.HFCHAT_CONFIG.ASSETS_URL + '/js/widget-loader.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(scriptTag, s) })()
 `
 
 export default class MyDocument extends Document {
