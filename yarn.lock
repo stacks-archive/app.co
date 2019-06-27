@@ -2757,10 +2757,10 @@ blockstack-ui@^0.0.77:
     styled-system "^3.2.1"
     system-components "^3.0.3"
 
-blockstack@^18.1.0:
-  version "18.2.1"
-  resolved "https://registry.yarnpkg.com/blockstack/-/blockstack-18.2.1.tgz#e369a189107f585093ce852a9a9e3514076d5cc5"
-  integrity sha512-hcJdNhltNSRZg6iouSauWOzKpVnfC1NFIMBhC9sZjaIFCPIojDrgvRcgoh3AEy8LMkj1krr26AKAOhnRcQJmng==
+blockstack@18.1.0:
+  version "18.1.0"
+  resolved "https://registry.yarnpkg.com/blockstack/-/blockstack-18.1.0.tgz#9a47f3de062c1c9e9f91d7790cc63db2967a1a0e"
+  integrity sha512-7N5Bea3dV4p9/g+2g318qoieEvkPT34if1pMFxcqIbpb3t+rBVzSMxjU6JWL1e5VyYWZJdrtHgw7J+uWZQNTew==
   dependencies:
     ajv "^4.11.5"
     babel-runtime "^6.26.0"
