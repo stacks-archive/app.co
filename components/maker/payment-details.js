@@ -37,16 +37,15 @@ const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
   return (
     <Flex style={{ display: display ? 'flex' : 'none' }}>
       <Box width={1} mt={0}>
-        {showNotification && (
-          <Notification message="Thanks! Your payment details have been updated." />
-        )}
+        {showNotification && <Notification message="Thanks! Your payment details have been updated." />}
         <Type mb={5}>
-          Presently, App Mining payments are made to a Bitcoin (BTC) address. In the future, payments will be made to a Stacks (STX) address. Your app cannot participate in App Mining without Blockstack having both address types on file.
+          Presently, App Mining payments are made to a Bitcoin (BTC) address. In the future, payments will be made to
+          a Stacks (STX) address. Your app cannot participate in App Mining without Blockstack having both address
+          types on file.
         </Type>
         <Type mb={5}>
-          Please provide a BTC and a STX address. For information on obtaining a STX address, see the
-          {' '}
-          <a href="https://docs.blockstack.org/org/wallet-use.html">Stacks wallet documentation</a>
+          Please provide a BTC and a STX address. For information on obtaining a STX address, see the{' '}
+          <a href="https://wallet.blockstack.org/">Stacks wallet documentation</a>
           {'.'}
         </Type>
         <Field
