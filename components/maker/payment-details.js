@@ -52,12 +52,14 @@ const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
         <Field
           name="btcAddress"
           label="Bitcoin Address"
+          placeholder="Enter a Bitcoin address"
           onChange={(e) => setBTCAddress(e.target.value)}
           value={btcAddress}
         />
         <Field
           name="stacksAddress"
           label="Stacks Address"
+          placeholder="Enter a Stacks address"
           onChange={(e) => setSTXAddress(e.target.value)}
           value={stxAddress}
         />
