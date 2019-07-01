@@ -53,11 +53,6 @@ const ParticipationAgreement = ({ app, apiServer, accessToken, display }) => {
 
   return (
     <Flex style={{ display: display ? 'flex' : 'none' }}>
-      {/* There is no npm package for this... */}
-      <script
-        type="text/javascript"
-        src="https://s3.amazonaws.com/eversign-embedded-js-library/eversign.embedded.latest.js"
-      />
       <Box width={1} mt={0}>
         <Box width={1} id="embedded-participation-agreement" />
         {!document && (
