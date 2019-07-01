@@ -41,6 +41,7 @@ const handleSignIn = (apiServer) =>
     }
 
     dispatch(signingIn())
+    await userSession.handlePendingSignIn()
     const url = `${apiServer}/api/authenticate?authToken=${token}`
     const response = await fetch(url, {
       method: 'POST'
