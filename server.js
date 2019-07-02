@@ -7,6 +7,7 @@ const expressSitemapXml = require('express-sitemap-xml')
 const fs = require('fs-extra')
 const secure = require('express-force-https')
 const morgan = require('morgan')
+const basicAuth = require('express-basic-auth')
 
 const dev = process.env.NODE_ENV !== 'production'
 if (dev) {
@@ -108,6 +109,13 @@ app.prepare().then(() => {
     server.use(morgan('combined'))
     server.use(cookiesMiddleware())
     server.use(compression())
+
+    if (process.env.AUTH_PASSWORD) {
+      server.use(basicAuth({
+        users: { 'admin': process.env.AUTH_PASSWORD },
+        challenge: true
+      }))
+    }
 
     server.set('views', './common/server-views')
     server.set('view engine', 'pug')
