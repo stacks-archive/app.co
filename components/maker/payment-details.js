@@ -79,8 +79,8 @@ const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
           without Blockstack having both address types on file.
         </Type>
         <Type mb={5}>
-          Please provide a BTC and a STX address. For information on obtaining a STX address, see the{' '}
-          <a href="https://wallet.blockstack.org/">Stacks wallet documentation</a>
+          Please provide a BTC and a STX address. For information on obtaining a STX address, download the{' '}
+          <a href="https://wallet.blockstack.org/" target="_blank" rel="noopener noreferrer">Stacks Wallet</a>
           {'.'}
         </Type>
         <Field
