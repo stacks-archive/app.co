@@ -46,7 +46,7 @@ const ParticipationAgreement = ({ app, apiServer, accessToken, display }) => {
     return (
       <Flex style={{ display: display ? 'flex' : 'none' }}>
         <Box width={1} mt={0}>
-          <Notification message="Thanks! You've successfully signed our partification agreement" />
+          <Notification message="Thanks! You've successfully signed our participation agreement" />
         </Box>
       </Flex>
     )

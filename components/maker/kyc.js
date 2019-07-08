@@ -34,7 +34,7 @@ const KYC = ({ app, accessToken, apiServer, display }) => {
               We are ready to pay you Bitcoin and Stacks tokens for building a great Blockstack app, but we also need to comply with all applicable laws.
             </Type>
             <Type mb={4} display="block">
-              You have 60 days from today to complete this process.
+              You have 60 days from today to complete this process. You are not eligible for app mining until you&amp;ve completed identity verification.
             </Type>
             <Button onClick={initiateKYC} mt={4}>
               {loading ? 'Loading..' : 'Begin Verification'}
