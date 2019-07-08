@@ -4,6 +4,7 @@ import ParticipationAgreement from './participation-agreement'
 import KYC from './kyc'
 import Status from './status'
 import Notification from './notification'
+import Info from './info'
 
 export default {
   SidebarButton,
@@ -11,5 +12,6 @@ export default {
   ParticipationAgreement,
   KYC,
   Status,
-  Notification
+  Notification,
+  Info
 }

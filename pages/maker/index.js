@@ -10,7 +10,8 @@ const SECTIONS = {
   PAYMENT: 'payment',
   ID: 'identity',
   ESIGN: 'esign',
-  STATUS: 'status'
+  STATUS: 'status',
+  info: 'info'
 }
 
 export default class MakerPortal extends React.Component {
@@ -75,6 +76,12 @@ export default class MakerPortal extends React.Component {
                   >
                     App Mining Status
                   </Maker.SidebarButton>
+                  {/* <Maker.SidebarButton
+                    active={section === SECTIONS.INFO}
+                    onClick={() => this.setState({ section: SECTIONS.INFO })}
+                  >
+                    General Information
+                  </Maker.SidebarButton> */}
                 </Box>
                 <Box flexGrow={1}>
                   <Type fontSize={3} fontWeight={500} py={6} px={6}>
@@ -105,6 +112,8 @@ export default class MakerPortal extends React.Component {
                       accessToken={accessToken}
                       display={section === SECTIONS.STATUS}
                     />
+                    {/* <Maker.Info display={section === SECTIONS.INFO} /> */}
+                    <Type mt={7} display="block" is="a" fontSize={1} href="https://www.sec.gov/Archives/edgar/data/1693656/000110465919039476/a18-15736_1partiiandiii.htm">SEC Participation Agreement</Type>
                   </Content>
                 </Box>
               </Flex>
