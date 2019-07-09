@@ -5,6 +5,7 @@ import KYC from './kyc'
 import Status from './status'
 import Notification from './notification'
 import Info from './info'
+import Tax from './tax-info'
 
 export default {
   SidebarButton,
@@ -13,5 +14,6 @@ export default {
   KYC,
   Status,
   Notification,
-  Info
+  Info,
+  Tax
 }

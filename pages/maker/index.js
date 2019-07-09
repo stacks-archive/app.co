@@ -11,7 +11,8 @@ const SECTIONS = {
   ID: 'identity',
   ESIGN: 'esign',
   STATUS: 'status',
-  info: 'info'
+  INFO: 'info',
+  TAX: 'tax'
 }
 
 export default class MakerPortal extends React.Component {
@@ -71,6 +72,12 @@ export default class MakerPortal extends React.Component {
                     Document Signing
                   </Maker.SidebarButton>
                   <Maker.SidebarButton
+                    active={section === SECTIONS.TAX}
+                    onClick={() => this.setState({ section: SECTIONS.TAX })}
+                  >
+                    Tax Documents
+                  </Maker.SidebarButton>
+                  <Maker.SidebarButton
                     active={section === SECTIONS.STATUS}
                     onClick={() => this.setState({ section: SECTIONS.STATUS })}
                   >
@@ -111,6 +118,12 @@ export default class MakerPortal extends React.Component {
                       apiServer={apiServer}
                       accessToken={accessToken}
                       display={section === SECTIONS.STATUS}
+                    />
+                    <Maker.Tax
+                      app={app}
+                      apiServer={apiServer}
+                      accessToken={accessToken}
+                      display={section === SECTIONS.TAX}
                     />
                     {/* <Maker.Info display={section === SECTIONS.INFO} /> */}
                     <Type mt={7} display="block" is="a" fontSize={1} href="https://www.sec.gov/Archives/edgar/data/1693656/000110465919039476/a18-15736_1partiiandiii.htm">SEC Participation Agreement</Type>
