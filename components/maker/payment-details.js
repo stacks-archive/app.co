@@ -74,8 +74,9 @@ const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
       <Box width={1} mt={0}>
         {showNotification && <Notification message="Thanks! Your payment details have been updated." />}
         <Type mb={5}>
-          Presently, App Mining payments are made to a Bitcoin (BTC) address. Soon, we may begin paying to both a Bitcoin and a Stacks (STX) address. Your app cannot participate in App Mining
-          without Blockstack having both address types on file.
+          Presently, App Mining payments are made in Bitcoin (BTC). We anticipate paying in Stacks (STX) soon.
+          In order for your Stacks payment to start accruing for future delivery, please provide both BTC and STX addresses. 
+          Your app cannot participate in App Mining without Blockstack having both address types on file.
         </Type>
         <Type mb={5}>
           Please provide a BTC and a STX address. For information on obtaining a STX address, download the{' '}
