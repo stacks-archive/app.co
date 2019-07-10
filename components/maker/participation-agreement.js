@@ -90,7 +90,7 @@ const ParticipationAgreement = ({ app, apiServer, accessToken, display }) => {
                         htmlFor: "isUSA"
                       }}
                       pl={2}
-                      label="I am based in the USA"
+                      label="I am a person or company based in the US"
                     />
                   </Flex>
                 </Box>
