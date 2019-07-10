@@ -67,27 +67,33 @@ const ParticipationAgreement = ({ app, apiServer, accessToken, display }) => {
                 </Type>
                 <Type mb={4}>Provide your name and email address below to start the signing process.</Type>
                 <Field name="name" label="Your Name" onChange={(e) => setName(e.target.value)} value={name} />
-                  <Box pb={4}>
-                    <Flex pb={3} alignItems="center">
-                      <input
-                        type="checkbox"
-                        name="isUSA"
-                        id="isUSA"
-                        checked={isUSA}
-                        onChange={(e) =>
-                          setIsUSA(e.target.checked)
-                        }
-                      />
-                      <Field.LabelAdvanced
-                        labelProps={{
-                          pb: 0,
-                          htmlFor: "isUSA"
-                        }}
-                        pl={2}
-                        label="I am based in the USA"
-                      />
-                    </Flex>
-                  </Box>
+                <Field
+                  name="stacksAddress"
+                  label="Your Email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                />
+                <Box pb={4}>
+                  <Flex pb={3} alignItems="center">
+                    <input
+                      type="checkbox"
+                      name="isUSA"
+                      id="isUSA"
+                      checked={isUSA}
+                      onChange={(e) =>
+                        setIsUSA(e.target.checked)
+                      }
+                    />
+                    <Field.LabelAdvanced
+                      labelProps={{
+                        pb: 0,
+                        htmlFor: "isUSA"
+                      }}
+                      pl={2}
+                      label="I am based in the USA"
+                    />
+                  </Flex>
+                </Box>
                 {/* <Field
                   name="isUSA"
                   label="I am based in the United States"
