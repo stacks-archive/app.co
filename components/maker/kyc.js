@@ -36,6 +36,11 @@ const KYC = ({ app, accessToken, apiServer, display }) => {
             <Type mb={4} display="block">
               You have 60 days from today to complete this process. You are not eligible for app mining until you&amp;ve completed identity verification.
             </Type>
+            <Type mb={4} display="block">
+              If you are registering as an entity, please note that you must contact us at{' '}
+              <a href="mailto:mining@app.co">mining@app.co</a>
+              {' '}for further verification of your entity.
+            </Type>
             <Button onClick={initiateKYC} mt={4}>
               {loading ? 'Loading..' : 'Begin Verification'}
             </Button>
