@@ -94,12 +94,12 @@ export default class MakerPortal extends React.Component {
                       <Type fontSize={2} display="block" fontWeight={600}>Important Links</Type>
                     </Box>
                     <Box width={1} pl={4} mt={3}>
-                      <Type is="a" fontSize={1} target="_blank" href="https://www.sec.gov/Archives/edgar/data/1693656/000110465919039476/a18-15736_1partiiandiii.htm">Offering circular</Type>
+                      <Type is="a" fontSize={1} target="_blank" href="https://stackstoken.com/circular">Offering circular</Type>
                     </Box>
                     <Box width={1} pl={4} mt={3}>
                       <Type is="a" fontSize={1} href="/static/docs/participation-agreement.pdf" target="_blank">Participation agreement</Type>
                     </Box>
-                    <Box width={1} pl={4} mt={3}>
+                    <Box width={1} pl={4} mt={3} mb={3}>
                       <Type is="a" fontSize={1} href="/static/docs/intl-participation-agreement.pdf">International participation agreement</Type>
                     </Box>
                   </Flex>
