@@ -50,7 +50,7 @@ const Status = ({ app, display }) => {
       <Box width={1}>
         {isReady ? (
           <Type mb={4}>
-            Congratulations! We&amp;ve collected everything we need in order for your app to participate in app
+            Congratulations! We&apos;ve collected everything we need in order for your app to participate in app
             mining.
           </Type>
         ) : (
