@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Flex, Box, Button, Field, Type } from 'blockstack-ui'
+import download from 'downloadjs'
 import Notification from './notification'
 
 const ParticipationAgreement = ({ app, apiServer, accessToken, display }) => {
@@ -36,6 +37,12 @@ const ParticipationAgreement = ({ app, apiServer, accessToken, display }) => {
     })
   }
 
+  const getDownload = async () => {
+    const filename = isUSA ? 'us' : 'intl'
+    await download(`/static/docs/${filename}.zip`)
+    getDocument()
+  }
+
   useEffect(() => {
     if (app.eversignDocumentID) {
       getDocument()
@@ -66,6 +73,7 @@ const ParticipationAgreement = ({ app, apiServer, accessToken, display }) => {
                   You must sign our participation agreement to become eligible to participate in App Mining.
                 </Type>
                 <Type mb={4}>Provide your name and email address below to start the signing process.</Type>
+                <Type mb={4}>Before beginning the signing process, you must download and read a package of documents that we provide.</Type>
                 <Field name="name" label="Your Name" onChange={(e) => setName(e.target.value)} value={name} />
                 <Field
                   name="stacksAddress"
@@ -101,7 +109,7 @@ const ParticipationAgreement = ({ app, apiServer, accessToken, display }) => {
                   type="checkbox"
                   value={isUSA}
                 /> */}
-                <Button mt={4} disabled={loading} onClick={() => getDocument()}>
+                <Button mt={4} disabled={loading} onClick={() => getDownload()}>
                   {loading ? 'Starting...' : 'Start Signing Process'}
                 </Button>
               </>
