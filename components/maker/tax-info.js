@@ -3,11 +3,11 @@ import { Flex, Box, Type, Button } from 'blockstack-ui'
 import { Select } from '@components/mining/select'
 
 const openInDropbox = () => {
-  window.open(process.env.US_DROPBOX_URL, '_blank')
+  window.open('https://www.dropbox.com/request/jBv2pYJ2lhJuvfXbJvw8', '_blank')
 }
 
 const openIntlDropbox = () => {
-  window.open(process.env.INTL_DROPBOX_URL, '_blank')
+  window.open('https://www.dropbox.com/request/84CaeiizMy1BU0AaWIrk', '_blank')
 }
 
 const Tax = ({ display, app }) => {
