@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Styled from 'styled-components'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
@@ -28,6 +29,10 @@ import {
   selectStorageCategories,
   selectAuthenticationCategories
 } from '@stores/apps/selectors'
+
+const Strong = Styled.strong`
+  font-weight: 800;
+`
 
 class App extends React.Component {
   static propTypes = {
@@ -62,7 +67,11 @@ class App extends React.Component {
       registrationIsOpen: false,
       twitterHandle: '',
       isKYCVerified: false,
-      BTCAddress: ''
+      BTCAddress: '',
+      stacksAddress: '',
+      hasCollectedKYC: false,
+      hasAcceptedSECTerms: false,
+      hasAcceptedTerms: false
     }
     this.save = this.save.bind(this)
   }
@@ -98,6 +107,25 @@ class App extends React.Component {
     }
   }
 
+  async resetIDVerification() {
+    const { id } = queryString.parse(document.location.search)
+    const { jwt, apiServer } = this.props
+    await fetch(`${apiServer}/api/admin/apps/${id}/reset-id-verification`, {
+      method: 'POST',
+      headers: new Headers({
+        Authorization: `Bearer ${jwt}`,
+        'Content-Type': 'application/json'
+      })
+    })
+    this.setState({
+      jumioTransactionID: null
+    })
+    this.notifications.addNotification({
+      message: 'ID Verification has been reset.',
+      level: 'success'
+    })
+  }
+
   save() {
     this.props.saveApp(this.state, this.props.apiServer, this.props.jwt)
     this.notifications.addNotification({
@@ -126,23 +154,23 @@ class App extends React.Component {
             <>
               <p>
                 Twitter mentions in the last 7 days:{' '}
-                <strong>{ranking.twitterMentions}</strong>
+                <Strong>{ranking.twitterMentions}</Strong>
               </p>
               <p>
                 Monthly visits:{' '}
-                <strong>{Math.round(ranking.monthlyVisitsCount)}</strong>
+                <Strong>{Math.round(ranking.monthlyVisitsCount)}</Strong>
               </p>
               <p>
                 Monthly bounce rate:{' '}
-                <strong>{((ranking.monthlyBounceRate || 0) * 100).toFixed(1)}%</strong>
+                <Strong>{((ranking.monthlyBounceRate || 0) * 100).toFixed(1)}%</Strong>
               </p>
               <p>
                 Monthly page views:{' '}
-                <strong>{Math.round(ranking.monthlyPageViews)}</strong>
+                <Strong>{Math.round(ranking.monthlyPageViews)}</Strong>
               </p>
               <p>
                 Monthly visit duration:{' '}
-                <strong>{Math.round(ranking.monthlyVisitDuration)} seconds</strong>
+                <Strong>{Math.round(ranking.monthlyVisitDuration)} seconds</Strong>
               </p>
             </>
           ) : (
@@ -167,6 +195,10 @@ class App extends React.Component {
           <p>
             Referral Source:{' '}
             <code>{app.refSource}</code>
+          </p>
+          <p>
+            Access Token:{' '}
+            <code>{app.accessToken}</code>
           </p>
           <Form.Wrapper>
             <TextField
@@ -234,10 +266,47 @@ class App extends React.Component {
               label="BTC Address"
             />
             <br />
+            <TextField
+              value={this.state.stacksAddress || ''}
+              onChange={(e) => this.setState({ stacksAddress: e.target.value })}
+              label="Stacks Address"
+            />
+            <br />
             <Checkbox
               isChecked={this.state.isKYCVerified}
               onChange={() => this.setState({ isKYCVerified: !this.state.isKYCVerified })}
               label="Tax information is collected"
+            />
+            <br />
+            <p>
+              KYC is verified:{' '}
+              <Strong>{JSON.stringify(!!this.state.hasCollectedKYC)}</Strong>
+            </p>
+            {this.state.jumioTransactionID && (
+              <React.Fragment>
+                <Button appearance="primary" is="a" href={`https://portal.netverify.com/merchant/idscan/${this.state.jumioTransactionID}`} target="_blank">
+                  View in Jumio
+                </Button>
+                {!this.state.hasCollectedKYC && (
+                  <React.Fragment>
+                    <br />
+                    <br />
+                    <Button appearance="danger" onClick={() => this.resetIDVerification()}>
+                      Reset ID Verification
+                    </Button>
+                  </React.Fragment>
+                )}
+              </React.Fragment>
+            )}
+            <p>
+              Participation Agreement signed:{' '}
+              <Strong>{JSON.stringify(!!this.state.hasAcceptedSECTerms)}</Strong>
+            </p>
+            <br />
+            <Checkbox
+              isChecked={this.state.hasAcceptedTerms}
+              onChange={() => this.setState({ hasAcceptedTerms: !this.state.hasAcceptedTerms })}
+              label="Terms accepted"
             />
           </Form.Wrapper>
           <br />
@@ -284,7 +353,7 @@ class App extends React.Component {
           ) : (
               <Button appearance="primary" onClick={this.save}>
                 Save
-          </Button>
+              </Button>
             )}
         </Content>
       </Section>

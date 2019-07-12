@@ -7,6 +7,7 @@ const expressSitemapXml = require('express-sitemap-xml')
 const fs = require('fs-extra')
 const secure = require('express-force-https')
 const morgan = require('morgan')
+const basicAuth = require('express-basic-auth')
 
 const dev = process.env.NODE_ENV !== 'production'
 if (dev) {
@@ -28,7 +29,9 @@ const apiServer = process.env.API_SERVER || 'https://api.app.co'
 const pageCacheKey = (req) => {
   // return `req`
   const { path } = req
-  if (path.indexOf('admin') !== -1) {
+  const isAdmin = path.indexOf('admin') !== -1
+  const isMaker = path.indexOf('maker') !== -1
+  if (isAdmin || isMaker) {
     return null
   }
   return `page-cache-key-${path}`
@@ -38,7 +41,7 @@ async function renderAndCache(req, res, pagePath, serverData) {
   try {
     const cacheKey = pageCacheKey(req)
     const USE_CACHE = true
-    if (USE_CACHE && cacheKey && ssrCache.has(cacheKey)) {
+    if (USE_CACHE && cacheKey && ssrCache.has(cacheKey) && !dev) {
       console.log('Cache hit:', req.path)
       res.setHeader('x-cache', 'HIT')
       return res.send(ssrCache.get(cacheKey))
@@ -106,6 +109,13 @@ app.prepare().then(() => {
     server.use(morgan('combined'))
     server.use(cookiesMiddleware())
     server.use(compression())
+
+    if (process.env.AUTH_PASSWORD) {
+      server.use(basicAuth({
+        users: { 'admin': process.env.AUTH_PASSWORD },
+        challenge: true
+      }))
+    }
 
     server.set('views', './common/server-views')
     server.set('view engine', 'pug')
@@ -197,6 +207,11 @@ app.prepare().then(() => {
     server.get('/admin/mining/months/:monthId/reviewers/:reviewerId', (req, res) =>
       renderAndCache(req, res, '/admin/mining/reviewer')
     )
+
+    /**
+     * Maker pages
+     */
+    server.get('/maker/:accessToken', (req, res) => renderAndCache(req, res, '/maker', { accessToken: req.params.accessToken }))
 
     apps.platforms.forEach((platform) => {
       server.get(`/${slugify(platform)}`, (req, res) => {

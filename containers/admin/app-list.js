@@ -10,7 +10,7 @@ const appRows = (apps) => apps.map((app) => (
   <tr>
     <Td>
       <Link href={`/admin/app?id=${app.id}`}>
-        <a>{app.name}</a>
+        <a target="_blank">{app.name}</a>
       </Link>
     </Td>
     <SpacedTd>
