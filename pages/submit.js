@@ -2,6 +2,7 @@ import React from 'react'
 import 'isomorphic-unfetch'
 import { connect } from 'react-redux'
 import Head from '@containers/head'
+import Link from 'next/link'
 import { Page } from '@components/page'
 import { Type, Field, Flex, Box, Button } from 'blockstack-ui'
 import { selectAppConstants, selectApiServer } from '@stores/apps/selectors'
@@ -463,7 +464,8 @@ class SubmitDapp extends React.Component {
     success: false,
     errors: {},
     referralCode: null,
-    refSource: null
+    refSource: null,
+    accessToken: null
   }
 
   componentDidMount() {
@@ -504,7 +506,7 @@ class SubmitDapp extends React.Component {
     }
 
     try {
-      await fetch(url, {
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           Accept: 'application/json, text/plain, */*',
@@ -512,8 +514,9 @@ class SubmitDapp extends React.Component {
         },
         body: JSON.stringify(values)
       })
+      const { app } = await response.json()
       trackEvent('App Submission Page - Submission Success')
-      this.setState({ success: true, loading: false })
+      this.setState({ success: true, loading: false, accessToken: app.accessToken })
     } catch (e) {
       trackEvent('App Submission Page - Submission Error')
       this.setState({ success: false, loading: false, globalError: e.message })
@@ -521,8 +524,14 @@ class SubmitDapp extends React.Component {
     }
   }
 
+  makerPortalURL() {
+    const { accessToken } = this.state
+    return `/maker/${accessToken}`
+  }
+
   render() {
     const { appConstants } = this.props
+    const { accessToken, values } = this.state
 
     return (
       <Page>
@@ -537,7 +546,24 @@ class SubmitDapp extends React.Component {
                   </Type>
                 </Box>
                 <Box mx="auto">
-                  <Type>Thanks for your submission! We'll get back to you soon.</Type>
+                  <Type display="block">Thanks for your submission! We'll get back to you soon.</Type>
+                  {values.authentication === 'Blockstack' && values.category !== "Sample Blockstack Apps" && (
+                    <>
+                      <Type mt={2} display="block">You can update your app details using this magic link. Don't share this URL!</Type>
+                      <Link
+                        href={{
+                          pathname: '/maker',
+                          query: {
+                            accessToken
+                          }
+                        }}
+                        as={this.makerPortalURL()}
+                        passHref
+                      >
+                        <Type mt={2} is="a" display="block">{document.location.origin}{this.makerPortalURL()}</Type> 
+                      </Link>
+                    </>
+                  )}
                 </Box>
                 <Box pt={6}>
                   <Button is="a" href="/" color="white !important">

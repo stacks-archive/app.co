@@ -47,6 +47,11 @@ export default class MyDocument extends Document {
             charSet="utf-8"
             async="async"
           />
+          {/* There is no npm package for this... */}
+          <script
+            type="text/javascript"
+            src="https://s3.amazonaws.com/eversign-embedded-js-library/eversign.embedded.latest.js"
+          />
           <script dangerouslySetInnerHTML={{ __html: HappyFoxCode }} />
           <script dangerouslySetInnerHTML={{ __html: SegmentCode }} />
 

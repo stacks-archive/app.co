@@ -25,6 +25,10 @@ module.exports = withBundleAnalyzer(
     publicRuntimeConfig: {
       segmentWriteKey: process.env.SEGMENT_WRITE_KEY || 'ytmyrpwXzhFF34b0CpNxzdYTRcEFRMzq'
     },
+    env: {
+      INTL_DROPBOX_URL: process.env.INTL_DROPBOX_URL,
+      US_DROPBOX_URL: process.env.US_DROPBOX_URL
+    },
     bundleAnalyzerConfig: {
       server: {
         analyzerMode: 'static',
