@@ -106,33 +106,29 @@ const ArrowButton = ({ disabled, icon: Icon, ...rest }) => (
 )
 
 const Table = ({ apps, state, limit = 7, months, decrementMonth, incrementMonth, ...rest }) => (
-    <Box width={1}>
-      <Flex fontWeight="bold" mb="1px" py={5} bg="white">
-        <Type width={[1 / 3, 5 / 8]} pl={5}>
-          <Type display={['none', 'inline']}>App Mining</Type> Rank
-        </Type>
-        <Flex style={{ userSelect: 'none' }} width={[2 / 3, 2 / 3, 3 / 8]} ml="auto" alignItems="center">
-          <Flex alignItems="center" justifyContent={['flex-end', 'center']} textAlign="center" width={[1, 1 / 2]}>
-            <ArrowButton icon={ChevronLeftIcon} onClick={decrementMonth} pt={1} px={2} disabled={state.month === 0} />
-            <Type style={{ whiteSpace: 'nowrap' }}>Payout</Type>
-            <ArrowButton
-              icon={ChevronRightIcon}
-              onClick={incrementMonth}
-              disabled={state.month === months.length - 1}
-            />
-          </Flex>
-          <Flex justifyContent="flex-end" textAlign="right" width={1 / 2} display={['none', 'flex']} pr={5}>
-            <Type style={{ whiteSpace: 'nowrap' }}>Lifetime</Type>
-          </Flex>
+  <Box width={1}>
+    <Flex fontWeight="bold" mb="1px" py={5} bg="white">
+      <Type width={[1 / 3, 5 / 8]} pl={5}>
+        <Type display={['none', 'inline']}>App Mining</Type> Rank
+      </Type>
+      <Flex style={{ userSelect: 'none' }} width={[2 / 3, 2 / 3, 3 / 8]} ml="auto" alignItems="center">
+        <Flex alignItems="center" justifyContent={['flex-end', 'center']} textAlign="center" width={[1, 1 / 2]}>
+          <ArrowButton icon={ChevronLeftIcon} onClick={decrementMonth} pt={1} px={2} disabled={state.month === 0} />
+          <Type style={{ whiteSpace: 'nowrap' }}>Payout</Type>
+          <ArrowButton icon={ChevronRightIcon} onClick={incrementMonth} disabled={state.month === months.length - 1} />
+        </Flex>
+        <Flex justifyContent="flex-end" textAlign="right" width={1 / 2} display={['none', 'flex']} pr={5}>
+          <Type style={{ whiteSpace: 'nowrap' }}>Lifetime</Type>
         </Flex>
       </Flex>
-      <>
-        {apps.map((app, i) =>
-          state.all ? <Row key={i} index={i} {...app} /> : i < limit ? <Row key={i} index={i} {...app} /> : null
-        )}
-      </>
-    </Box>
-  )
+    </Flex>
+    <>
+      {apps.map((app, i) =>
+        state.all ? <Row key={i} index={i} {...app} /> : i < limit ? <Row key={i} index={i} {...app} /> : null
+      )}
+    </>
+  </Box>
+)
 
 const HowMuchSection = ({ apps, months, ...rest }) => (
   <ObservedSection bg="blue.light" {...rest}>
@@ -142,10 +138,20 @@ const HowMuchSection = ({ apps, months, ...rest }) => (
           <Title mx="auto" maxWidth="100%" textAlign="center">
             How much can you earn?
           </Title>
-          <Type mx="auto" maxWidth={700} lineHeight={1.85} pt={6} textAlign="center">
-            We currently pay in BTC for legal compliance. We plan to begin paying Stacks tokens early 2019 provided
-            compliance with all applicable law. See below how much apps have earned in the equivalent of USD each month
-            based on their rank.
+          <Type mx="auto" maxWidth={860} lineHeight={1.85} pt={6} textAlign="center">
+            Starting in August, App Mining payouts are anticipated to include an additional $100,000 payout in Stacks
+            tokens (STX) on top of the existing $100,000 in BTC. Payouts in BTC will be phased out, and the total
+            monthly payout in STX will begin in November at $500,000; and will increase to $700,000 in February 2020; to
+            $1 million in May 2020.
+          </Type>
+          <Type mx="auto" maxWidth={860} lineHeight={1.85} pt={6} textAlign="center">
+            App Mining rewards in STX earned before the hard fork will be accrued, and the tokens will be distributed
+            following the hard fork. We expect the hard fork to occur approximately 30-60 days following the end of the
+            term of the RegA+ cash offering. For more detailed information, see how payouts are administered in the{' '}
+            <Type is="a" href="https://docs.blockstack.org/develop/mining-rewards.html" target="_blank">
+              Blockstack documentation
+            </Type>
+            .
           </Type>
           <Flex mt={6} width={1} flexDirection="column" alignItems="center" justifyContent="center">
             <State initial={{ all: false, showMenu: false, month: months.length - 1 }}>
@@ -197,7 +203,7 @@ const HowMuchSection = ({ apps, months, ...rest }) => (
                                   opacity={hovered || i === state.month ? 1 : 0.7}
                                   fontSize={1}
                                 >
-                                  {`${month.monthName.slice(0,3)} ${month.year.toString().slice(2)}`}
+                                  {`${month.monthName.slice(0, 3)} ${month.year.toString().slice(2)}`}
                                 </Type>
                               </Box>
                             )}
@@ -222,7 +228,7 @@ const HowMuchSection = ({ apps, months, ...rest }) => (
                               is="a"
                               target="_blank"
                               href={`/mining/${dayjs(
-                                `${months[state.month].monthName  } ${  months[state.month].year.toString()}`
+                                `${months[state.month].monthName} ${months[state.month].year.toString()}`
                               )
                                 .format('MMMM-YYYY')
                                 .toLowerCase()}`}
