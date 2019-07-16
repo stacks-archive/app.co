@@ -81,7 +81,6 @@ class AppMiningPage extends React.Component {
             ogImage="/static/images/og.png"
           />
           <Header />
-
           <Hero minHeight="100vh" apps={this.props.rankings} position="relative" zIndex={1000} />
           <StartAppMiningSection />
           <HowMuchSection apps={this.props.rankings} months={this.props.rankingMonths} />

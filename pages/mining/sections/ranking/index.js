@@ -145,7 +145,7 @@ const RankingSection = ({ apps, ...rest }) => (
                   <Type opacity={0.5} fontWeight={['bold', 300]} fontSize={[2, 5]}>
                     Payout this&nbsp;month:
                   </Type>{' '}
-                  $100,000
+                  $200,000
                 </Type>
               </Flex>
             </Flex>
