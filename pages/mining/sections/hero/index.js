@@ -66,7 +66,7 @@ const Hero = ({ apps, ...rest }) => (
       <Wrapper inView={inView} observed>
         <Flex width={[1, 1, 0.5, 0.6]} flexShrink={1} flexDirection="column">
           <AppMiningLogo typeSize={22} pb={5} invert />
-          <Title fontSize={[7, 7, 7, 8]}>Every 30 days we&nbsp;payout $100k to the best apps.</Title>
+          <Title fontSize={[7, 7, 7, 8]}>Every 30 days we&nbsp;payout $200k to the best apps in the ecosystem.</Title>
           <SubtitleBTC display={['none', 'flex', 'flex', 'flex']} pt={7} />
         </Flex>
         <Flex

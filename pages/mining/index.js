@@ -77,7 +77,7 @@ class AppMiningPage extends React.Component {
         <MiningPage>
           <Head
             title="App Mining"
-            description="Every 30 days we payout $100k to the best apps built on Blockstack. The better your app, the more you earn."
+            description="Every 30 days we payout $200k the best apps in the ecosystem. The better your app, the more you earn."
             ogImage="/static/images/og.png"
           />
           <Header />
