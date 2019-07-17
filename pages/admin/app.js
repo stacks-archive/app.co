@@ -126,6 +126,25 @@ class App extends React.Component {
     })
   }
 
+  async resetParticipationAgreement() {
+    const { id } = queryString.parse(document.location.search)
+    const { jwt, apiServer } = this.props
+    await fetch(`${apiServer}/api/admin/apps/${id}/reset-participation-agreement`, {
+      method: 'POST',
+      headers: new Headers({
+        Authorization: `Bearer ${jwt}`,
+        'Content-Type': 'application/json'
+      })
+    })
+    this.setState({
+      hasAcceptedSECTerms: null
+    })
+    this.notifications.addNotification({
+      message: 'Participation agreement signing has been reset.',
+      level: 'success'
+    })
+  }
+
   save() {
     this.props.saveApp(this.state, this.props.apiServer, this.props.jwt)
     this.notifications.addNotification({
@@ -296,6 +315,19 @@ class App extends React.Component {
                     </Button>
                   </React.Fragment>
                 )}
+              </React.Fragment>
+            )}
+
+            {this.state.eversignDocumentID && (
+              <React.Fragment>
+                <Button appearance="primary" is="a" href={`https://blockstack.eversign.com/documents/${this.state.eversignDocumentID}`} target="_blank">
+                  View in Eversign
+                </Button>
+                <br />
+                <br />
+                <Button appearance="danger" onClick={() => this.resetParticipationAgreement()}>
+                  Reset Participation Agreement
+                </Button>
               </React.Fragment>
             )}
             <p>
