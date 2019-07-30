@@ -52,7 +52,7 @@ export default class MyDocument extends Document {
             type="text/javascript"
             src="https://s3.amazonaws.com/eversign-embedded-js-library/eversign.embedded.latest.js"
           />
-          <script dangerouslySetInnerHTML={{ __html: HappyFoxCode }} />
+          {/* <script dangerouslySetInnerHTML={{ __html: HappyFoxCode }} /> */}
           <script dangerouslySetInnerHTML={{ __html: SegmentCode }} />
 
           <script
