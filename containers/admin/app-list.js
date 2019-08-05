@@ -17,7 +17,7 @@ const appRows = (apps) => apps.map((app) => (
       {app.category}
     </SpacedTd>
     <SpacedTd>
-      {app.Rankings && app.Rankings[0] && app.Rankings[0].twitterMentions || 0}
+      {app.authentication}
     </SpacedTd>
     <SpacedTd>
       {app.status}
@@ -51,7 +51,7 @@ class AppList extends React.Component {
             <tr>
               <Th>Name</Th>
               <Th>Category</Th>
-              <Th>Tweets/Week</Th>
+              <Th>Authentication</Th>
               <Th>Status</Th>
             </tr>
           </Thead>
