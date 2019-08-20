@@ -95,6 +95,7 @@
     "react-select": "^2.1.2",
     "react-spring": "^7.2.8",
     "rebass": "^2.3.4",
+    "redis": "^2.8.0",
     "redux": "^4.0.1",
     "redux-localstorage": "^0.4.1",
     "redux-persist": "^5.9.1",
