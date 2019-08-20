@@ -13,7 +13,9 @@
       "quantity": 1
     }
   },
-  "addons": [],
+  "addons": [
+    "heroku-redis:hobby-dev"
+  ],
   "buildpacks": [
     {
       "url": "heroku/nodejs"
