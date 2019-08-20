@@ -27,6 +27,7 @@ client.has = async (key) => {
 
 client.reset = async () => {
   const keys = await redis.keysAsync(prefix)
+  console.log('Clearing cache keys:')
   console.log(keys)
   await Promise.map(keys, key => redis.delAsync(key.slice(prefix.length)))
 }
