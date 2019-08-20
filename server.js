@@ -41,10 +41,10 @@ async function renderAndCache(req, res, pagePath, serverData) {
   try {
     const cacheKey = pageCacheKey(req)
     const USE_CACHE = true
-    if (USE_CACHE && cacheKey && ssrCache.has(cacheKey) && !dev) {
+    if (USE_CACHE && cacheKey && (await ssrCache.has(cacheKey)) && !dev) {
       console.log('Cache hit:', req.path)
       res.setHeader('x-cache', 'HIT')
-      return res.send(ssrCache.get(cacheKey))
+      return res.send(await ssrCache.getAsync(cacheKey))
     } else {
       console.log('Cache miss:', req.path)
     }
@@ -66,7 +66,7 @@ async function renderAndCache(req, res, pagePath, serverData) {
     }
     const html = await app.renderToHTML(req, res, pagePath, dataToPass)
     if (cacheKey) {
-      ssrCache.set(cacheKey, html)
+      await ssrCache.setAsync(cacheKey, html)
     }
     return res.send(html)
   } catch (err) {
@@ -220,11 +220,16 @@ app.prepare().then(() => {
       })
     })
 
-    server.get('/clear-cache', (req, res) => {
+    server.get('/clear-cache', async (req, res) => {
       if (req.query.key === process.env.API_KEY) {
         console.log('Clearing cache from API')
-        ssrCache.reset()
-        res.json({ success: true })
+        try {
+          await ssrCache.reset()
+          res.json({ success: true }) 
+        } catch (error) {
+          console.error(error)
+          res.status(500).json({ success: false })  
+        }
       } else {
         res.status(400).json({ success: false })
       }

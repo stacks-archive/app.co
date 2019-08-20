@@ -48,14 +48,14 @@ const processApps = (appsData) => {
 const getApps = (apiServer) =>
   new Promise(async (resolve, reject) => {
     try {
-      if (ssrCache.has(API_CACHE_KEY) && !dev) {
-        return resolve(JSON.parse(ssrCache.get(API_CACHE_KEY)))
+      if ((!dev && await ssrCache.has(API_CACHE_KEY))) {
+        return resolve(JSON.parse(await ssrCache.getAsync(API_CACHE_KEY)))
       }
       const response = await request(`${apiServer}/api/apps`)
 
       const data = JSON.parse(response)
       const apps = processApps(data)
-      ssrCache.set(API_CACHE_KEY, JSON.stringify(apps))
+      await ssrCache.setAsync(API_CACHE_KEY, JSON.stringify(apps))
       return resolve(apps)
     } catch (error) {
       return reject(error)
@@ -65,15 +65,15 @@ const getApps = (apiServer) =>
 const getAppMiningMonths = (apiServer) =>
   new Promise(async (resolve, reject) => {
     try {
-      if (ssrCache.has(MINING_RESULTS_KEY)) {
-        return resolve(JSON.parse(ssrCache.get(MINING_RESULTS_KEY)))
+      if (await ssrCache.has(MINING_RESULTS_KEY)) {
+        return resolve(JSON.parse(await ssrCache.getAsync(MINING_RESULTS_KEY)))
       }
       const { months } = await request({
         uri: `${apiServer}/api/app-mining-months`,
         json: true
       })
 
-      ssrCache.set(MINING_RESULTS_KEY, JSON.stringify(months))
+      await ssrCache.setAsync(MINING_RESULTS_KEY, JSON.stringify(months))
       return resolve(months)
     } catch (error) {
       console.log('Error when fetching mining months', error)
@@ -83,14 +83,14 @@ const getAppMiningMonths = (apiServer) =>
 
 const getRankedBlockstackApps = async (api) => {
   try {
-    if (ssrCache.has(BLOCKSTACK_RANKED_APPS_KEY)) {
-      return JSON.parse(ssrCache.get(BLOCKSTACK_RANKED_APPS_KEY))
+    if (await ssrCache.has(BLOCKSTACK_RANKED_APPS_KEY)) {
+      return JSON.parse(await ssrCache.getAsync(BLOCKSTACK_RANKED_APPS_KEY))
     }
     const months = await getAppMiningMonths(api)
 
     const rankings = months[months.length - 1].compositeRankings
 
-    ssrCache.set(BLOCKSTACK_RANKED_APPS_KEY, JSON.stringify(rankings))
+    await ssrCache.setAsync(BLOCKSTACK_RANKED_APPS_KEY, JSON.stringify(rankings))
     return rankings
   } catch (error) {
     console.error('error when fetching ranked apps', error)
