@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Head from '@containers/head'
 import { MiningPage } from '@components/mining/page'
-import { selectApiServer } from '@stores/apps/selectors'
+import { selectApiServer, selectAppMiningMonths, selectAppMiningApps } from '@stores/apps/selectors'
 import { connect } from 'react-redux'
 import { StartAppMiningSection } from '@pages/mining/sections/start-app-mining'
 import { Hero } from '@pages/mining/sections/hero'
@@ -23,16 +23,13 @@ const mapStateToProps = (state) => ({
 
 class AppMiningPage extends React.Component {
   static async getInitialProps({ reduxStore }) {
-    const api = selectApiServer(reduxStore.getState())
+    const state = reduxStore.getState()
+    const api = selectApiServer(state)
     try {
-      const promises = await Promise.all([
-        fetch(`${api}/api/app-mining-months`),
-        fetch(`${api}/api/mining-faq`),
-        fetch(`${api}/api/app-mining-apps`)
-      ])
-      const { months } = await promises[0].json()
-      const { faqs } = await promises[1].json()
-      const { apps } = await promises[2].json()
+      const faqsData = await fetch(`${api}/api/mining-faq`)
+      const { faqs } = await faqsData.json()
+      const apps = selectAppMiningApps(state)
+      const months = selectAppMiningMonths(state)
 
       if (months && months.length) {
         const rankings = months[months.length - 1].compositeRankings.map((app) => {
@@ -59,9 +56,11 @@ class AppMiningPage extends React.Component {
         })
         return { rankings, month: months[months.length - 1], months, rankingMonths, faq: faqs, apps }
       } else {
+        console.log('no months!')
         return {}
       }
     } catch (error) {
+      console.error(error)
       return {}
     }
   }
