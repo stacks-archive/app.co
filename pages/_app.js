@@ -73,7 +73,7 @@ const GlobalStyles = createGlobalStyle`
 `
 
 class MyApp extends App {
-  static async getInitialProps({ Component, ctx, ...rest }) {
+  static async getInitialProps({ Component, ctx }) {
     let pageProps = {}
 
     /**
@@ -84,8 +84,6 @@ class MyApp extends App {
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
     }
-
-    await appsActions.fetchAppMiningApps()(ctx.reduxStore.dispatch, ctx.reduxStore.getState)
 
     return { pageProps, cookies }
   }
