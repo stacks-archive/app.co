@@ -44,7 +44,6 @@ const mapStateToProps = (state) => ({
 })
 
 const getApps = (props) => {
-  console.log('getapps start')
   const hasFilter = props.platformFilter || props.categoryFilter
   const isAll = (props.filterBy === 'all') || (hasFilter === 'all')
   const apps = hasFilter && !isAll ? props.filteredApps : props.apps
