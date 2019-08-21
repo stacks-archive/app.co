@@ -31,9 +31,15 @@ const Tax = ({ display, app }) => {
   return (
     <Flex style={{ display: display ? 'flex' : 'none' }}>
       <Box width={1} mt={0}>
-        <Type display="block">Please upload your tax documents via Dropbox.</Type>
+        <Type display="block">Please upload your tax documents via Dropbox. </Type>
 
-        <Type display="block" my={5}>To begin, first give us some information about yourself, so we can guide you through which forms to use:</Type>
+        <Type fontWeight={600} display="block" my={5}>
+          Documents will only be marked accepted if they are uploaded as the name of your app.
+        </Type>
+
+        <Type display="block" my={5}>
+          To begin, first give us some information about yourself, so we can guide you through which forms to use:
+        </Type>
 
         {/* <Type display="block" my={5}>
           For US Citizens, please submit a{' '}
@@ -47,7 +53,7 @@ const Tax = ({ display, app }) => {
           .
         </Type> */}
 
-        <Select 
+        <Select
           onChange={(e) => setType(e ? e.value : null)}
           options={options}
           value={options.find((o) => o.value === type)}
@@ -97,7 +103,6 @@ const Tax = ({ display, app }) => {
             </Button>
           </>
         )}
-
       </Box>
     </Flex>
   )
