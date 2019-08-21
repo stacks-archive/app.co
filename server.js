@@ -14,11 +14,15 @@ if (dev) {
   dotenv.config()
 }
 
-const { ssrCache } = require('./common/lib/cache')
+const Cache = require('./common/lib/cache')
 const { getApps, getAppMiningMonths, getRankedBlockstackApps } = require('./common/lib/api')
 const getSitemapURLs = require('./common/lib/sitemap')
 const RSSController = require('./common/controllers/rss-controller')
 const slugify = require('./common/lib/slugify')
+
+const AppsAggregator = require('./common/lib/aggregators/apps')
+const MiningMonths = require('./common/lib/aggregators/mining-months')
+const RankedApps = require('./common/lib/aggregators/ranked-apps')
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const app = next({ dev })
@@ -41,10 +45,10 @@ async function renderAndCache(req, res, pagePath, serverData) {
   try {
     const cacheKey = pageCacheKey(req)
     const USE_CACHE = true
-    if (USE_CACHE && cacheKey && (await ssrCache.has(cacheKey)) && !dev) {
+    if (USE_CACHE && cacheKey && (await Cache.has(cacheKey)) && !dev) {
       console.log('Cache hit:', req.path)
       res.setHeader('x-cache', 'HIT')
-      return res.send(await ssrCache.getAsync(cacheKey))
+      return res.send(await Cache.getAsync(cacheKey))
     } else {
       console.log('Cache miss:', req.path)
     }
@@ -66,7 +70,7 @@ async function renderAndCache(req, res, pagePath, serverData) {
     }
     const html = await app.renderToHTML(req, res, pagePath, dataToPass)
     if (cacheKey) {
-      await ssrCache.setAsync(cacheKey, html)
+      await Cache.setAsync(cacheKey, html, 'EX', 60*60)
     }
     return res.send(html)
   } catch (err) {
@@ -224,7 +228,10 @@ app.prepare().then(() => {
       if (req.query.key === process.env.API_KEY) {
         console.log('Clearing cache from API')
         try {
-          await ssrCache.reset()
+          await AppsAggregator.set()
+          await MiningMonths.set()
+          await RankedApps.set()
+          await Cache.reset()
           res.json({ success: true }) 
         } catch (error) {
           console.error(error)

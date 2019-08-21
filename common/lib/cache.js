@@ -26,10 +26,14 @@ client.has = async (key) => {
 }
 
 client.reset = async () => {
-  const keys = await redis.keysAsync(prefix)
-  console.log('Clearing cache keys:')
-  console.log(keys)
-  await Promise.map(keys, key => redis.delAsync(key.slice(prefix.length)))
+  const keys = await client.keysAsync(`${prefix}*`)
+  await Promise.map(keys, key => {
+    if (key.indexOf('Aggregator') === -1) {
+      console.log('Clearing', key.slice(prefix.length))
+      return client.delAsync(key.slice(prefix.length))
+    }
+    return null
+  })
 }
 
 module.exports = client
