@@ -228,9 +228,11 @@ app.prepare().then(() => {
       if (req.query.key === process.env.API_KEY) {
         console.log('Clearing cache from API')
         try {
-          await AppsAggregator.set()
-          await MiningMonths.set()
-          await RankedApps.set()
+          await Promise.all([
+            AppsAggregator.set(),
+            MiningMonths.set(),
+            RankedApps.set()
+          ])
           await Cache.reset()
           res.json({ success: true }) 
         } catch (error) {
