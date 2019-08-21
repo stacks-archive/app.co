@@ -23,6 +23,7 @@ const slugify = require('./common/lib/slugify')
 const AppsAggregator = require('./common/lib/aggregators/apps')
 const MiningMonths = require('./common/lib/aggregators/mining-months')
 const RankedApps = require('./common/lib/aggregators/ranked-apps')
+const MiningApps = require('./common/lib/aggregators/mining-apps')
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const app = next({ dev })
@@ -52,21 +53,20 @@ async function renderAndCache(req, res, pagePath, serverData) {
     } else {
       console.log('Cache miss:', req.path)
     }
-    const [data, blockstackRankedApps] = await Promise.all([
-      getApps(apiServer),
-      getRankedBlockstackApps(apiServer)
+    const [data, blockstackRankedApps, appMiningMonths, appMiningApps] = await Promise.all([
+      getApps(),
+      getRankedBlockstackApps(),
+      getAppMiningMonths(),
+      MiningApps.fetch()
     ])
     data.apiServer = apiServer
-    let appMiningMonths = []
-    if (serverData && serverData.fetchMiningResults) {
-      appMiningMonths = await getAppMiningMonths(apiServer)
-    }
 
     const dataToPass = {
       ...data,
       ...serverData,
       blockstackRankedApps,
-      appMiningMonths
+      appMiningMonths,
+      appMiningApps
     }
     const html = await app.renderToHTML(req, res, pagePath, dataToPass)
     if (cacheKey) {
@@ -231,7 +231,8 @@ app.prepare().then(() => {
           await Promise.all([
             AppsAggregator.set(),
             MiningMonths.set(),
-            RankedApps.set()
+            RankedApps.set(),
+            MiningApps.set()
           ])
           await Cache.reset()
           res.json({ success: true }) 
