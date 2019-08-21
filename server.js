@@ -70,7 +70,12 @@ async function renderAndCache(req, res, pagePath, serverData) {
     }
     const html = await app.renderToHTML(req, res, pagePath, dataToPass)
     if (cacheKey) {
-      await Cache.setAsync(cacheKey, html, 'EX', 60*60)
+      try {
+        await Cache.setAsync(cacheKey, html, 'EX', 60 * 60) 
+      } catch (error) {
+        console.error('Error when saving page cache')
+        console.error(error)
+      }
     }
     return res.send(html)
   } catch (err) {
