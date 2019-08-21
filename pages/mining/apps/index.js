@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Head from '@containers/head'
 import { MiningPage } from '@components/mining/page'
-import { selectApiServer } from '@stores/apps/selectors'
+import { selectApiServer, selectAppMiningApps } from '@stores/apps/selectors'
 import { connect } from 'react-redux'
 import { AllApps } from '@pages/mining/apps/table-section'
 import { ModalRoot } from 'blockstack-ui'
@@ -17,15 +17,9 @@ const mapStateToProps = (state) => ({
 
 class AppMiningPage extends React.Component {
   static async getInitialProps({ reduxStore }) {
-    const api = selectApiServer(reduxStore.getState())
-    try {
-      const response = await fetch(`${api}/api/app-mining-apps`)
-      const { apps } = await response.json()
-
-      return { apps }
-    } catch (error) {
-      return {}
-    }
+    const state = reduxStore.getState()
+    const apps = selectAppMiningApps(state)
+    return { apps }
   }
 
   componentDidMount() {
