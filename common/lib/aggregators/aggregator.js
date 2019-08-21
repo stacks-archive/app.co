@@ -4,7 +4,7 @@ const Cache = require('../cache')
 
 class Aggregator {
   static key() {
-    return this.name
+    return `Aggregator-${this.name}`
   }
 
   static expiryKey() {
@@ -69,6 +69,7 @@ class Aggregator {
   }
 
   static request(path) {
+    console.log(`${this.apiServer()}${path}`)
     return request({
       uri: `${this.apiServer()}${path}`,
       json: true
