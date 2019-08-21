@@ -74,7 +74,7 @@ async function renderAndCache(req, res, pagePath, serverData) {
     }
     return res.send(html)
   } catch (err) {
-    console.log(err)
+    console.error(err)
     return app.renderError(err, req, res, pagePath)
   }
 }
