@@ -3,9 +3,7 @@ const Aggregator = require('./aggregator')
 
 module.exports = class AppsAggregator extends Aggregator {
   static async setter() {
-    const response = await this.request(`/api/apps`)
-
-    const data = JSON.parse(response)
+    const data = await this.request(`/api/apps`)
     const apps = this.processApps(data)
     return apps
   }
