@@ -32,6 +32,7 @@ export const selectCategoryName = (state) => state.apps && state.apps.categoryNa
 export const selectAppConstants = (state) => state.apps && state.apps.constants.appConstants
 
 export const selectAppMiningApps = (state) => state.apps && state.apps.appMiningApps
+export const selectAppMiningMonths = (state) => state.apps && state.apps.appMiningMonths
 
 export const selectRankedBlockstackApps = (state) => state.apps && state.apps.blockstackRankedApps
 
