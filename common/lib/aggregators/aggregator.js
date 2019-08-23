@@ -37,14 +37,12 @@ class Aggregator {
   }
 
   static async fetch() {
-    if (process.env.NODE_ENV !== 'production') {
+    if (process.env.SKIP_CACHE) {
       return this.setter()
     }
     const key = this.key()
-    console.log(`Running aggregator:`, key)
     const value = await this.get()
     if (value) {
-      console.log(`Found cache value for`, key)
       if (this.expiry()) {
         const expirationString = await Cache.getAsync(this.expiryKey())
         const expiration = moment(expirationString)
@@ -72,7 +70,6 @@ class Aggregator {
   }
 
   static request(path) {
-    console.log(`${this.apiServer()}${path}`)
     return request({
       uri: `${this.apiServer()}${path}`,
       json: true
