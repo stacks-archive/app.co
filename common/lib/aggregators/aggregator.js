@@ -37,6 +37,9 @@ class Aggregator {
   }
 
   static async fetch() {
+    if (process.env.NODE_ENV !== 'production') {
+      return this.setter()
+    }
     const key = this.key()
     console.log(`Running aggregator:`, key)
     const value = await this.get()
