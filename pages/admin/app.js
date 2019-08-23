@@ -168,56 +168,47 @@ class App extends React.Component {
         <h1>{app.name}</h1>
         <Content>
           <AppIcon app={app} />
-          <p><a href={appPage}>{appPage}</a></p>
+          <p>
+            <a href={appPage}>{appPage}</a>
+          </p>
           {ranking ? (
             <>
               <p>
-                Twitter mentions in the last 7 days:{' '}
-                <Strong>{ranking.twitterMentions}</Strong>
+                Twitter mentions in the last 7 days: <Strong>{ranking.twitterMentions}</Strong>
               </p>
               <p>
-                Monthly visits:{' '}
-                <Strong>{Math.round(ranking.monthlyVisitsCount)}</Strong>
+                Monthly visits: <Strong>{Math.round(ranking.monthlyVisitsCount)}</Strong>
               </p>
               <p>
-                Monthly bounce rate:{' '}
-                <Strong>{((ranking.monthlyBounceRate || 0) * 100).toFixed(1)}%</Strong>
+                Monthly bounce rate: <Strong>{((ranking.monthlyBounceRate || 0) * 100).toFixed(1)}%</Strong>
               </p>
               <p>
-                Monthly page views:{' '}
-                <Strong>{Math.round(ranking.monthlyPageViews)}</Strong>
+                Monthly page views: <Strong>{Math.round(ranking.monthlyPageViews)}</Strong>
               </p>
               <p>
-                Monthly visit duration:{' '}
-                <Strong>{Math.round(ranking.monthlyVisitDuration)} seconds</Strong>
+                Monthly visit duration: <Strong>{Math.round(ranking.monthlyVisitDuration)} seconds</Strong>
               </p>
             </>
           ) : (
-              <p>No rankings data yet.</p>
-            )}
+            <p>No rankings data yet.</p>
+          )}
           <p>
-            How did you hear about us?{' '}
-            <code>{app.referralSource}</code>
+            How did you hear about us? <code>{app.referralSource}</code>
           </p>
           <p>
-            Are you submitting your own app?{' '}
-            <code>{app.isSubmittingOwnApp ? 'Yes' : 'No'}</code>
+            Are you submitting your own app? <code>{app.isSubmittingOwnApp ? 'Yes' : 'No'}</code>
           </p>
           <p>
-            Submitted By:{' '}
-            <code>{app.submitterName}</code>
+            Submitted By: <code>{app.submitterName}</code>
           </p>
           <p>
-            Referral Code:{' '}
-            <code>{app.referralCode}</code>
+            Referral Code: <code>{app.referralCode}</code>
           </p>
           <p>
-            Referral Source:{' '}
-            <code>{app.refSource}</code>
+            Referral Source: <code>{app.refSource}</code>
           </p>
           <p>
-            Access Token:{' '}
-            <code>{app.accessToken}</code>
+            Access Token: <code>{app.accessToken}</code>
           </p>
           <Form.Wrapper>
             <TextField
@@ -230,15 +221,17 @@ class App extends React.Component {
               onChange={(e) => this.setState({ description: e.target.value })}
               label="Short description (~50 characters)"
             />
-            {this.state.description && (
-              <small>Currently {this.state.description.length} characters</small>
-            )}
+            {this.state.description && <small>Currently {this.state.description.length} characters</small>}
             <TextField
               value={this.state.website || ''}
               onChange={(e) => this.setState({ website: e.target.value })}
               label="Website"
             />
-            <small><a href={this.state.website} target="_blank" rel="noopener noreferrer">Visit website</a></small>
+            <small>
+              <a href={this.state.website} target="_blank" rel="noopener noreferrer">
+                Visit website
+              </a>
+            </small>
             {this.state.website.indexOf('http') !== 0 && (
               <>
                 <br />
@@ -297,13 +290,26 @@ class App extends React.Component {
               label="Tax information is collected"
             />
             <br />
-            <p>
-              KYC is verified:{' '}
-              <Strong>{JSON.stringify(!!this.state.hasCollectedKYC)}</Strong>
-            </p>
+            <Checkbox
+              isChecked={this.state.hasCollectedKYC}
+              onChange={() => this.setState({ hasCollectedKYC: !this.state.hasCollectedKYC })}
+              label="KYC Completed"
+            />
+            <br />
+            <Checkbox
+              isChecked={this.state.hasAcceptedSECTerms}
+              onChange={() => this.setState({ hasAcceptedSECTerms: !this.state.hasAcceptedSECTerms })}
+              label="KYC Completed"
+            />
+            <br />
             {this.state.jumioTransactionID && (
               <React.Fragment>
-                <Button appearance="primary" is="a" href={`https://portal.netverify.com/merchant/idscan/${this.state.jumioTransactionID}`} target="_blank">
+                <Button
+                  appearance="primary"
+                  is="a"
+                  href={`https://portal.netverify.com/merchant/idscan/${this.state.jumioTransactionID}`}
+                  target="_blank"
+                >
                   View in Jumio
                 </Button>
                 {!this.state.hasCollectedKYC && (
@@ -320,7 +326,13 @@ class App extends React.Component {
 
             {this.state.eversignDocumentID && (
               <React.Fragment>
-                <Button appearance="primary" is="a" href={`https://blockstack.eversign.com/documents/${this.state.eversignDocumentID}`} target="_blank">
+                <br />
+                <Button
+                  appearance="primary"
+                  is="a"
+                  href={`https://blockstack.eversign.com/documents/${this.state.eversignDocumentID}`}
+                  target="_blank"
+                >
                   View in Eversign
                 </Button>
                 <br />
@@ -330,10 +342,12 @@ class App extends React.Component {
                 </Button>
               </React.Fragment>
             )}
-            <p>
-              Participation Agreement signed:{' '}
-              <Strong>{JSON.stringify(!!this.state.hasAcceptedSECTerms)}</Strong>
-            </p>
+            <br />
+            <Checkbox
+              isChecked={this.state.isKYCVerified}
+              onChange={() => this.setState({ isKYCVerified: !this.state.isKYCVerified })}
+              label="KYC Completed"
+            />
             <br />
             <Checkbox
               isChecked={this.state.hasAcceptedTerms}
@@ -383,10 +397,10 @@ class App extends React.Component {
           {this.props.isSavingApp ? (
             <p>Saving {this.state.name}...</p>
           ) : (
-              <Button appearance="primary" onClick={this.save}>
-                Save
-              </Button>
-            )}
+            <Button appearance="primary" onClick={this.save}>
+              Save
+            </Button>
+          )}
         </Content>
       </Section>
     )
