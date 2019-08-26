@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { Box } from 'blockstack-ui'
 import Router from 'next/router'
 import download from 'downloadjs'
+import { CheckboxStateless as Checkbox } from '@atlaskit/checkbox'
 
 import MiningActions from '@stores/mining-admin/actions'
 
@@ -26,6 +27,10 @@ class MiningMonth extends React.Component {
     purchaseExchangeName: '',
     BTCTransactionId: '',
     purchaseConversionRate: '',
+    stxPayoutTotal: '',
+    stxPayoutDecay: '',
+    stxPayoutConversionRate: 0.3,
+    stxPayoutIsIOU: false,
     status: '',
     name: ''
   }
@@ -232,6 +237,63 @@ class MiningMonth extends React.Component {
                     <Input type="text"
                       value={this.state.BTCTransactionId}
                       onChange={(evt) => this.setState({ BTCTransactionId: evt.target.value })}
+                    />
+                  </FormTd>
+                </tr>
+              </tbody>
+            </Table>
+            <Button onClick={() => this.save()}>Save</Button>
+          </div>
+        </Collapsable>
+
+        <Collapsable title="STX Payout">
+          <div style={{ paddingBottom: '1em' }}>
+            <Table>
+              <tbody>
+                <tr>
+                  <FormTd>
+                    STX Payout Total
+                  </FormTd>
+                  <FormTd textAlign="right">
+                    <Input
+                      type="number"
+                      value={this.state.stxPayoutTotal}
+                      onChange={(evt) => this.setState({ stxPayoutTotal: evt.target.value })}
+                    />
+                  </FormTd>
+                </tr>
+                <tr>
+                  <FormTd>
+                    STX Payout Decay Rate (%)
+                  </FormTd>
+                  <FormTd textAlign="right">
+                    <Input
+                      type="number"
+                      value={this.state.stxPayoutDecay}
+                      onChange={(evt) => this.setState({ stxPayoutDecay: evt.target.value })}
+                    />
+                  </FormTd>
+                </tr>
+                <tr>
+                  <FormTd>
+                    STX Payout Conversion Rate to USD
+                  </FormTd>
+                  <FormTd textAlign="right">
+                    <Input type="number"
+                      value={this.state.stxPayoutConversionRate}
+                      onChange={(evt) => this.setState({ stxPayoutConversionRate: evt.target.value })}
+                    />
+                  </FormTd>
+                </tr>
+                <tr>
+                  <FormTd>
+                    STX Payout is an IOU
+                  </FormTd>
+                  <FormTd textAlign="right">
+                    <Checkbox
+                      isChecked={this.state.stxPayoutIsIOU}
+                      onChange={() => this.setState({ stxPayoutIsIOU: !this.state.stxPayoutIsIOU })}
+                      label="STX Payout is an IOU"
                     />
                   </FormTd>
                 </tr>
