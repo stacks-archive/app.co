@@ -299,7 +299,7 @@ class App extends React.Component {
             <Checkbox
               isChecked={this.state.hasAcceptedSECTerms}
               onChange={() => this.setState({ hasAcceptedSECTerms: !this.state.hasAcceptedSECTerms })}
-              label="KYC Completed"
+              label="Participation agreement signed"
             />
             <br />
             {this.state.jumioTransactionID && (
@@ -342,12 +342,6 @@ class App extends React.Component {
                 </Button>
               </React.Fragment>
             )}
-            <br />
-            <Checkbox
-              isChecked={this.state.isKYCVerified}
-              onChange={() => this.setState({ isKYCVerified: !this.state.isKYCVerified })}
-              label="KYC Completed"
-            />
             <br />
             <Checkbox
               isChecked={this.state.hasAcceptedTerms}
