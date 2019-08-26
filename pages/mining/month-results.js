@@ -83,7 +83,9 @@ class MonthResults extends React.Component {
             <>
               {app.formattedUsdRewards}
               <SubReward>({app.payout.BTCPaymentValue / 10e7} BTC)</SubReward>
-              <SubReward>({app.formattedSTXRewards} STX)</SubReward>
+              {app.formattedSTXRewards && (
+                <SubReward>({app.formattedSTXRewards} STX)</SubReward>
+              )}
             </>
           )}
         </SpacedTd>
