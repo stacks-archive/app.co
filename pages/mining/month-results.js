@@ -11,16 +11,19 @@ import { AppIcon } from '@components/app-icon'
 import { ButtonLink } from '@components/mining-admin/collapsable'
 import Reviewer from '@components/mining/reviewer'
 import Modal from '@containers/modals/app'
+import { selectAppMiningMonths } from '@stores/apps/selectors'
 
 import AppStore from '@stores/apps'
 
 class MonthResults extends React.Component {
   static async getInitialProps(context) {
     const { month, year } = context.query
+    const state = context.reduxStore.getState()
 
     try {
-      const response = await fetch(`https://api.app.co/api/app-mining-months`)
-      const { months } = await response.json()
+      // const response = await fetch(`https://api.app.co/api/app-mining-months`)
+      // const { months } = await response.json()
+      const months = selectAppMiningMonths(state)
       const foundReport = months.find(
         (report) => report.monthName.toLowerCase() === month.toLowerCase() && report.year === parseInt(year, 10)
       )
@@ -44,6 +47,8 @@ class MonthResults extends React.Component {
 
   rankings() {
     const { report } = this.props
+
+    console.log(report.compositeRankings[0])
 
     return report.compositeRankings.map((app, index) => (
       <ClickableTr>
@@ -78,6 +83,7 @@ class MonthResults extends React.Component {
             <>
               {app.formattedUsdRewards}
               <SubReward>({app.payout.BTCPaymentValue / 10e7} BTC)</SubReward>
+              <SubReward>({app.formattedSTXRewards} STX)</SubReward>
             </>
           )}
         </SpacedTd>
