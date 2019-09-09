@@ -9,6 +9,12 @@ The website is a [next.js](https://github.com/zeit/next.js/) application. To beg
 yarn
 ```
 
+To setup your environment variables for development, copy the `.env.sample` file to `.env`:
+
+~~~bash
+cp .env.sample .env
+~~~
+
 To run the development server:
 
 ```bash
