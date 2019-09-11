@@ -1,9 +1,14 @@
 app.co
 ----
 
-### Website 
+### Dependencies
 
-The website is a [next.js](https://github.com/zeit/next.js/) application. To begin, install the required dependencies:
+- [next.js](https://github.com/zeit/next.js/)
+- [redis](https://redis.io/)
+
+An instance of Redis **must** be running before starting the development server.
+
+### Instructions
 
 ```bash
 yarn
