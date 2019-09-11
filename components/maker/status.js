@@ -54,7 +54,7 @@ const Status = ({ app, display }) => {
             mining.
           </Type>
         ) : (
-          <Type mb={4}e>
+          <Type mb={4}>
             It looks like we still need to collect some more information before you can participate in app mining.
           </Type>
         )}

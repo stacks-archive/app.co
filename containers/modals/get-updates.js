@@ -22,7 +22,7 @@ class GetUpdates extends React.Component {
   }
 
   static propTypes = {
-    submitted: PropTypes.bool.isRequired,
+    submitted: PropTypes.bool,
     submitting: PropTypes.bool.isRequired,
     subscribed: PropTypes.bool.isRequired,
     open: PropTypes.bool.isRequired,

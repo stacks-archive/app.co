@@ -75,7 +75,7 @@ const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
         {showNotification && <Notification message="Thanks! Your payment details have been updated." />}
         <Type mb={5}>
           Presently, App Mining payments are made in Bitcoin (BTC). We anticipate paying in Stacks (STX) soon.
-          In order for your Stacks payment to start accruing for future delivery, please provide both BTC and STX addresses. 
+          In order for your Stacks payment to start accruing for future delivery, please provide both BTC and STX addresses.
           Your app cannot participate in App Mining without Blockstack having both address types on file.
         </Type>
         <Type mb={5}>
@@ -88,7 +88,7 @@ const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
           label="Bitcoin Address"
           placeholder="Enter a Bitcoin address"
           onChange={(e) => setBTCAddress(e.target.value)}
-          value={btcAddress}
+          value={btcAddress || ''}
           error={!btcValid ? 'Please enter a valid BTC address' : null}
         />
         <Field
@@ -96,7 +96,7 @@ const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
           label="Stacks Address"
           placeholder="Enter a Stacks address"
           onChange={(e) => setSTXAddress(e.target.value)}
-          value={stxAddress}
+          value={stxAddress || ''}
           error={!stxValid ? 'Please enter a valid STX address' : null}
         />
         <Button mt={4} disabled={saving} onClick={() => save({ btcAddress, stxAddress, apiServer, accessToken })}>
