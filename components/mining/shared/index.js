@@ -27,7 +27,7 @@ const Countdown = dynamic(() => import('../countdown'), {
   ssr: false,
   loading: () => <>...</>
 })
-const LearnMore = ({ label = 'Learn how to win', color = 'blue.mid', hoverColor = 'white', ...rest }) => (
+const LearnMore = ({ label = 'Learn how to earn', color = 'blue.mid', hoverColor = 'white', ...rest }) => (
   <Hover>
     {({ bind, hovered }) => (
       <Flex
