@@ -40,7 +40,7 @@
     "accounting": "^0.4.1",
     "async": "^2.6.0",
     "bitcoinjs-lib": "^5.0.5",
-    "blockstack": "^19.2.1",
+    "blockstack": "^19.3.0",
     "blockstack-ui": "^0.0.77",
     "c32check": "^0.0.6",
     "cheerio": "^1.0.0-rc.2",
