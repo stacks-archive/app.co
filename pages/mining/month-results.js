@@ -4,6 +4,7 @@ import { Flex, Box, Type } from 'blockstack-ui'
 import { Page } from '@components/page'
 import Head from '@containers/head'
 import { bindActionCreators } from 'redux'
+import accounting from 'accounting'
 import { Section, Content } from '@components/mining-admin/month'
 import { Table, Th, SpacedTd, Td, Thead, SubReward, ClickableTr } from '@components/mining-admin/table'
 import { AppLink, Name, Description, Container, Rank, Rewards } from '@components/mining/registered-apps/styled'
@@ -21,8 +22,6 @@ class MonthResults extends React.Component {
     const state = context.reduxStore.getState()
 
     try {
-      // const response = await fetch(`https://api.app.co/api/app-mining-months`)
-      // const { months } = await response.json()
       const months = selectAppMiningMonths(state)
       const foundReport = months.find(
         (report) => report.monthName.toLowerCase() === month.toLowerCase() && report.year === parseInt(year, 10)
@@ -41,6 +40,16 @@ class MonthResults extends React.Component {
     }
   }
 
+  sum() {
+    const { report } = this.props
+    const sum = report.compositeRankings.reduce((prev, app) => prev + app.usdRewards, 0)
+    return sum
+  }
+
+  formattedSum() {
+    return accounting.formatMoney(this.sum())
+  }
+
   title() {
     return `App Mining rewards for ${this.props.report && this.props.report.humanReadableDate}`
   }
@@ -48,7 +57,7 @@ class MonthResults extends React.Component {
   rankings() {
     const { report } = this.props
 
-    console.log(report.compositeRankings[0])
+    console.log(report)
 
     return report.compositeRankings.map((app, index) => (
       <ClickableTr>
@@ -134,7 +143,7 @@ class MonthResults extends React.Component {
               <Content>
                 <Type.p>
                   <Type.strong fontWeight="700">{report.compositeRankings.length} Blockstack apps</Type.strong> earned{' '}
-                  <Type.strong fontWeight="700">{report.formattedTotalRewardsUsd}</Type.strong> in App Mining rewards
+                  <Type.strong fontWeight="700">{this.formattedSum()}</Type.strong> in App Mining rewards
                   for the month of {report.humanReadableDate}.
                 </Type.p>
                 <Type.p>

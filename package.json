@@ -37,6 +37,7 @@
     "@mdx-js/tag": "^0.15.0",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-mdx": "^1.2.0",
+    "accounting": "^0.4.1",
     "async": "^2.6.0",
     "bitcoinjs-lib": "^5.0.5",
     "blockstack": "^19.2.1",
