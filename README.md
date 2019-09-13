@@ -14,6 +14,12 @@ An instance of Redis **must** be running before starting the development server.
 yarn
 ```
 
+To setup your environment variables for development, copy the `.env.sample` file to `.env`:
+
+~~~bash
+cp .env.sample .env
+~~~
+
 To run the development server:
 
 ```bash
