@@ -13,6 +13,8 @@ import debounce from 'lodash.debounce'
 
 import { trackEvent } from '@utils'
 
+const APP_SUBMISSION_DATA = 'app_submission_data'
+
 const ErrorMessage = ({
   message = `Whoops! Please check the form for errors and try again.`,
   icon: Icon = AlertOutlineIcon,
@@ -37,8 +39,8 @@ const ErrorMessage = ({
 )
 const Bar = ({ ...rest }) => <Box width={80} mb={7} mt={5} height="1px" bg="blue.mid" {...rest} />
 
-const handleChange = (e) => (setState) => {
-  e && e.persist && e.persist()
+const outerHandleChange = (e) => (setState) => {
+  if (e && e.persist) e.persist()
   setState((s) => ({
     ...s,
     values: {
@@ -48,16 +50,16 @@ const handleChange = (e) => (setState) => {
   }))
 }
 
-const FormSection = ({ fields, handleChange, errors, message, setState, ...rest }) => (
+const FormSection = ({ state, fields, handleChange, errors, message, setState }) => (
   <>
-    {fields.map((field, i) => {
+    {fields.map((field) => {
       if (field.type === 'radio') {
         if (!field.options || field.options.length !== 2) {
           console.log('Radio type fields need 2 options (true/false)')
           return null
         }
         return (
-          <React.Fragment key={i}>
+          <React.Fragment key={`radio-${field.name}`}>
             <Field.LabelAdvanced
               pb={3}
               label={field.label}
@@ -65,27 +67,32 @@ const FormSection = ({ fields, handleChange, errors, message, setState, ...rest 
               error={errors && field && errors[field.name] && errors[field.name]}
             />
             <Box pb={4}>
-              {field.options.map((option, i) => (
-                <Flex pb={3} alignItems="center" key={i}>
-                  <input
-                    type="radio"
-                    name={field.name}
-                    value={option.value}
-                    id={String(option.value)}
-                    onChange={(e) => handleChange(e)(setState)}
-                  />
-                  <Field.Label pb={0} pl={2} is="label" htmlFor={String(option.value)}>
-                    {option.label}
-                  </Field.Label>
-                </Flex>
-              ))}
+              {field.options.map((option) => (
+                  <Flex pb={3} alignItems="center" key={`radio-${field.name}-${option.value}`}>
+                    <input
+                      type="radio"
+                      name={field.name}
+                      value={option.value}
+                      defaultChecked={String(option.value) === state[field.name] || undefined}
+                      id={String(option.value)}
+                      onChange={(e) => handleChange(e)(setState)}
+                    />
+                    <Field.Label pb={0} pl={2} is="label" htmlFor={String(option.value)}>
+                      {option.label}
+                    </Field.Label>
+                  </Flex>
+                ))}
             </Box>
           </React.Fragment>
         )
       }
       if (field.type === 'select') {
+        const selectProps = { ...field }
+        if (!!state[field.name]) {
+          selectProps.defaultValue = { label: state[field.name], value: state[field.name] }
+        }
         return (
-          <React.Fragment key={i}>
+          <React.Fragment key={`select-${field.name}`}>
             <Box pb={4}>
               <Field.LabelAdvanced
                 pb={3}
@@ -107,7 +114,7 @@ const FormSection = ({ fields, handleChange, errors, message, setState, ...rest 
                   }
                   error={errors && field && errors[field.name] && errors[field.name]}
                   isClearable
-                  {...field}
+                  {...selectProps}
                 />
               </Flex>
             </Box>
@@ -116,15 +123,15 @@ const FormSection = ({ fields, handleChange, errors, message, setState, ...rest 
       }
       if (field.type === 'checkbox') {
         return (
-          <React.Fragment key={i}>
+          <React.Fragment key={`checkbox-${field.name}`}>
             <Box pb={4}>
               <Flex pb={3} alignItems="center">
                 <input
                   type="checkbox"
                   name={field.name}
                   id={field.name}
+                  defaultChecked={!!state[field.name] || undefined}
                   onChange={(e) =>
-                    console.log('checkbox', e.target.checked) ||
                     handleChange({
                       persist: e.persist,
                       target: {
@@ -158,7 +165,8 @@ const FormSection = ({ fields, handleChange, errors, message, setState, ...rest 
         <Field
           noValidate="novalidate"
           onChange={(e) => handleChange(e)(setState)}
-          key={i}
+          key={`field-${field.name}`}
+          defaultValue={state[field.name]}
           error={errors && field && errors[field.name] && errors[field.name]}
           {...field}
         />
@@ -170,7 +178,7 @@ const FormSection = ({ fields, handleChange, errors, message, setState, ...rest 
   </>
 )
 
-const Submit = ({ appConstants, setState, state, errors, submit, loading, success, ...rest }) => {
+const Submit = ({ appConstants, setState, state, errors, submit, loading, isAppMiningEligible }) => {
   const personal = [
     {
       name: 'isSubmittingOwnApp',
@@ -271,7 +279,12 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
 
   const generateOptions = (enums) =>
     Object.keys(enums)
-      .sort((a, b) => (a.toLowerCase() !== b.toLowerCase() ? (a.toLowerCase() < b.toLowerCase() ? -1 : 1) : 0))
+      .sort((a, b) => {
+        if (a.toLowerCase() !== b.toLowerCase()) {
+          return a.toLowerCase() < b.toLowerCase() ? -1 : 1
+        }
+        return 0
+      })
       .map((opt) => ({ label: opt, value: opt }))
 
   const categoryOptions = {
@@ -411,7 +424,7 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
   }
 
   const handleValidation = async (e) => {
-    e && e.preventDefault()
+    if (e) e.preventDefault()
     const validation = await validate()
     if (validation.count > 0) {
       trackEvent('App Submission Page - Validation Errors')
@@ -428,6 +441,12 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
     }
   }
 
+  const blockstackAuth = (e) => {
+    if (e) { e.preventDefault() }
+    localStorage.setItem(APP_SUBMISSION_DATA, JSON.stringify(state))
+    console.log('should login here', state)
+  }
+
   return (
     <Box mx="auto" maxWidth={700}>
       <Type is="h2">Add an app to App.co</Type>
@@ -439,27 +458,49 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, succes
       <Bar mb={0} />
       <Flex pt={6} flexDirection="column">
         <form noValidate onSubmit={handleValidation}>
-          {sections.map((section, i) => (
+          {sections.map((section) => (
             <FormSection
               errors={errors}
-              handleChange={handleChange}
+              handleChange={outerHandleChange}
               setState={setState}
-              key={i}
+              key={`section-${section.fields[0].name}`}
               message={section.message}
               fields={section.fields}
+              state={state}
             />
           ))}
           {errors ? <ErrorMessage /> : null}
-          <Button>{loading ? 'Loading...' : 'Submit App'}</Button>
+          {isAppMiningEligible ? (
+            <Button onClick={blockstackAuth}>{loading ? 'Loading...' : 'Login with Blockstack'}</Button>
+          ) : (
+            <Button>{ loading? 'Loading...': 'Submit App' }</Button>
+          )}
         </form>
       </Flex>
     </Box>
   )
 }
 
+const getValues = () => {
+  if (typeof localStorage !== 'undefined') {
+    const appDataJSON = localStorage.getItem(APP_SUBMISSION_DATA)
+    if (appDataJSON) {
+      const appData = JSON.parse(appDataJSON)
+      console.log('from localStorage', appData)
+      // localStorage.removeItem(APP_SUBMISSION_DATA)
+      return appData
+    }
+  }
+  return {}
+}
+
 class SubmitDapp extends React.Component {
   state = {
-    values: {},
+    values: getValues(),
+    // values: {
+    //   authentication: 'Blockstack',
+    //   twitterHandle: 'asdf'
+    // },
     loading: false,
     success: false,
     errors: {},
@@ -468,20 +509,50 @@ class SubmitDapp extends React.Component {
     accessToken: null
   }
 
-  componentDidMount() {
+  componentWillMount() {
+    if (typeof window !== 'undefined') {
+      trackEvent('App Submission Page - Page Load')
+      this.setStateFromData()
+    }
+  }
+
+  setStateFromData() {
+    // let newState = this.setStateFromLocalStorage()
+    let newState = {}
     const { search } = document.location
     if (search) {
       const referralCode = search.match(/referralCode=(\w+)/)[1]
       const refSource = search.match(/refSource=(\w+)/)[1]
-      this.setState({ // eslint-disable-line react/no-did-mount-set-state
+      newState = {
+        ...newState,
         referralCode,
         refSource
-      })
+      }
+      // this.setState({ // eslint-disable-line react/no-did-mount-set-state
+      //   referralCode,
+      //   refSource
+      // })
+    }
+    console.log(newState)
+    if (Object.keys(newState) > 0) {
+      this.setState(newState)
+      // setTimeout(() => {
+      //   this.setState(newState)
+      // }, 50)
     }
   }
-
-  componentDidMount() {
-    trackEvent('App Submission Page - Page Load')
+  
+  setStateFromLocalStorage = () => {
+    const appDataJSON = localStorage.getItem(APP_SUBMISSION_DATA)
+    if (appDataJSON) {
+      const appData = JSON.parse(appDataJSON)
+      console.log('from localStorage', appData)
+      localStorage.removeItem(APP_SUBMISSION_DATA)
+      return {
+        values: appData
+      }
+    }
+    return {}
   }
 
   submit = async () => {
@@ -519,7 +590,7 @@ class SubmitDapp extends React.Component {
       this.setState({ success: true, loading: false, accessToken: app.accessToken })
     } catch (e) {
       trackEvent('App Submission Page - Submission Error')
-      this.setState({ success: false, loading: false, globalError: e.message })
+      this.setState({ success: false, loading: false })
       console.error(e.message)
     }
   }
@@ -529,9 +600,15 @@ class SubmitDapp extends React.Component {
     return `/maker/${accessToken}`
   }
 
+  appMiningEligible() {
+    const { values } = this.state
+    console.log(values)
+    return values.authentication === 'Blockstack' && values.category !== "Sample Blockstack Apps"
+  }
+
   render() {
     const { appConstants } = this.props
-    const { accessToken, values } = this.state
+    const { accessToken } = this.state
 
     return (
       <Page>
@@ -546,10 +623,10 @@ class SubmitDapp extends React.Component {
                   </Type>
                 </Box>
                 <Box mx="auto">
-                  <Type display="block">Thanks for your submission! We'll get back to you soon.</Type>
-                  {values.authentication === 'Blockstack' && values.category !== "Sample Blockstack Apps" && (
+                  <Type display="block">Thanks for your submission! We&apos;ll get back to you soon.</Type>
+                  {this.appMiningEligible() && (
                     <>
-                      <Type mt={2} display="block">You can update your app details using this magic link. Don't share this URL!</Type>
+                      <Type mt={2} display="block">You can update your app details using this magic link. Don&apos;t share this URL!</Type>
                       <Link
                         href={{
                           pathname: '/maker',
@@ -581,6 +658,7 @@ class SubmitDapp extends React.Component {
               setState={debounce((args) => this.setState(args), 100)}
               state={this.state.values}
               errors={this.state.errorCount > 0 && this.state.errors}
+              isAppMiningEligible={this.appMiningEligible()}
             />
           )}
         </Page.Section>
