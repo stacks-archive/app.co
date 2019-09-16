@@ -35,9 +35,7 @@ const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, fo
           <ErrorPageLink isErrorPage={isErrorPage} href="/mining" prefetch {...extraProps}>
             <a href="/mining">App Mining</a>
           </ErrorPageLink>
-          <ErrorPageLink isErrorPage={isErrorPage} href="https://blog.app.co" {...extraProps}>
-            <a href="https://blog.app.co">Blog</a>
-          </ErrorPageLink>
+          <a href="https://blog.app.co" target="_blank" rel="noopener noreferrer">Blog</a>
           <a
             href="#"
             onClick={(evt) => {
