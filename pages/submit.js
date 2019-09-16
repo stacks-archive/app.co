@@ -469,10 +469,10 @@ class SubmitDapp extends React.Component {
   }
 
   componentDidMount() {
-    const { search } = document.location
-    if (search) {
-      const referralCode = search.match(/referralCode=(\w+)/)[1]
-      const refSource = search.match(/refSource=(\w+)/)[1]
+    const queries = document.location.search
+    if (queries) {
+      const referralCode = queries.match(/referralCode=(\w+)/)[1]
+      const refSource = queries.match(/refSource=(\w+)/)[1]
       this.setState({ // eslint-disable-line react/no-did-mount-set-state
         referralCode,
         refSource
@@ -485,8 +485,7 @@ class SubmitDapp extends React.Component {
   }
 
   submit = async () => {
-    const { apiServer } = this.props
-    const url = `${apiServer}/api/submit`
+    const url = `${this.props.apiServer}/api/submit`
     this.setState({ loading: true })
 
     /**
@@ -497,12 +496,11 @@ class SubmitDapp extends React.Component {
       twitterHandle = twitterHandle.replace('@', '')
     }
 
-    const { referralCode, refSource } = this.state
     const values = {
       ...this.state.values,
       twitterHandle,
-      referralCode,
-      refSource
+      referralCode: this.state.referralCode,
+      refSource: this.state.refSource
     }
 
     try {
@@ -514,9 +512,9 @@ class SubmitDapp extends React.Component {
         },
         body: JSON.stringify(values)
       })
-      const { app } = await response.json()
+      const resData = await response.json()
       trackEvent('App Submission Page - Submission Success')
-      this.setState({ success: true, loading: false, accessToken: app.accessToken })
+      this.setState({ success: true, loading: false, accessToken: resData.app.accessToken })
     } catch (e) {
       trackEvent('App Submission Page - Submission Error')
       this.setState({ success: false, loading: false, globalError: e.message })
