@@ -5,13 +5,13 @@ import NewsletterActions from '@stores/newsletter/actions'
 import { StyledTopBar } from '@components/top-bar/styled'
 import Link from 'next/link'
 
-const ErrorPageLink = ({ isErrorPage, children, ...props }) =>
+const ErrorPageLink = ({ isErrorPage, children, onClick,...props }) => 
   isErrorPage ? children : <Link {...props}>{children}</Link>
 
-const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, footer, admin, ...rest }) => {
+const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, footer, admin, display, ...rest }) => {
   const extraProps = handleClick ? { onClick: () => handleClick() } : {}
   return (
-    <StyledTopBar.Navigation flexWrap={footer ? 'wrap' : undefined} {...rest}>
+    <StyledTopBar.Navigation flexWrap={footer ? 'wrap' : undefined} display={display}>
       {admin ? (
         <>
           <Link href="/admin">

@@ -60,7 +60,9 @@ const StyledTopBar = styled.div`
   box-shadow: 0 1px 1px 0 rgba(20, 33, 68, 0.04), 0 1px 3px 1px rgba(20, 33, 68, 0.09);
 `
 
-const Wrapper = styled.div`
+const RawDiv = ({wrap, ...props}) => <div {...props} />
+
+const Wrapper = styled(RawDiv)`
   ${wrapperStyle};
   ${({ wrap }) =>
     wrap === false &&

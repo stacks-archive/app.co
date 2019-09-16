@@ -17,7 +17,7 @@ const handleBodyScroll = (on) =>
 const TopBar = ({ isErrorPage, admin, wrap, ...props }) => (
   <Headroom>
     <StyledTopBar {...props}>
-      <StyledTopBar.Wrapper wrap={wrap}>
+      <StyledTopBar.Wrapper wrap={false}>
         <StyledTopBar.Section grow>
           {isErrorPage ? (
             <a href="/">
