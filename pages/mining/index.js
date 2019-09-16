@@ -26,8 +26,8 @@ class AppMiningPage extends React.Component {
     const state = reduxStore.getState()
     const api = selectApiServer(state)
     try {
-      const faqsData = await fetch(`${api}/api/mining-faq`)
-      const { faqs } = await faqsData.json()
+      const faqsResponse = await fetch(`${api}/api/mining-faq`)
+      const faqsData = await faqsResponse.json()
       const apps = selectAppMiningApps(state)
       const months = selectAppMiningMonths(state)
 
@@ -54,7 +54,7 @@ class AppMiningPage extends React.Component {
             apps: theApps
           }
         })
-        return { rankings, month: months[months.length - 1], months, rankingMonths, faq: faqs, apps }
+        return { rankings, month: months[months.length - 1], months, rankingMonths, faq: faqsData.faqs, apps }
       } else {
         console.log('no months!')
         return {}
