@@ -114,8 +114,8 @@ app.prepare().then(() => {
 
     if (!dev) {
       server.use(secure)
+      server.use(morgan('combined'))
     }
-    server.use(morgan('combined'))
     server.use(cookiesMiddleware())
     server.use(compression())
 
