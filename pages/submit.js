@@ -3,6 +3,7 @@ import 'isomorphic-unfetch'
 import { connect } from 'react-redux'
 import Head from '@containers/head'
 import Link from 'next/link'
+import { bindActionCreators } from 'redux'
 import { Page } from '@components/page'
 import { Type, Field, Flex, Box, Button } from 'blockstack-ui'
 import { selectAppConstants, selectApiServer } from '@stores/apps/selectors'
@@ -10,6 +11,7 @@ import { string, boolean } from 'yup'
 import { Select } from '@components/mining/select'
 import { AlertOutlineIcon } from 'mdi-react'
 import debounce from 'lodash.debounce'
+import UserStore from '@stores/user'
 
 import { trackEvent } from '@utils'
 
@@ -143,13 +145,13 @@ const FormSection = ({ state, fields, handleChange, errors, message, setState })
                 />
                 <Field.LabelAdvanced
                   labelProps={{
-                    pb: !!(errors && field && errors[field.name] && errors[field.name]) ? 2 : 0,
+                    pb: !!(errors && field && errors[field.name]) ? 2 : 0,
                     htmlFor: field.name
                   }}
                   pl={2}
                   required={field.required}
                   label={field.label}
-                  error={errors && field && errors[field.name] && errors[field.name]}
+                  error={errors && field && errors[field.name]}
                 />
               </Flex>
               {field.message ? (
@@ -178,7 +180,7 @@ const FormSection = ({ state, fields, handleChange, errors, message, setState })
   </>
 )
 
-const Submit = ({ appConstants, setState, state, errors, submit, loading, isAppMiningEligible }) => {
+const Submit = ({ appConstants, setState, state, errors, submit, user, loading, signIn, isAppMiningEligible }) => {
   const personal = [
     {
       name: 'isSubmittingOwnApp',
@@ -222,6 +224,13 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, isAppM
       placeholder: 'Hacker News'
     }
   ]
+
+  console.log(user)
+  if (user && user.jwt) {
+    // If the user is logged in, remove the "Is this your app?" question
+    personal.splice(0,1)
+  }
+
   const appDetails = [
     {
       name: 'name',
@@ -444,19 +453,39 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, isAppM
   const blockstackAuth = (e) => {
     if (e) { e.preventDefault() }
     localStorage.setItem(APP_SUBMISSION_DATA, JSON.stringify(state))
-    console.log('should login here', state)
+    signIn('submit')
   }
 
   return (
     <Box mx="auto" maxWidth={700}>
       <Type is="h2">Add an app to App.co</Type>
       <Type is="p" lineHeight={1.5}>
-        Add any user-ready decentralized app: It could be an app you built, or an app you discovered. We manually verify
-        all information before publishing to App.co. Contact details are not displayed and we promise to keep your
-        information private and safe.
+        Add any user-ready decentralized app: It could be an app you built, or an app you discovered. We manually
+        verify all information before publishing to App.co. Contact details are not displayed and we promise to keep
+        your information private and safe.
       </Type>
       <Bar mb={0} />
-      <Flex pt={6} flexDirection="column">
+      {user && user.user && (
+        <Flex pt={6}>
+          <Box mb={4} width={1}>
+            <Field.LabelAdvanced
+              labelProps={{
+                pb: 3
+              }}
+              pl={0}
+              required
+              label="Blockstack ID"
+            />
+            <Box px={3} py={4} borderRadius={3} border="1px solid gray" display="inline-block">
+              {user.user.blockstackUsername}
+            </Box>
+            <Type fontSize={1} display="block" mt={3}>
+              You will use your ID to make changes to your app, and remove or modify it&apos;s listing in the future.
+            </Type>
+          </Box>
+        </Flex>
+      )}
+      <Flex flexWrap="wrap" pt={6} flexDirection="column">
         <form noValidate onSubmit={handleValidation}>
           {sections.map((section) => (
             <FormSection
@@ -470,10 +499,10 @@ const Submit = ({ appConstants, setState, state, errors, submit, loading, isAppM
             />
           ))}
           {errors ? <ErrorMessage /> : null}
-          {isAppMiningEligible ? (
+          {isAppMiningEligible && !(user && user.jwt) ? (
             <Button onClick={blockstackAuth}>{loading ? 'Loading...' : 'Login with Blockstack'}</Button>
           ) : (
-            <Button>{ loading? 'Loading...': 'Submit App' }</Button>
+            <Button>{loading ? 'Loading...' : 'Submit App'}</Button>
           )}
         </form>
       </Flex>
@@ -497,10 +526,6 @@ const getValues = () => {
 class SubmitDapp extends React.Component {
   state = {
     values: getValues(),
-    // values: {
-    //   authentication: 'Blockstack',
-    //   twitterHandle: 'asdf'
-    // },
     loading: false,
     success: false,
     errors: {},
@@ -516,29 +541,22 @@ class SubmitDapp extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.props.handleSignIn(this.props.apiServer)
+  }
+
   setStateFromData() {
-    // let newState = this.setStateFromLocalStorage()
-    let newState = {}
     const { search } = document.location
     if (search) {
-      const referralCode = search.match(/referralCode=(\w+)/)[1]
-      const refSource = search.match(/refSource=(\w+)/)[1]
-      newState = {
-        ...newState,
-        referralCode,
-        refSource
+      const refPart = search.match(/referralCode=(\w+)/)
+      if (refPart) {
+        const referralCode = refPart[1]
+        const refSource = search.match(/refSource=(\w+)/)[1]
+        this.setState({
+          referralCode,
+          refSource
+        })
       }
-      // this.setState({ // eslint-disable-line react/no-did-mount-set-state
-      //   referralCode,
-      //   refSource
-      // })
-    }
-    console.log(newState)
-    if (Object.keys(newState) > 0) {
-      this.setState(newState)
-      // setTimeout(() => {
-      //   this.setState(newState)
-      // }, 50)
     }
   }
   
@@ -556,7 +574,7 @@ class SubmitDapp extends React.Component {
   }
 
   submit = async () => {
-    const { apiServer } = this.props
+    const { apiServer, user } = this.props
     const url = `${apiServer}/api/submit`
     this.setState({ loading: true })
 
@@ -577,12 +595,17 @@ class SubmitDapp extends React.Component {
     }
 
     try {
+      const headers = {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+      if (user && user.jwt) {
+        headers.Authorization = `Bearer ${user.jwt}`
+      }
+
       const response = await fetch(url, {
         method: 'POST',
-        headers: {
-          Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/json'
-        },
+        headers,
         body: JSON.stringify(values)
       })
       const { app } = await response.json()
@@ -658,6 +681,8 @@ class SubmitDapp extends React.Component {
               setState={debounce((args) => this.setState(args), 100)}
               state={this.state.values}
               errors={this.state.errorCount > 0 && this.state.errors}
+              signIn={this.props.signIn}
+              user={this.props.user}
               isAppMiningEligible={this.appMiningEligible()}
             />
           )}
@@ -667,9 +692,14 @@ class SubmitDapp extends React.Component {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Object.assign({}, UserStore.actions), dispatch)
+}
+
 const mapStateToProps = (state) => ({
   appConstants: selectAppConstants(state),
-  apiServer: selectApiServer(state)
+  apiServer: selectApiServer(state),
+  user: state.user
 })
 
-export default connect(mapStateToProps)(SubmitDapp)
+export default connect(mapStateToProps, mapDispatchToProps)(SubmitDapp)

@@ -2,7 +2,7 @@ import { UserSession, AppConfig } from 'blockstack'
 
 const host = typeof document === 'undefined' ? 'https://app.co' : document.location.origin
 const appConfig = new AppConfig(['store_write'], host)
-const userSession = new UserSession({ appConfig })
+export const userSession = new UserSession({ appConfig })
 
 const initialState = {
   userId: null,
@@ -29,7 +29,7 @@ const signedIn = (data) => ({
   userId: data.user.id
 })
 
-const signOut = () => ({
+const signOut = () => ({ 
   type: constants.SIGNING_OUT
 })
 
@@ -38,6 +38,9 @@ const handleSignIn = (apiServer) =>
     const token = userSession.getAuthResponseToken()
     if (!token) {
       return true
+    }
+    if (userSession.isUserSignedIn()) {
+      userSession.signUserOut()
     }
 
     dispatch(signingIn())
@@ -48,15 +51,11 @@ const handleSignIn = (apiServer) =>
     })
     const json = await response.json()
     dispatch(signedIn(json))
-    // setTimeout(() => {
-    //   document.location = '/admin'
-    // }, 1000)
-
     return true
   }
 
-const signIn = () => {
-  const redirect = `${window.location.origin}/admin`
+const signIn = (redirectPath = 'admin') => {
+  const redirect = `${window.location.origin}/${redirectPath}`
   const manifest = `${window.location.origin}/static/manifest.json`
   userSession.redirectToSignIn(redirect, manifest)
   return signingIn()
