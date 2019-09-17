@@ -71,7 +71,7 @@ async function renderAndCache(req, res, pagePath, serverData) {
     const html = await app.renderToHTML(req, res, pagePath, dataToPass)
     if (cacheKey) {
       try {
-        await Cache.setAsync(cacheKey, html, 'EX', 60 * 60) 
+        await Cache.setAsync(cacheKey, html, 'EX', 60 * 60)
       } catch (error) {
         console.error('Error when saving page cache')
         console.error(error)
@@ -240,10 +240,10 @@ app.prepare().then(() => {
             MiningApps.set()
           ])
           await Cache.reset()
-          res.json({ success: true }) 
+          res.json({ success: true })
         } catch (error) {
           console.error(error)
-          res.status(500).json({ success: false })  
+          res.status(500).json({ success: false })
         }
       } else {
         res.status(400).json({ success: false })
@@ -254,7 +254,9 @@ app.prepare().then(() => {
     server.use(expressSitemapXml(getSitemapURLs(apiServer), 'https://app.co'))
 
     server.get('/robots.txt', async (req, res) => {
-      const robots = await fs.readFile('./static/robots.txt')
+      const robotsFile = dev || process.env.STAGING ? 'robots.staging.txt': 'robots.txt'
+      const robotsPath = './static/' + robotsFile;
+      const robots = await fs.readFile(robotsPath)
       res.header('Content-Type', 'text/plain')
       res.status(200).send(robots)
     })

@@ -55,7 +55,6 @@ class NewsletterClass extends React.Component {
 
   render() {
     const cookie = getNewsletterCookie(this.props.cookies)
-
     const { serverCookies } = this.props
     const serverCookie =
       serverCookies && serverCookies.BLOCKSTACK_NEWSLETTER && JSON.parse(serverCookies.BLOCKSTACK_NEWSLETTER)

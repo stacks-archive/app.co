@@ -93,8 +93,8 @@ const wrapperStyle = css`
   padding-left: 20px;
   padding-right: 20px;
   ${below.md`
-      padding-left: 20px;
-      padding-right: 20px;  
+    padding-left: 20px;
+    padding-right: 20px;  
   `};
 `
 

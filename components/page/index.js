@@ -29,7 +29,8 @@ Page.Section.Content = StyledPage.Content
 Page.propTypes = {
   children: PropTypes.node.isRequired,
   isErrorPage: PropTypes.bool,
-  admin: PropTypes.bool
+  admin: PropTypes.bool,
+  wrap: PropTypes.bool
 }
 
 Page.defaultProps = {

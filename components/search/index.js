@@ -100,8 +100,8 @@ class SearchBarClass extends React.Component {
     return (
       <Focus>
         {({ focused, bind }) => (
-          <StyledSearchBar {...this.props} pl={3} focused={focused || this.state.searchActive}>
-            <StyledSearchBar.Icon pr={1} focused={focused || this.state.searchActive}>
+          <StyledSearchBar apps={this.props.apps} pl={3} focused={(focused || this.state.searchActive).toString()}>
+            <StyledSearchBar.Icon pr={1} focused={(focused || this.state.searchActive).toString()}>
               <SearchIcon color="currentColor" />
             </StyledSearchBar.Icon>
             <StyledSearchBar.Section grow>
