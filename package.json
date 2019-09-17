@@ -68,6 +68,7 @@
     "lru-cache": "^4.1.3",
     "luxon": "^1.9.0",
     "mdi-react": "4.4.0",
+    "moment": "^2.24.0",
     "morgan": "^1.9.1",
     "next": "^8.0.4",
     "next-router-events": "^2.1.0",
