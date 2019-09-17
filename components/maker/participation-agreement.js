@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { Flex, Box, Button, Field, Type } from 'blockstack-ui'
 import download from 'downloadjs'
 import Notification from './notification'
+import { MakerCardHeader, MakerCardText } from './styled'
 
-const ParticipationAgreement = ({ app, apiServer, accessToken, display }) => {
+const Container = ({ children }) => <Flex><Box width={1} mt={0}>{children}</Box></Flex>
+
+const ParticipationAgreement = ({ app, apiServer, accessToken }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [isUSA, setIsUSA] = useState(true)
-  const [document, setDocument] = useState(null)
+  const [doc, setDoc] = useState(null)
   const [loading, setLoading] = useState(false)
   const [finished, setFinished] = useState(!!app.hasAcceptedSECTerms)
 
@@ -19,7 +22,7 @@ const ParticipationAgreement = ({ app, apiServer, accessToken, display }) => {
     })
     const data = await response.json()
     setLoading(false)
-    setDocument(data.embedURL)
+    setDoc(data.embedURL)
     // eslint-disable-next-line no-undef
     eversign.open({
       url: data.embedURL,
@@ -51,73 +54,70 @@ const ParticipationAgreement = ({ app, apiServer, accessToken, display }) => {
 
   if (finished) {
     return (
-      <Flex style={{ display: display ? 'flex' : 'none' }}>
-        <Box width={1} mt={0}>
-          <Notification message="Thanks! You've successfully signed our participation agreement" />
-        </Box>
-      </Flex>
+      <Container>
+        <Notification message="Thanks! You've successfully signed our participation agreement" />
+      </Container>
     )
   }
 
   return (
-    <Flex style={{ display: display ? 'flex' : 'none' }}>
-      <Box width={1} mt={0}>
-        <Box width={1} id="embedded-participation-agreement" />
-        {!document && (
-          <>
-            {loading ? (
-              'Fetching participation agreement...'
-            ) : (
-              <>
-                <Type mb={4}>
-                  You must sign our participation agreement to become eligible to participate in App Mining.
-                </Type>
-                <Type mb={4}>Provide your name and email address below to start the signing process.</Type>
-                <Type mb={4}>Before beginning the signing process, you must download and read a package of documents that we provide.</Type>
-                <Field name="name" label="Your Name" onChange={(e) => setName(e.target.value)} value={name} />
-                <Field
-                  name="stacksAddress"
-                  label="Your Email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                />
-                <Box pb={4}>
-                  <Flex pb={3} alignItems="center">
-                    <input
-                      type="checkbox"
-                      name="isUSA"
-                      id="isUSA"
-                      checked={isUSA}
-                      onChange={(e) =>
-                        setIsUSA(e.target.checked)
-                      }
-                    />
-                    <Field.LabelAdvanced
-                      labelProps={{
-                        pb: 0,
-                        htmlFor: "isUSA"
-                      }}
-                      pl={2}
-                      label="I am a person or company based in the US"
-                    />
-                  </Flex>
-                </Box>
-                {/* <Field
-                  name="isUSA"
-                  label="I am based in the United States"
-                  onChange={(e) => setIsUSA(e.target.checked)}
-                  type="checkbox"
-                  value={isUSA}
-                /> */}
-                <Button mt={4} disabled={loading} onClick={() => getDownload()}>
-                  {loading ? 'Starting...' : 'Start Signing Process'}
-                </Button>
-              </>
-            )}
-          </>
-        )}
-      </Box>
-    </Flex>
+    <Container>
+      <MakerCardHeader>Legal Documents</MakerCardHeader>
+      <Box width={1} id="embedded-participation-agreement" />
+      {!doc && (
+        <>
+          {loading ? (
+            'Fetching participation agreement...'
+          ) : (
+            <>
+              <MakerCardText mb={4}>
+                You must sign our participation agreement to become eligible to participate in App Mining.
+              </MakerCardText>
+              <MakerCardText mb={4}>Provide your name and email address below to start the signing process.</MakerCardText>
+              <MakerCardText mb={4}>Before beginning the signing process, you must download and read a package of documents that we provide.</MakerCardText>
+              <Field name="name" label="Your Name" onChange={(e) => setName(e.target.value)} value={name} />
+              <Field
+                name="stacksAddress"
+                label="Your Email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+              />
+              <Box pb={4}>
+                <Flex pb={3} alignItems="center">
+                  <input
+                    type="checkbox"
+                    name="isUSA"
+                    id="isUSA"
+                    checked={isUSA}
+                    onChange={(e) =>
+                      setIsUSA(e.target.checked)
+                    }
+                  />
+                  <Field.LabelAdvanced
+                    labelProps={{
+                      pb: 0,
+                      htmlFor: "isUSA"
+                    }}
+                    pl={2}
+                    label="I am a person or company based in the US"
+                  />
+                </Flex>
+              </Box>
+              {/* <Field
+                name="isUSA"
+                label="I am based in the United States"
+                onChange={(e) => setIsUSA(e.target.checked)}
+                type="checkbox"
+                value={isUSA}
+              /> */}
+              <Button mt={4} disabled={loading} onClick={() => getDownload()}>
+                {loading ? 'Starting...' : 'Start Signing Process'}
+              </Button>
+            </>
+          )}
+        </>
+      )}
+    </Container>
   )
 }
 

@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import { Flex, Box, Type, Button } from 'blockstack-ui'
 import { Select } from '@components/mining/select'
+import { MakerCardHeader, MakerCardText, MakerRadioListLabel } from './styled'
 
-const openInDropbox = () => {
+const openInDropbox = () => 
   window.open('https://www.dropbox.com/request/jBv2pYJ2lhJuvfXbJvw8', '_blank')
-}
 
-const openIntlDropbox = () => {
+
+const openIntlDropbox = () => 
   window.open('https://www.dropbox.com/request/84CaeiizMy1BU0AaWIrk', '_blank')
-}
 
-const Tax = ({ display, app }) => {
+
+const Tax = ({ app }) => {
   const [type, setType] = useState(null)
 
   const options = [
@@ -28,46 +29,44 @@ const Tax = ({ display, app }) => {
     }
   ]
 
+  const taxStatusRadioList = options.map(({ value, label }, i) => 
+    <MakerRadioListLabel key={i}>
+      <input
+        type="radio" 
+        name="tax-status" 
+        value={value} 
+        onChange={(e) => setType(e.target.value)} 
+      />
+      {label}
+    </MakerRadioListLabel>
+  )
+
   return (
-    <Flex style={{ display: display ? 'flex' : 'none' }}>
+    <Flex>
       <Box width={1} mt={0}>
-        <Type display="block">Please upload your tax documents via Dropbox. </Type>
+        <MakerCardHeader>Tax Documents</MakerCardHeader>
+        <MakerCardText>Please upload your tax documents via Dropbox. </MakerCardText>
 
-        <Type fontWeight={600} display="block" my={5}>
+        <MakerCardText>
           Documents will only be marked accepted if they are uploaded as the name of your app.
-        </Type>
+        </MakerCardText>
 
-        <Type display="block" my={5}>
+        <MakerCardText my={5}>
           To begin, first give us some information about yourself, so we can guide you through which forms to use:
-        </Type>
+        </MakerCardText>
 
-        {/* <Type display="block" my={5}>
-          For US Citizens, please submit a{' '}
-          <Type is="a" href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" target="_blank">
-            IRS Form W-9
-          </Type>
-          . Otherwise, use the applicable{' '}
-          <Type is="a" href="https://www.irs.gov/pub/irs-pdf/iw8.pdf" target="_blank">
-            IRS Form W-8
-          </Type>
-          .
-        </Type> */}
-
-        <Select
-          onChange={(e) => setType(e ? e.value : null)}
-          options={options}
-          value={options.find((o) => o.value === type)}
-        />
+        <h4>I am:</h4>
+        {taxStatusRadioList}
 
         {type === 'us' && (
           <>
-            <Type display="block" my={5}>
+            <MakerCardText display="block" my={5}>
               Please submit an{' '}
               <Type is="a" href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" target="_blank">
                 IRS Form W-9
               </Type>
               .
-            </Type>
+            </MakerCardText>
             <Button display="inline-block" my={4} onClick={openInDropbox}>
               Upload via Dropbox
             </Button>
@@ -76,13 +75,13 @@ const Tax = ({ display, app }) => {
 
         {type === 'intl' && (
           <>
-            <Type display="block" my={5}>
+            <MakerCardText display="block" my={5}>
               Please submit an{' '}
               <Type is="a" href="https://www.irs.gov/pub/irs-pdf/iw8.pdf" target="_blank">
                 IRS Form W-8
               </Type>
               .
-            </Type>
+            </MakerCardText>
             <Button display="inline-block" my={4} onClick={openIntlDropbox}>
               Upload via Dropbox
             </Button>
@@ -91,13 +90,13 @@ const Tax = ({ display, app }) => {
 
         {type === 'intl_entity' && (
           <>
-            <Type display="block" my={5}>
+            <MakerCardText display="block" my={5}>
               Please submit an{' '}
               <Type is="a" href="https://www.irs.gov/pub/irs-pdf/fw8bene.pdf" target="_blank">
                 IRS Form W-8BEN-E
               </Type>
               .
-            </Type>
+            </MakerCardText>
             <Button display="inline-block" my={4} onClick={openIntlDropbox}>
               Upload via Dropbox
             </Button>

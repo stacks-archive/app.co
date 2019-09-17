@@ -4,6 +4,8 @@ import { address, networks } from 'bitcoinjs-lib'
 import * as c32Check from 'c32check'
 import Notification from './notification'
 
+import { MakerCardHeader, MakerCardText } from './styled'
+
 const validateBTC = (addr) => {
   try {
     address.toOutputScript(addr, networks.bitcoin)
@@ -69,20 +71,20 @@ const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
     setSaving(false)
   }
 
+  if (!display) {
+    return <div/>;
+  }
+
   return (
-    <Flex style={{ display: display ? 'flex' : 'none' }}>
+    <Flex>
       <Box width={1} mt={0}>
+        <MakerCardHeader>Payment details</MakerCardHeader>
         {showNotification && <Notification message="Thanks! Your payment details have been updated." />}
-        <Type mb={5}>
-          Presently, App Mining payments are made in Bitcoin (BTC). We anticipate paying in Stacks (STX) soon.
-          In order for your Stacks payment to start accruing for future delivery, please provide both BTC and STX addresses.
-          Your app cannot participate in App Mining without Blockstack having both address types on file.
-        </Type>
-        <Type mb={5}>
-          Please provide a BTC and a STX address. For information on obtaining a STX address, download the{' '}
-          <a href="https://wallet.blockstack.org/" target="_blank" rel="noopener noreferrer">Stacks Wallet</a>
-          {'.'}
-        </Type>
+        <MakerCardText mb={5}>
+          This is where you will receive your App Mining payments.
+          Currently, payments are made in Bitcoin (BTC). Payments will be made
+          in Stacks (STX) in the future.
+        </MakerCardText>
         <Field
           name="btcAddress"
           label="Bitcoin Address"
@@ -99,6 +101,9 @@ const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
           value={stxAddress || ''}
           error={!stxValid ? 'Please enter a valid STX address' : null}
         />
+        <Type.p fontSize={12} display="block">
+          Don't have a Stacks address? <a href="https://wallet.blockstack.org" target="_blank" rel="noopener noreferrer">Download the Stacks wallet to get one</a>
+        </Type.p>
         <Button mt={4} disabled={saving} onClick={() => save({ btcAddress, stxAddress, apiServer, accessToken })}>
           {saving ? 'Saving...' : 'Save'}
         </Button>
