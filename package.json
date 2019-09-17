@@ -103,8 +103,6 @@
     "redux-thunk": "^2.2.0",
     "request-promise": "^4.2.2",
     "rss": "^1.2.2",
-    "sequelize": "^4.37.6",
-    "sequelize-cli": "^4.0.0",
     "shevyjs": "^1.1.0",
     "smoothscroll-polyfill": "^0.4.3",
     "string-hash": "^1.1.3",
