@@ -37,6 +37,7 @@
     "@mdx-js/tag": "^0.15.0",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-mdx": "^1.2.0",
+    "@zeit/next-typescript": "^1.1.1",
     "accounting": "^0.4.1",
     "async": "^2.6.0",
     "bitcoinjs-lib": "^5.0.5",
@@ -124,6 +125,7 @@
     "@babel/core": "7.2.2",
     "@babel/plugin-transform-regenerator": "^7.0.0",
     "@babel/preset-env": "7.2.0",
+    "@types/react": "^16.9.2",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.2.6",
     "babel-jest": "^22.4.3",
@@ -146,7 +148,8 @@
     "request": "^2.85.0",
     "responsive-loader": "^1.1.0",
     "sepia": "^2.0.2",
-    "sharp": "^0.20.5"
+    "sharp": "^0.20.5",
+    "typescript": "^3.6.3"
   },
   "homepage": "https://github.com/blockstackpbc/app.co#readme",
   "keywords": [

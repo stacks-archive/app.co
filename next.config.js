@@ -3,9 +3,10 @@ const webpackConfig = require('./webpack.config')
 const withMDX = require('@zeit/next-mdx')({
   extension: /\.mdx?$/
 })
+const withTypescript = require('@zeit/next-typescript')
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
 
-module.exports = withBundleAnalyzer(
+module.exports = withTypescript(withBundleAnalyzer(
   withMDX({
     exportPathMap: async function(defaultPathMap) {
       return {
@@ -40,4 +41,4 @@ module.exports = withBundleAnalyzer(
       }
     }
   })
-)
+))

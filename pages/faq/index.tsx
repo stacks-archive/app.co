@@ -16,7 +16,7 @@ class LearnMore extends React.PureComponent {
           description="App.co surfaces the best new dapps every day. It’s a place for blockchain-loving nerds, enthusiasts, and investors to geek out over the latest decentralized tech—from currency exchanges to mutant-feline-marketplaces."
         />
         <Page.Section px>
-          <Newsletter wrap />
+          <Newsletter />
         </Page.Section>
         <Page.Section wrap richText bg="white">
           <Box p={["32px", "64px"]}>
