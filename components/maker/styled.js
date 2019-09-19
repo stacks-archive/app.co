@@ -20,6 +20,14 @@ export const MakerCardHeader = styled.h2`
   margin-bottom: 16px;
 `
 
+export const MakerCardSubheader = styled.h3`
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #0F1117;
+  margin-bottom: 8px;
+`
+
 export const MakerCardText = styled.h2`
   font-style: normal;
   font-weight: normal;
@@ -35,4 +43,11 @@ export const MakerRadioListLabel = styled.label`
   > input {
     margin-right: 12px;
   }
+`
+
+export const MakerCardDivider = styled.hr`
+  margin: 24px -32px 32px;
+  border: 0;
+  height: 1px;
+  background-color: #F0F0F5;
 `

@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import { Flex, Box, Type } from 'blockstack-ui'
 import { MakerCardHeader, MakerCardText } from './styled'
 
-const CrossIcon = () => <img src="/static/images/status-cross.svg" alt="Image of a cross mark" />
-const CheckIcon = () => <img src="/static/images/status-check.svg" alt="Image of a check mark" />
+const CrossIcon = () => <img src="/static/images/status-cross.svg" alt="Cross mark" />
+const CheckIcon = () => <img src="/static/images/status-check.svg" alt="Check mark" />
 const StatusIcon = ({ status = false }) => status ? <CheckIcon /> : <CrossIcon />
 
 const isMiningReady = (app) => {
@@ -33,7 +33,6 @@ const StyledType = styled(Type)`
 
 const Status = ({ app, display }) => {
   const isReady = isMiningReady(app)
-  const size = 14
 
   const Field = ({ label, field }) => (
     <Flex my={3}>
@@ -58,15 +57,15 @@ const Status = ({ app, display }) => {
             mining.
           </MakerCardText>
         ) : (
-          <MakerCardText mb={4} fontSize={14} lineHeight={'20px'}>
+          <MakerCardText mb={4} fontSize={14} lineHeight="20px">
             Complete the forms in order for your app to be elligble for App Mining
           </MakerCardText>
         )}
 
         <Field label="Bitcoin Address" field="BTCAddress" />
         <Field label="STX Address" field="stacksAddress" />
-        <Field label="Tax Documents" field="isKYCVerified" />
         <Field label="Identity Verification" field="hasCollectedKYC" />
+        <Field label="Tax Documents" field="isKYCVerified" />
         <Field label="SEC Participation Agreement" field="hasAcceptedSECTerms" />
       </Box>
     </Flex>

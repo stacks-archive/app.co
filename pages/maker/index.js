@@ -48,9 +48,6 @@ export default class MakerPortal extends React.Component {
               <StyledBox>
                 <Maker.ParticipationAgreement app={app} apiServer={apiServer} accessToken={accessToken} display={true} />
               </StyledBox>
-              <StyledBox>
-                <Maker.Tax app={app} apiServer={apiServer} accessToken={accessToken} display={true} />
-              </StyledBox>
             </Box>
           </Flex>
         </MakerContainer>

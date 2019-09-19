@@ -89,6 +89,7 @@
     "react-headroom": "^2.2.2",
     "react-intersection-observer": "^6.4.1",
     "react-lorem-component": "^0.13.0",
+    "react-modal": "^3.10.1",
     "react-notification-system": "^0.2.17",
     "react-powerplug": "^1.0.0",
     "react-redux": "^5.0.7",
