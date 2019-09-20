@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Flex, Box, Type, OpenModal } from 'blockstack-ui'
 import { Hover } from 'react-powerplug'
 import { ArrowIcon, OutlinedLogo } from '@components/mining/svg'
-import { StarterKitModal } from '@pages/mining/starter-kit-modal'
+import { StarterKitModal } from '@containers/mining/starter-kit-modal'
 import { InView } from 'react-intersection-observer'
 
 import dynamic from 'next/dynamic'
@@ -79,8 +79,8 @@ const Wrapper = ({ observed, inView, ...rest }) => (
   <Flex
     maxWidth={1180}
     px={[6, 8]}
-    width={'100%'}
-    mx={'auto'}
+    width="100%"
+    mx="auto"
     flexDirection={['column', 'column', 'row', 'row']}
     opacity={!observed ? 1 : inView ? 1 : 0}
     transform={!observed ? 'none' : inView ? 'none' : 'translateY(-20px)'}
@@ -204,7 +204,7 @@ const CallToAction = ({ hideTimer, buttonProps = {}, ...rest }) => (
             borderRadius={2}
             overflow="hidden"
             transform={hovered ? 'translateY(-5px)' : 'unset'}
-            transition={'0.1s all ease-in-out'}
+            transition="0.1s all ease-in-out"
             {...rest}
           >
             <Flex
