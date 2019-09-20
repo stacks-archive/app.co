@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Flex, Box, Button, Field } from 'blockstack-ui'
 import download from 'downloadjs'
 import Notification from './notification'
-import { UsTaxForms, InternationalTaxForms, InternationalEntityTaxForms } from './tax-forms'
+import { TaxDocumentComponent } from './tax-forms'
 import {
   MakerCardHeader,
   MakerCardSubheader,
@@ -89,16 +89,6 @@ const ParticipationAgreement = ({ app, apiServer, accessToken }) => {
     </MakerRadioListLabel>
   )
 
-  const openFile = url => window.open(url, '_blank')
-  const downloadUsaForms = () => openFile('https://www.dropbox.com/request/jBv2pYJ2lhJuvfXbJvw8')
-  const downloadInternationalForms = () => openFile('https://www.dropbox.com/request/84CaeiizMy1BU0AaWIrk')
-
-  const taxDocumentComponents = {
-    us: <UsTaxForms handleClick={downloadUsaForms} />,
-    intl: <InternationalTaxForms handleClick={downloadUsaForms} />,
-    intl_entity: <InternationalEntityTaxForms handleClick={downloadInternationalForms} />
-  }
-
   return (
     <>
       <EverSignModal isOpen={modalState} handleClose={() => setModalState(false)}>
@@ -144,7 +134,9 @@ const ParticipationAgreement = ({ app, apiServer, accessToken }) => {
               <MakerCardSubheader>
                 Fill out the Tax form
               </MakerCardSubheader>
-              {taxDocumentComponents[taxType]}
+
+              <TaxDocumentComponent taxType={taxType} />
+
             </Box>
             <MakerCardDivider />
             <Box>
