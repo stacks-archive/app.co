@@ -2,7 +2,6 @@ import React from 'react'
 import { Flex, Box, Button, Field, Type } from 'blockstack-ui'
 
 const Info = ({ display }) => {
-  console.log('info!')
   return (
     <Flex style={{ display: display ? 'flex' : 'none' }}>
       <Box width={1} mt={0}>

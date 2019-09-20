@@ -5,10 +5,10 @@ import { Footer } from '@components/footer'
 
 import { StyledPage } from './styled'
 
-const Page = ({ isErrorPage, children, admin, wrap, ...rest }) => (
+const Page = ({ isErrorPage, children, admin, wrap, innerPadding = [2, 0], ...rest }) => (
   <StyledPage {...rest}>
     <TopBar isErrorPage={isErrorPage} admin={admin} wrap={wrap} />
-    <StyledPage.Section flexDirection={['column']} alignItems="center" pt={[3, 4]} px={[2, 0]}>
+    <StyledPage.Section flexDirection={['column']} alignItems="center" pt={[3, 4]} px={innerPadding}>
       {children}
     </StyledPage.Section>
     <StyledPage.Section flexDirection={['column']} alignItems="center" px={[2, 0]}>

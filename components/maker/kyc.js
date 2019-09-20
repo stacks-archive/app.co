@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Flex, Box, Type, Button } from 'blockstack-ui'
+import { MakerCardHeader, MakerCardText } from './styled'
 
 const KYC = ({ app, accessToken, apiServer, display }) => {
   const [embedURL, setEmbedURL] = useState(app.jumioEmbedURL)
@@ -17,6 +18,7 @@ const KYC = ({ app, accessToken, apiServer, display }) => {
   return (
     <Flex style={{ display: display ? 'flex' : 'none' }}>
       <Box width={1} mt={0}>
+        <MakerCardHeader>Identity Verification</MakerCardHeader>
         {embedURL ? (
           <>
             {app.hasCollectedKYC ? (
@@ -27,20 +29,20 @@ const KYC = ({ app, accessToken, apiServer, display }) => {
           </>
         ) : (
           <>
-            <Type mb={4}>
+            <MakerCardText>
               We need to confirm your identity before you can participate in App Mining.
-            </Type>
-            <Type mb={4} display="block">
+            </MakerCardText>
+            <MakerCardText>
               We are ready to pay you Bitcoin and Stacks tokens for building a great Blockstack app, but we also need to comply with all applicable laws.
-            </Type>
-            <Type mb={4} display="block">
+            </MakerCardText>
+            <MakerCardText>
               You have 60 days from today to complete this process. You are not eligible for app mining until you&apos;ve completed identity verification.
-            </Type>
-            <Type mb={4} display="block">
+            </MakerCardText>
+            <MakerCardText>
               If you are registering as an entity, please note that you must contact us at{' '}
               <a href="mailto:mining@app.co">mining@app.co</a>
               {' '}for further verification of your entity.
-            </Type>
+            </MakerCardText>
             <Button onClick={initiateKYC} mt={4}>
               {loading ? 'Loading..' : 'Begin Verification'}
             </Button>
