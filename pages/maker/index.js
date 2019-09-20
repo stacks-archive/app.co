@@ -1,15 +1,12 @@
 import React from 'react'
-import styled from 'styled-components'
 import { Flex, Box, Type } from 'blockstack-ui'
 import { connect } from 'react-redux'
 
 import { selectApiServer } from '@stores/apps/selectors'
-import { Section, Content } from '@components/mining-admin/month'
 import { Page } from '@components/page'
 import Head from '@containers/head'
 import Maker from '@components/maker'
-
-import { MakerContainer, StyledBox } from './maker-layout'
+import { MakerContainer, MakerContentBox } from '@components/maker/styled'
 
 class MakerPortal extends React.Component {
   state = {
@@ -74,15 +71,15 @@ class MakerPortal extends React.Component {
               <Maker.Status app={app} apiServer={apiServer} display />
             </Box>
             <Box>
-              <StyledBox>
+              <MakerContentBox>
                 <Maker.PaymentDetails app={app} apiServer={apiServer} display />
-              </StyledBox>
-              <StyledBox>
+              </MakerContentBox>
+              <MakerContentBox>
                 <Maker.KYC app={app} apiServer={apiServer} display />
-              </StyledBox>
-              <StyledBox>
+              </MakerContentBox>
+              <MakerContentBox>
                 <Maker.ParticipationAgreement app={app} apiServer={apiServer} display />
-              </StyledBox>
+              </MakerContentBox>
             </Box>
           </Flex>
         </MakerContainer>

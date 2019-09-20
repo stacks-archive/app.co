@@ -34,3 +34,16 @@ export const InternationalEntityTaxForms = taxFormGenerator({
   taxFormName: 'IRS Form W-8BEN-E',
   text: 'Entities outside the US are require to submit an'
 })
+
+const openFile = url => window.open(url, '_blank')
+const downloadUsaForms = () => openFile('https://www.dropbox.com/request/jBv2pYJ2lhJuvfXbJvw8')
+const downloadInternationalForms = () => openFile('https://www.dropbox.com/request/84CaeiizMy1BU0AaWIrk')
+
+export const TaxDocumentComponent = ({ taxType }) => {
+  switch (taxType) {
+    case 'us': return <UsTaxForms handleClick={downloadUsaForms} />
+    case 'intl': return <InternationalTaxForms handleClick={downloadUsaForms} />
+    case 'intl_entity': return <InternationalEntityTaxForms handleClick={downloadInternationalForms} />
+    default: throw new Error('Invalid tax status: ', taxType)
+  }
+}
