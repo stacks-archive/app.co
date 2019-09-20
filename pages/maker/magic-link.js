@@ -47,7 +47,7 @@ class MakerMagicLink extends React.Component {
       loading: true
     })
     const { apiServer } = this.props
-    const uri = `${apiServer}/api/maker/apps`
+    const uri = `${apiServer}/api/magic-link/${this.props.accessToken}`
     await fetch(uri, {
       method: 'POST',
       headers: {
