@@ -136,8 +136,13 @@ const Submit = ({ appConstants, setState, state, errors, submit, user, loading, 
             </>
           ))}
           {errors ? <ErrorMessage /> : null}
-          {isAppMiningEligible && !(user && user.jwt) ? (
-            <Button onClick={blockstackAuth}>{loading ? 'Loading...' : 'Login with Blockstack'}</Button>
+          {!(user && user.jwt) ? (
+            <>
+              <Field.Message maxWidth={400} lineHeight={1.5} mb={3}>
+                To submit your app, first login with Blockstack. You&apos;ll be able to use your Blockstack ID to manage your app&apos;s listing.
+              </Field.Message>
+              <Button onClick={blockstackAuth}>{loading ? 'Loading...' : 'Login with Blockstack'}</Button>
+            </>
           ) : (
             <Button>{loading ? 'Loading...' : 'Submit App'}</Button>
           )}
@@ -152,8 +157,6 @@ const getValues = () => {
     const appDataJSON = localStorage.getItem(APP_SUBMISSION_DATA)
     if (appDataJSON) {
       const appData = JSON.parse(appDataJSON)
-      console.log('from localStorage', appData)
-      // localStorage.removeItem(APP_SUBMISSION_DATA)
       return appData
     }
   }
@@ -196,19 +199,6 @@ class SubmitDapp extends React.Component {
       }
     }
   }
-  
-  setStateFromLocalStorage = () => {
-    const appDataJSON = localStorage.getItem(APP_SUBMISSION_DATA)
-    if (appDataJSON) {
-      const appData = JSON.parse(appDataJSON)
-      console.log('from localStorage', appData)
-      localStorage.removeItem(APP_SUBMISSION_DATA)
-      return {
-        values: appData
-      }
-    }
-    return {}
-  }
 
   submit = async () => {
     const { apiServer, user } = this.props
@@ -247,6 +237,7 @@ class SubmitDapp extends React.Component {
       })
       const { app } = await response.json()
       trackEvent('App Submission Page - Submission Success')
+      localStorage.removeItem(APP_SUBMISSION_DATA)
       this.setState({ success: true, loading: false, accessToken: app.accessToken })
     } catch (e) {
       trackEvent('App Submission Page - Submission Error')
