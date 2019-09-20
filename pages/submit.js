@@ -268,7 +268,6 @@ class SubmitDapp extends React.Component {
 
   render() {
     const { appConstants } = this.props
-    const { accessToken } = this.state
 
     return (
       <Page>
@@ -283,29 +282,22 @@ class SubmitDapp extends React.Component {
                   </Type>
                 </Box>
                 <Box mx="auto">
-                  <Type display="block">Thanks for your submission! We&apos;ll get back to you soon.</Type>
+                  <Type display="block">Thanks for your submission! Your app will need to be approved before being public on app.co.</Type>
                   {this.appMiningEligible() && (
                     <>
-                      <Type mt={2} display="block">You can update your app details using this magic link. Don&apos;t share this URL!</Type>
+                      <Type mt={2} display="block">To update your app&apos;s details and enroll in App Mining, visit our Maker Portal</Type>
                       <Link
                         href={{
-                          pathname: '/maker',
-                          query: {
-                            accessToken
-                          }
+                          pathname: '/maker'
                         }}
-                        as={this.makerPortalURL()}
                         passHref
                       >
-                        <Type mt={2} is="a" display="block">{document.location.origin}{this.makerPortalURL()}</Type> 
+                        <Button is="a" href="/" color="white !important">
+                          Go to the Maker Portal
+                        </Button>
                       </Link>
                     </>
                   )}
-                </Box>
-                <Box pt={6}>
-                  <Button is="a" href="/" color="white !important">
-                    Back Home
-                  </Button>
                 </Box>
               </Box>
             </>
