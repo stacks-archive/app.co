@@ -36,9 +36,7 @@ const Strong = Styled.strong`
 
 class App extends React.Component {
   static propTypes = {
-    apps: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
-    doSelectApp: PropTypes.func.isRequired,
     selectedApp: PropTypes.object,
     saveApp: PropTypes.func.isRequired,
     jwt: PropTypes.string.isRequired,
@@ -88,14 +86,12 @@ class App extends React.Component {
   }
 
   async fetchApp() {
-    const { id } = queryString.parse(document.location.search)
-    const { jwt, apiServer } = this.props
-    // console.log(id, jwt)
-    if (id && jwt) {
-      const request = await fetch(`${apiServer}/api/admin/apps/${id}`, {
+    const qs = queryString.parse(document.location.search)
+    if (qs.id && this.props.jwt) {
+      const request = await fetch(`${this.propsapiServer}/api/admin/apps/${qs.id}`, {
         method: 'GET',
         headers: new Headers({
-          Authorization: `Bearer ${jwt}`,
+          Authorization: `Bearer ${this.props.jwt}`,
           'Content-Type': 'application/json'
         })
       })
@@ -108,12 +104,11 @@ class App extends React.Component {
   }
 
   async resetIDVerification() {
-    const { id } = queryString.parse(document.location.search)
-    const { jwt, apiServer } = this.props
-    await fetch(`${apiServer}/api/admin/apps/${id}/reset-id-verification`, {
+    const qs = queryString.parse(document.location.search)
+    await fetch(`${this.props.apiServer}/api/admin/apps/${qs.id}/reset-id-verification`, {
       method: 'POST',
       headers: new Headers({
-        Authorization: `Bearer ${jwt}`,
+        Authorization: `Bearer ${this.props.jwt}`,
         'Content-Type': 'application/json'
       })
     })
@@ -127,12 +122,11 @@ class App extends React.Component {
   }
 
   async resetParticipationAgreement() {
-    const { id } = queryString.parse(document.location.search)
-    const { jwt, apiServer } = this.props
-    await fetch(`${apiServer}/api/admin/apps/${id}/reset-participation-agreement`, {
+    const qs = queryString.parse(document.location.search)
+    await fetch(`${this.props.apiServer}/api/admin/apps/${qs.id}/reset-participation-agreement`, {
       method: 'POST',
       headers: new Headers({
-        Authorization: `Bearer ${jwt}`,
+        Authorization: `Bearer ${this.props.jwt}`,
         'Content-Type': 'application/json'
       })
     })
@@ -157,7 +151,6 @@ class App extends React.Component {
     // const app = this.props.selectedApp
     // const { name } = this.state;
     const app = this.state
-    const { categories, authentications, storageNetworks, blockchains } = this.props 
     if (!app.name) {
       return <h1>Loading</h1>
     }
@@ -350,27 +343,27 @@ class App extends React.Component {
             />
           </Form.Wrapper>
           <br />
-          {enumSelect(categories, 'Category', {
+          {enumSelect(this.props.categories, 'Category', {
             required: true,
             value: this.state.category,
             onChange: (data) => {
               this.setState(data)
             }
           })}
-          {enumSelect(blockchains, 'Blockchain', {
+          {enumSelect(this.props.blockchains, 'Blockchain', {
             value: this.state.blockchain,
             onChange: (data) => {
               this.setState(data)
             }
           })}
-          {enumSelect(storageNetworks, 'Storage', {
+          {enumSelect(this.props.storageNetworks, 'Storage', {
             apiAttr: 'storageNetwork',
             value: this.state.storageNetwork,
             onChange: (data) => {
               this.setState(data)
             }
           })}
-          {enumSelect(authentications, 'Authentication', {
+          {enumSelect(this.props.authentications, 'Authentication', {
             menuPlacement: 'top',
             value: this.state.authentication,
             onChange: (data) => {

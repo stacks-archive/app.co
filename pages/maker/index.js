@@ -17,17 +17,17 @@ const SECTIONS = {
 
 export default class MakerPortal extends React.Component {
   static async getInitialProps({ query, reduxStore }) {
-    const { accessToken } = query
+    const token = query.accessToken
 
     const apiServer = selectApiServer(reduxStore.getState())
 
-    const appResult = await fetch(`${apiServer}/api/maker/app?accessToken=${accessToken}`)
-    const { app } = await appResult.json()
+    const appResult = await fetch(`${apiServer}/api/maker/app?accessToken=${token}`)
+    const appData = await appResult.json()
 
     return {
-      app,
+      app: appData.app,
       apiServer,
-      accessToken
+      accessToken: token
     }
   }
 

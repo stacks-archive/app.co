@@ -27,11 +27,10 @@ const appRows = (apps) => apps.map((app) => (
 
 class AppList extends React.Component {
   async downloadAllApps() {
-    const { jwt, apiServer } = this.props
-    const url = `${apiServer}/api/admin/download-apps`
+    const url = `${this.props.apiServer}/api/admin/download-apps`
     const res = await fetch(url, {
       headers: new Headers({
-        Authorization: `Bearer ${jwt}`
+        Authorization: `Bearer ${this.props.jwt}`
       })
     })
     const blob = await res.blob()
