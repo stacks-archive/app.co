@@ -236,9 +236,9 @@ app.prepare().then(() => {
           await Promise.all([
             AppsAggregator.set(),
             MiningMonths.set(),
-            RankedApps.set(),
             MiningApps.set()
           ])
+          await RankedApps.set()
           await Cache.reset()
           res.json({ success: true })
         } catch (error) {
