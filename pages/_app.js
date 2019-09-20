@@ -10,6 +10,8 @@ import { theme } from '@common/styles'
 import { theme as BlockstackTheme } from 'blockstack-ui'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { Mdx } from '@components/mdx'
+import NProgress from 'nprogress'
+import routerEvents from 'next-router-events'
 import { trackPageView } from '@utils'
 import 'isomorphic-unfetch'
 import { normalize } from 'polished'
@@ -86,6 +88,13 @@ class MyApp extends App {
     }
 
     return { pageProps, cookies }
+  }
+
+  constructor(props) {
+    super(props)
+    routerEvents.on('routeChangeStart', () => NProgress.start())
+    routerEvents.on('routeChangeComplete', () => NProgress.done())
+    routerEvents.on('routeChangeError', () => NProgress.done())
   }
 
   componentDidMount() {
