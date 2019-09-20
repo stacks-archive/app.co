@@ -284,6 +284,12 @@ class App extends React.Component {
               label="Stacks Address"
             />
             <br />
+            <TextField
+              value={this.state.adminBlockstackID || ''}
+              onChange={(e) => this.setState({ adminBlockstackID: e.target.value })}
+              label="Admin Blockstack ID"
+            />
+            <br />
             <Checkbox
               isChecked={this.state.isKYCVerified}
               onChange={() => this.setState({ isKYCVerified: !this.state.isKYCVerified })}
