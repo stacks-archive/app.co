@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Flex, Box } from 'blockstack-ui'
+import { Flex, Box, Type } from 'blockstack-ui'
 
 export const SidebarButton = styled.div`
   width: 100%;
@@ -44,7 +44,7 @@ export const MakerContainer = ({ children }) => (
 )
 
 
-export const MakerCardHeader = styled.h2`
+export const MakerCardHeader = styled(Type.h2)`
   font-weight: 500;
   font-size: 20px;
   line-height: 28px;
@@ -52,7 +52,7 @@ export const MakerCardHeader = styled.h2`
   margin-bottom: 16px;
 `
 
-export const MakerCardSubheader = styled.h3`
+export const MakerCardSubheader = styled(Type.h3)`
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
@@ -60,7 +60,7 @@ export const MakerCardSubheader = styled.h3`
   margin-bottom: 8px;
 `
 
-export const MakerCardText = styled.h2`
+export const MakerCardText = styled(Type.p)`
   font-style: normal;
   font-weight: normal;
   font-size: 14px;

@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Flex, Box, Type } from 'blockstack-ui'
+import { CheckMarkIcon, CrossMarkIcon } from '@components/svg/maker'
 import { MakerCardHeader, MakerCardText } from './styled'
 
-const CrossIcon = () => <img src="/static/images/status-cross.svg" alt="Cross mark" />
-const CheckIcon = () => <img src="/static/images/status-check.svg" alt="Check mark" />
-const StatusIcon = ({ status = false }) => status ? <CheckIcon /> : <CrossIcon />
+const StatusIcon = ({ status = false }) => status
+  ? <CheckMarkIcon />
+  : <CrossMarkIcon />
 
 const isMiningReady = (app) => {
   const required = [
