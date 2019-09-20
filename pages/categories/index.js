@@ -48,9 +48,9 @@ class CategoryPage extends React.PureComponent {
       /**
        * On the server we need to check the req object for the param
        */
-      const {
-        params: { category }
-      } = req
+
+      // eslint-disable-next-line prefer-destructuring
+      const category = req.params.category
 
       if (category) {
         reduxStore.dispatch(doSelectCategoryFilter(category))
@@ -63,7 +63,8 @@ class CategoryPage extends React.PureComponent {
       /**
        * On the client we need to check the query param for what category we're trying to display
        */
-      const { category } = query
+      // eslint-disable-next-line prefer-destructuring
+      const category = query.category
       if (category) {
         reduxStore.dispatch(doSelectCategoryFilter(category))
         return { category }
