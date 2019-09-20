@@ -3,7 +3,7 @@ import { Heading, Section } from '@containers/mining/shared'
 import { Box } from '@components/mining'
 import styled from 'styled-components'
 
-import Content from '@pages/mining/faq/faq-content.md'
+import Content from '@containers/mining/faq/faq-content.md'
 
 export const FAQwrapper = styled(Box)`
   & h2 {

@@ -6,8 +6,8 @@ import { Flex, Type, Box } from 'blockstack-ui'
 import ArrowLeftIcon from 'mdi-react/ArrowLeftIcon'
 import Link from 'next/link'
 import { LinksWrapper } from '@pages/mining/terms'
-import { FAQwrapper } from './faq-section'
-import Markdown from './faq-content.md'
+import { FAQwrapper } from '@containers/mining/faq/faq-section'
+import Markdown from '@containers/mining/faq/faq-content.md'
 
 const Content = (props) => <Flex flexDirection="column" width={1} maxWidth="780px" {...props} />
 
