@@ -220,7 +220,7 @@ app.prepare().then(() => {
     /**
      * Maker pages
      */
-    server.get('/maker/:accessToken', (req, res) => renderAndCache(req, res, '/maker', { accessToken: req.params.accessToken }))
+    server.get('/maker', (req, res) => renderAndCache(req, res, '/maker'))
 
     apps.platforms.forEach((platform) => {
       server.get(`/${slugify(platform)}`, (req, res) => {
@@ -255,7 +255,7 @@ app.prepare().then(() => {
 
     server.get('/robots.txt', async (req, res) => {
       const robotsFile = dev || process.env.STAGING ? 'robots.staging.txt': 'robots.txt'
-      const robotsPath = './static/' + robotsFile;
+      const robotsPath = `./static/${  robotsFile}`;
       const robots = await fs.readFile(robotsPath)
       res.header('Content-Type', 'text/plain')
       res.status(200).send(robots)

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Flex, Box, Type } from 'blockstack-ui'
+import { connect } from 'react-redux'
 
 import { selectApiServer } from '@stores/apps/selectors'
 import { Section, Content } from '@components/mining-admin/month'
@@ -10,25 +11,59 @@ import Maker from '@components/maker'
 
 import { MakerContainer, StyledBox } from './maker-layout'
 
-export default class MakerPortal extends React.Component {
-  static async getInitialProps({ query, reduxStore }) {
-    const { accessToken } = query
-    const apiServer = selectApiServer(reduxStore.getState())
-    const appResult = await fetch(`${apiServer}/api/maker/app?accessToken=${accessToken}`)
-    const { app } = await appResult.json()
+class MakerPortal extends React.Component {
+  state = {
+    loading: true,
+    apps: [],
+    errorMessage: null
+  }
 
-    return {
-      app,
-      apiServer,
-      accessToken
+  componentDidMount() {
+    this.fetchApps()
+  }
+
+  async fetchApps() {
+    const { apiServer, user } = this.props
+    if (!(user && user.jwt)) {
+      this.setState({
+        loading: false,
+        errorMessage: 'Please sign in to access the maker portal.'
+      })
+      return
     }
+
+    const uri = `${apiServer}/api/maker/apps`
+    const response = await fetch(uri, {
+      headers: {
+        Authorization: `Bearer ${user.jwt}`
+      }
+    })
+    const { apps } = await response.json()
+    this.setState({
+      loading: false,
+      apps
+    })
   }
 
   render() {
-    const { app, apiServer, accessToken } = this.props
+    const { apiServer } = this.props
+    const { loading, errorMessage, apps } = this.state
+    const [app] = apps // TODO: this is for now until we handle multiple apps
+
+    if (loading || errorMessage) {
+      return (
+        <Page innerPadding={0} wrap>
+          <Flex>
+            <Box width={1}>
+              <Type fontSize={5} my={7} textAlign="center">{loading ? 'Loading...' : errorMessage}</Type>
+            </Box>
+          </Flex>
+        </Page>
+      )
+    }
 
     return (
-      <Page innerPadding={0} wrap={true}>
+      <Page innerPadding={0} wrap>
         <Head title={app.name} />
         <MakerContainer>
           <Type fontSize={3} fontWeight={500} mx={[4, 6]} py={6} px={[20, 0]}>
@@ -36,17 +71,17 @@ export default class MakerPortal extends React.Component {
           </Type>
           <Flex flexDirection={['column', 'column', 'row-reverse']} maxWidth={[null, null, 1140]}>
             <Box>
-              <Maker.Status app={app} apiServer={apiServer} accessToken={accessToken} display={true} />
+              <Maker.Status app={app} apiServer={apiServer} display />
             </Box>
             <Box>
               <StyledBox>
-                <Maker.PaymentDetails app={app} apiServer={apiServer} accessToken={accessToken} display={true} />
+                <Maker.PaymentDetails app={app} apiServer={apiServer} display />
               </StyledBox>
               <StyledBox>
-                <Maker.KYC app={app} apiServer={apiServer} accessToken={accessToken} display={true} />
+                <Maker.KYC app={app} apiServer={apiServer} display />
               </StyledBox>
               <StyledBox>
-                <Maker.ParticipationAgreement app={app} apiServer={apiServer} accessToken={accessToken} display={true} />
+                <Maker.ParticipationAgreement app={app} apiServer={apiServer} display />
               </StyledBox>
             </Box>
           </Flex>
@@ -55,3 +90,10 @@ export default class MakerPortal extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  user: state.user,
+  apiServer: selectApiServer(state)
+})
+
+export default connect(mapStateToProps)(MakerPortal)
