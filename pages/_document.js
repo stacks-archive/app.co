@@ -62,6 +62,7 @@ export default class MyDocument extends Document {
             data-user="48381"
             async
           />
+          <link href="/static/nprogress.css" rel="stylesheet" type="text/css" async />
           {this.props.styleTags}
         </Head>
         <body>
