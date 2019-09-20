@@ -276,7 +276,7 @@ class SubmitDapp extends React.Component {
                   <Type display="block">Thanks for your submission! Your app will need to be approved before being public on app.co.</Type>
                   {this.appMiningEligible() && (
                     <>
-                      <Type mt={2} display="block">To update your app&apos;s details and enroll in App Mining, visit our Maker Portal</Type>
+                      <Type my={3} display="block">To update your app&apos;s details and enroll in App Mining, visit our Maker Portal</Type>
                       <Link
                         href={{
                           pathname: '/maker'
