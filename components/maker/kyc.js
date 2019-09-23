@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Flex, Box, Type, Button } from 'blockstack-ui'
-import { MakerCardHeader, MakerCardText } from './styled'
+import { Flex, Box, Type } from 'blockstack-ui'
+import { MakerCardHeader, MakerCardText, MakerButton } from './styled'
 
 const KYC = ({ app, accessToken, apiServer, display }) => {
   const [embedURL, setEmbedURL] = useState(app.jumioEmbedURL)
@@ -43,9 +43,9 @@ const KYC = ({ app, accessToken, apiServer, display }) => {
               <a href="mailto:mining@app.co">mining@app.co</a>
               {' '}for further verification of your entity.
             </MakerCardText>
-            <Button onClick={initiateKYC} mt={4}>
+            <MakerButton onClick={initiateKYC} mt={4}>
               {loading ? 'Loading..' : 'Begin Verification'}
-            </Button>
+            </MakerButton>
           </>
         )}
       </Box>

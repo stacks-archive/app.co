@@ -1,6 +1,6 @@
 import React from 'react'
 import { Type, Button } from 'blockstack-ui'
-import { MakerCardText } from './styled'
+import { MakerCardText, MakerButton } from './styled'
 
 const taxFormGenerator = ({ taxFormUrl, taxFormName, text }) =>
   ({ handleClick }) => (
@@ -11,9 +11,9 @@ const taxFormGenerator = ({ taxFormUrl, taxFormName, text }) =>
           {taxFormName}.
         </Type>
       </MakerCardText>
-      <Button display="inline-block" mt={4} mb={2} onClick={handleClick}>
+      <MakerButton display="inline-block" mt={4} mb={2} onClick={handleClick}>
         Upload via Dropbox
-      </Button>
+      </MakerButton>
     </>
   )
 

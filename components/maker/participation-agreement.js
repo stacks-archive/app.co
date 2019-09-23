@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Flex, Box, Button, Field } from 'blockstack-ui'
+import { Flex, Box, Field } from 'blockstack-ui'
 import download from 'downloadjs'
 import Notification from './notification'
 import { TaxDocumentComponent } from './tax-forms'
@@ -8,7 +8,8 @@ import {
   MakerCardSubheader,
   MakerCardText,
   MakerRadioListLabel,
-  MakerCardDivider
+  MakerCardDivider,
+  MakerButton
 } from './styled'
 import EverSignModal from './eversign'
 
@@ -143,9 +144,9 @@ const ParticipationAgreement = ({ app, apiServer, accessToken }) => {
               <MakerCardSubheader>
                 Sign the Participation Agreement
               </MakerCardSubheader>
-              <Button mt={4} disabled={loading} onClick={() => getDownload()}>
+              <MakerButton mt={4} disabled={loading} onClick={() => getDownload()}>
                 {loading ? 'Starting...' : 'Start Signing Process'}
-              </Button>
+              </MakerButton>
               <MakerCardText>
                 Opening the Participation Agreement will start a download a package of documents that you are required to read.
               </MakerCardText>

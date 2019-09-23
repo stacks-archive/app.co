@@ -4,7 +4,7 @@ import { address, networks } from 'bitcoinjs-lib'
 import * as c32Check from 'c32check'
 import Notification from './notification'
 
-import { MakerCardHeader, MakerCardText } from './styled'
+import { MakerCardHeader, MakerCardText, MakerButton } from './styled'
 
 const validateBTC = (addr) => {
   try {
@@ -72,7 +72,7 @@ const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
   }
 
   if (!display) {
-    return <div/>;
+    return <div/>
   }
 
   return (
@@ -102,11 +102,11 @@ const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
           error={!stxValid ? 'Please enter a valid STX address' : null}
         />
         <Type.p fontSize={12} display="block">
-          Don't have a Stacks address? <a href="https://wallet.blockstack.org" target="_blank" rel="noopener noreferrer">Download the Stacks wallet to get one</a>
+          {"Don't"} have a Stacks address? <a href="https://wallet.blockstack.org" target="_blank" rel="noopener noreferrer">Download the Stacks wallet to get one</a>
         </Type.p>
-        <Button mt={4} disabled={saving} onClick={() => save({ btcAddress, stxAddress, apiServer, accessToken })}>
+        <MakerButton mt={4} disabled={saving} onClick={() => save({ btcAddress, stxAddress, apiServer, accessToken })}>
           {saving ? 'Saving...' : 'Save'}
-        </Button>
+        </MakerButton>
       </Box>
     </Flex>
   )

@@ -1,6 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Flex, Box, Type } from 'blockstack-ui'
+import { Flex, Box, Type, Button } from 'blockstack-ui'
+
+//
+// These styles are to be considered tempoary, and to be removed
+// upon release of the updated style guide
 
 export const SidebarButton = styled.div`
   width: 100%;
@@ -53,6 +57,7 @@ export const MakerCardHeader = styled(Type.h2)`
 `
 
 export const MakerCardSubheader = styled(Type.h3)`
+  display: block;
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
@@ -82,4 +87,15 @@ export const MakerCardDivider = styled.hr`
   border: 0;
   height: 1px;
   background-color: #F0F0F5;
+`
+
+export const MakerButton = styled(Button)`
+  background: #3700FF;
+  border-radius: 6px;
+  height: 40px;
+  box-shadow: none;
+  min-width: 126px;
+  > span {
+    font-size: 14px;
+  }
 `
