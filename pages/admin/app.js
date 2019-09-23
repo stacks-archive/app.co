@@ -210,6 +210,9 @@ class App extends React.Component {
           <p>
             Access Token: <code>{app.accessToken}</code>
           </p>
+          <p>
+            Magic link: <a href={`/maker/${app.accessToken}`}>{`/maker/${app.accessToken}`}</a>
+          </p>
           <Form.Wrapper>
             <TextField
               value={this.state.name || ''}
