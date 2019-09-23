@@ -7,7 +7,7 @@ import { Table, Th, Thead, Td, SpacedTd } from '@components/mining-admin/table'
 import { Section, Content } from '@components/mining-admin/month'
 
 const appRows = (apps) => apps.map((app) => (
-  <tr>
+  <tr key={app.id}>
     <Td>
       <Link href={`/admin/app?id=${app.id}`}>
         <a target="_blank">{app.name}</a>

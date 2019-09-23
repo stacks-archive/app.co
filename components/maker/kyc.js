@@ -34,7 +34,7 @@ const KYC = ({ app, accessToken, apiServer, display }) => {
               Your ID will never be shared.
             </MakerCardText>
             <MakerButton onClick={initiateKYC} mt={4}>
-              {loading ? 'Loading..' : 'Start verification'}
+              {loading ? 'Loading…' : 'Start verification'}
             </MakerButton>
           </>
         )}

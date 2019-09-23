@@ -25,7 +25,7 @@ export const Thead = Styled.thead`
 
 export const ClickableTr = Styled.tr`
   cursor: pointer;
-  &:hover { 
+  &:hover {
     background: #f3f5f9;
   }
 `
