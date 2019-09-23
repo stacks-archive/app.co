@@ -29,22 +29,12 @@ const KYC = ({ app, accessToken, apiServer, display }) => {
           </>
         ) : (
           <>
-            <MakerCardText>
-              We need to confirm your identity before you can participate in App Mining.
-            </MakerCardText>
-            <MakerCardText>
-              We are ready to pay you Bitcoin and Stacks tokens for building a great Blockstack app, but we also need to comply with all applicable laws.
-            </MakerCardText>
-            <MakerCardText>
-              You have 60 days from today to complete this process. You are not eligible for app mining until you&apos;ve completed identity verification.
-            </MakerCardText>
-            <MakerCardText>
-              If you are registering as an entity, please note that you must contact us at{' '}
-              <a href="mailto:mining@app.co">mining@app.co</a>
-              {' '}for further verification of your entity.
+            <MakerCardText mt={0}>
+              Verifying your identity helps keep App Mining secure and fight fraud.
+              Your ID will never be shared.
             </MakerCardText>
             <MakerButton onClick={initiateKYC} mt={4}>
-              {loading ? 'Loading..' : 'Begin Verification'}
+              {loading ? 'Loading..' : 'Start verification'}
             </MakerButton>
           </>
         )}

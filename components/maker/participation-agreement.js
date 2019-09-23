@@ -104,7 +104,7 @@ const ParticipationAgreement = ({ app, apiServer, accessToken }) => {
               'Fetching participation agreement...'
             ) : (
               <>
-                <MakerCardText mb={4}>
+                <MakerCardText mb={4} mt={0}>
                   Please select the appropriate legal status so we can provide you with the correct Tax Form and Participation Agreement.
                 </MakerCardText>
                 <Field

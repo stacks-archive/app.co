@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Flex, Box, Type, Button } from 'blockstack-ui'
+import { Flex, Box, Type, Button, Field } from 'blockstack-ui'
 
 //
 // These styles are to be considered tempoary, and to be removed

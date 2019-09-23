@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
-import { Flex, Box, Field, Button, Type } from 'blockstack-ui'
+import { Flex, Box, Type, Field } from 'blockstack-ui'
 import { address, networks } from 'bitcoinjs-lib'
 import * as c32Check from 'c32check'
 import Notification from './notification'
 
-import { MakerCardHeader, MakerCardText, MakerButton } from './styled'
+import {
+  MakerCardHeader,
+  MakerCardText,
+  MakerButton
+} from './styled'
 
 const validateBTC = (addr) => {
   try {
@@ -80,7 +84,7 @@ const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
       <Box width={1} mt={0}>
         <MakerCardHeader>Payment details</MakerCardHeader>
         {showNotification && <Notification message="Thanks! Your payment details have been updated." />}
-        <MakerCardText mb={5}>
+        <MakerCardText mb={5} mt={0}>
           This is where you will receive your App Mining payments.
           Currently, payments are made in Bitcoin (BTC). Payments will be made
           in Stacks (STX) in the future.
