@@ -27,24 +27,22 @@ const isMiningReady = (app) => {
 
 const hasPaymentDetails = app => app.BTCAddress && app.stacksAddress
 
-// const hasLegalDetails = app => app.hasAcceptedSECTerms
-
-const StyledType = styled(Type)`
+const StyledTypeOverride = styled(Type)`
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
 `
 
-const Field = ({ label, status }) => (
+const ItemToCompleteField = ({ label, status }) => (
   <Flex my={3}>
     <Box>
       <StatusIcon status={status} />
     </Box>
     <Box>
-      <StyledType mb={1} ml={2}>
+      <StyledTypeOverride mb={1} ml={2}>
         {label}
-      </StyledType>
+      </StyledTypeOverride>
     </Box>
   </Flex>
 )
@@ -52,25 +50,30 @@ const Field = ({ label, status }) => (
 const Status = ({ app, display }) => {
   const isReady = isMiningReady(app)
 
+  const AppMiningComplete = () => (
+    <MakerCardText mb={4}>
+      Congratulations! We&apos;ve collected everything we need in order for your app to participate in app
+      mining.
+    </MakerCardText>
+  )
+
+  const AppMiningIncomplete = () => (
+    <MakerCardText mb={4} mt={0} fontSize={14} lineHeight="20px">
+      Complete the forms in order for your app to be elligble for App Mining
+    </MakerCardText>
+  )
+
   return (
     <Flex style={{ display: display ? 'flex' : 'none' }} mx={[4, 6]} px={[20, 0, 20]} pb={32} maxWidth={360}>
       <Box>
         <MakerCardHeader>Your App Mining status</MakerCardHeader>
-        {isReady ? (
-          <MakerCardText mb={4}>
-            Congratulations! We&apos;ve collected everything we need in order for your app to participate in app
-            mining.
-          </MakerCardText>
-        ) : (
-          <MakerCardText mb={4} mt={0} fontSize={14} lineHeight="20px">
-            Complete the forms in order for your app to be elligble for App Mining
-          </MakerCardText>
-        )}
 
-        <Field label="Payment details" status={hasPaymentDetails(app)} />
-        <Field label="Identity Verification" status={app.hasCollectedKYC} />
-        <Field label="Tax Documents" status={app.isKYCVerified} />
-        <Field label="SEC Participation Agreement" status={app.hasAcceptedSECTerms} />
+        {isReady ? <AppMiningComplete /> : <AppMiningIncomplete/>}
+
+        <ItemToCompleteField label="Payment details" status={hasPaymentDetails(app)} />
+        <ItemToCompleteField label="Identity Verification" status={app.hasCollectedKYC} />
+        <ItemToCompleteField label="Tax Documents" status={app.isKYCVerified} />
+        <ItemToCompleteField label="SEC Participation Agreement" status={app.hasAcceptedSECTerms} />
       </Box>
     </Flex>
   )
