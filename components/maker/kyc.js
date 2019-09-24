@@ -2,14 +2,19 @@ import React, { useState } from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
 import { MakerCardHeader, MakerCardText, MakerButton } from './styled'
 
-const KYC = ({ app, accessToken, apiServer, display }) => {
+const KYC = ({ app, user, apiServer, display }) => {
   const [embedURL, setEmbedURL] = useState(app.jumioEmbedURL)
   const [loading, setLoading] = useState(false)
 
   const initiateKYC = async () => {
     setLoading(true)
-    const url = `${apiServer}/api/maker/initiate-kyc?accessToken=${accessToken}`
-    const response = await fetch(url, { method: 'POST' })
+    const url = `${apiServer}/api/maker/apps/${app.id}/initiate-kyc`
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: new Headers({
+        authorization: `Bearer ${user.jwt}`
+      })
+    })
     const data = await response.json()
     setEmbedURL(data.embedURL)
     setLoading(false)

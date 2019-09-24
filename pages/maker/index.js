@@ -76,10 +76,10 @@ class MakerPortal extends React.Component {
                 <Maker.ParticipationAgreement app={app} user={user} apiServer={apiServer} display />
               </MakerContentBox>
               <MakerContentBox>
-                <Maker.PaymentDetails app={app} apiServer={apiServer} display />
+                <Maker.PaymentDetails app={app} user={user} apiServer={apiServer} display />
               </MakerContentBox>
               <MakerContentBox>
-                <Maker.KYC app={app} apiServer={apiServer} display />
+                <Maker.KYC app={app} user={user} apiServer={apiServer} display />
               </MakerContentBox>
             </Box>
           </Flex>

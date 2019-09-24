@@ -28,13 +28,16 @@ const validateSTX = (addr) => {
   }
 }
 
-const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
+const PaymentDetails = ({ app, apiServer, accessToken, user }) => {
   const [btcAddress, setBTCAddress] = useState(app.BTCAddress)
   const [stxAddress, setSTXAddress] = useState(app.stacksAddress)
   const [showNotification, setShowNotification] = useState(false)
   const [btcValid, setBtcValid] = useState(true)
   const [stxValid, setStxValid] = useState(true)
   const [saving, setSaving] = useState(false)
+
+  const haveEitherAddressesChanged = () =>
+    btcAddress !== app.BTCAddress && stxAddress !== app.stacksAddress
 
   const notify = () => {
     setShowNotification(true)
@@ -60,10 +63,11 @@ const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
       setStxValid(true)
     }
     setSaving(true)
-    const response = await fetch(`${apiServer}/api/maker/app?accessToken=${accessToken}`, {
+    const response = await fetch(`${apiServer}/api/maker/apps/${app.id}?appId=${app.id}`, {
       method: 'POST',
       headers: new Headers({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${user.jwt}`
       }),
       body: JSON.stringify({
         BTCAddress: btcAddress,
@@ -73,10 +77,6 @@ const PaymentDetails = ({ app, apiServer, accessToken, display }) => {
     await response.json()
     notify()
     setSaving(false)
-  }
-
-  if (!display) {
-    return <div/>
   }
 
   return (

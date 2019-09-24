@@ -1,5 +1,5 @@
 import React from 'react'
-import { Type, Button } from 'blockstack-ui'
+import { Type } from 'blockstack-ui'
 import { MakerCardText, MakerButton } from './styled'
 
 const taxFormGenerator = ({ taxFormUrl, taxFormName, text }) =>

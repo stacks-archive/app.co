@@ -9,7 +9,7 @@ const StatusIcon = ({ status = false }) => status
   : <CrossMarkIcon />
 
 const isMiningReady = (app) => {
-  const required = [
+  const requiredTrueProperties = [
     'hasCollectedKYC',
     'hasAcceptedSECTerms',
     'BTCAddress',
@@ -17,13 +17,17 @@ const isMiningReady = (app) => {
     'isKYCVerified'
   ]
   let ready = true
-  required.forEach((field) => {
+  requiredTrueProperties.forEach(field => {
     if (!app[field]) {
       ready = false
     }
   })
   return ready
 }
+
+const hasPaymentDetails = app => app.BTCAddress && app.stacksAddress
+
+// const hasLegalDetails = app => app.hasAcceptedSECTerms
 
 const StyledType = styled(Type)`
   font-style: normal;
@@ -32,21 +36,21 @@ const StyledType = styled(Type)`
   line-height: 20px;
 `
 
+const Field = ({ label, status }) => (
+  <Flex my={3}>
+    <Box>
+      <StatusIcon status={status} />
+    </Box>
+    <Box>
+      <StyledType mb={1} ml={2}>
+        {label}
+      </StyledType>
+    </Box>
+  </Flex>
+)
+
 const Status = ({ app, display }) => {
   const isReady = isMiningReady(app)
-
-  const Field = ({ label, field }) => (
-    <Flex my={3}>
-      <Box>
-        <StatusIcon status={!!app[field]} />
-      </Box>
-      <Box>
-        <StyledType mb={1} ml={2}>
-          {label}
-        </StyledType>
-      </Box>
-    </Flex>
-  )
 
   return (
     <Flex style={{ display: display ? 'flex' : 'none' }} mx={[4, 6]} px={[20, 0, 20]} pb={32} maxWidth={360}>
@@ -58,16 +62,15 @@ const Status = ({ app, display }) => {
             mining.
           </MakerCardText>
         ) : (
-          <MakerCardText mb={4} fontSize={14} lineHeight="20px">
+          <MakerCardText mb={4} mt={0} fontSize={14} lineHeight="20px">
             Complete the forms in order for your app to be elligble for App Mining
           </MakerCardText>
         )}
 
-        <Field label="Bitcoin Address" field="BTCAddress" />
-        <Field label="STX Address" field="stacksAddress" />
-        <Field label="Identity Verification" field="hasCollectedKYC" />
-        <Field label="Tax Documents" field="isKYCVerified" />
-        <Field label="SEC Participation Agreement" field="hasAcceptedSECTerms" />
+        <Field label="Payment details" status={hasPaymentDetails(app)} />
+        <Field label="Identity Verification" status={app.hasCollectedKYC} />
+        <Field label="Tax Documents" status={app.isKYCVerified} />
+        <Field label="SEC Participation Agreement" status={app.hasAcceptedSECTerms} />
       </Box>
     </Flex>
   )
