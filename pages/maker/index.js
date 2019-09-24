@@ -43,7 +43,8 @@ class MakerPortal extends React.Component {
   }
 
   render() {
-    const { apiServer } = this.props
+    const { apiServer, user } = this.props
+
     const { loading, errorMessage, apps } = this.state
     const [app] = apps // TODO: this is for now until we handle multiple apps
 
@@ -72,13 +73,13 @@ class MakerPortal extends React.Component {
             </Box>
             <Box>
               <MakerContentBox>
+                <Maker.ParticipationAgreement app={app} user={user} apiServer={apiServer} display />
+              </MakerContentBox>
+              <MakerContentBox>
                 <Maker.PaymentDetails app={app} apiServer={apiServer} display />
               </MakerContentBox>
               <MakerContentBox>
                 <Maker.KYC app={app} apiServer={apiServer} display />
-              </MakerContentBox>
-              <MakerContentBox>
-                <Maker.ParticipationAgreement app={app} apiServer={apiServer} display />
               </MakerContentBox>
             </Box>
           </Flex>

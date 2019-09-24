@@ -3,7 +3,6 @@ import { Page } from '@components/page'
 import { Newsletter } from '@components/newsletter'
 import Head from '@containers/head'
 import { Box } from '@components/mining'
-import { Type } from '@components/typography'
 
 import Content from './content.md'
 

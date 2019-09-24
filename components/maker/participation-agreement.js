@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Flex, Box, Field } from 'blockstack-ui'
 import download from 'downloadjs'
-import Notification from './notification'
 import { TaxDocumentComponent } from './tax-forms'
 import {
   MakerCardHeader,
@@ -15,47 +14,53 @@ import EverSignModal from './eversign'
 
 const Container = ({ children }) => <Flex><Box width={1} mt={0}>{children}</Box></Flex>
 
-const ParticipationAgreement = ({ app, apiServer, accessToken }) => {
-  console.log('ParticipationAgreement', apiServer, accessToken)
+const ParticipationAgreement = ({ app, apiServer, user }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-  const [doc, setDoc] = useState(null)
+  const [embedUrl, setEmbedUrl] = useState(null)
   const [loading, setLoading] = useState(false)
   const [finished, setFinished] = useState(!!app.hasAcceptedSECTerms)
   const [modalState, setModalState] = useState(false)
   const [taxType, setTaxType] = useState(null)
 
-
   const isUsa = () => taxType === 'us'
 
-  const getDocument = async () => {
-    console.log('xxxxxxxxxx', name, email)
-    setLoading(true)
-    const url = `${apiServer}/api/maker/make-participation-agreement?accessToken=${accessToken}&name=${name}&email=${email}&isUSA=${isUsa()}`
-    console.log(url)
-    const response = await fetch(url, { method: 'POST' })
-    const data = await response.json()
-    setLoading(false)
-    setDoc(data.embedURL)
+  const openEverSign = url => {
+    console.log('opening eversign', url)
     // eslint-disable-next-line no-undef
     eversign.open({
-      url: data.embedURL,
+      url,
       containerID: 'embedded-participation-agreement',
       height: '700px',
       width: '100%',
       events: {
         signed: () => setFinished(true),
-        loaded: () => {},
-        declined: () => {},
-        error: () => {}
+        loaded: () => console.log('Eversign finished loading'),
+        declined: () => console.log('Eversign denied'),
+        error: () => console.log('Eversign error')
       }
     })
   }
 
-  const getDownload = () => {
-    setModalState(true)
-    // download(`/static/docs/${taxType}.zip`)
+  const getDocument = async () => {
+    setLoading(true)
+    const url = `${apiServer}/api/maker/apps/${app.id}/make-participation-agreement?name=${name}&email=${email}&isUSA=${isUsa()}&appId=${app.id}`
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: new Headers({
+        authorization: `Bearer ${user.jwt}`
+      })
+    })
+    const data = await response.json()
+    setLoading(false)
+    setEmbedUrl(data.embedURL)
+    openEverSign(embedUrl)
+  }
+
+  const getDownload = async () => {
+    download(`/static/docs/${taxType}.zip`)
     getDocument()
+    setModalState(true)
   }
 
   useEffect(() => {
@@ -63,14 +68,6 @@ const ParticipationAgreement = ({ app, apiServer, accessToken }) => {
       getDocument()
     }
   }, [])
-
-  if (finished) {
-    return (
-      <Container>
-        <Notification message="Thanks! You've successfully signed our participation agreement" />
-      </Container>
-    )
-  }
 
   const options = [
     { value: 'us', label: 'I am a US person or entity' },
@@ -98,36 +95,28 @@ const ParticipationAgreement = ({ app, apiServer, accessToken }) => {
 
       <Container>
         <MakerCardHeader>Legal Documents</MakerCardHeader>
-        {!doc && (
-          <>
-            {loading ? (
-              'Fetching participation agreement...'
-            ) : (
-              <>
-                <MakerCardText mb={4} mt={0}>
-                  Please select the appropriate legal status so we can provide you with the correct Tax Form and Participation Agreement.
-                </MakerCardText>
-                <Field
-                  name="name"
-                  label="Full Name"
-                  onChange={(e) => setName(e.target.value)}
-                  value={name}
-                />
-                <Field
-                  name="emailAddress"
-                  type="email"
-                  label="Email address"
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                />
-                <Box pb={4}>
-                  <Field.LabelAdvanced label="I am" />
-                  {taxStatusRadioList}
-                </Box>
-              </>
-            )}
-          </>
-        )}
+
+        <MakerCardText mb={4} mt={0}>
+          Please select the appropriate legal status so we can provide you with the correct Tax Form and Participation Agreement.
+        </MakerCardText>
+        <Field
+          name="name"
+          label="Full Name"
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+        />
+        <Field
+          name="emailAddress"
+          type="email"
+          label="Email address"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+        />
+        <Box pb={4}>
+          <Field.LabelAdvanced label="I am" />
+          {taxStatusRadioList}
+        </Box>
+
         { taxType !== null &&
           <>
             <MakerCardDivider />
@@ -144,7 +133,11 @@ const ParticipationAgreement = ({ app, apiServer, accessToken }) => {
               <MakerCardSubheader>
                 Sign the Participation Agreement
               </MakerCardSubheader>
-              <MakerButton mt={4} disabled={loading} onClick={() => getDownload()}>
+              <MakerButton
+                mt={4}
+                disabled={loading || finished}
+                onClick={() => getDownload()}
+              >
                 {loading ? 'Starting...' : 'Start Signing Process'}
               </MakerButton>
               <MakerCardText>

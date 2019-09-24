@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Flex, Box, Type, Button, Field } from 'blockstack-ui'
 
 //
@@ -98,4 +98,7 @@ export const MakerButton = styled(Button)`
   > span {
     font-size: 14px;
   }
+  ${props => props.disabled && css`
+    background: #C5CCFF;
+  `}
 `

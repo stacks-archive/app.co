@@ -157,7 +157,7 @@ class App extends React.Component {
     // const app = this.props.selectedApp
     // const { name } = this.state;
     const app = this.state
-    const { categories, authentications, storageNetworks, blockchains } = this.props 
+    const { categories, authentications, storageNetworks, blockchains } = this.props
     if (!app.name) {
       return <h1>Loading</h1>
     }
