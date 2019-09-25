@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
 import { MakerCardHeader, MakerCardText, MakerButton } from './styled'
 
-const KYC = ({ app, user, apiServer, display }) => {
+const KYC = ({ app, user, apiServer }) => {
   const [embedURL, setEmbedURL] = useState(app.jumioEmbedURL)
   const [loading, setLoading] = useState(false)
 
@@ -21,7 +21,7 @@ const KYC = ({ app, user, apiServer, display }) => {
   }
 
   return (
-    <Flex style={{ display: display ? 'flex' : 'none' }}>
+    <Flex>
       <Box width={1} mt={0}>
         <MakerCardHeader>Identity Verification</MakerCardHeader>
         {embedURL ? (

@@ -47,7 +47,7 @@ const ItemToCompleteField = ({ label, status }) => (
   </Flex>
 )
 
-const Status = ({ app, display }) => {
+const Status = ({ app }) => {
   const isReady = isMiningReady(app)
 
   const AppMiningComplete = () => (
@@ -64,7 +64,7 @@ const Status = ({ app, display }) => {
   )
 
   return (
-    <Flex style={{ display: display ? 'flex' : 'none' }} mx={[4, 6]} px={[20, 0, 20]} pb={32} maxWidth={360}>
+    <Flex mx={[4, 6]} px={[20, 0, 20]} pb={32} maxWidth={360}>
       <Box>
         <MakerCardHeader>Your App Mining status</MakerCardHeader>
 

@@ -9,6 +9,7 @@ import Maker from '@components/maker'
 import { MakerContainer, MakerContentBox } from '@components/maker/styled'
 
 class MakerPortal extends React.Component {
+
   state = {
     loading: true,
     apps: [],
@@ -69,17 +70,17 @@ class MakerPortal extends React.Component {
           </Type>
           <Flex flexDirection={['column', 'column', 'row-reverse']} maxWidth={[null, null, 1140]}>
             <Box>
-              <Maker.Status app={app} apiServer={apiServer} display />
+              <Maker.Status app={app} apiServer={apiServer} />
             </Box>
             <Box>
               <MakerContentBox>
-                <Maker.ParticipationAgreement app={app} user={user} apiServer={apiServer} display />
+                <Maker.PaymentDetails app={app} user={user} apiServer={apiServer} />
               </MakerContentBox>
               <MakerContentBox>
-                <Maker.PaymentDetails app={app} user={user} apiServer={apiServer} display />
+                <Maker.KYC app={app} user={user} apiServer={apiServer} />
               </MakerContentBox>
               <MakerContentBox>
-                <Maker.KYC app={app} user={user} apiServer={apiServer} display />
+                <Maker.ParticipationAgreement app={app} user={user} apiServer={apiServer} />
               </MakerContentBox>
             </Box>
           </Flex>
