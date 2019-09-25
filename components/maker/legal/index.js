@@ -9,8 +9,8 @@ import {
   MakerRadioListLabel,
   MakerCardDivider,
   MakerButton
-} from './styled'
-import MakerModal from './modal'
+} from '../styled'
+import MakerModal from '../modal'
 
 const Container = ({ children }) => <Flex><Box width={1} mt={0}>{children}</Box></Flex>
 

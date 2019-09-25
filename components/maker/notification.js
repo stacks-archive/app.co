@@ -8,9 +8,9 @@ const Alert = Styled(Box)`
 `
 
 const Notification = ({ message, type }) => (
-    <Alert mb={4} type={type}>
-      <Type>{message}</Type>
-    </Alert>
-  )
+  <Alert mb={4} type={type}>
+    <Type>{message}</Type>
+  </Alert>
+)
 
 export default Notification

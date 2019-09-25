@@ -102,3 +102,9 @@ export const MakerButton = styled(Button)`
     background: #C5CCFF;
   `}
 `
+
+export const MakerField = styled(Field)`
+  > label {
+    color: red !important;
+  }
+`

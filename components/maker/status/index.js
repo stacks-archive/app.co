@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Flex, Box, Type } from 'blockstack-ui'
 import { CheckMarkIcon, CrossMarkIcon } from '@components/svg/maker'
-import { MakerCardHeader, MakerCardText } from './styled'
+import { MakerCardHeader, MakerCardText } from '../styled'
 
 const StatusIcon = ({ status = false }) => status
   ? <CheckMarkIcon />

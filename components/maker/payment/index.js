@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import { Flex, Box, Type, Field } from 'blockstack-ui'
 import { address, networks } from 'bitcoinjs-lib'
 import * as c32Check from 'c32check'
-import Notification from './notification'
+import Notification from '../notification'
 
 import {
   MakerCardHeader,
   MakerCardText,
-  MakerButton
-} from './styled'
+  MakerButton,
+  MakerField
+} from '../styled'
 
 const validateBTC = (addr) => {
   try {
@@ -89,7 +90,7 @@ const PaymentDetails = ({ app, apiServer, accessToken, user }) => {
           Currently, payments are made in Bitcoin (BTC). Payments will be made
           in Stacks (STX) in the future.
         </MakerCardText>
-        <Field
+        <MakerField
           name="btcAddress"
           label="Bitcoin Address"
           placeholder="Enter a Bitcoin address"
@@ -97,7 +98,7 @@ const PaymentDetails = ({ app, apiServer, accessToken, user }) => {
           value={btcAddress || ''}
           error={!btcValid ? 'Please enter a valid BTC address' : null}
         />
-        <Field
+        <MakerField
           name="stacksAddress"
           label="Stacks Address"
           placeholder="Enter a Stacks address"

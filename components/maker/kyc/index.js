@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Flex, Box, Type } from 'blockstack-ui'
-import { MakerCardHeader, MakerCardText, MakerButton } from './styled'
-import MakerModal from './modal';
+import { Flex, Box } from 'blockstack-ui'
+import MakerModal from '../modal'
+import { MakerCardHeader, MakerCardText, MakerButton } from '../styled'
 
 const KYC = ({ app, user, apiServer }) => {
   const [embedURL, setEmbedURL] = useState(app.jumioEmbedURL)
