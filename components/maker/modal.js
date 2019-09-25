@@ -31,7 +31,7 @@ const CloseButton = ({ handleClick }) => (
   </CloseButtonContainer>
 )
 
-const EverSignModal = ({ isOpen, handleClose, children }) => (
+const MakerModal = ({ isOpen, handleClose, children }) => (
   <Modal
     isOpen={isOpen}
     onRequestClose={handleClose}
@@ -44,4 +44,4 @@ const EverSignModal = ({ isOpen, handleClose, children }) => (
 )
 
 
-export default EverSignModal
+export default MakerModal

@@ -10,7 +10,7 @@ import {
   MakerCardDivider,
   MakerButton
 } from './styled'
-import EverSignModal from './eversign'
+import MakerModal from './modal'
 
 const Container = ({ children }) => <Flex><Box width={1} mt={0}>{children}</Box></Flex>
 
@@ -26,7 +26,6 @@ const ParticipationAgreement = ({ app, apiServer, user }) => {
   const isUsa = () => taxType === 'us'
 
   const openEverSign = url => {
-    console.log('opening eversign', url)
     // eslint-disable-next-line no-undef
     eversign.open({
       url,
@@ -89,9 +88,9 @@ const ParticipationAgreement = ({ app, apiServer, user }) => {
 
   return (
     <>
-      <EverSignModal isOpen={modalState} handleClose={() => setModalState(false)}>
+      <MakerModal isOpen={modalState} handleClose={() => setModalState(false)}>
         <Box width={1} id="embedded-participation-agreement" />
-      </EverSignModal>
+      </MakerModal>
 
       <Container>
         <MakerCardHeader>Legal Documents</MakerCardHeader>

@@ -105,7 +105,7 @@ const PaymentDetails = ({ app, apiServer, accessToken, user }) => {
           value={stxAddress || ''}
           error={!stxValid ? 'Please enter a valid STX address' : null}
         />
-        <Type.p fontSize={12} display="block">
+        <Type.p fontSize={12} mt={0} display="block">
           {"Don't"} have a Stacks address? <a href="https://wallet.blockstack.org" target="_blank" rel="noopener noreferrer">Download the Stacks wallet to get one</a>
         </Type.p>
         <MakerButton mt={4} disabled={saving} onClick={() => save({ btcAddress, stxAddress, apiServer, accessToken })}>

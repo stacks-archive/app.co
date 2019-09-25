@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
 import { MakerCardHeader, MakerCardText, MakerButton } from './styled'
+import MakerModal from './modal';
 
 const KYC = ({ app, user, apiServer }) => {
   const [embedURL, setEmbedURL] = useState(app.jumioEmbedURL)
   const [loading, setLoading] = useState(false)
+  const [modalState, setModalState] = useState(false)
 
   const initiateKYC = async () => {
     setLoading(true)
-    const url = `${apiServer}/api/maker/apps/${app.id}/initiate-kyc`
+    setModalState(true)
+    const url = `${apiServer}/api/maker/apps/${app.id}/initiate-kyc?appId=${app.id}`
     const response = await fetch(url, {
       method: 'POST',
       headers: new Headers({
@@ -20,31 +23,32 @@ const KYC = ({ app, user, apiServer }) => {
     setLoading(false)
   }
 
+  const buttonText = () => {
+    if (loading) {
+      return 'Loading…'
+    }
+    return app.hasCollectedKYC ? 'Verified' : 'Start verification'
+  }
+
   return (
-    <Flex>
-      <Box width={1} mt={0}>
-        <MakerCardHeader>Identity Verification</MakerCardHeader>
-        {embedURL ? (
-          <>
-            {app.hasCollectedKYC ? (
-              <Type>Your identity has been verified.</Type>
-            ) : (
-              <iframe src={embedURL} title="Document" width="100%" height="700px" allow="camera" />
-            )}
-          </>
-        ) : (
-          <>
-            <MakerCardText mt={0}>
-              Verifying your identity helps keep App Mining secure and fight fraud.
-              Your ID will never be shared.
-            </MakerCardText>
-            <MakerButton onClick={initiateKYC} mt={4}>
-              {loading ? 'Loading…' : 'Start verification'}
-            </MakerButton>
-          </>
-        )}
-      </Box>
-    </Flex>
+    <>
+      <MakerModal isOpen={modalState} handleClose={() => setModalState(false)}>
+        <iframe src={embedURL} title="Document" width="100%" height="700px" allow="camera" />
+      </MakerModal>
+
+      <Flex>
+        <Box width={1} mt={0}>
+          <MakerCardHeader>Identity Verification</MakerCardHeader>
+          <MakerCardText mt={0}>
+            Verifying your identity helps keep App Mining secure and fight fraud.
+            Your ID will never be shared.
+          </MakerCardText>
+          <MakerButton onClick={initiateKYC} mt={4} disabled={app.hasCollectedKYC}>
+            {buttonText()}
+          </MakerButton>
+        </Box>
+      </Flex>
+    </>
   )
 }
 
