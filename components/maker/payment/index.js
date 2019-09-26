@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Flex, Box, Type, Field } from 'blockstack-ui'
+import { Flex, Box, Type } from 'blockstack-ui'
 import { address, networks } from 'bitcoinjs-lib'
 import * as c32Check from 'c32check'
 import Notification from '../notification'
@@ -36,9 +36,6 @@ const PaymentDetails = ({ app, apiServer, accessToken, user }) => {
   const [btcValid, setBtcValid] = useState(true)
   const [stxValid, setStxValid] = useState(true)
   const [saving, setSaving] = useState(false)
-
-  const haveEitherAddressesChanged = () =>
-    btcAddress !== app.BTCAddress && stxAddress !== app.stacksAddress
 
   const notify = () => {
     setShowNotification(true)

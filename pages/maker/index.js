@@ -6,7 +6,7 @@ import { selectApiServer } from '@stores/apps/selectors'
 import { Page } from '@components/page'
 import Head from '@containers/head'
 import Maker from '@components/maker'
-import { MakerContainer, MakerContentBox } from '@components/maker/styled'
+import { MakerContainer, MakerContentBox, MakerStickyStatusBox } from '@components/maker/styled'
 
 class MakerPortal extends React.Component {
 
@@ -68,10 +68,10 @@ class MakerPortal extends React.Component {
           <Type fontSize={3} fontWeight={500} mx={[4, 6]} py={6} px={[20, 0]}>
             {app.name}
           </Type>
-          <Flex flexDirection={['column', 'column', 'row-reverse']} maxWidth={[null, null, 1140]}>
-            <Box>
+          <Flex flexDirection={['column', 'column', 'row-reverse']} maxWidth={[null, null, 1140]} alignItems="flex-start">
+            <MakerStickyStatusBox>
               <Maker.Status app={app} apiServer={apiServer} />
-            </Box>
+            </MakerStickyStatusBox>
             <Box>
               <MakerContentBox>
                 <Maker.PaymentDetails app={app} user={user} apiServer={apiServer} />

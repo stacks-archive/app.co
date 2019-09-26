@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Flex, Box, Field } from 'blockstack-ui'
+import { Flex, Box, Field, Type } from 'blockstack-ui'
 import download from 'downloadjs'
-import { TaxDocumentComponent } from './tax-forms'
+import { TaxDocuments } from './tax-forms'
 import {
   MakerCardHeader,
   MakerCardSubheader,
@@ -66,7 +66,7 @@ const ParticipationAgreement = ({ app, apiServer, user }) => {
     if (app.eversignDocumentID) {
       getDocument()
     }
-  }, [])
+  }, [app.id])
 
   const options = [
     { value: 'us', label: 'I am a US person or entity' },
@@ -111,7 +111,7 @@ const ParticipationAgreement = ({ app, apiServer, user }) => {
           onChange={(e) => setEmail(e.target.value)}
           value={email}
         />
-        <Box pb={4}>
+        <Box pb={2}>
           <Field.LabelAdvanced label="I am" />
           {taxStatusRadioList}
         </Box>
@@ -124,7 +124,7 @@ const ParticipationAgreement = ({ app, apiServer, user }) => {
                 Fill out the Tax form
               </MakerCardSubheader>
 
-              <TaxDocumentComponent taxType={taxType} />
+              <TaxDocuments taxType={taxType} />
 
             </Box>
             <MakerCardDivider />
@@ -139,9 +139,9 @@ const ParticipationAgreement = ({ app, apiServer, user }) => {
               >
                 {loading ? 'Starting...' : 'Start Signing Process'}
               </MakerButton>
-              <MakerCardText>
+              <Type.p fontSize={12} mb={0}>
                 Opening the Participation Agreement will start a download a package of documents that you are required to read.
-              </MakerCardText>
+              </Type.p>
             </Box>
           </>
         }

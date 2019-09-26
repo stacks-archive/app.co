@@ -47,24 +47,24 @@ const ItemToCompleteField = ({ label, status }) => (
   </Flex>
 )
 
+const AppMiningComplete = () => (
+  <MakerCardText mb={4}>
+    Congratulations! We&apos;ve collected everything we need in order for your app to participate in app
+    mining.
+    </MakerCardText>
+)
+
+const AppMiningIncomplete = () => (
+  <MakerCardText mb={4} mt={0} fontSize={14} lineHeight="20px">
+    Complete the forms in order for your app to be elligble for App Mining
+    </MakerCardText>
+)
+
 const Status = ({ app }) => {
   const isReady = isMiningReady(app)
 
-  const AppMiningComplete = () => (
-    <MakerCardText mb={4}>
-      Congratulations! We&apos;ve collected everything we need in order for your app to participate in app
-      mining.
-    </MakerCardText>
-  )
-
-  const AppMiningIncomplete = () => (
-    <MakerCardText mb={4} mt={0} fontSize={14} lineHeight="20px">
-      Complete the forms in order for your app to be elligble for App Mining
-    </MakerCardText>
-  )
-
   return (
-    <Flex mx={[4, 6]} px={[20, 0, 20]} pb={32} maxWidth={360}>
+    <Flex mx={[4, 6]} px={[20, 0, 20]} pt={[0, 0, 32]} pb={32} maxWidth={360}>
       <Box>
         <MakerCardHeader>Your App Mining status</MakerCardHeader>
 

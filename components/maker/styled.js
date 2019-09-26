@@ -18,6 +18,13 @@ export const SidebarButton = styled.div`
   }
 `
 
+export const MakerStickyStatusBox = styled(Box)`
+  @media screen and (min-width: 832px) {
+    position: sticky;
+    top: 48px;
+  }
+`
+
 export const MakerContentBox = styled(Box)`
   background: #fff;
   border-top: 1px solid #F0F0F5;
@@ -71,6 +78,7 @@ export const MakerCardText = styled(Type.p)`
   font-size: 14px;
   line-height: 20px;
   color: #677282;
+  margin-top: 0;
   margin-bottom: 16px;
 `
 
