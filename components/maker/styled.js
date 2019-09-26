@@ -72,15 +72,17 @@ export const MakerCardSubheader = styled(Type.h3)`
   margin-bottom: 8px;
 `
 
-export const MakerCardText = styled(Type.p)`
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 20px;
-  color: #677282;
-  margin-top: 0;
-  margin-bottom: 16px;
-`
+export const MakerCardText = ({children}) => (
+  <Type.p
+    fontSize={14}
+    lineHeight="20px"
+    color="#677282"
+    mt={0}
+    mb={16}
+  >
+    {children}
+  </Type.p>
+)
 
 export const MakerRadioListLabel = styled.label`
   display: block;
