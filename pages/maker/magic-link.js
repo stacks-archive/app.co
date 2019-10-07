@@ -115,8 +115,6 @@ const mapStateToProps = (state) => ({
   apiServer: selectApiServer(state)
 })
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Object.assign({}, UserStore.actions), dispatch)
-}
+const mapDispatchToProps = (dispatch) => bindActionCreators({ ...UserStore.actions }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MakerMagicLink)
