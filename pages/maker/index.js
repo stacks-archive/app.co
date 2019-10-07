@@ -2,7 +2,7 @@ import React from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
 import { connect } from 'react-redux'
 
-import { selectApiServer } from '@stores/apps/selectors'
+import { selectApiServer, selectUser } from '@stores/apps/selectors'
 import { Page } from '@components/page'
 import Head from '@containers/head'
 import Maker from '@components/maker'
@@ -91,7 +91,7 @@ class MakerPortal extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.user,
+  user: selectUser(state),
   apiServer: selectApiServer(state)
 })
 

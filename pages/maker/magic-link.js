@@ -4,7 +4,7 @@ import { Flex, Box, Type, Button } from 'blockstack-ui'
 import { bindActionCreators } from 'redux'
 import Link from 'next/link'
 import UserStore from '@stores/user'
-import { selectApiServer } from '@stores/apps/selectors'
+import { selectApiServer, selectUser } from '@stores/apps/selectors'
 import { Page } from '@components/page'
 import Head from '@containers/head'
 import { AppIcon } from '@components/app-icon'
@@ -70,8 +70,6 @@ class MakerMagicLink extends React.Component {
     const { app, user } = this.props
     const { loading, claimed } = this.state
 
-    console.log(this.props.user)
-
     const isClaimed = app.adminBlockstackId || claimed
 
     return (
@@ -113,7 +111,7 @@ class MakerMagicLink extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.user,
+  user: selectUser(state),
   apiServer: selectApiServer(state)
 })
 
