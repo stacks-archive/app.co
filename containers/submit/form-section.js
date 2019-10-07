@@ -18,7 +18,7 @@ export const FormSection = ({ state, fields, handleChange, errors, message, setS
               required={field.required}
               error={errors && field && errors[field.name] && errors[field.name]}
             />
-            <Box pb={4}>
+            <Box pb={field.options.length ? 4 : 0}>
               {field.options.map((option) => (
                 <Flex pb={3} alignItems="center" key={`radio-${field.name}-${option.value}`}>
                   <input
