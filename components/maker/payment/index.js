@@ -94,6 +94,7 @@ const PaymentDetails = ({ app, apiServer, accessToken, user }) => {
           placeholder="Enter a Bitcoin address"
           onChange={(e) => setBTCAddress(e.target.value)}
           value={btcAddress || ''}
+          autocomplete="off"
           error={!btcValid ? 'Please enter a valid BTC address' : null}
         />
         <MakerField
@@ -102,6 +103,7 @@ const PaymentDetails = ({ app, apiServer, accessToken, user }) => {
           placeholder="Enter a Stacks address"
           onChange={(e) => setSTXAddress(e.target.value)}
           value={stxAddress || ''}
+          autocomplete="off"
           error={!stxValid ? 'Please enter a valid STX address' : null}
         />
         <Type.p fontSize={12} mt={0} display="block">
