@@ -61,7 +61,8 @@ const PaymentDetails = ({ app, apiServer, accessToken, user }) => {
       setStxValid(true)
     }
     setSaving(true)
-    const response = await fetch(`${apiServer}/api/maker/apps/${app.id}?appId=${app.id}`, {
+    console.log(stxAddress)
+    const response = await fetch(`${apiServer}/api/maker/apps?appId=${app.id}`, {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json',

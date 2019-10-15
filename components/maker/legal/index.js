@@ -43,7 +43,7 @@ const ParticipationAgreement = ({ app, apiServer, user }) => {
 
   const getDocument = async () => {
     setLoading(true)
-    const url = `${apiServer}/api/maker/apps/${app.id}/make-participation-agreement?name=${name}&email=${email}&isUSA=${isUsa()}&appId=${app.id}`
+    const url = `${apiServer}/api/maker/apps/make-participation-agreement?name=${name}&email=${email}&isUSA=${isUsa()}&appId=${app.id}`
     const response = await fetch(url, {
       method: 'POST',
       headers: new Headers({

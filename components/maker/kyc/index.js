@@ -11,7 +11,7 @@ const KYC = ({ app, user, apiServer }) => {
   const initiateKYC = async () => {
     setLoading(true)
     setModalState(true)
-    const url = `${apiServer}/api/maker/apps/${app.id}/initiate-kyc?appId=${app.id}`
+    const url = `${apiServer}/api/maker/apps/initiate-kyc?appId=${app.id}`
     const response = await fetch(url, {
       method: 'POST',
       headers: new Headers({
