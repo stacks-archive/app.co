@@ -5,7 +5,6 @@ import Status from './status'
 import Notification from './notification'
 import { SidebarButton } from './styled'
 
-
 export default {
   SidebarButton,
   PaymentDetails,

@@ -13,7 +13,12 @@ class MakerPortal extends React.Component {
   state = {
     loading: true,
     apps: [],
-    errorMessage: null
+    errorMessage: null,
+    status: {
+      paymentDetailsComplete: false,
+      kycComplete: false,
+      legalComplete: false
+    }
   }
 
   componentDidMount() {
@@ -22,8 +27,10 @@ class MakerPortal extends React.Component {
 
   async fetchApps() {
     const { apiServer, user } = this.props
+
     if (!(user && user.jwt)) {
       this.setState({
+        ...this.state,
         loading: false,
         errorMessage: 'Please sign in to access the maker portal.'
       })
@@ -41,6 +48,22 @@ class MakerPortal extends React.Component {
       loading: false,
       apps
     })
+  }
+
+  updateStatus (props) {
+    this.setState({ ...this.state, status: { ...this.state.status, ...props } })
+  }
+
+  setPaymentDetailsComplete () {
+    this.updateStatus({ paymentDetailsComplete: true })
+  }
+
+  setKycComplete () {
+    this.updateStatus({ kycComplete: true })
+  }
+
+  setLegalComplete () {
+    this.updateStatus({ legalComplete: true })
   }
 
   render() {
@@ -70,17 +93,36 @@ class MakerPortal extends React.Component {
           </Type>
           <Flex flexDirection={['column', 'column', 'row-reverse']} maxWidth={[null, null, 1140]} alignItems="flex-start">
             <MakerStickyStatusBox>
-              <Maker.Status app={app} apiServer={apiServer} />
+              <Maker.Status
+                app={app}
+                apiServer={apiServer}
+                status={this.state.status}
+              />
             </MakerStickyStatusBox>
             <Box>
               <MakerContentBox>
-                <Maker.PaymentDetails app={app} user={user} apiServer={apiServer} />
+                <Maker.PaymentDetails
+                  app={app}
+                  user={user}
+                  apiServer={apiServer}
+                  onPaymentDetailsComplete={() => this.setPaymentDetailsComplete()}
+                />
               </MakerContentBox>
               <MakerContentBox>
-                <Maker.KYC app={app} user={user} apiServer={apiServer} />
+                <Maker.KYC
+                  app={app}
+                  user={user}
+                  apiServer={apiServer}
+                  onKycComplete={() => this.setKycComplete()}
+                />
               </MakerContentBox>
               <MakerContentBox>
-                <Maker.ParticipationAgreement app={app} user={user} apiServer={apiServer} />
+                <Maker.ParticipationAgreement
+                  app={app}
+                  user={user}
+                  apiServer={apiServer}
+                  onLegalComplete={() => this.setLegalComplete()}
+                />
               </MakerContentBox>
             </Box>
           </Flex>

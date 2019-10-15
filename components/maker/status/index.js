@@ -60,7 +60,7 @@ const AppMiningIncomplete = () => (
     </MakerCardText>
 )
 
-const Status = ({ app }) => {
+const Status = ({ app, status }) => {
   const isReady = isMiningReady(app)
 
   return (
@@ -70,8 +70,8 @@ const Status = ({ app }) => {
 
         {isReady ? <AppMiningComplete /> : <AppMiningIncomplete/>}
 
-        <ItemToCompleteField label="Payment details" status={hasPaymentDetails(app)} />
-        <ItemToCompleteField label="Identity Verification" status={app.hasCollectedKYC} />
+        <ItemToCompleteField label="Payment details" status={status.paymentDetailsComplete || hasPaymentDetails(app)} />
+        <ItemToCompleteField label="Identity Verification" status={status.kycComplete || app.hasCollectedKYC} />
         <ItemToCompleteField label="Tax Documents" status={app.isKYCVerified} />
         <ItemToCompleteField label="SEC Participation Agreement" status={app.hasAcceptedSECTerms} />
       </Box>

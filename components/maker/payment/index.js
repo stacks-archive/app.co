@@ -1,117 +1,75 @@
 import React, { useState } from 'react'
-import { Flex, Box, Type } from 'blockstack-ui'
-import { address, networks } from 'bitcoinjs-lib'
-import * as c32Check from 'c32check'
-import Notification from '../notification'
-
+import { validateBTC, validateSTX, savePaymentDetails } from './helpers'
 import {
-  MakerCardHeader,
-  MakerCardText,
-  MakerButton,
-  MakerField
-} from '../styled'
+  PaymentContainer,
+  PaymentHeader,
+  PaymentDescription,
+  PaymentHelpText,
+  PaymentBtcField,
+  PaymentStxField,
+  PaymentButton
+} from './content'
 
-const validateBTC = (addr) => {
-  try {
-    address.toOutputScript(addr, networks.bitcoin)
-    return true
-  } catch (error) {
-    return false
-  }
-}
-
-const validateSTX = (addr) => {
-  try {
-    c32Check.c32addressDecode(addr)
-    return true
-  } catch (error) {
-    return false
-  }
-}
-
-const PaymentDetails = ({ app, apiServer, accessToken, user }) => {
+const PaymentDetails = ({ app, apiServer, accessToken, user, onPaymentDetailsComplete }) => {
   const [btcAddress, setBTCAddress] = useState(app.BTCAddress)
   const [stxAddress, setSTXAddress] = useState(app.stacksAddress)
-  const [showNotification, setShowNotification] = useState(false)
-  const [btcValid, setBtcValid] = useState(true)
-  const [stxValid, setStxValid] = useState(true)
   const [saving, setSaving] = useState(false)
+  const [hasAttemptedSaved, setHasAttemptedSaved] = useState(false)
+  const [savedValues, setSavedValue] = useState({ btcAddress, stxAddress })
 
-  const notify = () => {
-    setShowNotification(true)
-    setTimeout(() => {
-      setShowNotification(false)
-    }, 10000)
-  }
+  const isSaved = (
+    btcAddress === savedValues.btcAddress &&
+    btcAddress !== '' &&
+    stxAddress === savedValues.stxAddress &&
+    stxAddress !== ''
+  )
 
   const save = async () => {
-    let isValid = true
-    if (!validateBTC(btcAddress)) {
-      isValid = false
-      setBtcValid(false)
-    }
-    if (!validateSTX(stxAddress)) {
-      isValid = false
-      setStxValid(false)
-    }
-    if (!isValid) {
-      return
-    } else {
-      setBtcValid(true)
-      setStxValid(true)
-    }
+    setHasAttemptedSaved(true)
+    if (!validateBTC(btcAddress) || !validateSTX(stxAddress)) return
     setSaving(true)
-    console.log(stxAddress)
-    const response = await fetch(`${apiServer}/api/maker/apps?appId=${app.id}`, {
-      method: 'POST',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${user.jwt}`
-      }),
-      body: JSON.stringify({
-        BTCAddress: btcAddress,
-        stacksAddress: stxAddress
-      })
-    })
-    await response.json()
-    notify()
+    await savePaymentDetails({ apiServer, appId: app.id, jwt: user.jwt, btcAddress, stxAddress })
     setSaving(false)
+    setSavedValue({ btcAddress, stxAddress })
+    onPaymentDetailsComplete()
   }
 
+  const buttonText = () => {
+    if (saving) return 'Saving…'
+    if (isSaved) return 'Saved'
+    return 'Save'
+  }
+
+  const createInputError = ({ validateFn, currencySymbol }) => addressHash => {
+    if (!hasAttemptedSaved) return null
+    if (!validateFn(addressHash)) return `Please enter a valid ${currencySymbol} address`
+    return null
+  }
+  const getBtcError = createInputError({ validateFn: validateBTC, currencySymbol: 'BTC' })
+  const getStxError = createInputError({ validateFn: validateSTX, currencySymbol: 'STX' })
+
   return (
-    <Flex>
-      <Box width={1} mt={0}>
-        <MakerCardHeader>Payment details</MakerCardHeader>
-        {showNotification && <Notification message="Thanks! Your payment details have been updated." />}
-        <MakerCardText mb={5} mt={0}>
-          This is where you will receive your App Mining payments.
-          Currently, payments are made in Bitcoin (BTC). Payments will be made
-          in Stacks (STX) in the future.
-        </MakerCardText>
-        <MakerField
-          name="btcAddress"
-          label="Bitcoin Address"
-          placeholder="Enter a Bitcoin address"
-          onChange={(e) => setBTCAddress(e.target.value)}
-          value={btcAddress || ''}
-          error={!btcValid ? 'Please enter a valid BTC address' : null}
-        />
-        <MakerField
-          name="stacksAddress"
-          label="Stacks Address"
-          placeholder="Enter a Stacks address"
-          onChange={(e) => setSTXAddress(e.target.value)}
-          value={stxAddress || ''}
-          error={!stxValid ? 'Please enter a valid STX address' : null}
-        />
-        <Type.p fontSize={12} mt={0} display="block">
-          {"Don't"} have a Stacks address? <a href="https://wallet.blockstack.org" target="_blank" rel="noopener noreferrer">Download the Stacks wallet to get one</a>
-        </Type.p>
-        <MakerButton mt={4} disabled={saving} onClick={() => save({ btcAddress, stxAddress, apiServer, accessToken })}>
-          {saving ? 'Saving...' : 'Save'}
-        </MakerButton>
-      </Box>
-    </Flex>
+    <PaymentContainer>
+      <PaymentHeader>Payment details</PaymentHeader>
+      <PaymentDescription />
+      <PaymentBtcField
+        onChange={e => setBTCAddress(e.target.value)}
+        value={btcAddress || ''}
+        error={getBtcError(btcAddress)}
+      />
+      <PaymentStxField
+        onChange={e => setSTXAddress(e.target.value)}
+        value={stxAddress || ''}
+        error={getStxError(stxAddress)}
+      />
+      <PaymentHelpText/>
+      <PaymentButton
+        disabled={isSaved || saving}
+        onClick={() => save({ btcAddress, stxAddress, apiServer, accessToken })}
+      >
+        {buttonText()}
+      </PaymentButton>
+    </PaymentContainer>
   )
 }
 
