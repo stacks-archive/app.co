@@ -54,6 +54,14 @@ export const MakerContainer = ({ children }) => (
   </Flex>
 )
 
+export const MakerTitle = styled(Type.h2)`
+  display: block;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  color: #0F1117;
+  margin-bottom: 16px;
+`
 
 export const MakerCardHeader = styled(Type.h2)`
   font-weight: 500;
