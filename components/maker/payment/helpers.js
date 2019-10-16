@@ -19,18 +19,3 @@ export const validateSTX = memoize(addr => {
     return false
   }
 })
-
-export const savePaymentDetails = async ({ apiServer, appId, jwt, btcAddress, stxAddress }) => {
-  const response = await fetch(`${apiServer}/api/maker/apps?appId=${appId}`, {
-    method: 'POST',
-    headers: new Headers({
-      'Content-Type': 'application/json',
-      authorization: `Bearer ${jwt}`
-    }),
-    body: JSON.stringify({
-      BTCAddress: btcAddress,
-      stacksAddress: stxAddress
-    })
-  })
-  await response.json()
-}

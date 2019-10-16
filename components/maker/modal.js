@@ -5,6 +5,10 @@ import styled from 'styled-components'
 import { CloseIcon } from '@components/svg/maker'
 
 const customStyles = {
+  overlay: {
+    // above headroom header library
+    zIndex: 100
+  },
   content : {
     top: '50%',
     left: '50%',

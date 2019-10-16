@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { validateBTC, validateSTX, savePaymentDetails } from './helpers'
+import { savePaymentDetails } from '@stores/maker/actions'
+import { validateBTC, validateSTX } from './helpers'
 import {
   PaymentContainer,
   PaymentHeader,
@@ -10,7 +11,7 @@ import {
   PaymentButton
 } from './content'
 
-const PaymentDetails = ({ app, apiServer, accessToken, user, onPaymentDetailsComplete }) => {
+const PaymentDetails = ({ app, apiServer, accessToken, user, dispatch }) => {
   const [btcAddress, setBTCAddress] = useState(app.BTCAddress)
   const [stxAddress, setSTXAddress] = useState(app.stacksAddress)
   const [saving, setSaving] = useState(false)
@@ -28,10 +29,9 @@ const PaymentDetails = ({ app, apiServer, accessToken, user, onPaymentDetailsCom
     setHasAttemptedSaved(true)
     if (!validateBTC(btcAddress) || !validateSTX(stxAddress)) return
     setSaving(true)
-    await savePaymentDetails({ apiServer, appId: app.id, jwt: user.jwt, btcAddress, stxAddress })
+    await savePaymentDetails({ apiServer, appId: app.id, jwt: user.jwt, btcAddress, stxAddress })(dispatch)
     setSaving(false)
     setSavedValue({ btcAddress, stxAddress })
-    onPaymentDetailsComplete()
   }
 
   const buttonText = () => {
