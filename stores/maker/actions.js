@@ -13,6 +13,8 @@ export const FETCH_APPS = '[Maker Page] FETCH_APPS'
 export const FETCH_APPS_DONE = '[Maker Page] FETCH_APPS_DONE'
 export const FETCH_APPS_FAIL = '[Maker Page] FETCH_APPS_FAIL'
 
+export const SELECT_APP = '[Maker Page] SELECT_APP'
+
 export const errorAction = () => ({ type: MAKER_AUTH_ERROR })
 export const setLoadingDoneAction = () => ({ type: SET_LOADING_DONE })
 export const setPaymentDetailsComplete = () => ({ type: SET_PAYMENT_DETAILS_COMPLETE })
@@ -27,6 +29,7 @@ export const fetchAppsAction = () => ({ type: FETCH_APPS })
 export const fetchAppsDoneAction = payload => ({ type: FETCH_APPS_DONE, payload })
 export const fetchAppsFailAction = () => ({ type: FETCH_APPS_FAIL })
 
+export const selectAppAction = payload => ({ type: SELECT_APP, payload })
 
 export const savePaymentDetails = ({ apiServer, appId, jwt, btcAddress, stxAddress }) => async dispatch => {
   dispatch(savePaymentDetailsAction())

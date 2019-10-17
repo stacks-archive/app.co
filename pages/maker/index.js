@@ -2,22 +2,28 @@ import React, { useEffect } from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
 import { connect } from 'react-redux'
 
-import { selectMaker } from '@stores/maker/reducer'
-import { fetchApps } from '@stores/maker/actions'
+import { selectMaker, selectAppList, selectCurrentApp } from '@stores/maker/reducer'
+import { fetchApps, selectAppAction } from '@stores/maker/actions'
 import { selectApiServer, selectUser } from '@stores/apps/selectors'
 import { Page } from '@components/page'
 import Head from '@containers/head'
 import Maker from '@components/maker'
 import { MakerContainer, MakerContentBox, MakerStickyStatusBox } from '@components/maker/styled'
 
-
-const MakerPortal = ({ apiServer, user, maker, loading, errorMessage, dispatch }) => {
+const MakerPortal = ({ apiServer, user, maker, loading, errorMessage, appList, selectedApp, dispatch }) => {
 
   useEffect(() => {
     fetchApps({ apiServer, user })(dispatch)
   }, [])
 
-  const app = maker.appEntities[maker.appIds[0]]
+  const app = selectedApp
+
+  function handleChangingApp (event) {
+    event.persist()
+    const id = event.target.value
+    dispatch(selectAppAction(id))
+  }
+
   if (loading || !app) {
     return (
       <Page innerPadding={0} wrap>
@@ -29,11 +35,18 @@ const MakerPortal = ({ apiServer, user, maker, loading, errorMessage, dispatch }
       </Page>
     )
   }
-  console.log(app)
+
   return (
     <Page innerPadding={0} wrap>
       <Head title={app.name} />
       <MakerContainer>
+        <Box>
+          <select onChange={handleChangingApp}>
+            {appList.map(({ name, id }) => (
+              <option key={id} value={id}>{name}</option>
+            ))}
+          </select>
+        </Box>
         <Type fontSize={3} fontWeight={500} mx={[4, 6]} py={6} px={[20, 0]}>
           {app.name}
         </Type>
@@ -81,7 +94,9 @@ const MakerPortal = ({ apiServer, user, maker, loading, errorMessage, dispatch }
 const mapStateToProps = (state) => ({
   user: selectUser(state),
   apiServer: selectApiServer(state),
-  maker: selectMaker(state)
+  maker: selectMaker(state),
+  appList: selectAppList(state),
+  selectedApp: selectCurrentApp(state)
 })
 
 export default connect(mapStateToProps)(MakerPortal)

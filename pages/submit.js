@@ -2,13 +2,13 @@ import React from 'react'
 import 'isomorphic-unfetch'
 import { connect } from 'react-redux'
 import Head from '@containers/head'
-import Link from 'next/link'
 import { bindActionCreators } from 'redux'
-import { MakerTitle, MakerCardHeader, MakerCardText, MakerButton, MakerField } from '@components/maker/styled'
+import { MakerTitle, MakerCardHeader, MakerButton } from '@components/maker/styled'
 import { Page } from '@components/page'
-import { Type, Field, Flex, Box, Button } from 'blockstack-ui'
+import { Type, Field, Flex, Box } from 'blockstack-ui'
 import { selectAppConstants, selectApiServer } from '@stores/apps/selectors'
-import { FormSection, ErrorMessage, Bar, sections as getSections } from '@containers/submit'
+import { FormSection, ErrorMessage, sections as getSections } from '@containers/submit'
+import SuccessCard from '@components/submit'
 import debounce from 'lodash.debounce'
 import UserStore from '@stores/user'
 
@@ -259,48 +259,24 @@ class SubmitDapp extends React.Component {
       <Page innerPadding={0} pt={0}>
         <Head title="Submit your dapp" description="Submit your dapp to be listed on the Universal Dapp Store." />
         <Page.Section p={['32px', '64px']} mb={3} bg="white">
-          {this.state.success ? (
-            <>
-              <Box width="100%" textAlign="center">
-                <Box pb={6} width="100%">
-                  <Type mx="auto" fontSize={5} fontWeight="bold">
-                    Success!
-                  </Type>
-                </Box>
-                <Box mx="auto">
-                  <Type display="block">Thanks for your submission! Your app will need to be approved before being public on app.co.</Type>
-                  {this.appMiningEligible() && (
-                    <>
-                      <Type my={3} display="block">To update your app&apos;s details and enroll in App Mining, visit our Maker Portal</Type>
-                      <Link
-                        href={{
-                          pathname: '/maker'
-                        }}
-                        passHref
-                      >
-                        <Button is="a" href="/" color="white !important">
-                          Go to the Maker Portal
-                        </Button>
-                      </Link>
-                    </>
-                  )}
-                </Box>
-              </Box>
-            </>
-          ) : (
-            <Submit
-              loading={this.state.loading}
-              submit={this.submit}
-              success={this.state.success}
-              appConstants={appConstants}
-              setState={debounce((args) => this.setState(args), 100)}
-              state={this.state.values}
-              errors={this.state.errorCount > 0 && this.state.errors}
-              signIn={this.props.signIn}
-              user={this.props.user}
-              isAppMiningEligible={this.appMiningEligible()}
-            />
-          )}
+          {
+            this.state.success
+              ? <SuccessCard isAppMiningEligible={this.appMiningEligible()} />
+              : (
+                  <Submit
+                    loading={this.state.loading}
+                    submit={this.submit}
+                    success={this.state.success}
+                    appConstants={appConstants}
+                    setState={debounce((args) => this.setState(args), 100)}
+                    state={this.state.values}
+                    errors={this.state.errorCount > 0 && this.state.errors}
+                    signIn={this.props.signIn}
+                    user={this.props.user}
+                    isAppMiningEligible={this.appMiningEligible()}
+                  />
+                )
+            }
         </Page.Section>
       </Page>
     )
