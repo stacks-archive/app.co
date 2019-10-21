@@ -1,7 +1,7 @@
 import React from 'react'
 import { Page } from '@components/page'
 import { Newsletter } from '@components/newsletter'
-import { FeaturedList, AppsList } from '@components/list/apps'
+import { FeaturedList } from '@components/list/apps'
 import { CategoriesList } from '@components/list/categories'
 import { doSelectApp } from '@stores/apps'
 import { PlatformsList } from '@components/list/platforms'
@@ -48,21 +48,6 @@ class HomePage extends React.PureComponent {
             query="blockstack"
             limit={23}
           />
-          <AppsList
-            single
-            limit={4}
-            filterBy="all"
-            title="Popular Decentralized Apps"
-            header={{
-              action: {
-                label: 'View All'
-              },
-              href: {
-                pathname: '/all'
-              },
-              as: '/all'
-            }}
-          />
         </Page.Section>
 
         <Page.Section p={0} pl={[0, 4]} pr={[0, 4]}>
@@ -72,14 +57,6 @@ class HomePage extends React.PureComponent {
           </Page.Section>
         </Page.Section>
         <Page.Section flexDirection="column" px>
-          <FeaturedList
-            appNames={['MyCrypto', 'MyEtherWallet', 'Balance.io', 'Coinbase Wallet', 'MetaMask', 'Trust Wallet']}
-            title="Ethereum Wallets"
-          />
-          <FeaturedList
-            title="Decentralized Exchanges"
-            appNames={['Airswap', 'EtherDelta', 'Radar Relay', 'IDEX', 'OasisDEX', 'Paradex', 'Dexy']}
-          />
           <FeaturedList
             appNames={['SteemIt', 'Stealthy', 'Peepeth', 'Mastodon', 'Diaspora', 'DTube']}
             title="Hot Social Dapps"
