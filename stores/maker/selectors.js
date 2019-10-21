@@ -15,9 +15,14 @@ export const selectAppList = state => state.maker.appIds.map(id => state.maker.a
 
 export const selectCurrentApp = state => state.maker.appEntities[state.maker.selectedAppId]
 
-// export const selectCompetionStatus = state => {
-//   const selectedApp = state.appEntities[state.selectedAppId]
-//   return {
-//     paymentDetailsComplete
-//   }
-// }
+export const selectCompetionStatus = state => {
+  const selectedApp = state.maker.appEntities[state.maker.selectedAppId]
+  if (!selectedApp) {
+    return {}
+  }
+  return {
+    paymentDetailsComplete: selectedApp.BTCAddress && selectedApp.stacksAddress,
+    kycComplete: selectedApp.isKYCVerified,
+    legalComplete: false
+  }
+}

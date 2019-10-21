@@ -40,7 +40,7 @@ const MakerModal = ({ isOpen, handleClose, children }) => (
     isOpen={isOpen}
     onRequestClose={handleClose}
     style={customStyles}
-    ariaHideApp={false}
+    appElement={document.querySelector('#__next')}
   >
     <CloseButton handleClick={handleClose} />
     {children}

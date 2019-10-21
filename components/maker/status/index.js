@@ -60,7 +60,7 @@ const AppMiningIncomplete = () => (
     </MakerCardText>
 )
 
-const Status = ({ app, status }) => {
+const Status = ({ app }) => {
   const isReady = isMiningReady(app)
 
   return (
