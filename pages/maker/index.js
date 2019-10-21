@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Flex, Box, Type } from 'blockstack-ui'
 import { connect } from 'react-redux'
 
-import { selectMaker, selectAppList, selectCurrentApp } from '@stores/maker/reducer'
+import { selectMaker, selectAppList, selectCurrentApp, selectCompetionStatus } from '@stores/maker/selectors'
 import { fetchApps, selectAppAction } from '@stores/maker/actions'
 import { selectApiServer, selectUser } from '@stores/apps/selectors'
 import { Page } from '@components/page'
@@ -12,9 +12,8 @@ import { MakerContainer, MakerContentBox, MakerStickyStatusBox } from '@componen
 
 const MakerPortal = ({ apiServer, user, maker, loading, errorMessage, appList, selectedApp, dispatch }) => {
 
-  useEffect(() => {
-    fetchApps({ apiServer, user })(dispatch)
-  }, [])
+const MakerPortal = ({ query, params, apiServer, user, maker, errorMessage, appList, selectedApp, competionStatus, dispatch }) => {
+  console.log('Rendering component')
 
   const app = selectedApp
 
@@ -55,7 +54,7 @@ const MakerPortal = ({ apiServer, user, maker, loading, errorMessage, appList, s
             <Maker.Status
               app={app}
               apiServer={apiServer}
-              status={maker.status}
+              status={competionStatus}
             />
           </MakerStickyStatusBox>
           <Box>
@@ -96,7 +95,8 @@ const mapStateToProps = (state) => ({
   apiServer: selectApiServer(state),
   maker: selectMaker(state),
   appList: selectAppList(state),
-  selectedApp: selectCurrentApp(state)
+  selectedApp: selectCurrentApp(state),
+  competionStatus: selectCompetionStatus(state)
 })
 
 export default connect(mapStateToProps)(MakerPortal)

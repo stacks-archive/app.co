@@ -17,9 +17,11 @@ export const SELECT_APP = '[Maker Page] SELECT_APP'
 
 export const errorAction = () => ({ type: MAKER_AUTH_ERROR })
 export const setLoadingDoneAction = () => ({ type: SET_LOADING_DONE })
-export const setPaymentDetailsComplete = () => ({ type: SET_PAYMENT_DETAILS_COMPLETE })
 export const savePaymentDetailsAction = () => ({ type: SAVE_PAYMENT_DETAILS })
-export const savePaymentDetailsDoneAction = () => ({ type: SAVE_PAYMENT_DETAILS_DONE })
+export const savePaymentDetailsDoneAction = addresses => ({
+  type: SAVE_PAYMENT_DETAILS_DONE,
+  payload: addresses
+})
 export const savePaymentDetailsFailAction = () => ({ type: SAVE_PAYMENT_DETAILS_FAIL })
 
 export const setKycComplete = () => ({ type: SET_KYC_COMPLETE })
@@ -46,13 +48,11 @@ export const savePaymentDetails = ({ apiServer, appId, jwt, btcAddress, stxAddre
       })
     })
     await response.json()
-    dispatch(setPaymentDetailsComplete())
-    dispatch(savePaymentDetailsDoneAction())
+    dispatch(savePaymentDetailsDoneAction({ appId, btcAddress, stxAddress }))
   } catch (error) {
     dispatch(savePaymentDetailsFailAction(error))
   }
 }
-
 
 export const fetchApps = ({ user, apiServer }) => async dispatch => {
   dispatch(fetchAppsAction())
@@ -74,4 +74,3 @@ export const fetchApps = ({ user, apiServer }) => async dispatch => {
     dispatch(fetchAppsFailAction())
   }
 }
-
