@@ -8,8 +8,7 @@ const fs = require('fs-extra')
 const secure = require('express-force-https')
 const morgan = require('morgan')
 const basicAuth = require('express-basic-auth')
-const { createMiddleware: createPrometheusMiddleware } = require('@promster/express')
-const { createServer } = require('@promster/server')
+const { createMiddleware: createPrometheusMiddleware, getContentType, getSummary } = require('@promster/express')
 
 const dev = process.env.NODE_ENV !== 'production'
 if (dev) {
@@ -114,11 +113,6 @@ app.prepare().then(() => {
   getApps(apiServer).then((apps) => {
     const server = express()
     server.use(createPrometheusMiddleware({ app: server }))
-
-    // Create `/metrics` endpoint on separate server
-    if (!dev) {
-      createServer({ port: 9153 }).then(() => console.log(`@promster/server started on port 9153.`))
-    }
 
     if (!dev) {
       server.use(secure)
@@ -263,10 +257,20 @@ app.prepare().then(() => {
 
     server.get('/robots.txt', async (req, res) => {
       const robotsFile = dev || process.env.STAGING ? 'robots.staging.txt': 'robots.txt'
-      const robotsPath = './static/' + robotsFile;
+      const robotsPath = `./static/${  robotsFile}`
       const robots = await fs.readFile(robotsPath)
       res.header('Content-Type', 'text/plain')
       res.status(200).send(robots)
+    })
+
+    // Expose prometheus metrics
+    server.use('/metrics', (req, res) => {
+      if (req.query.prometheus_key !== process.env.PROMETHEUS_KEY) {
+        return res.status(400).end()
+      }
+
+      res.setHeader('Content-Type', getContentType())
+      return res.end(getSummary())
     })
 
     server.get('*', (req, res) => handle(req, res))
