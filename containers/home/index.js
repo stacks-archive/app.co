@@ -15,15 +15,13 @@ class HomePage extends React.PureComponent {
     const props = { rankings }
 
     if (req) {
-      const {
-        params: { appSlug }
-      } = req
+      const slug = req.params.appSlug
 
-      reduxStore.dispatch(doSelectApp(appSlug))
+      reduxStore.dispatch(doSelectApp(slug))
 
       return {
         ...props,
-        appSlug
+        appSlug: slug
       }
     }
 

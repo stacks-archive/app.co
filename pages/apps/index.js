@@ -13,12 +13,8 @@ class PlatformsPage extends React.PureComponent {
   }
 
   static async getInitialProps(ctx) {
-    const {
-      query: { category }
-    } = ctx
-
     return {
-      category
+      category: ctx.query.category
     }
   }
 

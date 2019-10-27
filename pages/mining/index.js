@@ -3,12 +3,12 @@ import Head from '@containers/head'
 import { MiningPage } from '@components/mining/page'
 import { selectApiServer, selectAppMiningMonths, selectAppMiningApps } from '@stores/apps/selectors'
 import { connect } from 'react-redux'
-import { StartAppMiningSection } from '@pages/mining/sections/start-app-mining'
-import { Hero } from '@pages/mining/sections/hero'
-import { HowMuchSection } from '@pages/mining/sections/how-much-earn'
-import { RankingSection } from '@pages/mining/sections/ranking'
-import { PioneersSection } from '@pages/mining/sections/pioneers'
-import { FAQSection } from '@pages/mining/sections/faq'
+import { StartAppMiningSection } from '@containers/mining/sections/start-app-mining'
+import { Hero } from '@containers/mining/sections/hero'
+import { HowMuchSection } from '@containers/mining/sections/how-much-earn'
+import { RankingSection } from '@containers/mining/sections/ranking'
+import { PioneersSection } from '@containers/mining/sections/pioneers'
+import { FAQSection } from '@containers/mining/sections/faq'
 import { ModalRoot } from 'blockstack-ui'
 import { Header } from '@components/mining/header'
 import { Footer } from '@components/mining/footer'
@@ -26,8 +26,8 @@ class AppMiningPage extends React.Component {
     const state = reduxStore.getState()
     const api = selectApiServer(state)
     try {
-      const faqsData = await fetch(`${api}/api/mining-faq`)
-      const { faqs } = await faqsData.json()
+      const faqsResponse = await fetch(`${api}/api/mining-faq`)
+      const faqsData = await faqsResponse.json()
       const apps = selectAppMiningApps(state)
       const months = selectAppMiningMonths(state)
 
@@ -54,7 +54,7 @@ class AppMiningPage extends React.Component {
             apps: theApps
           }
         })
-        return { rankings, month: months[months.length - 1], months, rankingMonths, faq: faqs, apps }
+        return { rankings, month: months[months.length - 1], months, rankingMonths, faq: faqsData.faqs, apps }
       } else {
         console.log('no months!')
         return {}
