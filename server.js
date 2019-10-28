@@ -50,7 +50,7 @@ async function renderAndCache(req, res, pagePath, serverData) {
       console.log('Cache hit:', req.path)
       res.setHeader('x-cache', 'HIT')
       return res.send(await Cache.getAsync(cacheKey))
-    } else {
+    } else if (!dev) {
       console.log('Cache miss:', req.path)
     }
     const [data, blockstackRankedApps, appMiningMonths, appMiningApps] = await Promise.all([
@@ -114,8 +114,8 @@ app.prepare().then(() => {
 
     if (!dev) {
       server.use(secure)
+      server.use(morgan('combined'))
     }
-    server.use(morgan('combined'))
     server.use(cookiesMiddleware())
     server.use(compression())
 
@@ -237,9 +237,9 @@ app.prepare().then(() => {
           await Promise.all([
             AppsAggregator.set(),
             MiningMonths.set(),
-            RankedApps.set(),
             MiningApps.set()
           ])
+          await RankedApps.set()
           await Cache.reset()
           res.json({ success: true })
         } catch (error) {

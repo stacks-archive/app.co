@@ -1,3 +1,3 @@
-import { HomePage } from '@pages/home'
+import { HomePage } from '@containers/home'
 
 export default HomePage

@@ -5,9 +5,9 @@ import { Footer } from '@components/footer'
 
 import { StyledPage } from './styled'
 
-const Page = ({ isErrorPage, children, admin, wrap, innerPadding = [2, 0], ...rest }) => (
+const Page = ({ isErrorPage = false, children, admin = false, wrap, innerPadding = [2, 0], ...rest }) => (
   <StyledPage {...rest}>
-    <TopBar isErrorPage={isErrorPage} admin={admin} wrap={wrap} />
+    <TopBar isErrorPage={isErrorPage} admin={admin} wrap={rest.wrap} />
     <StyledPage.Section flexDirection={['column']} alignItems="center" pt={[3, 4]} px={innerPadding}>
       {children}
     </StyledPage.Section>
@@ -28,6 +28,13 @@ Page.Section.Content = StyledPage.Content
 
 Page.propTypes = {
   children: PropTypes.node.isRequired,
+  isErrorPage: PropTypes.bool,
+  admin: PropTypes.bool,
   wrap: PropTypes.bool
+}
+
+Page.defaultProps = {
+  isErrorPage: false,
+  admin: false
 }
 export { Page }

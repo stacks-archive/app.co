@@ -174,10 +174,15 @@ class SubmitDapp extends React.Component {
     accessToken: null
   }
 
-  componentWillMount() {
-    if (typeof window !== 'undefined') {
-      trackEvent('App Submission Page - Page Load')
-      this.setStateFromData()
+  componentDidMount() {
+    const queries = document.location.search
+    if (queries) {
+      const referralCode = queries.match(/referralCode=(\w+)/)[1]
+      const refSource = queries.match(/refSource=(\w+)/)[1]
+      this.setState({ // eslint-disable-line react/no-did-mount-set-state
+        referralCode,
+        refSource
+      })
     }
   }
 
@@ -201,8 +206,7 @@ class SubmitDapp extends React.Component {
   }
 
   submit = async () => {
-    const { apiServer, user } = this.props
-    const url = `${apiServer}/api/submit`
+    const url = `${this.props.apiServer}/api/submit`
     this.setState({ loading: true })
 
     /**
@@ -213,12 +217,11 @@ class SubmitDapp extends React.Component {
       twitterHandle = twitterHandle.replace('@', '')
     }
 
-    const { referralCode, refSource } = this.state
     const values = {
       ...this.state.values,
       twitterHandle,
-      referralCode,
-      refSource
+      referralCode: this.state.referralCode,
+      refSource: this.state.refSource
     }
 
     try {
@@ -235,10 +238,9 @@ class SubmitDapp extends React.Component {
         headers,
         body: JSON.stringify(values)
       })
-      const { app } = await response.json()
+      const resData = await response.json()
       trackEvent('App Submission Page - Submission Success')
-      localStorage.removeItem(APP_SUBMISSION_DATA)
-      this.setState({ success: true, loading: false, accessToken: app.accessToken })
+      this.setState({ success: true, loading: false, accessToken: resData.app.accessToken })
     } catch (e) {
       trackEvent('App Submission Page - Submission Error')
       this.setState({ success: false, loading: false })

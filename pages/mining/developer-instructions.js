@@ -9,8 +9,8 @@ import RegisteredApps from '@components/mining/registered-apps'
 class DeveloperInstructions extends React.Component {
   static async getInitialProps() {
     const response = await fetch(`https://api.app.co/api/app-mining-apps`)
-    const { apps } = await response.json()
-    return { apps }
+    const data = await response.json()
+    return { apps: data.apps }
   }
   render() {
     return (

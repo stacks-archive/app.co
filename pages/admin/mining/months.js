@@ -24,11 +24,10 @@ class MiningMonths extends React.Component {
   }
 
   async download() {
-    const { jwt, apiServer } = this.props 
-    const url = `${apiServer}/api/admin/mining-ready-apps`
+    const url = `${this.props.apiServer}/api/admin/mining-ready-apps`
     const res = await fetch(url, {
       headers: new Headers({
-        Authorization: `Bearer ${jwt}`
+        Authorization: `Bearer ${this.props.jwt}`
       })
     })
     const blob = await res.blob()

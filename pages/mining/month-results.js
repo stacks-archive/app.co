@@ -18,24 +18,25 @@ import AppStore from '@stores/apps'
 
 class MonthResults extends React.Component {
   static async getInitialProps(context) {
-    const { month, year } = context.query
+    const monthName = context.query.month
+    const yearName = context.query.year
     const state = context.reduxStore.getState()
 
     try {
       const months = selectAppMiningMonths(state)
       const foundReport = months.find(
-        (report) => report.monthName.toLowerCase() === month.toLowerCase() && report.year === parseInt(year, 10)
+        (report) => report.monthName.toLowerCase() === monthName.toLowerCase() && report.year === parseInt(yearName, 10)
       )
 
       return {
         report: foundReport,
-        month,
-        year
+        month: monthName,
+        year: yearName
       }
     } catch (error) {
       return {
-        month,
-        year
+        month: monthName,
+        year: yearName
       }
     }
   }
@@ -56,8 +57,6 @@ class MonthResults extends React.Component {
 
   rankings() {
     const { report } = this.props
-
-    console.log(report)
 
     return report.compositeRankings.map((app, index) => (
       <ClickableTr>

@@ -1,4 +1,4 @@
-import App, { Container } from 'next/app'
+import App from 'next/app'
 import React from 'react'
 import { Provider } from 'react-redux'
 import { CookiesProvider } from 'react-cookie'
@@ -110,16 +110,14 @@ class MyApp extends App {
       <CookiesProvider>
         <Mdx>
           <ThemeProvider theme={BlockstackTheme}>
-            <Container>
-              <Provider store={reduxStore}>
-                <Root>
-                  <>
-                    <GlobalStyles />
-                    <Component {...pageProps} serverCookies={this.props.cookies} />
-                  </>
-                </Root>
-              </Provider>
-            </Container>
+            <Provider store={reduxStore}>
+              <Root>
+                <>
+                  <GlobalStyles />
+                  <Component {...pageProps} serverCookies={this.props.cookies} />
+                </>
+              </Root>
+            </Provider>
           </ThemeProvider>
         </Mdx>
       </CookiesProvider>
