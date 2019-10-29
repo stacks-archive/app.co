@@ -1,19 +1,19 @@
-export const SET_LOADING_DONE = '[Maker Page] SET_LOADING_DONE'
-export const MAKER_AUTH_ERROR = '[Maker Page] MAKER_AUTH_ERROR'
+export const SET_LOADING_DONE = 'maker-page/SET_LOADING_DONE'
+export const MAKER_AUTH_ERROR = 'maker-page/MAKER_AUTH_ERROR'
 
-export const SET_PAYMENT_DETAILS_COMPLETE = '[Maker Page] SET_PAYMENT_DETAILS_COMPLETE'
-export const SAVE_PAYMENT_DETAILS = '[Maker Page] SAVE_PAYMENT_DETAILS'
-export const SAVE_PAYMENT_DETAILS_DONE = '[Maker Page] SAVE_PAYMENT_DETAILS_DONE'
-export const SAVE_PAYMENT_DETAILS_FAIL = '[Maker Page] SAVE_PAYMENT_DETAILS_FAIL'
+export const SET_PAYMENT_DETAILS_COMPLETE = 'maker-page/SET_PAYMENT_DETAILS_COMPLETE'
+export const SAVE_PAYMENT_DETAILS = 'maker-page/SAVE_PAYMENT_DETAILS'
+export const SAVE_PAYMENT_DETAILS_DONE = 'maker-page/SAVE_PAYMENT_DETAILS_DONE'
+export const SAVE_PAYMENT_DETAILS_FAIL = 'maker-page/SAVE_PAYMENT_DETAILS_FAIL'
 
-export const SET_KYC_COMPLETE = '[Maker Page] SET_KYC_COMPLETE'
-export const SET_LEGAL_COMPLETE = '[Maker Page] SET_LEGAL_COMPLETE'
+export const SET_KYC_COMPLETE = 'maker-page/SET_KYC_COMPLETE'
+export const SET_LEGAL_COMPLETE = 'maker-page/SET_LEGAL_COMPLETE'
 
-export const FETCH_APPS = '[Maker Page] FETCH_APPS'
-export const FETCH_APPS_DONE = '[Maker Page] FETCH_APPS_DONE'
-export const FETCH_APPS_FAIL = '[Maker Page] FETCH_APPS_FAIL'
+export const FETCH_APPS = 'maker-page/FETCH_APPS'
+export const FETCH_APPS_DONE = 'maker-page/FETCH_APPS_DONE'
+export const FETCH_APPS_FAIL = 'maker-page/FETCH_APPS_FAIL'
 
-export const SELECT_APP = '[Maker Page] SELECT_APP'
+export const SELECT_APP = 'maker-page/SELECT_APP'
 
 export const errorAction = () => ({ type: MAKER_AUTH_ERROR })
 export const setLoadingDoneAction = () => ({ type: SET_LOADING_DONE })

@@ -7,7 +7,7 @@ import { StyledPage } from './styled'
 
 const Page = ({ isErrorPage = false, children, admin = false, wrap, innerPadding = [2, 0], ...rest }) => (
   <StyledPage {...rest}>
-    <TopBar isErrorPage={isErrorPage} admin={admin} wrap={rest.wrap} />
+    <TopBar isErrorPage={isErrorPage} admin={admin} wrap={wrap} />
     <StyledPage.Section flexDirection={['column']} alignItems="center" pt={[3, 4]} px={innerPadding}>
       {children}
     </StyledPage.Section>
