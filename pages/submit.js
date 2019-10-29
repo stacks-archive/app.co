@@ -252,7 +252,6 @@ class SubmitDapp extends React.Component {
   }
 
   render() {
-    // return <div>lkjsdflkjsdlfkjs</div>
     const { appConstants } = this.props
 
     return (
