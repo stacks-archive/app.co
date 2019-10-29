@@ -11,131 +11,115 @@ import { MakerContainer, MakerContentBox, MakerStickyStatusBox } from '@componen
 import { Page } from '@components/page'
 import Head from '@containers/head'
 import Maker from '@components/maker'
+import { red } from '@atlaskit/theme/dist/cjs/colors'
 
-const MakerPortal = ({ params, apiServer, user, maker, errorMessage, appList, selectedApp, competionStatus, dispatch }) => {
-
-  const hasAppId = params && !!params.appId
-
-  const router = useRouter()
-
-  const updateMakerRoute = id => router.push(
-    '/maker/apps',
-    `/maker/apps/${id}`,
-    {
-      shallow: true
-    }
-  )
-
-  const getAppId = () => {
-    if (!params) return undefined
-    const id = parseInt(params.appId, 10)
-    if (isNaN(id)) return undefined
-    return id
-  }
-
-  useEffect(() => {
-    async function fetchAppsOnInit () {
-      await fetchApps({ apiServer, user })(dispatch)
-      if (hasAppId) {
-        dispatch(selectAppAction(getAppId()))
-      }
-      if (!hasAppId && process.browser) {
-        setTimeout(() => {
-          console.log(appList)
-          const { id } = appList[0]
-          dispatch(selectAppAction(id))
-        })
-      }
-    }
-    fetchAppsOnInit()
-  }, [])
-
-  if (maker.loading || !selectedApp) {
-    return (
-      <Page innerPadding={0} wrap>
-        <Flex>
-          <Box width={1}>
-            <Type fontSize={5} my={7} textAlign="center">{maker.loading ? 'Loading...' : errorMessage}</Type>
-          </Box>
-        </Flex>
-      </Page>
-    )
-  }
-
-  function handleChangingApp (event) {
-    event.persist()
-    const id = event.target.value
-    dispatch(selectAppAction(id))
-    updateMakerRoute(id)
-  }
-
-  return (
-    <Page innerPadding={0} wrap>
-      <Head title={selectedApp.name} />
-      <MakerContainer>
-        <Box>
-        {
-          appList.length &&
-            <select onChange={handleChangingApp} value={getAppId()}>
-              {appList.map(({ name, id }) => (
-                <option key={id} value={id}>{name}</option>
-              ))}
-            </select>
-        }
-        </Box>
-        <Type fontSize={3} fontWeight={500} mx={[4, 6]} py={6} px={[20, 0]}>
-          {selectedApp.name}
-        </Type>
-        <Flex flexDirection={['column', 'column', 'row-reverse']} maxWidth={[null, null, 1140]} alignItems="flex-start">
-          <MakerStickyStatusBox>
-            <Maker.Status
-              app={selectedApp}
-              apiServer={apiServer}
-              status={competionStatus}
-            />
-          </MakerStickyStatusBox>
-          <Box>
-            <MakerContentBox>
-              <Maker.PaymentDetails
-                app={selectedApp}
-                user={user}
-                apiServer={apiServer}
-                dispatch={dispatch}
-              />
-            </MakerContentBox>
-            <MakerContentBox>
-              <Maker.KYC
-                app={selectedApp}
-                user={user}
-                apiServer={apiServer}
-              />
-            </MakerContentBox>
-            <MakerContentBox>
-              <Maker.ParticipationAgreement
-                app={selectedApp}
-                user={user}
-                apiServer={apiServer}
-              />
-            </MakerContentBox>
-          </Box>
-        </Flex>
-      </MakerContainer>
-    </Page>
-  )
-}
-
-MakerPortal.getInitialProps = (x) => {
-  console.log(x.userApps)
-  return { params: x.query.params }
-}
-
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: selectUser(state),
   apiServer: selectApiServer(state),
   maker: selectMaker(state),
   appList: selectAppList(state),
   selectedApp: selectCurrentApp(state),
-  competionStatus: selectCompetionStatus(state)
+  completionStatus: selectCompetionStatus(state)
 })
 
-export default connect(mapStateToProps)(MakerPortal)
+const LoadingPage = ({ message = 'Loading...', ...rest }) => (
+  <Page innerPadding={0} wrap>
+    <Flex>
+      <Box width={1}>
+        <Type fontSize={5} my={7} textAlign="center">
+          {message}
+        </Type>
+      </Box>
+    </Flex>
+  </Page>
+)
+
+const handleChangingApp = (event, fn) => (dispatch) => {
+  event.persist()
+  const id = event.target.value
+  dispatch(selectAppAction(id))
+  fn(id)
+}
+
+const getAppId = (params) => {
+  if (!params) return undefined
+  const id = parseInt(params.appId, 10)
+  if (isNaN(id)) return undefined
+  return id
+}
+
+const MakerPortal = connect()(
+  ({ maker, selectedApp, appList, appId, apiServer, completionStatus, user, dispatch, ...rest }) => {
+    const router = useRouter()
+
+    const updateMakerRoute = (id) =>
+      router.push('/maker/apps', `/maker/apps/${id}`, {
+        shallow: true
+      })
+
+    if (maker.loading || !selectedApp) return <LoadingPage />
+
+    return (
+      <Page innerPadding={0} wrap>
+        <Head title={selectedApp.name} />
+        <MakerContainer>
+          <Box>
+            {appList.length && (
+              <select onChange={(e) => handleChangingApp(e, updateMakerRoute)(dispatch)} value={appId}>
+                {appList.map(({ name, id }) => (
+                  <option key={id} value={id}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+            )}
+          </Box>
+          <Type fontSize={3} fontWeight={500} mx={[4, 6]} py={6} px={[20, 0]}>
+            {selectedApp.name}
+          </Type>
+          <Flex
+            flexDirection={['column', 'column', 'row-reverse']}
+            maxWidth={['unset', 'unset', 1140]}
+            alignItems="flex-start"
+          >
+            <MakerStickyStatusBox>
+              <Maker.Status app={selectedApp} apiServer={apiServer} status={completionStatus} />
+            </MakerStickyStatusBox>
+            <Box>
+              <MakerContentBox>
+                <Maker.PaymentDetails app={selectedApp} user={user} apiServer={apiServer} dispatch={dispatch} />
+              </MakerContentBox>
+              <MakerContentBox>
+                <Maker.KYC app={selectedApp} user={user} apiServer={apiServer} />
+              </MakerContentBox>
+              <MakerContentBox>
+                <Maker.ParticipationAgreement app={selectedApp} user={user} apiServer={apiServer} />
+              </MakerContentBox>
+            </Box>
+          </Flex>
+        </MakerContainer>
+      </Page>
+    )
+  }
+)
+
+MakerPortal.getInitialProps = async ({ req, reduxStore, ...ctx }) => {
+  const { params, universalCookies } = req
+  const userCookie = universalCookies.cookies.jwt
+  const appId = getAppId(params)
+  const apiServer = selectApiServer(reduxStore.getState())
+  await fetchApps({ apiServer, user: { jwt: userCookie } })(reduxStore.dispatch)
+  let selectedApp = {}
+  if (appId) {
+    reduxStore.dispatch(selectAppAction(appId))
+    selectedApp = selectCurrentApp(reduxStore.getState())
+  } else {
+    const firstApp = selectAppList(reduxStore.getState())[0]
+    selectedApp = firstApp
+  }
+  const props = mapStateToProps(reduxStore.getState())
+
+  return { appId, ...props, selectedApp, dispatch: reduxStore.dispatch }
+}
+
+export default MakerPortal
