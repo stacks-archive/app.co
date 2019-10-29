@@ -18,35 +18,33 @@ const MakerPortal = ({ params, apiServer, user, maker, errorMessage, appList, se
 
   const router = useRouter()
 
-  console.log(router)
-  const updateMakerRoute = id => {
-    router.push(
-      {
-        pathname: '/maker',
-        query: {
-          params: { appId: id }
-        },
-        as: `/maker/${id}`
-      },
-      {
-        shallow: true
-      }
-    )
-  }
+  const updateMakerRoute = id => router.push(
+    '/maker/apps',
+    `/maker/apps/${id}`,
+    {
+      shallow: true
+    }
+  )
 
   const getAppId = () => {
-
+    if (!params) return undefined
     const id = parseInt(params.appId, 10)
-    if (isNaN(id)) return null
+    if (isNaN(id)) return undefined
     return id
   }
 
   useEffect(() => {
     async function fetchAppsOnInit () {
       await fetchApps({ apiServer, user })(dispatch)
-
       if (hasAppId) {
         dispatch(selectAppAction(getAppId()))
+      }
+      if (!hasAppId && process.browser) {
+        setTimeout(() => {
+          console.log(appList)
+          const { id } = appList[0]
+          dispatch(selectAppAction(id))
+        })
       }
     }
     fetchAppsOnInit()
@@ -64,21 +62,12 @@ const MakerPortal = ({ params, apiServer, user, maker, errorMessage, appList, se
     )
   }
 
-  // if (!hasAppId) {
-    // if (appList.length === 0) throw new Error('wlkdsfsldfl')
-    // const { id } = appList[0]
-    // console.log('has no app id take first', id)
-    // updateMakerRoute(id)
-    // dispatch(selectAppAction(id))
-  // }
-
   function handleChangingApp (event) {
     event.persist()
     const id = event.target.value
     dispatch(selectAppAction(id))
     updateMakerRoute(id)
   }
-
 
   return (
     <Page innerPadding={0} wrap>
@@ -135,7 +124,12 @@ const MakerPortal = ({ params, apiServer, user, maker, errorMessage, appList, se
   )
 }
 
-const mapStateToProps = (state) => ({
+MakerPortal.getInitialProps = (x) => {
+  console.log(x.userApps)
+  return { params: x.query.params }
+}
+
+const mapStateToProps = state => ({
   user: selectUser(state),
   apiServer: selectApiServer(state),
   maker: selectMaker(state),

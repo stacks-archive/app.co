@@ -206,6 +206,10 @@ class App extends React.Component {
           <p>
             Magic link: <a href={`/maker/${app.accessToken}`}>{`/maker/${app.accessToken}`}</a>
           </p>
+          <p>
+            Maker portal: <a href={`/maker/apps/${app.id}`}>{`/maker/apps/${app.id}`}</a>
+          </p>
+
           <Form.Wrapper>
             <TextField
               value={this.state.name || ''}

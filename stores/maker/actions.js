@@ -55,11 +55,11 @@ export const savePaymentDetails = ({ apiServer, appId, jwt, btcAddress, stxAddre
 }
 
 export const fetchApps = ({ user, apiServer }) => async dispatch => {
-  dispatch(fetchAppsAction())
   if (!(user && user.jwt)) {
     dispatch(errorAction())
     return
   }
+  dispatch(fetchAppsAction())
   try {
     const uri = `${apiServer}/api/maker/apps`
     const response = await fetch(uri, {
@@ -68,8 +68,7 @@ export const fetchApps = ({ user, apiServer }) => async dispatch => {
       }
     })
     const apps = await response.json()
-    dispatch(fetchAppsDoneAction(apps))
-    dispatch(setLoadingDoneAction())
+    await dispatch(fetchAppsDoneAction(apps))
   } catch (error) {
     dispatch(fetchAppsFailAction())
   }
