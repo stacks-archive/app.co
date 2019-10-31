@@ -1,3 +1,4 @@
+import React from 'react'
 import styled, { css } from 'styled-components'
 import { wrapperStyle } from '@common/styles'
 import { display, textAlign, alignItems, justifyContent } from 'styled-system'
@@ -5,22 +6,6 @@ import { Flex } from 'blockstack-ui'
 
 const Navigation = styled(Flex)`
   display: flex;
-  a {
-    &:link,
-    &:visited,
-    &:active {
-      display: block;
-      padding: 10px;
-
-      font-size: 14px;
-      color: rgba(20, 33, 68, 0.7);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    &:hover {
-      color: rgba(20, 33, 68, 1);
-    }
-  }
   ${display};
   ${textAlign};
   ${alignItems};
@@ -50,6 +35,36 @@ const Navigation = styled(Flex)`
       flex-direction: column;
     `};
 `
+
+export const StyledAnchor = styled.a`
+  &:link,
+  &:visited,
+  &:active {
+    padding: 10px;
+    font-size: 14px;
+    color: rgba(20, 33, 68, 0.7);
+    text-decoration: none;
+    font-weight: 400;
+  }
+  &:hover {
+    color: rgba(20, 33, 68, 1);
+  }
+  ${({ mobile }) =>
+    mobile &&
+    css`
+      font-size: 25px !important;
+      text-align: right;
+      width: 100%;
+      display: block;
+    `
+  };
+  ${({ footer }) =>
+    footer &&
+    css`
+      display: inline-block;
+  `};
+`
+
 const StyledTopBar = styled.div`
   width: 100%;
   top: 0;
