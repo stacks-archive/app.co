@@ -2,13 +2,13 @@ import React from 'react'
 import 'isomorphic-unfetch'
 import { connect } from 'react-redux'
 import Head from '@containers/head'
-import Link from 'next/link'
 import { bindActionCreators } from 'redux'
+import { MakerTitle, MakerCardHeader, MakerButton } from '@components/maker/styled'
 import { Page } from '@components/page'
-import { Type, Field, Flex, Box, Button } from 'blockstack-ui'
+import { Type, Field, Flex, Box } from 'blockstack-ui'
 import { selectAppConstants, selectApiServer } from '@stores/apps/selectors'
-import { string, boolean } from 'yup'
-import { FormSection, ErrorMessage, Bar, sections as getSections } from '@containers/submit'
+import { FormSection, ErrorMessage, sections as getSections } from '@containers/submit'
+import SuccessCard from '@components/submit'
 import debounce from 'lodash.debounce'
 import UserStore from '@stores/user'
 
@@ -92,13 +92,8 @@ const Submit = ({ appConstants, setState, state, errors, submit, user, loading, 
 
   return (
     <Box mx="auto" maxWidth={700}>
-      <Type is="h2">Add an app to App.co</Type>
-      <Type is="p" lineHeight={1.5}>
-        Add any user-ready decentralized app: It could be an app you built, or an app you discovered. We manually
-        verify all information before publishing to App.co. Contact details are not displayed and we promise to keep
-        your information private and safe.
-      </Type>
-      <Bar mb={0} />
+      <MakerTitle pt="20px">Submit your app</MakerTitle>
+      <MakerCardHeader>Personal details</MakerCardHeader>
       {user && user.user && (
         <Flex pt={6}>
           <Box mb={4} width={1}>
@@ -121,19 +116,16 @@ const Submit = ({ appConstants, setState, state, errors, submit, user, loading, 
       )}
       <Flex flexWrap="wrap" pt={6} flexDirection="column">
         <form noValidate onSubmit={handleValidation}>
-          {sections.map((section) => (
-            <>
-              <FormSection
-                errors={errors}
-                handleChange={outerHandleChange}
-                setState={setState}
-                key={`section-${section.fields[0].name}`}
-                message={section.message}
-                fields={section.fields}
-                state={state}
-              />
-              <Bar />
-            </>
+          {sections.map(section => (
+            <FormSection
+              errors={errors}
+              handleChange={outerHandleChange}
+              setState={setState}
+              key={`section-${section.fields[0].name}`}
+              message={section.message}
+              fields={section.fields}
+              state={state}
+            />
           ))}
           {errors ? <ErrorMessage /> : null}
           {!(user && user.jwt) ? (
@@ -141,10 +133,10 @@ const Submit = ({ appConstants, setState, state, errors, submit, user, loading, 
               <Field.Message maxWidth={400} lineHeight={1.5} mb={3}>
                 To submit your app, first login with Blockstack. You&apos;ll be able to use your Blockstack ID to manage your app&apos;s listing.
               </Field.Message>
-              <Button onClick={blockstackAuth}>{loading ? 'Loading...' : 'Login with Blockstack'}</Button>
+              <MakerButton onClick={blockstackAuth}>{loading ? 'Loading...' : 'Login with Blockstack'}</MakerButton>
             </>
           ) : (
-            <Button>{loading ? 'Loading...' : 'Submit App'}</Button>
+            <MakerButton>{loading ? 'Loading...' : 'Submit App'}</MakerButton>
           )}
         </form>
       </Flex>
@@ -263,51 +255,27 @@ class SubmitDapp extends React.Component {
     const { appConstants } = this.props
 
     return (
-      <Page>
+      <Page innerPadding={0} pt={0}>
         <Head title="Submit your dapp" description="Submit your dapp to be listed on the Universal Dapp Store." />
-        <Page.Section wrap p={['32px', '64px']} mb={3} richText bg="white">
-          {this.state.success ? (
-            <>
-              <Box width="100%" textAlign="center">
-                <Box pb={6} width="100%">
-                  <Type mx="auto" fontSize={5} fontWeight="bold">
-                    Success!
-                  </Type>
-                </Box>
-                <Box mx="auto">
-                  <Type display="block">Thanks for your submission! Your app will need to be approved before being public on app.co.</Type>
-                  {this.appMiningEligible() && (
-                    <>
-                      <Type my={3} display="block">To update your app&apos;s details and enroll in App Mining, visit our Maker Portal</Type>
-                      <Link
-                        href={{
-                          pathname: '/maker'
-                        }}
-                        passHref
-                      >
-                        <Button is="a" href="/" color="white !important">
-                          Go to the Maker Portal
-                        </Button>
-                      </Link>
-                    </>
-                  )}
-                </Box>
-              </Box>
-            </>
-          ) : (
-            <Submit
-              loading={this.state.loading}
-              submit={this.submit}
-              success={this.state.success}
-              appConstants={appConstants}
-              setState={debounce((args) => this.setState(args), 100)}
-              state={this.state.values}
-              errors={this.state.errorCount > 0 && this.state.errors}
-              signIn={this.props.signIn}
-              user={this.props.user}
-              isAppMiningEligible={this.appMiningEligible()}
-            />
-          )}
+        <Page.Section p={['32px', '64px']} mb={3} bg="white">
+          {
+            this.state.success
+              ? <SuccessCard isAppMiningEligible={this.appMiningEligible()} />
+              : (
+                  <Submit
+                    loading={this.state.loading}
+                    submit={this.submit}
+                    success={this.state.success}
+                    appConstants={appConstants}
+                    setState={debounce((args) => this.setState(args), 100)}
+                    state={this.state.values}
+                    errors={this.state.errorCount > 0 && this.state.errors}
+                    signIn={this.props.signIn}
+                    user={this.props.user}
+                    isAppMiningEligible={this.appMiningEligible()}
+                  />
+                )
+            }
         </Page.Section>
       </Page>
     )

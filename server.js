@@ -66,7 +66,8 @@ async function renderAndCache(req, res, pagePath, serverData) {
       ...serverData,
       blockstackRankedApps,
       appMiningMonths,
-      appMiningApps
+      appMiningApps,
+      params: req.params
     }
     const html = await app.renderToHTML(req, res, pagePath, dataToPass)
     if (cacheKey) {
@@ -220,7 +221,9 @@ app.prepare().then(() => {
     /**
      * Maker pages
      */
-    server.get('/maker', (req, res) => renderAndCache(req, res, '/maker'))
+    server.get('/maker', (req, res) => res.redirect('/maker/apps'))
+    server.get('/maker/apps', (req, res) => renderAndCache(req, res, '/maker/apps'))
+    server.get('/maker/apps/:appId', (req, res) => renderAndCache(req, res, '/maker/apps'))
     server.get('/maker/:accessToken', (req, res) => renderAndCache(req, res, '/maker/magic-link', { accessToken: req.params.accessToken }))
 
     apps.platforms.forEach((platform) => {

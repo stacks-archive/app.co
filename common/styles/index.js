@@ -72,7 +72,7 @@ const theme = {
       accent: '#0CCABA'
     }),
     grey: Object.assign('#5B647C', {
-      light: '#E6E9EE',
+      light: '#F9F9FC',
       mid: '#7588A2',
       dark: '#142144'
     }),
@@ -94,7 +94,7 @@ const wrapperStyle = css`
   padding-right: 20px;
   ${below.md`
     padding-left: 20px;
-    padding-right: 20px;  
+    padding-right: 20px;
   `};
 `
 

@@ -1,4 +1,5 @@
 import { UserSession, AppConfig } from 'blockstack'
+import Cookies from 'js-cookie'
 
 const host = typeof document === 'undefined' ? 'https://app.co' : document.location.origin
 const appConfig = new AppConfig(['store_write'], host)
@@ -24,35 +25,43 @@ const signingIn = () => ({
 
 const signedIn = (data) => ({
   type: constants.SIGNED_IN,
-  token: data.token,
-  user: data.user,
-  userId: data.user.id
+  payload: {
+    token: data.token,
+    user: data.user,
+    userId: data.user.id
+  }
 })
 
-const signOut = () => ({ 
-  type: constants.SIGNING_OUT
-})
+const signOut = () => {
+  Cookies.remove('jwt')
+  return {
+    type: constants.SIGNING_OUT
+  }
+}
 
-const handleSignIn = (apiServer) =>
-  async function innerHandleSignIn(dispatch) {
-    const token = userSession.getAuthResponseToken()
-    if (!token) {
-      return true
-    }
-    if (userSession.isUserSignedIn()) {
-      userSession.signUserOut()
-    }
-
-    dispatch(signingIn())
-    await userSession.handlePendingSignIn()
-    const url = `${apiServer}/api/authenticate?authToken=${token}`
-    const response = await fetch(url, {
-      method: 'POST'
-    })
-    const json = await response.json()
-    dispatch(signedIn(json))
+const handleSignIn = (apiServer) => async (dispatch) => {
+  const token = userSession.getAuthResponseToken()
+  if (!token) {
     return true
   }
+  if (userSession.isUserSignedIn()) {
+    userSession.signUserOut()
+  }
+
+  dispatch(signingIn())
+  await userSession.handlePendingSignIn()
+  const url = `${apiServer}/api/authenticate?authToken=${token}`
+  const response = await fetch(url, {
+    method: 'POST'
+  })
+  const json = await response.json()
+  dispatch(signedIn(json))
+  const cookie = Cookies.get('jwt')
+  if (!cookie) {
+    Cookies.set('jwt', json.token)
+  }
+  return true
+}
 
 const signIn = (redirectPath = 'admin') => {
   const redirect = `${window.location.origin}/${redirectPath}`
@@ -67,25 +76,23 @@ const actions = {
   signOut
 }
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
+const reducer = (state = initialState, { type, payload }) => {
+  switch (type) {
     case constants.SIGNING_IN:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         signingIn: true
-      })
+      }
     case constants.SIGNED_IN:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         signingIn: false,
-        jwt: action.token,
-        userId: action.userId,
-        user: action.user
-      })
+        jwt: payload.token,
+        userId: payload.userId,
+        user: payload.user
+      }
     case constants.SIGNING_OUT:
-      return Object.assign({}, state, {
-        user: null,
-        userId: null,
-        jwt: null
-      })
+      return { ...state, user: null, userId: null, jwt: null }
     default:
       return state
   }

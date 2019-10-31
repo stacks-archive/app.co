@@ -8,6 +8,7 @@ import newsletter from '@stores/newsletter'
 import RouterStore from '@stores/router'
 import makeMiningReducer from '@stores/mining/reducer'
 import AdminMiningReducer from '@stores/mining-admin/reducer'
+import makerReducer from '@stores/maker/reducer'
 
 export default (data) => {
   const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
@@ -21,7 +22,8 @@ export default (data) => {
     newsletter,
     router: RouterStore.reducer,
     mining: makeMiningReducer(data),
-    miningAdmin: AdminMiningReducer
+    miningAdmin: AdminMiningReducer,
+    maker: makerReducer
   })
 
   return finalCreateStore(Reducer)

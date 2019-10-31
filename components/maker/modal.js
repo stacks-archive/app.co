@@ -5,7 +5,11 @@ import styled from 'styled-components'
 import { CloseIcon } from '@components/svg/maker'
 
 const customStyles = {
-  content : {
+  overlay: {
+    // above headroom header library
+    zIndex: 100
+  },
+  content: {
     top: '50%',
     left: '50%',
     right: 'auto',
@@ -27,7 +31,7 @@ const CloseButtonContainer = styled.div`
 
 const CloseButton = ({ handleClick }) => (
   <CloseButtonContainer onClick={handleClick}>
-    <CloseIcon/>
+    <CloseIcon />
   </CloseButtonContainer>
 )
 
@@ -36,12 +40,11 @@ const MakerModal = ({ isOpen, handleClose, children }) => (
     isOpen={isOpen}
     onRequestClose={handleClose}
     style={customStyles}
-    ariaHideApp={false}
+    appElement={typeof document !== 'undefined' ? document.querySelector('#__next') : null}
   >
     <CloseButton handleClick={handleClose} />
     {children}
   </Modal>
 )
-
 
 export default MakerModal
