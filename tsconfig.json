@@ -24,7 +24,7 @@
       "@common/*": ["common/*"],
       "@pages/*": ["pages/*"],
       "@utils/*": ["utils/*"],
-      "@stores/*": ["store/*"]
+      "@stores/*": ["stores/*"]
     }
   },
   "exclude": [
