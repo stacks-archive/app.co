@@ -18,7 +18,7 @@ export const SELECT_APP = 'maker-page/SELECT_APP'
 export const errorAction = () => ({ type: MAKER_AUTH_ERROR })
 export const setLoadingDoneAction = () => ({ type: SET_LOADING_DONE })
 export const savePaymentDetailsAction = () => ({ type: SAVE_PAYMENT_DETAILS })
-export const savePaymentDetailsDoneAction = addresses => ({
+export const savePaymentDetailsDoneAction = (addresses) => ({
   type: SAVE_PAYMENT_DETAILS_DONE,
   payload: addresses
 })
@@ -28,12 +28,14 @@ export const setKycComplete = () => ({ type: SET_KYC_COMPLETE })
 export const setLegalComplete = () => ({ type: SET_LEGAL_COMPLETE })
 
 export const fetchAppsAction = () => ({ type: FETCH_APPS })
-export const fetchAppsDoneAction = payload => ({ type: FETCH_APPS_DONE, payload })
+
+export const fetchAppsDoneAction = (payload) => ({ type: FETCH_APPS_DONE, payload })
+
 export const fetchAppsFailAction = () => ({ type: FETCH_APPS_FAIL })
 
-export const selectAppAction = payload => ({ type: SELECT_APP, payload })
+export const selectAppAction = (payload) => ({ type: SELECT_APP, payload })
 
-export const savePaymentDetails = ({ apiServer, appId, jwt, btcAddress, stxAddress }) => async dispatch => {
+export const savePaymentDetails = ({ apiServer, appId, jwt, btcAddress, stxAddress }) => async (dispatch) => {
   dispatch(savePaymentDetailsAction())
   try {
     const response = await fetch(`${apiServer}/api/maker/apps?appId=${appId}`, {
@@ -54,11 +56,12 @@ export const savePaymentDetails = ({ apiServer, appId, jwt, btcAddress, stxAddre
   }
 }
 
-export const fetchApps = ({ user, apiServer }) => async dispatch => {
+export const fetchApps = ({ user, apiServer }) => async (dispatch) => {
   if (!(user && user.jwt)) {
     dispatch(errorAction())
     return
   }
+
   dispatch(fetchAppsAction())
   try {
     const uri = `${apiServer}/api/maker/apps`
@@ -67,8 +70,8 @@ export const fetchApps = ({ user, apiServer }) => async dispatch => {
         Authorization: `Bearer ${user.jwt}`
       }
     })
-    const apps = await response.json()
-    await dispatch(fetchAppsDoneAction(apps))
+    const data = await response.json()
+    await dispatch(fetchAppsDoneAction(data))
   } catch (error) {
     dispatch(fetchAppsFailAction())
   }

@@ -9,7 +9,7 @@ const customStyles = {
     // above headroom header library
     zIndex: 100
   },
-  content : {
+  content: {
     top: '50%',
     left: '50%',
     right: 'auto',
@@ -31,7 +31,7 @@ const CloseButtonContainer = styled.div`
 
 const CloseButton = ({ handleClick }) => (
   <CloseButtonContainer onClick={handleClick}>
-    <CloseIcon/>
+    <CloseIcon />
   </CloseButtonContainer>
 )
 
@@ -40,12 +40,11 @@ const MakerModal = ({ isOpen, handleClose, children }) => (
     isOpen={isOpen}
     onRequestClose={handleClose}
     style={customStyles}
-    appElement={document.querySelector('#__next')}
+    appElement={typeof document !== 'undefined' ? document.querySelector('#__next') : null}
   >
     <CloseButton handleClick={handleClose} />
     {children}
   </Modal>
 )
-
 
 export default MakerModal

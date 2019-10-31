@@ -12,7 +12,6 @@ const initialState = {
 
 function makerReducer(state = initialState, action) {
   switch (action.type) {
-
     case MakerActions.MAKER_AUTH_ERROR:
       return {
         ...state,
@@ -24,9 +23,8 @@ function makerReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        appIds: action.payload.apps.map(app => app.id),
+        appIds: action.payload.apps.map((app) => app.id),
         appEntities: keyBy(action.payload.apps, 'id')
-        // selectedAppId: action.payload.apps.length ? action.payload.apps[0].id : null
       }
 
     case MakerActions.SELECT_APP:

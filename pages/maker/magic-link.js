@@ -14,6 +14,7 @@ class MakerMagicLink extends React.Component {
     const { accessToken } = query
     const apiServer = selectApiServer(reduxStore.getState())
     const appResult = await fetch(`${apiServer}/api/magic-link/${accessToken}`)
+    console.log(appResult)
     const { app } = await appResult.json()
 
     return {
@@ -85,7 +86,8 @@ class MakerMagicLink extends React.Component {
                     {app.name} is now owned by {app.adminBlockstackId || user.user.blockstackUsername}
                   </Type>
                   <Type mt={5}>
-                    Your Magic Link is now no longer functional. Instead, you will use your Blockstack ID to sign in to the developer portal.
+                    Your Magic Link is now no longer functional. Instead, you will use your Blockstack ID to sign in to
+                    the developer portal.
                   </Type>
                   <Link href="/maker" passHref>
                     <Button mt={5}>Continue to Developer Portal</Button>
@@ -97,9 +99,12 @@ class MakerMagicLink extends React.Component {
                     Sign in with Blockstack to claim {app.name}
                   </Type>
                   <Type mt={5}>
-                    You will use this Blockstack ID to make changes to your app, and remove or modify your listing in the future.
+                    You will use this Blockstack ID to make changes to your app, and remove or modify your listing in
+                    the future.
                   </Type>
-                  <Button mt={5} onClick={() => this.signIn()}>{loading ? 'Loading...' : 'Sign in with Blockstack'}</Button>
+                  <Button mt={5} onClick={() => this.signIn()}>
+                    {loading ? 'Loading...' : 'Sign in with Blockstack'}
+                  </Button>
                 </>
               )}
             </Box>
@@ -117,4 +122,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({ ...UserStore.actions }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(MakerMagicLink)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MakerMagicLink)

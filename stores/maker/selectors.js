@@ -9,13 +9,15 @@ const updateEntity = (state, id, newProps) => ({
   }
 })
 
-export const selectMaker = state => state.maker
+export const selectMaker = (state) => state.maker
 
-export const selectAppList = state => state.maker.appIds.map(id => state.maker.appEntities[id])
+export const selectIsMakerLoading = (state) => state.maker.loading
 
-export const selectCurrentApp = state => state.maker.appEntities[state.maker.selectedAppId]
+export const selectAppList = (state) => state.maker.appIds.map((id) => state.maker.appEntities[id])
 
-export const selectCompetionStatus = state => {
+export const selectCurrentApp = (state) => state.maker.appEntities[state.maker.selectedAppId]
+
+export const selectCompetionStatus = (state) => {
   const selectedApp = state.maker.appEntities[state.maker.selectedAppId]
   if (!selectedApp) {
     return {}
