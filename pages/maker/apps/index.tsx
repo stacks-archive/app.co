@@ -4,6 +4,8 @@ import { Flex, Box, Type } from 'blockstack-ui'
 import { connect } from 'react-redux'
 import isNaN from 'lodash/isNaN'
 
+import { TestComponent } from '@components/app-select'
+
 import { selectMaker, selectAppList, selectCurrentApp, selectCompetionStatus } from '@stores/maker/selectors'
 import { fetchApps, selectAppAction } from '@stores/maker/actions'
 import { selectApiServer, selectUser } from '@stores/apps/selectors'
@@ -11,8 +13,9 @@ import { MakerContainer, MakerContentBox, MakerStickyStatusBox } from '@componen
 import { Page } from '@components/page'
 import Head from '@containers/head'
 import Maker from '@components/maker'
+import { MakerNav } from '@components/maker/nav/maker-nav'
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: any) => ({
   user: selectUser(state),
   apiServer: selectApiServer(state),
   maker: selectMaker(state),
@@ -21,14 +24,15 @@ const mapStateToProps = (state) => ({
   completionStatus: selectCompetionStatus(state)
 })
 
-const handleChangingApp = (event, fn) => (dispatch) => {
+
+const handleChangingApp = (event: any, fn: any) => (dispatch: any) => {
   event.persist()
   const id = event.target.value
   dispatch(selectAppAction(id))
   fn(id)
 }
 
-const getAppId = (params) => {
+const getAppId = (params: any) => {
   if (!params) return undefined
   const id = parseInt(params.appId, 10)
   if (isNaN(id)) return undefined
@@ -36,7 +40,7 @@ const getAppId = (params) => {
 }
 
 const LoadingPage = ({ message = 'Loading...' }) => (
-  <Page innerPadding={0} wrap>
+  <Page innerPadding={[0]} wrap>
     <Flex>
       <Box width={1}>
         <Type fontSize={5} my={7} textAlign="center">
@@ -47,31 +51,28 @@ const LoadingPage = ({ message = 'Loading...' }) => (
   </Page>
 )
 
-const MakerPortal = connect()(({ maker, selectedApp, appList, appId, apiServer, completionStatus, user, dispatch }) => {
+const MakerPortal = connect()(({ maker, selectedApp, appList, appId, apiServer, user, dispatch }: any) => {
   const router = useRouter()
 
-  const updateMakerRoute = (id) =>
+  const updateMakerRoute = (id: number) =>
     router.push('/maker/apps', `/maker/apps/${id}`, {
       shallow: true
     })
 
   if (maker.loading || !selectedApp) return <LoadingPage />
 
+  const subNav = (
+    <MakerNav
+      apps={appList}
+      userId="kyranjamie.id"
+      onChange={e => handleChangingApp(e, updateMakerRoute)(dispatch)}
+    />
+  )
+
   return (
-    <Page innerPadding={0} wrap>
+    <Page innerPadding={[0]} subNav={subNav} wrap>
       <Head title={selectedApp.name} />
       <MakerContainer>
-        <Box>
-          {appList.length && (
-            <select onChange={(e) => handleChangingApp(e, updateMakerRoute)(dispatch)} value={appId}>
-              {appList.map(({ name, id }) => (
-                <option key={id} value={id}>
-                  {name}
-                </option>
-              ))}
-            </select>
-          )}
-        </Box>
         <Type fontSize={3} fontWeight={500} mx={[4, 6]} py={6} px={[20, 0]}>
           {selectedApp.name}
         </Type>
@@ -81,11 +82,11 @@ const MakerPortal = connect()(({ maker, selectedApp, appList, appId, apiServer, 
           alignItems="flex-start"
         >
           <MakerStickyStatusBox>
-            <Maker.Status app={selectedApp} apiServer={apiServer} status={completionStatus} />
+            <Maker.Status app={selectedApp} />
           </MakerStickyStatusBox>
           <Box>
             <MakerContentBox>
-              <Maker.PaymentDetails app={selectedApp} user={user} apiServer={apiServer} dispatch={dispatch} />
+              <Maker.PaymentDetails app={selectedApp} user={user} apiServer={apiServer} accessToken={user.jwt} dispatch={dispatch} />
             </MakerContentBox>
             <MakerContentBox>
               <Maker.KYC app={selectedApp} user={user} apiServer={apiServer} />

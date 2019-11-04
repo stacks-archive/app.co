@@ -1,13 +1,14 @@
 import React from 'react'
 import { ResultItemGroup } from '@atlaskit/quick-search'
-import { StyledSearchBar } from '@components/search/styled'
-import { SearchIcon, CloseIcon } from 'mdi-react'
-import { AppItem } from '@components/list/apps'
-import { connect } from 'react-redux'
-import { selectApps } from '@stores/apps/selectors'
 import debounce from 'lodash/debounce'
+import { connect } from 'react-redux'
 import { Focus } from 'react-powerplug'
+import { SearchIcon, CloseIcon } from 'mdi-react'
+import { Text } from '@blockstack/ui'
 
+import { StyledSearchBar } from '@components/search/styled'
+import { AppItem } from '@components/list/apps'
+import { selectApps } from '@stores/apps/selectors'
 import { trackEvent } from '@utils'
 
 const mapStateToProps = (state) => ({
@@ -102,7 +103,7 @@ class SearchBarClass extends React.Component {
         {({ focused, bind }) => (
           <StyledSearchBar apps={this.props.apps} pl={3} focused={(focused || this.state.searchActive).toString()}>
             <StyledSearchBar.Icon pr={1} focused={(focused || this.state.searchActive).toString()}>
-              <SearchIcon color="currentColor" />
+              <SearchIcon color="#C1C3CC" size={20} />
             </StyledSearchBar.Icon>
             <StyledSearchBar.Section grow>
               <StyledSearchBar.CloseIcon

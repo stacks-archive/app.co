@@ -1,13 +1,22 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { TopBar } from '@components/top-bar'
 import { Footer } from '@components/footer'
 
 import { StyledPage } from './styled'
 
-const Page = ({ isErrorPage = false, children, admin = false, wrap, innerPadding = [2, 0], ...rest }) => (
+interface PageProps {
+  isErrorPage?: boolean;
+  children?: React.ReactNode;
+  admin?: boolean;
+  wrap?: boolean;
+  innerPadding?: number | number[];
+  subNav?: React.ReactNode;
+}
+
+const Page = ({ isErrorPage = false, children, admin = false, wrap, innerPadding = [2, 0], subNav, ...rest }: PageProps) => (
   <StyledPage {...rest}>
     <TopBar isErrorPage={isErrorPage} admin={admin} wrap={wrap} />
+    {React.isValidElement(subNav) && subNav}
     <StyledPage.Section flexDirection={['column']} alignItems="center" pt={[3, 4]} px={innerPadding}>
       {children}
     </StyledPage.Section>
@@ -20,21 +29,10 @@ const Page = ({ isErrorPage = false, children, admin = false, wrap, innerPadding
 const pxProps = ({ px }) => (px ? { px: [2, 4] } : {})
 const pyProps = ({ py }) => (py ? { py: [1, 4] } : {})
 
-const Section = (props) => <StyledPage.Section {...props} {...pxProps(props)} {...pyProps(props)} />
+const Section = (props: any) => <StyledPage.Section {...props} {...pxProps(props)} {...pyProps(props)} />
 
 Page.Sidebar = StyledPage.Aside
 Page.Section = Section
-Page.Section.Content = StyledPage.Content
+Page.Content = StyledPage.Content
 
-Page.propTypes = {
-  children: PropTypes.node.isRequired,
-  isErrorPage: PropTypes.bool,
-  admin: PropTypes.bool,
-  wrap: PropTypes.bool
-}
-
-Page.defaultProps = {
-  isErrorPage: false,
-  admin: false
-}
 export { Page }

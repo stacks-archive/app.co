@@ -41,14 +41,8 @@ export const MakerContentBox = styled(Box)`
 `
 
 export const MakerContainer = ({ children }) => (
-  <Flex
-    mb={5}
-    mx={[0, 20]}
-    flexDirection={['column', 'column', 'column', 'row']}
-    justifyContent="space-between"
-    flexWrap="wrap"
-  >
-    <Box flexGrow={1}>
+  <Flex mb={5} mx={[0, 20]} flexDirection={['column', 'column', 'column', 'row']}>
+    <Box>
       {children}
     </Box>
   </Flex>

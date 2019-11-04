@@ -8,7 +8,7 @@ export const HomeLink = ({ isErrorPage }) =>
   isErrorPage
     ? (
       <a href="/">
-        <Box size="34px">
+        <Box size="24px">
           <AppIcon />
         </Box>
       </a>
@@ -16,7 +16,7 @@ export const HomeLink = ({ isErrorPage }) =>
     : (
       <Link href="/">
         <a href="/">
-          <Box size="34px">
+          <Box size="24px">
             <AppIcon />
           </Box>
         </a>
