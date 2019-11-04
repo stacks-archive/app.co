@@ -1,7 +1,7 @@
 import React from 'react'
 import { Type } from 'blockstack-ui'
 
-import { generateLinkList } from '@components/navigation/helpers';
+import { LinkList } from '@components/navigation/helpers';
 import { termsLinks } from '@common/constants'
 import { Flex, Box } from '@components/box'
 
@@ -9,7 +9,7 @@ const Footer = ({ isErrorPage, admin, ...props }) => (
   <>
     <Flex {...props}>
       <Box ml="auto">
-        {generateLinkList(termsLinks)({ isErrorPage })}
+        <LinkList list={termsLinks} isErrorPage={isErrorPage} />
       </Box>
     </Flex>
     <Flex mt={5}>
