@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import Link from 'next/link'
 
 import { StyledAnchor } from '@components/top-bar/styled'
@@ -9,15 +9,19 @@ export const ErrorPageLink: React.FC<any> = ({ isErrorPage, children, onClick, h
     ? children
     : <Link href={href} {...props}>{children}</Link>
 
+interface LinkListProps {
+  list: NavLink[];
+  isErrorPage: boolean;
+}
 
-export const generateLinkList = (list: NavLink[]) => ({ isErrorPage }) => (
+export const LinkList = ({ list, isErrorPage }: LinkListProps) => (
   <>
-  {
-    list.map(({ name, href }) => (
-      <ErrorPageLink key= { name } isErrorPage = { isErrorPage } href = { href } >
-        <StyledAnchor href={ href } >{ name } </StyledAnchor>
-      </ErrorPageLink>
-    ))
-  }
+    {
+      list.map(({ name, href }) => (
+        <ErrorPageLink key={name} isErrorPage={isErrorPage} href={href} >
+          <StyledAnchor href={href} >{name}</StyledAnchor>
+        </ErrorPageLink>
+      ))
+    }
   </>
 )

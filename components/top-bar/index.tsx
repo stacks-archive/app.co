@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 import Headroom from 'react-headroom'
 import { StyledTopBar } from '@components/top-bar/styled'
 import { SearchBar } from '@components/search'
 import GetUpdatesModal from '@containers/modals/get-updates'
 import { Box } from 'blockstack-ui'
 import { Navigation } from '@components/navigation'
-import { generateLinkList } from '@components/navigation/helpers'
+import { LinkList } from '@components/navigation/helpers'
 import { primaryNavLinks, adminLinks } from '@common/constants'
 import { HomeLink } from './home-link'
 import { MenuToggle } from './menu-toggle'
@@ -22,8 +23,8 @@ export const TopBar = ({ isErrorPage, admin, wrap, ...props }) => {
 
   const NavLinks = () => (
     <>
-      { admin && generateLinkList(adminLinks)({ isErrorPage }) }
-      { generateLinkList(primaryNavLinks)({ isErrorPage }) }
+      { admin && <LinkList list={adminLinks} isErrorPage={isErrorPage} /> }
+      <LinkList list={primaryNavLinks} isErrorPage={isErrorPage} />
     </>
   )
 
@@ -63,7 +64,7 @@ export const TopBar = ({ isErrorPage, admin, wrap, ...props }) => {
       </StyledTopBar>
 
       <GetUpdatesModal />
+
     </Headroom>
   )
 }
-

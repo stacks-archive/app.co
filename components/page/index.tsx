@@ -11,13 +11,15 @@ interface PageProps {
   wrap?: boolean;
   innerPadding?: number | number[];
   subNav?: React.ReactNode;
+  align?: string;
+  [prop: string]: any;
 }
 
-const Page = ({ isErrorPage = false, children, admin = false, wrap, innerPadding = [2, 0], subNav, ...rest }: PageProps) => (
+const Page = ({ isErrorPage = false, children, admin = false, align = 'center', wrap, innerPadding = [2, 0], subNav, ...rest }: PageProps) => (
   <StyledPage {...rest}>
     <TopBar isErrorPage={isErrorPage} admin={admin} wrap={wrap} />
     {React.isValidElement(subNav) && subNav}
-    <StyledPage.Section flexDirection={['column']} alignItems="center" pt={[3, 4]} px={innerPadding}>
+    <StyledPage.Section flexDirection={['column']} alignItems={align} pt={[3, 4]} px={innerPadding}>
       {children}
     </StyledPage.Section>
     <StyledPage.Section flexDirection={['column']} alignItems="center" px={[2, 0]}>
