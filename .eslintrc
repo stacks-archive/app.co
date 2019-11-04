@@ -31,7 +31,7 @@
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2,
     "react/require-default-props": 0,
-    "react/prop-types": 1,
+    "react/prop-types": 0,
     "react/sort-comp": 0,
     "react/prefer-stateless-function": 0,
     "no-duplicate-imports": 0,

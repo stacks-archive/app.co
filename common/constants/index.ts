@@ -21,6 +21,10 @@ export const primaryNavLinks = [
   {
     name: 'Submit app',
     href: '/submit'
+  },
+  {
+    name: 'Manage your apps',
+    href: '/maker/apps'
   }
 ]
 

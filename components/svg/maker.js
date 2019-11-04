@@ -54,4 +54,19 @@ export const CloseIcon = () => (
   </svg>
 )
 
-
+export const ArrowDown = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="6"
+    height="4"
+    fill="none"
+    viewBox="0 0 6 4"
+  >
+    <path
+      fill="#A1A7B3"
+      fillRule="evenodd"
+      d="M3 4L0 0h6L3 4z"
+      clipRule="evenodd"
+    />
+  </svg>
+)

@@ -23,7 +23,7 @@ const signingIn = () => ({
   type: constants.SIGNING_IN
 })
 
-const signedIn = (data) => ({
+const signedIn = (data: any) => ({
   type: constants.SIGNED_IN,
   payload: {
     token: data.token,
@@ -39,7 +39,7 @@ const signOut = () => {
   }
 }
 
-const handleSignIn = (apiServer) => async (dispatch) => {
+const handleSignIn = (apiServer: any) => async (dispatch: any) => {
   const token = userSession.getAuthResponseToken()
   if (!token) {
     return true

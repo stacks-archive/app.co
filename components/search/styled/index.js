@@ -124,6 +124,11 @@ const Input = styled.input`
     box-shadow: none;
     outline: none;
   }
+
+  &::placeholder {
+    color: #A1A7B3;
+    font-size: 14px;
+  }
 `
 
 ResultsWrapper.defaultProps = {
