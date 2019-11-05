@@ -2,7 +2,9 @@ import styled, { css } from 'styled-components'
 import { wrapperStyles } from '@common/styles'
 import { Box, boxProps } from '@components/box'
 
-const StyledPage = styled(Box)``
+const StyledPage = styled(Box)`
+  ${({ fullHeight }) => fullHeight && `height: 100vh`};
+`
 
 const Section = styled(Box)`
   display: flex;
