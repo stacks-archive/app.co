@@ -24,7 +24,6 @@ const mapStateToProps = (state: any) => ({
   completionStatus: selectCompetionStatus(state)
 })
 
-
 const handleChangingApp = (event: any, fn: any) => (dispatch: any) => {
   event.persist()
   const id = event.target.value
