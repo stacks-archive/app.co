@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { StyledAnchor } from '@components/top-bar/styled'
-import { NavLink } from '@common/constants';
+import { NavLink } from '@common/constants'
 
-export const ErrorPageLink: React.FC<any> = ({ isErrorPage, children, onClick, href, ...props }) => (
+export const ErrorPageLink: React.FC<any> = ({ isErrorPage, children, href, ...props }) => (
   isErrorPage
     ? children
     : <Link href={href} {...props}>{children}</Link>
@@ -16,7 +16,7 @@ interface LinkListProps {
   activeRoute?: string;
 }
 
-export const LinkList = ({ activeRoute, list, isErrorPage }: LinkListProps) => (
+export const LinkList: React.FC<LinkListProps> = ({ list, isErrorPage }) => (
   <>
     {
       list.map(({ name, href }) => (
@@ -28,8 +28,8 @@ export const LinkList = ({ activeRoute, list, isErrorPage }: LinkListProps) => (
   </>
 )
 
-export const ActiveLinkList = ({ list, isErrorPage }: LinkListProps) => {
-  const { pathname } = useRouter();
+export const ActiveLinkList: React.FC<LinkListProps> = ({ list, isErrorPage }) => {
+  const { pathname } = useRouter()
   return (
     <>
       {
