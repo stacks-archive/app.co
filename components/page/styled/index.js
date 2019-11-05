@@ -4,6 +4,7 @@ import { Box, boxProps } from '@components/box'
 
 const StyledPage = styled(Box)`
   ${({ fullHeight }) => fullHeight && `height: 100vh`};
+  ${({ background }) => background && `background:${background}`};
 `
 
 const Section = styled(Box)`
@@ -19,7 +20,6 @@ const Section = styled(Box)`
         max-width: 700px;
       }
     `};
-
 `
 const Content = styled.div`
   flex-grow: 1;
