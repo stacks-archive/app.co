@@ -4,7 +4,7 @@ import { Box, Flex, Text } from '@blockstack/ui'
 import { userSession } from '@stores/user'
 
 import { MakerNavContainer } from './nav-layout'
-import { ArrowDown } from '@components/svg/maker'
+import { Arrow } from '@components/arrow'
 
 const SelectBox = styled(Box)`
   -webkit-appearance: none;
@@ -47,7 +47,7 @@ const AppSelect = ({ selectedValue, onChange, apps = [] }: AppSelectProps) => (
           <SelectBox as="select" onChange={onChange}>
 
           </SelectBox>
-          {apps.length > 1 && <ArrowDown />}
+          {apps.length > 1 && <Arrow direction="down" />}
         </Flex>
       </Flex>
     </Box>
