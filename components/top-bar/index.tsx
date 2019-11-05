@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Headroom from 'react-headroom'
+
 import { StyledTopBar } from '@components/top-bar/styled'
 import { SearchBar } from '@components/search'
 import GetUpdatesModal from '@containers/modals/get-updates'
 import { Box } from 'blockstack-ui'
 import { Navigation } from '@components/navigation'
-import { LinkList } from '@components/navigation/helpers'
+import { ActiveLinkList, LinkList } from '@components/navigation/helpers'
 import { primaryNavLinks, adminLinks } from '@common/constants'
 import { HomeLink } from './home-link'
 import { MenuToggle } from './menu-toggle'
@@ -18,13 +19,15 @@ const handleBodyScroll = (on: boolean) => {
     ? body.classList.remove(noScrollClassName)
     : body.classList.add(noScrollClassName)
 }
+
 export const TopBar = ({ isErrorPage, admin, wrap, ...props }) => {
   const [menuOpen, setMenuOpen] = useState(false)
+  const router = useRouter()
 
-  const NavLinks = () => (
+  const NavLinks = ({}) => (
     <>
-      { admin && <LinkList list={adminLinks} isErrorPage={isErrorPage} /> }
-      <LinkList list={primaryNavLinks} isErrorPage={isErrorPage} />
+      { admin && <ActiveLinkList list={adminLinks} activeRoute={router.route} isErrorPage={isErrorPage} /> }
+      <ActiveLinkList list={primaryNavLinks} activeRoute={router.route} isErrorPage={isErrorPage} />
     </>
   )
 
@@ -36,8 +39,8 @@ export const TopBar = ({ isErrorPage, admin, wrap, ...props }) => {
             <HomeLink isErrorPage={isErrorPage} />
             <SearchBar transparent />
           </StyledTopBar.Section>
-          <StyledTopBar.Section>
-            <Navigation display={['none', 'flex']} isErrorPage={isErrorPage} admin={admin}>
+          <StyledTopBar.Section fullHeight>
+            <Navigation variant="main" display={['none', 'flex']} isErrorPage={isErrorPage} admin={admin}>
               <NavLinks />
             </Navigation>
             <Box display={['block', 'none']}>
@@ -62,9 +65,7 @@ export const TopBar = ({ isErrorPage, admin, wrap, ...props }) => {
           </StyledTopBar.Section>
         </StyledTopBar.Wrapper>
       </StyledTopBar>
-
       <GetUpdatesModal />
-
     </Headroom>
   )
 }

@@ -34,9 +34,17 @@ const Navigation = styled(Flex)`
     css`
       flex-direction: column;
     `};
-`
+  ${({ variant }) =>
+    variant === 'main' &&
+    css`
+      @media (min-width: 640px) {
+        height: 100%;
+      }
+    `};
+  `
 
 export const StyledAnchor = styled.a`
+  white-space: nowrap;
   &:link,
   &:visited,
   &:active {
@@ -62,6 +70,31 @@ export const StyledAnchor = styled.a`
     footer &&
     css`
       display: inline-block;
+  `};
+  ${({ active }) =>
+    active &&
+    css`
+      @media (min-width: 640px) {
+        position: relative;
+        &::before {
+          content: '';
+          position: absolute;
+          height: 1px;
+          width: 100%;
+          background: #000;
+          bottom: 0;
+          left: 0;
+        }
+      }
+  `};
+
+  ${({ topNav }) =>
+    topNav &&
+    css`
+      @media (min-width: 640px) {
+        line-height: 45px;
+        height: 100%;
+      }
   `};
 `
 
@@ -92,6 +125,7 @@ const Section = styled.div`
   display: flex;
   align-items: center;
   ${({ grow }) => grow && `flex-grow:1;`};
+  ${({ fullHeight }) => fullHeight && `height: 100%`};
 `
 StyledTopBar.Wrapper = Wrapper
 StyledTopBar.Section = Section

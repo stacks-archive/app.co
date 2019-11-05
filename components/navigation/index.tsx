@@ -5,9 +5,9 @@ import { bindActionCreators } from 'redux'
 import NewsletterActions from '@stores/newsletter/actions'
 import { StyledTopBar, StyledAnchor } from '@components/top-bar/styled'
 
-const NavigationComponent = ({ children, mobile, display }) => {
+const NavigationComponent = ({ children, mobile, display, variant }) => {
   return (
-    <StyledTopBar.Navigation display={display} mobile={mobile}>
+    <StyledTopBar.Navigation display={display} mobile={mobile} variant={variant}>
       {children}
     </StyledTopBar.Navigation>
   )
