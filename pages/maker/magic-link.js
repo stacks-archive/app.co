@@ -74,7 +74,7 @@ class MakerMagicLink extends React.Component {
     const isClaimed = app.adminBlockstackId || claimed
 
     return (
-      <Page>
+      <Page fullHeight background="white">
         <Head title={`${app.name} - Maker Portal`} />
         <Page.Section flexDirection="column" px>
           <Flex>
