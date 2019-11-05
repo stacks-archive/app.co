@@ -221,7 +221,7 @@ app.prepare().then(() => {
     /**
      * Maker pages
      */
-    server.get('/maker', (req, res) => res.redirect('/maker/apps'))
+    server.get('/maker', (req, res) => renderAndCache(req, res, '/maker'))
     server.get('/maker/apps', (req, res) => renderAndCache(req, res, '/maker/apps'))
     server.get('/maker/apps/:appId', (req, res) => renderAndCache(req, res, '/maker/apps'))
     server.get('/maker/:accessToken', (req, res) => renderAndCache(req, res, '/maker/magic-link', { accessToken: req.params.accessToken }))
