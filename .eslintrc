@@ -1,7 +1,7 @@
 {
-  "extends": ["airbnb", "prettier", "prettier/react"],
-  "parser": "babel-eslint",
-  "plugins": ["react"],
+  "extends": ["airbnb", "plugin:@typescript-eslint/recommended", "prettier", "prettier/react"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["react", "@typescript-eslint"],
   "env": {
     "browser": true,
     "es6": true,
@@ -27,6 +27,7 @@
     "new-cap": 0,
     "camelcase": 2,
     "semi": [2, "never"],
+
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2,
@@ -35,13 +36,19 @@
     "react/sort-comp": 0,
     "react/prefer-stateless-function": 0,
     "no-duplicate-imports": 0,
+
+    "import/no-unresolved": 0,
     "import/no-duplicates": 2,
-    "import/no-extraneous-dependencies": false,
-    "import/prefer-default-export": false,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "import/no-extraneous-dependencies": 0,
+    "import/prefer-default-export": 0,
+
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }],
     "react/forbid-prop-types": [2, { "forbid": ["any"] }],
+    "react/jsx-props-no-spreading": 0,
     "jsx-a11y/anchor-is-valid": [0],
-    "no-script-url": [0]
+    "no-script-url": [0],
+
+    "@typescript-eslint/no-explicit-any": 0
   },
   "settings": {
     "import/resolver": {
