@@ -27,6 +27,7 @@
     "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/polyfill": "7.0.0",
     "@babel/register": "7.0.0",
+    "@blockstack/ui": "^1.0.0-alpha.11",
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-free-brands": "^5.0.13",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
