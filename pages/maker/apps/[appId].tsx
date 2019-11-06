@@ -9,9 +9,11 @@ import { fetchApps, selectAppAction } from '@stores/maker/actions'
 import { selectApiServer, selectUser } from '@stores/apps/selectors'
 import { MakerContainer, MakerContentBox, MakerStickyStatusBox } from '@components/maker/styled'
 import { Page } from '@components/page'
+import { MakerNav } from '@components/maker/nav/maker-nav'
 import Head from '@containers/head'
 import Maker from '@components/maker'
-import { MakerNav } from '@components/maker/nav/maker-nav'
+import UserStore from '@stores/user'
+
 
 const mapStateToProps = (state: any) => ({
   user: selectUser(state),
@@ -47,7 +49,7 @@ const LoadingPage = ({ message = 'Loading...' }) => (
   </Page>
 )
 
-const MakerPortal = connect()(({ maker, selectedApp, appList, appId, apiServer, user, dispatch }: any) => {
+const MakerPortal = connect()(({ maker, selectedApp, appList, apiServer, user, dispatch }: any) => {
   const router = useRouter()
 
   const updateMakerRoute = (id: number) =>
@@ -61,6 +63,11 @@ const MakerPortal = connect()(({ maker, selectedApp, appList, appId, apiServer, 
     <MakerNav
       apps={appList}
       userId="kyranjamie.id"
+      handleSignOut={() => {
+        dispatch(UserStore.actions.signOut())
+        localStorage.clear()
+        window.location.href = '/'
+      }}
       onChange={e => handleChangingApp(e, updateMakerRoute)(dispatch)}
     />
   )
@@ -72,9 +79,7 @@ const MakerPortal = connect()(({ maker, selectedApp, appList, appId, apiServer, 
         <Type fontSize={3} fontWeight={500} mx={[4, 6]} py={6} px={[20, 0]}>
           {selectedApp.name}
         </Type>
-        <Flex
-          flexDirection={['column', 'column', 'row-reverse']}
-        >
+        <Flex flexDirection={['column', 'column', 'row-reverse']}>
           <MakerStickyStatusBox>
             <Maker.Status app={selectedApp} />
           </MakerStickyStatusBox>

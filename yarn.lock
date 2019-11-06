@@ -13969,14 +13969,7 @@ use-dark-mode@2.3.1:
     "@use-it/event-listener" "^0.1.2"
     use-persisted-state "^0.3.0"
 
-use-events@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/use-events/-/use-events-1.2.0.tgz#b56adef4cd0055498e415293ae85fff998ebff1f"
-  integrity sha512-yh9MqjLiHNBR1+zc2Ks44vksOD6XbylakIRDWsf5FcGjEMX1G+D85jTwSSxZXOUN88p8IgmuE7rIPID9E5QeBw==
-  dependencies:
-    resize-observer-polyfill "1.5.1"
-
-use-events@^1.4.1:
+use-events@1.4.1, use-events@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/use-events/-/use-events-1.4.1.tgz#bf1ef93d502f1cad69afcda5619fda8b5f60b325"
   integrity sha512-ANiKauqtfTnK5HCQ8mPlOoBXld/ZjFtC5rJSrH6wYZIke8Nz2DW8gYoMDKlmBk+qBPt24mVwQh8ea5sCqdrfnA==

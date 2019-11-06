@@ -1,6 +1,5 @@
 import React from 'react'
-import { Flex, Text } from '@blockstack/ui'
-import { Button } from 'blockstack-ui'
+import { Flex, Text, Button } from '@blockstack/ui'
 
 interface SignInProps {
   handleSignIn(): void;
