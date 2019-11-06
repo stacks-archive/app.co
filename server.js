@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const express = require('express')
 const next = require('next')
 const dotenv = require('dotenv')
@@ -96,7 +97,7 @@ const checkMatch = (args, match) => {
 console.error = (...args) => {
   if (checkMatch(args, 'Warning: React does not recognize')) return
   if (checkMatch(args, 'Warning: Failed prop type')) return
-  if (checkMatch(args, 'for a non-boolean attribute') ) return
+  if (checkMatch(args, 'for a non-boolean attribute')) return
   if (checkMatch(args, 'Warning: Invalid value for prop')) return
   if (checkMatch(args, 'Failed to retrieve initialize state from localStorage')) return
   if (checkMatch(args, 'Unable to persist state to localStorage')) return
@@ -122,7 +123,7 @@ app.prepare().then(() => {
 
     if (process.env.AUTH_PASSWORD) {
       server.use(basicAuth({
-        users: { 'admin': process.env.AUTH_PASSWORD },
+        users: { admin: process.env.AUTH_PASSWORD },
         challenge: true
       }))
     }
@@ -146,8 +147,7 @@ app.prepare().then(() => {
     server.get('/mining/terms', (req, res) => renderAndCache(req, res, '/mining/terms'))
     server.get('/mining/privacy', (req, res) => renderAndCache(req, res, '/mining/privacy'))
     server.get('/mining/developer-instructions', (req, res) =>
-      renderAndCache(req, res, '/mining/developer-instructions')
-    )
+      renderAndCache(req, res, '/mining/developer-instructions'))
     server.get('/mining/reviewer-instructions', (req, res) => renderAndCache(req, res, '/mining/reviewer-instructions'))
 
     server.get('/mining/latest', async (req, res) => {
@@ -188,8 +188,7 @@ app.prepare().then(() => {
     server.get('/categories', (req, res) => renderAndCache(req, res, '/categories'))
     server.get('/categories/all', (req, res) => renderAndCache(req, res, '/categories/all'))
     server.get('/categories/:category', (req, res) =>
-      renderAndCache(req, res, '/categories', { category: req.params.category })
-    )
+      renderAndCache(req, res, '/categories', { category: req.params.category }))
     server.get('/category/:category', (req, res) => res.redirect(`/categories/${req.params.category}`))
     /**
      * General Pages
@@ -209,14 +208,11 @@ app.prepare().then(() => {
     server.get('/admin/pending', (req, res) => renderAndCache(req, res, '/admin/pending'))
     server.get('/admin/mining/months', (req, res) => renderAndCache(req, res, '/admin/mining/months'))
     server.get('/admin/mining/months/:id', (req, res) =>
-      renderAndCache(req, res, '/admin/mining/month', { monthId: req.params.id })
-    )
+      renderAndCache(req, res, '/admin/mining/month', { monthId: req.params.id }))
     server.get('/admin/mining/months/:id/upload-report', (req, res) =>
-      renderAndCache(req, res, '/admin/mining/upload-report', { monthId: req.params.id })
-    )
+      renderAndCache(req, res, '/admin/mining/upload-report', { monthId: req.params.id }))
     server.get('/admin/mining/months/:monthId/reviewers/:reviewerId', (req, res) =>
-      renderAndCache(req, res, '/admin/mining/reviewer')
-    )
+      renderAndCache(req, res, '/admin/mining/reviewer'))
 
     /**
      * Maker pages
@@ -258,8 +254,8 @@ app.prepare().then(() => {
     server.use(expressSitemapXml(getSitemapURLs(apiServer), 'https://app.co'))
 
     server.get('/robots.txt', async (req, res) => {
-      const robotsFile = dev || process.env.STAGING ? 'robots.staging.txt': 'robots.txt'
-      const robotsPath = `./static/${  robotsFile}`
+      const robotsFile = dev || process.env.STAGING ? 'robots.staging.txt' : 'robots.txt'
+      const robotsPath = `./static/${robotsFile}`
       const robots = await fs.readFile(robotsPath)
       res.header('Content-Type', 'text/plain')
       res.status(200).send(robots)

@@ -1,6 +1,15 @@
 {
-  "extends": ["airbnb", "plugin:@typescript-eslint/recommended", "prettier", "prettier/react"],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "prettier/react",
+    "prettier/@typescript-eslint",
+    "airbnb"
+  ],
   "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "plugins": ["react", "@typescript-eslint"],
   "env": {
     "browser": true,
@@ -48,7 +57,9 @@
     "jsx-a11y/anchor-is-valid": [0],
     "no-script-url": [0],
 
-    "@typescript-eslint/no-explicit-any": 0
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "implicit-arrow-linebreak": 0
   },
   "settings": {
     "import/resolver": {
@@ -63,6 +74,9 @@
           "@utils": "./utils"
         }
       }
+    },
+    "react": {
+      "version": "detect"
     }
   },
   "globals": {
