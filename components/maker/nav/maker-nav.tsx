@@ -58,13 +58,14 @@ const AppSelect = ({ selectedValue, onChange, apps = [] }: AppSelectProps) => (
 interface MakerNavActionsProps {
   userId: string
   appName?: string
+  handleSignOut(): void;
   apps?: {
     name: string
     value: number
   }[]
 }
 
-const MakerNavActions = ({ apps, userId, appName }: MakerNavActionsProps) => {
+const MakerNavActions = ({ apps, userId, appName, handleSignOut }: MakerNavActionsProps) => {
   const User = () => <Text fontSize={0}>{userId}</Text>
   return (
     <Flex alignItems="center">
@@ -72,7 +73,7 @@ const MakerNavActions = ({ apps, userId, appName }: MakerNavActionsProps) => {
         <User />
       </Box>
       <Box textAlign="right" mr={1}>
-        <Text onClick={() => userSession.signUserOut('/')} as="a" fontSize={0} fontWeight="medium" color="blue.900">Sign out</Text>
+        <Text onClick={handleSignOut} as="a" fontSize={0} fontWeight="medium" color="blue.900">Sign out</Text>
       </Box>
     </Flex>
   )
@@ -81,15 +82,16 @@ const MakerNavActions = ({ apps, userId, appName }: MakerNavActionsProps) => {
 interface MakerNavProps {
   apps: any[]
   userId: string
-  onChange?(e: Event): void
+  onChange?(e: Event): void;
+  handleSignOut(): void;
 }
 
-export const MakerNav = ({ apps, userId, onChange }: MakerNavProps) => {
+export const MakerNav = ({ apps, userId, onChange, handleSignOut }: MakerNavProps) => {
   return (
     <MakerNavContainer>
 
       <AppSelect apps={apps} onChange={onChange} selectedValue={28} />
-      <MakerNavActions appName="klsdflksdf" userId={userId} />
+      <MakerNavActions appName="klsdflksdf" userId={userId} handleSignOut={handleSignOut} />
 
     </MakerNavContainer>
   )

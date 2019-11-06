@@ -120,7 +120,7 @@
     "tinycolor2": "^1.4.1",
     "twitter": "^1.7.1",
     "universal-cookie-express": "^2.2.0",
-    "use-events": "^1.2.0",
+    "use-events": "1.4.1",
     "yup": "^0.26.6"
   },
   "devDependencies": {
