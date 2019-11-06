@@ -47,7 +47,6 @@ const handleSignIn = (apiServer: any) => async (dispatch: any) => {
   if (userSession.isUserSignedIn()) {
     userSession.signUserOut()
   }
-
   dispatch(signingIn())
   await userSession.handlePendingSignIn()
   const url = `${apiServer}/api/authenticate?authToken=${token}`

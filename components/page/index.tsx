@@ -12,11 +12,12 @@ interface PageProps {
   innerPadding?: number | number[];
   subNav?: React.ReactNode;
   align?: string;
+  fullHeight?: boolean;
   [prop: string]: any;
 }
 
-const Page = ({ isErrorPage = false, children, admin = false, align = 'center', wrap, innerPadding = [2, 0], subNav, background,...rest }: PageProps) => (
-  <StyledPage background={background} {...rest}>
+const Page = ({ isErrorPage = false, children, admin = false, align = 'center', wrap, innerPadding = [2, 0], subNav, background, fullHeight, ...rest }: PageProps) => (
+  <StyledPage background={background} fullHeight={fullHeight} {...rest}>
     <TopBar isErrorPage={isErrorPage} admin={admin} wrap={wrap} />
     {React.isValidElement(subNav) && subNav}
     <StyledPage.Section flexDirection={['column']} alignItems={align} pt={[3, 4]} px={innerPadding}>
@@ -24,7 +25,7 @@ const Page = ({ isErrorPage = false, children, admin = false, align = 'center', 
     </StyledPage.Section>
 
     <StyledPage.Section flexDirection={['column']} alignItems="center" px={[2, 0]}>
-      <Footer pb={3} isErrorPage={isErrorPage} admin={admin}/>
+      <Footer pb={3} isErrorPage={isErrorPage} admin={admin} />
     </StyledPage.Section>
   </StyledPage>
 )

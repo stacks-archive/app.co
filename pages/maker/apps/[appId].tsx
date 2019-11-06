@@ -4,8 +4,6 @@ import { Flex, Box, Type } from 'blockstack-ui'
 import { connect } from 'react-redux'
 import isNaN from 'lodash/isNaN'
 
-import { TestComponent } from '@components/app-select'
-
 import { selectMaker, selectAppList, selectCurrentApp } from '@stores/maker/selectors'
 import { fetchApps, selectAppAction } from '@stores/maker/actions'
 import { selectApiServer, selectUser } from '@stores/apps/selectors'

@@ -3,7 +3,7 @@ export const selectApps = (state) => state.apps && state.apps.apps
 export const selectApiServer = (state) => state.apps && state.apps.apiServer
 export const selectCurrentApp = (state) => state.apps && state.apps.selectedApp
 
-export const selectUser = (state) => state.user
+export const selectUser = (state) => state.user 
 
 export const selectFilteredApps = (state) => state.apps && state.apps.filteredApps
 export const selectPlatformFilter = (state) => state.apps && state.apps.platformFilter
