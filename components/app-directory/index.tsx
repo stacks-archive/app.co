@@ -14,6 +14,7 @@ interface AppDirectoryProps {
 }
 
 export const AppDirectory: React.FC<AppDirectoryProps> = ({ apps }) => (
+
   <>
     {
       apps.map(app => (

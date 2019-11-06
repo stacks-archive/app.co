@@ -101,16 +101,18 @@ const MakerPortal = connect()(({ maker, selectedApp, appList, apiServer, user, d
 })
 
 MakerPortal.getInitialProps = async ({ req, reduxStore }) => {
-  const { params, universalCookies } = req
-  const userCookie = universalCookies.cookies.jwt
+  const { params } = req
   const appId = getAppId(params)
-  const apiServer = selectApiServer(reduxStore.getState())
-  await fetchApps({ apiServer, user: { jwt: userCookie } })(reduxStore.dispatch)
+  if (selectAppList(reduxStore.getState()).length === 0) {
+    const { universalCookies } = req
+    const userCookie = universalCookies.cookies.jwt
+    const apiServer = selectApiServer(reduxStore.getState())
+    await fetchApps({ apiServer, user: { jwt: userCookie } })(reduxStore.dispatch)
+  }
   reduxStore.dispatch(selectAppAction(appId))
   const selectedApp = selectCurrentApp(reduxStore.getState())
   const props = mapStateToProps(reduxStore.getState())
-  console.log(reduxStore.getState())
-  return { appId, ...props, selectedApp, dispatch: reduxStore.dispatch }
+  return { appId, selectedApp, ...props, dispatch: reduxStore.dispatch }
 }
 
 export default MakerPortal
