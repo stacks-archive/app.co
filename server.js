@@ -9,6 +9,8 @@ const fs = require('fs-extra')
 const secure = require('express-force-https')
 const morgan = require('morgan')
 const basicAuth = require('express-basic-auth')
+const request = require('request-promise')
+const keyBy = require('lodash/keyBy')
 
 const dev = process.env.NODE_ENV !== 'production'
 if (dev) {
@@ -70,6 +72,25 @@ async function renderAndCache(req, res, pagePath, serverData) {
       appMiningApps,
       params: req.params
     }
+
+    if (req.universalCookies.get('jwt')) {
+      const uri = `${apiServer}/api/maker/apps`
+      const json = await request({
+        uri,
+        json: true,
+        auth: {
+          bearer: req.universalCookies.get('jwt')
+        }
+      })
+      dataToPass.maker = {
+        appIds: json.apps.map((_app) => _app.id),
+        appEntities: keyBy(json.apps, 'id')
+      }
+      if (req.params.appId) {
+        dataToPass.maker.selectedApp = dataToPass.maker.appEntities[req.params.appId]
+      }
+    }
+
     const html = await app.renderToHTML(req, res, pagePath, dataToPass)
     if (cacheKey) {
       try {

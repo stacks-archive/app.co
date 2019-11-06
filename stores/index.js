@@ -23,7 +23,7 @@ export default (data) => {
     router: RouterStore.reducer,
     mining: makeMiningReducer(data),
     miningAdmin: AdminMiningReducer,
-    maker: makerReducer
+    maker: makerReducer(data.maker)
   })
 
   return finalCreateStore(Reducer)
