@@ -7,7 +7,7 @@ import { SearchBar } from '@components/search'
 import GetUpdatesModal from '@containers/modals/get-updates'
 import { Box } from 'blockstack-ui'
 import { Navigation } from '@components/navigation'
-import { ActiveLinkList, LinkList } from '@components/navigation/helpers'
+import { ActiveLinkList } from '@components/navigation/helpers'
 import { primaryNavLinks, adminLinks } from '@common/constants'
 import { HomeLink } from './home-link'
 import { MenuToggle } from './menu-toggle'
@@ -24,7 +24,7 @@ export const TopBar = ({ isErrorPage, admin, wrap, ...props }) => {
   const [menuOpen, setMenuOpen] = useState(false)
   const router = useRouter()
 
-  const NavLinks = ({}) => (
+  const NavLinks = () => (
     <>
       { admin && <ActiveLinkList list={adminLinks} activeRoute={router.route} isErrorPage={isErrorPage} /> }
       <ActiveLinkList list={primaryNavLinks} activeRoute={router.route} isErrorPage={isErrorPage} />

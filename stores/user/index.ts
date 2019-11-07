@@ -58,6 +58,8 @@ const handleSignIn = (apiServer: any) => async (dispatch: any) => {
   const cookie = Cookies.get('jwt')
   if (!cookie) {
     Cookies.set('jwt', json.token)
+    // next.js relies on cookie to render data
+    window.location.reload()
   }
   return true
 }

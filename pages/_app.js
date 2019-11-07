@@ -7,7 +7,6 @@ import withReduxStore from '@common/lib/with-redux-store'
 import { Root } from '@containers/root'
 import { theme } from '@common/styles'
 import { theme as BlockstackTheme } from 'blockstack-ui'
-import { ThemeProvider as BlockstackUiTheme } from "@blockstack/ui"
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { Mdx } from '@components/mdx'
 import NProgress from 'nprogress'
@@ -111,7 +110,6 @@ class MyApp extends App {
       <CookiesProvider>
         <Mdx>
           <ThemeProvider theme={BlockstackTheme}>
-            <BlockstackUiTheme>
               <Provider store={reduxStore}>
                 <Root>
                   <>
@@ -120,7 +118,6 @@ class MyApp extends App {
                   </>
                 </Root>
               </Provider>
-            </BlockstackUiTheme>
           </ThemeProvider>
         </Mdx>
       </CookiesProvider>

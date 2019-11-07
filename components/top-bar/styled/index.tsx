@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { css, ThemedStyledFunction, StyledComponent } from 'styled-components'
+import styled, { css, StyledComponent } from 'styled-components'
 import { wrapperStyle } from '@common/styles'
 import { display, textAlign, alignItems, justifyContent } from 'styled-system'
 import { Flex } from 'blockstack-ui'

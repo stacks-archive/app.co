@@ -84,7 +84,8 @@ async function renderAndCache(req, res, pagePath, serverData) {
       })
       dataToPass.maker = {
         appIds: json.apps.map((_app) => _app.id),
-        appEntities: keyBy(json.apps, 'id')
+        appEntities: keyBy(json.apps, 'id'),
+        loading: false
       }
       if (req.params.appId) {
         dataToPass.maker.selectedApp = dataToPass.maker.appEntities[req.params.appId]

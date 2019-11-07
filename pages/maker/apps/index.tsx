@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect, useSelector } from 'react-redux'
 
 import { AppDirectory } from '@components/app-directory'
-import { Flex, Box } from '@blockstack/ui'
+import { ThemeProvider, theme, Flex, Box } from '@blockstack/ui'
 import { isUserSignedIn } from '@stores/user/selectors'
 import UserStore from '@stores/user'
 import { selectAppList } from '@stores/maker/selectors'
@@ -26,22 +26,27 @@ const AppDirectoryPage: React.FC<AppDirectoryPageProps> = ({ signIn, handleSignI
   }))
 
   useEffect(() => {
-    handleSignIn(apiServer)
+    async function signInCheck () {
+      await handleSignIn(apiServer)
+    }
+    signInCheck()
   }, [])
 
   return (
-    <Page fullHeight background="white">
-      <Head title="Select your app" />
-      <Flex alignItems="center">
-        <Box>
-          {
-            isSignedIn
-              ? <AppDirectory apps={apps} />
-              : <SignIn handleSignIn={() => signIn('maker/apps')} />
-          }
-        </Box>
-      </Flex>
-    </Page>
+    <ThemeProvider theme={theme}>
+      <Page fullHeight background="white">
+        <Head title="Select your app" />
+        <Flex alignItems="center">
+          <Box>
+            {
+              isSignedIn
+                ? <AppDirectory apps={apps} />
+                : <SignIn handleSignIn={() => signIn('maker/apps')} />
+            }
+          </Box>
+        </Flex>
+      </Page>
+    </ThemeProvider>
   )
 }
 
