@@ -21,8 +21,10 @@ const PaymentDetails = ({ app, apiServer, accessToken, user, dispatch }) => {
   const isSaved = (
     btcAddress === savedValues.btcAddress &&
     btcAddress !== '' &&
+    btcAddress !== null &&
     stxAddress === savedValues.stxAddress &&
-    stxAddress !== ''
+    stxAddress !== '' &&
+    stxAddress !== null
   )
 
   const save = async () => {
