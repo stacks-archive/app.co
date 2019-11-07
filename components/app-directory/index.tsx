@@ -6,7 +6,7 @@ import { App } from '@models/app'
 import { Arrow } from '@components/arrow'
 
 const AppDirectoryItem: React.FC<{ app: App }> = ({ app }) => (
-  <Flex key={app.id}>
+  <Flex>
     <Link href={`/maker/apps/${app.id}`}>
       <PseudoBox display="flex" width={['320px', '432px']} maxWidth={432} mb={2} height={96} borderRadius={6} justifyContent="space-between" alignItems="center" background="#F9F9FC" _hover={{ bg: '#F0F0F5' }}>
         {/* Due to many broken image links, commenting out pictures  */}
@@ -28,6 +28,6 @@ interface AppDirectoryProps {
 
 export const AppDirectory: React.FC<AppDirectoryProps> = ({ apps }) => (
   <Box my={[2, 2, 6, 12]}>
-    { apps.map(app => <AppDirectoryItem app={app} />) }
+    { apps.map(app => <AppDirectoryItem app={app} key={app.id} />) }
   </Box>
 )
