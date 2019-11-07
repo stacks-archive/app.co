@@ -63,6 +63,7 @@ const MakerPortal = connect()(({ maker, selectedApp, appList, apiServer, user, d
     <MakerNav
       apps={appList}
       userId="kyranjamie.id"
+      selectedAppId={selectedApp.id}
       handleSignOut={() => {
         dispatch(UserStore.actions.signOut())
         localStorage.clear()

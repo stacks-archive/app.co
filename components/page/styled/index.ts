@@ -33,7 +33,6 @@ interface Page {
 }
 
 const StyledPage: Page & StyledComponent<any, any, object, string | number | symbol> = styled(Box)`
-  ${({ fullHeight }) => fullHeight && `height: 100vh`};
   ${({ background }) => background && `background:${background}`};
 `
 

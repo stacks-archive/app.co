@@ -4,7 +4,7 @@ import { wrapperStyle } from '@common/styles'
 import { display, textAlign, alignItems, justifyContent } from 'styled-system'
 import { Flex } from 'blockstack-ui'
 
-export const Navigation = styled(Flex)`
+export const Navigation = styled(({ mobile, ...rest }) => <Flex {...rest} />)`
   display: flex;
   ${display};
   ${textAlign};
@@ -134,7 +134,7 @@ interface SectionProps {
   fullHeight?: boolean
 }
 
-export const Section = styled.div<SectionProps>`
+export const Section = styled(({ fullHeight, grow, ...rest}) => <div {...rest} />)<SectionProps>`
   display: flex;
   align-items: center;
   ${({ grow }) => grow && `flex-grow:1;`};

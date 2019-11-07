@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Box, Flex, Text } from '@blockstack/ui'
+import { App } from '@models/app'
 import { userSession } from '@stores/user'
 
 import { MakerNavContainer } from './nav-layout'
@@ -59,13 +60,10 @@ interface MakerNavActionsProps {
   userId: string
   appName?: string
   handleSignOut(): void;
-  apps?: {
-    name: string
-    value: number
-  }[]
+  apps?: App[];
 }
 
-const MakerNavActions = ({ apps, userId, appName, handleSignOut }: MakerNavActionsProps) => {
+const MakerNavActions = ({ userId, handleSignOut }: MakerNavActionsProps) => {
   const User = () => <Text fontSize={0}>{userId}</Text>
   return (
     <Flex alignItems="center">
@@ -80,17 +78,18 @@ const MakerNavActions = ({ apps, userId, appName, handleSignOut }: MakerNavActio
 }
 
 interface MakerNavProps {
-  apps: any[]
+  apps: App[]
   userId: string
+  selectedAppId: number;
   onChange?(e: Event): void;
   handleSignOut(): void;
 }
 
-export const MakerNav = ({ apps, userId, onChange, handleSignOut }: MakerNavProps) => {
+export const MakerNav = ({ apps, userId, selectedAppId, onChange, handleSignOut }: MakerNavProps) => {
   return (
     <MakerNavContainer>
 
-      <AppSelect apps={apps} onChange={onChange} selectedValue={28} />
+      <AppSelect apps={apps} onChange={onChange} selectedValue={selectedAppId} />
       <MakerNavActions appName="klsdflksdf" userId={userId} handleSignOut={handleSignOut} />
 
     </MakerNavContainer>

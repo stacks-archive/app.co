@@ -16,8 +16,8 @@ interface PageProps {
   [prop: string]: any;
 }
 
-const Page = ({ isErrorPage = false, children, admin = false, align = 'center', wrap, innerPadding = [2, 0], subNav, background, fullHeight, ...rest }: PageProps) => (
-  <StyledPage background={background} fullHeight={fullHeight} {...rest}>
+const Page = ({ isErrorPage = false, children, admin = false, align = 'center', wrap, innerPadding = [2, 0], subNav, background, ...rest }: PageProps) => (
+  <StyledPage background={background} {...rest}>
     <TopBar isErrorPage={isErrorPage} admin={admin} wrap={wrap} />
     {React.isValidElement(subNav) && subNav}
     <StyledPage.Section flexDirection={['column']} alignItems={align} pt={[3, 4]} px={innerPadding}>
