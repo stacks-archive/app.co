@@ -9,9 +9,10 @@ const AppDirectoryItem: React.FC<{ app: App }> = ({ app }) => (
   <Flex key={app.id}>
     <Link href={`/maker/apps/${app.id}`}>
       <PseudoBox display="flex" width={['320px', '432px']} maxWidth={432} mb={2} height={96} borderRadius={6} justifyContent="space-between" alignItems="center" background="#F9F9FC" _hover={{ bg: '#F0F0F5' }}>
-        <Box ml={6}>
+        {/* Due to many broken image links, commenting out pictures  */}
+        {/* <Box ml={6}>
           <img src={app.imageUrl} alt={`Logo of ${app.name}`} width="48px" height="48px" />
-        </Box>
+        </Box> */}
         <Box flex={1} ml={6}>{app.name}</Box>
         <Box mr={6}>
           <Arrow direction="right" />
