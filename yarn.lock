@@ -1844,6 +1844,11 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@blockstack/prettier-config@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@blockstack/prettier-config/-/prettier-config-0.0.2.tgz#3f206339e4b03a270c71fb73b1d6bb97c9f75e58"
+  integrity sha512-8T8TieONaGy6ygv+rG0F/v14wNx2f1ugSermyFMlsQ9CRuBDd4esRNQ34EZ2NLVk/GlLA5qf5VLErtsHSGRU9Q==
+
 "@blockstack/ui@^1.0.0-alpha.11":
   version "1.0.0-alpha.11"
   resolved "https://registry.yarnpkg.com/@blockstack/ui/-/ui-1.0.0-alpha.11.tgz#b4912f5de226a2780ed70678afa9306a7fd651c8"

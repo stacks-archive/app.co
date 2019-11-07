@@ -6,6 +6,7 @@
   "bugs": {
     "url": "https://github.com/blockstackpbc/app.co/issues"
   },
+  "prettier": "@blockstack/prettier-config",
   "dependencies": {
     "@atlaskit/button": "^7.2.5",
     "@atlaskit/checkbox": "^2.0.2",
@@ -126,6 +127,7 @@
     "@babel/core": "^7.7.0",
     "@babel/plugin-transform-regenerator": "^7.7.0",
     "@babel/preset-env": "^7.7.1",
+    "@blockstack/prettier-config": "^0.0.2",
     "@types/react": "^16.9.11",
     "@typescript-eslint/eslint-plugin": "^2.6.1",
     "@typescript-eslint/parser": "^2.6.1",
