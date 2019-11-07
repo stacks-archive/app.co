@@ -24,13 +24,15 @@ const AppDirectoryPage: React.FC<AppDirectoryPageProps> = ({ signIn, handleSignI
     isSignedIn: isUserSignedIn(state),
     apiServer: selectApiServer(state)
   }))
+
   useEffect(() => {
     handleSignIn(apiServer)
   }, [])
+
   return (
     <Page fullHeight background="white">
       <Head title="Select your app" />
-      <Flex height={[null, null, '70vh']} alignItems="center">
+      <Flex alignItems="center">
         <Box>
           {
             isSignedIn
