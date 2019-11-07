@@ -1,18 +1,19 @@
 import React from 'react'
 import 'isomorphic-unfetch'
-import { connect } from 'react-redux'
-import Head from '@containers/head'
 import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { Type, Field, Flex, Box } from 'blockstack-ui'
+import debounce from 'lodash.debounce'
+
+import Head from '@containers/head'
 import { MakerTitle, MakerCardHeader, MakerButton } from '@components/maker/styled'
 import { Page } from '@components/page'
-import { Type, Field, Flex, Box } from 'blockstack-ui'
 import { selectAppConstants, selectApiServer } from '@stores/apps/selectors'
 import { FormSection, ErrorMessage, sections as getSections } from '@containers/submit'
 import SuccessCard from '@components/submit'
-import debounce from 'lodash.debounce'
 import UserStore from '@stores/user'
 
-import { trackEvent } from '@utils'
+import { trackEvent } from '@utils/index'
 
 const APP_SUBMISSION_DATA = 'app_submission_data'
 
@@ -176,9 +177,6 @@ class SubmitDapp extends React.Component {
         refSource
       })
     }
-  }
-
-  componentDidMount() {
     this.props.handleSignIn(this.props.apiServer)
   }
 

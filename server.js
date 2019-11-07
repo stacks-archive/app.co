@@ -216,7 +216,8 @@ app.prepare().then(() => {
      * General Pages
      */
     server.get('/faq', (req, res) => renderAndCache(req, res, '/faq'))
-    server.get('/submit', (req, res) => renderAndCache(req, res, '/submit'))
+    server.get('/submit', (req, res) => res.redirect('/submit-your-app'))
+    server.get('/submit-your-app', (req, res) => renderAndCache(req, res, '/submit-your-app'))
     server.get('/all', (req, res) => renderAndCache(req, res, '/all'))
     server.get('/terms', (req, res) => renderAndCache(req, res, '/terms'))
     server.get('/privacy', (req, res) => renderAndCache(req, res, '/privacy'))

@@ -52,10 +52,7 @@ const LoadingPage = ({ message = 'Loading...' }) => (
 const MakerPortal = connect()(({ maker, selectedApp, appList, apiServer, user, dispatch }: any) => {
   const router = useRouter()
 
-  const updateMakerRoute = (id: number) =>
-    router.push('/maker/apps', `/maker/apps/${id}`, {
-      shallow: true
-    })
+  const updateMakerRoute = (id: number) => router.push(`/maker/apps/${id}`)
 
   if (maker.loading || !selectedApp) return <LoadingPage />
 
