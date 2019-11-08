@@ -12,7 +12,6 @@ interface PageProps {
   innerPadding?: number | number[];
   subNav?: React.ReactNode;
   align?: string;
-  fullHeight?: boolean;
   [prop: string]: any;
 }
 

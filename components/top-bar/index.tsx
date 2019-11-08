@@ -39,7 +39,7 @@ export const TopBar = ({ isErrorPage, admin, wrap, ...props }) => {
             <HomeLink isErrorPage={isErrorPage} />
             <SearchBar transparent />
           </StyledTopBar.Section>
-          <StyledTopBar.Section fullHeight>
+          <StyledTopBar.Section>
             <Navigation variant="main" display={['none', 'flex']} isErrorPage={isErrorPage} admin={admin}>
               <NavLinks />
             </Navigation>

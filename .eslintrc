@@ -35,7 +35,7 @@
     "prefer-const": 2,
     "new-cap": 0,
     "camelcase": 2,
-    "semi": [2, "never"],
+    "semi": [2, "always"],
 
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,

@@ -21,21 +21,21 @@ const mapStateToProps = (state: any) => ({
   maker: selectMaker(state),
   appList: selectAppList(state),
   selectedApp: selectCurrentApp(state)
-})
+});
 
 const handleChangingApp = (event: any, fn: any) => (dispatch: any) => {
-  event.persist()
-  const id = event.target.value
-  dispatch(selectAppAction(id))
-  fn(id)
-}
+  event.persist();
+  const id = event.target.value;
+  dispatch(selectAppAction(id));
+  fn(id);
+};
 
 const getAppId = (params: any) => {
-  if (!params) return undefined
-  const id = parseInt(params.appId, 10)
-  if (isNaN(id)) return undefined
-  return id
-}
+  if (!params) return undefined;
+  const id = parseInt(params.appId, 10);
+  if (isNaN(id)) return undefined;
+  return id;
+};
 
 const LoadingPage = ({ message = 'Loading...' }) => (
   <Page innerPadding={[0]} wrap>
@@ -47,10 +47,10 @@ const LoadingPage = ({ message = 'Loading...' }) => (
       </Box>
     </Flex>
   </Page>
-)
+);
 
 const MakerPortal = connect()(({ maker, selectedApp, appList, apiServer, user, dispatch }: any) => {
-  const router = useRouter()
+  const router = useRouter();
 
   const updateMakerRoute = (id: number) => router.push(`/maker/apps/${id}`)
 
@@ -62,13 +62,13 @@ const MakerPortal = connect()(({ maker, selectedApp, appList, apiServer, user, d
       userId="kyranjamie.id"
       selectedAppId={selectedApp.id}
       handleSignOut={() => {
-        dispatch(UserStore.actions.signOut())
-        localStorage.clear()
-        window.location.href = '/'
+        dispatch(UserStore.actions.signOut());
+        localStorage.clear();
+        window.location.href = '/';
       }}
       onChange={e => handleChangingApp(e, updateMakerRoute)(dispatch)}
     />
-  )
+  );
 
   return (
     <Page innerPadding={[0]} subNav={subNav} wrap>
@@ -95,22 +95,22 @@ const MakerPortal = connect()(({ maker, selectedApp, appList, apiServer, user, d
         </Flex>
       </MakerContainer>
     </Page>
-  )
-})
+  );
+});
 
 MakerPortal.getInitialProps = async ({ req, reduxStore }) => {
-  const { params } = req
-  const appId = getAppId(params)
+  const { params } = req;
+  const appId = getAppId(params);
   if (selectAppList(reduxStore.getState()).length === 0) {
-    const { universalCookies } = req
-    const userCookie = universalCookies.cookies.jwt
-    const apiServer = selectApiServer(reduxStore.getState())
-    await fetchApps({ apiServer, user: { jwt: userCookie } })(reduxStore.dispatch)
+    const { universalCookies } = req;
+    const userCookie = universalCookies.cookies.jwt;
+    const apiServer = selectApiServer(reduxStore.getState());
+    await fetchApps({ apiServer, user: { jwt: userCookie } })(reduxStore.dispatch);
   }
-  reduxStore.dispatch(selectAppAction(appId))
-  const selectedApp = selectCurrentApp(reduxStore.getState())
-  const props = mapStateToProps(reduxStore.getState())
-  return { appId, selectedApp, ...props, dispatch: reduxStore.dispatch }
+  reduxStore.dispatch(selectAppAction(appId));
+  const selectedApp = selectCurrentApp(reduxStore.getState());
+  const props = mapStateToProps(reduxStore.getState());
+  return { appId, selectedApp, ...props, dispatch: reduxStore.dispatch };
 }
 
-export default MakerPortal
+export default MakerPortal;
