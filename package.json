@@ -39,6 +39,7 @@
     "@mdx-js/tag": "^0.15.0",
     "@next/bundle-analyzer": "^9.1.2",
     "@next/mdx": "^9.1.2",
+    "@types/js-cookie": "^2.2.4",
     "@types/react-redux": "^7.1.5",
     "accounting": "^0.4.1",
     "async": "^2.6.0",

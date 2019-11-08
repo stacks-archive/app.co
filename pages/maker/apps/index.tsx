@@ -32,7 +32,7 @@ const AppDirectoryPageContainer: React.FC = ({ children }) => (
 
 type AppDirectoryPage = React.FC<AppDirectoryPageProps>;
 
-const AppDirectoryPage: AppDirectoryPage = ({ signIn,  handleSignIn }) => {
+const AppDirectoryPage: AppDirectoryPage = ({ signIn, handleSignIn }) => {
   const { apps, isSignedIn, apiServer, user } = useSelector(state => ({
     apps: selectAppList(state),
     isSignedIn: isUserSignedIn(state),
@@ -48,7 +48,6 @@ const AppDirectoryPage: AppDirectoryPage = ({ signIn,  handleSignIn }) => {
   }, []);
 
   if (isSignedIn && apps.length === 0) {
-  // if (true) {
     return (
       <AppDirectoryPageContainer>
         <NoAppsEmptyState username={user.user.blockstackUsername} />
