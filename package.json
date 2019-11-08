@@ -51,7 +51,6 @@
     "compression": "^1.7.3",
     "cross-fetch": "^2.2.2",
     "dayjs": "^1.7.7",
-    "delay": "^4.1.0",
     "dotenv": "^5.0.1",
     "download": "^7.1.0",
     "downloadjs": "^1.4.7",
