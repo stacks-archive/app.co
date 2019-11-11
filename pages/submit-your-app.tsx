@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { ThemeProvider, theme } from '@blockstack/ui';
 import { Field, Flex, Box, Type } from 'blockstack-ui';
+import debounce from 'lodash/debounce';
 
 import Head from '@containers/head';
 import {
@@ -22,12 +23,13 @@ import SuccessCard from '@components/submit';
 import UserStore from '@stores/user';
 
 import { trackEvent } from '@utils/index';
+import { string } from 'prop-types';
 
 const APP_SUBMISSION_DATA = 'app_submission_data';
 
-const outerHandleChange = e => setState => {
+const outerHandleChange = e => (setState: any) => {
   if (e && e.persist) e.persist();
-  setState(s => ({
+  setState((s: any) => ({
     ...s,
     values: {
       ...s.values,
@@ -44,7 +46,9 @@ const Submit = ({
   submit,
   user,
   loading,
-  signIn
+  signIn,
+  success,
+  isAppMiningEligible
 }) => {
   const sections = getSections(user, appConstants);
 
@@ -54,7 +58,7 @@ const Submit = ({
     await Promise.all(
       sections.map(async section =>
         Promise.all(
-          section.fields.map(async field => {
+          (section.fields as any[]).map(async field => {
             const isBool = field.type === 'radio' || field.type === 'checkbox';
             const value = state[field.name];
             if (isBool && field.required && !value) {
@@ -186,7 +190,26 @@ const getValues = () => {
   return {};
 };
 
-class SubmitDapp extends React.Component {
+interface SubmitDappProps {
+  handleSignIn(server: string): void;
+  apiServer: string;
+  user: any;
+  appConstants: any;
+  signIn(): void;
+}
+
+interface SubmitDappState {
+    values: any;
+    loading: any;
+    success: any;
+    errors: any;
+    referralCode: any;
+    refSource: any;
+    accessToken: any;
+    errorCount: any;
+}
+
+class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
   state = {
     values: getValues(),
     loading: false,
@@ -194,7 +217,8 @@ class SubmitDapp extends React.Component {
     errors: {},
     referralCode: null,
     refSource: null,
-    accessToken: null
+    accessToken: null,
+    errorCount: 0
   };
 
   componentDidMount() {
@@ -209,7 +233,6 @@ class SubmitDapp extends React.Component {
       });
     }
     this.props.handleSignIn(this.props.apiServer);
-    console.log('xxxxxxxxx', this.props)
   }
 
   setStateFromData() {
@@ -247,7 +270,7 @@ class SubmitDapp extends React.Component {
     };
 
     try {
-      const headers = {
+      const headers: Record<string, string> = {
         Accept: 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
       };
@@ -307,7 +330,7 @@ class SubmitDapp extends React.Component {
                 submit={this.submit}
                 success={this.state.success}
                 appConstants={appConstants}
-                setState={debounce(args => this.setState(args), 100)}
+                setState={debounce((args: any) => this.setState(args), 100)}
                 state={this.state.values}
                 errors={this.state.errorCount > 0 && this.state.errors}
                 signIn={this.props.signIn}
@@ -322,11 +345,11 @@ class SubmitDapp extends React.Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({ ...UserStore.actions }, dispatch);
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
   appConstants: selectAppConstants(state),
   apiServer: selectApiServer(state),
   user: selectUser(state)
