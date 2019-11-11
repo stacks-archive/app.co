@@ -13,7 +13,11 @@ import {
   MakerButton
 } from '@components/maker/styled';
 import { Page } from '@components/page';
-import { selectAppConstants, selectApiServer, selectUser } from '@stores/apps/selectors';
+import {
+  selectAppConstants,
+  selectApiServer,
+  selectUser
+} from '@stores/apps/selectors';
 import {
   FormSection,
   ErrorMessage,
@@ -23,7 +27,8 @@ import SuccessCard from '@components/submit';
 import UserStore from '@stores/user';
 
 import { trackEvent } from '@utils/index';
-import { string } from 'prop-types';
+import { SubmitSignIn } from '@components/submit/submit-sign-in';
+import { isUserSignedIn } from '@stores/user/selectors';
 
 const APP_SUBMISSION_DATA = 'app_submission_data';
 
@@ -47,6 +52,7 @@ interface SubmitProps {
   user: any;
   loading: any;
   signIn: any;
+  isSignedIn: boolean;
   success: any;
   isAppMiningEligible: any;
 }
@@ -62,6 +68,7 @@ const Submit: Submit = ({
   user,
   loading,
   signIn,
+  isSignedIn,
   success,
   isAppMiningEligible
 }) => {
@@ -103,7 +110,7 @@ const Submit: Submit = ({
     };
   };
 
-  const handleValidation = async e => {
+  const handleValidation = async (e: any) => {
     if (e) e.preventDefault();
     const validation = await validate();
     if (validation.count > 0) {
@@ -121,7 +128,7 @@ const Submit: Submit = ({
     }
   };
 
-  const blockstackAuth = e => {
+  const blockstackAuth = (e: any) => {
     if (e) {
       e.preventDefault();
     }
@@ -133,6 +140,11 @@ const Submit: Submit = ({
     <Box mx="auto" maxWidth={700}>
       <MakerTitle pt="20px">Submit your app</MakerTitle>
       <MakerCardHeader>Personal details</MakerCardHeader>
+
+      {!isSignedIn && (
+        <SubmitSignIn handleBlockstackAuth={blockstackAuth} loading={loading} />
+      )}
+
       {user && user.user && (
         <Flex pt={6}>
           <Box mb={4} width={1}>
@@ -174,20 +186,7 @@ const Submit: Submit = ({
             />
           ))}
           {errors ? <ErrorMessage /> : null}
-          {!(user && user.jwt) ? (
-            <>
-              <Field.Message maxWidth={400} lineHeight={1.5} mb={3}>
-                To submit your app, first login with Blockstack. You&apos;ll be
-                able to use your Blockstack ID to manage your app&apos;s
-                listing.
-              </Field.Message>
-              <MakerButton onClick={blockstackAuth}>
-                {loading ? 'Loading...' : 'Login with Blockstack'}
-              </MakerButton>
-            </>
-          ) : (
-            <MakerButton>{loading ? 'Loading...' : 'Submit App'}</MakerButton>
-          )}
+          <MakerButton>{loading ? 'Loading...' : 'Submit App'}</MakerButton>
         </form>
       </Flex>
     </Box>
@@ -211,6 +210,7 @@ interface SubmitDappProps {
   user: any;
   appConstants: any;
   signIn(): void;
+  isSignedIn: boolean;
 }
 
 interface SubmitDappState {
@@ -344,6 +344,7 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
             ) : (
               <Submit
                 loading={this.state.loading}
+                isSignedIn={this.props.isSignedIn}
                 submit={this.submit}
                 success={this.state.success}
                 appConstants={appConstants}
@@ -369,7 +370,11 @@ function mapDispatchToProps(dispatch: any) {
 const mapStateToProps = (state: any) => ({
   appConstants: selectAppConstants(state),
   apiServer: selectApiServer(state),
-  user: selectUser(state)
+  user: selectUser(state),
+  isSignedIn: isUserSignedIn(state)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubmitDapp);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SubmitDapp);

@@ -1,1 +1,1 @@
-export const isUserSignedIn = (state: any) => Boolean(state.user && state.user.jwt)
+export const isUserSignedIn = (state: any) => Boolean(state.user && state.user.jwt);

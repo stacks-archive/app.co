@@ -31,7 +31,7 @@ export const sections = (user, appConstants) => {
 
   if (user && user.jwt) {
     // If the user is logged in, remove the "Is this your app?" question
-    personal.splice(0, 1)
+    personal.splice(0, 1);
   }
 
   const appDetails = [
