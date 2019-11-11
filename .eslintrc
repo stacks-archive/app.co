@@ -54,6 +54,8 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }],
     "react/forbid-prop-types": [2, { "forbid": ["any"] }],
     "react/jsx-props-no-spreading": 0,
+    "react/state-in-constructor": 0,
+    "react/destructuring-assignment": 0,
     "jsx-a11y/anchor-is-valid": [0],
     "no-script-url": [0],
 
