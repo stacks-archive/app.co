@@ -41,6 +41,7 @@
     "@next/mdx": "^9.1.2",
     "@types/js-cookie": "^2.2.4",
     "@types/react-redux": "^7.1.5",
+    "@types/yup": "^0.26.24",
     "accounting": "^0.4.1",
     "async": "^2.6.0",
     "bitcoinjs-lib": "^5.0.5",

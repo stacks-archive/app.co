@@ -5,24 +5,6 @@ import { string, boolean } from 'yup'
 export const sections = (user, appConstants) => {
   const personal = [
     {
-      name: 'isSubmittingOwnApp',
-      required: true,
-      type: 'radio',
-      label: 'Did you build this app?',
-      options: [
-        {
-          label: 'Yes, I built this app.',
-          value: true,
-          checked: true
-        },
-        {
-          label: 'No, I want to add an app someone else built.',
-          value: false
-        }
-      ],
-      validation: boolean().required('Required.')
-    },
-    {
       name: 'submitterName',
       required: true,
       label: 'Your Name',
