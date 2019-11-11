@@ -186,7 +186,7 @@ const Submit: Submit = ({
             />
           ))}
           {errors ? <ErrorMessage /> : null}
-          <MakerButton>{loading ? 'Loading...' : 'Submit App'}</MakerButton>
+          <MakerButton>{loading ? 'Loading...' : 'Submit your app'}</MakerButton>
         </form>
       </Flex>
     </Box>
