@@ -150,8 +150,6 @@ export const sections = (user, appConstants) => {
       required: true,
       type: 'checkbox',
       label: 'App is publicly accessible and user-ready',
-      message:
-        'App.co lists decentralized apps that are user-ready. Part of our review process is verifying anyone can immediately begin using the app.',
       validation: boolean().required('Required.')
     },
     {
@@ -187,13 +185,7 @@ export const sections = (user, appConstants) => {
       fields: appDetails
     },
     {
-      fields: appCategories,
-      message: (
-        <>
-          Want to add a new category, blockchain, storage, or technology?{' '}
-          <a href="mailto:hello@app.co">Contact us.</a>
-        </>
-      )
+      fields: appCategories
     },
     {
       fields: agreements
