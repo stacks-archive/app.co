@@ -38,7 +38,22 @@ const outerHandleChange = e => (setState: any) => {
   }));
 };
 
-const Submit = ({
+interface SubmitProps {
+  appConstants: any;
+  setState: any;
+  state: any;
+  errors: any;
+  submit: any;
+  user: any;
+  loading: any;
+  signIn: any;
+  success: any;
+  isAppMiningEligible: any;
+}
+
+type Submit = React.FC<SubmitProps>;
+
+const Submit: Submit = ({
   appConstants,
   setState,
   state,
@@ -111,7 +126,7 @@ const Submit = ({
       e.preventDefault();
     }
     localStorage.setItem(APP_SUBMISSION_DATA, JSON.stringify(state));
-    signIn('submit');
+    signIn('submit-your-app');
   };
 
   return (
@@ -199,14 +214,14 @@ interface SubmitDappProps {
 }
 
 interface SubmitDappState {
-    values: any;
-    loading: any;
-    success: any;
-    errors: any;
-    referralCode: any;
-    refSource: any;
-    accessToken: any;
-    errorCount: any;
+  values: any;
+  loading: any;
+  success: any;
+  errors: any;
+  referralCode: any;
+  refSource: any;
+  accessToken: any;
+  errorCount: any;
 }
 
 class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
@@ -224,8 +239,10 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
   componentDidMount() {
     const queries = document.location.search;
     if (queries) {
-      const referralCode = queries.match(/referralCode=(\w+)/)[1];
-      const refSource = queries.match(/refSource=(\w+)/)[1];
+      const referralCodeMatch = queries.match(/referralCode=(\w+)/);
+      const referralCode = referralCodeMatch ? referralCodeMatch[1] : null;
+      const refSourceMatch = queries.match(/refSource=(\w+)/);
+      const refSource = refSourceMatch ? refSourceMatch[1] : null;
       this.setState({
         // eslint-disable-line react/no-did-mount-set-state
         referralCode,

@@ -20,7 +20,7 @@ export const primaryNavLinks = [
   },
   {
     name: 'Submit app',
-    href: '/submit'
+    href: '/submit-your-app'
   },
   {
     name: 'Manage your apps',
