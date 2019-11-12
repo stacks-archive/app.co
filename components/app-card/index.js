@@ -154,12 +154,6 @@ const StatsItem = ({ Rankings, name }) => {
   )
 }
 
-const ClaimApp = ({ name }) => (
-  <Box mb={3}>
-    Is this your app? <a href={`mailto:hello@app.co?subject=I want to claim ${name}`}>Claim it now.</a>
-  </Box>
-)
-
 const HomeLink = (props) => (
   <div
     style={{
@@ -254,10 +248,6 @@ const AppCard = ({ py, px, my, mx, mr = 'auto', ml = 'auto', mt, mb, style, appM
             </Box>
           </Flex>
         ) : null}
-        <Box mt={2} mb={5}>
-          <hr />
-        </Box>
-        <ClaimApp {...props} />
       </Box>
     </>
   )

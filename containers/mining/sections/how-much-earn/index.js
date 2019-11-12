@@ -139,10 +139,9 @@ const HowMuchSection = ({ apps, months, ...rest }) => (
             How much can you earn?
           </Title>
           <Type mx="auto" maxWidth={860} lineHeight={1.85} pt={6} textAlign="center">
-            Starting in August, App Mining payouts are anticipated to include an additional $100,000 payout in Stacks
-            tokens (STX) on top of the existing $100,000 in BTC. Payouts in BTC will be phased out, and the total
-            monthly payout in STX will begin in November at $500,000; and will increase to $700,000 in February 2020; to
-            $1 million in May 2020.
+            Starting in November 2019, the total payout will increase to $300,000, paid in both BTC and STX. As BTC
+            payments are phased out, the full payout will be paid in STX, and will increase to $500,000 in February
+            2020; then $1 million in May 2020.
           </Type>
           <Type mx="auto" maxWidth={860} lineHeight={1.85} pt={6} textAlign="center">
             App Mining rewards in STX earned before the hard fork will be accrued, and the tokens will be distributed

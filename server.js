@@ -8,6 +8,8 @@ const fs = require('fs-extra')
 const secure = require('express-force-https')
 const morgan = require('morgan')
 const basicAuth = require('express-basic-auth')
+const { createMiddleware: createPrometheusMiddleware } = require('@promster/express')
+const { createServer } = require('@promster/server')
 
 const dev = process.env.NODE_ENV !== 'production'
 if (dev) {
@@ -111,6 +113,12 @@ console.warn = (...args) => {
 app.prepare().then(() => {
   getApps(apiServer).then((apps) => {
     const server = express()
+    server.use(createPrometheusMiddleware({ app: server }))
+
+    // Create `/metrics` endpoint on separate server
+    if (!dev) {
+      createServer({ port: 9153 }).then(() => console.log(`@promster/server started on port 9153.`))
+    }
 
     if (!dev) {
       server.use(secure)
