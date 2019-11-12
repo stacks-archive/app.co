@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import { Flex, Box, Type } from 'blockstack-ui'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import isNaN from 'lodash/isNaN'
 
 import { selectMaker, selectAppList, selectCurrentApp } from '@stores/maker/selectors'
@@ -16,9 +16,7 @@ import UserStore from '@stores/user'
 
 
 const mapStateToProps = (state: any) => ({
-  user: selectUser(state),
   apiServer: selectApiServer(state),
-  maker: selectMaker(state),
   appList: selectAppList(state),
   selectedApp: selectCurrentApp(state)
 });
@@ -49,8 +47,13 @@ const LoadingPage = ({ message = 'Loading...' }) => (
   </Page>
 );
 
-const MakerPortal = connect()(({ maker, selectedApp, appList, apiServer, user, dispatch }: any) => {
+const MakerPortal = connect()(({ selectedApp, appList, apiServer, dispatch }: any) => {
   const router = useRouter();
+
+  const { user, maker } = useSelector(state => ({
+    user: selectUser(state),
+    maker: selectMaker(state)
+  }));
 
   const updateMakerRoute = (id: number) => router.push(`/maker/apps/${id}`)
 
