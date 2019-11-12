@@ -29,6 +29,7 @@ import UserStore from '@stores/user';
 import { trackEvent } from '@utils/index';
 import { SubmitSignIn } from '@components/submit/submit-sign-in';
 import { isUserSignedIn } from '@stores/user/selectors';
+import { WarningCard } from '@components/warning-card';
 
 const APP_SUBMISSION_DATA = 'app_submission_data';
 
@@ -142,7 +143,10 @@ const Submit: Submit = ({
       <MakerCardHeader>Personal details</MakerCardHeader>
 
       {!isSignedIn && (
-        <SubmitSignIn handleBlockstackAuth={blockstackAuth} loading={loading} />
+        <SubmitSignIn
+          handleBlockstackAuth={blockstackAuth}
+          loading={loading}
+        />
       )}
 
       {user && user.user && (
@@ -185,8 +189,11 @@ const Submit: Submit = ({
               state={state}
             />
           ))}
+          <WarningCard message="Blockstack Authentication is required to participate in App Mining" />
           {errors ? <ErrorMessage /> : null}
-          <MakerButton>{loading ? 'Loading...' : 'Submit your app'}</MakerButton>
+          <MakerButton>
+            {loading ? 'Loading...' : 'Submit your app'}
+          </MakerButton>
         </form>
       </Flex>
     </Box>
