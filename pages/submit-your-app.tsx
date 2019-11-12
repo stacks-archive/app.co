@@ -335,7 +335,6 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
     const { appConstants } = this.props;
 
     return (
-      <ThemeProvider theme={theme}>
         <Page innerPadding={0} pt={0} background="white">
           <Head
             title="Submit your dapp"
@@ -361,7 +360,6 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
             )}
           </Page.Section>
         </Page>
-      </ThemeProvider>
     );
   }
 }

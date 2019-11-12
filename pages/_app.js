@@ -1,12 +1,14 @@
 import App from 'next/app'
 import React from 'react'
 import { Provider } from 'react-redux'
+import merge from 'lodash/merge';
 import { CookiesProvider } from 'react-cookie'
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 import withReduxStore from '@common/lib/with-redux-store'
 import { Root } from '@containers/root'
 import { theme } from '@common/styles'
 import { theme as BlockstackTheme } from 'blockstack-ui'
+import { theme as newBlockstackTheme } from '@blockstack/ui'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { Mdx } from '@components/mdx'
 import NProgress from 'nprogress'
@@ -15,6 +17,19 @@ import { trackPageView } from '@utils'
 import 'isomorphic-unfetch'
 import { normalize } from 'polished'
 import smoothscroll from 'smoothscroll-polyfill'
+
+// Polyfill theme
+
+merge(newBlockstackTheme, {
+  colors: {
+    blue: {
+      mid: '#E1E3E8'
+    }
+  }
+});
+
+console.log(newBlockstackTheme);
+
 /**
  * Reset our styles
  */
@@ -73,6 +88,21 @@ const GlobalStyles = createGlobalStyle`
   }
 `
 
+const REFACTORED_PATHS = ['/maker/apps', '/maker/apps/blockstack-only', '/submit-your-app'];
+
+const RenderRouteThemeProvider = ({ children }) => {
+  const { pathname } = useRouter();
+  if (REFACTORED_PATHS.includes(pathname)) {
+    console.info(`Pathname: '${pathname}' is a refactored path.`);
+    return (
+      <ThemeProvider theme={newBlockstackTheme}>
+        {children}
+      </ThemeProvider>
+    );
+  }
+  return <ThemeProvider theme={BlockstackTheme}>{children}</ThemeProvider>;
+};
+
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {}
@@ -109,16 +139,16 @@ class MyApp extends App {
     return (
       <CookiesProvider>
         <Mdx>
-          <ThemeProvider theme={BlockstackTheme}>
-              <Provider store={reduxStore}>
-                <Root>
-                  <>
-                    <GlobalStyles />
-                    <Component {...pageProps} serverCookies={this.props.cookies} />
-                  </>
-                </Root>
-              </Provider>
-          </ThemeProvider>
+          <RenderRouteThemeProvider>
+            <Provider store={reduxStore}>
+              <Root>
+                <>
+                  <GlobalStyles />
+                  <Component {...pageProps} serverCookies={this.props.cookies} />
+                </>
+              </Root>
+            </Provider>
+          </RenderRouteThemeProvider>
         </Mdx>
       </CookiesProvider>
     )
