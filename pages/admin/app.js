@@ -79,7 +79,7 @@ class App extends React.Component {
     // this.props.doSelectApp(parseInt(parsed.id, 10))
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.selectedApp && this.state.id !== nextProps.selectedApp.id && nextProps.selectedApp.status) {
       this.setState(Object.assign({}, this.state, nextProps.selectedApp))
     }

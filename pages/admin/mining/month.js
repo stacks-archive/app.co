@@ -53,7 +53,7 @@ class MiningMonth extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (!this.state.purchasedAt && nextProps.month) {
       this.setState({ ...nextProps.month })
     }

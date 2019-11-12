@@ -36,7 +36,7 @@ class MakerMagicLink extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { user } = this.props
     if (!user && nextProps.user) {
       this.claim(user)
