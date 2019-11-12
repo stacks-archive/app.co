@@ -26,8 +26,8 @@ const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, fo
         </>
       ) : (
         <>
-          <ErrorPageLink isErrorPage={isErrorPage} href="/all">
-            <a href="/all">All apps</a>
+          <ErrorPageLink isErrorPage={isErrorPage} href={{ pathname: '/platforms', query: { platform: 'blockstack' } }} as="/blockstack">
+            <a href="/blockstack">All apps</a>
           </ErrorPageLink>
           <ErrorPageLink isErrorPage={isErrorPage} href="/faq" {...extraProps}>
             <a href="/faq">Learn more</a>
