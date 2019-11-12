@@ -2,7 +2,7 @@ import React from 'react';
 import 'isomorphic-unfetch';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ThemeProvider, theme } from '@blockstack/ui';
+import { ThemeProvider, theme, Button } from '@blockstack/ui';
 import { Field, Flex, Box, Type } from 'blockstack-ui';
 import debounce from 'lodash/debounce';
 
@@ -187,9 +187,9 @@ const Submit: Submit = ({
           ))}
           <WarningCard message="Blockstack Authentication is required to participate in App Mining" />
           {errors ? <ErrorMessage /> : null}
-          <MakerButton>
+          <Button>
             {loading ? 'Loading...' : 'Submit your app'}
-          </MakerButton>
+          </Button>
         </form>
       </Flex>
     </Box>
