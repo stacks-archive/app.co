@@ -2,7 +2,7 @@ import * as React from 'react'
 import { MiningPage } from '@components/mining/page'
 import styled from 'styled-components'
 
-import { Header, Footer } from '@pages/mining/shared'
+import { Header, Footer } from '@containers/mining/shared'
 import Head from '@containers/head'
 import { Flex, Type, Box } from 'blockstack-ui'
 import ArrowLeftIcon from 'mdi-react/ArrowLeftIcon'
@@ -32,7 +32,7 @@ class AppMiningTermsOfUsePage extends React.PureComponent {
           <Box maxWidth="780px" width={1} mx="auto" px={4}>
             <Content>
               <Link href="/mining">
-                <Flex is="a" href={'/mining'} alignItems="center">
+                <Flex is="a" href="/mining" alignItems="center">
                   <ArrowLeftIcon />
                   <Type>Back to App Mining</Type>
                 </Flex>

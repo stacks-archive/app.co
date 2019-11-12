@@ -7,8 +7,6 @@
         "ssr": true
       }
     ],
-    "@babel/plugin-transform-regenerator",
-    "@babel/plugin-transform-runtime",
     [
       "module-resolver",
       {

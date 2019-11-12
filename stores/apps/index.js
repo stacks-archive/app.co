@@ -1,7 +1,7 @@
 import assignIn from 'lodash/assignIn'
 
 import { getTags, capitalize } from '@utils'
-import { selectAllPlatforms, selectRankedBlockstackApps } from '@stores/apps/selectors'
+import { selectAllPlatforms } from '@stores/apps/selectors'
 import { slugify } from '@common'
 
 const constants = {
@@ -48,8 +48,8 @@ const saveApp = (data, apiServer, jwt) => async (dispatch) => {
     }),
     body: JSON.stringify(data)
   })
-  const { app } = await response.json()
-  dispatch(savedApp(app))
+  const resData = await response.json()
+  dispatch(savedApp(resData.app))
 }
 
 const fetchingPending = () => ({
@@ -87,8 +87,8 @@ const fetchAdminApps = (apiServer, jwt) => async (dispatch) => {
       'Content-Type': 'application/json'
     })
   })
-  const { apps } = await response.json()
-  dispatch(fetchedAdminApps(apps))
+  const data = await response.json()
+  dispatch(fetchedAdminApps(data.apps))
 }
 
 const fetchPendingApps = (apiServer, jwt) => async (dispatch) => {
@@ -98,16 +98,16 @@ const fetchPendingApps = (apiServer, jwt) => async (dispatch) => {
       Authorization: `Bearer ${jwt}`
     })
   })
-  const { apps } = await response.json()
-  dispatch(fetchedPending(apps))
+  const data = await response.json()
+  dispatch(fetchedPending(data.apps))
 }
 
 const fetchAppMiningApps = () => async (dispatch, getState) => {
   const state = getState()
-  const { apiServer } = state.apps
-  const response = await fetch(`${apiServer}/api/app-mining-apps`)
-  const { apps } = await response.json()
-  dispatch(fetchedAppMiningApps(apps))
+  const url = state.apps.apiServer
+  const response = await fetch(`${url}/api/app-mining-apps`)
+  const data = await response.json()
+  dispatch(fetchedAppMiningApps(data.apps))
 }
 
 const actions = {

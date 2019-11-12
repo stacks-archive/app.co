@@ -16,8 +16,8 @@ const doSubmitEmail = (email, callback) => async (dispatch, getState) => {
 
   try {
     const state = getState()
-    const { apiServer } = state.apps
-    const url = `${apiServer}/api/subscribe`
+    const urlBase = state.apps.apiServer
+    const url = `${urlBase}/api/subscribe`
     const data = { email }
     await fetch(url, {
       method: 'POST',
