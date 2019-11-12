@@ -18,7 +18,6 @@ import UserStore from '@stores/user'
 const mapStateToProps = (state: any) => ({
   apiServer: selectApiServer(state),
   appList: selectAppList(state),
-  selectedApp: selectCurrentApp(state)
 });
 
 const handleChangingApp = (event: any, fn: any) => (dispatch: any) => {
@@ -47,12 +46,13 @@ const LoadingPage = ({ message = 'Loading...' }) => (
   </Page>
 );
 
-const MakerPortal = connect()(({ selectedApp, appList, apiServer, dispatch }: any) => {
+const MakerPortal = connect()(({ appList, apiServer, dispatch }: any) => {
   const router = useRouter();
 
-  const { user, maker } = useSelector(state => ({
+  const { user, maker, selectedApp } = useSelector(state => ({
     user: selectUser(state),
-    maker: selectMaker(state)
+    maker: selectMaker(state),
+    selectedApp: selectCurrentApp(state)
   }));
 
   const updateMakerRoute = (id: number) => router.push(`/maker/apps/${id}`)
