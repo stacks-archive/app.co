@@ -30,6 +30,7 @@ import { trackEvent } from '@utils/index';
 import { SubmitSignIn } from '@components/submit/submit-sign-in';
 import { isUserSignedIn } from '@stores/user/selectors';
 import { WarningCard } from '@components/warning-card';
+import { BlockstackIdCard } from '@components/submit/blockstack-id-card';
 
 const APP_SUBMISSION_DATA = 'app_submission_data';
 
@@ -143,10 +144,12 @@ const Submit: Submit = ({
       <MakerCardHeader>Personal details</MakerCardHeader>
 
       {!isSignedIn && (
-        <SubmitSignIn
-          handleBlockstackAuth={blockstackAuth}
-          loading={loading}
-        />
+        <section>
+          <SubmitSignIn
+            handleBlockstackAuth={blockstackAuth}
+            loading={loading}
+          />
+        </section>
       )}
 
       {user && user.user && (
@@ -160,15 +163,7 @@ const Submit: Submit = ({
               required
               label="Blockstack ID"
             />
-            <Box
-              px={3}
-              py={4}
-              borderRadius={3}
-              border="1px solid gray"
-              display="inline-block"
-            >
-              {user.user.blockstackUsername}
-            </Box>
+            <BlockstackIdCard name={user.user.blockstackUsername} />
             <Type fontSize={1} display="block" mt={3}>
               You will use your ID to make changes to your app, and remove or
               modify it&apos;s listing in the future.
@@ -176,6 +171,7 @@ const Submit: Submit = ({
           </Box>
         </Flex>
       )}
+
       <Flex flexWrap="wrap" pt={6} flexDirection="column">
         <form noValidate onSubmit={handleValidation}>
           {sections.map(section => (
