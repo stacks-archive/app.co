@@ -25,12 +25,14 @@ import {
 } from '@containers/submit';
 import SuccessCard from '@components/submit';
 import UserStore from '@stores/user';
+import * as MakerStore from '@stores/maker/actions';
 
 import { trackEvent } from '@utils/index';
 import { SubmitSignIn } from '@components/submit/submit-sign-in';
 import { isUserSignedIn } from '@stores/user/selectors';
 import { WarningCard } from '@components/warning-card';
 import { BlockstackIdCard } from '@components/submit/blockstack-id-card';
+// import { fetchApps } from '@stores/maker/actions';
 
 const APP_SUBMISSION_DATA = 'app_submission_data';
 
@@ -214,6 +216,7 @@ interface SubmitDappProps {
   appConstants: any;
   signIn(): void;
   isSignedIn: boolean;
+  fetchApps(x?: any, y?: any): void;
 }
 
 interface SubmitDappState {
@@ -310,6 +313,7 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
         loading: false,
         accessToken: resData.app.accessToken
       });
+      this.props.fetchApps({ user: this.props.user, apiServer: this.props.apiServer })
     } catch (e) {
       trackEvent('App Submission Page - Submission Error');
       this.setState({ success: false, loading: false });
@@ -365,7 +369,7 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
 }
 
 function mapDispatchToProps(dispatch: any) {
-  return bindActionCreators({ ...UserStore.actions }, dispatch);
+  return bindActionCreators({ ...UserStore.actions, fetchApps: MakerStore.fetchApps }, dispatch);
 }
 
 const mapStateToProps = (state: any) => ({
