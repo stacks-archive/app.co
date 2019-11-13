@@ -6,44 +6,43 @@ import { App } from '@models/app';
 import { Arrow } from '@components/arrow';
 import { AppIcon } from '@components/app-icon';
 
-const AppDirectoryItem: React.FC<{ app: App }> = ({ app }) => {
-  const url =
-    app.authentication === 'Blockstack'
-      ? `/maker/apps/${app.id}`
-      : '/maker/apps/blockstack-only';
+interface AppDirectoryItemProps {
+  app: App;
+}
 
-  return (
-    <Flex>
-      <Link href={url}>
-        <PseudoBox
-          display="flex"
-          width={['320px', '432px']}
-          maxWidth={432}
-          mb={2}
-          height={96}
-          borderRadius={6}
-          justifyContent="space-between"
-          alignItems="center"
-          background="#F9F9FC"
-          _hover={{ bg: '#F0F0F5' }}
-        >
-          <AppIcon
-            ml={6}
-            src={app.imageUrl}
-            alt={`Logo of ${app.name}`}
-            size={48}
-          />
-          <Box flex={1} ml={6}>
-            {app.name}
-          </Box>
-          <Box mr={6}>
-            <Arrow direction="right" />
-          </Box>
-        </PseudoBox>
-      </Link>
-    </Flex>
-  );
-};
+type AppDirectoryItem = React.FC<AppDirectoryItemProps>;
+
+const AppDirectoryItem: AppDirectoryItem = ({ app }) => (
+  <Flex>
+    <Link href={`/maker/apps/${app.id}`}>
+      <PseudoBox
+        display="flex"
+        width={['320px', '432px']}
+        maxWidth={432}
+        mb={2}
+        height={96}
+        borderRadius={6}
+        justifyContent="space-between"
+        alignItems="center"
+        background="#F9F9FC"
+        _hover={{ bg: '#F0F0F5' }}
+      >
+        <AppIcon
+          ml={6}
+          src={app.imageUrl}
+          alt={`Logo of ${app.name}`}
+          size={48}
+        />
+        <Box flex={1} ml={6}>
+          {app.name}
+        </Box>
+        <Box mr={6}>
+          <Arrow direction="right" />
+        </Box>
+      </PseudoBox>
+    </Link>
+  </Flex>
+);
 
 interface AppDirectoryProps {
   apps: App[];

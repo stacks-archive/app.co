@@ -24,7 +24,8 @@ import UserStore from '@stores/user';
 
 const mapStateToProps = (state: any) => ({
   apiServer: selectApiServer(state),
-  appList: selectAppList(state)
+  appList: selectAppList(state),
+  selectedApp: selectCurrentApp(state)
 });
 
 const handleChangingApp = (event: any, fn: any) => (dispatch: any) => {
@@ -118,7 +119,7 @@ const MakerPortal = connect()(({ appList, apiServer, dispatch }: any) => {
   );
 });
 
-MakerPortal.getInitialProps = async ({ req, reduxStore }) => {
+MakerPortal.getInitialProps = async ({ res, req, reduxStore }) => {
   const { params } = req;
   const appId = getAppId(params);
   if (selectAppList(reduxStore.getState()).length === 0) {
@@ -131,6 +132,9 @@ MakerPortal.getInitialProps = async ({ req, reduxStore }) => {
   }
   reduxStore.dispatch(selectAppAction(appId));
   const props = mapStateToProps(reduxStore.getState());
+  if (props.selectedApp.authentication.toLowerCase() !== 'blockstack') {
+    res.redirect('/maker/apps/blockstack-only');
+  }
   return { appId, ...props, dispatch: reduxStore.dispatch };
 };
 
