@@ -1,10 +1,10 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Box, Flex, Text } from '@blockstack/ui'
-import { App } from '@models/app'
+import React from 'react';
+import styled from 'styled-components';
+import { Box, Flex, Text } from '@blockstack/ui';
+import { App } from '@models/app';
 
-import { Arrow } from '@components/arrow'
-import { MakerNavContainer } from './nav-layout'
+import { Arrow } from '@components/arrow';
+import { MakerNavContainer } from './nav-layout';
 
 const StyledSelectBox = styled(Box)`
   -webkit-appearance: none;
@@ -19,12 +19,12 @@ const StyledSelectBox = styled(Box)`
   &:focus {
     outline: 0;
   }
-`
+`;
 
 interface AppSelectProps {
-  selectedValue?: number
-  onChange?(e: any): void
-  apps?: any[]
+  selectedValue?: number;
+  onChange?(e: any): void;
+  apps?: any[];
 }
 
 const AppSelect = ({ selectedValue, onChange, apps = [] }: AppSelectProps) => (
@@ -49,44 +49,64 @@ const AppSelect = ({ selectedValue, onChange, apps = [] }: AppSelectProps) => (
       </Flex>
     </Box>
   </Flex>
-)
+);
 
 interface MakerNavActionsProps {
-  userId: string
-  appName?: string
-  handleSignOut(): void
-  apps?: App[]
+  userId: string;
+  appName?: string;
+  handleSignOut(): void;
+  apps?: App[];
 }
 
 const MakerNavActions = ({ userId, handleSignOut }: MakerNavActionsProps) => {
-  const User = () => <Text fontSize={0}>{userId}</Text>
+  const User = () => <Text fontSize={0}>{userId}</Text>;
   return (
     <Flex alignItems="center">
       <Box textAlign="right" mr={3}>
         <User />
       </Box>
       <Box textAlign="right" mr={1}>
-        <Text onClick={handleSignOut} as="a" fontSize={0} fontWeight="medium" color="blue.900">Sign out</Text>
+        <Text
+          onClick={handleSignOut}
+          as="a"
+          fontSize={0}
+          fontWeight="medium"
+          color="blue.900"
+        >
+          Sign out
+        </Text>
       </Box>
     </Flex>
-  )
-}
+  );
+};
 
 interface MakerNavProps {
-  apps: App[]
-  userId: string
+  apps: App[];
+  userId: string;
   selectedAppId: number;
   onChange?(e: Event): void;
   handleSignOut(): void;
 }
 
-export const MakerNav = ({ apps, userId, selectedAppId, onChange, handleSignOut }: MakerNavProps) => {
+export const MakerNav = ({
+  apps,
+  userId,
+  selectedAppId,
+  onChange,
+  handleSignOut
+}: MakerNavProps) => {
   return (
     <MakerNavContainer>
-
-      <AppSelect apps={apps} onChange={onChange} selectedValue={selectedAppId} />
-      <MakerNavActions appName="klsdflksdf" userId={userId} handleSignOut={handleSignOut} />
-
+      <AppSelect
+        apps={apps}
+        onChange={onChange}
+        selectedValue={selectedAppId}
+      />
+      <MakerNavActions
+        appName="klsdflksdf"
+        userId={userId}
+        handleSignOut={handleSignOut}
+      />
     </MakerNavContainer>
-  )
-}
+  );
+};

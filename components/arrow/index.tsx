@@ -1,30 +1,30 @@
-import React from 'react'
-import { Flex } from '@blockstack/ui'
-import { ArrowDown } from '@components/svg/maker'
+import React from 'react';
+import { Flex } from '@blockstack/ui';
+import { ArrowDown } from '@components/svg/maker';
 
-type Direction = 'up' | 'down' | 'left' | 'right'
+type Direction = 'up' | 'down' | 'left' | 'right';
 
 interface ArrowProps {
-  direction: Direction
+  direction: Direction;
 }
 
 const degreesToRotate = (direction: Direction) => {
   switch (direction) {
     case 'up':
-      return 90
+      return 90;
     case 'down':
-      return 0
+      return 0;
     case 'left':
-      return 180
+      return 180;
     case 'right':
-      return 270
+      return 270;
     default:
-      throw new Error('Must be invoked with direction')
+      throw new Error('Must be invoked with direction');
   }
-}
+};
 
 export const Arrow: React.FC<ArrowProps> = ({ direction }) => (
   <Flex style={{ transform: `rotate(${degreesToRotate(direction)}deg)` }}>
     <ArrowDown />
   </Flex>
-)
+);

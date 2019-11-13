@@ -70,7 +70,7 @@ const MakerPortal = connect()(({ appList, apiServer, dispatch }: any) => {
   const subNav = (
     <MakerNav
       apps={appList}
-      userId="kyranjamie.id"
+      userId={user && user.user && user.user.blockstackUsername}
       selectedAppId={selectedApp.id}
       handleSignOut={() => {
         dispatch(UserStore.actions.signOut());
