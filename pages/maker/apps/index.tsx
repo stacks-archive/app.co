@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect, useSelector } from 'react-redux';
 
 import { AppDirectory } from '@components/app-directory';
-import { ThemeProvider, theme, Flex, Box } from '@blockstack/ui';
+import { Flex, Box } from '@blockstack/ui';
 import { isUserSignedIn } from '@stores/user/selectors';
 import UserStore from '@stores/user';
 import { selectAppList } from '@stores/maker/selectors';
@@ -20,19 +20,18 @@ interface AppDirectoryPageProps {
 }
 
 const AppDirectoryPageContainer: React.FC = ({ children }) => (
-  <ThemeProvider theme={theme}>
-    <Page background="white">
-      <Head title="Select your app" />
-      <Flex alignItems="center">
-        <Box>{children}</Box>
-      </Flex>
-    </Page>
-  </ThemeProvider>
+  <Page background="white">
+    <Head title="Select your app" />
+    <Flex alignItems="center">
+      <Box>{children}</Box>
+    </Flex>
+  </Page>
 );
 
 type AppDirectoryPage = React.FC<AppDirectoryPageProps>;
 
 const AppDirectoryPage: AppDirectoryPage = ({ signIn, handleSignIn }) => {
+
   const { apps, isSignedIn, apiServer, user } = useSelector(state => ({
     apps: selectAppList(state),
     isSignedIn: isUserSignedIn(state),

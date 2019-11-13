@@ -1,20 +1,41 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import NewsletterActions from '@stores/newsletter/actions'
-import { StyledTopBar } from '@components/top-bar/styled'
+import NewsletterActions from '@stores/newsletter/actions';
+import { StyledTopBar } from '@components/top-bar/styled';
 
-const NavigationComponent: React.FC<any> = ({ children, mobile, display, variant }) => {
-  return (
-    <StyledTopBar.Navigation display={display} mobile={mobile} variant={variant}>
-      {children}
-    </StyledTopBar.Navigation>
-  )
+interface NavigationComponentProps {
+  mobile: boolean;
+  display: boolean;
+  variant: string;
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({ ...NewsletterActions }, dispatch)
+type NavigationComponent = React.FC<NavigationComponentProps>;
 
-const Navigation = connect(null, mapDispatchToProps)(NavigationComponent)
+const NavigationComponent: NavigationComponent = ({
+  children,
+  mobile,
+  display,
+  variant
+}) => {
+  return (
+    <StyledTopBar.Navigation
+      display={display}
+      mobile={mobile}
+      variant={variant}
+    >
+      {children}
+    </StyledTopBar.Navigation>
+  );
+};
 
-export { Navigation }
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ ...NewsletterActions }, dispatch);
+
+const Navigation = connect(
+  null,
+  mapDispatchToProps
+)(NavigationComponent);
+
+export { Navigation };

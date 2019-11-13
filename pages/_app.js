@@ -18,8 +18,10 @@ import 'isomorphic-unfetch'
 import { normalize } from 'polished'
 import smoothscroll from 'smoothscroll-polyfill'
 
-// Polyfill theme
 
+// Polyfill theme
+// This merge is here to handle some edge cases
+// caused int the transition to the new ui library
 merge(newBlockstackTheme, {
   colors: {
     blue: {
@@ -27,8 +29,6 @@ merge(newBlockstackTheme, {
     }
   }
 });
-
-console.log(newBlockstackTheme);
 
 /**
  * Reset our styles

@@ -1,3 +1,4 @@
+import { Dispatch } from 'redux'
 import { UserSession, AppConfig } from 'blockstack';
 import Cookies from 'js-cookie';
 
@@ -40,7 +41,7 @@ const signOut = () => {
   };
 };
 
-const handleSignIn = (apiServer: any) => async (dispatch: any) => {
+const handleSignIn = (apiServer: string) => async (dispatch: Dispatch) => {
   const token = userSession.getAuthResponseToken();
   if (!token) {
     return true;

@@ -1,5 +1,3 @@
-export const headerHeight = '88px'
-
 export interface NavLink {
   name: string;
   href: string;
@@ -8,7 +6,7 @@ export interface NavLink {
 export const primaryNavLinks = [
   {
     name: 'Discover apps',
-    href: '/all'
+    href: '/blockstack'
   },
   {
     name: 'About app.co',
