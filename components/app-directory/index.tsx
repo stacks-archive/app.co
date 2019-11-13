@@ -4,6 +4,7 @@ import { Flex, Box, PseudoBox } from '@blockstack/ui';
 
 import { App } from '@models/app';
 import { Arrow } from '@components/arrow';
+import { AppIcon } from '@components/app-icon';
 
 const AppDirectoryItem: React.FC<{ app: App }> = ({ app }) => {
   const url =
@@ -26,10 +27,12 @@ const AppDirectoryItem: React.FC<{ app: App }> = ({ app }) => {
           background="#F9F9FC"
           _hover={{ bg: '#F0F0F5' }}
         >
-          {/* Due to many broken image links, commenting out pictures  */}
-          {/* <Box ml={6}>
-            <img src={app.imageUrl} alt={`Logo of ${app.name}`} width="48px" height="48px" />
-          </Box> */}
+          <AppIcon
+            ml={6}
+            src={app.imageUrl}
+            alt={`Logo of ${app.name}`}
+            size={48}
+          />
           <Box flex={1} ml={6}>
             {app.name}
           </Box>

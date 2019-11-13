@@ -1,9 +1,8 @@
+import React from 'react';
 import styled, { css } from 'styled-components'
 import { Box } from 'blockstack-ui'
-import { rgba } from 'polished'
-import { theme } from '@common/styles'
 
-const StyledAppIcon = styled(Box)`
+const StyledAppIcon = styled(({ showGradient, ...props }) => <Box {...props}/>)`
   max-width: 100%;
   width: ${({ size }) => size}px;
   height: ${({ size }) => size}px;
@@ -28,12 +27,10 @@ const StyledAppIcon = styled(Box)`
     width: ${({ size }) => size}px;
   }
 `
-const Image = styled.img`
+const StyledAppIconImage = styled.img`
   display: block;
   max-width: 100%;
   width: 100%;
 `
 
-StyledAppIcon.Image = Image
-
-export { StyledAppIcon }
+export { StyledAppIcon, StyledAppIconImage }
