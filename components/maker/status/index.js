@@ -49,16 +49,15 @@ const ItemToCompleteField = ({ label, status }) => (
 
 const AppMiningComplete = () => (
   <MakerCardText mb={4}>
-    Congratulations! We&apos;ve collected everything we need in order for your app to participate in app
-    mining.
+    You’ve completed these sections and are now eligible for App Mining!
   </MakerCardText>
-)
+);
 
 const AppMiningIncomplete = () => (
   <MakerCardText mb={4} mt={0} fontSize={14} lineHeight="20px">
-    Complete the forms in order for your app to be elligble for App Mining
+    Complete these sections to become eligible for App Mining:
   </MakerCardText>
-)
+);
 
 const Status = ({ app }) => {
   const isReady = isMiningReady(app)
