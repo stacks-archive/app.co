@@ -88,7 +88,7 @@ class App extends React.Component {
   async fetchApp() {
     const qs = queryString.parse(document.location.search)
     if (qs.id && this.props.jwt) {
-      const request = await fetch(`${this.propsapiServer}/api/admin/apps/${qs.id}`, {
+      const request = await fetch(`${this.props.apiServer}/api/admin/apps/${qs.id}`, {
         method: 'GET',
         headers: new Headers({
           Authorization: `Bearer ${this.props.jwt}`,
