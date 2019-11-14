@@ -14,12 +14,14 @@ type AppDirectoryItem = React.FC<AppDirectoryItemProps>;
 
 const AppDirectoryItem: AppDirectoryItem = ({ app }) => (
   <Flex>
-    <Link href={`/maker/apps/${app.id}`}>
+    <Link href={`/maker/apps/${app.id}`} passHref>
       <PseudoBox
+        as="a"
         display="flex"
         width={['320px', '432px']}
         maxWidth={432}
         mb={2}
+        cursor="pointer"
         height={96}
         borderRadius={6}
         justifyContent="space-between"

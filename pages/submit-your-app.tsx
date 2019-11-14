@@ -2,16 +2,12 @@ import React from 'react';
 import 'isomorphic-unfetch';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ThemeProvider, theme, Button } from '@blockstack/ui';
+import { Button } from '@blockstack/ui';
 import { Field, Flex, Box, Type } from 'blockstack-ui';
 import debounce from 'lodash/debounce';
 
 import Head from '@containers/head';
-import {
-  MakerTitle,
-  MakerCardHeader,
-  MakerButton
-} from '@components/maker/styled';
+import { MakerTitle, MakerCardHeader } from '@components/maker/styled';
 import { Page } from '@components/page';
 import {
   selectAppConstants,
@@ -32,7 +28,6 @@ import { SubmitSignIn } from '@components/submit/submit-sign-in';
 import { isUserSignedIn } from '@stores/user/selectors';
 import { WarningCard } from '@components/warning-card';
 import { BlockstackIdCard } from '@components/submit/blockstack-id-card';
-// import { fetchApps } from '@stores/maker/actions';
 
 const APP_SUBMISSION_DATA = 'app_submission_data';
 
@@ -81,6 +76,14 @@ const Submit: Submit = ({
   const validate = async () => {
     let errorsObj = {};
     let errorCount = 0;
+
+    if ((!user && !user.jwt)) {
+      return {
+        count: 1,
+        errors: {}
+      }
+    }
+
     await Promise.all(
       sections.map(async section =>
         Promise.all(
@@ -188,7 +191,7 @@ const Submit: Submit = ({
             />
           ))}
           <WarningCard message="Blockstack Authentication is required to participate in App Mining" />
-          {errors ? <ErrorMessage /> : null}
+          {errors ? <ErrorMessage message={!(user && user.jwt) ? 'You must sign in with Blockstack' : undefined} /> : null}
           <Button>
             {loading ? 'Loading...' : 'Submit your app'}
           </Button>
@@ -328,7 +331,6 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
 
   appMiningEligible() {
     const { values } = this.state;
-    console.log(values);
     return (
       values.authentication === 'Blockstack' &&
       values.category !== 'Sample Blockstack Apps'
@@ -339,31 +341,31 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
     const { appConstants } = this.props;
 
     return (
-        <Page innerPadding={0} pt={0} background="white">
-          <Head
-            title="Submit your dapp"
-            description="Submit your dapp to be listed on the Universal Dapp Store."
-          />
-          <Page.Section p={['32px', '64px']} mb={3} bg="white">
-            {this.state.success ? (
-              <SuccessCard isAppMiningEligible={this.appMiningEligible()} />
-            ) : (
-              <Submit
-                loading={this.state.loading}
-                isSignedIn={this.props.isSignedIn}
-                submit={this.submit}
-                success={this.state.success}
-                appConstants={appConstants}
-                setState={debounce((args: any) => this.setState(args), 100)}
-                state={this.state.values}
-                errors={this.state.errorCount > 0 && this.state.errors}
-                signIn={this.props.signIn}
-                user={this.props.user}
-                isAppMiningEligible={this.appMiningEligible()}
-              />
-            )}
-          </Page.Section>
-        </Page>
+      <Page innerPadding={0} pt={0} background="white">
+        <Head
+          title="Submit your dapp"
+          description="Submit your dapp to be listed on the Universal Dapp Store."
+        />
+        <Page.Section p={['32px', '64px']} mb={3} bg="white">
+          {this.state.success ? (
+            <SuccessCard isAppMiningEligible={this.appMiningEligible()} />
+          ) : (
+            <Submit
+              loading={this.state.loading}
+              isSignedIn={this.props.isSignedIn}
+              submit={this.submit}
+              success={this.state.success}
+              appConstants={appConstants}
+              setState={debounce((args: any) => this.setState(args), 100)}
+              state={this.state.values}
+              errors={this.state.errorCount > 0 && this.state.errors}
+              signIn={this.props.signIn}
+              user={this.props.user}
+              isAppMiningEligible={this.appMiningEligible()}
+            />
+          )}
+        </Page.Section>
+      </Page>
     );
   }
 }

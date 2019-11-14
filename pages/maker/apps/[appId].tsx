@@ -86,7 +86,7 @@ const MakerPortal = connect()(({ appList, apiServer, dispatch }: any) => {
       <Head title={selectedApp.name} />
       <MakerContainer>
         <Type fontSize={3} fontWeight={500} mx={[4, 6]} py={6} px={[20, 0]}>
-          {selectedApp.name}
+          App Mining submission
         </Type>
         <Flex flexDirection={['column', 'column', 'row-reverse']}>
           <MakerStickyStatusBox>

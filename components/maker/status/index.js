@@ -66,7 +66,7 @@ const Status = ({ app }) => {
   return (
     <Flex mx={[4, 6]} px={[20, 0, 20]} pt={[0, 0, 32]} pb={32} maxWidth={556}>
       <Box>
-        <MakerCardHeader>Your App Mining status</MakerCardHeader>
+        <MakerCardHeader>Completion status</MakerCardHeader>
 
         {isReady ? <AppMiningComplete /> : <AppMiningIncomplete/>}
 
@@ -79,4 +79,4 @@ const Status = ({ app }) => {
   )
 }
 
-export default Status
+export default Status;
