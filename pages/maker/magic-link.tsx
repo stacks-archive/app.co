@@ -8,8 +8,18 @@ import { selectApiServer, selectUser } from '@stores/apps/selectors';
 import { Page } from '@components/page';
 import Head from '@containers/head';
 import { AppIcon } from '@components/app-icon';
+import { App } from '@models/app';
 
-class MakerMagicLink extends React.Component {
+interface MakerMagicLinkProps {
+  app: App;
+  handleSignIn(apiServer: string): void;
+  user: any;
+  accessToken: string;
+  apiServer: string;
+  signIn(path: string): void;
+}
+
+class MakerMagicLink extends React.Component<MakerMagicLinkProps> {
   static async getInitialProps({ query, reduxStore }) {
     const { accessToken } = query;
     const apiServer = selectApiServer(reduxStore.getState());
@@ -31,7 +41,7 @@ class MakerMagicLink extends React.Component {
 
   componentDidMount() {
     this.props.handleSignIn(this.props.apiServer);
-    if (this.props.user && !this.props.app.adminBlockstackId) {
+    if (this.props.user && !this.props.app.adminBlockstackID) {
       this.claim(this.props.user);
     }
   }
@@ -71,7 +81,7 @@ class MakerMagicLink extends React.Component {
     const { app, user } = this.props;
     const { loading, claimed } = this.state;
 
-    const isClaimed = app.adminBlockstackId || claimed;
+    const isClaimed = app.adminBlockstackID || claimed;
 
     return (
       <Page fullHeight background="white">
@@ -97,7 +107,7 @@ class MakerMagicLink extends React.Component {
                 <>
                   <Type fontSize={4} fontWeight="500">
                     {app.name} is now owned by{' '}
-                    {app.adminBlockstackId || user.user.blockstackUsername}
+                    {app.adminBlockstackID || user.user.blockstackUsername}
                   </Type>
                   <Type mt={5}>
                     Your Magic Link is now no longer functional. Instead, you
