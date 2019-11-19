@@ -16,21 +16,24 @@ const SuccessCard: SuccessCard = ({ isAppMiningEligible }) => (
         Success!
       </Text>
     </Box>
-    <Box mx="auto">
+    <Box mx="auto" maxWidth="560px">
       <Text textStyle="display.small" display="block">
-        Thanks for your submission! Your app will need to be approved before
-        being public on app.co.
+        Thank you for submitting your app to App.co! We will get back to you
+        soon.
       </Text>
       {isAppMiningEligible && (
         <>
           <Text my={3} display="block">
-            To update your app&apos;s details and enroll in App Mining, visit
-            our Maker Portal
+            Because your app uses Blockstack authentication, you are eligible to
+            participate in{' '}
+            <Link href="/mining">
+              <Text color="blue" fontWeight={500}>App Mining</Text>
+            </Link>
+            . To participate, you are required to submit your payment and tax
+            details.
           </Text>
           <Link href={{ pathname: '/maker/apps' }} passHref>
-            <Button mt={6}>
-              Go to the Maker Portal
-            </Button>
+            <Button mt={6}>Participate in App Mining</Button>
           </Link>
         </>
       )}

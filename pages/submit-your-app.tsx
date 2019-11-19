@@ -1,6 +1,6 @@
 import React from 'react';
 import 'isomorphic-unfetch';
-import { bindActionCreators } from 'redux';
+import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button } from '@blockstack/ui';
 import { Field, Flex, Box, Type } from 'blockstack-ui';
@@ -370,7 +370,7 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
   }
 }
 
-function mapDispatchToProps(dispatch: any) {
+function mapDispatchToProps(dispatch: Dispatch) {
   return bindActionCreators({ ...UserStore.actions, fetchApps: MakerStore.fetchApps }, dispatch);
 }
 
