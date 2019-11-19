@@ -4,6 +4,7 @@ import { Flex, Box, Text, Button } from '@blockstack/ui';
 import { bindActionCreators } from 'redux';
 import Link from 'next/link';
 import UserStore from '@stores/user';
+import { fetchApps } from '@stores/maker/actions';
 import { selectApiServer, selectUser } from '@stores/apps/selectors';
 import { Page } from '@components/page';
 import Head from '@containers/head';
@@ -63,6 +64,7 @@ interface MakerMagicLinkProps {
   apiServer: string;
   handleSignIn(apiServer: string): void;
   signIn(path: string): void;
+  fetchApps({ user: any, apiServer: string }): void;
 }
 
 class MakerMagicLink extends React.Component<MakerMagicLinkProps> {
@@ -105,6 +107,7 @@ class MakerMagicLink extends React.Component<MakerMagicLinkProps> {
       loading: false,
       claimed: true
     });
+    this.props.fetchApps({ user, apiServer: this.props.apiServer });
   };
 
   async signIn() {
@@ -118,7 +121,6 @@ class MakerMagicLink extends React.Component<MakerMagicLinkProps> {
     const { loading, claimed } = this.state;
 
     const isClaimed = app.adminBlockstackID || claimed;
-    console.log({ app });
 
     return (
       <Page fullHeight background="white">
@@ -159,7 +161,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ ...UserStore.actions }, dispatch);
+  bindActionCreators({ ...UserStore.actions, fetchApps }, dispatch);
 
 export default connect(
   mapStateToProps,
