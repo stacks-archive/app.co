@@ -77,11 +77,11 @@ const Submit: Submit = ({
     let errorsObj = {};
     let errorCount = 0;
 
-    if ((!user && !user.jwt)) {
+    if (!(user && user.jwt)) {
       return {
         count: 1,
         errors: {}
-      }
+      };
     }
 
     await Promise.all(
