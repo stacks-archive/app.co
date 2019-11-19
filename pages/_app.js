@@ -1,23 +1,22 @@
-import App from 'next/app'
-import React from 'react'
-import { Provider } from 'react-redux'
+import App from 'next/app';
+import React from 'react';
+import { Provider } from 'react-redux';
 import merge from 'lodash/merge';
-import { CookiesProvider } from 'react-cookie'
-import Router, { useRouter } from 'next/router'
-import withReduxStore from '@common/lib/with-redux-store'
-import { Root } from '@containers/root'
-import { theme } from '@common/styles'
-import { theme as BlockstackTheme } from 'blockstack-ui'
-import { theme as newBlockstackTheme } from '@blockstack/ui'
-import { ThemeProvider, createGlobalStyle } from 'styled-components'
-import { Mdx } from '@components/mdx'
-import NProgress from 'nprogress'
-import routerEvents from 'next-router-events'
-import { trackPageView } from '@utils'
-import 'isomorphic-unfetch'
-import { normalize } from 'polished'
-import smoothscroll from 'smoothscroll-polyfill'
-
+import { CookiesProvider } from 'react-cookie';
+import Router, { useRouter } from 'next/router';
+import withReduxStore from '@common/lib/with-redux-store';
+import { Root } from '@containers/root';
+import { theme } from '@common/styles';
+import { theme as BlockstackTheme } from 'blockstack-ui';
+import { theme as newBlockstackTheme } from '@blockstack/ui';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import { Mdx } from '@components/mdx';
+import NProgress from 'nprogress';
+import routerEvents from 'next-router-events';
+import { trackPageView } from '@utils';
+import 'isomorphic-unfetch';
+import { normalize } from 'polished';
+import smoothscroll from 'smoothscroll-polyfill';
 
 // Polyfill theme
 // This merge is here to handle some edge cases
@@ -86,55 +85,60 @@ const GlobalStyles = createGlobalStyle`
   input::ms-clear {
     display: none;
   }
-`
+`;
 
-const REFACTORED_PATHS = ['/maker/apps', '/maker/apps/blockstack-only', '/submit-your-app'];
+const REFACTORED_PATHS = [
+  '/maker/magic-link',
+  '/maker/apps',
+  '/maker/apps/blockstack-only',
+  '/submit-your-app'
+];
 
 const RenderRouteThemeProvider = ({ children }) => {
   const { pathname } = useRouter();
   if (REFACTORED_PATHS.includes(pathname)) {
     console.info(`Pathname: '${pathname}' is a refactored path.`);
-    return (
-      <ThemeProvider theme={newBlockstackTheme}>
-        {children}
-      </ThemeProvider>
-    );
+    return <ThemeProvider theme={newBlockstackTheme}>{children}</ThemeProvider>;
   }
   return <ThemeProvider theme={BlockstackTheme}>{children}</ThemeProvider>;
 };
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
-    let pageProps = {}
+    let pageProps = {};
 
     /**
      * Pass down cookies from server to each page
      */
-    const cookies = ctx.req && ctx.req.universalCookies && ctx.req.universalCookies.cookies
+    const cookies =
+      ctx.req && ctx.req.universalCookies && ctx.req.universalCookies.cookies;
 
     if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx)
+      pageProps = await Component.getInitialProps(ctx);
     }
 
-    return { pageProps, cookies }
+    return { pageProps, cookies };
   }
 
   constructor(props) {
-    super(props)
-    routerEvents.on('routeChangeStart', () => NProgress.start())
-    routerEvents.on('routeChangeComplete', () => NProgress.done())
-    routerEvents.on('routeChangeError', () => NProgress.done())
+    super(props);
+    routerEvents.on('routeChangeStart', () => NProgress.start());
+    routerEvents.on('routeChangeComplete', () => NProgress.done());
+    routerEvents.on('routeChangeError', () => NProgress.done());
   }
 
   componentDidMount() {
-    smoothscroll.polyfill()
-    if (typeof document !== 'undefined' && document.location.pathname.indexOf('/admin') !== 0) {
-      Router.router.events.on('routeChangeComplete', trackPageView)
+    smoothscroll.polyfill();
+    if (
+      typeof document !== 'undefined' &&
+      document.location.pathname.indexOf('/admin') !== 0
+    ) {
+      Router.router.events.on('routeChangeComplete', trackPageView);
     }
   }
 
   render() {
-    const { Component, pageProps, reduxStore } = this.props
+    const { Component, pageProps, reduxStore } = this.props;
 
     return (
       <CookiesProvider>
@@ -144,15 +148,18 @@ class MyApp extends App {
               <Root>
                 <>
                   <GlobalStyles />
-                  <Component {...pageProps} serverCookies={this.props.cookies} />
+                  <Component
+                    {...pageProps}
+                    serverCookies={this.props.cookies}
+                  />
                 </>
               </Root>
             </Provider>
           </RenderRouteThemeProvider>
         </Mdx>
       </CookiesProvider>
-    )
+    );
   }
 }
 
-export default withReduxStore(MyApp)
+export default withReduxStore(MyApp);

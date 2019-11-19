@@ -1,5 +1,5 @@
-import thunk from 'redux-thunk'
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
+import thunk from 'redux-thunk'
 import persistState from 'redux-localstorage'
 
 import AppsStore from '@stores/apps'

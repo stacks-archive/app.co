@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Flex, Box, Type, Button } from 'blockstack-ui';
+import { Flex, Box, Text, Button } from '@blockstack/ui';
 import { bindActionCreators } from 'redux';
 import Link from 'next/link';
 import UserStore from '@stores/user';
@@ -10,12 +10,58 @@ import Head from '@containers/head';
 import { AppIcon } from '@components/app-icon';
 import { App } from '@models/app';
 
+const MagicLinkClaimed = ({ app, user }) => (
+  <>
+    <Text as="h1" display="block" fontSize={4}>
+      {app.name} is now owned by{' '}
+      {app.adminBlockstackID || user.user.blockstackUsername}
+    </Text>
+    <Text display="block" mt={5}>
+      Your Magic Link is now no longer functional. Instead, you will use your
+      Blockstack ID to manage your app.
+    </Text>
+    <Link href="/maker/apps" passHref>
+      <Button mt={5}>Continue to Developer Portal</Button>
+    </Link>
+  </>
+);
+
+const MagicLinkUnclaimed = ({
+  app,
+  user,
+  loading,
+  isSignedIn,
+  handleSignIn,
+  handleClaim
+}) => (
+  <>
+    <Text display="block" fontSize={4}>
+      {isSignedIn
+        ? 'Claim the app with your Blockstack ID'
+        : `Sign in with Blockstack to claim ${app.name}`}
+    </Text>
+    <Text display="block" mt={5}>
+      You will use this Blockstack ID to manage your app, and remove or modify
+      your listing in the future.
+    </Text>
+    {isSignedIn ? (
+      <Button mt={5} onClick={handleClaim}>
+        Claim app
+      </Button>
+    ) : (
+      <Button mt={5} onClick={handleSignIn}>
+        {loading ? 'Loading...' : 'Sign in with Blockstack'}
+      </Button>
+    )}
+  </>
+);
+
 interface MakerMagicLinkProps {
   app: App;
-  handleSignIn(apiServer: string): void;
   user: any;
   accessToken: string;
   apiServer: string;
+  handleSignIn(apiServer: string): void;
   signIn(path: string): void;
 }
 
@@ -41,16 +87,6 @@ class MakerMagicLink extends React.Component<MakerMagicLinkProps> {
 
   componentDidMount() {
     this.props.handleSignIn(this.props.apiServer);
-    if (this.props.user && !this.props.app.adminBlockstackID) {
-      this.claim(this.props.user);
-    }
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const { user } = this.props;
-    if (!user && nextProps.user) {
-      this.claim(user);
-    }
   }
 
   claim = async user => {
@@ -82,20 +118,14 @@ class MakerMagicLink extends React.Component<MakerMagicLinkProps> {
     const { loading, claimed } = this.state;
 
     const isClaimed = app.adminBlockstackID || claimed;
+    console.log({ app });
 
     return (
       <Page fullHeight background="white">
         <Head title={`${app.name} - Maker Portal`} />
         <Page.Section flexDirection="column" px>
           <Flex>
-            <Box
-              width={1}
-              maxWidth="550px"
-              mx="auto"
-              py={7}
-              mb={7}
-              textAlign="center"
-            >
+            <Box maxWidth="550px" mx="auto" py={48} mb={7} textAlign="center">
               <AppIcon
                 src={app.imgixImageUrl}
                 size={48}
@@ -104,33 +134,16 @@ class MakerMagicLink extends React.Component<MakerMagicLinkProps> {
                 mb={5}
               />
               {isClaimed ? (
-                <>
-                  <Type fontSize={4} fontWeight="500">
-                    {app.name} is now owned by{' '}
-                    {app.adminBlockstackID || user.user.blockstackUsername}
-                  </Type>
-                  <Type mt={5}>
-                    Your Magic Link is now no longer functional. Instead, you
-                    will use your Blockstack ID to sign in to the developer
-                    portal.
-                  </Type>
-                  <Link href="/maker" passHref>
-                    <Button mt={5}>Continue to Developer Portal</Button>
-                  </Link>
-                </>
+                <MagicLinkClaimed app={app} user={user} />
               ) : (
-                <>
-                  <Type fontSize={4} fontWeight="500">
-                    Sign in with Blockstack to claim {app.name}
-                  </Type>
-                  <Type mt={5}>
-                    You will use this Blockstack ID to make changes to your app,
-                    and remove or modify your listing in the future.
-                  </Type>
-                  <Button mt={5} onClick={() => this.signIn()}>
-                    {loading ? 'Loading...' : 'Sign in with Blockstack'}
-                  </Button>
-                </>
+                <MagicLinkUnclaimed
+                  app={app}
+                  user={user}
+                  isSignedIn={user && user.jwt}
+                  loading={loading}
+                  handleClaim={() => this.claim(user)}
+                  handleSignIn={() => this.signIn()}
+                />
               )}
             </Box>
           </Flex>
