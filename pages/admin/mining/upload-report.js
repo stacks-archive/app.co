@@ -38,7 +38,7 @@ class UploadReport extends React.Component {
     this.props.fetchMiningMonths()
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.saved) {
       Router.push(`/admin/mining/months/${this.props.id}`)
     }

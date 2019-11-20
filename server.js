@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const express = require('express')
 const next = require('next')
 const dotenv = require('dotenv')
@@ -8,6 +9,8 @@ const fs = require('fs-extra')
 const secure = require('express-force-https')
 const morgan = require('morgan')
 const basicAuth = require('express-basic-auth')
+const request = require('request-promise')
+const keyBy = require('lodash/keyBy')
 
 const dev = process.env.NODE_ENV !== 'production'
 if (dev) {
@@ -69,6 +72,26 @@ async function renderAndCache(req, res, pagePath, serverData) {
       appMiningApps,
       params: req.params
     }
+
+    if (req.universalCookies.get('jwt')) {
+      const uri = `${apiServer}/api/maker/apps`
+      const json = await request({
+        uri,
+        json: true,
+        auth: {
+          bearer: req.universalCookies.get('jwt')
+        }
+      })
+      dataToPass.maker = {
+        appIds: json.apps.map((_app) => _app.id),
+        appEntities: keyBy(json.apps, 'id'),
+        loading: false
+      }
+      if (req.params.appId) {
+        dataToPass.maker.selectedApp = dataToPass.maker.appEntities[req.params.appId]
+      }
+    }
+
     const html = await app.renderToHTML(req, res, pagePath, dataToPass)
     if (cacheKey) {
       try {
@@ -96,7 +119,7 @@ const checkMatch = (args, match) => {
 console.error = (...args) => {
   if (checkMatch(args, 'Warning: React does not recognize')) return
   if (checkMatch(args, 'Warning: Failed prop type')) return
-  if (checkMatch(args, 'for a non-boolean attribute') ) return
+  if (checkMatch(args, 'for a non-boolean attribute')) return
   if (checkMatch(args, 'Warning: Invalid value for prop')) return
   if (checkMatch(args, 'Failed to retrieve initialize state from localStorage')) return
   if (checkMatch(args, 'Unable to persist state to localStorage')) return
@@ -122,7 +145,7 @@ app.prepare().then(() => {
 
     if (process.env.AUTH_PASSWORD) {
       server.use(basicAuth({
-        users: { 'admin': process.env.AUTH_PASSWORD },
+        users: { admin: process.env.AUTH_PASSWORD },
         challenge: true
       }))
     }
@@ -146,8 +169,7 @@ app.prepare().then(() => {
     server.get('/mining/terms', (req, res) => renderAndCache(req, res, '/mining/terms'))
     server.get('/mining/privacy', (req, res) => renderAndCache(req, res, '/mining/privacy'))
     server.get('/mining/developer-instructions', (req, res) =>
-      renderAndCache(req, res, '/mining/developer-instructions')
-    )
+      renderAndCache(req, res, '/mining/developer-instructions'))
     server.get('/mining/reviewer-instructions', (req, res) => renderAndCache(req, res, '/mining/reviewer-instructions'))
 
     server.get('/mining/latest', async (req, res) => {
@@ -188,14 +210,14 @@ app.prepare().then(() => {
     server.get('/categories', (req, res) => renderAndCache(req, res, '/categories'))
     server.get('/categories/all', (req, res) => renderAndCache(req, res, '/categories/all'))
     server.get('/categories/:category', (req, res) =>
-      renderAndCache(req, res, '/categories', { category: req.params.category })
-    )
+      renderAndCache(req, res, '/categories', { category: req.params.category }))
     server.get('/category/:category', (req, res) => res.redirect(`/categories/${req.params.category}`))
     /**
      * General Pages
      */
     server.get('/faq', (req, res) => renderAndCache(req, res, '/faq'))
-    server.get('/submit', (req, res) => renderAndCache(req, res, '/submit'))
+    server.get('/submit', (req, res) => res.redirect('/submit-your-app'))
+    server.get('/submit-your-app', (req, res) => renderAndCache(req, res, '/submit-your-app'))
     server.get('/all', (req, res) => renderAndCache(req, res, '/all'))
     server.get('/terms', (req, res) => renderAndCache(req, res, '/terms'))
     server.get('/privacy', (req, res) => renderAndCache(req, res, '/privacy'))
@@ -209,21 +231,19 @@ app.prepare().then(() => {
     server.get('/admin/pending', (req, res) => renderAndCache(req, res, '/admin/pending'))
     server.get('/admin/mining/months', (req, res) => renderAndCache(req, res, '/admin/mining/months'))
     server.get('/admin/mining/months/:id', (req, res) =>
-      renderAndCache(req, res, '/admin/mining/month', { monthId: req.params.id })
-    )
+      renderAndCache(req, res, '/admin/mining/month', { monthId: req.params.id }))
     server.get('/admin/mining/months/:id/upload-report', (req, res) =>
-      renderAndCache(req, res, '/admin/mining/upload-report', { monthId: req.params.id })
-    )
+      renderAndCache(req, res, '/admin/mining/upload-report', { monthId: req.params.id }))
     server.get('/admin/mining/months/:monthId/reviewers/:reviewerId', (req, res) =>
-      renderAndCache(req, res, '/admin/mining/reviewer')
-    )
+      renderAndCache(req, res, '/admin/mining/reviewer'))
 
     /**
      * Maker pages
      */
-    server.get('/maker', (req, res) => res.redirect('/maker/apps'))
-    server.get('/maker/apps', (req, res) => renderAndCache(req, res, '/maker/apps'))
-    server.get('/maker/apps/:appId', (req, res) => renderAndCache(req, res, '/maker/apps'))
+    server.get('/maker', (req, res) => renderAndCache(req, res, '/maker'))
+    server.get('/maker/apps', (req, res) => renderAndCache(req, res, '/maker/apps'));
+    server.get('/maker/apps/blockstack-only', (req, res) => renderAndCache(req, res, '/maker/apps/blockstack-only'));
+    server.get('/maker/apps/:appId', (req, res) => renderAndCache(req, res, '/maker/apps/:appId'))
     server.get('/maker/:accessToken', (req, res) => renderAndCache(req, res, '/maker/magic-link', { accessToken: req.params.accessToken }))
 
     apps.platforms.forEach((platform) => {
@@ -258,8 +278,8 @@ app.prepare().then(() => {
     server.use(expressSitemapXml(getSitemapURLs(apiServer), 'https://app.co'))
 
     server.get('/robots.txt', async (req, res) => {
-      const robotsFile = dev || process.env.STAGING ? 'robots.staging.txt': 'robots.txt'
-      const robotsPath = `./static/${  robotsFile}`
+      const robotsFile = dev || process.env.STAGING ? 'robots.staging.txt' : 'robots.txt'
+      const robotsPath = `./static/${robotsFile}`
       const robots = await fs.readFile(robotsPath)
       res.header('Content-Type', 'text/plain')
       res.status(200).send(robots)

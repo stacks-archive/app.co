@@ -137,7 +137,7 @@ const ParticipationAgreement = ({ app, apiServer, user }) => {
                 disabled={loading || finished}
                 onClick={() => getDownload()}
               >
-                {loading ? 'Starting...' : 'Start Signing Process'}
+                {loading ? 'Starting...' : 'Sign participation agreement'}
               </MakerButton>
               <Type.p fontSize={12} mb={0}>
                 Opening the Participation Agreement will start a download a package of documents that you are required to read.
@@ -150,4 +150,4 @@ const ParticipationAgreement = ({ app, apiServer, user }) => {
   )
 }
 
-export default ParticipationAgreement
+export default ParticipationAgreement;

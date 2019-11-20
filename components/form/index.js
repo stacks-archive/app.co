@@ -2,8 +2,6 @@ import styled from 'styled-components'
 
 export const Select = styled.select`
   width: 100%;
-  // appearance: none;
-  // padding: 1em;
 `
 
 export default {

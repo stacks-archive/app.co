@@ -5,24 +5,6 @@ import { string, boolean } from 'yup'
 export const sections = (user, appConstants) => {
   const personal = [
     {
-      name: 'isSubmittingOwnApp',
-      required: true,
-      type: 'radio',
-      label: 'Did you build this app?',
-      options: [
-        {
-          label: 'Yes, I built this app.',
-          value: true,
-          checked: true
-        },
-        {
-          label: 'No, I want to add an app someone else built.',
-          value: false
-        }
-      ],
-      validation: boolean().required('Required.')
-    },
-    {
       name: 'submitterName',
       required: true,
       label: 'Your Name',
@@ -49,7 +31,7 @@ export const sections = (user, appConstants) => {
 
   if (user && user.jwt) {
     // If the user is logged in, remove the "Is this your app?" question
-    personal.splice(0, 1)
+    personal.splice(0, 1);
   }
 
   const appDetails = [
@@ -168,8 +150,6 @@ export const sections = (user, appConstants) => {
       required: true,
       type: 'checkbox',
       label: 'App is publicly accessible and user-ready',
-      message:
-        'App.co lists decentralized apps that are user-ready. Part of our review process is verifying anyone can immediately begin using the app.',
       validation: boolean().required('Required.')
     },
     {
@@ -205,13 +185,7 @@ export const sections = (user, appConstants) => {
       fields: appDetails
     },
     {
-      fields: appCategories,
-      message: (
-        <>
-          Want to add a new category, blockchain, storage, or technology?{' '}
-          <a href="mailto:hello@app.co">Contact us.</a>
-        </>
-      )
+      fields: appCategories
     },
     {
       fields: agreements

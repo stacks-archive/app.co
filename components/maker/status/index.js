@@ -49,24 +49,23 @@ const ItemToCompleteField = ({ label, status }) => (
 
 const AppMiningComplete = () => (
   <MakerCardText mb={4}>
-    Congratulations! We&apos;ve collected everything we need in order for your app to participate in app
-    mining.
-    </MakerCardText>
-)
+    You’ve completed these sections and are now eligible for App Mining!
+  </MakerCardText>
+);
 
 const AppMiningIncomplete = () => (
   <MakerCardText mb={4} mt={0} fontSize={14} lineHeight="20px">
-    Complete the forms in order for your app to be elligble for App Mining
-    </MakerCardText>
-)
+    Complete these sections to become eligible for App Mining:
+  </MakerCardText>
+);
 
 const Status = ({ app }) => {
   const isReady = isMiningReady(app)
 
   return (
-    <Flex mx={[4, 6]} px={[20, 0, 20]} pt={[0, 0, 32]} pb={32} maxWidth={360}>
+    <Flex mx={[4, 6]} px={[20, 0, 20]} pt={[0, 0, 32]} pb={32} maxWidth={556}>
       <Box>
-        <MakerCardHeader>Your App Mining status</MakerCardHeader>
+        <MakerCardHeader>Completion status</MakerCardHeader>
 
         {isReady ? <AppMiningComplete /> : <AppMiningIncomplete/>}
 
@@ -79,4 +78,4 @@ const Status = ({ app }) => {
   )
 }
 
-export default Status
+export default Status;

@@ -9,8 +9,7 @@ import { Hero } from '@containers/hero'
 import AppList from '@containers/app-list'
 import Head from '@containers/head'
 
-import AppStore from '@stores/apps'
-import { doSelectPlatformFilter } from '@stores/apps'
+import AppStore, { doSelectPlatformFilter } from '@stores/apps'
 import { selectPlatformName } from '@stores/apps/selectors'
 import UserStore from '@stores/user'
 

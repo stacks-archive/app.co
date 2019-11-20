@@ -28,7 +28,7 @@ class NewsletterClass extends React.Component {
     validEmail: true
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const cookie = getNewsletterCookie(this.props.cookies)
     if (!cookie) {
       setNewsletterCookie(this.props.cookies)

@@ -74,6 +74,22 @@ const ArrowRight = ({ color = 'currentColor', ...rest }) => (
       fill={color}
     />
   </svg>
+);
+
+export const WarningIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    fill="none"
+    viewBox="0 0 16 16"
+  >
+    <circle cx="8" cy="8" r="8" fill="#F7AA00" />
+    <path
+      fill="#fff"
+      d="M8.828 4.852a.83.83 0 10-1.66 0L7.28 8.83a.721.721 0 001.442 0l.107-3.978zM8 12c.49 0 .916-.413.92-.926a.934.934 0 00-.92-.918.92.92 0 00-.92.918A.92.92 0 008 12z"
+    />
+  </svg>
 )
 
 export { ArrowRight, PlanetsWithGasGiant, CheckMark }

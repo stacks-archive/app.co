@@ -1,23 +1,17 @@
 import React from 'react'
 import { Type } from 'blockstack-ui'
 
-import { Navigation } from '@components/navigation'
+import { LinkList } from '@components/navigation/helpers';
+import { primaryNavLinks, termsLinks } from '@common/constants'
 import { Flex, Box } from '@components/box'
 
 const Footer = ({ isErrorPage, admin, ...props }) => (
   <>
     <Flex {...props}>
-      <Box ml="auto">
-        <Navigation
-          admin={admin}
-          display={['block', 'flex']}
-          justifyContent="center"
-          footer
-          alignItems="center"
-          textAlign={['center']}
-          isErrorPage={isErrorPage}
-        />
-      </Box>
+      <Flex ml="auto" flexDirection={['column', 'column', 'row']}>
+        <LinkList list={termsLinks} isErrorPage={isErrorPage} />
+        <LinkList list={primaryNavLinks} isErrorPage={isErrorPage} />
+      </Flex>
     </Flex>
     <Flex mt={5}>
       <Box width={1} px={[2, 4, 8]} fontSize={1} py={6}>

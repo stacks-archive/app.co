@@ -1,5 +1,5 @@
-import thunk from 'redux-thunk'
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
+import thunk from 'redux-thunk'
 import persistState from 'redux-localstorage'
 
 import AppsStore from '@stores/apps'
@@ -23,7 +23,7 @@ export default (data) => {
     router: RouterStore.reducer,
     mining: makeMiningReducer(data),
     miningAdmin: AdminMiningReducer,
-    maker: makerReducer
+    maker: makerReducer(data.maker)
   })
 
   return finalCreateStore(Reducer)

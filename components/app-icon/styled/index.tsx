@@ -1,9 +1,10 @@
-import styled, { css } from 'styled-components'
-import { Box } from 'blockstack-ui'
-import { rgba } from 'polished'
-import { theme } from '@common/styles'
+import React from 'react';
+import styled, { css } from 'styled-components';
+import { Box } from 'blockstack-ui';
 
-const StyledAppIcon = styled(Box)`
+const StyledAppIcon = styled(({ showGradient, ...props }) => (
+  <Box {...props} />
+))`
   max-width: 100%;
   width: ${({ size }) => size}px;
   height: ${({ size }) => size}px;
@@ -13,7 +14,8 @@ const StyledAppIcon = styled(Box)`
   overflow: hidden;
   flex-shrink: 0;
   border-radius: 10px;
-  box-shadow: 0 1px 5px 0 rgba(20, 33, 68, 0.04), 0 1px 6px 1px rgba(20, 33, 68, 0.09);
+  box-shadow: 0 1px 5px 0 rgba(20, 33, 68, 0.04),
+    0 1px 6px 1px rgba(20, 33, 68, 0.09);
   ${({ showGradient, gradient }) =>
     showGradient &&
     css`
@@ -27,13 +29,11 @@ const StyledAppIcon = styled(Box)`
   & > div {
     width: ${({ size }) => size}px;
   }
-`
-const Image = styled.img`
+`;
+const StyledAppIconImage = styled.img`
   display: block;
   max-width: 100%;
   width: 100%;
-`
+`;
 
-StyledAppIcon.Image = Image
-
-export { StyledAppIcon }
+export { StyledAppIcon, StyledAppIconImage };

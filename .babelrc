@@ -17,7 +17,8 @@
           "@stores": "./stores",
           "@pages": "./pages",
           "@common": "./common",
-          "@utils": "./utils"
+          "@utils": "./utils",
+          "@models": "./models"
         }
       }
     ]
