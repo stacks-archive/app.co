@@ -66,9 +66,7 @@ const Submit: Submit = ({
   user,
   loading,
   signIn,
-  isSignedIn,
-  success,
-  isAppMiningEligible
+  isSignedIn
 }) => {
   const sections = getSections(user, appConstants);
   const [signingIn, setSigningIn] = useState(false);
