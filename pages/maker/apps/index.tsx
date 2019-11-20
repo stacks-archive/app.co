@@ -3,6 +3,7 @@ import Head from '@containers/head';
 import { bindActionCreators } from 'redux';
 import { connect, useSelector } from 'react-redux';
 
+import Head from '@containers/head';
 import { AppDirectory } from '@components/app-directory';
 import { Flex, Box } from '@blockstack/ui';
 import { isUserSignedIn } from '@stores/user/selectors';
