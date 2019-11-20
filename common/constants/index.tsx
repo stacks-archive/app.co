@@ -3,7 +3,7 @@ export interface NavLink {
   href: string;
 }
 
-export const primaryNavLinks = [
+export const primaryNavLinks: NavLink[] = [
   {
     name: 'Discover apps',
     href: '/blockstack'
@@ -26,7 +26,7 @@ export const primaryNavLinks = [
   }
 ]
 
-export const adminLinks = [
+export const adminLinks: NavLink[] = [
   {
     name: 'Admin',
     href: '/admin'
@@ -41,7 +41,7 @@ export const adminLinks = [
   }
 ]
 
-export const termsLinks = [
+export const termsLinks: NavLink[] = [
   {
     name: 'Privacy Policy',
     href: '/privacy'
