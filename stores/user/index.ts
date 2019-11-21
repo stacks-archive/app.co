@@ -1,4 +1,3 @@
-import { Dispatch } from 'redux';
 import { REHYDRATE } from 'redux-persist';
 import { UserSession, AppConfig } from 'blockstack';
 import Cookies from 'js-cookie';
@@ -19,47 +18,11 @@ const signingIn = () => ({
   type: constants.SIGNING_IN
 });
 
-const signedIn = (data: any) => ({
-  type: constants.SIGNED_IN,
-  payload: {
-    token: data.token,
-    user: data.user,
-    userId: data.user.id
-  }
-});
-
 const signOut = () => {
   Cookies.remove('jwt');
   return {
     type: constants.SIGNING_OUT
   };
-};
-
-const handleSignIn = (apiServer: string) => async (dispatch: Dispatch) => {
-  // const token = userSession.getAuthResponseToken();
-  // if (!token) {
-  //   return true;
-  // }
-  // if (userSession.isUserSignedIn()) {
-  //   userSession.signUserOut();
-  // }
-  // dispatch(signingIn());
-  // await userSession.handlePendingSignIn();
-  // // const url = `${apiServer}/api/authenticate?authToken=${token}`;
-  // // const response = await fetch(url, {
-  // //   method: 'POST'
-  // // });
-  // // const json = await response.json();
-  // // console.log('xxxxxxxxxxxxx', JSON.stringify(json, null, 2));
-  // // dispatch(signedIn(json));
-  // const cookie = Cookies.get('jwt');
-  // console.log('has cookie', cookie);
-  // // if (!cookie) {
-  //   // Cookies.set('jwt', json.token);
-  //   // next.js relies on cookie to render data
-  //   // window.location.reload();
-  // // }
-  // return true;
 };
 
 const signIn = (redirectPath = 'admin') => {
@@ -70,12 +33,20 @@ const signIn = (redirectPath = 'admin') => {
 };
 
 const actions = {
-  handleSignIn,
   signIn,
   signOut
 };
 
-const initialState = {
+interface UserState {
+  userId: string | null;
+  jwt: string | null;
+  signingIn: boolean;
+  user?: {
+    blockstackUsername: string;
+  };
+}
+
+const initialState: UserState = {
   userId: null,
   jwt: null,
   signingIn: false,

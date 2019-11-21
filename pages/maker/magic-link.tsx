@@ -62,7 +62,6 @@ interface MakerMagicLinkProps {
   user: any;
   accessToken: string;
   apiServer: string;
-  handleSignIn(apiServer: string): void;
   signIn(path: string): void;
   fetchApps({ user: any, apiServer: string }): void;
 }
@@ -86,10 +85,6 @@ class MakerMagicLink extends React.Component<MakerMagicLinkProps> {
     loading: false,
     claimed: false
   };
-
-  componentDidMount() {
-    this.props.handleSignIn(this.props.apiServer);
-  }
 
   claim = async user => {
     this.setState({
