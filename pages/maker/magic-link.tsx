@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import Link from 'next/link';
 import UserStore from '@stores/user';
 import { fetchApps } from '@stores/maker/actions';
-import { selectApiServer, selectUser } from '@stores/apps/selectors';
+import { selectUser } from '@stores/apps/selectors';
 import { Page } from '@components/page';
 import Head from '@containers/head';
 import { AppIcon } from '@components/app-icon';
@@ -61,22 +61,21 @@ interface MakerMagicLinkProps {
   app: App;
   user: any;
   accessToken: string;
-  apiServer: string;
   signIn(path: string): void;
-  fetchApps({ user: any, apiServer: string }): void;
+  fetchApps({ user: any }): void;
 }
 
 class MakerMagicLink extends React.Component<MakerMagicLinkProps> {
   static async getInitialProps({ query, reduxStore }) {
     const { accessToken } = query;
-    const apiServer = selectApiServer(reduxStore.getState());
-    const appResult = await fetch(`${apiServer}/api/magic-link/${accessToken}`);
+    const appResult = await fetch(
+      `${process.env.API_SERVER}/api/magic-link/${accessToken}`
+    );
     console.log(appResult);
     const { app } = await appResult.json();
 
     return {
       app,
-      apiServer,
       accessToken
     };
   }
@@ -90,8 +89,9 @@ class MakerMagicLink extends React.Component<MakerMagicLinkProps> {
     this.setState({
       loading: true
     });
-    const { apiServer } = this.props;
-    const uri = `${apiServer}/api/magic-link/${this.props.accessToken}`;
+    const uri = `${process.env.API_SERVER}/api/magic-link/${
+      this.props.accessToken
+    }`;
     await fetch(uri, {
       method: 'POST',
       headers: {
@@ -102,7 +102,7 @@ class MakerMagicLink extends React.Component<MakerMagicLinkProps> {
       loading: false,
       claimed: true
     });
-    this.props.fetchApps({ user, apiServer: this.props.apiServer });
+    this.props.fetchApps({ user });
   };
 
   async signIn() {
@@ -151,8 +151,7 @@ class MakerMagicLink extends React.Component<MakerMagicLinkProps> {
 }
 
 const mapStateToProps = state => ({
-  user: selectUser(state),
-  apiServer: selectApiServer(state)
+  user: selectUser(state)
 });
 
 const mapDispatchToProps = dispatch =>

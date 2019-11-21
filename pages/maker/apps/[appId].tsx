@@ -10,7 +10,7 @@ import {
   selectCurrentApp
 } from '@stores/maker/selectors';
 import { fetchApps, selectAppAction } from '@stores/maker/actions';
-import { selectApiServer, selectUser } from '@stores/apps/selectors';
+import { selectUser } from '@stores/apps/selectors';
 import {
   MakerContainer,
   MakerContentBox,
@@ -23,7 +23,6 @@ import Maker from '@components/maker';
 import UserStore from '@stores/user';
 
 const mapStateToProps = (state: any) => ({
-  apiServer: selectApiServer(state),
   appList: selectAppList(state),
   selectedApp: selectCurrentApp(state)
 });
@@ -54,7 +53,7 @@ const LoadingPage = ({ message = 'Loading...' }) => (
   </Page>
 );
 
-const MakerPortal = connect()(({ appList, apiServer, dispatch }: any) => {
+const MakerPortal = connect()(({ appList, dispatch }: any) => {
   const router = useRouter();
 
   const { user, maker, selectedApp } = useSelector(state => ({
@@ -97,20 +96,15 @@ const MakerPortal = connect()(({ appList, apiServer, dispatch }: any) => {
               <Maker.PaymentDetails
                 app={selectedApp}
                 user={user}
-                apiServer={apiServer}
                 accessToken={user.jwt}
                 dispatch={dispatch}
               />
             </MakerContentBox>
             <MakerContentBox>
-              <Maker.KYC app={selectedApp} user={user} apiServer={apiServer} />
+              <Maker.KYC app={selectedApp} user={user} />
             </MakerContentBox>
             <MakerContentBox>
-              <Maker.ParticipationAgreement
-                app={selectedApp}
-                user={user}
-                apiServer={apiServer}
-              />
+              <Maker.ParticipationAgreement app={selectedApp} user={user} />
             </MakerContentBox>
           </Box>
         </Flex>
@@ -125,10 +119,7 @@ MakerPortal.getInitialProps = async ({ res, req, reduxStore }) => {
   if (selectAppList(reduxStore.getState()).length === 0) {
     const { universalCookies } = req;
     const userCookie = universalCookies.cookies.jwt;
-    const apiServer = selectApiServer(reduxStore.getState());
-    await fetchApps({ apiServer, user: { jwt: userCookie } })(
-      reduxStore.dispatch
-    );
+    await fetchApps({ user: { jwt: userCookie } })(reduxStore.dispatch);
   }
   reduxStore.dispatch(selectAppAction(appId));
   const props = mapStateToProps(reduxStore.getState());

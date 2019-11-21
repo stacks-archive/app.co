@@ -1,19 +1,19 @@
-import React from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import { Button } from '@components/button'
-import AdminLayout from '@containers/admin/layout'
-import AppList from '@containers/admin/app-list'
+import { Button } from '@components/button';
+import AdminLayout from '@containers/admin/layout';
+import AppList from '@containers/admin/app-list';
 
-import AppStore from '@stores/apps'
-import UserStore from '@stores/user'
-import { selectApps, selectApiServer } from '@stores/apps/selectors'
+import AppStore from '@stores/apps';
+import UserStore from '@stores/user';
+import { selectApps } from '@stores/apps/selectors';
 
 class Admin extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = {}
+    super(props);
+    this.state = {};
   }
 
   render() {
@@ -25,25 +25,30 @@ class Admin extends React.Component {
           <Button
             type="button/primary"
             onClick={() => {
-              this.props.signIn()
+              this.props.signIn();
             }}
           >
             Sign In with Blockstack
           </Button>
         )}
       </AdminLayout>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   apps: selectApps(state),
-  apiServer: selectApiServer(state),
   user: state.user
-})
+});
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Object.assign({}, AppStore.actions, UserStore.actions), dispatch)
+  return bindActionCreators(
+    Object.assign({}, AppStore.actions, UserStore.actions),
+    dispatch
+  );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Admin)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Admin);
