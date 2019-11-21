@@ -258,7 +258,6 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
         refSource
       });
     }
-    this.props.handleSignIn(this.props.apiServer);
   }
 
   setStateFromData() {

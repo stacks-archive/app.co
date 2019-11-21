@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Head from '@containers/head';
 import { bindActionCreators } from 'redux';
 import { connect, useSelector } from 'react-redux';
@@ -15,7 +15,6 @@ import { SignIn } from '@components/sign-in';
 import { NoAppsEmptyState } from '@components/maker/empty-state/no-apps';
 
 interface AppDirectoryPageProps {
-  handleSignIn(server: string): any;
   signIn: any;
 }
 
@@ -30,21 +29,14 @@ const AppDirectoryPageContainer: React.FC = ({ children }) => (
 
 type AppDirectoryPage = React.FC<AppDirectoryPageProps>;
 
-const AppDirectoryPage: AppDirectoryPage = ({ signIn, handleSignIn }) => {
+const AppDirectoryPage: AppDirectoryPage = ({ signIn }) => {
 
-  const { apps, isSignedIn, apiServer, user } = useSelector(state => ({
+  const { apps, isSignedIn, user } = useSelector(state => ({
     apps: selectAppList(state),
     isSignedIn: isUserSignedIn(state),
     apiServer: selectApiServer(state),
     user: selectUser(state)
   }));
-
-  useEffect(() => {
-    async function signInCheck() {
-      handleSignIn(apiServer);
-    }
-    signInCheck();
-  }, []);
 
   if (isSignedIn && apps.length === 0) {
     return (

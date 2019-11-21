@@ -16,10 +16,6 @@ class Admin extends React.Component {
     this.state = {}
   }
 
-  componentDidMount() {
-    this.props.handleSignIn(this.props.apiServer)
-  }
-
   render() {
     return (
       <AdminLayout>

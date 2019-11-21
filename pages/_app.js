@@ -1,22 +1,24 @@
-import App from 'next/app';
 import React from 'react';
+import { PersistGate } from 'redux-persist/integration/react';
+import App from 'next/app';
+import Router, { useRouter } from 'next/router';
 import { Provider } from 'react-redux';
 import merge from 'lodash/merge';
 import { CookiesProvider } from 'react-cookie';
-import Router, { useRouter } from 'next/router';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import { theme as newBlockstackTheme } from '@blockstack/ui';
+import { theme as BlockstackTheme } from 'blockstack-ui';
+import smoothscroll from 'smoothscroll-polyfill';
+import { normalize } from 'polished';
+import NProgress from 'nprogress';
+import routerEvents from 'next-router-events';
+
 import withReduxStore from '@common/lib/with-redux-store';
 import { Root } from '@containers/root';
 import { theme } from '@common/styles';
-import { theme as BlockstackTheme } from 'blockstack-ui';
-import { theme as newBlockstackTheme } from '@blockstack/ui';
-import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { Mdx } from '@components/mdx';
-import NProgress from 'nprogress';
-import routerEvents from 'next-router-events';
-import { trackPageView } from '@utils';
 import 'isomorphic-unfetch';
-import { normalize } from 'polished';
-import smoothscroll from 'smoothscroll-polyfill';
+import { trackPageView } from '@utils';
 
 // Polyfill theme
 // This merge is here to handle some edge cases
@@ -138,22 +140,24 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps, reduxStore } = this.props;
+    const { Component, pageProps, reduxStore, persistor } = this.props;
 
     return (
       <CookiesProvider>
         <Mdx>
           <RenderRouteThemeProvider>
             <Provider store={reduxStore}>
-              <Root>
-                <>
-                  <GlobalStyles />
-                  <Component
-                    {...pageProps}
-                    serverCookies={this.props.cookies}
-                  />
-                </>
-              </Root>
+              <PersistGate loading={null} persistor={persistor}>
+                <Root>
+                  <>
+                    <GlobalStyles />
+                    <Component
+                      {...pageProps}
+                      serverCookies={this.props.cookies}
+                    />
+                  </>
+                </Root>
+              </PersistGate>
             </Provider>
           </RenderRouteThemeProvider>
         </Mdx>

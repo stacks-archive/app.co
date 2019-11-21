@@ -103,11 +103,11 @@ const fetchPendingApps = (apiServer, jwt) => async (dispatch) => {
 }
 
 const fetchAppMiningApps = () => async (dispatch, getState) => {
-  const state = getState()
-  const url = state.apps.apiServer
+  const state = getState();
+  const url = state.apps.apiServer;
   const response = await fetch(`${url}/api/app-mining-apps`)
-  const data = await response.json()
-  dispatch(fetchedAppMiningApps(data.apps))
+  const data = await response.json();
+  dispatch(fetchedAppMiningApps(data.apps));
 }
 
 const actions = {
@@ -155,7 +155,7 @@ const makeReducer = (data) => {
   }
 
   if (initialState.apps.apps) {
-    initialState = initialState.apps
+    initialState = initialState.apps;
   } else {
     const emptyState = {
       platformFilter: null,
@@ -169,10 +169,9 @@ const makeReducer = (data) => {
       categoryFilter: null,
       platformName: null,
       categoryName: null
-    }
+    };
 
-    initialState = assignIn(data, emptyState)
-
+    initialState = { ...data, ...emptyState };
   }
 
   const reducer = (state = initialState, action) => {
@@ -240,10 +239,10 @@ const makeReducer = (data) => {
           selectedApp: action.app
         }
       case constants.FETCHING_PENDING:
-        return Object.assign({}, state, {
+        return {
           ...state,
           isFetchingPending: true
-        })
+        };
       case constants.FETCHED_PENDING:
         return {
           ...state,
