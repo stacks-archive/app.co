@@ -1,15 +1,15 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { Flex, Box, Type } from 'blockstack-ui';
-import { connect, useSelector } from 'react-redux';
-import isNaN from 'lodash/isNaN';
+import { Dispatch } from 'redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {
   selectMaker,
   selectAppList,
   selectCurrentApp
 } from '@stores/maker/selectors';
-import { fetchApps, selectAppAction } from '@stores/maker/actions';
+import { selectAppAction } from '@stores/maker/actions';
 import { selectUser } from '@stores/apps/selectors';
 import {
   MakerContainer,
@@ -22,23 +22,11 @@ import Head from '@containers/head';
 import Maker from '@components/maker';
 import UserStore from '@stores/user';
 
-const mapStateToProps = (state: any) => ({
-  appList: selectAppList(state),
-  selectedApp: selectCurrentApp(state)
-});
-
-const handleChangingApp = (event: any, fn: any) => (dispatch: any) => {
+const handleChangingApp = (event: any, fn: any) => (dispatch: Dispatch) => {
   event.persist();
   const id = event.target.value;
   dispatch(selectAppAction(id));
   fn(id);
-};
-
-const getAppId = (params: any) => {
-  if (!params) return undefined;
-  const id = parseInt(params.appId, 10);
-  if (isNaN(id)) return undefined;
-  return id;
 };
 
 const LoadingPage = ({ message = 'Loading...' }) => (
@@ -53,13 +41,15 @@ const LoadingPage = ({ message = 'Loading...' }) => (
   </Page>
 );
 
-const MakerPortal = connect()(({ appList, dispatch }: any) => {
+const MakerPortal = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
 
-  const { user, maker, selectedApp } = useSelector(state => ({
+  const { user, maker, selectedApp, appList } = useSelector(state => ({
     user: selectUser(state),
     maker: selectMaker(state),
-    selectedApp: selectCurrentApp(state)
+    selectedApp: selectCurrentApp(state),
+    appList: selectAppList(state)
   }));
 
   const updateMakerRoute = (id: number) => router.push(`/maker/apps/${id}`);
@@ -111,22 +101,6 @@ const MakerPortal = connect()(({ appList, dispatch }: any) => {
       </MakerContainer>
     </Page>
   );
-});
-
-MakerPortal.getInitialProps = async ({ res, req, reduxStore }) => {
-  const { params } = req;
-  const appId = getAppId(params);
-  if (selectAppList(reduxStore.getState()).length === 0) {
-    const { universalCookies } = req;
-    const userCookie = universalCookies.cookies.jwt;
-    await fetchApps({ user: { jwt: userCookie } })(reduxStore.dispatch);
-  }
-  reduxStore.dispatch(selectAppAction(appId));
-  const props = mapStateToProps(reduxStore.getState());
-  if (props.selectedApp.authentication.toLowerCase() !== 'blockstack') {
-    res.redirect('/maker/apps/blockstack-only');
-  }
-  return { appId, ...props, dispatch: reduxStore.dispatch };
 };
 
 export default MakerPortal;

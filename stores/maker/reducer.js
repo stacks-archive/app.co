@@ -1,21 +1,20 @@
-import keyBy from 'lodash/keyBy'
-import * as MakerActions from './actions'
+import keyBy from 'lodash/keyBy';
+import * as MakerActions from './actions';
 
 const initialState = {
   loading: true,
-  apps: [],
   appIds: [],
   appEntities: {},
   selectedAppId: null,
   errorMessage: null
-}
+};
 
 export const createMakerReducer = (serverState = {}) => {
   const startingState = {
     ...initialState,
     ...serverState,
     loading: !serverState.appIds
-  }
+  };
 
   function makerReducer(state = startingState, action) {
     switch (action.type) {
@@ -24,18 +23,18 @@ export const createMakerReducer = (serverState = {}) => {
           ...state,
           loading: false,
           errorMessage: 'Please sign in to access the maker portal.'
-        }
+        };
 
       case MakerActions.FETCH_APPS_DONE:
         return {
           ...state,
           loading: false,
-          appIds: action.payload.apps.map((app) => app.id),
+          appIds: action.payload.apps.map(app => app.id),
           appEntities: keyBy(action.payload.apps, 'id')
-        }
+        };
 
       case MakerActions.SELECT_APP:
-        return { ...state, selectedAppId: action.payload }
+        return { ...state, selectedAppId: action.payload };
 
       case MakerActions.SAVE_PAYMENT_DETAILS_DONE:
         return {
@@ -48,14 +47,14 @@ export const createMakerReducer = (serverState = {}) => {
               stacksAddress: action.payload.stxAddress
             }
           }
-        }
+        };
 
       default:
-        return state
+        return state;
     }
   }
 
-  return makerReducer
-}
+  return makerReducer;
+};
 
-export default createMakerReducer
+export default createMakerReducer;
