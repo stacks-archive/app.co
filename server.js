@@ -11,8 +11,10 @@ const morgan = require('morgan');
 const basicAuth = require('express-basic-auth');
 const request = require('request-promise');
 const keyBy = require('lodash/keyBy');
+const { createMiddleware: createPrometheusMiddleware } = require('@promster/express')
+const { createServer } = require('@promster/server');
 
-const dev = process.env.NODE_ENV !== 'production';
+const dev = process.env.NODE_ENV !== 'production'
 if (dev) {
   dotenv.config();
 }
@@ -163,8 +165,14 @@ console.warn = (...args) => {
 };
 
 app.prepare().then(() => {
-  getApps(apiServer).then(apps => {
-    const server = express();
+  getApps(apiServer).then((apps) => {
+    const server = express()
+    server.use(createPrometheusMiddleware({ app: server }))
+
+    // Create `/metrics` endpoint on separate server
+    if (!dev) {
+      createServer({ port: 9153 }).then(() => console.log(`@promster/server started on port 9153.`))
+    }
 
     if (!dev) {
       server.use(secure);

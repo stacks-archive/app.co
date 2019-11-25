@@ -1,5 +1,5 @@
 # app.co - 20min build
-FROM node:10.15.3-alpine as base
+FROM node:10.16.3-alpine as base
 # FROM blockstack/node:latest as base
 WORKDIR /usr/src
 COPY package.json yarn.lock /usr/src/
@@ -20,7 +20,7 @@ RUN yarn build && \
     g++ && \
   yarn --production
 
-FROM node:alpine
+FROM node:10.16.3-alpine
 # FROM blockstack/node:latest
 WORKDIR /usr/src
 ENV NODE_ENV="production"
