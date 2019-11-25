@@ -72,6 +72,7 @@ const MakerNavActions = ({ userId, handleSignOut }: MakerNavActionsProps) => {
           fontSize={0}
           fontWeight="medium"
           color="blue.900"
+          cursor="pointer"
         >
           Sign out
         </Text>

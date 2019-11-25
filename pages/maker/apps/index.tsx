@@ -2,6 +2,7 @@ import React from 'react';
 import Head from '@containers/head';
 import { useSelector, useDispatch } from 'react-redux';
 
+import Head from '@containers/head';
 import { AppDirectory } from '@components/app-directory';
 import { Flex, Box } from '@blockstack/ui';
 import { isUserSignedIn } from '@stores/user/selectors';

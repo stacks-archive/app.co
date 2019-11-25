@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'isomorphic-unfetch';
 import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -71,6 +71,7 @@ const Submit: Submit = ({
   isAppMiningEligible
 }) => {
   const sections = getSections(user, appConstants);
+  const [signingIn, setSigningIn] = useState(false);
 
   const validate = async () => {
     let errorsObj = {};
@@ -135,6 +136,7 @@ const Submit: Submit = ({
   };
 
   const blockstackAuth = (e: any) => {
+    setSigningIn(true);
     if (e) {
       e.preventDefault();
     }
@@ -151,7 +153,7 @@ const Submit: Submit = ({
         <section>
           <SubmitSignIn
             handleBlockstackAuth={blockstackAuth}
-            loading={loading}
+            loading={signingIn}
           />
         </section>
       )}
@@ -190,10 +192,16 @@ const Submit: Submit = ({
             />
           ))}
           <WarningCard message="Blockstack Authentication is required to participate in App Mining" />
-          {errors ? <ErrorMessage message={!(user && user.jwt) ? 'You must sign in with Blockstack' : undefined} /> : null}
-          <Button>
-            {loading ? 'Loading...' : 'Submit your app'}
-          </Button>
+          {errors ? (
+            <ErrorMessage
+              message={
+                !(user && user.jwt)
+                  ? 'You must sign in with Blockstack'
+                  : undefined
+              }
+            />
+          ) : null}
+          <Button>{loading ? 'Loading...' : 'Submit your app'}</Button>
         </form>
       </Flex>
     </Box>
