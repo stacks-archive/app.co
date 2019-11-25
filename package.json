@@ -158,7 +158,8 @@
     "responsive-loader": "^1.1.0",
     "sepia": "^2.0.2",
     "sharp": "^0.20.5",
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.3",
+    "webpack-cli": "^3.3.10"
   },
   "homepage": "https://github.com/blockstackpbc/app.co#readme",
   "keywords": [

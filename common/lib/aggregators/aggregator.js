@@ -16,7 +16,7 @@ class Aggregator {
     const key = this.key()
     const value = await this.setter()
     await Cache.setAsync(key, JSON.stringify(value))
-  
+
     const expiryKey = this.expiryKey()
     if (expiryKey) {
       const expirySeconds = this.expiry()
@@ -65,17 +65,13 @@ class Aggregator {
     return null
   }
 
-  static apiServer() {
-    return process.env.API_SERVER || 'https://api.app.co'
-  }
-
   static request(path) {
     return request({
-      uri: `${this.apiServer()}${path}`,
+      uri: `${process.env.API_SERVER}${path}`,
       json: true
-    })
+    });
   }
-  
+
 }
 
 module.exports = Aggregator

@@ -93,6 +93,7 @@ const REFACTORED_PATHS = [
   '/maker/magic-link',
   '/maker/apps',
   '/maker/apps/blockstack-only',
+  '/maker/apps/[appId]',
   '/submit-your-app'
 ];
 

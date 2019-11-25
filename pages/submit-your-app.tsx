@@ -11,7 +11,6 @@ import { MakerTitle, MakerCardHeader } from '@components/maker/styled';
 import { Page } from '@components/page';
 import {
   selectAppConstants,
-  selectApiServer,
   selectUser
 } from '@stores/apps/selectors';
 import {
@@ -214,7 +213,6 @@ const getValues = () => {
 
 interface SubmitDappProps {
   handleSignIn(server: string): void;
-  apiServer: string;
   user: any;
   appConstants: any;
   signIn(): void;
@@ -276,7 +274,7 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
   }
 
   submit = async () => {
-    const url = `${this.props.apiServer}/api/submit`;
+    const url = `${process.env.API_SERVER}/api/submit`;
     this.setState({ loading: true });
 
     /**
@@ -315,7 +313,7 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
         loading: false,
         accessToken: resData.app.accessToken
       });
-      this.props.fetchApps({ user: this.props.user, apiServer: this.props.apiServer })
+      this.props.fetchApps({ user: this.props.user })
     } catch (e) {
       trackEvent('App Submission Page - Submission Error');
       this.setState({ success: false, loading: false });
@@ -375,7 +373,6 @@ function mapDispatchToProps(dispatch: Dispatch) {
 
 const mapStateToProps = (state: any) => ({
   appConstants: selectAppConstants(state),
-  apiServer: selectApiServer(state),
   user: selectUser(state),
   isSignedIn: isUserSignedIn(state)
 });

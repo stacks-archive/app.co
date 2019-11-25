@@ -1,18 +1,18 @@
-import React from 'react'
+import React from 'react';
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import { Page } from '@components/page'
-import Head from '@containers/head'
+import { Page } from '@components/page';
+import Head from '@containers/head';
 
-import AppStore from '@stores/apps'
-import UserStore from '@stores/user'
+import AppStore from '@stores/apps';
+import UserStore from '@stores/user';
 
 class AdminHome extends React.Component {
   componentDidMount() {
     if (this.props.jwt) {
-      this.props.fetchAdminApps(this.props.apiServer, this.props.jwt)
+      this.props.fetchAdminApps(this.props.jwt);
     }
   }
 
@@ -24,19 +24,24 @@ class AdminHome extends React.Component {
           {this.props.children}
         </Page.Section>
       </Page>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   apps: state.apps.apps,
-  apiServer: state.apps.apiServer,
   jwt: state.user.jwt,
   user: state.user
-})
+});
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Object.assign({}, AppStore.actions, UserStore.actions), dispatch)
+  return bindActionCreators(
+    Object.assign({}, AppStore.actions, UserStore.actions),
+    dispatch
+  );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminHome)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdminHome);

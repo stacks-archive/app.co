@@ -19,5 +19,8 @@ module.exports = withBundleAnalyzer(
     publicRuntimeConfig: {
       segmentWriteKey: process.env.SEGMENT_WRITE_KEY || 'ytmyrpwXzhFF34b0CpNxzdYTRcEFRMzq'
     },
+    env: {
+      API_SERVER: process.env.API_SERVER || 'https://api.app.co'
+    }
   })
 )

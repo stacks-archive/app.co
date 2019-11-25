@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { Flex, Box, Field, Type } from 'blockstack-ui'
-import download from 'downloadjs'
-import { TaxDocuments } from './tax-forms'
+import React, { useEffect, useState } from 'react';
+import { Flex, Box, Field, Type } from 'blockstack-ui';
+import download from 'downloadjs';
+import { TaxDocuments } from './tax-forms';
 import {
   MakerCardHeader,
   MakerCardSubheader,
@@ -9,21 +9,27 @@ import {
   MakerRadioListLabel,
   MakerCardDivider,
   MakerButton
-} from '../styled'
-import MakerModal from '../modal'
+} from '../styled';
+import MakerModal from '../modal';
 
-const Container = ({ children }) => <Flex><Box width={1} mt={0}>{children}</Box></Flex>
+const Container = ({ children }) => (
+  <Flex>
+    <Box width={1} mt={0}>
+      {children}
+    </Box>
+  </Flex>
+);
 
-const ParticipationAgreement = ({ app, apiServer, user }) => {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [embedUrl, setEmbedUrl] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [finished, setFinished] = useState(!!app.hasAcceptedSECTerms)
-  const [modalState, setModalState] = useState(false)
-  const [taxType, setTaxType] = useState(null)
+const ParticipationAgreement = ({ app, user }) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [embedUrl, setEmbedUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [finished, setFinished] = useState(!!app.hasAcceptedSECTerms);
+  const [modalState, setModalState] = useState(false);
+  const [taxType, setTaxType] = useState(null);
 
-  const isUsa = () => taxType === 'us'
+  const isUsa = () => taxType === 'us';
 
   const openEverSign = url => {
     // eslint-disable-next-line no-undef
@@ -38,53 +44,57 @@ const ParticipationAgreement = ({ app, apiServer, user }) => {
         declined: () => console.log('Eversign denied'),
         error: () => console.log('Eversign error')
       }
-    })
-  }
+    });
+  };
 
   const getDocument = async () => {
-    setLoading(true)
-    const url = `${apiServer}/api/maker/apps/make-participation-agreement?name=${name}&email=${email}&isUSA=${isUsa()}&appId=${app.id}`
+    setLoading(true);
+    const url = `${
+      process.env.API_SERVER
+    }/api/maker/apps/make-participation-agreement?name=${name}&email=${email}&isUSA=${isUsa()}&appId=${
+      app.id
+    }`;
     const response = await fetch(url, {
       method: 'POST',
       headers: new Headers({
         authorization: `Bearer ${user.jwt}`
       })
-    })
-    const data = await response.json()
-    setLoading(false)
-    setEmbedUrl(data.embedURL)
-    openEverSign(embedUrl)
-  }
+    });
+    const data = await response.json();
+    setLoading(false);
+    setEmbedUrl(data.embedURL);
+    openEverSign(embedUrl);
+  };
 
   const getDownload = async () => {
-    download(`/static/docs/${taxType}.zip`)
-    getDocument()
-    setModalState(true)
-  }
+    download(`/static/docs/${taxType}.zip`);
+    getDocument();
+    setModalState(true);
+  };
 
   useEffect(() => {
     if (app.eversignDocumentID) {
-      getDocument()
+      getDocument();
     }
-  }, [app.id])
+  }, [app.id]);
 
   const options = [
     { value: 'us', label: 'I am a US person or entity' },
     { value: 'intl', label: 'I am a person based outside of the US' },
     { value: 'intl_entity', label: 'I am an entity based outside of the US' }
-  ]
+  ];
 
-  const taxStatusRadioList = options.map(({ value, label }) =>
+  const taxStatusRadioList = options.map(({ value, label }) => (
     <MakerRadioListLabel key={value}>
       <input
         type="radio"
         name="tax-status"
         value={value}
-        onChange={(e) => setTaxType(e.target.value)}
+        onChange={e => setTaxType(e.target.value)}
       />
       {label}
     </MakerRadioListLabel>
-  )
+  ));
 
   return (
     <>
@@ -96,19 +106,20 @@ const ParticipationAgreement = ({ app, apiServer, user }) => {
         <MakerCardHeader>Legal Documents</MakerCardHeader>
 
         <MakerCardText mb={4} mt={0}>
-          Please select the appropriate legal status so we can provide you with the correct Tax Form and Participation Agreement.
+          Please select the appropriate legal status so we can provide you with
+          the correct Tax Form and Participation Agreement.
         </MakerCardText>
         <Field
           name="name"
           label="Full Name"
-          onChange={(e) => setName(e.target.value)}
+          onChange={e => setName(e.target.value)}
           value={name}
         />
         <Field
           name="emailAddress"
           type="email"
           label="Email address"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
           value={email}
         />
         <Box pb={2}>
@@ -116,16 +127,13 @@ const ParticipationAgreement = ({ app, apiServer, user }) => {
           {taxStatusRadioList}
         </Box>
 
-        { taxType !== null &&
+        {taxType !== null && (
           <>
             <MakerCardDivider />
             <Box>
-              <MakerCardSubheader>
-                Fill out the Tax form
-              </MakerCardSubheader>
+              <MakerCardSubheader>Fill out the Tax form</MakerCardSubheader>
 
               <TaxDocuments taxType={taxType} />
-
             </Box>
             <MakerCardDivider />
             <Box>
@@ -140,14 +148,15 @@ const ParticipationAgreement = ({ app, apiServer, user }) => {
                 {loading ? 'Starting...' : 'Sign participation agreement'}
               </MakerButton>
               <Type.p fontSize={12} mb={0}>
-                Opening the Participation Agreement will start a download a package of documents that you are required to read.
+                Opening the Participation Agreement will start a download a
+                package of documents that you are required to read.
               </Type.p>
             </Box>
           </>
-        }
+        )}
       </Container>
     </>
-  )
-}
+  );
+};
 
 export default ParticipationAgreement;
