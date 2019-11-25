@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from '@containers/head';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Head from '@containers/head';
@@ -13,9 +12,19 @@ import { selectUser } from '@stores/apps/selectors';
 import { Page } from '@components/page';
 import { SignIn } from '@components/sign-in';
 import { NoAppsEmptyState } from '@components/maker/empty-state/no-apps';
+import { MakerNav } from '@containers/maker-nav';
 
-const AppDirectoryPageContainer: React.FC = ({ children }) => (
-  <Page background="white">
+interface AppDirectoryContainerProps {
+  nav?: React.ReactNode;
+}
+
+type AppDirectoryContainer = React.FC<AppDirectoryContainerProps>;
+
+const AppDirectoryContainer: AppDirectoryContainer = ({
+  children,
+  nav
+}) => (
+  <Page background="white" subNav={nav}>
     <Head title="Select your app" />
     <Flex alignItems="center">
       <Box>{children}</Box>
@@ -37,20 +46,22 @@ const AppDirectoryPage: AppDirectoryPage = () => {
 
   if (isSignedIn && apps.length === 0) {
     return (
-      <AppDirectoryPageContainer>
+      <AppDirectoryContainer>
         <NoAppsEmptyState username={user.user.blockstackUsername} />
-      </AppDirectoryPageContainer>
+      </AppDirectoryContainer>
     );
   }
 
+  const nav = isSignedIn ? <MakerNav /> : null;
+
   return (
-    <AppDirectoryPageContainer>
+    <AppDirectoryContainer nav={nav}>
       {isSignedIn ? (
         <AppDirectory apps={apps} />
       ) : (
         <SignIn handleSignIn={() => signIn('maker/apps')} />
       )}
-    </AppDirectoryPageContainer>
+    </AppDirectoryContainer>
   );
 };
 

@@ -1,15 +1,8 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 import { Flex, Box, Type } from 'blockstack-ui';
-import { Dispatch } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 
-import {
-  selectMaker,
-  selectAppList,
-  selectCurrentApp
-} from '@stores/maker/selectors';
-import { selectAppAction } from '@stores/maker/actions';
+import { selectMaker, selectCurrentApp } from '@stores/maker/selectors';
 import { selectUser } from '@stores/apps/selectors';
 import {
   MakerContainer,
@@ -17,17 +10,9 @@ import {
   MakerStickyStatusBox
 } from '@components/maker/styled';
 import { Page } from '@components/page';
-import { MakerNav } from '@components/maker/nav/maker-nav';
+import { MakerNav } from '@containers/maker-nav';
 import Head from '@containers/head';
 import Maker from '@components/maker';
-import UserStore from '@stores/user';
-
-const handleChangingApp = (event: any, fn: any) => (dispatch: Dispatch) => {
-  event.persist();
-  const id = event.target.value;
-  dispatch(selectAppAction(id));
-  fn(id);
-};
 
 const LoadingPage = ({ message = 'Loading...' }) => (
   <Page innerPadding={[0]} wrap>
@@ -42,36 +27,21 @@ const LoadingPage = ({ message = 'Loading...' }) => (
 );
 
 const MakerPortal = () => {
-  const router = useRouter();
   const dispatch = useDispatch();
-
-  const { user, maker, selectedApp, appList } = useSelector(state => ({
+  const { user, maker, selectedApp } = useSelector(state => ({
     user: selectUser(state),
     maker: selectMaker(state),
-    selectedApp: selectCurrentApp(state),
-    appList: selectAppList(state)
+    selectedApp: selectCurrentApp(state)
   }));
-
-  const updateMakerRoute = (id: number) => router.push(`/maker/apps/${id}`);
 
   if (maker.loading || !selectedApp) return <LoadingPage />;
 
-  const subNav = (
-    <MakerNav
-      apps={appList}
-      userId={user && user.user && user.user.blockstackUsername}
-      selectedAppId={selectedApp.id}
-      handleSignOut={() => {
-        dispatch(UserStore.actions.signOut());
-        localStorage.clear();
-        window.location.href = '/';
-      }}
-      onChange={e => handleChangingApp(e, updateMakerRoute)(dispatch)}
-    />
-  );
-
   return (
-    <Page innerPadding={[0]} subNav={subNav} wrap>
+    <Page
+      innerPadding={[0]}
+      subNav={<MakerNav selectedAppId={selectedApp.id} />}
+      wrap
+    >
       <Head title={selectedApp.name} />
       <MakerContainer>
         <Type fontSize={3} fontWeight={500} mx={[4, 6]} py={6} px={[20, 0]}>
