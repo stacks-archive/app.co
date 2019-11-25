@@ -117,8 +117,7 @@ async function renderAndCache(req, res, pagePath, serverData) {
         loading: false
       };
       if (req.params.appId) {
-        dataToPass.maker.selectedApp =
-          dataToPass.maker.appEntities[req.params.appId];
+        dataToPass.maker.selectedAppId = parseInt(req.params.appId, 10);
       }
     }
 

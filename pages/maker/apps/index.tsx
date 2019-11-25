@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from '@containers/head';
-import { bindActionCreators } from 'redux';
-import { connect, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { AppDirectory } from '@components/app-directory';
 import { Flex, Box } from '@blockstack/ui';
@@ -14,10 +13,6 @@ import { Page } from '@components/page';
 import { SignIn } from '@components/sign-in';
 import { NoAppsEmptyState } from '@components/maker/empty-state/no-apps';
 
-interface AppDirectoryPageProps {
-  signIn: any;
-}
-
 const AppDirectoryPageContainer: React.FC = ({ children }) => (
   <Page background="white">
     <Head title="Select your app" />
@@ -27,9 +22,11 @@ const AppDirectoryPageContainer: React.FC = ({ children }) => (
   </Page>
 );
 
-type AppDirectoryPage = React.FC<AppDirectoryPageProps>;
+type AppDirectoryPage = React.FC;
 
-const AppDirectoryPage: AppDirectoryPage = ({ signIn }) => {
+const AppDirectoryPage: AppDirectoryPage = () => {
+  const dispatch = useDispatch();
+  const signIn = (path: string) => dispatch(UserStore.actions.signIn(path));
 
   const { apps, isSignedIn, user } = useSelector(state => ({
     apps: selectAppList(state),
@@ -56,10 +53,4 @@ const AppDirectoryPage: AppDirectoryPage = ({ signIn }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch: any) =>
-  bindActionCreators({ ...UserStore.actions }, dispatch);
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(AppDirectoryPage);
+export default AppDirectoryPage;
