@@ -27,6 +27,7 @@ const CloseButtonContainer = styled.div`
   top: 0;
   right: 0;
   padding: 20px;
+  cursor: pointer;
 `;
 
 const CloseButton = ({ handleClick }) => (

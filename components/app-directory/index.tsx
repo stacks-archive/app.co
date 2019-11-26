@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Flex, Box, PseudoBox } from '@blockstack/ui';
+import { Flex, Box, PseudoBox, Text } from '@blockstack/ui';
 
 import { App } from '@models/app';
 import { Arrow } from '@components/arrow';
@@ -13,7 +13,8 @@ interface AppDirectoryItemProps {
 type AppDirectoryItem = React.FC<AppDirectoryItemProps>;
 
 const AppDirectoryItem: AppDirectoryItem = ({ app }) => (
-  <Flex>
+  <Flex flexDirection="column">
+    <Text as="h1" textAlign="center" color="ink" mt={[10, 10, 8]} mb={8}>Manage your apps</Text>
     <Link href={`/maker/apps/${app.id}`} passHref>
       <PseudoBox
         as="a"

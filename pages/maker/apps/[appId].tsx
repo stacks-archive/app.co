@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Box, Type } from 'blockstack-ui';
+import { Flex, Box, Text } from '@blockstack/ui';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectMaker, selectCurrentApp } from '@stores/maker/selectors';
@@ -18,9 +18,9 @@ const LoadingPage = ({ message = 'Loading...' }) => (
   <Page innerPadding={[0]} wrap>
     <Flex>
       <Box width={1}>
-        <Type fontSize={5} my={7} textAlign="center">
+        <Text fontSize={5} my={7} textAlign="center">
           {message}
-        </Type>
+        </Text>
       </Box>
     </Flex>
   </Page>
@@ -44,9 +44,11 @@ const MakerPortal = () => {
     >
       <Head title={selectedApp.name} />
       <MakerContainer>
-        <Type fontSize={3} fontWeight={500} mx={[4, 6]} py={6} px={[20, 0]}>
-          App Mining submission
-        </Type>
+        <Box>
+          <Text as="h1" display="block" fontSize={4} color="ink" fontWeight={500} mx={[4, 6]} pt={6} pb={[0, 0, 6]} px={[4, 0]}>
+            App Mining submission
+          </Text>
+        </Box>
         <Flex flexDirection={['column', 'column', 'row-reverse']}>
           <MakerStickyStatusBox>
             <Maker.Status app={selectedApp} />

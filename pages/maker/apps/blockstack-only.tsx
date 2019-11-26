@@ -3,9 +3,10 @@ import Link from 'next/link';
 import { Flex, Box, Text, Button } from '@blockstack/ui';
 
 import { Page } from '@components/page';
+import { MakerNav } from '@containers/maker-nav';
 
 const BlockstackOnly = () => (
-  <Page background="white">
+  <Page background="white" subNav={<MakerNav />}>
     <Flex py={148} flexDirection="column" align="center">
       <Text textStyle="display.large" mb={6}>
         App management is currently not supported for non-Blockstack apps

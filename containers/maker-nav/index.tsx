@@ -32,6 +32,10 @@ export const MakerNav: MakerNav = ({ selectedAppId }) => {
 
   const updateMakerRoute = (id: number) => router.push(`/maker/apps/${id}`);
 
+  if (!(user && user.jwt)) {
+    return null;
+  }
+
   return (
     <MakerNavDumb
       apps={appList}

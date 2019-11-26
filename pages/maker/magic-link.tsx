@@ -10,6 +10,7 @@ import { Page } from '@components/page';
 import Head from '@containers/head';
 import { AppIcon } from '@components/app-icon';
 import { App } from '@models/app';
+import { MakerNav } from '@containers/maker-nav';
 
 const MagicLinkClaimed = ({ app, user }) => (
   <>
@@ -118,7 +119,7 @@ class MakerMagicLink extends React.Component<MakerMagicLinkProps> {
     const isClaimed = app.adminBlockstackID || claimed;
 
     return (
-      <Page fullHeight background="white">
+      <Page fullHeight subNav={<MakerNav />} background="white">
         <Head title={`${app.name} - Maker Portal`} />
         <Page.Section flexDirection="column" px>
           <Flex>
