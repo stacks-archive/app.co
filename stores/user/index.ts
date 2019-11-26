@@ -71,6 +71,9 @@ const makeUserReducer = (serverState: any = {}) => {
         if (state.jwt && state.userId) {
           return { ...state };
         }
+        if (!Cookies.get('jwt')) {
+          return { ...initialState };
+        }
         if (payload && payload.user) {
           return { ...payload.user };
         }

@@ -96,9 +96,7 @@ async function renderAndCache(req, res, pagePath, serverData) {
       });
       if (authResp.success) {
         dataToPass.user = authResp;
-        req.universalCookies.set('jwt', authResp.token, {
-          httpOnly: true
-        });
+        req.universalCookies.set('jwt', authResp.token);
       }
     }
 
