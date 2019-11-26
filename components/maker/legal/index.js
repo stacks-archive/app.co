@@ -61,13 +61,14 @@ const ParticipationAgreement = ({ app, user }) => {
     });
     const data = await response.json();
     setLoading(false);
-    openEverSign(data.embedURL);
+    return data.embedURL;
   };
 
   const getDownload = async () => {
     download(`/static/docs/${taxType}.zip`);
-    getDocument();
     setModalState(true);
+    const url = await getDocument();
+    openEverSign(url);
   };
 
   useEffect(() => {
