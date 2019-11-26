@@ -81,11 +81,6 @@ class AppDetails extends React.Component {
           )}
 
           <br />
-          <StyledApp.MainSection center>
-            <StyledApp.ClaimApp href={`mailto:hello@app.co?subject=I want to claim ${app.name}`}>
-              Is this your app? Claim it now.
-            </StyledApp.ClaimApp>
-          </StyledApp.MainSection>
         </Box>
 
         <Box width={[1, 1, 1 / 2, 1 / 2]} px={[0, 0, 3, 3]} mt={[2, 2, 0, 0]}>
