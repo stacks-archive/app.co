@@ -2,17 +2,13 @@ import React, { useState } from 'react';
 import 'isomorphic-unfetch';
 import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Button } from '@blockstack/ui';
+import { Button, Text } from '@blockstack/ui';
 import { Field, Flex, Box, Type } from 'blockstack-ui';
 import debounce from 'lodash/debounce';
 
 import Head from '@containers/head';
-import { MakerTitle, MakerCardHeader } from '@components/maker/styled';
 import { Page } from '@components/page';
-import {
-  selectAppConstants,
-  selectUser
-} from '@stores/apps/selectors';
+import { selectAppConstants, selectUser } from '@stores/apps/selectors';
 import {
   FormSection,
   ErrorMessage,
@@ -142,10 +138,16 @@ const Submit: Submit = ({
     signIn('submit-your-app');
   };
 
+  const [personalDetailsSection, ...appDetailsSections] = sections;
+
   return (
     <Box mx="auto" maxWidth={700}>
-      <MakerTitle pt="20px">Submit your app</MakerTitle>
-      <MakerCardHeader>Personal details</MakerCardHeader>
+      <Text as="h1" color="ink" display="block" pt={2} pb={10}>
+        Submit your app
+      </Text>
+      <Text as="h2" color="ink" display="block" pb={4}>
+        Personal details
+      </Text>
 
       {!isSignedIn && (
         <section>
@@ -178,7 +180,20 @@ const Submit: Submit = ({
 
       <Flex flexWrap="wrap" pt={6} flexDirection="column">
         <form noValidate onSubmit={handleValidation}>
-          {sections.map(section => (
+          <FormSection
+            errors={errors}
+            handleChange={outerHandleChange}
+            setState={setState}
+            key={`section-${personalDetailsSection.fields[0].name}`}
+            message={personalDetailsSection.message}
+            fields={personalDetailsSection.fields}
+            state={state}
+          />
+
+          <Text as="h2" display="block" color="ink" pt={12} pb={10}>
+            About your app
+          </Text>
+          {appDetailsSections.map(section => (
             <FormSection
               errors={errors}
               handleChange={outerHandleChange}
@@ -319,7 +334,7 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
         loading: false,
         accessToken: resData.app.accessToken
       });
-      this.props.fetchApps({ user: this.props.user })
+      this.props.fetchApps({ user: this.props.user });
     } catch (e) {
       trackEvent('App Submission Page - Submission Error');
       this.setState({ success: false, loading: false });
@@ -374,7 +389,10 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
 }
 
 function mapDispatchToProps(dispatch: Dispatch) {
-  return bindActionCreators({ ...UserStore.actions, fetchApps: MakerStore.fetchApps }, dispatch);
+  return bindActionCreators(
+    { ...UserStore.actions, fetchApps: MakerStore.fetchApps },
+    dispatch
+  );
 }
 
 const mapStateToProps = (state: any) => ({

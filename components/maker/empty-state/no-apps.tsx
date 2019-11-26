@@ -22,5 +22,5 @@ export const NoAppsEmptyState: NoAppsEmptyState = ({ username }) => {
         Submit app
       </Button>
     </Flex>
-  )
+  );
 };
