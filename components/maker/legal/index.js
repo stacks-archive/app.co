@@ -23,7 +23,6 @@ const Container = ({ children }) => (
 const ParticipationAgreement = ({ app, user }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [embedUrl, setEmbedUrl] = useState(null);
   const [loading, setLoading] = useState(false);
   const [finished, setFinished] = useState(!!app.hasAcceptedSECTerms);
   const [modalState, setModalState] = useState(false);
@@ -62,8 +61,7 @@ const ParticipationAgreement = ({ app, user }) => {
     });
     const data = await response.json();
     setLoading(false);
-    setEmbedUrl(data.embedURL);
-    openEverSign(embedUrl);
+    openEverSign(data.embedURL);
   };
 
   const getDownload = async () => {

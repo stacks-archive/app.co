@@ -1,6 +1,11 @@
-import React from 'react'
-import { Flex, Box, Type } from 'blockstack-ui'
-import { MakerCardHeader, MakerCardText, MakerButton, MakerField } from '../styled'
+import React from 'react';
+import { Flex, Box, Type } from 'blockstack-ui';
+import {
+  MakerCardHeader,
+  MakerCardText,
+  MakerButton,
+  MakerField
+} from '../styled';
 
 export const PaymentContainer = ({ children }) => (
   <Flex>
@@ -8,23 +13,30 @@ export const PaymentContainer = ({ children }) => (
       {children}
     </Box>
   </Flex>
-)
+);
 
-export const PaymentHeader = MakerCardHeader
+export const PaymentHeader = MakerCardHeader;
 
 export const PaymentDescription = () => (
-  <MakerCardText mb={5} mt={0}>
-    This is where you will receive your App Mining payments.
-    Currently, payments are made in Bitcoin (BTC). Payments will be made
-    in Stacks (STX) in the future.
+  <MakerCardText mb={1} mt={0}>
+    This is where you will receive your App Mining payments. Currently, payments
+    are made in Bitcoin (BTC). Payments will be made in Stacks (STX) in the
+    future.
   </MakerCardText>
-)
+);
 
 export const PaymentHelpText = () => (
   <Type.p fontSize={12} mt={0} display="block">
-    {"Don't"} have a Stacks address? <a href="https://wallet.blockstack.org" target="_blank" rel="noopener noreferrer">Download the Stacks wallet to get one</a>
+    {"Don't"} have a Stacks address?{' '}
+    <a
+      href="https://wallet.blockstack.org"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Download the Stacks wallet to get one
+    </a>
   </Type.p>
-)
+);
 
 export const PaymentBtcField = props => (
   <MakerField
@@ -33,7 +45,7 @@ export const PaymentBtcField = props => (
     placeholder="Enter a Bitcoin address"
     {...props}
   />
-)
+);
 
 export const PaymentStxField = props => (
   <MakerField
@@ -42,10 +54,10 @@ export const PaymentStxField = props => (
     placeholder="Enter a Stacks address"
     {...props}
   />
-)
+);
 
 export const PaymentButton = ({ children, ...props }) => (
   <MakerButton type="button" mt={4} {...props}>
     {children}
   </MakerButton>
-)
+);
