@@ -14,7 +14,7 @@ import { MakerNav } from '@containers/maker-nav';
 
 const MagicLinkClaimed = ({ app, user }) => (
   <>
-    <Text as="h1" display="block" fontSize={4}>
+    <Text as="h1" display="block" color="ink" fontSize={3}>
       {app.name} is now owned by{' '}
       {app.adminBlockstackID || user.user.blockstackUsername}
     </Text>
@@ -30,16 +30,20 @@ const MagicLinkClaimed = ({ app, user }) => (
 
 const MagicLinkUnclaimed = ({
   app,
-  user,
   loading,
   isSignedIn,
+  user,
   handleSignIn,
   handleClaim
 }) => (
   <>
-    <Text display="block" fontSize={4}>
+    <Text display="block" color="ink" fontSize={4}>
       {isSignedIn
-        ? 'Claim the app with your Blockstack ID'
+        ? (
+            <Text>
+              Claim the app with <Text color="ink.600">{user.blockstackUsername}</Text>
+            </Text>
+          )
         : `Sign in with Blockstack to claim ${app.name}`}
     </Text>
     <Text display="block" mt={5}>
@@ -67,7 +71,7 @@ interface MakerMagicLinkProps {
 }
 
 class MakerMagicLink extends React.Component<MakerMagicLinkProps> {
-  static async getInitialProps({ query, reduxStore }) {
+  static async getInitialProps({ query }) {
     const { accessToken } = query;
     const appResult = await fetch(
       `${process.env.API_SERVER}/api/magic-link/${accessToken}`
@@ -136,7 +140,7 @@ class MakerMagicLink extends React.Component<MakerMagicLinkProps> {
               ) : (
                 <MagicLinkUnclaimed
                   app={app}
-                  user={user}
+                  user={user.user}
                   isSignedIn={user && user.jwt}
                   loading={loading}
                   handleClaim={() => this.claim(user)}

@@ -14,7 +14,6 @@ type AppDirectoryItem = React.FC<AppDirectoryItemProps>;
 
 const AppDirectoryItem: AppDirectoryItem = ({ app }) => (
   <Flex flexDirection="column">
-    <Text as="h1" textAlign="center" color="ink" mt={[10, 10, 8]} mb={8}>Manage your apps</Text>
     <Link href={`/maker/apps/${app.id}`} passHref>
       <PseudoBox
         as="a"
@@ -52,9 +51,14 @@ interface AppDirectoryProps {
 }
 
 export const AppDirectory: React.FC<AppDirectoryProps> = ({ apps }) => (
-  <Box my={[2, 2, 6, 12]}>
-    {apps.map(app => (
-      <AppDirectoryItem app={app} key={app.id} />
-    ))}
-  </Box>
+  <>
+    <Text as="h1" display="block" textAlign="center" color="ink" mt={[10, 10, 8]} mb={8}>
+      Manage your apps
+    </Text>
+    <Box my={[2, 2, 6, 12]}>
+      {apps.map(app => (
+        <AppDirectoryItem app={app} key={app.id} />
+      ))}
+    </Box>
+  </>
 );
