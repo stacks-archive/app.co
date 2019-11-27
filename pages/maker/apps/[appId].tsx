@@ -39,6 +39,7 @@ const MakerPortal = () => {
   return (
     <Page
       innerPadding={[0]}
+      align="flex-start"
       subNav={<MakerNav selectedAppId={selectedApp.id} />}
       wrap
     >
@@ -59,7 +60,7 @@ const MakerPortal = () => {
             App Mining submission
           </Text>
         </Box>
-        <Flex flexDirection={['column', 'column', 'row-reverse']}>
+        <Flex flexDirection={['column', 'column', 'row-reverse']} justifyContent="flex-end">
           <MakerStickyStatusBox>
             <Maker.Status app={selectedApp} />
           </MakerStickyStatusBox>

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { Flex, Box, Type, Button, Field } from 'blockstack-ui';
+import { Box } from '@blockstack/ui';
+import { Type, Button, Field } from 'blockstack-ui';
 
 //
 // These styles are to be considered tempoary, and to be removed
@@ -33,21 +34,22 @@ export const MakerContentBox = styled(Box)`
   margin-bottom: 32px;
   max-width: 544px;
 
-  @media (min-width: 832px) {
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.04);
-    border-radius: 6px;
+  @media (min-width: 30em) {
     border: 1px solid #f0f0f5;
+    border-radius: 6px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.04);
   }
 `;
 
 export const MakerContainer = ({ children }) => (
-  <Flex
-    mb={5}
-    mx={[0, 20]}
-    flexDirection={['column', 'column', 'column', 'row']}
+  <Box
+    px={[0, 5]}
+    mx="auto"
+    width="100%"
+    maxWidth="1216px"
   >
-    <Box>{children}</Box>
-  </Flex>
+    {children}
+  </Box>
 );
 
 export const MakerTitle = styled(Type.h2)`
@@ -65,6 +67,7 @@ export const MakerCardHeader = styled(Type.h2)`
   line-height: 28px;
   color: #0f1117;
   margin-bottom: 16px;
+  display: block;
 `;
 
 export const MakerCardSubheader = styled(Type.h3)`
