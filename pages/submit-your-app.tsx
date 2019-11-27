@@ -3,7 +3,7 @@ import 'isomorphic-unfetch';
 import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button, Text } from '@blockstack/ui';
-import { Field, Flex, Box, Type } from 'blockstack-ui';
+import { Field, Flex, Box } from 'blockstack-ui';
 import debounce from 'lodash/debounce';
 
 import Head from '@containers/head';
@@ -170,10 +170,10 @@ const Submit: Submit = ({
               label="Blockstack ID"
             />
             <BlockstackIdCard name={user.user.blockstackUsername} />
-            <Type fontSize={1} display="block" mt={3}>
+            <Text fontSize={1} display="block" mt={3}>
               You will use your ID to make changes to your app, and remove or
               modify it&apos;s listing in the future.
-            </Type>
+            </Text>
           </Box>
         </Flex>
       )}

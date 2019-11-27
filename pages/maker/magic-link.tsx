@@ -14,9 +14,9 @@ import { MakerNav } from '@containers/maker-nav';
 
 const MagicLinkClaimed = ({ app, user }) => (
   <>
-    <Text as="h1" display="block" color="ink" fontSize={3}>
+    <Text display="block" color="ink" fontSize={4}>
       {app.name} is now owned by{' '}
-      {app.adminBlockstackID || user.user.blockstackUsername}
+      <Text color="ink.600">{app.adminBlockstackID || user.user.blockstackUsername}</Text>
     </Text>
     <Text display="block" mt={5}>
       Your Magic Link is now no longer functional. Instead, you will use your
