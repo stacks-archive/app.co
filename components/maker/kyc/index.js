@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Flex, Box } from 'blockstack-ui';
+import { Button } from '@blockstack/ui';
 
-import { MakerCardHeader, MakerCardText, MakerButton } from '../styled';
+import { MakerCardHeader, MakerCardText } from '../styled';
 
 const KYC = ({ app, user }) => {
   const [loading, setLoading] = useState(false);
@@ -39,13 +40,13 @@ const KYC = ({ app, user }) => {
             Verifying your identity helps keep App Mining secure and fight
             fraud. Your ID will never be shared.
           </MakerCardText>
-          <MakerButton
+          <Button
             onClick={initiateKYC}
             mt={4}
             disabled={app.hasCollectedKYC}
           >
             {buttonText()}
-          </MakerButton>
+          </Button>
         </Box>
       </Flex>
     </>

@@ -100,22 +100,6 @@ export const MakerCardDivider = styled.hr`
   background-color: #f0f0f5;
 `;
 
-export const MakerButton = styled(Button)`
-  background: #3700ff;
-  border-radius: 6px;
-  height: 40px;
-  box-shadow: none;
-  min-width: 126px;
-  > span {
-    font-size: 14px;
-  }
-  ${props =>
-    props.disabled &&
-    css`
-      background: #c5ccff;
-    `}
-`;
-
 export const MakerField = styled(Field)`
   > label {
     color: red !important;

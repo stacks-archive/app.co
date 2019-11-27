@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Flex, Box, Field, Type } from 'blockstack-ui';
+import { Button } from '@blockstack/ui';
 import download from 'downloadjs';
 import { TaxDocuments } from './tax-forms';
 import {
@@ -7,8 +8,7 @@ import {
   MakerCardSubheader,
   MakerCardText,
   MakerRadioListLabel,
-  MakerCardDivider,
-  MakerButton
+  MakerCardDivider
 } from '../styled';
 import MakerModal from '../modal';
 
@@ -139,13 +139,13 @@ const ParticipationAgreement = ({ app, user }) => {
               <MakerCardSubheader>
                 Sign the Participation Agreement
               </MakerCardSubheader>
-              <MakerButton
+              <Button
                 mt={4}
                 disabled={loading || finished}
                 onClick={() => getDownload()}
               >
                 {loading ? 'Starting...' : 'Sign participation agreement'}
-              </MakerButton>
+              </Button>
               <Type.p fontSize={12} mb={0}>
                 Opening the Participation Agreement will start a download a
                 package of documents that you are required to read.

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Flex, Box, Type } from 'blockstack-ui';
+import { Button } from '@blockstack/ui';
 import {
   MakerCardHeader,
   MakerCardText,
-  MakerButton,
   MakerField
 } from '../styled';
 
@@ -57,7 +57,7 @@ export const PaymentStxField = props => (
 );
 
 export const PaymentButton = ({ children, ...props }) => (
-  <MakerButton type="button" mt={4} {...props}>
+  <Button type="button" mt={4} {...props}>
     {children}
-  </MakerButton>
+  </Button>
 );
