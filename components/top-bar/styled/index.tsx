@@ -24,7 +24,7 @@ export const Navigation = styled(({ mobile, ...rest }) => <Flex {...rest} />)`
       padding: 20px;
       a {
         font-size: 25px !important;
-        text-align: right;
+        text-align: left;
         width: 100%;
         display: block;
       }

@@ -15,7 +15,6 @@ const AppSelect = ({ selectedValue, onChange, apps = [] }: AppSelectProps) => (
   <Flex alignItems="center">
     <Box>
       <Flex>
-        <Box mt="2px" mx={2} />
         <Flex alignItems="center">
           {apps.length && (
             <select value={selectedValue} onChange={onChange}>

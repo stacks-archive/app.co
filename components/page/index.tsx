@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Box } from '@blockstack/ui';
+import { Box } from '@blockstack/ui';
 import { TopBar } from '@components/top-bar';
 import { Footer } from '@components/footer';
 

@@ -45,7 +45,17 @@ const MakerPortal = () => {
       <Head title={selectedApp.name} />
       <MakerContainer>
         <Box>
-          <Text as="h1" display="block" fontSize={4} color="ink" fontWeight={500} mx={[4, 6]} pt={6} pb={[0, 0, 6]} px={[4, 0]}>
+          <Text
+            as="h1"
+            display="block"
+            fontSize={4}
+            color="ink"
+            fontWeight={500}
+            mx={[4, 6, 0]}
+            pt={6}
+            pb={[0, 0, 6]}
+            px={[4, 0]}
+          >
             App Mining submission
           </Text>
         </Box>
