@@ -42,8 +42,13 @@ interface MakerNavActionsProps {
 const MakerNavActions = ({ userId, handleSignOut }: MakerNavActionsProps) => {
   const User = () => <Text fontSize={0}>{userId}</Text>;
   return (
-    <Flex alignItems="center" ml="auto">
-      <Box textAlign="right" mr={3}>
+    <Flex
+      alignItems={['right', 'center']}
+      ml="auto"
+      justifyContent={['center']}
+      flexDirection={['column', 'row']}
+    >
+      <Box textAlign="right" mr={[0, 3]}>
         <User />
       </Box>
       <Box textAlign="right" mr={1}>

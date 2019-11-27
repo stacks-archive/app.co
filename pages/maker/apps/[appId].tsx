@@ -53,7 +53,7 @@ const MakerPortal = () => {
             fontWeight={500}
             mx={[4, 6, 0]}
             pt={6}
-            pb={[0, 0, 6]}
+            pb={[0, 6]}
             px={[4, 0]}
           >
             App Mining submission
