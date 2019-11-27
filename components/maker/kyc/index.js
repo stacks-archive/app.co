@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import { Flex, Box } from 'blockstack-ui';
-import MakerModal from '../modal';
+
 import { MakerCardHeader, MakerCardText, MakerButton } from '../styled';
 
 const KYC = ({ app, user }) => {
-  const [embedURL, setEmbedURL] = useState(app.jumioEmbedURL);
   const [loading, setLoading] = useState(false);
-  const [modalState, setModalState] = useState(false);
 
   const initiateKYC = async () => {
     setLoading(true);
-    setModalState(true);
+
     const url = `${process.env.API_SERVER}/api/maker/apps/initiate-kyc?appId=${
       app.id
     }`;
@@ -21,7 +19,7 @@ const KYC = ({ app, user }) => {
       })
     });
     const data = await response.json();
-    setEmbedURL(data.embedURL);
+    window.open(data.embedURL);
     setLoading(false);
   };
 
@@ -34,16 +32,6 @@ const KYC = ({ app, user }) => {
 
   return (
     <>
-      <MakerModal isOpen={modalState} handleClose={() => setModalState(false)}>
-        <iframe
-          src={embedURL}
-          title="Document"
-          width="100%"
-          height="700px"
-          allow="camera"
-        />
-      </MakerModal>
-
       <Flex>
         <Box width={1} mt={0}>
           <MakerCardHeader>Identity Verification</MakerCardHeader>
