@@ -9,11 +9,9 @@ import { selectAppList } from '@stores/maker/selectors';
 import { selectUser } from '@stores/apps/selectors';
 import UserStore from '@stores/user';
 
-const handleChangingApp = (event: any, fn: any) => (dispatch: Dispatch) => {
-  event.persist();
-  const id = event.target.value;
-  dispatch(selectAppAction(id));
-  fn(id);
+const handleChangingApp = ({ value }: { value: number }, fn: Function) => (dispatch: Dispatch) => {
+  dispatch(selectAppAction(value));
+  fn(value);
 };
 
 interface MakerNavProps {

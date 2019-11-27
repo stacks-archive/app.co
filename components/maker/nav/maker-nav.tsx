@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Flex, Text } from '@blockstack/ui';
-import { App } from '@models/app';
+import Select from 'react-select';
 
-import { Arrow } from '@components/arrow';
+import { App } from '@models/app';
 import { MakerNavContainer } from './nav-layout';
 
 interface AppSelectProps {
@@ -11,26 +11,23 @@ interface AppSelectProps {
   apps?: any[];
 }
 
-const AppSelect = ({ selectedValue, onChange, apps = [] }: AppSelectProps) => (
-  <Flex alignItems="center">
-    <Box>
-      <Flex>
-        <Flex alignItems="center">
-          {apps.length && (
-            <select value={selectedValue} onChange={onChange}>
-              {apps.map(({ name, id }) => (
-                <option key={id} value={id}>
-                  {name}
-                </option>
-              ))}
-            </select>
-          )}
-          {apps.length > 1 && <Arrow direction="down" />}
-        </Flex>
-      </Flex>
-    </Box>
-  </Flex>
-);
+const AppSelect = ({ selectedValue, onChange, apps = [] }: AppSelectProps) => {
+  const options = apps.map(app => ({
+    label: app.name,
+    value: app.id
+  }));
+  return (
+    <Flex alignItems="center">
+      <Box width="200px">
+        <Select
+          value={options.find(({ value }) => value === selectedValue)}
+          onChange={onChange}
+          options={options}
+        />
+      </Box>
+    </Flex>
+  );
+};
 
 interface MakerNavActionsProps {
   userId: string;
@@ -71,7 +68,7 @@ interface MakerNavProps {
   apps: App[];
   userId: string;
   selectedAppId: number;
-  onChange(e: Event): void;
+  onChange(e: any): void;
   handleSignOut(): void;
 }
 
