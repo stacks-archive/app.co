@@ -322,7 +322,7 @@ app.prepare().then(() => {
     /**
      * Maker pages
      */
-    server.get('/maker', (req, res) => renderAndCache(req, res, '/maker'));
+    server.get('/maker', (req, res) => res.redirect('maker/apps'));
     server.get('/maker/apps', (req, res) =>
       renderAndCache(req, res, '/maker/apps')
     );

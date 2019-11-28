@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Text } from '@blockstack/ui';
+import { Box, Flex, Text, theme } from '@blockstack/ui';
 import Select from 'react-select';
 
 import { App } from '@models/app';
@@ -22,6 +22,18 @@ const AppSelect = ({ selectedValue, onChange, apps = [] }: AppSelectProps) => {
         <Select
           value={options.find(({ value }) => value === selectedValue)}
           onChange={onChange}
+          styles={{
+            option: (provided, state) => ({
+              ...provided,
+              fontSize: '14px',
+              color: state.isSelected ? 'white' : '#222933'
+            }),
+            singleValue: provided => ({
+              ...provided,
+              fontSize: '14px',
+              color: '#222933'
+            })
+          }}
           options={options}
         />
       </Box>
