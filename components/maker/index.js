@@ -1,11 +1,9 @@
-import { SidebarButton } from './styled'
-import PaymentDetails from './payment-details'
-import ParticipationAgreement from './participation-agreement'
+import PaymentDetails from './payment'
+import ParticipationAgreement from './legal'
 import KYC from './kyc'
 import Status from './status'
 import Notification from './notification'
-import Info from './info'
-import Tax from './tax-info'
+import { SidebarButton } from './styled'
 
 export default {
   SidebarButton,
@@ -13,7 +11,5 @@ export default {
   ParticipationAgreement,
   KYC,
   Status,
-  Notification,
-  Info,
-  Tax
+  Notification
 }

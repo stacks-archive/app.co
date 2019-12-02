@@ -75,7 +75,7 @@ class AppsListComponent extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const sortedApps = getApps(nextProps)
     this.setState({ sortedApps })
   }

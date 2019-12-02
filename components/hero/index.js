@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { wrapperStyles } from '@common/styles'
-import { headerHeight } from '@common/constants'
 
 const StyledHero = styled.div`
   height: 40vh;

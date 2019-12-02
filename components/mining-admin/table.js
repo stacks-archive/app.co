@@ -25,7 +25,7 @@ export const Thead = Styled.thead`
 
 export const ClickableTr = Styled.tr`
   cursor: pointer;
-  &:hover { 
+  &:hover {
     background: #f3f5f9;
   }
 `
@@ -36,7 +36,7 @@ export const Td = Styled.td`
   border-top: 1px solid #e6e9ee;
   text-align: ${props => props.textAlign || 'left'};
   > a {
-    padding: 2em;
+    padding: 0 2em;
     display: block;
     height: 100%;
     width: 100%;
@@ -47,13 +47,13 @@ export const Td = Styled.td`
 `
 
 export const SpacedTd = Styled(Td)`
-  padding: 32px;
-  font-weight: 600;
+  padding: 16px 32px;
   text-align: ${({ textAlign }) => textAlign || 'left'}
 `
 
 export const FormTd = Styled.td`
   padding: 32px;
+  font-size: 14px;
   border-top: 1px solid #e6e9ee;
 `
 
