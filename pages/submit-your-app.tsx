@@ -158,7 +158,7 @@ const Submit: Submit = ({
         </section>
       )}
 
-      {user && user.user && (
+      {user && user.jwt && (
         <Flex pt={6}>
           <Box mb={4} width={1}>
             <Field.LabelAdvanced
