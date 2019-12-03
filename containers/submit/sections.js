@@ -84,7 +84,7 @@ export const sections = (user, appConstants) => {
     {
       name: 'twitterHandle',
       required: false,
-      label: "Application's Twitter handle",
+      label: "App Twitter handle",
       placeholder: '@SatoshiChat'
     }
   ]
