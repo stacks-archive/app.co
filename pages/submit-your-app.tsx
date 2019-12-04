@@ -141,7 +141,7 @@ const Submit: Submit = ({
   const [personalDetailsSection, ...appDetailsSections] = sections;
 
   return (
-    <Box mx="auto" maxWidth={700}>
+    <Box mx="auto" maxWidth={700} as="form">
       <Text as="h1" color="ink" display="block" pt={2} pb={10}>
         Submit your app
       </Text>
@@ -204,7 +204,6 @@ const Submit: Submit = ({
               state={state}
             />
           ))}
-          <WarningCard message="Blockstack Authentication is required to participate in App Mining" />
           {errors ? (
             <ErrorMessage
               message={
