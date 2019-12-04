@@ -12,12 +12,12 @@ type SuccessCard = React.FC<SuccessCardProps>;
 const SuccessCard: SuccessCard = ({ isAppMiningEligible }) => (
   <Box width="100%" textAlign="center" py={56}>
     <Box pb={6} width="100%">
-      <Text textStyle="display.large" mx="auto" fontSize={5} fontWeight="bold">
-        Success!
+      <Text as="h1" textStyle="display.large" color="ink" mx="auto" fontSize={5}>
+        Submission received
       </Text>
     </Box>
     <Box mx="auto" maxWidth="560px">
-      <Text textStyle="display.small" display="block">
+      <Text display="block">
         Thank you for submitting your app to App.co! We will get back to you
         soon.
       </Text>
