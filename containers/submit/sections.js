@@ -27,12 +27,7 @@ export const sections = (user, appConstants) => {
       label: 'How did you learn about App.co or App Mining?',
       placeholder: 'Hacker News'
     }
-  ]
-
-  if (user && user.jwt) {
-    // If the user is logged in, remove the "Is this your app?" question
-    personal.splice(0, 1);
-  }
+  ];
 
   const appDetails = [
     {
