@@ -47,7 +47,7 @@ const AppDirectoryPage: AppDirectoryPage = () => {
   if (isSignedIn && apps.length === 0) {
     return (
       <AppDirectoryContainer>
-        <NoAppsEmptyState username={user.user.blockstackUsername} />
+        <NoAppsEmptyState username={user && user.user && user.user.blockstackUsername} />
       </AppDirectoryContainer>
     );
   }

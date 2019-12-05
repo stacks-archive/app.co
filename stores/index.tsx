@@ -29,7 +29,7 @@ export default data => {
 
   const Reducer = combineReducers({
     apps: AppsStore.makeReducer(data),
-    user: UserStore.makeUserReducer(data.apps.user),
+    user: UserStore.makeUserReducer(data.app && data.apps.user),
     newsletter,
     router: RouterStore.reducer,
     mining: makeMiningReducer(data),
