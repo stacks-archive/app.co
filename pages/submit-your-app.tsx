@@ -360,8 +360,8 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
     return (
       <Page innerPadding={0} pt={0} background="white">
         <Head
-          title="Submit your dapp"
-          description="Submit your dapp to be listed on the Universal Dapp Store."
+          title="Submit your app"
+          description="Submit your app to be listed on the Universal Dapp Store."
         />
         <Page.Section p={['32px', '64px']} mb={3} bg="white">
           {this.state.success ? (
