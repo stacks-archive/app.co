@@ -27,6 +27,7 @@ const AppDirectoryItem: AppDirectoryItem = ({ app }) => (
         justifyContent="space-between"
         alignItems="center"
         background="#F9F9FC"
+        textDecoration="none"
         _hover={{ bg: '#F0F0F5' }}
       >
         <AppIcon

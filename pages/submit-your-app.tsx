@@ -249,6 +249,7 @@ interface SubmitDappState {
   refSource: any;
   accessToken: any;
   errorCount: any;
+  newAppId: number | null;
 }
 
 class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
@@ -260,7 +261,8 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
     referralCode: null,
     refSource: null,
     accessToken: null,
-    errorCount: 0
+    errorCount: 0,
+    newAppId: null
   };
 
   componentDidMount() {
@@ -331,7 +333,8 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
       this.setState({
         success: true,
         loading: false,
-        accessToken: resData.app.accessToken
+        accessToken: resData.app.accessToken,
+        newAppId: resData.app.id
       });
       this.props.fetchApps({ user: this.props.user });
     } catch (e) {
@@ -365,7 +368,7 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
         />
         <Page.Section p={['32px', '64px']} mb={3} bg="white">
           {this.state.success ? (
-            <SuccessCard isAppMiningEligible={this.appMiningEligible()} />
+            <SuccessCard newAppId={this.state.newAppId} isAppMiningEligible={this.appMiningEligible()} />
           ) : (
             <Submit
               loading={this.state.loading}

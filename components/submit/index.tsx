@@ -5,11 +5,12 @@ import { Box, Button, Text } from '@blockstack/ui';
 
 interface SuccessCardProps {
   isAppMiningEligible: boolean;
+  newAppId: number | null;
 }
 
 type SuccessCard = React.FC<SuccessCardProps>;
 
-const SuccessCard: SuccessCard = ({ isAppMiningEligible }) => (
+const SuccessCard: SuccessCard = ({ isAppMiningEligible, newAppId }) => (
   <Box width="100%" textAlign="center" py={56}>
     <Box pb={6} width="100%">
       <Text as="h1" textStyle="display.large" color="ink" mx="auto" fontSize={5}>
@@ -32,7 +33,7 @@ const SuccessCard: SuccessCard = ({ isAppMiningEligible }) => (
             . To participate, you are required to submit your payment and tax
             details.
           </Text>
-          <Link href={{ pathname: '/maker/apps' }} passHref>
+          <Link href={{ pathname: newAppId ? `/maker/apps/${newAppId}` : '/maker/apps' }} passHref>
             <Button mt={6}>Participate in App Mining</Button>
           </Link>
         </>
