@@ -21,7 +21,6 @@ import * as MakerStore from '@stores/maker/actions';
 import { trackEvent } from '@utils/index';
 import { SubmitSignIn } from '@components/submit/submit-sign-in';
 import { isUserSignedIn } from '@stores/user/selectors';
-import { WarningCard } from '@components/warning-card';
 import { BlockstackIdCard } from '@components/submit/blockstack-id-card';
 
 const APP_SUBMISSION_DATA = 'app_submission_data';
@@ -172,7 +171,7 @@ const Submit: Submit = ({
             <BlockstackIdCard name={user.user.blockstackUsername} />
             <Text fontSize={1} display="block" mt={3}>
               You will use your ID to make changes to your app, and remove or
-              modify it&apos;s listing in the future.
+              modify its listing in the future.
             </Text>
           </Box>
         </Flex>

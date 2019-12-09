@@ -20,7 +20,7 @@ export const SubmitSignIn: SubmitSignIn = ({
     </Box>
     <Text textStyle="caption">
       You will use your ID to make changes to your app, and remove or modify
-      it’s listing in the future.
+      its listing in the future.
     </Text>
   </Flex>
 );
