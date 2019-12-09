@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Text, theme } from '@blockstack/ui';
+import { Box, Flex, Text } from '@blockstack/ui';
 import Select from 'react-select';
 
 import { App } from '@models/app';
@@ -49,7 +49,11 @@ interface MakerNavActionsProps {
 }
 
 const MakerNavActions = ({ userId, handleSignOut }: MakerNavActionsProps) => {
-  const User = () => <Text fontSize={0}>{userId}</Text>;
+  const User = () => (
+    <Text fontSize={0} lineHeight="20px">
+      {userId}
+    </Text>
+  );
   return (
     <Flex
       alignItems={['right', 'center']}
@@ -68,6 +72,7 @@ const MakerNavActions = ({ userId, handleSignOut }: MakerNavActionsProps) => {
           fontWeight="medium"
           color="blue.900"
           cursor="pointer"
+          lineHeight="20px"
         >
           Sign out
         </Text>
