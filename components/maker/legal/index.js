@@ -122,7 +122,7 @@ const ParticipationAgreement = ({ app, user }) => {
           value={email}
         />
         <Box pb={2}>
-          <Field.LabelAdvanced label="I am" />
+          <Field.LabelAdvanced label="Select your tax category:" />
           {taxStatusRadioList}
         </Box>
 
