@@ -44,15 +44,15 @@ const AppDirectoryPage: AppDirectoryPage = () => {
     user: selectUser(state)
   }));
 
+  const nav = isSignedIn ? <MakerNav /> : null;
+
   if (isSignedIn && apps.length === 0) {
     return (
-      <AppDirectoryContainer>
+      <AppDirectoryContainer nav={nav}>
         <NoAppsEmptyState username={user && user.user && user.user.blockstackUsername} />
       </AppDirectoryContainer>
     );
   }
-
-  const nav = isSignedIn ? <MakerNav /> : null;
 
   return (
     <AppDirectoryContainer nav={nav}>

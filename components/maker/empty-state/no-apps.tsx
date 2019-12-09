@@ -13,7 +13,8 @@ export const NoAppsEmptyState: NoAppsEmptyState = ({ username }) => {
   return (
     <Flex flexDirection="column" alignItems="center" my={80}>
       <Text as="h2" mb={6}>
-        You don&apos;t have any apps associated with {username}
+        You don&apos;t have any apps connected to{' '}
+        <Text color="ink.400">{username}</Text>
       </Text>
       <Text mb={6}>
         Submit your app or sign in with a different Blockstack ID.
