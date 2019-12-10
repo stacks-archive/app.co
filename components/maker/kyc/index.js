@@ -1,14 +1,26 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import useVisibilityChange from 'use-visibility-change';
 import { Flex, Box } from 'blockstack-ui';
 import { Button } from '@blockstack/ui';
-
 import { MakerCardHeader, MakerCardText } from '../styled';
+import { fetchApps } from '@stores/maker/actions';
 
 const Kyc = ({ app, user }) => {
   const [loading, setLoading] = useState(false);
+  const [hasStartedKyc, setHasStartedKyc] = useState(false);
+  const dispatch = useDispatch();
+
+  useVisibilityChange({
+    onShow() {
+      if (!hasStartedKyc) return;
+      fetchApps({ user })(dispatch);
+    }
+  });
 
   const initiateKYC = async () => {
     setLoading(true);
+    setHasStartedKyc(true);
     const url = `${process.env.API_SERVER}/api/maker/apps/initiate-kyc?appId=${
       app.id
     }`;

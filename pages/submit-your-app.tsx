@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'isomorphic-unfetch';
 import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Button, Text } from '@blockstack/ui';
+import { Button, Text, theme } from '@blockstack/ui';
 import { Field, Flex, Box } from 'blockstack-ui';
 import debounce from 'lodash/debounce';
 
