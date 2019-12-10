@@ -74,7 +74,7 @@ const MakerPortal = () => {
               />
             </MakerContentBox>
             <MakerContentBox>
-              <Maker.KYC app={selectedApp} user={user} />
+              <Maker.Kyc app={selectedApp} user={user} />
             </MakerContentBox>
             <MakerContentBox>
               <Maker.ParticipationAgreement app={selectedApp} user={user} />

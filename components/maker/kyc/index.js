@@ -4,12 +4,11 @@ import { Button } from '@blockstack/ui';
 
 import { MakerCardHeader, MakerCardText } from '../styled';
 
-const KYC = ({ app, user }) => {
+const Kyc = ({ app, user }) => {
   const [loading, setLoading] = useState(false);
 
   const initiateKYC = async () => {
     setLoading(true);
-
     const url = `${process.env.API_SERVER}/api/maker/apps/initiate-kyc?appId=${
       app.id
     }`;
@@ -36,7 +35,7 @@ const KYC = ({ app, user }) => {
       <Flex>
         <Box width={1} mt={0}>
           <MakerCardHeader>Identity Verification</MakerCardHeader>
-          <MakerCardText mt={0}>
+          <MakerCardText>
             Verifying your identity helps keep App Mining secure and fight
             fraud. Your ID will never be shared.
           </MakerCardText>
@@ -53,4 +52,4 @@ const KYC = ({ app, user }) => {
   );
 };
 
-export default KYC;
+export default Kyc;
