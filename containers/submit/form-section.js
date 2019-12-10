@@ -70,7 +70,6 @@ export const FormSection = ({
           <React.Fragment key={`select-${field.name}`}>
             <Box pb={4}>
               <Field.LabelAdvanced
-                pb={3}
                 required={field.required}
                 hint={field.hint}
                 message={field.message}
