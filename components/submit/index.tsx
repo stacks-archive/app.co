@@ -11,7 +11,7 @@ interface SuccessCardProps {
 type SuccessCard = React.FC<SuccessCardProps>;
 
 const SuccessCard: SuccessCard = ({ isAppMiningEligible, newAppId }) => (
-  <Box width="100%" textAlign="center" py={56}>
+  <Box width="100%" textAlign="center" pt={14}>
     <Box pb={6} width="100%">
       <Text as="h1" textStyle="display.large" color="ink" mx="auto" fontSize={5}>
         Submission received
