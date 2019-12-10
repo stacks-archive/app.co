@@ -144,12 +144,18 @@ const Submit: Submit = ({
       <Text as="h1" color="ink" display="block" pt={2} pb={10}>
         Submit your app
       </Text>
-      <Text as="h2" color="ink" display="block" pb={4}>
+      <Text as="h2" color="ink" display="block" pb={8}>
         Personal details
       </Text>
 
       {!isSignedIn && (
         <section>
+          {/* <Text as="h2" textStyle="body.small" color="ink">Connect your Blockstack ID</Text> */}
+          <Field.LabelAdvanced
+            label="Connect your Blockstack ID"
+            pb={2}
+            required
+          />
           <SubmitSignIn
             handleBlockstackAuth={blockstackAuth}
             loading={signingIn}
@@ -367,7 +373,10 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
         />
         <Page.Section p={['32px', '64px']} mb={3} bg="white">
           {this.state.success ? (
-            <SuccessCard newAppId={this.state.newAppId} isAppMiningEligible={this.appMiningEligible()} />
+            <SuccessCard
+              newAppId={this.state.newAppId}
+              isAppMiningEligible={this.appMiningEligible()}
+            />
           ) : (
             <Submit
               loading={this.state.loading}
