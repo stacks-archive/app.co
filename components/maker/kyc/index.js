@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import useVisibilityChange from 'use-visibility-change';
 import { Flex, Box } from 'blockstack-ui';
-import { Button } from '@blockstack/ui';
+import { Button, Text } from '@blockstack/ui';
 import { MakerCardHeader, MakerCardText } from '../styled';
 import { fetchApps } from '@stores/maker/actions';
 
@@ -63,11 +63,16 @@ const Kyc = ({ app, user }) => {
             Verifying your identity helps keep App Mining secure and fight
             fraud. Your ID will never be shared.
           </MakerCardText>
-          <a href={url} target="_blank" style={{ textDecoration: 'none' }}>
-            <Button mt={4} disabled={app.hasCollectedKYC}>
-              {buttonText()}
-            </Button>
-          </a>
+          <Box>
+            <a href={url} target="_blank" style={{ textDecoration: 'none' }}>
+              <Button mt={2} disabled={app.hasCollectedKYC}>
+                {buttonText()}
+              </Button>
+            </a>
+          </Box>
+          <Text as="p" display="block" textStyle="caption" mt={4} mb={0}>
+            It may take several minutes for the status to update once complete.
+          </Text>
         </Box>
       </Flex>
     </>
