@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import useVisibilityChange from 'use-visibility-change';
 import { Flex, Box } from 'blockstack-ui';
@@ -51,6 +52,8 @@ const Kyc = ({ app, user }) => {
     return app.hasCollectedKYC ? 'Verified' : 'Start verification';
   };
 
+  const url = app.hasCollectedKYC ? null : syncKycUrl || kycUrl;
+
   return (
     <>
       <Flex>
@@ -60,13 +63,8 @@ const Kyc = ({ app, user }) => {
             Verifying your identity helps keep App Mining secure and fight
             fraud. Your ID will never be shared.
           </MakerCardText>
-          <a href={syncKycUrl || kycUrl} target="_blank">
-            <Button
-              as="a"
-              // onClick={initiateKYC}
-              mt={4}
-              disabled={app.hasCollectedKYC}
-            >
+          <a href={url} target="_blank" style={{ textDecoration: 'none' }}>
+            <Button mt={4} disabled={app.hasCollectedKYC}>
               {buttonText()}
             </Button>
           </a>
