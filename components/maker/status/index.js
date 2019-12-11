@@ -76,10 +76,9 @@ const Status = ({ app }) => {
           label="Identity Verification"
           status={app.hasCollectedKYC}
         />
-        <ItemToCompleteField label="Tax Documents" status={app.isKYCVerified} />
         <ItemToCompleteField
-          label="SEC Participation Agreement"
-          status={app.hasAcceptedSECTerms}
+          label="Legal documents"
+          status="app.isKYCVerified && app.hasAcceptedSECTerms"
         />
       </Box>
     </Flex>
