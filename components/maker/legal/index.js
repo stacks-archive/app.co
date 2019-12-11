@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Flex, Box, Field, Type } from 'blockstack-ui';
-import { Button } from '@blockstack/ui';
+import { Button, Text } from '@blockstack/ui';
 import download from 'downloadjs';
 import { TaxDocuments } from './tax-forms';
 import {
@@ -97,7 +97,10 @@ const ParticipationAgreement = ({ app, user }) => {
 
   return (
     <>
-      <MakerModal isOpen={modalState} handleClose={() => setModalState(false)}>
+      <MakerModal
+        isOpen={modalState}
+        handleClose={() => setModalState(false)}
+      >
         <Box width={1} id="embedded-participation-agreement" />
       </MakerModal>
 
@@ -105,8 +108,8 @@ const ParticipationAgreement = ({ app, user }) => {
         <MakerCardHeader>Legal Documents</MakerCardHeader>
 
         <MakerCardText mb={4} mt={0}>
-          Please select the appropriate legal status so we can provide you with
-          the correct Tax Form and Participation Agreement.
+          Please select the appropriate legal status so we can provide you
+          with the correct Tax Form and Participation Agreement.
         </MakerCardText>
         <Field
           name="name"
@@ -150,6 +153,15 @@ const ParticipationAgreement = ({ app, user }) => {
                 Opening the Participation Agreement will start a download a
                 package of documents that you are required to read.
               </Type.p>
+            </Box>
+            <Box>
+              <MakerCardDivider />
+
+              <Text as="p" display="block" textStyle="caption" mb={0}>
+                Note: It may take a few days for this page to update after
+                you’ve uploaded the tax form and signed the participation
+                agreement. These must be reviewed and approved manually.
+              </Text>
             </Box>
           </>
         )}

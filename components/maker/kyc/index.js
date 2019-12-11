@@ -71,7 +71,8 @@ const Kyc = ({ app, user }) => {
             </a>
           </Box>
           <Text as="p" display="block" textStyle="caption" mt={4} mb={0}>
-            It may take several minutes for the status to update once complete.
+            Note: It may take a few minutes for this page to update after
+            you’ve completed identity verification.
           </Text>
         </Box>
       </Flex>
