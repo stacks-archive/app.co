@@ -78,7 +78,7 @@ const Status = ({ app }) => {
         />
         <ItemToCompleteField
           label="Legal documents"
-          status="app.isKYCVerified && app.hasAcceptedSECTerms"
+          status={app.isKYCVerified && app.hasAcceptedSECTerms}
         />
       </Box>
     </Flex>
