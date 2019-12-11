@@ -64,7 +64,7 @@ const MakerNavActions = ({ userId, handleSignOut }: MakerNavActionsProps) => {
       <Box textAlign="right" mr={[0, 3]}>
         <User />
       </Box>
-      <Box textAlign="right" mr={1}>
+      <Box textAlign="right">
         <Text
           onClick={handleSignOut}
           as="a"

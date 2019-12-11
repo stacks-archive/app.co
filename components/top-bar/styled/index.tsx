@@ -41,7 +41,13 @@ export const Navigation = styled(({ mobile, ...rest }) => <Flex {...rest} />)`
         height: 100%;
       }
     `};
-  `
+
+  @media (min-width: 640px) {
+    a:last-child {
+      padding-right: 0 !important;
+    }
+  }
+`;
 
 interface AnchorProps {
   topNav?: boolean
