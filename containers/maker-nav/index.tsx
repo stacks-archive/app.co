@@ -16,11 +16,12 @@ const handleChangingApp = ({ value }: { value: number }, fn: Function) => (dispa
 
 interface MakerNavProps {
   selectedAppId?: number;
+  onSignOut?: Function;
 }
 
 type MakerNav = React.FC<MakerNavProps>;
 
-export const MakerNav: MakerNav = ({ selectedAppId }) => {
+export const MakerNav: MakerNav = ({ selectedAppId, onSignOut }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { appList, user } = useSelector(state => ({
@@ -34,16 +35,17 @@ export const MakerNav: MakerNav = ({ selectedAppId }) => {
     return null;
   }
 
+  const handleSignOut = () => {
+    dispatch(UserStore.actions.signOut());
+    if (onSignOut) onSignOut();
+  };
+
   return (
     <MakerNavDumb
       apps={appList}
       selectedAppId={selectedAppId}
       userId={user && user.user && user.user.blockstackUsername}
-      handleSignOut={() => {
-        dispatch(UserStore.actions.signOut());
-        localStorage.clear();
-        window.location.href = '/';
-      }}
+      handleSignOut={handleSignOut}
       onChange={e => handleChangingApp(e, updateMakerRoute)(dispatch)}
     />
   );

@@ -40,7 +40,14 @@ const MakerPortal = () => {
     <Page
       innerPadding={[0]}
       align="flex-start"
-      subNav={<MakerNav selectedAppId={selectedApp.id} />}
+      subNav={
+        <MakerNav
+          selectedAppId={selectedApp.id}
+          onSignOut={() => {
+            window.location.href = '/';
+          }}
+        />
+      }
       wrap
     >
       <Head title={selectedApp.name} />
@@ -60,7 +67,10 @@ const MakerPortal = () => {
             App Mining submission
           </Text>
         </Box>
-        <Flex flexDirection={['column', 'column', 'row-reverse']} justifyContent="flex-end">
+        <Flex
+          flexDirection={['column', 'column', 'row-reverse']}
+          justifyContent="flex-end"
+        >
           <MakerStickyStatusBox>
             <Maker.Status app={selectedApp} />
           </MakerStickyStatusBox>

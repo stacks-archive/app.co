@@ -1,31 +1,32 @@
-import React from 'react'
+import React from 'react';
 
 export const CheckMarkIcon = () => (
-  <svg
-    xmlns='http://www.w3.org/2000/svg'
-    width='20'
-    height='20'
-    fill='none'
-    viewBox='0 0 20 20'
-  >
-    <circle cx='10' cy='10' r='10' fill='#00A73E' />
-    <path
-      stroke='#fff'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-      strokeWidth='2'
-      d='M7.57 10.694l2.084 1.39 2.777-4.167'
-    />
-  </svg>
-)
-
-export const CrossMarkIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="20"
     height="20"
     fill="none"
     viewBox="0 0 20 20"
+  >
+    <circle cx="10" cy="10" r="10" fill="#00A73E" />
+    <path
+      stroke="#fff"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      d="M7.57 10.694l2.084 1.39 2.777-4.167"
+    />
+  </svg>
+);
+
+export const CrossMarkIcon = ({ width = 20, height = 20 }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    fill="none"
+    viewBox="0 0 20 20"
+    style={{ display: 'block' }}
   >
     <circle cx="10" cy="10" r="10" fill="#C1C3CC" />
     <path
@@ -35,24 +36,24 @@ export const CrossMarkIcon = () => (
       clipRule="evenodd"
     />
   </svg>
-)
+);
 
 export const CloseIcon = () => (
   <svg
-    xmlns='http://www.w3.org/2000/svg'
-    width='12'
-    height='12'
-    fill='none'
-    viewBox='0 0 12 12'
+    xmlns="http://www.w3.org/2000/svg"
+    width="12"
+    height="12"
+    fill="none"
+    viewBox="0 0 12 12"
   >
     <path
-      fill='#BFBFC3'
-      fillRule='evenodd'
-      d='M4.586 6L0 1.413 1.415 0 6 4.585 10.584.001 12 1.415 7.414 5.999l4.585 4.585L10.585 12 6 7.414l-4.586 4.585L0 10.585l4.586-4.586z'
-      clipRule='evenodd'
+      fill="#BFBFC3"
+      fillRule="evenodd"
+      d="M4.586 6L0 1.413 1.415 0 6 4.585 10.584.001 12 1.415 7.414 5.999l4.585 4.585L10.585 12 6 7.414l-4.586 4.585L0 10.585l4.586-4.586z"
+      clipRule="evenodd"
     />
   </svg>
-)
+);
 
 export const ArrowDown = () => (
   <svg
@@ -69,4 +70,4 @@ export const ArrowDown = () => (
       clipRule="evenodd"
     />
   </svg>
-)
+);
