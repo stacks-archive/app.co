@@ -141,7 +141,7 @@ const Submit: Submit = ({
   const [personalDetailsSection, ...appDetailsSections] = sections;
 
   return (
-    <Box mx="auto" maxWidth={700} as="form">
+    <Box mx="auto" maxWidth={540} as="form">
       <Text as="h1" color="ink" display="block" pt={2} pb={10}>
         Submit your app
       </Text>
