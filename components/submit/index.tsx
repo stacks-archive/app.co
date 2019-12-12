@@ -25,16 +25,15 @@ const SuccessCard: SuccessCard = ({ isAppMiningEligible, newAppId }) => (
       {isAppMiningEligible && (
         <>
           <Text my={3} display="block">
-            Because your app uses Blockstack authentication, you are eligible to
+            Because your app uses Blockstack authentication, you are invited to
             participate in{' '}
             <Link href="/mining">
               <Text color="blue" fontWeight={500}>App Mining</Text>
             </Link>
-            . To participate, you are required to submit your payment and tax
-            details.
+            . To participate, you must provide payment details, identity verification information, and legal documents. 
           </Text>
           <Link href={{ pathname: newAppId ? `/maker/apps/${newAppId}` : '/maker/apps' }} passHref>
-            <Button mt={6}>Participate in App Mining</Button>
+            <Button mt={6}>Complete your mining submission</Button>
           </Link>
         </>
       )}
