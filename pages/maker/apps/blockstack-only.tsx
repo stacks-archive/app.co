@@ -8,7 +8,7 @@ import { MakerNav } from '@containers/maker-nav';
 const BlockstackOnly = () => (
   <Page background="white" subNav={<MakerNav />}>
     <Flex py={148} flexDirection="column" align="center">
-      <Text textStyle="display.large" mb={6}>
+      <Text textStyle="display.small" color="ink" mb={6}>
         App management is currently not supported for non-Blockstack apps
       </Text>
       <Box>

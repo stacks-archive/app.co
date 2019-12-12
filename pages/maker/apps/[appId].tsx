@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { Flex, Box, Text } from '@blockstack/ui';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -28,11 +29,18 @@ const LoadingPage = ({ message = 'Loading...' }) => (
 
 const MakerPortal = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
+
   const { user, maker, selectedApp } = useSelector(state => ({
     user: selectUser(state),
     maker: selectMaker(state),
     selectedApp: selectCurrentApp(state)
   }));
+
+  if (selectedApp.authentication.toLowerCase() !== 'blockstack') {
+    router.replace('/maker/apps/blockstack-only');
+    return <></>;
+  }
 
   if (maker.loading || !selectedApp) return <LoadingPage />;
 
