@@ -13,9 +13,7 @@ const BlockstackOnly = () => (
       </Text>
       <Box>
         <Link href="/maker/apps">
-          <Button>
-              Return to app directory
-          </Button>
+          <Button>Return to app directory</Button>
         </Link>
       </Box>
     </Flex>

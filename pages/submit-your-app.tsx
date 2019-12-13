@@ -12,7 +12,7 @@ import { selectAppConstants, selectUser } from '@stores/apps/selectors';
 import {
   FormSection,
   ErrorMessage,
-  sections as getSections
+  sections as getSections,
 } from '@containers/submit';
 import SuccessCard from '@components/submit';
 import UserStore from '@stores/user';
@@ -31,8 +31,8 @@ const outerHandleChange = e => (setState: any) => {
     ...s,
     values: {
       ...s.values,
-      [e.target.name]: e.target.value
-    }
+      [e.target.name]: e.target.value,
+    },
   }));
 };
 
@@ -61,7 +61,7 @@ const Submit: Submit = ({
   user,
   loading,
   signIn,
-  isSignedIn
+  isSignedIn,
 }) => {
   const sections = getSections(user, appConstants);
   const [signingIn, setSigningIn] = useState(false);
@@ -74,7 +74,7 @@ const Submit: Submit = ({
     if (!(user && user.jwt)) {
       return {
         count: 1,
-        errors: {}
+        errors: {},
       };
     }
 
@@ -87,7 +87,7 @@ const Submit: Submit = ({
             if (isBool && field.required && !value) {
               errorsObj = {
                 ...errorsObj,
-                [field.name]: 'This is required.'
+                [field.name]: 'This is required.',
               };
               errorCount += 1;
             } else if (field.validation) {
@@ -96,7 +96,7 @@ const Submit: Submit = ({
               } catch (e) {
                 errorsObj = {
                   ...errorsObj,
-                  [field.name]: e.errors[0]
+                  [field.name]: e.errors[0],
                 };
                 errorCount += 1;
               }
@@ -107,7 +107,7 @@ const Submit: Submit = ({
     );
     return {
       count: errorCount,
-      errors: errorsObj
+      errors: errorsObj,
     };
   };
 
@@ -118,12 +118,12 @@ const Submit: Submit = ({
       trackEvent('App Submission Page - Validation Errors');
       setState(() => ({
         errorCount: validation.count,
-        errors: validation.errors
+        errors: validation.errors,
       }));
     } else {
       setState(() => ({
         errorCount: null,
-        errors: {}
+        errors: {},
       }));
       submit();
     }
@@ -169,7 +169,7 @@ const Submit: Submit = ({
           <Box mb={4} width={1}>
             <Field.LabelAdvanced
               labelProps={{
-                pb: 3
+                pb: 3,
               }}
               pl={0}
               required
@@ -271,7 +271,7 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
     refSource: null,
     accessToken: null,
     errorCount: 0,
-    newAppId: null
+    newAppId: null,
   };
 
   componentDidMount() {
@@ -284,7 +284,7 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
       this.setState({
         // eslint-disable-line react/no-did-mount-set-state
         referralCode,
-        refSource
+        refSource,
       });
     }
   }
@@ -298,7 +298,7 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
         const refSource = search.match(/refSource=(\w+)/)[1];
         this.setState({
           referralCode,
-          refSource
+          refSource,
         });
       }
     }
@@ -320,13 +320,13 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
       ...this.state.values,
       twitterHandle,
       referralCode: this.state.referralCode,
-      refSource: this.state.refSource
+      refSource: this.state.refSource,
     };
 
     try {
       const headers: Record<string, string> = {
         Accept: 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       };
       if (this.props.user && this.props.user.jwt) {
         headers.Authorization = `Bearer ${this.props.user.jwt}`;
@@ -335,7 +335,7 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
       const response = await fetch(url, {
         method: 'POST',
         headers,
-        body: JSON.stringify(values)
+        body: JSON.stringify(values),
       });
       const resData = await response.json();
       trackEvent('App Submission Page - Submission Success');
@@ -343,7 +343,7 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
         success: true,
         loading: false,
         accessToken: resData.app.accessToken,
-        newAppId: resData.app.id
+        newAppId: resData.app.id,
       });
       this.props.fetchApps({ user: this.props.user });
     } catch (e) {
@@ -412,7 +412,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
 const mapStateToProps = (state: any) => ({
   appConstants: selectAppConstants(state),
   user: selectUser(state),
-  isSignedIn: isUserSignedIn(state)
+  isSignedIn: isUserSignedIn(state),
 });
 
 export default connect(

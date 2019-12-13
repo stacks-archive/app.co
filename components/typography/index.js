@@ -1,27 +1,27 @@
-import styled from 'styled-components'
-import PropTypes from 'prop-types'
-import { color, space } from 'styled-system'
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { color, space } from 'styled-system';
 
-import { H1, H2, H3, H4, H5, H6 } from './headings'
-import Body from './body'
+import { H1, H2, H3, H4, H5, H6 } from './headings';
+import Body from './body';
 
-const Type = styled.div``
+const Type = styled.div``;
 
-Type.h1 = H1
-Type.h2 = H2
-Type.h3 = H3
-Type.h4 = H4
-Type.h5 = H5
-Type.h6 = H6
-Type.p = Body.p
-Type.span = Body.span
-Type.strong = Body.strong
-Type.em = Body.em
-Type.ul = Body.ul
-Type.ol = Body.ol
-Type.li = Body.li
-Type.oli = Body.oli
-Type.pre = Body.pre
+Type.h1 = H1;
+Type.h2 = H2;
+Type.h3 = H3;
+Type.h4 = H4;
+Type.h5 = H5;
+Type.h6 = H6;
+Type.p = Body.p;
+Type.span = Body.span;
+Type.strong = Body.strong;
+Type.em = Body.em;
+Type.ul = Body.ul;
+Type.ol = Body.ol;
+Type.li = Body.li;
+Type.oli = Body.oli;
+Type.pre = Body.pre;
 
 const basePropTypes = {
   sub: PropTypes.bool,
@@ -33,54 +33,54 @@ const basePropTypes = {
   size: PropTypes.string,
   align: PropTypes.string,
   ...color.propTypes,
-  ...space.propTypes
-}
+  ...space.propTypes,
+};
 
 Type.h1.propTypes = {
-  ...basePropTypes
-}
+  ...basePropTypes,
+};
 Type.h2.propTypes = {
-  ...basePropTypes
-}
+  ...basePropTypes,
+};
 Type.h3.propTypes = {
-  ...basePropTypes
-}
+  ...basePropTypes,
+};
 Type.h4.propTypes = {
-  ...basePropTypes
-}
+  ...basePropTypes,
+};
 Type.h5.propTypes = {
-  ...basePropTypes
-}
+  ...basePropTypes,
+};
 Type.h6.propTypes = {
-  ...basePropTypes
-}
+  ...basePropTypes,
+};
 Type.p.propTypes = {
-  ...basePropTypes
-}
+  ...basePropTypes,
+};
 Type.strong.propTypes = {
-  ...basePropTypes
-}
+  ...basePropTypes,
+};
 Type.em.propTypes = {
-  ...basePropTypes
-}
+  ...basePropTypes,
+};
 Type.ul.propTypes = {
-  ...basePropTypes
-}
+  ...basePropTypes,
+};
 Type.ol.propTypes = {
-  ...basePropTypes
-}
+  ...basePropTypes,
+};
 Type.li.propTypes = {
-  ...basePropTypes
-}
+  ...basePropTypes,
+};
 Type.oli.propTypes = {
-  ...basePropTypes
-}
+  ...basePropTypes,
+};
 Type.pre.propTypes = {
-  ...basePropTypes
-}
+  ...basePropTypes,
+};
 
 Type.propTypes = {
-  ...basePropTypes
-}
+  ...basePropTypes,
+};
 
-export { Type }
+export { Type };

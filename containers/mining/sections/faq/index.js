@@ -1,16 +1,20 @@
-import React from 'react'
-import { Flex, Box, Type } from 'blockstack-ui'
-import { Title, Wrapper, ObservedSection as Section } from '@components/mining/shared'
-import { slugify } from '@utils'
-import { LinkVariantIcon as LinkIcon } from 'mdi-react'
-import { Hover } from 'react-powerplug'
-import styled from 'styled-components'
+import React from 'react';
+import { Flex, Box, Type } from 'blockstack-ui';
+import {
+  Title,
+  Wrapper,
+  ObservedSection as Section,
+} from '@components/mining/shared';
+import { slugify } from '@utils';
+import { LinkVariantIcon as LinkIcon } from 'mdi-react';
+import { Hover } from 'react-powerplug';
+import styled from 'styled-components';
 
 const IframeStyles = styled.div`
   iframe {
     max-width: 100% !important;
   }
-`
+`;
 
 const FAQSection = ({ faq, apps, ...rest }) => (
   <IframeStyles>
@@ -18,17 +22,30 @@ const FAQSection = ({ faq, apps, ...rest }) => (
       bg="blue.light"
       pt={8}
       inViewProps={{
-        threshold: 0
+        threshold: 0,
       }}
       {...rest}
     >
       {({ inView }) => (
         <Wrapper maxWidth={820} inView={inView} observed>
           <Flex width={[1]} flexShrink={0} flexDirection="column">
-            <Title textAlign="center" maxWidth="80%" mx="auto" pt={[0, 8]} pb={0}>
+            <Title
+              textAlign="center"
+              maxWidth="80%"
+              mx="auto"
+              pt={[0, 8]}
+              pb={0}
+            >
               Frequently Asked Questions
             </Title>
-            <Box width={1} mt={8} color="blue.dark" pl={4} borderLeft={'5px solid'} borderColor="blue.mid">
+            <Box
+              width={1}
+              mt={8}
+              color="blue.dark"
+              pl={4}
+              borderLeft={'5px solid'}
+              borderColor="blue.mid"
+            >
               {faq.map(({ question }, i) => (
                 <React.Fragment key={i}>
                   <Box py={'6px'} lineHeight={1.5}>
@@ -36,13 +53,17 @@ const FAQSection = ({ faq, apps, ...rest }) => (
                       {({ hovered, bind }) => (
                         <Flex
                           style={{
-                            textDecoration: 'none'
+                            textDecoration: 'none',
                           }}
                           is="a"
                           href={`#${slugify(question)}`}
                           {...bind}
                         >
-                          <Type fontSize={2} fontWeight="500" color={hovered ? 'blue' : 'blue.dark'}>
+                          <Type
+                            fontSize={2}
+                            fontWeight="500"
+                            color={hovered ? 'blue' : 'blue.dark'}
+                          >
                             {question}
                           </Type>
                         </Flex>
@@ -64,14 +85,22 @@ const FAQSection = ({ faq, apps, ...rest }) => (
                             {question}
                           </Type>
 
-                          <Box is="a" href={`#${slugify(question)}`} opacity={hovered ? 1 : 0} pl={2}>
+                          <Box
+                            is="a"
+                            href={`#${slugify(question)}`}
+                            opacity={hovered ? 1 : 0}
+                            pl={2}
+                          >
                             <LinkIcon />
                           </Box>
                         </Flex>
                       )}
                     </Hover>
                     <Box lineHeight={1.65} color="blue.dark">
-                      <Type maxWidth={900} dangerouslySetInnerHTML={{ __html: answer }} />
+                      <Type
+                        maxWidth={900}
+                        dangerouslySetInnerHTML={{ __html: answer }}
+                      />
                     </Box>
                     <Box mt={6} width={80} height={'1px'} bg={'blue.mid'} />
                   </Box>
@@ -83,6 +112,6 @@ const FAQSection = ({ faq, apps, ...rest }) => (
       )}
     </Section>
   </IframeStyles>
-)
+);
 
-export { FAQSection }
+export { FAQSection };

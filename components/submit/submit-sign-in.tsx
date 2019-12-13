@@ -10,7 +10,7 @@ type SubmitSignIn = React.FC<SubmitSignInProps>;
 
 export const SubmitSignIn: SubmitSignIn = ({
   loading,
-  handleBlockstackAuth
+  handleBlockstackAuth,
 }) => (
   <Flex flexDirection="column">
     <Box>

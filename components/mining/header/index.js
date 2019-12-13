@@ -1,6 +1,6 @@
-import * as React from 'react'
-import { Flex, Type, AppMiningLogo } from 'blockstack-ui'
-import { CallToAction, Countdown, Wrapper } from '../shared'
+import * as React from 'react';
+import { Flex, Type, AppMiningLogo } from 'blockstack-ui';
+import { CallToAction, Countdown, Wrapper } from '../shared';
 
 const Header = ({ showOnMobile, link, ...rest }) => {
   return (
@@ -44,13 +44,13 @@ const Header = ({ showOnMobile, link, ...rest }) => {
             buttonProps={{
               py: 4,
               px: [4, 4, 4, 6],
-              fontSize: [2]
+              fontSize: [2],
             }}
             hideTimer
           />
         </Flex>
       </Wrapper>
     </Flex>
-  )
-}
-export { Header }
+  );
+};
+export { Header };

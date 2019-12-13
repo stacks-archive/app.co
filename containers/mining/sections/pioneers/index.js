@@ -1,11 +1,16 @@
-import React from 'react'
-import { Flex, Box, Type, Button } from 'blockstack-ui'
-import { Title, Wrapper, ObservedSection as Section, OpenStarterKitModal } from '@components/mining/shared'
+import React from 'react';
+import { Flex, Box, Type, Button } from 'blockstack-ui';
+import {
+  Title,
+  Wrapper,
+  ObservedSection as Section,
+  OpenStarterKitModal,
+} from '@components/mining/shared';
 
-import { ArrowIcon } from '@components/mining/svg'
+import { ArrowIcon } from '@components/mining/svg';
 
 const Avatar = ({ photo, ...rest }) => {
-  const bigSize = 48
+  const bigSize = 48;
   return (
     <Box position="relative" {...rest}>
       <Box
@@ -19,8 +24,8 @@ const Avatar = ({ photo, ...rest }) => {
         borderRadius={bigSize}
       />
     </Box>
-  )
-}
+  );
+};
 
 const quotes = [
   {
@@ -34,9 +39,9 @@ const quotes = [
             Graphite Docs
           </Type>
         </>
-      )
+      ),
     },
-    quote: `App Mining allowed me to focus on building something great rather than diving straight into fundraising.`
+    quote: `App Mining allowed me to focus on building something great rather than diving straight into fundraising.`,
   },
   {
     quote: `Allows us to focus 
@@ -51,19 +56,24 @@ on what we do best, build! It’s an extra incentive to forge ahead in this new 
             Blockusign
           </Type>
         </>
-      )
-    }
-  }
-]
+      ),
+    },
+  },
+];
 
 const texts = [
   'Add Blockstack auth to your existing app and get a second revenue source.',
   'Skip VC fundraising, focus on your users, and get paid each month.',
-  'Ditch advertising and use App Mining as an alternative revenue source.'
-]
+  'Ditch advertising and use App Mining as an alternative revenue source.',
+];
 
 const TextSection = ({ ...rest }) => (
-  <Flex lineHeight={1.6} justifyContent="space-between" flexWrap="wrap" {...rest}>
+  <Flex
+    lineHeight={1.6}
+    justifyContent="space-between"
+    flexWrap="wrap"
+    {...rest}
+  >
     {texts.map((text, i) => (
       <Box key={i} pt={[7]} width={['100%', '28%']}>
         <Box bg="blue" height="1px" width={80} />
@@ -73,13 +83,24 @@ const TextSection = ({ ...rest }) => (
       </Box>
     ))}
   </Flex>
-)
+);
 
 const Quotes = ({ ...rest }) => (
   <Flex width={1} justifyContent="space-between" flexWrap="wrap" {...rest}>
     {quotes.map(({ quote, quotee }, i) => (
-      <Box width={[1, 0.45]} mr={[0, 5]} pb={[i !== quotes.length - 1 ? 7 : 0, 0]} key={i}>
-        <Type color="blue.dark" fontWeight={300} fontSize={3} fontFamily="brand" lineHeight={1.75}>
+      <Box
+        width={[1, 0.45]}
+        mr={[0, 5]}
+        pb={[i !== quotes.length - 1 ? 7 : 0, 0]}
+        key={i}
+      >
+        <Type
+          color="blue.dark"
+          fontWeight={300}
+          fontSize={3}
+          fontFamily="brand"
+          lineHeight={1.75}
+        >
           {quote}
         </Type>
         <Flex pt={6} alignItems="center">
@@ -94,15 +115,23 @@ const Quotes = ({ ...rest }) => (
       </Box>
     ))}
   </Flex>
-)
+);
 
 const PioneersSection = ({ apps, ...rest }) => (
-  <Section style={{ willChange: 'transform' }} flexDirection="column" pb={0} bg="white" {...rest}>
+  <Section
+    style={{ willChange: 'transform' }}
+    flexDirection="column"
+    pb={0}
+    bg="white"
+    {...rest}
+  >
     {({ inView }) => (
       <>
         <Wrapper inView={inView} observed>
           <Flex width={[1]} flexShrink={0} flexDirection="column">
-            <Title maxWidth="100%">We are honored to fund the pioneers of the decentralized internet</Title>
+            <Title maxWidth="100%">
+              We are honored to fund the pioneers of the decentralized internet
+            </Title>
             <Type pt={[5, 7, 8]} lineHeight={1.65}>
               App Mining Pioneers: Alpha Run, September 2018
             </Type>
@@ -112,7 +141,7 @@ const PioneersSection = ({ apps, ...rest }) => (
               alignItems="center"
               justifyContent={['space-evenly', 'flex-start', 'flex-start']}
             >
-              {apps.map((app) => (
+              {apps.map(app => (
                 <Box
                   is="a"
                   target="_blank"
@@ -133,7 +162,13 @@ const PioneersSection = ({ apps, ...rest }) => (
             </Flex>
             <Quotes pt={[5, 8]} />
             <TextSection pt={[0, 8]} />
-            <Flex alignItems="center" justifyContent="center" mt={[0, 7]} pt={[8]} pb={[8, 7]}>
+            <Flex
+              alignItems="center"
+              justifyContent="center"
+              mt={[0, 7]}
+              pt={[8]}
+              pb={[8, 7]}
+            >
               <Type
                 fontSize={5}
                 color="blue"
@@ -149,32 +184,51 @@ const PioneersSection = ({ apps, ...rest }) => (
           </Flex>
         </Wrapper>
         <Flex width={1} position="relative">
-          <Wrapper alignItems="center" justifyContent="center" position="relative" zIndex={2}>
+          <Wrapper
+            alignItems="center"
+            justifyContent="center"
+            position="relative"
+            zIndex={2}
+          >
             <Box max="auto" width={1} maxWidth={500}>
               <OpenStarterKitModal
                 content={{
                   initial: {
-                    title: 'Subscribe for Updates'
+                    title: 'Subscribe for Updates',
                   },
                   success: {
                     title: 'Thank you!',
-                    body: 'We will send updates about App Mining to'
-                  }
+                    body: 'We will send updates about App Mining to',
+                  },
                 }}
               >
                 {({ bind }) => (
-                  <Button height="auto" pt="16px" pb="15px" icon={ArrowIcon} width={1} {...bind}>
+                  <Button
+                    height="auto"
+                    pt="16px"
+                    pb="15px"
+                    icon={ArrowIcon}
+                    width={1}
+                    {...bind}
+                  >
                     Subscribe for Updates
                   </Button>
                 )}
               </OpenStarterKitModal>
             </Box>
           </Wrapper>
-          <Box position="absolute" bg="blue.light" height="100%" bottom="-50%" left={0} width={1} />
+          <Box
+            position="absolute"
+            bg="blue.light"
+            height="100%"
+            bottom="-50%"
+            left={0}
+            width={1}
+          />
         </Flex>
       </>
     )}
   </Section>
-)
+);
 
-export { PioneersSection }
+export { PioneersSection };

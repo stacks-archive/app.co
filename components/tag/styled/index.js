@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components'
-import { theme } from '@common/styles'
-import { boxProps } from '@components/box'
-import { Box } from 'blockstack-ui'
+import styled, { css } from 'styled-components';
+import { theme } from '@common/styles';
+import { boxProps } from '@components/box';
+import { Box } from 'blockstack-ui';
 
 const StyledTag = styled(Box)`
   display: inline-block;
@@ -28,18 +28,18 @@ const StyledTag = styled(Box)`
   & + & {
     margin-left: 8px;
   }
-`
+`;
 
 StyledTag.defaultProps = {
   px: 2,
-  py: 1
-}
+  py: 1,
+};
 
 const StyledTagLink = styled(StyledTag).attrs({ is: 'a' })`
   text-decoration: none;
   &:hover {
     text-decoration: underline;
   }
-`
+`;
 
-export { StyledTag, StyledTagLink }
+export { StyledTag, StyledTagLink };

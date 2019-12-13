@@ -19,7 +19,7 @@ class PendingApps extends React.Component {
     fetchPendingApps: PropTypes.func.isRequired,
     jwt: PropTypes.string.isRequired,
     isFetchingPending: PropTypes.bool.isRequired,
-    pendingApps: PropTypes.array
+    pendingApps: PropTypes.array,
   };
 
   componentDidMount() {
@@ -49,7 +49,7 @@ const mapStateToProps = state => ({
   isSavingApp: state.apps.isSavingApp,
   savedApp: state.apps.savedApp,
   isFetchingPending: state.apps.isFetchingPending,
-  pendingApps: state.apps.pendingApps
+  pendingApps: state.apps.pendingApps,
 });
 
 function mapDispatchToProps(dispatch) {

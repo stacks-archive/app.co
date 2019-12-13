@@ -1,20 +1,47 @@
-import React from 'react'
-import { Flex, Type } from 'blockstack-ui'
+import React from 'react';
+import { Flex, Type } from 'blockstack-ui';
 
 const Footer = ({ ...rest }) => (
-  <Flex py={4} alignItems="center" justifyContent="center" flexWrap="wrap" {...rest}>
-    <Type p={3} color="white !important" style={{ textDecoration: 'none' }} is="a" href="/terms" target="_blank">
+  <Flex
+    py={4}
+    alignItems="center"
+    justifyContent="center"
+    flexWrap="wrap"
+    {...rest}
+  >
+    <Type
+      p={3}
+      color="white !important"
+      style={{ textDecoration: 'none' }}
+      is="a"
+      href="/terms"
+      target="_blank"
+    >
       App.co Terms
     </Type>
 
-    <Type p={3} color="white !important" style={{ textDecoration: 'none' }} is="a" href="/privacy" target="_blank">
+    <Type
+      p={3}
+      color="white !important"
+      style={{ textDecoration: 'none' }}
+      is="a"
+      href="/privacy"
+      target="_blank"
+    >
       Privacy Policy
     </Type>
 
-    <Type p={3} color="white !important" style={{ textDecoration: 'none' }} is="a" href="/mining/terms" target="_blank">
+    <Type
+      p={3}
+      color="white !important"
+      style={{ textDecoration: 'none' }}
+      is="a"
+      href="/mining/terms"
+      target="_blank"
+    >
       App Mining Terms
     </Type>
   </Flex>
-)
+);
 
-export {Footer}
+export { Footer };

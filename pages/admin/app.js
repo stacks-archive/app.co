@@ -26,7 +26,7 @@ import {
   selectAppCategoriesArray,
   selectBlockchainCategories,
   selectStorageCategories,
-  selectAuthenticationCategories
+  selectAuthenticationCategories,
 } from '@stores/apps/selectors';
 
 const Strong = Styled.strong`
@@ -42,7 +42,7 @@ class App extends React.Component {
     authentications: PropTypes.array.isRequired,
     blockchains: PropTypes.array.isRequired,
     storageNetworks: PropTypes.array.isRequired,
-    isSavingApp: PropTypes.bool.isRequired
+    isSavingApp: PropTypes.bool.isRequired,
   };
 
   constructor(props) {
@@ -67,7 +67,7 @@ class App extends React.Component {
       stacksAddress: '',
       hasCollectedKYC: false,
       hasAcceptedSECTerms: false,
-      hasAcceptedTerms: false
+      hasAcceptedTerms: false,
     };
     this.save = this.save.bind(this);
   }
@@ -95,14 +95,14 @@ class App extends React.Component {
           method: 'GET',
           headers: new Headers({
             Authorization: `Bearer ${this.props.jwt}`,
-            'Content-Type': 'application/json'
-          })
+            'Content-Type': 'application/json',
+          }),
         }
       );
       const app = await request.json();
       this.setState(state => ({
         ...state,
-        ...app
+        ...app,
       }));
     }
   }
@@ -115,39 +115,37 @@ class App extends React.Component {
         method: 'POST',
         headers: new Headers({
           Authorization: `Bearer ${this.props.jwt}`,
-          'Content-Type': 'application/json'
-        })
+          'Content-Type': 'application/json',
+        }),
       }
     );
     this.setState({
-      jumioTransactionID: null
+      jumioTransactionID: null,
     });
     this.notifications.addNotification({
       message: 'ID Verification has been reset.',
-      level: 'success'
+      level: 'success',
     });
   }
 
   async resetParticipationAgreement() {
     const qs = queryString.parse(document.location.search);
     await fetch(
-      `${process.env.API_SERVER}/api/admin/apps/${
-        qs.id
-      }/reset-participation-agreement`,
+      `${process.env.API_SERVER}/api/admin/apps/${qs.id}/reset-participation-agreement`,
       {
         method: 'POST',
         headers: new Headers({
           Authorization: `Bearer ${this.props.jwt}`,
-          'Content-Type': 'application/json'
-        })
+          'Content-Type': 'application/json',
+        }),
       }
     );
     this.setState({
-      hasAcceptedSECTerms: null
+      hasAcceptedSECTerms: null,
     });
     this.notifications.addNotification({
       message: 'Participation agreement signing has been reset.',
-      level: 'success'
+      level: 'success',
     });
   }
 
@@ -155,7 +153,7 @@ class App extends React.Component {
     this.props.saveApp(this.state, this.props.jwt);
     this.notifications.addNotification({
       message: `${this.state.name} was saved successfully.`,
-      level: 'success'
+      level: 'success',
     });
   }
 
@@ -227,9 +225,9 @@ class App extends React.Component {
           </p>
           <p>
             Magic link:{' '}
-            <a href={`/maker/${app.accessToken}`}>{`/maker/${
-              app.accessToken
-            }`}</a>
+            <a
+              href={`/maker/${app.accessToken}`}
+            >{`/maker/${app.accessToken}`}</a>
           </p>
           <p>
             Maker portal:{' '}
@@ -297,7 +295,7 @@ class App extends React.Component {
               isChecked={this.state.registrationIsOpen}
               onChange={() =>
                 this.setState({
-                  registrationIsOpen: !this.state.registrationIsOpen
+                  registrationIsOpen: !this.state.registrationIsOpen,
                 })
               }
               label="Registration is open to all users"
@@ -350,7 +348,7 @@ class App extends React.Component {
               isChecked={this.state.hasAcceptedSECTerms}
               onChange={() =>
                 this.setState({
-                  hasAcceptedSECTerms: !this.state.hasAcceptedSECTerms
+                  hasAcceptedSECTerms: !this.state.hasAcceptedSECTerms,
                 })
               }
               label="Participation agreement signed"
@@ -361,9 +359,7 @@ class App extends React.Component {
                 <Button
                   appearance="primary"
                   is="a"
-                  href={`https://portal.netverify.com/merchant/idscan/${
-                    this.state.jumioTransactionID
-                  }`}
+                  href={`https://portal.netverify.com/merchant/idscan/${this.state.jumioTransactionID}`}
                   target="_blank"
                 >
                   View in Jumio
@@ -389,9 +385,7 @@ class App extends React.Component {
                 <Button
                   appearance="primary"
                   is="a"
-                  href={`https://blockstack.eversign.com/documents/${
-                    this.state.eversignDocumentID
-                  }`}
+                  href={`https://blockstack.eversign.com/documents/${this.state.eversignDocumentID}`}
                   target="_blank"
                 >
                   View in Eversign
@@ -411,7 +405,7 @@ class App extends React.Component {
               isChecked={this.state.hasAcceptedTerms}
               onChange={() =>
                 this.setState({
-                  hasAcceptedTerms: !this.state.hasAcceptedTerms
+                  hasAcceptedTerms: !this.state.hasAcceptedTerms,
                 })
               }
               label="Terms accepted"
@@ -423,27 +417,27 @@ class App extends React.Component {
             value: this.state.category,
             onChange: data => {
               this.setState(data);
-            }
+            },
           })}
           {enumSelect(this.props.blockchains, 'Blockchain', {
             value: this.state.blockchain,
             onChange: data => {
               this.setState(data);
-            }
+            },
           })}
           {enumSelect(this.props.storageNetworks, 'Storage', {
             apiAttr: 'storageNetwork',
             value: this.state.storageNetwork,
             onChange: data => {
               this.setState(data);
-            }
+            },
           })}
           {enumSelect(this.props.authentications, 'Authentication', {
             menuPlacement: 'top',
             value: this.state.authentication,
             onChange: data => {
               this.setState(data);
-            }
+            },
           })}
           <br />
           <h3>Status:</h3>
@@ -493,7 +487,7 @@ const mapStateToProps = state => ({
   user: state.user.user,
   jwt: state.user.jwt,
   isSavingApp: state.apps.isSavingApp,
-  savedApp: state.apps.savedApp
+  savedApp: state.apps.savedApp,
 });
 
 function mapDispatchToProps(dispatch) {

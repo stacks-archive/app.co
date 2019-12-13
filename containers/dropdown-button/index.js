@@ -1,10 +1,8 @@
-import React from 'react'
-import { StyledDropdownButton } from '@components/dropdown-button'
+import React from 'react';
+import { StyledDropdownButton } from '@components/dropdown-button';
 
-const DropdownButton = ({ children, ...rest}) => (
-  <StyledDropdownButton {...rest}>
-    {children}
-  </StyledDropdownButton>
-  )
+const DropdownButton = ({ children, ...rest }) => (
+  <StyledDropdownButton {...rest}>{children}</StyledDropdownButton>
+);
 
-export { DropdownButton }
+export { DropdownButton };

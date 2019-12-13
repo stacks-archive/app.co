@@ -18,20 +18,18 @@ const Kyc = ({ app, user }) => {
     onShow() {
       if (!hasStartedKyc) return;
       fetchApps({ user })(dispatch);
-    }
+    },
   });
 
   useEffect(() => {
     async function getEmbed() {
       setLoading(true);
-      const url = `${
-        process.env.API_SERVER
-      }/api/maker/apps/initiate-kyc?appId=${app.id}`;
+      const url = `${process.env.API_SERVER}/api/maker/apps/initiate-kyc?appId=${app.id}`;
       const response = await fetch(url, {
         method: 'POST',
         headers: new Headers({
-          authorization: `Bearer ${user.jwt}`
-        })
+          authorization: `Bearer ${user.jwt}`,
+        }),
       });
       const data = await response.json();
       //
@@ -71,8 +69,8 @@ const Kyc = ({ app, user }) => {
             </a>
           </Box>
           <Text as="p" display="block" textStyle="caption" mt={4} mb={0}>
-            Note: It may take a few minutes for this page to update after
-            you’ve completed identity verification.
+            Note: It may take a few minutes for this page to update after you’ve
+            completed identity verification.
           </Text>
         </Box>
       </Flex>

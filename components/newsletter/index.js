@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
   selectNewsletterHasSubscribed,
-  selectNewsletterSubmitting
+  selectNewsletterSubmitting,
 } from '@stores/newsletter/selectors';
 import NewsletterActions from '@stores/newsletter/actions';
 import { PlanetsWithGasGiant } from '@components/svg';
@@ -17,7 +17,7 @@ import {
   getNewsletterCookie,
   setNewsletterCookie,
   CLOSED,
-  SUBSCRIBED
+  SUBSCRIBED,
 } from '@common/lib/cookies';
 
 import { StyledNewsletter } from './styled';
@@ -29,10 +29,10 @@ class NewsletterClass extends React.Component {
   state = {
     email: null,
     cookie: getNewsletterCookie(this.props.cookies),
-    validEmail: true
+    validEmail: true,
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
     const cookie = getNewsletterCookie(this.props.cookies);
     if (!cookie) {
@@ -98,7 +98,7 @@ class NewsletterClass extends React.Component {
               zIndex: 20,
               right: '6px',
               top: '6px',
-              cursor: 'pointer'
+              cursor: 'pointer',
             }}
             onClick={() => this.handleClose()}
           >
@@ -159,7 +159,7 @@ class NewsletterClass extends React.Component {
 
 const mapStateToProps = state => ({
   subscribed: selectNewsletterHasSubscribed(state),
-  submitting: selectNewsletterSubmitting(state)
+  submitting: selectNewsletterSubmitting(state),
 });
 
 function mapDispatchToProps(dispatch) {

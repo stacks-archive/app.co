@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
-import { Flex } from 'blockstack-ui'
+import styled, { css } from 'styled-components';
+import { Flex } from 'blockstack-ui';
 
 const StyledCard = styled(Flex)`
   ${({ borders }) =>
@@ -12,6 +12,6 @@ const StyledCard = styled(Flex)`
           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
           border-radius: 4px;
         `};
-`
+`;
 
-export { StyledCard }
+export { StyledCard };

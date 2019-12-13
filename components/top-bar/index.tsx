@@ -1,35 +1,45 @@
-import React, { useState } from 'react'
-import { useRouter } from 'next/router'
-import Headroom from 'react-headroom'
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import Headroom from 'react-headroom';
 
-import { StyledTopBar } from '@components/top-bar/styled'
-import { SearchBar } from '@components/search'
-import GetUpdatesModal from '@containers/modals/get-updates'
-import { Box } from 'blockstack-ui'
-import { Navigation } from '@components/navigation'
-import { ActiveLinkList } from '@components/navigation/helpers'
-import { primaryNavLinks, adminLinks } from '@common/constants'
-import { HomeLink } from './home-link'
-import { MenuToggle } from './menu-toggle'
+import { StyledTopBar } from '@components/top-bar/styled';
+import { SearchBar } from '@components/search';
+import GetUpdatesModal from '@containers/modals/get-updates';
+import { Box } from 'blockstack-ui';
+import { Navigation } from '@components/navigation';
+import { ActiveLinkList } from '@components/navigation/helpers';
+import { primaryNavLinks, adminLinks } from '@common/constants';
+import { HomeLink } from './home-link';
+import { MenuToggle } from './menu-toggle';
 
 const handleBodyScroll = (on: boolean) => {
-  const { body } = document
-  const noScrollClassName = 'no-scroll'
+  const { body } = document;
+  const noScrollClassName = 'no-scroll';
   on
     ? body.classList.remove(noScrollClassName)
-    : body.classList.add(noScrollClassName)
-}
+    : body.classList.add(noScrollClassName);
+};
 
 export const TopBar = ({ isErrorPage, admin, wrap, ...props }) => {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const router = useRouter()
+  const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
 
   const NavLinks = () => (
     <>
-      { admin && <ActiveLinkList list={adminLinks} activeRoute={router.route} isErrorPage={isErrorPage} /> }
-      <ActiveLinkList list={primaryNavLinks} activeRoute={router.route} isErrorPage={isErrorPage} />
+      {admin && (
+        <ActiveLinkList
+          list={adminLinks}
+          activeRoute={router.route}
+          isErrorPage={isErrorPage}
+        />
+      )}
+      <ActiveLinkList
+        list={primaryNavLinks}
+        activeRoute={router.route}
+        isErrorPage={isErrorPage}
+      />
     </>
-  )
+  );
 
   return (
     <Headroom>
@@ -40,15 +50,20 @@ export const TopBar = ({ isErrorPage, admin, wrap, ...props }) => {
             <SearchBar transparent />
           </StyledTopBar.Section>
           <StyledTopBar.Section>
-            <Navigation variant="main" display={['none', 'flex']} isErrorPage={isErrorPage} admin={admin}>
+            <Navigation
+              variant="main"
+              display={['none', 'flex']}
+              isErrorPage={isErrorPage}
+              admin={admin}
+            >
               <NavLinks />
             </Navigation>
             <Box display={['block', 'none']}>
               <Box
                 cursor="pointer"
                 onClick={() => {
-                  setMenuOpen(!menuOpen)
-                  handleBodyScroll(menuOpen)
+                  setMenuOpen(!menuOpen);
+                  handleBodyScroll(menuOpen);
                 }}
               >
                 <MenuToggle on={menuOpen} />
@@ -67,5 +82,5 @@ export const TopBar = ({ isErrorPage, admin, wrap, ...props }) => {
       </StyledTopBar>
       <GetUpdatesModal />
     </Headroom>
-  )
-}
+  );
+};

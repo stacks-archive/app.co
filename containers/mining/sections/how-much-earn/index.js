@@ -1,18 +1,25 @@
-import React from 'react'
-import { Flex, Box, Type } from 'blockstack-ui'
-import { Hover, State } from 'react-powerplug'
-import { Title, Wrapper, ObservedSection } from '@components/mining/shared'
-import { ArrowIcon } from '@components/mining/svg'
+import React from 'react';
+import { Flex, Box, Type } from 'blockstack-ui';
+import { Hover, State } from 'react-powerplug';
+import { Title, Wrapper, ObservedSection } from '@components/mining/shared';
+import { ArrowIcon } from '@components/mining/svg';
 
-import dayjs from 'dayjs'
-import numeral from 'numeral'
-import { ChevronRightIcon, ChevronLeftIcon } from 'mdi-react'
+import dayjs from 'dayjs';
+import numeral from 'numeral';
+import { ChevronRightIcon, ChevronLeftIcon } from 'mdi-react';
 
 const Pill = ({ display, ...rest }) => (
-  <Box mr={2} py="6px" borderRadius={30} px="12px" bg="#E4ECF1" display={display}>
+  <Box
+    mr={2}
+    py="6px"
+    borderRadius={30}
+    px="12px"
+    bg="#E4ECF1"
+    display={display}
+  >
     <Type {...rest} fontSize="11px" opacity={0.75} />
   </Box>
-)
+);
 
 const Row = ({
   name,
@@ -34,7 +41,11 @@ const Row = ({
         borderColor={hovered ? 'blue' : 'transparent'}
         is="a"
         transition="0.1s all ease-in-out"
-        href={rest.Slugs && rest.Slugs.length ? `https://app.co/app/${rest.Slugs[0].value}` : undefined}
+        href={
+          rest.Slugs && rest.Slugs.length
+            ? `https://app.co/app/${rest.Slugs[0].value}`
+            : undefined
+        }
         target="_blank"
         style={{ textDecoration: 'none' }}
         {...bind}
@@ -60,31 +71,52 @@ const Row = ({
             </Type>
           </Flex>
           <Flex
-            display={authentication === 'Blockstack' || storageNetwork === 'Gaia' ? 'flex' : 'none'}
+            display={
+              authentication === 'Blockstack' || storageNetwork === 'Gaia'
+                ? 'flex'
+                : 'none'
+            }
             alignItems="center"
             pt={[3, 3, 3, 0]}
             pl={[0, 0, 0, 3]}
           >
-            {authentication === 'Blockstack' ? <Pill display={['none', 'none', 'flex']}>Blockstack Auth</Pill> : null}
-            {storageNetwork === 'Gaia' ? <Pill display={['none', 'none', 'flex']}>Gaia</Pill> : null}
+            {authentication === 'Blockstack' ? (
+              <Pill display={['none', 'none', 'flex']}>Blockstack Auth</Pill>
+            ) : null}
+            {storageNetwork === 'Gaia' ? (
+              <Pill display={['none', 'none', 'flex']}>Gaia</Pill>
+            ) : null}
           </Flex>
         </Flex>
         <Flex width={[2 / 3, 2 / 3, 3 / 8]} ml="auto" alignItems="center">
-          <Flex justifyContent={['flex-end', 'center']} textAlign="center" width={[1, 1 / 2]} pr={6}>
+          <Flex
+            justifyContent={['flex-end', 'center']}
+            textAlign="center"
+            width={[1, 1 / 2]}
+            pr={6}
+          >
             <Type fontFamily="brand" color="blue">
               {formattedUsdRewards.split('.')[0]}
             </Type>
           </Flex>
-          <Flex justifyContent="flex-end" textAlign="right" width={1 / 2} pr={5} display={['none', 'flex']}>
+          <Flex
+            justifyContent="flex-end"
+            textAlign="right"
+            width={1 / 2}
+            pr={5}
+            display={['none', 'flex']}
+          >
             <Type fontFamily="brand" color="blue">
-              {lifetimeEarnings ? numeral(String(lifetimeEarnings).split('.')[0]).format('$0,0') : '--'}
+              {lifetimeEarnings
+                ? numeral(String(lifetimeEarnings).split('.')[0]).format('$0,0')
+                : '--'}
             </Type>
           </Flex>
         </Flex>
       </Flex>
     )}
   </Hover>
-)
+);
 
 const ArrowButton = ({ disabled, icon: Icon, ...rest }) => (
   <Hover>
@@ -103,79 +135,159 @@ const ArrowButton = ({ disabled, icon: Icon, ...rest }) => (
       </Box>
     )}
   </Hover>
-)
+);
 
-const Table = ({ apps, state, limit = 7, months, decrementMonth, incrementMonth, ...rest }) => (
+const Table = ({
+  apps,
+  state,
+  limit = 7,
+  months,
+  decrementMonth,
+  incrementMonth,
+  ...rest
+}) => (
   <Box width={1}>
     <Flex fontWeight="bold" mb="1px" py={5} bg="white">
       <Type width={[1 / 3, 5 / 8]} pl={5}>
         <Type display={['none', 'inline']}>App Mining</Type> Rank
       </Type>
-      <Flex style={{ userSelect: 'none' }} width={[2 / 3, 2 / 3, 3 / 8]} ml="auto" alignItems="center">
-        <Flex alignItems="center" justifyContent={['flex-end', 'center']} textAlign="center" width={[1, 1 / 2]}>
-          <ArrowButton icon={ChevronLeftIcon} onClick={decrementMonth} pt={1} px={2} disabled={state.month === 0} />
+      <Flex
+        style={{ userSelect: 'none' }}
+        width={[2 / 3, 2 / 3, 3 / 8]}
+        ml="auto"
+        alignItems="center"
+      >
+        <Flex
+          alignItems="center"
+          justifyContent={['flex-end', 'center']}
+          textAlign="center"
+          width={[1, 1 / 2]}
+        >
+          <ArrowButton
+            icon={ChevronLeftIcon}
+            onClick={decrementMonth}
+            pt={1}
+            px={2}
+            disabled={state.month === 0}
+          />
           <Type style={{ whiteSpace: 'nowrap' }}>Payout</Type>
-          <ArrowButton icon={ChevronRightIcon} onClick={incrementMonth} disabled={state.month === months.length - 1} />
+          <ArrowButton
+            icon={ChevronRightIcon}
+            onClick={incrementMonth}
+            disabled={state.month === months.length - 1}
+          />
         </Flex>
-        <Flex justifyContent="flex-end" textAlign="right" width={1 / 2} display={['none', 'flex']} pr={5}>
+        <Flex
+          justifyContent="flex-end"
+          textAlign="right"
+          width={1 / 2}
+          display={['none', 'flex']}
+          pr={5}
+        >
           <Type style={{ whiteSpace: 'nowrap' }}>Lifetime</Type>
         </Flex>
       </Flex>
     </Flex>
     <>
       {apps.map((app, i) =>
-        state.all ? <Row key={i} index={i} {...app} /> : i < limit ? <Row key={i} index={i} {...app} /> : null
+        state.all ? (
+          <Row key={i} index={i} {...app} />
+        ) : i < limit ? (
+          <Row key={i} index={i} {...app} />
+        ) : null
       )}
     </>
   </Box>
-)
+);
 
 const HowMuchSection = ({ apps, months, ...rest }) => (
   <ObservedSection bg="blue.light" {...rest}>
     {({ inView }) => (
       <Wrapper inView={inView} observed>
-        <Flex width={[1]} flexShrink={0} justifyContent="center" flexDirection="column">
+        <Flex
+          width={[1]}
+          flexShrink={0}
+          justifyContent="center"
+          flexDirection="column"
+        >
           <Title mx="auto" maxWidth="100%" textAlign="center">
             How much can you earn?
           </Title>
-          <Type mx="auto" maxWidth={860} lineHeight={1.85} pt={6} textAlign="center">
-            Starting in November 2019, the total payout will increase to $300,000, paid in both BTC and STX. As BTC
-            payments are phased out, the full payout will be paid in STX, and will increase to $500,000 in February
-            2020; then $1 million in May 2020.
+          <Type
+            mx="auto"
+            maxWidth={860}
+            lineHeight={1.85}
+            pt={6}
+            textAlign="center"
+          >
+            Starting in November 2019, the total payout will increase to
+            $300,000, paid in both BTC and STX. As BTC payments are phased out,
+            the full payout will be paid in STX, and will increase to $500,000
+            in February 2020; then $1 million in May 2020.
           </Type>
-          <Type mx="auto" maxWidth={860} lineHeight={1.85} pt={6} textAlign="center">
-            App Mining rewards in STX earned before the hard fork will be accrued, and the tokens will be distributed
-            following the hard fork. We expect the hard fork to occur approximately 30-60 days following the end of the
-            term of the RegA+ cash offering. For more detailed information, see how payouts are administered in the{' '}
-            <Type is="a" href="https://docs.blockstack.org/develop/mining-rewards.html" target="_blank">
+          <Type
+            mx="auto"
+            maxWidth={860}
+            lineHeight={1.85}
+            pt={6}
+            textAlign="center"
+          >
+            App Mining rewards in STX earned before the hard fork will be
+            accrued, and the tokens will be distributed following the hard fork.
+            We expect the hard fork to occur approximately 30-60 days following
+            the end of the term of the RegA+ cash offering. For more detailed
+            information, see how payouts are administered in the{' '}
+            <Type
+              is="a"
+              href="https://docs.blockstack.org/develop/mining-rewards.html"
+              target="_blank"
+            >
               Blockstack documentation
             </Type>
             .
           </Type>
-          <Flex mt={6} width={1} flexDirection="column" alignItems="center" justifyContent="center">
-            <State initial={{ all: false, showMenu: false, month: months.length - 1 }}>
+          <Flex
+            mt={6}
+            width={1}
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <State
+              initial={{
+                all: false,
+                showMenu: false,
+                month: months.length - 1,
+              }}
+            >
               {({ state, setState }) => {
                 const decrementMonth = () => {
                   if (state.month !== 0) {
-                    setState((s) => ({
-                      month: s.month - 1
-                    }))
+                    setState(s => ({
+                      month: s.month - 1,
+                    }));
                   }
-                }
+                };
                 const incrementMonth = () => {
                   if (state.month < months.length - 1) {
-                    setState((s) => ({
-                      month: s.month + 1
-                    }))
+                    setState(s => ({
+                      month: s.month + 1,
+                    }));
                   }
-                }
+                };
 
-                const setMonth = (index) => setState({ month: index })
+                const setMonth = index => setState({ month: index });
 
                 return (
                   <Box width={1}>
                     <Box display={['none', 'block']} width={[1]}>
-                      <Flex flexWrap="wrap" justifyContent="center" flexDirection="row" flexGrow={1} pb={6}>
+                      <Flex
+                        flexWrap="wrap"
+                        justifyContent="center"
+                        flexDirection="row"
+                        flexGrow={1}
+                        pb={6}
+                      >
                         {months.map((month, i) => (
                           <Hover>
                             {({ hovered, bind }) => (
@@ -183,9 +295,27 @@ const HowMuchSection = ({ apps, months, ...rest }) => (
                                 mx={2}
                                 mb={2}
                                 textAlign={['center']}
-                                bg={state.month === i ? 'blue.dark' : hovered ? 'blue' : 'blue.mid'}
-                                color={state.month === i ? 'white' : hovered ? 'white' : 'blue.dark'}
-                                borderColor={i === state.month ? 'blue' : hovered ? 'blue.mid' : 'transparent'}
+                                bg={
+                                  state.month === i
+                                    ? 'blue.dark'
+                                    : hovered
+                                    ? 'blue'
+                                    : 'blue.mid'
+                                }
+                                color={
+                                  state.month === i
+                                    ? 'white'
+                                    : hovered
+                                    ? 'white'
+                                    : 'blue.dark'
+                                }
+                                borderColor={
+                                  i === state.month
+                                    ? 'blue'
+                                    : hovered
+                                    ? 'blue.mid'
+                                    : 'transparent'
+                                }
                                 py={2}
                                 px={4}
                                 key={i}
@@ -199,10 +329,15 @@ const HowMuchSection = ({ apps, months, ...rest }) => (
                                   fontWeight={600}
                                   lineHeight={0.9}
                                   pb="4px"
-                                  opacity={hovered || i === state.month ? 1 : 0.7}
+                                  opacity={
+                                    hovered || i === state.month ? 1 : 0.7
+                                  }
                                   fontSize={1}
                                 >
-                                  {`${month.monthName.slice(0, 3)} ${month.year.toString().slice(2)}`}
+                                  {`${month.monthName.slice(
+                                    0,
+                                    3
+                                  )} ${month.year.toString().slice(2)}`}
                                 </Type>
                               </Box>
                             )}
@@ -227,7 +362,9 @@ const HowMuchSection = ({ apps, months, ...rest }) => (
                               is="a"
                               target="_blank"
                               href={`/mining/${dayjs(
-                                `${months[state.month].monthName} ${months[state.month].year.toString()}`
+                                `${months[state.month].monthName} ${months[
+                                  state.month
+                                ].year.toString()}`
                               )
                                 .format('MMMM-YYYY')
                                 .toLowerCase()}`}
@@ -239,21 +376,27 @@ const HowMuchSection = ({ apps, months, ...rest }) => (
                               justifyContent="center"
                               fontFamily="brand"
                               style={{
-                                textDecoration: 'none'
+                                textDecoration: 'none',
                               }}
                               {...bind}
                             >
-                              <Type color={hovered ? 'blue' : 'blue.dark'} pr={2}>
+                              <Type
+                                color={hovered ? 'blue' : 'blue.dark'}
+                                pr={2}
+                              >
                                 See Full Report
                               </Type>
-                              <ArrowIcon color={hovered ? 'blue' : 'blue.dark'} width="25px" />
+                              <ArrowIcon
+                                color={hovered ? 'blue' : 'blue.dark'}
+                                width="25px"
+                              />
                             </Flex>
                           )}
                         </Hover>
                       </Box>
                     </Box>
                   </Box>
-                )
+                );
               }}
             </State>
           </Flex>
@@ -261,6 +404,6 @@ const HowMuchSection = ({ apps, months, ...rest }) => (
       </Wrapper>
     )}
   </ObservedSection>
-)
+);
 
-export { HowMuchSection }
+export { HowMuchSection };

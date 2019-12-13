@@ -45,7 +45,7 @@ export const LinkList: React.FC<LinkListProps> = ({ list, isErrorPage }) => (
 
 export const ActiveLinkList: React.FC<LinkListProps> = ({
   list,
-  isErrorPage
+  isErrorPage,
 }) => {
   const { pathname } = useRouter();
   return (

@@ -8,7 +8,7 @@ import { selectUser } from '@stores/apps/selectors';
 import {
   MakerContainer,
   MakerContentBox,
-  MakerStickyStatusBox
+  MakerStickyStatusBox,
 } from '@components/maker/styled';
 import { Page } from '@components/page';
 import { MakerNav } from '@containers/maker-nav';
@@ -34,7 +34,7 @@ const MakerPortal = () => {
   const { user, maker, selectedApp } = useSelector(state => ({
     user: selectUser(state),
     maker: selectMaker(state),
-    selectedApp: selectCurrentApp(state)
+    selectedApp: selectCurrentApp(state),
   }));
 
   if (selectedApp.authentication.toLowerCase() !== 'blockstack') {

@@ -1,12 +1,12 @@
-import React from 'react'
-import styled, { css } from 'styled-components'
+import React from 'react';
+import styled, { css } from 'styled-components';
 
 const App = {
   MainSection: styled.div`
     background: white;
     padding: 34px 27px;
 
-    text-align: ${(props) => (props.center ? 'center' : 'left')};
+    text-align: ${props => (props.center ? 'center' : 'left')};
   `,
 
   TagLabel: styled.p`
@@ -62,7 +62,7 @@ const App = {
     &:hover {
       text-decoration: underline;
     }
-  `
-}
+  `,
+};
 
-export default App
+export default App;

@@ -13,7 +13,7 @@ const isMiningReady = app => {
     'hasAcceptedSECTerms',
     'BTCAddress',
     'stacksAddress',
-    'isKYCVerified'
+    'isKYCVerified',
   ];
   let ready = true;
   requiredTrueProperties.forEach(field => {

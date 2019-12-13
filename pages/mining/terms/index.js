@@ -1,13 +1,13 @@
-import * as React from 'react'
-import { MiningPage } from '@components/mining/page'
-import styled from 'styled-components'
+import * as React from 'react';
+import { MiningPage } from '@components/mining/page';
+import styled from 'styled-components';
 
-import { Header, Footer } from '@containers/mining/shared'
-import Head from '@containers/head'
-import { Flex, Type, Box } from 'blockstack-ui'
-import ArrowLeftIcon from 'mdi-react/ArrowLeftIcon'
-import Link from 'next/link'
-import Markdown from './content.md'
+import { Header, Footer } from '@containers/mining/shared';
+import Head from '@containers/head';
+import { Flex, Type, Box } from 'blockstack-ui';
+import ArrowLeftIcon from 'mdi-react/ArrowLeftIcon';
+import Link from 'next/link';
+import Markdown from './content.md';
 
 export const LinksWrapper = styled.div`
   a:link,
@@ -15,9 +15,11 @@ export const LinksWrapper = styled.div`
   a:active {
     color: white !important;
   }
-`
+`;
 
-const Content = (props) => <Flex flexDirection="column" width={1} maxWidth="780px" {...props} />
+const Content = props => (
+  <Flex flexDirection="column" width={1} maxWidth="780px" {...props} />
+);
 
 class AppMiningTermsOfUsePage extends React.PureComponent {
   render() {
@@ -46,8 +48,8 @@ class AppMiningTermsOfUsePage extends React.PureComponent {
           </Box>
         </MiningPage>
       </LinksWrapper>
-    )
+    );
   }
 }
 
-export default AppMiningTermsOfUsePage
+export default AppMiningTermsOfUsePage;

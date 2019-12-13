@@ -7,7 +7,6 @@ import Form from '@components/form';
 import 'isomorphic-unfetch';
 import { enumSelect } from '@utils';
 
-
 export default class SubmitDapp extends React.Component {
   constructor(props) {
     super(props);
@@ -25,7 +24,7 @@ export default class SubmitDapp extends React.Component {
       submitting: false,
       openSourceUrl: '',
       registrationIsOpen: false,
-      twitterHandle: ''
+      twitterHandle: '',
     };
     this.submit = this.submit.bind(this);
   }
@@ -37,9 +36,9 @@ export default class SubmitDapp extends React.Component {
       method: 'POST',
       headers: {
         Accept: 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify(this.state),
     });
     this.props.close();
     this.setState({ submitted: true, submitting: false });
@@ -116,7 +115,7 @@ export default class SubmitDapp extends React.Component {
                   isChecked={this.state.registrationIsOpen}
                   onChange={() =>
                     this.setState({
-                      registrationIsOpen: !this.state.registrationIsOpen
+                      registrationIsOpen: !this.state.registrationIsOpen,
                     })
                   }
                   label="Registration is open to all users"
@@ -125,10 +124,10 @@ export default class SubmitDapp extends React.Component {
               {enumSelect(constants.categoryEnums, 'Category')}
               {enumSelect(constants.blockchainEnums, 'Blockchain')}
               {enumSelect(constants.storageEnums, 'Storage', {
-                apiAttr: 'storageNetwork'
+                apiAttr: 'storageNetwork',
               })}
               {enumSelect(constants.authenticationEnums, 'Authentication', {
-                menuPlacement: 'top'
+                menuPlacement: 'top',
               })}
             </div>
           )}
@@ -140,5 +139,5 @@ export default class SubmitDapp extends React.Component {
 
 SubmitDapp.propTypes = {
   open: PropTypes.bool.isRequired,
-  close: PropTypes.func.isRequired
+  close: PropTypes.func.isRequired,
 };

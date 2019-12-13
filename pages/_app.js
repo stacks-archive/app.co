@@ -26,9 +26,9 @@ import { trackPageView } from '@utils';
 merge(newBlockstackTheme, {
   colors: {
     blue: {
-      mid: '#E1E3E8'
-    }
-  }
+      mid: '#E1E3E8',
+    },
+  },
 });
 
 /**
@@ -94,7 +94,7 @@ const REFACTORED_PATHS = [
   '/maker/apps',
   '/maker/apps/blockstack-only',
   '/maker/apps/[appId]',
-  '/submit-your-app'
+  '/submit-your-app',
 ];
 
 const RenderRouteThemeProvider = ({ children }) => {

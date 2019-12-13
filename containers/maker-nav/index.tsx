@@ -9,7 +9,9 @@ import { selectAppList } from '@stores/maker/selectors';
 import { selectUser } from '@stores/apps/selectors';
 import UserStore from '@stores/user';
 
-const handleChangingApp = ({ value }: { value: number }, fn: Function) => (dispatch: Dispatch) => {
+const handleChangingApp = ({ value }: { value: number }, fn: Function) => (
+  dispatch: Dispatch
+) => {
   dispatch(selectAppAction(value));
   fn(value);
 };
@@ -26,7 +28,7 @@ export const MakerNav: MakerNav = ({ selectedAppId, onSignOut }) => {
   const dispatch = useDispatch();
   const { appList, user } = useSelector(state => ({
     appList: selectAppList(state),
-    user: selectUser(state)
+    user: selectUser(state),
   }));
 
   const updateMakerRoute = (id: number) => router.push(`/maker/apps/${id}`);
@@ -42,7 +44,9 @@ export const MakerNav: MakerNav = ({ selectedAppId, onSignOut }) => {
 
   return (
     <MakerNavDumb
-      apps={appList.filter(app => app.authentication.toLowerCase() === 'blockstack')}
+      apps={appList.filter(
+        app => app.authentication.toLowerCase() === 'blockstack'
+      )}
       selectedAppId={selectedAppId}
       userId={user && user.user && user.user.blockstackUsername}
       handleSignOut={handleSignOut}

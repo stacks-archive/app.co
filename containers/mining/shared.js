@@ -1,14 +1,38 @@
-import * as React from 'react'
-import { Type, Flex, Box } from 'blockstack-ui'
-import { AppIcon } from '@components/logos'
-import Link from 'next/link'
+import * as React from 'react';
+import { Type, Flex, Box } from 'blockstack-ui';
+import { AppIcon } from '@components/logos';
+import Link from 'next/link';
 
-const HeaderType = (props) => <Type.h3 color="white" fontSize={['18px', '23px']} fontWeight={300} {...props} />
-const Heading = (props) => <Type.h3 color="white" fontSize={[4, 5]} textAlign="center" fontWeight={200} {...props} />
-const SubHeading = (props) => (
-  <Type.h4 color="#11A9BC" fontSize="19px" lineHeight={1.5} textAlign="center" fontWeight={400} {...props} />
-)
-const Section = (props) => <Flex alignItems="center" justifyContent="center" py={4} px={3} {...props} />
+const HeaderType = props => (
+  <Type.h3
+    color="white"
+    fontSize={['18px', '23px']}
+    fontWeight={300}
+    {...props}
+  />
+);
+const Heading = props => (
+  <Type.h3
+    color="white"
+    fontSize={[4, 5]}
+    textAlign="center"
+    fontWeight={200}
+    {...props}
+  />
+);
+const SubHeading = props => (
+  <Type.h4
+    color="#11A9BC"
+    fontSize="19px"
+    lineHeight={1.5}
+    textAlign="center"
+    fontWeight={400}
+    {...props}
+  />
+);
+const Section = props => (
+  <Flex alignItems="center" justifyContent="center" py={4} px={3} {...props} />
+);
 
 const Footer = () => (
   <Flex justifyContent="center" p={4}>
@@ -24,7 +48,7 @@ const Footer = () => (
       </Type>
     </Link>
   </Flex>
-)
+);
 
 const Header = () => (
   <Section>
@@ -44,6 +68,6 @@ const Header = () => (
       </a>
     </HeaderType>
   </Section>
-)
+);
 
-export { HeaderType, Section, Heading, Header, SubHeading, Footer }
+export { HeaderType, Section, Heading, Header, SubHeading, Footer };

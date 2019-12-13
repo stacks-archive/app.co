@@ -20,10 +20,7 @@ interface AppDirectoryContainerProps {
 
 type AppDirectoryContainer = React.FC<AppDirectoryContainerProps>;
 
-const AppDirectoryContainer: AppDirectoryContainer = ({
-  children,
-  nav
-}) => (
+const AppDirectoryContainer: AppDirectoryContainer = ({ children, nav }) => (
   <Page background="white" subNav={nav}>
     <Head title="Select your app" />
     <Flex alignItems="center">
@@ -41,7 +38,7 @@ const AppDirectoryPage: AppDirectoryPage = () => {
   const { apps, isSignedIn, user } = useSelector(state => ({
     apps: selectAppList(state),
     isSignedIn: isUserSignedIn(state),
-    user: selectUser(state)
+    user: selectUser(state),
   }));
 
   const nav = isSignedIn ? <MakerNav /> : null;
@@ -49,7 +46,9 @@ const AppDirectoryPage: AppDirectoryPage = () => {
   if (isSignedIn && apps.length === 0) {
     return (
       <AppDirectoryContainer nav={nav}>
-        <NoAppsEmptyState username={user && user.user && user.user.blockstackUsername} />
+        <NoAppsEmptyState
+          username={user && user.user && user.user.blockstackUsername}
+        />
       </AppDirectoryContainer>
     );
   }

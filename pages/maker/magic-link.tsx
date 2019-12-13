@@ -16,7 +16,9 @@ const MagicLinkClaimed = ({ app, user }) => (
   <>
     <Text display="block" color="ink" fontSize={4}>
       {app.name} is now owned by{' '}
-      <Text color="ink.600">{app.adminBlockstackID || user.user.blockstackUsername}</Text>
+      <Text color="ink.600">
+        {app.adminBlockstackID || user.user.blockstackUsername}
+      </Text>
     </Text>
     <Text display="block" mt={5}>
       Your Magic Link is now no longer functional. Instead, you will use your
@@ -34,17 +36,18 @@ const MagicLinkUnclaimed = ({
   isSignedIn,
   user,
   handleSignIn,
-  handleClaim
+  handleClaim,
 }) => (
   <>
     <Text display="block" color="ink" fontSize={4}>
-      {isSignedIn
-        ? (
-            <Text>
-              Claim the app with <Text color="ink.600">{user.blockstackUsername}</Text>
-            </Text>
-          )
-        : `Sign in with Blockstack to claim ${app.name}`}
+      {isSignedIn ? (
+        <Text>
+          Claim the app with{' '}
+          <Text color="ink.600">{user.blockstackUsername}</Text>
+        </Text>
+      ) : (
+        `Sign in with Blockstack to claim ${app.name}`
+      )}
     </Text>
     <Text display="block" mt={5}>
       You will use this Blockstack ID to manage your app, and remove or modify
@@ -81,31 +84,29 @@ class MakerMagicLink extends React.Component<MakerMagicLinkProps> {
 
     return {
       app,
-      accessToken
+      accessToken,
     };
   }
 
   state = {
     loading: false,
-    claimed: false
+    claimed: false,
   };
 
   claim = async user => {
     this.setState({
-      loading: true
+      loading: true,
     });
-    const uri = `${process.env.API_SERVER}/api/magic-link/${
-      this.props.accessToken
-    }`;
+    const uri = `${process.env.API_SERVER}/api/magic-link/${this.props.accessToken}`;
     await fetch(uri, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${user.jwt}`
-      }
+        Authorization: `Bearer ${user.jwt}`,
+      },
     });
     this.setState({
       loading: false,
-      claimed: true
+      claimed: true,
     });
     this.props.fetchApps({ user });
   };
@@ -156,7 +157,7 @@ class MakerMagicLink extends React.Component<MakerMagicLinkProps> {
 }
 
 const mapStateToProps = state => ({
-  user: selectUser(state)
+  user: selectUser(state),
 });
 
 const mapDispatchToProps = dispatch =>

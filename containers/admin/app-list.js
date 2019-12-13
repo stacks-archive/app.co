@@ -25,8 +25,8 @@ class AppList extends React.Component {
     const url = `${process.env.API_SERVER}/api/admin/download-apps`;
     const res = await fetch(url, {
       headers: new Headers({
-        Authorization: `Bearer ${this.props.jwt}`
-      })
+        Authorization: `Bearer ${this.props.jwt}`,
+      }),
     });
     const blob = await res.blob();
     download(blob, 'App-co Apps.csv', 'text/csv');
@@ -59,7 +59,7 @@ class AppList extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  jwt: state.user.jwt
+  jwt: state.user.jwt,
 });
 
 export default connect(mapStateToProps)(AppList);

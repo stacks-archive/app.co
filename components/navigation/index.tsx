@@ -17,7 +17,7 @@ const NavigationComponent: NavigationComponent = ({
   children,
   mobile,
   display,
-  variant
+  variant,
 }) => {
   return (
     <StyledTopBar.Navigation

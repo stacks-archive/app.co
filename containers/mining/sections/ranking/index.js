@@ -1,7 +1,7 @@
-import React from 'react'
-import { Flex, Box, Type } from 'blockstack-ui'
-import { Title, Wrapper, ObservedSection } from '@components/mining/shared'
-import { useHover } from 'use-events'
+import React from 'react';
+import { Flex, Box, Type } from 'blockstack-ui';
+import { Title, Wrapper, ObservedSection } from '@components/mining/shared';
+import { useHover } from 'use-events';
 import {
   Dots,
   DotsLine,
@@ -10,18 +10,23 @@ import {
   CameraIcon,
   TryMyUILogo,
   NewInternetLabsHorizontal,
-  AwarioLogo
-} from '@components/mining/svg'
-import { animated } from 'react-spring'
+  AwarioLogo,
+} from '@components/mining/svg';
+import { animated } from 'react-spring';
 
 const texts = [
   'Any app with Blockstack auth or storage can register for App Mining.',
   'Expert reviewers use their proprietary data to evaluate apps.',
-  'Reviewers, criteria, and rankings are made public each month.'
-]
+  'Reviewers, criteria, and rankings are made public each month.',
+];
 
 const DotsAnimation = ({ position = 0, color }) => (
-  <Flex is={animated.div} position="absolute" bottom="-3px" style={{ transform: `translateX(${position}%)` }}>
+  <Flex
+    is={animated.div}
+    position="absolute"
+    bottom="-3px"
+    style={{ transform: `translateX(${position}%)` }}
+  >
     <Box>
       <Dots color={color} />
     </Box>
@@ -35,7 +40,7 @@ const DotsAnimation = ({ position = 0, color }) => (
       <Dots color={color} />
     </Box>
   </Flex>
-)
+);
 
 const TextSection = ({ ...rest }) => (
   <Flex lineHeight={1.6} justifyContent="space-between" flexWrap="wrap">
@@ -48,7 +53,7 @@ const TextSection = ({ ...rest }) => (
       </Box>
     ))}
   </Flex>
-)
+);
 
 const RankerContainer = ({
   position,
@@ -87,21 +92,26 @@ const RankerContainer = ({
         <Logo />
       </Box>
     ) : null}
-    <Type transition="0.1s all ease-in-out" pb={2} pt={[2, 2, 0, 0]} color={hovered ? 'white' : textColor}>
+    <Type
+      transition="0.1s all ease-in-out"
+      pb={2}
+      pt={[2, 2, 0, 0]}
+      color={hovered ? 'white' : textColor}
+    >
       {children}
     </Type>
     <DotsAnimation position={position} hovered={hovered} color={color} />
   </Box>
-)
+);
 
 const Ranker = ({ children, ...rest }) => {
-  const [hovered, bind] = useHover()
+  const [hovered, bind] = useHover();
   return (
     <RankerContainer {...rest} {...bind} hovered={hovered}>
       {children}
     </RankerContainer>
-  )
-}
+  );
+};
 
 const RankingSection = ({ apps, ...rest }) => (
   <ObservedSection bg="blue.dark" {...rest}>
@@ -122,8 +132,19 @@ const RankingSection = ({ apps, ...rest }) => (
           position="relative"
           pt={7}
         >
-          <Box width={1} borderRadius={4} overflow="hidden" style={{ willChange: 'transform' }}>
-            <Flex color="blue.dark" alignItems="center" bg="white" px={[4, 6]} py={6}>
+          <Box
+            width={1}
+            borderRadius={4}
+            overflow="hidden"
+            style={{ willChange: 'transform' }}
+          >
+            <Flex
+              color="blue.dark"
+              alignItems="center"
+              bg="white"
+              px={[4, 6]}
+              py={6}
+            >
               <Flex alignItems="center">
                 <Type mr={4} fontSize={4} fontFamily="brand">
                   1
@@ -141,8 +162,17 @@ const RankingSection = ({ apps, ...rest }) => (
                 </Flex>
               </Flex>
               <Flex ml="auto">
-                <Type lineHeight={1.5} fontSize={5} fontWeight={300} fontFamily="brand">
-                  <Type opacity={0.5} fontWeight={['bold', 300]} fontSize={[2, 5]}>
+                <Type
+                  lineHeight={1.5}
+                  fontSize={5}
+                  fontWeight={300}
+                  fontFamily="brand"
+                >
+                  <Type
+                    opacity={0.5}
+                    fontWeight={['bold', 300]}
+                    fontSize={[2, 5]}
+                  >
                     Payout this&nbsp;month:
                   </Type>{' '}
                   $200,000
@@ -169,11 +199,12 @@ const RankingSection = ({ apps, ...rest }) => (
                 key="ph"
                 position={-6}
                 logoProps={{
-                  minWidth: [180, 150, 150, 180]
+                  minWidth: [180, 150, 150, 180],
                 }}
               >
                 Ranks with Product Hunt
-                <Box is="br" display={['none', 'none', 'none', 'unset']} /> community upvotes and activity.
+                <Box is="br" display={['none', 'none', 'none', 'unset']} />{' '}
+                community upvotes and activity.
               </Ranker>
               <Ranker
                 key="try"
@@ -185,7 +216,8 @@ const RankingSection = ({ apps, ...rest }) => (
                 position={-5}
               >
                 Ranks by user testing
-                <Box is="br" display={['none', 'none', 'none', 'unset']} /> and usability metrics.
+                <Box is="br" display={['none', 'none', 'none', 'unset']} /> and
+                usability metrics.
               </Ranker>
               <Ranker
                 key="aw"
@@ -197,7 +229,8 @@ const RankingSection = ({ apps, ...rest }) => (
                 position={-5}
               >
                 Ranks by 'awareness' level
-                <Box is="br" display={['none', 'none', 'none', 'unset']} /> based on the online reach the app generates.
+                <Box is="br" display={['none', 'none', 'none', 'unset']} />{' '}
+                based on the online reach the app generates.
               </Ranker>
               <Ranker
                 key="nil"
@@ -206,12 +239,13 @@ const RankingSection = ({ apps, ...rest }) => (
                 target="_blank"
                 logo={NewInternetLabsHorizontal}
                 logoProps={{
-                  minWidth: [200, 152, 152, 200]
+                  minWidth: [200, 152, 152, 200],
                 }}
                 color="#b077ff"
                 position={-25}
               >
-                Ranks based on how well apps protect <Box is="br" display={['none', 'none', 'none', 'unset']} />
+                Ranks based on how well apps protect{' '}
+                <Box is="br" display={['none', 'none', 'none', 'unset']} />
                 the fundamental digital rights of users.
               </Ranker>
               <Box left={35} top={0} position="absolute">
@@ -224,6 +258,6 @@ const RankingSection = ({ apps, ...rest }) => (
       </Wrapper>
     )}
   </ObservedSection>
-)
+);
 
-export { RankingSection }
+export { RankingSection };

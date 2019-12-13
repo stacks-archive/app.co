@@ -8,7 +8,7 @@ export const FormSection = ({
   handleChange,
   errors,
   message,
-  setState
+  setState,
 }) => (
   <>
     {fields.map(field => {
@@ -63,7 +63,7 @@ export const FormSection = ({
         if (!!state[field.name]) {
           selectProps.defaultValue = {
             label: state[field.name],
-            value: state[field.name]
+            value: state[field.name],
           };
         }
         return (
@@ -84,8 +84,8 @@ export const FormSection = ({
                     handleChange({
                       target: {
                         name: field.name,
-                        value: e ? e.value : null
-                      }
+                        value: e ? e.value : null,
+                      },
                     })(setState)
                   }
                   error={
@@ -114,15 +114,15 @@ export const FormSection = ({
                       persist: e.persist,
                       target: {
                         name: e.target.name,
-                        value: e.target.checked
-                      }
+                        value: e.target.checked,
+                      },
                     })(setState)
                   }
                 />
                 <Field.LabelAdvanced
                   labelProps={{
                     pb: !!(errors && field && errors[field.name]) ? 2 : 0,
-                    htmlFor: field.name
+                    htmlFor: field.name,
                   }}
                   pl={2}
                   required={field.required}

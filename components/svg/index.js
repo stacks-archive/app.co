@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const CheckMark = ({ color = '#2F4EEA', size = 32 }) => (
   <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
@@ -14,9 +14,9 @@ const CheckMark = ({ color = '#2F4EEA', size = 32 }) => (
       fill="white"
     />
   </svg>
-)
+);
 
-const PlanetsWithGasGiant = (props) => (
+const PlanetsWithGasGiant = props => (
   <svg width="104" height="71" viewBox="0 0 104 71" fill="none" {...props}>
     <path
       d="M17.9763 35.9741C27.9043 35.9741 35.9525 27.921 35.9525 17.987C35.9525 8.05308 27.9043 0 17.9763 0C8.04825 0 -2.9026e-06 8.05308 -2.9026e-06 17.987C-2.9026e-06 27.921 8.04825 35.9741 17.9763 35.9741Z"
@@ -60,9 +60,15 @@ const PlanetsWithGasGiant = (props) => (
       transform="translate(76 59)"
       fill="#DAEBFB"
     />
-    <circle cx="8.5" cy="8.5" r="8.5" transform="translate(87 54)" fill="#FE4F74" />
+    <circle
+      cx="8.5"
+      cy="8.5"
+      r="8.5"
+      transform="translate(87 54)"
+      fill="#FE4F74"
+    />
   </svg>
-)
+);
 
 const ArrowRight = ({ color = 'currentColor', ...rest }) => (
   <svg width="16" height="14" viewBox="0 0 16 14" fill="none" {...rest}>
@@ -90,6 +96,6 @@ export const WarningIcon = () => (
       d="M8.828 4.852a.83.83 0 10-1.66 0L7.28 8.83a.721.721 0 001.442 0l.107-3.978zM8 12c.49 0 .916-.413.92-.926a.934.934 0 00-.92-.918.92.92 0 00-.92.918A.92.92 0 008 12z"
     />
   </svg>
-)
+);
 
-export { ArrowRight, PlanetsWithGasGiant, CheckMark }
+export { ArrowRight, PlanetsWithGasGiant, CheckMark };

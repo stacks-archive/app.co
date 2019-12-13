@@ -11,7 +11,7 @@ class NewsletterCTA extends React.Component {
     this.state = {
       submitted: false,
       email: '',
-      valid: true
+      valid: true,
     };
     this.submit = this.submit.bind(this);
   }
@@ -26,9 +26,9 @@ class NewsletterCTA extends React.Component {
         method: 'POST',
         headers: {
           Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
     } else {
       this.setState({ valid: false });

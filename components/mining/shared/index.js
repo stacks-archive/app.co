@@ -1,33 +1,41 @@
-import * as React from 'react'
-import { Flex, Box, Type, OpenModal } from 'blockstack-ui'
-import { Hover } from 'react-powerplug'
-import { ArrowIcon, OutlinedLogo } from '@components/mining/svg'
-import { StarterKitModal } from '@containers/mining/starter-kit-modal'
-import { InView } from 'react-intersection-observer'
+import * as React from 'react';
+import { Flex, Box, Type, OpenModal } from 'blockstack-ui';
+import { Hover } from 'react-powerplug';
+import { ArrowIcon, OutlinedLogo } from '@components/mining/svg';
+import { StarterKitModal } from '@containers/mining/starter-kit-modal';
+import { InView } from 'react-intersection-observer';
 
-import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic';
 
-const SectionContext = React.createContext({})
+const SectionContext = React.createContext({});
 
 const defaultContent = {
   initial: {
-    title: 'Get your App Mining Starter Kit'
+    title: 'Get your App Mining Starter Kit',
   },
   success: {
     title: 'Welcome to App Mining',
-    body: 'We emailed your App Mining Starter Kit to'
-  }
-}
+    body: 'We emailed your App Mining Starter Kit to',
+  },
+};
 
 const OpenStarterKitModal = ({ content = defaultContent, ...rest }) => (
-  <OpenModal component={(props) => <StarterKitModal {...props} content={content} />} {...rest} />
-)
+  <OpenModal
+    component={props => <StarterKitModal {...props} content={content} />}
+    {...rest}
+  />
+);
 
 const Countdown = dynamic(() => import('../countdown'), {
   ssr: false,
-  loading: () => <>...</>
-})
-const LearnMore = ({ label = 'Learn how to earn', color = 'blue.mid', hoverColor = 'white', ...rest }) => (
+  loading: () => <>...</>,
+});
+const LearnMore = ({
+  label = 'Learn how to earn',
+  color = 'blue.mid',
+  hoverColor = 'white',
+  ...rest
+}) => (
   <Hover>
     {({ bind, hovered }) => (
       <Flex
@@ -54,7 +62,7 @@ const LearnMore = ({ label = 'Learn how to earn', color = 'blue.mid', hoverColor
       </Flex>
     )}
   </Hover>
-)
+);
 
 const Title = ({ style, ...rest }) => (
   <SectionContext.Consumer>
@@ -68,13 +76,13 @@ const Title = ({ style, ...rest }) => (
         lineHeight={1.4}
         style={{
           hyphens: 'auto',
-          ...style
+          ...style,
         }}
         {...rest}
       />
     )}
   </SectionContext.Consumer>
-)
+);
 const Wrapper = ({ observed, inView, ...rest }) => (
   <Flex
     maxWidth={1180}
@@ -87,7 +95,7 @@ const Wrapper = ({ observed, inView, ...rest }) => (
     transition="0.35s 0.15s all ease-in-out"
     {...rest}
   />
-)
+);
 const Section = ({ bg, ...rest }) => (
   <SectionContext.Provider value={{ bg }}>
     <Flex
@@ -102,7 +110,7 @@ const Section = ({ bg, ...rest }) => (
       {...rest}
     />
   </SectionContext.Provider>
-)
+);
 
 const ObservedSection = ({ children, inViewProps = {}, ...rest }) => (
   <InView rootMargin="60px" threshold={0.1} {...inViewProps}>
@@ -112,7 +120,7 @@ const ObservedSection = ({ children, inViewProps = {}, ...rest }) => (
       </div>
     )}
   </InView>
-)
+);
 
 const Logo = ({ ...rest }) => (
   <Box {...rest}>
@@ -120,26 +128,42 @@ const Logo = ({ ...rest }) => (
       <Box size={32} color="blue.accent" mr={3}>
         <OutlinedLogo />
       </Box>
-      <Type textTransform="uppercase" letterSpacing="1px" color="white" fontWeight="bolder" fontSize={3}>
+      <Type
+        textTransform="uppercase"
+        letterSpacing="1px"
+        color="white"
+        fontWeight="bolder"
+        fontSize={3}
+      >
         App Mining
       </Type>
     </Flex>
     <Type pt={3} color="blue.mid">
       Powered by{' '}
-      <Type color="white !important" is="a" href="https://blockstack.org" target="_blank">
+      <Type
+        color="white !important"
+        is="a"
+        href="https://blockstack.org"
+        target="_blank"
+      >
         Blockstack
       </Type>{' '}
       +{' '}
-      <Type color="white !important" is="a" href="https://app.co" target="_blank">
+      <Type
+        color="white !important"
+        is="a"
+        href="https://app.co"
+        target="_blank"
+      >
         App.co
       </Type>
     </Type>
   </Box>
-)
+);
 
-const sizes = [1, 0.95, 0.9, 0.89]
-const opacity = [1, 0.46, 0.25, 0.15]
-const offset = [0, 21, 40, 60]
+const sizes = [1, 0.95, 0.9, 0.89];
+const opacity = [1, 0.46, 0.25, 0.15];
+const offset = [0, 21, 40, 60];
 
 const getActiveStyles = (active, index, length) => {
   if (active === index) {
@@ -147,19 +171,20 @@ const getActiveStyles = (active, index, length) => {
       zIndex: 20,
       position: 'relative',
       transform: `translateY(${offset[0]}px) scale(${sizes[0]})`,
-      opacity: opacity[0]
-    }
+      opacity: opacity[0],
+    };
   }
-  const number = index - active < 0 ? length + (index - active) : index - active
+  const number =
+    index - active < 0 ? length + (index - active) : index - active;
   return {
     position: 'absolute',
     zIndex: length - index,
     top: '0px',
     transform: `translateY(${offset[number]}px) scale(${sizes[number]})`,
     left: 0,
-    opacity: opacity[number]
-  }
-}
+    opacity: opacity[number],
+  };
+};
 
 const AppItem = ({ app, active, index, length, ...rest }) => (
   <Flex
@@ -172,7 +197,7 @@ const AppItem = ({ app, active, index, length, ...rest }) => (
     {...rest}
     {...getActiveStyles(active, index, length)}
     style={{
-      transition: '0.5s all ease-in-out'
+      transition: '0.5s all ease-in-out',
     }}
   >
     <Box
@@ -184,7 +209,7 @@ const AppItem = ({ app, active, index, length, ...rest }) => (
       borderRadius={[10, 16]}
       boxShadow="card"
       style={{
-        transition: '0.5s all ease-in-out'
+        transition: '0.5s all ease-in-out',
       }}
       opacity={index !== active ? 0 : 1}
     />
@@ -193,7 +218,7 @@ const AppItem = ({ app, active, index, length, ...rest }) => (
       <Type fontWeight={400}>{app.formattedUsdRewards.split('.')[0]}</Type>
     </Box>
   </Flex>
-)
+);
 
 const CallToAction = ({ hideTimer, buttonProps = {}, ...rest }) => (
   <OpenStarterKitModal>
@@ -246,7 +271,7 @@ const CallToAction = ({ hideTimer, buttonProps = {}, ...rest }) => (
                 >
                   <Type
                     style={{
-                      whiteSpace: 'nowrap'
+                      whiteSpace: 'nowrap',
                     }}
                   >
                     Next ranking starts on
@@ -262,7 +287,7 @@ const CallToAction = ({ hideTimer, buttonProps = {}, ...rest }) => (
       </Hover>
     )}
   </OpenStarterKitModal>
-)
+);
 
 export {
   Title,
@@ -275,5 +300,5 @@ export {
   Countdown,
   CallToAction,
   ObservedSection,
-  OpenStarterKitModal
-}
+  OpenStarterKitModal,
+};

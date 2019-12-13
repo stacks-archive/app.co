@@ -1,70 +1,98 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Flex, Box, Type } from 'blockstack-ui'
-import { Page } from '@components/page'
-import Head from '@containers/head'
-import { bindActionCreators } from 'redux'
-import accounting from 'accounting'
-import { Section, Content } from '@components/mining-admin/month'
-import { Table, Th, SpacedTd, Td, Thead, SubReward, ClickableTr } from '@components/mining-admin/table'
-import { AppLink, Name, Description, Container, Rank, Rewards } from '@components/mining/registered-apps/styled'
-import { AppIcon } from '@components/app-icon'
-import { ButtonLink } from '@components/mining-admin/collapsable'
-import Reviewer from '@components/mining/reviewer'
-import Modal from '@containers/modals/app'
-import { selectAppMiningMonths } from '@stores/apps/selectors'
+import React from 'react';
+import { connect } from 'react-redux';
+import { Flex, Box, Type } from 'blockstack-ui';
+import { Page } from '@components/page';
+import Head from '@containers/head';
+import { bindActionCreators } from 'redux';
+import accounting from 'accounting';
+import { Section, Content } from '@components/mining-admin/month';
+import {
+  Table,
+  Th,
+  SpacedTd,
+  Td,
+  Thead,
+  SubReward,
+  ClickableTr,
+} from '@components/mining-admin/table';
+import {
+  AppLink,
+  Name,
+  Description,
+  Container,
+  Rank,
+  Rewards,
+} from '@components/mining/registered-apps/styled';
+import { AppIcon } from '@components/app-icon';
+import { ButtonLink } from '@components/mining-admin/collapsable';
+import Reviewer from '@components/mining/reviewer';
+import Modal from '@containers/modals/app';
+import { selectAppMiningMonths } from '@stores/apps/selectors';
 
-import AppStore from '@stores/apps'
+import AppStore from '@stores/apps';
 
 class MonthResults extends React.Component {
   static async getInitialProps(context) {
-    const monthName = context.query.month
-    const yearName = context.query.year
-    const state = context.reduxStore.getState()
+    const monthName = context.query.month;
+    const yearName = context.query.year;
+    const state = context.reduxStore.getState();
 
     try {
-      const months = selectAppMiningMonths(state)
+      const months = selectAppMiningMonths(state);
       const foundReport = months.find(
-        (report) => report.monthName.toLowerCase() === monthName.toLowerCase() && report.year === parseInt(yearName, 10)
-      )
+        report =>
+          report.monthName.toLowerCase() === monthName.toLowerCase() &&
+          report.year === parseInt(yearName, 10)
+      );
 
       return {
         report: foundReport,
         month: monthName,
-        year: yearName
-      }
+        year: yearName,
+      };
     } catch (error) {
       return {
         month: monthName,
-        year: yearName
-      }
+        year: yearName,
+      };
     }
   }
 
   sum() {
-    const { report } = this.props
-    const sum = report.compositeRankings.reduce((prev, app) => prev + app.usdRewards, 0)
-    return sum
+    const { report } = this.props;
+    const sum = report.compositeRankings.reduce(
+      (prev, app) => prev + app.usdRewards,
+      0
+    );
+    return sum;
   }
 
   formattedSum() {
-    return accounting.formatMoney(this.sum())
+    return accounting.formatMoney(this.sum());
   }
 
   title() {
-    return `App Mining rewards for ${this.props.report && this.props.report.humanReadableDate}`
+    return `App Mining rewards for ${this.props.report &&
+      this.props.report.humanReadableDate}`;
   }
 
   rankings() {
-    const { report } = this.props
+    const { report } = this.props;
 
     return report.compositeRankings.map((app, index) => (
       <ClickableTr>
-        <SpacedTd display={['none', 'table-cell']} style={{ cursor: 'pointer' }}>
+        <SpacedTd
+          display={['none', 'table-cell']}
+          style={{ cursor: 'pointer' }}
+        >
           {index + 1}
         </SpacedTd>
         <Td style={{ cursor: 'pointer' }}>
-          <AppLink href={`/app/${app.slug}`} target="_blank" style={{ borderTop: 'none' }}>
+          <AppLink
+            href={`/app/${app.slug}`}
+            target="_blank"
+            style={{ borderTop: 'none' }}
+          >
             <AppIcon src={app.imgixImageUrl} size={48} alt={app.name} />
             <Container>
               <Name>
@@ -79,14 +107,18 @@ class MonthResults extends React.Component {
                   {app.description}
                 </Type.span>
                 <Rewards>
-                  <Type.strong fontSize="1em">Monthy rewards:</Type.strong> {app.formattedUsdRewards} (
-                  {app.payout.BTCPaymentValue / 10e7} BTC)
+                  <Type.strong fontSize="1em">Monthy rewards:</Type.strong>{' '}
+                  {app.formattedUsdRewards} ({app.payout.BTCPaymentValue / 10e7}{' '}
+                  BTC)
                 </Rewards>
               </Description>
             </Container>
           </AppLink>
         </Td>
-        <SpacedTd style={{ cursor: 'pointer' }} display={['none', 'table-cell']}>
+        <SpacedTd
+          style={{ cursor: 'pointer' }}
+          display={['none', 'table-cell']}
+        >
           {app.payout && (
             <>
               {app.formattedUsdRewards}
@@ -98,16 +130,18 @@ class MonthResults extends React.Component {
           )}
         </SpacedTd>
       </ClickableTr>
-    ))
+    ));
   }
 
   reviewers() {
-    const { report } = this.props
-    return report.MiningReviewerReports.map((reviewer, index) => <Reviewer reviewer={reviewer} index={index} />)
+    const { report } = this.props;
+    return report.MiningReviewerReports.map((reviewer, index) => (
+      <Reviewer reviewer={reviewer} index={index} />
+    ));
   }
 
   render() {
-    const { report } = this.props
+    const { report } = this.props;
     return (
       <Page wrap={false}>
         <Head title={this.title()} />
@@ -141,21 +175,33 @@ class MonthResults extends React.Component {
             <Section>
               <Content>
                 <Type.p>
-                  <Type.strong fontWeight="700">{report.compositeRankings.length} Blockstack apps</Type.strong> earned{' '}
-                  <Type.strong fontWeight="700">{this.formattedSum()}</Type.strong> in App Mining rewards
-                  for the month of {report.humanReadableDate}.
+                  <Type.strong fontWeight="700">
+                    {report.compositeRankings.length} Blockstack apps
+                  </Type.strong>{' '}
+                  earned{' '}
+                  <Type.strong fontWeight="700">
+                    {this.formattedSum()}
+                  </Type.strong>{' '}
+                  in App Mining rewards for the month of{' '}
+                  {report.humanReadableDate}.
                 </Type.p>
                 <Type.p>
-                  These decentralized apps have guaranteed users control over their identity by implementing{' '}
-                  <a href="https://blockstack.org">Blockstack authentication</a>.
+                  These decentralized apps have guaranteed users control over
+                  their identity by implementing{' '}
+                  <a href="https://blockstack.org">Blockstack authentication</a>
+                  .
                 </Type.p>
-                <Type.p mb={4}>Are you a Blockstack app developer? Start earning rewards as soon as next month:</Type.p>
+                <Type.p mb={4}>
+                  Are you a Blockstack app developer? Start earning rewards as
+                  soon as next month:
+                </Type.p>
                 <ButtonLink href="/mining" style={{ width: '100%', margin: 0 }}>
                   Learn about App Mining
                 </ButtonLink>
                 <Type.p mt={4} color="#1421446e" fontSize="0.9em">
-                  Note: USD values displayed for payouts made in BTC were determined based on the exchange rate at the
-                  time of conversion on {report.friendlyPurchasedAt}.
+                  Note: USD values displayed for payouts made in BTC were
+                  determined based on the exchange rate at the time of
+                  conversion on {report.friendlyPurchasedAt}.
                 </Type.p>
                 {this.reviewers()}
               </Content>
@@ -164,15 +210,15 @@ class MonthResults extends React.Component {
         </Flex>
         <Modal doGoBack={false} />
       </Page>
-    )
+    );
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Object.assign({}, AppStore.actions), dispatch)
+  return bindActionCreators(Object.assign({}, AppStore.actions), dispatch);
 }
 
 export default connect(
   null,
   mapDispatchToProps
-)(MonthResults)
+)(MonthResults);

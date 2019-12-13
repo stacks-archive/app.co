@@ -31,7 +31,7 @@ class AdminHome extends React.Component {
 const mapStateToProps = state => ({
   apps: state.apps.apps,
   jwt: state.user.jwt,
-  user: state.user
+  user: state.user,
 });
 
 function mapDispatchToProps(dispatch) {

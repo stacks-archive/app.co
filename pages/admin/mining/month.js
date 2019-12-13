@@ -21,7 +21,7 @@ import {
   Td,
   Thead,
   Th,
-  SpacedTd
+  SpacedTd,
 } from '@components/mining-admin/table';
 import ReportStatus from '@containers/admin/report-status';
 import { Type } from '@components/typography';
@@ -39,24 +39,24 @@ class MiningMonth extends React.Component {
     stxPayoutConversionRate: 0.3,
     stxPayoutIsIOU: false,
     status: '',
-    name: ''
+    name: '',
   };
 
   static propTypes = {
     fetchMiningMonths: PropTypes.func.isRequired,
     saveMonth: PropTypes.func.isRequired,
     month: PropTypes.object,
-    id: PropTypes.string.isRequired
+    id: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
-    month: null
+    month: null,
   };
 
   static getInitialProps({ req }) {
     const { id } = req.params;
     return {
-      id
+      id,
     };
   }
 
@@ -80,7 +80,7 @@ class MiningMonth extends React.Component {
     this.props.saveMonth(data);
     this.notifications.addNotification({
       message: `Report for ${this.monthName()} was saved successfully.`,
-      level: 'success'
+      level: 'success',
     });
   }
 
@@ -110,8 +110,8 @@ class MiningMonth extends React.Component {
     const url = `${process.env.API_SERVER}/api/admin/mining-reports/${id}/download-rankings`;
     const res = await fetch(url, {
       headers: new Headers({
-        Authorization: `Bearer ${jwt}`
-      })
+        Authorization: `Bearer ${jwt}`,
+      }),
     });
     const blob = await res.blob();
     download(blob, `${this.monthName()} Rankings.csv`, 'text/csv');
@@ -122,9 +122,7 @@ class MiningMonth extends React.Component {
       <tr key={report.id}>
         <Td>
           <Link
-            href={`/admin/mining/months/${this.props.id}/reviewers/${
-              report.id
-            }`}
+            href={`/admin/mining/months/${this.props.id}/reviewers/${report.id}`}
           >
             <a>{report.reviewerName}</a>
           </Link>
@@ -219,7 +217,7 @@ class MiningMonth extends React.Component {
                       value={this.state.purchaseExchangeName}
                       onChange={evt =>
                         this.setState({
-                          purchaseExchangeName: evt.target.value
+                          purchaseExchangeName: evt.target.value,
                         })
                       }
                     />
@@ -247,7 +245,7 @@ class MiningMonth extends React.Component {
                       value={this.state.purchaseConversionRate}
                       onChange={evt =>
                         this.setState({
-                          purchaseConversionRate: evt.target.value
+                          purchaseConversionRate: evt.target.value,
                         })
                       }
                     />
@@ -307,7 +305,7 @@ class MiningMonth extends React.Component {
                       value={this.state.stxPayoutConversionRate}
                       onChange={evt =>
                         this.setState({
-                          stxPayoutConversionRate: evt.target.value
+                          stxPayoutConversionRate: evt.target.value,
                         })
                       }
                     />
@@ -320,7 +318,7 @@ class MiningMonth extends React.Component {
                       isChecked={this.state.stxPayoutIsIOU}
                       onChange={() =>
                         this.setState({
-                          stxPayoutIsIOU: !this.state.stxPayoutIsIOU
+                          stxPayoutIsIOU: !this.state.stxPayoutIsIOU,
                         })
                       }
                       label="STX Payout is an IOU"
@@ -408,7 +406,7 @@ const mapStateToProps = (state, props) => ({
   month: state.miningAdmin.months.find(
     month => month.id === parseInt(props.id, 10)
   ),
-  jwt: state.user.jwt
+  jwt: state.user.jwt,
 });
 
 function mapDispatchToProps(dispatch) {

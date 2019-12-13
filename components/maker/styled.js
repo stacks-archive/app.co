@@ -42,12 +42,7 @@ export const MakerContentBox = styled(Box)`
 `;
 
 export const MakerContainer = ({ children }) => (
-  <Box
-    px={[0, 5]}
-    mx="auto"
-    width="100%"
-    maxWidth="1216px"
-  >
+  <Box px={[0, 5]} mx="auto" width="100%" maxWidth="1216px">
     {children}
   </Box>
 );

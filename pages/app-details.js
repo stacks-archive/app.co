@@ -1,45 +1,47 @@
-import React from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { selectCurrentApp, selectAppMiningApps } from '@stores/apps/selectors'
-import { Flex, Box } from 'blockstack-ui'
-import { GithubCircleIcon, TwitterCircleIcon } from 'mdi-react'
-import { Page as Container } from '@containers/page'
-import { Header } from '@containers/header'
-import { Hero } from '@containers/hero'
-import AppIcon from '@containers/app-icon'
-import AppStore, { doSelectApp } from '@stores/apps'
-import StyledApp from '@components/app-details'
-import { StyledAppList } from '@components/app-list'
-import { Button } from '@components/button'
-import Head from '@containers/head'
+import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { selectCurrentApp, selectAppMiningApps } from '@stores/apps/selectors';
+import { Flex, Box } from 'blockstack-ui';
+import { GithubCircleIcon, TwitterCircleIcon } from 'mdi-react';
+import { Page as Container } from '@containers/page';
+import { Header } from '@containers/header';
+import { Hero } from '@containers/hero';
+import AppIcon from '@containers/app-icon';
+import AppStore, { doSelectApp } from '@stores/apps';
+import StyledApp from '@components/app-details';
+import { StyledAppList } from '@components/app-list';
+import { Button } from '@components/button';
+import Head from '@containers/head';
 
-import UserStore from '@stores/user'
+import UserStore from '@stores/user';
 
-import { outboundLink } from '@utils'
-import app from '@pages/admin/app'
+import { outboundLink } from '@utils';
+import app from '@pages/admin/app';
 
 class AppDetails extends React.Component {
   static getInitialProps({ req, reduxStore }) {
     const {
-      params: { slug }
-    } = req
+      params: { slug },
+    } = req;
 
-    reduxStore.dispatch(doSelectApp(slug))
+    reduxStore.dispatch(doSelectApp(slug));
 
-    return { slug }
+    return { slug };
   }
 
   appDetails() {
-    const { selectedApp: app, appMiningApps } = this.props
+    const { selectedApp: app, appMiningApps } = this.props;
 
-    const [ranking] = app.Rankings || []
-    let tweets = 0
+    const [ranking] = app.Rankings || [];
+    let tweets = 0;
     if (ranking) {
-      tweets = ranking.twitterMentions || 0
+      tweets = ranking.twitterMentions || 0;
     }
 
-    const isAppMiningApp = appMiningApps.find((appMiningapp) => appMiningapp.name === app.name)
+    const isAppMiningApp = appMiningApps.find(
+      appMiningapp => appMiningapp.name === app.name
+    );
     return (
       <Flex flexWrap>
         <Box width={[1, 1, 1 / 4, 1 / 4]}>
@@ -55,7 +57,7 @@ class AppDetails extends React.Component {
           <Button
             type="button/primary"
             onClick={() => {
-              outboundLink(app)
+              outboundLink(app);
             }}
           >
             Visit Website
@@ -73,7 +75,10 @@ class AppDetails extends React.Component {
 
           {app.twitterHandle && (
             <>
-              <StyledApp.BrandLink href={`https://twitter.com/${app.twitterHandle}`} target="_blank">
+              <StyledApp.BrandLink
+                href={`https://twitter.com/${app.twitterHandle}`}
+                target="_blank"
+              >
                 <TwitterCircleIcon color="currentColor" />
                 View on Twitter
               </StyledApp.BrandLink>
@@ -99,7 +104,9 @@ class AppDetails extends React.Component {
               <>
                 <StyledApp.TagLabel>Storage Network</StyledApp.TagLabel>
                 <StyledAppList.TagGroup left>
-                  <StyledAppList.Tag left>{app.storageNetwork}</StyledAppList.Tag>
+                  <StyledAppList.Tag left>
+                    {app.storageNetwork}
+                  </StyledAppList.Tag>
                 </StyledAppList.TagGroup>
                 <br />
               </>
@@ -109,7 +116,9 @@ class AppDetails extends React.Component {
               <>
                 <StyledApp.TagLabel>Authentication</StyledApp.TagLabel>
                 <StyledAppList.TagGroup left>
-                  <StyledAppList.Tag left>{app.authentication}</StyledAppList.Tag>
+                  <StyledAppList.Tag left>
+                    {app.authentication}
+                  </StyledAppList.Tag>
                 </StyledAppList.TagGroup>
                 <br />
               </>
@@ -128,44 +137,52 @@ class AppDetails extends React.Component {
 
         <Box width={[1, 1, 1 / 4, 1 / 4]}>
           <StyledApp.StatNumber>{tweets}</StyledApp.StatNumber>
-          <StyledApp.StatLabel>Tweets about {app.name} in the last 7 days</StyledApp.StatLabel>
+          <StyledApp.StatLabel>
+            Tweets about {app.name} in the last 7 days
+          </StyledApp.StatLabel>
         </Box>
       </Flex>
-    )
+    );
   }
 
   render() {
-    const app = this.props.selectedApp
-    const smallMetaContent = app.tweets > 0 ? { label1: 'Tweets this Week', data1: app.tweets } : {}
+    const app = this.props.selectedApp;
+    const smallMetaContent =
+      app.tweets > 0 ? { label1: 'Tweets this Week', data1: app.tweets } : {};
     const metaContent = {
       title: `${app.name} on App.co`,
       description: app.description,
       ogImage: app.imageUrl,
-      ...smallMetaContent
-    }
+      ...smallMetaContent,
+    };
     return (
       <>
         <Head {...metaContent} />
         <Header />
         <Hero />
         <Container.Section wrap={1}>
-          <Container.Section.Content>{this.props.selectedApp && this.appDetails()}</Container.Section.Content>
+          <Container.Section.Content>
+            {this.props.selectedApp && this.appDetails()}
+          </Container.Section.Content>
         </Container.Section>
       </>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   selectedApp: selectCurrentApp(state),
-  appMiningApps: selectAppMiningApps(state)
-})
+  appMiningApps: selectAppMiningApps(state),
+});
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Object.assign({}, AppStore.actions, UserStore.actions), dispatch)
+  return bindActionCreators(
+    Object.assign({}, AppStore.actions, UserStore.actions),
+    dispatch
+  );
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AppDetails)
+)(AppDetails);

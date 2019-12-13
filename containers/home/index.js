@@ -1,31 +1,31 @@
-import React from 'react'
-import { Page } from '@components/page'
-import { Newsletter } from '@components/newsletter'
-import { FeaturedList } from '@components/list/apps'
-import { CategoriesList } from '@components/list/categories'
-import { doSelectApp } from '@stores/apps'
-import { PlatformsList } from '@components/list/platforms'
-import Modal from '@containers/modals/app'
-import Head from '@containers/head'
-import { selectRankedBlockstackApps } from '@stores/apps/selectors'
+import React from 'react';
+import { Page } from '@components/page';
+import { Newsletter } from '@components/newsletter';
+import { FeaturedList } from '@components/list/apps';
+import { CategoriesList } from '@components/list/categories';
+import { doSelectApp } from '@stores/apps';
+import { PlatformsList } from '@components/list/platforms';
+import Modal from '@containers/modals/app';
+import Head from '@containers/head';
+import { selectRankedBlockstackApps } from '@stores/apps/selectors';
 
 class HomePage extends React.PureComponent {
   static async getInitialProps({ req, reduxStore }) {
-    const rankings = selectRankedBlockstackApps(reduxStore.getState())
-    const props = { rankings }
+    const rankings = selectRankedBlockstackApps(reduxStore.getState());
+    const props = { rankings };
 
     if (req) {
-      const slug = req.params.appSlug
+      const slug = req.params.appSlug;
 
-      reduxStore.dispatch(doSelectApp(slug))
+      reduxStore.dispatch(doSelectApp(slug));
 
       return {
         ...props,
-        appSlug: slug
-      }
+        appSlug: slug,
+      };
     }
 
-    return props
+    return props;
   }
 
   render() {
@@ -37,10 +37,16 @@ class HomePage extends React.PureComponent {
         </Page.Section>
         <Page.Section flexDirection="column" px>
           <FeaturedList
-            appNames={this.props.rankings.map((app) => app.name)}
+            appNames={this.props.rankings.map(app => app.name)}
             title="Popular Blockstack Apps"
             href="/blockstack"
-            hrefAttrs={{ as: '/blockstack', href: { pathname: '/platforms', query: { platform: 'blockstack' } } }}
+            hrefAttrs={{
+              as: '/blockstack',
+              href: {
+                pathname: '/platforms',
+                query: { platform: 'blockstack' },
+              },
+            }}
             filterBy="platforms"
             singular="platform"
             query="blockstack"
@@ -56,7 +62,14 @@ class HomePage extends React.PureComponent {
         </Page.Section>
         <Page.Section flexDirection="column" px>
           <FeaturedList
-            appNames={['SteemIt', 'Stealthy', 'Peepeth', 'Mastodon', 'Diaspora', 'DTube']}
+            appNames={[
+              'SteemIt',
+              'Stealthy',
+              'Peepeth',
+              'Mastodon',
+              'Diaspora',
+              'DTube',
+            ]}
             title="Hot Social Dapps"
             href="/categories/social-networking"
             filterBy="categories"
@@ -64,7 +77,14 @@ class HomePage extends React.PureComponent {
             query="social-networking"
           />
           <FeaturedList
-            appNames={['Graphite', 'Misthos', 'Aragon', 'Gitcoin', 'adChain Registry', 'ETHLance']}
+            appNames={[
+              'Graphite',
+              'Misthos',
+              'Aragon',
+              'Gitcoin',
+              'adChain Registry',
+              'ETHLance',
+            ]}
             title="Business Tools"
             href="/categories/business-tools"
             filterBy="categories"
@@ -74,8 +94,8 @@ class HomePage extends React.PureComponent {
         </Page.Section>
         <Modal />
       </Page>
-    )
+    );
   }
 }
 
-export { HomePage }
+export { HomePage };

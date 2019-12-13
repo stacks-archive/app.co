@@ -8,7 +8,7 @@ import {
   MakerCardSubheader,
   MakerCardText,
   MakerRadioListLabel,
-  MakerCardDivider
+  MakerCardDivider,
 } from '../styled';
 import MakerModal from '../modal';
 
@@ -41,8 +41,8 @@ const ParticipationAgreement = ({ app, user }) => {
         signed: () => setFinished(true),
         loaded: () => console.log('Eversign finished loading'),
         declined: () => console.log('Eversign denied'),
-        error: () => console.log('Eversign error')
-      }
+        error: () => console.log('Eversign error'),
+      },
     });
   };
 
@@ -56,8 +56,8 @@ const ParticipationAgreement = ({ app, user }) => {
     const response = await fetch(url, {
       method: 'POST',
       headers: new Headers({
-        authorization: `Bearer ${user.jwt}`
-      })
+        authorization: `Bearer ${user.jwt}`,
+      }),
     });
     const data = await response.json();
     setLoading(false);
@@ -80,7 +80,7 @@ const ParticipationAgreement = ({ app, user }) => {
   const options = [
     { value: 'us', label: 'I am a US person or entity' },
     { value: 'intl', label: 'I am a person based outside of the US' },
-    { value: 'intl_entity', label: 'I am an entity based outside of the US' }
+    { value: 'intl_entity', label: 'I am an entity based outside of the US' },
   ];
 
   const taxStatusRadioList = options.map(({ value, label }) => (
@@ -97,10 +97,7 @@ const ParticipationAgreement = ({ app, user }) => {
 
   return (
     <>
-      <MakerModal
-        isOpen={modalState}
-        handleClose={() => setModalState(false)}
-      >
+      <MakerModal isOpen={modalState} handleClose={() => setModalState(false)}>
         <Box width={1} id="embedded-participation-agreement" />
       </MakerModal>
 
@@ -108,8 +105,8 @@ const ParticipationAgreement = ({ app, user }) => {
         <MakerCardHeader>Legal Documents</MakerCardHeader>
 
         <MakerCardText mb={4} mt={0}>
-          Please select the appropriate legal status so we can provide you
-          with the correct Tax Form and Participation Agreement.
+          Please select the appropriate legal status so we can provide you with
+          the correct Tax Form and Participation Agreement.
         </MakerCardText>
         <Field
           name="name"

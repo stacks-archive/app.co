@@ -38,7 +38,7 @@ class Admin extends React.Component {
 
 const mapStateToProps = state => ({
   apps: selectApps(state),
-  user: state.user
+  user: state.user,
 });
 
 function mapDispatchToProps(dispatch) {

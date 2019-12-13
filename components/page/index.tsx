@@ -49,13 +49,15 @@ const Page = ({
   </StyledPage>
 );
 
-const pxProps = ({ px }) => (px ? { px: [2, 4] } : {})
-const pyProps = ({ py }) => (py ? { py: [1, 4] } : {})
+const pxProps = ({ px }) => (px ? { px: [2, 4] } : {});
+const pyProps = ({ py }) => (py ? { py: [1, 4] } : {});
 
-const Section = (props: any) => <StyledPage.Section {...props} {...pxProps(props)} {...pyProps(props)} />
+const Section = (props: any) => (
+  <StyledPage.Section {...props} {...pxProps(props)} {...pyProps(props)} />
+);
 
-Page.Sidebar = StyledPage.Aside
-Page.Section = Section
-Page.Content = StyledPage.Content
+Page.Sidebar = StyledPage.Aside;
+Page.Section = Section;
+Page.Content = StyledPage.Content;
 
-export { Page }
+export { Page };

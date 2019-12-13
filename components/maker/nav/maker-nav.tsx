@@ -14,7 +14,7 @@ interface AppSelectProps {
 const AppSelect = ({ selectedValue, onChange, apps = [] }: AppSelectProps) => {
   const options = apps.map(app => ({
     label: app.name,
-    value: app.id
+    value: app.id,
   }));
   return (
     <Flex alignItems="center">
@@ -26,13 +26,13 @@ const AppSelect = ({ selectedValue, onChange, apps = [] }: AppSelectProps) => {
             option: (provided, state) => ({
               ...provided,
               fontSize: '14px',
-              color: state.isSelected ? 'white' : '#222933'
+              color: state.isSelected ? 'white' : '#222933',
             }),
             singleValue: provided => ({
               ...provided,
               fontSize: '14px',
-              color: '#222933'
-            })
+              color: '#222933',
+            }),
           }}
           options={options}
         />
@@ -96,7 +96,7 @@ export const MakerNav: MakerNav = ({
   userId,
   selectedAppId,
   onChange,
-  handleSignOut
+  handleSignOut,
 }) => {
   return (
     <MakerNavContainer>

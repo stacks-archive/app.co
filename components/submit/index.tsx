@@ -13,7 +13,13 @@ type SuccessCard = React.FC<SuccessCardProps>;
 const SuccessCard: SuccessCard = ({ isAppMiningEligible, newAppId }) => (
   <Box width="100%" textAlign="center" pt={14}>
     <Box pb={6} width="100%">
-      <Text as="h1" textStyle="display.large" color="ink" mx="auto" fontSize={5}>
+      <Text
+        as="h1"
+        textStyle="display.large"
+        color="ink"
+        mx="auto"
+        fontSize={5}
+      >
         Submission received
       </Text>
     </Box>
@@ -28,11 +34,19 @@ const SuccessCard: SuccessCard = ({ isAppMiningEligible, newAppId }) => (
             Because your app uses Blockstack authentication, you are invited to
             participate in{' '}
             <Link href="/mining">
-              <Text color="blue" fontWeight={500}>App Mining</Text>
+              <Text color="blue" fontWeight={500}>
+                App Mining
+              </Text>
             </Link>
-            . To participate, you must provide payment details, identity verification information, and legal documents. 
+            . To participate, you must provide payment details, identity
+            verification information, and legal documents.
           </Text>
-          <Link href={{ pathname: newAppId ? `/maker/apps/${newAppId}` : '/maker/apps' }} passHref>
+          <Link
+            href={{
+              pathname: newAppId ? `/maker/apps/${newAppId}` : '/maker/apps',
+            }}
+            passHref
+          >
             <Button mt={6}>Complete your mining submission</Button>
           </Link>
         </>

@@ -1,54 +1,59 @@
-import React from 'react'
-import { Flex, Box, Type as NewType } from 'blockstack-ui'
-import { GithubCircleIcon, TwitterCircleIcon, ArrowLeftIcon } from 'mdi-react'
-import Link from 'next/link'
+import React from 'react';
+import { Flex, Box, Type as NewType } from 'blockstack-ui';
+import { GithubCircleIcon, TwitterCircleIcon, ArrowLeftIcon } from 'mdi-react';
+import Link from 'next/link';
 
-import numeral from 'numeral'
+import numeral from 'numeral';
 
-import { Type } from '@components/typography'
-import { AppIcon } from '@components/app-icon'
-import { Button } from '@components/button'
-import { TagLink } from '@components/tag'
-import Head from '@containers/head'
+import { Type } from '@components/typography';
+import { AppIcon } from '@components/app-icon';
+import { Button } from '@components/button';
+import { TagLink } from '@components/tag';
+import Head from '@containers/head';
 
-import { outboundLink } from '@utils'
-import { slugify } from '@common'
-import { theme } from '@common/styles'
-import { doClearApp } from '@stores/apps'
+import { outboundLink } from '@utils';
+import { slugify } from '@common';
+import { theme } from '@common/styles';
+import { doClearApp } from '@stores/apps';
 
-const LinkWithIcon = (props) => {
-  const { icon: Icon, link, label, title } = props
+const LinkWithIcon = props => {
+  const { icon: Icon, link, label, title } = props;
   return (
     <a
       pr={2}
       href={link}
-      onClick={(event) => {
-        event.preventDefault()
-        outboundLink(props, link)
+      onClick={event => {
+        event.preventDefault();
+        outboundLink(props, link);
       }}
       title={title}
     >
       <Icon color="currentColor" size={28} />
       {label}
     </a>
-  )
-}
+  );
+};
 
-const formatUrl = (url) => {
+const formatUrl = url => {
   const updatedUrl = url
     .replace('https://', '')
     .replace('http://', '')
-    .replace('www.', '')
+    .replace('www.', '');
   if (updatedUrl.substr(-1) === '/') {
-    return updatedUrl.substr(0, updatedUrl.length - 1)
+    return updatedUrl.substr(0, updatedUrl.length - 1);
   }
-  return updatedUrl
-}
+  return updatedUrl;
+};
 
 const OpenSource = ({ openSourceUrl, ...rest }) =>
   openSourceUrl && openSourceUrl.indexOf('github.com') !== -1 ? (
-    <LinkWithIcon link={openSourceUrl} icon={GithubCircleIcon} title="View on Github" {...rest} />
-  ) : null
+    <LinkWithIcon
+      link={openSourceUrl}
+      icon={GithubCircleIcon}
+      title="View on Github"
+      {...rest}
+    />
+  ) : null;
 
 const Twitter = ({ twitterHandle, ...rest }) =>
   twitterHandle ? (
@@ -58,47 +63,71 @@ const Twitter = ({ twitterHandle, ...rest }) =>
       title="View on Twitter"
       {...rest}
     />
-  ) : null
+  ) : null;
 
 const TagBox = ({ label, tag, onClick }) => {
   if (!tag) {
-    return null
+    return null;
   }
-  const slugified = slugify(tag)
-  const url = `/${slugified}`
+  const slugified = slugify(tag);
+  const url = `/${slugified}`;
   return (
     <Box py={4} pr={4} onClick={() => onClick()}>
       <Type.h5>{label}</Type.h5>
 
-      <TagLink light mt={3} as={url} href={{ pathname: '/platforms', query: { platform: slugified } }}>
+      <TagLink
+        light
+        mt={3}
+        as={url}
+        href={{ pathname: '/platforms', query: { platform: slugified } }}
+      >
         {tag}
       </TagLink>
     </Box>
-  )
-}
+  );
+};
 
-const TagsSection = ({ authentication, blockchain, storageNetwork, handleClose = () => null }) => (
+const TagsSection = ({
+  authentication,
+  blockchain,
+  storageNetwork,
+  handleClose = () => null,
+}) => (
   <Flex alignItems="center">
-    <TagBox label="Storage" tag={storageNetwork} onClick={() => handleClose()} />
-    <TagBox label="Authentication" tag={authentication} onClick={() => handleClose()} />
+    <TagBox
+      label="Storage"
+      tag={storageNetwork}
+      onClick={() => handleClose()}
+    />
+    <TagBox
+      label="Authentication"
+      tag={authentication}
+      onClick={() => handleClose()}
+    />
     <TagBox label="Blockchain" tag={blockchain} onClick={() => handleClose()} />
   </Flex>
-)
+);
 
-const WebsiteButton = (props) => (
+const WebsiteButton = props => (
   <Button
     type="button/primary"
     onClick={() => {
-      outboundLink(props)
+      outboundLink(props);
     }}
   >
     Get Dapp
   </Button>
-)
+);
 
-const categoryURL = (category) => `/categories/${slugify(category)}`
+const categoryURL = category => `/categories/${slugify(category)}`;
 
-const Header = ({ imgixImageUrl, name, category, description, handleClose = () => null }) => (
+const Header = ({
+  imgixImageUrl,
+  name,
+  category,
+  description,
+  handleClose = () => null,
+}) => (
   <>
     <Flex alignItems="center">
       <AppIcon src={imgixImageUrl} alt={name} />
@@ -108,7 +137,10 @@ const Header = ({ imgixImageUrl, name, category, description, handleClose = () =
           mt={2}
           small
           as={categoryURL(category)}
-          href={{ pathname: '/categories', query: { category: slugify(category) } }}
+          href={{
+            pathname: '/categories',
+            query: { category: slugify(category) },
+          }}
           onClick={() => handleClose()}
         >
           {category}
@@ -119,47 +151,51 @@ const Header = ({ imgixImageUrl, name, category, description, handleClose = () =
       <Type.p>{description}</Type.p>
     </Box>
   </>
-)
+);
 
-const Website = (props) =>
+const Website = props =>
   props.website ? (
     <Box>
       <a
         href={props.website}
         target="_blank"
         onClick={() => {
-          outboundLink(props)
+          outboundLink(props);
         }}
       >
         {formatUrl(props.website)}
       </a>
-      {props.Rankings && props.Rankings[0] && props.Rankings[0].monthlyVisitsCount && (
-        <Type.span fontSize={14} color={theme.colors.grey.mid} ml={3}>
-          {numeral(props.Rankings[0].monthlyVisitsCount || 0).format('0a')} visits / month
-        </Type.span>
-      )}
+      {props.Rankings &&
+        props.Rankings[0] &&
+        props.Rankings[0].monthlyVisitsCount && (
+          <Type.span fontSize={14} color={theme.colors.grey.mid} ml={3}>
+            {numeral(props.Rankings[0].monthlyVisitsCount || 0).format('0a')}{' '}
+            visits / month
+          </Type.span>
+        )}
     </Box>
-  ) : null
+  ) : null;
 
 const StatsItem = ({ Rankings, name }) => {
-  const [ranking] = Rankings || []
-  let tweets = 0
+  const [ranking] = Rankings || [];
+  let tweets = 0;
   if (ranking) {
-    tweets = ranking.twitterMentions || 0
+    tweets = ranking.twitterMentions || 0;
   }
   return (
     <Flex pt={3} alignItems="center">
-      <Type.h3 pr={2}>{tweets.toLocaleString()}</Type.h3> <Type.p>tweets about {name} in the past 7 days</Type.p>
+      <Type.h3 pr={2}>{tweets.toLocaleString()}</Type.h3>{' '}
+      <Type.p>tweets about {name} in the past 7 days</Type.p>
     </Flex>
-  )
-}
+  );
+};
 
-const HomeLink = (props) => (
+const HomeLink = props => (
   <div
     style={{
       position: 'absolute',
       top: '-38px',
-      left: 0
+      left: 0,
     }}
     {...props}
   >
@@ -172,9 +208,21 @@ const HomeLink = (props) => (
       </a>
     </Link>
   </div>
-)
+);
 
-const AppCard = ({ py, px, my, mx, mr = 'auto', ml = 'auto', mt, mb, style, appMiningData, ...props }) => {
+const AppCard = ({
+  py,
+  px,
+  my,
+  mx,
+  mr = 'auto',
+  ml = 'auto',
+  mt,
+  mb,
+  style,
+  appMiningData,
+  ...props
+}) => {
   const appCardStyleProps = {
     py,
     px,
@@ -184,12 +232,14 @@ const AppCard = ({ py, px, my, mx, mr = 'auto', ml = 'auto', mt, mb, style, appM
     ml,
     mt,
     mb,
-    style
-  }
+    style,
+  };
 
   const descNoPeriod =
-    props.description[props.description.length - 1] === '.' ? props.description.slice(0, -1) : props.description
-  const metaDesc = `${props.name} — ${descNoPeriod}. Explore this and other dapps on App.co, the universal dapp store.`
+    props.description[props.description.length - 1] === '.'
+      ? props.description.slice(0, -1)
+      : props.description;
+  const metaDesc = `${props.name} — ${descNoPeriod}. Explore this and other dapps on App.co, the universal dapp store.`;
   return (
     <>
       <Head title={props.name} description={metaDesc} />
@@ -198,11 +248,13 @@ const AppCard = ({ py, px, my, mx, mr = 'auto', ml = 'auto', mt, mb, style, appM
         card
         p={4}
         style={{
-          position: 'relative'
+          position: 'relative',
         }}
         {...appCardStyleProps}
       >
-        {props.homeLink ? <HomeLink onClick={() => props.dispatch(doClearApp())} /> : null}
+        {props.homeLink ? (
+          <HomeLink onClick={() => props.dispatch(doClearApp())} />
+        ) : null}
         <Header {...props} />
         <hr />
         <Box py={4}>
@@ -217,8 +269,18 @@ const AppCard = ({ py, px, my, mx, mr = 'auto', ml = 'auto', mt, mb, style, appM
         <TagsSection {...props} />
         <hr />
         <StatsItem {...props} />
-        {appMiningData && appMiningData.lifetimeEarnings && appMiningData.lifetimeEarnings !== 0 ? (
-          <Flex justifyContent="space-between" alignItems="center" borderRadius={6} mt={1} mb={4} p={4} bg="blue.dark">
+        {appMiningData &&
+        appMiningData.lifetimeEarnings &&
+        appMiningData.lifetimeEarnings !== 0 ? (
+          <Flex
+            justifyContent="space-between"
+            alignItems="center"
+            borderRadius={6}
+            mt={1}
+            mb={4}
+            p={4}
+            bg="blue.dark"
+          >
             <Box mr={2}>
               <NewType fontFamily="brand" color="white" fontSize={3}>
                 App Mining
@@ -227,7 +289,12 @@ const AppCard = ({ py, px, my, mx, mr = 'auto', ml = 'auto', mt, mb, style, appM
                 <NewType color="blue.mid" lineHeight={1.5}>
                   Every 30 days we payout $100k to the best Blockstack apps.{' '}
                   <Box is="span" color="blue.accent">
-                    <NewType is="a" href="/mining" target="_blank" color="currentColor !important">
+                    <NewType
+                      is="a"
+                      href="/mining"
+                      target="_blank"
+                      color="currentColor !important"
+                    >
                       Learn More.
                     </NewType>
                   </Box>
@@ -250,7 +317,7 @@ const AppCard = ({ py, px, my, mx, mr = 'auto', ml = 'auto', mt, mb, style, appM
         ) : null}
       </Box>
     </>
-  )
-}
+  );
+};
 
-export { AppCard }
+export { AppCard };

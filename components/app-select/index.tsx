@@ -1,5 +1,3 @@
-import React from 'react'
+import React from 'react';
 
-export const TestComponent: React.FC = ({ children }) => (
-  <div>{children}</div>
-)
+export const TestComponent: React.FC = ({ children }) => <div>{children}</div>;

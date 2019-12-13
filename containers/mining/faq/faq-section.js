@@ -1,9 +1,9 @@
-import * as React from 'react'
-import { Heading, Section } from '@containers/mining/shared'
-import { Box } from '@components/mining'
-import styled from 'styled-components'
+import * as React from 'react';
+import { Heading, Section } from '@containers/mining/shared';
+import { Box } from '@components/mining';
+import styled from 'styled-components';
 
-import Content from '@containers/mining/faq/faq-content.md'
+import Content from '@containers/mining/faq/faq-content.md';
 
 export const FAQwrapper = styled(Box)`
   & h2 {
@@ -22,11 +22,17 @@ export const FAQwrapper = styled(Box)`
   & .disclaimer {
     opacity: 0.7;
   }
-`
+`;
 
 const FAQ = ({ ...props }) => (
   <>
-    <Section minHeight="40vh" justifyContent="flex-end" mt={6} flexDirection="column" {...props}>
+    <Section
+      minHeight="40vh"
+      justifyContent="flex-end"
+      mt={6}
+      flexDirection="column"
+      {...props}
+    >
       <Heading mb={5} maxWidth={['100%', '800px']}>
         Frequently asked
         <br />
@@ -37,6 +43,6 @@ const FAQ = ({ ...props }) => (
       </FAQwrapper>
     </Section>
   </>
-)
+);
 
-export { FAQ }
+export { FAQ };

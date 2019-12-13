@@ -3,7 +3,7 @@ import Head from '@containers/head';
 import { MiningPage } from '@components/mining/page';
 import {
   selectAppMiningMonths,
-  selectAppMiningApps
+  selectAppMiningApps,
 } from '@stores/apps/selectors';
 import { connect } from 'react-redux';
 import { StartAppMiningSection } from '@containers/mining/sections/start-app-mining';
@@ -41,7 +41,7 @@ class AppMiningPage extends React.Component {
             );
             return {
               ...appWithLifetimeEarnings,
-              ...app
+              ...app,
             };
           }
         );
@@ -53,13 +53,13 @@ class AppMiningPage extends React.Component {
             );
             return {
               ...appWithLifetimeEarnings,
-              ...app
+              ...app,
             };
           });
 
           return {
             ...month,
-            apps: theApps
+            apps: theApps,
           };
         });
         return {
@@ -68,7 +68,7 @@ class AppMiningPage extends React.Component {
           months,
           rankingMonths,
           faq: faqsData.faqs,
-          apps
+          apps,
         };
       } else {
         console.log('no months!');

@@ -20,7 +20,9 @@ export const BlockstackIdCard: BlockstackIdCard = ({ name, onSignOut }) => (
       borderRadius={4}
       border="1px solid #E1E3E8"
     >
-      <Text textStyle="caption.medium" color="ink">{name}</Text>
+      <Text textStyle="caption.medium" color="ink">
+        {name}
+      </Text>
       <Box onClick={onSignOut} ml={2} pt="1px" cursor="pointer">
         <CrossMarkIcon width={16} height={16} />
       </Box>

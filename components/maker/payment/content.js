@@ -1,11 +1,7 @@
 import React from 'react';
 import { Flex, Box, Type } from 'blockstack-ui';
 import { Button } from '@blockstack/ui';
-import {
-  MakerCardHeader,
-  MakerCardText,
-  MakerField
-} from '../styled';
+import { MakerCardHeader, MakerCardText, MakerField } from '../styled';
 
 export const PaymentContainer = ({ children }) => (
   <Flex>

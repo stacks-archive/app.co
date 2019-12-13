@@ -1,13 +1,13 @@
-import * as React from 'react'
-import styled from 'styled-components'
-import DeathStarIcon from 'mdi-react/DeathStarIcon'
-import { theme } from '@common/styles'
+import * as React from 'react';
+import styled from 'styled-components';
+import DeathStarIcon from 'mdi-react/DeathStarIcon';
+import { theme } from '@common/styles';
 
 const StyledSVG = styled.svg`
   display: block;
-`
+`;
 
-const DEFAULT_COLOR = theme.colors.blue
+const DEFAULT_COLOR = theme.colors.blue;
 const Platform0xIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
   <StyledSVG width="24" height="24" viewBox="0 0 24 24" fill="none" {...rest}>
     <path
@@ -15,7 +15,7 @@ const Platform0xIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
       fill={color}
     />
   </StyledSVG>
-)
+);
 const PlatformBlockstackIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
   <StyledSVG width="24" height="24" viewBox="0 0 24 24" fill="none" {...rest}>
     <path
@@ -23,7 +23,7 @@ const PlatformBlockstackIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
       fill={color}
     />
   </StyledSVG>
-)
+);
 const PlatformBTCIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
   <StyledSVG width="24" height="24" viewBox="0 0 24 24" fill="none" {...rest}>
     <path
@@ -33,7 +33,7 @@ const PlatformBTCIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
       fill={color}
     />
   </StyledSVG>
-)
+);
 const PlatformBTCCashIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
   <StyledSVG width="24" height="24" viewBox="0 0 24 24" fill="none" {...rest}>
     <path
@@ -51,7 +51,7 @@ const PlatformBTCCashIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
       fill={color}
     />
   </StyledSVG>
-)
+);
 const PlatformCivicIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
   <StyledSVG width="24" height="24" viewBox="0 0 24 24" fill="none" {...rest}>
     <path
@@ -59,7 +59,7 @@ const PlatformCivicIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
       fill={color}
     />
   </StyledSVG>
-)
+);
 
 const PlatformEOSIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
   <StyledSVG width="24" height="24" viewBox="0 0 24 24" fill="none" {...rest}>
@@ -70,17 +70,26 @@ const PlatformEOSIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
       strokeLinejoin="round"
     />
   </StyledSVG>
-)
+);
 const PlatformEthereumIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
   <StyledSVG width="24" height="24" viewBox="0 0 24 24" fill="none" {...rest}>
-    <path d="M12.3979 3L12.28 3.41017V15.3123L12.3979 15.4328L17.7963 12.167L12.3979 3Z" fill={color} />
+    <path
+      d="M12.3979 3L12.28 3.41017V15.3123L12.3979 15.4328L17.7963 12.167L12.3979 3Z"
+      fill={color}
+    />
     <path d="M12.3983 3L7 12.167L12.3983 15.4328V9.65586V3Z" fill={color} />
-    <path d="M12.3985 16.477L12.332 16.5599V20.7997L12.3985 20.9983L17.8 13.2129L12.3985 16.477Z" fill={color} />
+    <path
+      d="M12.3985 16.477L12.332 16.5599V20.7997L12.3985 20.9983L17.8 13.2129L12.3985 16.477Z"
+      fill={color}
+    />
     <path d="M12.3983 20.9983V16.477L7 13.2129L12.3983 20.9983Z" fill={color} />
-    <path d="M12.3982 15.4351L17.7964 12.1694L12.3982 9.6582V15.4351Z" fill={color} />
+    <path
+      d="M12.3982 15.4351L17.7964 12.1694L12.3982 9.6582V15.4351Z"
+      fill={color}
+    />
     <path d="M7 12.1694L12.3982 15.4351V9.6582L7 12.1694Z" fill={color} />
   </StyledSVG>
-)
+);
 const PlatformIPFSIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
   <StyledSVG width="24" height="24" viewBox="0 0 24 24" fill="none" {...rest}>
     <path
@@ -90,7 +99,7 @@ const PlatformIPFSIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
       fill={color}
     />
   </StyledSVG>
-)
+);
 const PlatformSteemIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
   <StyledSVG width="24" height="24" viewBox="0 0 24 24" fill="none" {...rest}>
     <path
@@ -102,7 +111,7 @@ const PlatformSteemIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
       fill={color}
     />
   </StyledSVG>
-)
+);
 const PlatformZeroNetIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
   <StyledSVG width="24" height="24" viewBox="0 0 24 24" fill="none" {...rest}>
     <path
@@ -124,36 +133,38 @@ const PlatformZeroNetIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
       fill={color}
     />
   </StyledSVG>
-)
+);
 
-const DefaultIcon = ({ color = DEFAULT_COLOR, ...rest }) => <DeathStarIcon color={color} {...rest} />
+const DefaultIcon = ({ color = DEFAULT_COLOR, ...rest }) => (
+  <DeathStarIcon color={color} {...rest} />
+);
 
-const renderPlatformIcon = (slug) => {
+const renderPlatformIcon = slug => {
   switch (slug) {
     case 'blockstack':
-      return (props) => <PlatformBlockstackIcon {...props} />
+      return props => <PlatformBlockstackIcon {...props} />;
     case 'ipfs':
-      return (props) => <PlatformIPFSIcon {...props} />
+      return props => <PlatformIPFSIcon {...props} />;
     case 'bitcoin':
-      return (props) => <PlatformBTCIcon {...props} />
+      return props => <PlatformBTCIcon {...props} />;
     case 'bitcoin-cash':
-      return (props) => <PlatformBTCCashIcon {...props} />
+      return props => <PlatformBTCCashIcon {...props} />;
     case '0x-relays':
-      return (props) => <Platform0xIcon {...props} />
+      return props => <Platform0xIcon {...props} />;
     case 'civic':
-      return (props) => <PlatformCivicIcon {...props} />
+      return props => <PlatformCivicIcon {...props} />;
     case 'zeronet':
-      return (props) => <PlatformZeroNetIcon {...props} />
+      return props => <PlatformZeroNetIcon {...props} />;
     case 'steem':
-      return (props) => <PlatformSteemIcon {...props} />
+      return props => <PlatformSteemIcon {...props} />;
     case 'eos':
-      return (props) => <PlatformEOSIcon {...props} />
+      return props => <PlatformEOSIcon {...props} />;
     case 'ethereum':
-      return (props) => <PlatformEthereumIcon {...props} />
+      return props => <PlatformEthereumIcon {...props} />;
     default:
-      return (props) => <DefaultIcon {...props} />
+      return props => <DefaultIcon {...props} />;
   }
-}
+};
 
 export {
   Platform0xIcon,
@@ -166,5 +177,5 @@ export {
   PlatformIPFSIcon,
   PlatformSteemIcon,
   PlatformZeroNetIcon,
-  renderPlatformIcon
-}
+  renderPlatformIcon,
+};

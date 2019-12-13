@@ -1,21 +1,21 @@
-import React from 'react'
-import { Page } from '@components/page'
-import { Newsletter } from '@components/newsletter'
-import { AppsList } from '@components/list/apps'
-import { CategoriesList } from '@components/list/categories'
-import { PlatformsList } from '@components/list/platforms'
-import { Modal } from '@components/modal'
-import Head from 'next/head'
+import React from 'react';
+import { Page } from '@components/page';
+import { Newsletter } from '@components/newsletter';
+import { AppsList } from '@components/list/apps';
+import { CategoriesList } from '@components/list/categories';
+import { PlatformsList } from '@components/list/platforms';
+import { Modal } from '@components/modal';
+import Head from 'next/head';
 
 class PlatformsPage extends React.PureComponent {
   state = {
-    filterBy: 'category'
-  }
+    filterBy: 'category',
+  };
 
   static async getInitialProps(ctx) {
     return {
-      category: ctx.query.category
-    }
+      category: ctx.query.category,
+    };
   }
 
   render() {
@@ -36,14 +36,18 @@ class PlatformsPage extends React.PureComponent {
         <Page.Section flexDirection="column" px>
           <AppsList
             filterBy={this.state.filterBy}
-            single={this.props.category === 'all-categories' ? undefined : this.props.category}
+            single={
+              this.props.category === 'all-categories'
+                ? undefined
+                : this.props.category
+            }
             limit={this.props.category === 'all-categories' ? 7 : undefined}
           />
         </Page.Section>
         <Modal />
       </Page>
-    )
+    );
   }
 }
 
-export default PlatformsPage
+export default PlatformsPage;
