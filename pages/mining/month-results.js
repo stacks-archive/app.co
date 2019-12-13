@@ -27,6 +27,7 @@ class MonthResults extends React.Component {
       const foundReport = months.find(
         (report) => report.monthName.toLowerCase() === monthName.toLowerCase() && report.year === parseInt(yearName, 10)
       )
+      // console.log(foundReport)
 
       return {
         report: foundReport,
@@ -80,7 +81,7 @@ class MonthResults extends React.Component {
                 </Type.span>
                 <Rewards>
                   <Type.strong fontSize="1em">Monthy rewards:</Type.strong> {app.formattedUsdRewards} (
-                  {app.payout.BTCPaymentValue / 10e7} BTC)
+                  {app.payout.BTC.toFixed(7)} BTC)
                 </Rewards>
               </Description>
             </Container>
@@ -90,7 +91,7 @@ class MonthResults extends React.Component {
           {app.payout && (
             <>
               {app.formattedUsdRewards}
-              <SubReward>({app.payout.BTCPaymentValue / 10e7} BTC)</SubReward>
+              <SubReward>({app.payout.BTC.toFixed(7)} BTC)</SubReward>
               {app.formattedSTXRewards && (
                 <SubReward>({app.formattedSTXRewards} STX)</SubReward>
               )}

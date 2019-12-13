@@ -128,32 +128,17 @@ class MiningMonth extends React.Component {
   }
 
   composite() {
-    // console.log(this.props.month.compositeRankings)
-    const { blockExplorerUrl, BTCTransactionId } = this.props.month
-    return this.props.month.compositeRankings.map((app, index) => {
-      let payment = null
-      this.props.month.MiningAppPayouts.forEach((_payment) => {
-        if (_payment.appId === app.id) {
-          payment = _payment
-        }
-      })
-      return (
+    return this.props.month.compositeRankings.map((app, index) => (
         <tr key={app.id}>
           <SpacedTd>{index + 1}</SpacedTd>
           <SpacedTd>{app.name}</SpacedTd>
           <SpacedTd>{app.domain}</SpacedTd>
           <SpacedTd>{app.BTCAddress}</SpacedTd>
           <Td>
-            {payment && (
-              <a href={`${blockExplorerUrl}/${BTCTransactionId}`} target="_blank">
-                {payment.BTCPaymentValue / 10e7}{' '}
-                BTC
-              </a>
-            )}
+            {app.formattedUsdRewards}
           </Td>
         </tr>
-      )
-    })
+      ))
   }
 
 
@@ -231,12 +216,25 @@ class MiningMonth extends React.Component {
                 </tr>
                 <tr>
                   <FormTd>
-                    Disbursement transaction ID
+                    BTC Payout Total
                   </FormTd>
                   <FormTd textAlign="right">
-                    <Input type="text"
-                      value={this.state.BTCTransactionId}
-                      onChange={(evt) => this.setState({ BTCTransactionId: evt.target.value })}
+                    <Input
+                      type="number"
+                      value={this.state.btcPayoutTotal}
+                      onChange={(evt) => this.setState({ btcPayoutTotal: evt.target.value })}
+                    />
+                  </FormTd>
+                </tr>
+                <tr>
+                  <FormTd>
+                    BTC Payout Decay Rate (%)
+                  </FormTd>
+                  <FormTd textAlign="right">
+                    <Input
+                      type="number"
+                      value={this.state.btcPayoutDecay}
+                      onChange={(evt) => this.setState({ btcPayoutDecay: evt.target.value })}
                     />
                   </FormTd>
                 </tr>
