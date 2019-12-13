@@ -4,12 +4,16 @@ FROM node:10.16.3-alpine as base
 WORKDIR /usr/src
 COPY package.json yarn.lock /usr/src/
 RUN apk update
-RUN apk add --repository https://dl-3.alpinelinux.org/alpine/edge/community/ --update-cache \
-  python \
-  py-pip \
-  make \
-  g++ \
-  vips-dev
+RUN apk add --update --no-cache build-base \
+  && apk add \
+    --update-cache \
+    --repository https://alpine.global.ssl.fastly.net/alpine/edge/community/ \
+    --repository https://alpine.global.ssl.fastly.net/alpine/edge/main \
+    python   \
+    py-pip   \
+    make   \
+    g++   \
+    vips-dev
 RUN yarn install
 COPY . .
 RUN yarn build && \
