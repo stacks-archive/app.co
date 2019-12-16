@@ -135,6 +135,8 @@ export const sections = (user, appConstants) => {
       width: '100%',
       type: 'select',
       placeholder: 'Blockstack',
+      required: true,
+      validation: string().required('Please select an authentication method'),
       options: categoryOptions.authentication,
       message:
         'Blockstack authentication is required to qualify for App Mining.',

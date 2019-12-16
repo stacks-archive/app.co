@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import useVisibilityChange from 'use-visibility-change';
+
 import { Flex, Box } from 'blockstack-ui';
 import { Button, Text } from '@blockstack/ui';
-import { MakerCardHeader, MakerCardText } from '../styled';
 import { fetchApps } from '@stores/maker/actions';
+import { MakerCardHeader, MakerCardText } from '../styled';
 
 const Kyc = ({ app, user }) => {
   const [loading, setLoading] = useState(false);
