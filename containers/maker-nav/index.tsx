@@ -45,7 +45,7 @@ export const MakerNav: MakerNav = ({ selectedAppId, onSignOut }) => {
   return (
     <MakerNavDumb
       apps={appList.filter(
-        app => app.authentication.toLowerCase() === 'blockstack'
+        app => app.authentication && app.authentication.toLowerCase() === 'blockstack'
       )}
       selectedAppId={selectedAppId}
       userId={user && user.user && user.user.blockstackUsername}
