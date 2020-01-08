@@ -24,7 +24,7 @@ export const sections = (user, appConstants) => {
     {
       name: 'referralSource',
       required: false,
-      label: 'How did you learn about App.co or App Mining?',
+      label: 'How did you learn about App.co?',
       placeholder: 'Hacker News',
     },
   ];
@@ -138,8 +138,6 @@ export const sections = (user, appConstants) => {
       required: true,
       validation: string().required('Please select an authentication method'),
       options: categoryOptions.authentication,
-      message:
-        'Blockstack authentication is required to qualify for App Mining.',
     },
   ];
 
@@ -164,12 +162,7 @@ export const sections = (user, appConstants) => {
           ,{' '}
           <Type is="a" href="/privacy" target="_blank">
             Privacy Policy
-          </Type>
-          , and{' '}
-          <Type is="a" href="/mining/terms" target="_blank">
-            App Mining Terms
-          </Type>
-          .
+          </Type>.
         </>
       ),
       validation: boolean().required(
@@ -178,7 +171,7 @@ export const sections = (user, appConstants) => {
     },
   ];
 
-  const sections = [
+  const fieldSections = [
     {
       fields: personal,
     },
@@ -192,5 +185,5 @@ export const sections = (user, appConstants) => {
       fields: agreements,
     },
   ];
-  return sections;
+  return fieldSections;
 };
