@@ -201,7 +201,7 @@ const Table = ({
 );
 
 const HowMuchSection = ({ apps, months, ...rest }) => (
-  <ObservedSection bg="blue.light" {...rest}>
+  <ObservedSection minHeight="unset" bg="blue.light" {...rest}>
     {({ inView }) => (
       <Wrapper inView={inView} observed>
         <Flex
@@ -211,41 +211,8 @@ const HowMuchSection = ({ apps, months, ...rest }) => (
           flexDirection="column"
         >
           <Title mx="auto" maxWidth="100%" textAlign="center">
-            How much can you earn?
+            Past Earnings
           </Title>
-          <Type
-            mx="auto"
-            maxWidth={860}
-            lineHeight={1.85}
-            pt={6}
-            textAlign="center"
-          >
-            Starting in November 2019, the total payout will increase to
-            $300,000, paid in both BTC and STX. As BTC payments are phased out,
-            the full payout will be paid in STX, and will increase to $500,000
-            in February 2020; then $1 million in May 2020.
-          </Type>
-          <Type
-            mx="auto"
-            maxWidth={860}
-            lineHeight={1.85}
-            pt={6}
-            textAlign="center"
-          >
-            App Mining rewards in STX earned before the hard fork will be
-            accrued, and the tokens will be distributed following the hard fork.
-            We expect the hard fork to occur approximately 30-60 days following
-            the end of the term of the RegA+ cash offering. For more detailed
-            information, see how payouts are administered in the{' '}
-            <Type
-              is="a"
-              href="https://docs.blockstack.org/develop/mining-rewards.html"
-              target="_blank"
-            >
-              Blockstack documentation
-            </Type>
-            .
-          </Type>
           <Flex
             mt={6}
             width={1}

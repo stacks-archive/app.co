@@ -155,7 +155,7 @@
     "eslint-plugin-react": "^7.16.0",
     "eslint-scope": "^5.0.0",
     "jest": "^22.4.3",
-    "prettier": "^1.15.3",
+    "prettier": "^1.19.1",
     "request": "^2.85.0",
     "responsive-loader": "^1.1.0",
     "sepia": "^2.0.2",
@@ -206,8 +206,5 @@
       "containers/*",
       "stores/*"
     ]
-  },
-  "engines": {
-    "node": "^10.15"
   }
 }

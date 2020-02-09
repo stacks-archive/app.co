@@ -6,12 +6,8 @@ import {
   selectAppMiningApps,
 } from '@stores/apps/selectors';
 import { connect } from 'react-redux';
-import { StartAppMiningSection } from '@containers/mining/sections/start-app-mining';
 import { Hero } from '@containers/mining/sections/hero';
 import { HowMuchSection } from '@containers/mining/sections/how-much-earn';
-import { RankingSection } from '@containers/mining/sections/ranking';
-import { PioneersSection } from '@containers/mining/sections/pioneers';
-import { FAQSection } from '@containers/mining/sections/faq';
 import { ModalRoot } from 'blockstack-ui';
 import { Header } from '@components/mining/header';
 import { Footer } from '@components/mining/footer';
@@ -91,24 +87,19 @@ class AppMiningPage extends React.Component {
         <MiningPage>
           <Head
             title="App Mining"
-            description="Every 30 days we payout $200k the best apps in the ecosystem. Payouts are planned to be $1,000,000 by May 2020. The better your app, the more you earn."
+            description=""
             ogImage="/static/images/og.png"
           />
           <Header />
           <Hero
-            minHeight="100vh"
             apps={this.props.rankings}
             position="relative"
             zIndex={1000}
           />
-          <StartAppMiningSection />
           <HowMuchSection
             apps={this.props.rankings}
             months={this.props.rankingMonths}
           />
-          <RankingSection apps={this.props.rankings} />
-          <PioneersSection apps={this.props.months[0].compositeRankings} />
-          <FAQSection faq={this.props.faq} apps={this.props.rankings} />
           <Footer />
         </MiningPage>
       </ModalRoot>
