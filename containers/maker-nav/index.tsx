@@ -28,7 +28,7 @@ export const MakerNav: MakerNav = ({ selectedAppId, onSignOut }) => {
   const dispatch = useDispatch();
   const { appList, user } = useSelector(state => ({
     appList: selectAppList(state),
-    user: selectUser(state),
+    user: selectUser(state)
   }));
 
   const updateMakerRoute = (id: number) => router.push(`/maker/apps/${id}`);
@@ -45,7 +45,7 @@ export const MakerNav: MakerNav = ({ selectedAppId, onSignOut }) => {
   return (
     <MakerNavDumb
       apps={appList.filter(
-        app => app.authentication.toLowerCase() === 'blockstack'
+        app => app.authentication && app.authentication.toLowerCase() === 'blockstack'
       )}
       selectedAppId={selectedAppId}
       userId={user && user.user && user.user.blockstackUsername}
