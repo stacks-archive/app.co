@@ -1,27 +1,9 @@
-import React from 'react'
-import { Type } from 'blockstack-ui'
-import { string, boolean } from 'yup'
+import React from 'react';
+import { Type } from 'blockstack-ui';
+import { string, boolean } from 'yup';
 
 export const sections = (user, appConstants) => {
   const personal = [
-    {
-      name: 'isSubmittingOwnApp',
-      required: true,
-      type: 'radio',
-      label: 'Did you build this app?',
-      options: [
-        {
-          label: 'Yes, I built this app.',
-          value: true,
-          checked: true
-        },
-        {
-          label: 'No, I want to add an app someone else built.',
-          value: false
-        }
-      ],
-      validation: boolean().required('Required.')
-    },
     {
       name: 'submitterName',
       required: true,
@@ -45,12 +27,7 @@ export const sections = (user, appConstants) => {
       label: 'How did you learn about App.co or App Mining?',
       placeholder: 'Hacker News'
     }
-  ]
-
-  if (user && user.jwt) {
-    // If the user is logged in, remove the "Is this your app?" question
-    personal.splice(0, 1)
-  }
+  ];
 
   const appDetails = [
     {
@@ -85,7 +62,8 @@ export const sections = (user, appConstants) => {
       required: true,
       label: 'App icon URL',
       type: 'url',
-      message: 'Square icon, other sizes will be distorted. Accepted formats: JPG, PNG, SVG.',
+      message:
+        'Square icon, other sizes will be distorted. Accepted formats: JPG, PNG, SVG.',
       placeholder: 'https://example.com/app_icon.png',
       validation: string()
         .required('Please provide an icon.')
@@ -102,27 +80,27 @@ export const sections = (user, appConstants) => {
     {
       name: 'twitterHandle',
       required: false,
-      label: "Application's Twitter handle",
+      label: 'App Twitter handle',
       placeholder: '@SatoshiChat'
     }
-  ]
+  ];
 
-  const generateOptions = (enums) =>
+  const generateOptions = enums =>
     Object.keys(enums)
       .sort((a, b) => {
         if (a.toLowerCase() !== b.toLowerCase()) {
-          return a.toLowerCase() < b.toLowerCase() ? -1 : 1
+          return a.toLowerCase() < b.toLowerCase() ? -1 : 1;
         }
-        return 0
+        return 0;
       })
-      .map((opt) => ({ label: opt, value: opt }))
+      .map(opt => ({ label: opt, value: opt }));
 
   const categoryOptions = {
     category: generateOptions(appConstants.categoryEnums),
     blockchain: generateOptions(appConstants.blockchainEnums),
     storageNetwork: generateOptions(appConstants.storageEnums),
     authentication: generateOptions(appConstants.authenticationEnums)
-  }
+  };
 
   const appCategories = [
     {
@@ -157,10 +135,11 @@ export const sections = (user, appConstants) => {
       width: '100%',
       type: 'select',
       placeholder: 'Blockstack',
-      options: categoryOptions.authentication,
-      message: 'Blockstack authentication is required to qualify for App Mining.'
+      required: true,
+      validation: string().required('Please select an authentication method'),
+      options: categoryOptions.authentication
     }
-  ]
+  ];
 
   const agreements = [
     {
@@ -168,8 +147,6 @@ export const sections = (user, appConstants) => {
       required: true,
       type: 'checkbox',
       label: 'App is publicly accessible and user-ready',
-      message:
-        'App.co lists decentralized apps that are user-ready. Part of our review process is verifying anyone can immediately begin using the app.',
       validation: boolean().required('Required.')
     },
     {
@@ -193,9 +170,11 @@ export const sections = (user, appConstants) => {
           .
         </>
       ),
-      validation: boolean().required('To submit an app, you must accept these terms.')
+      validation: boolean().required(
+        'To submit an app, you must accept these terms.'
+      )
     }
-  ]
+  ];
 
   const sections = [
     {
@@ -205,17 +184,11 @@ export const sections = (user, appConstants) => {
       fields: appDetails
     },
     {
-      fields: appCategories,
-      message: (
-        <>
-          Want to add a new category, blockchain, storage, or technology?{' '}
-          <a href="mailto:hello@app.co">Contact us.</a>
-        </>
-      )
+      fields: appCategories
     },
     {
       fields: agreements
     }
-  ]
-  return sections
-}
+  ];
+  return sections;
+};

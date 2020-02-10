@@ -1,10 +1,8 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Select = styled.select`
   width: 100%;
-  // appearance: none;
-  // padding: 1em;
-`
+`;
 
 export default {
   Wrapper: styled.div`
@@ -18,5 +16,5 @@ export default {
         width: 100%;
       }
     }
-  `
-}
+  `,
+};

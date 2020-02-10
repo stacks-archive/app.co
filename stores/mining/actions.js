@@ -1,22 +1,26 @@
-import fetch from 'cross-fetch'
-import { SUBMIT_APP_STARTED, SUBMIT_APP_FINISHED, SUBMIT_APP_ERROR } from './constants'
+import fetch from 'cross-fetch';
+import {
+  SUBMIT_APP_STARTED,
+  SUBMIT_APP_FINISHED,
+  SUBMIT_APP_ERROR
+} from './constants';
 
 const submittingApp = () => ({
   type: SUBMIT_APP_STARTED
-})
+});
 
 const submittingAppError = () => ({
   type: SUBMIT_APP_ERROR
-})
+});
 
 const submittedApp = () => ({
   type: SUBMIT_APP_FINISHED
-})
+});
 
-const submitApp = (submission, apiServer) => async (dispatch) => {
-  dispatch(submittingApp())
+const submitApp = submission => async dispatch => {
+  dispatch(submittingApp());
   try {
-    const url = `${apiServer}/api/app-mining-submission`
+    const url = `${process.env.API_SERVER}/api/app-mining-submission`;
     await fetch(url, {
       method: 'POST',
       headers: {
@@ -24,14 +28,14 @@ const submitApp = (submission, apiServer) => async (dispatch) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(submission)
-    })
-    dispatch(submittedApp())
+    });
+    dispatch(submittedApp());
   } catch (error) {
-    dispatch(submittingAppError())
-    throw Error(error)
+    dispatch(submittingAppError());
+    throw Error(error);
   }
-}
+};
 
 export default {
   submitApp
-}
+};

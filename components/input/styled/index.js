@@ -1,11 +1,11 @@
-import styled, { css } from 'styled-components'
-import { Box } from 'blockstack-ui'
-import { theme } from '@common/styles'
-import { space } from 'styled-system'
+import styled, { css } from 'styled-components';
+import { Box } from 'blockstack-ui';
+import { theme } from '@common/styles';
+import { space } from 'styled-system';
 
 const StyledInput = styled(Box)`
   position: relative;
-`
+`;
 const Action = styled(Box)`
   position: absolute;
   right: 0;
@@ -28,7 +28,7 @@ const Action = styled(Box)`
   svg {
     display: block;
   }
-`
+`;
 const Input = styled.input`
   background: ${theme.colors.blue.light};
   border: none;
@@ -51,9 +51,9 @@ const Input = styled.input`
       }
     `};
   ${space};
-`
+`;
 
-StyledInput.Input = Input
-StyledInput.Action = Action
+StyledInput.Input = Input;
+StyledInput.Action = Action;
 
-export { StyledInput }
+export { StyledInput };

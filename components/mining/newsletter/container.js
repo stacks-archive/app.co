@@ -1,13 +1,13 @@
-import React from 'react'
-import fetch from 'cross-fetch'
-import { string } from 'yup'
-import debounce from 'lodash.debounce'
+import React from 'react';
+import fetch from 'cross-fetch';
+import { string } from 'yup';
+import debounce from 'lodash.debounce';
 
-import { trackEvent } from '@utils'
+import { trackEvent } from '@utils';
 
-const API = 'https://api.app.co/api/blockstack-subscribe'
+const API = 'https://api.app.co/api/blockstack-subscribe';
 
-export const NewsletterContext = React.createContext()
+export const NewsletterContext = React.createContext();
 
 class NewsletterWrapper extends React.PureComponent {
   state = {
@@ -16,107 +16,107 @@ class NewsletterWrapper extends React.PureComponent {
     value: null,
     isValid: false,
     showError: false,
-    error: null
-  }
+    error: null,
+  };
 
   schema = string()
     .email('Invalid email.')
     .nullable()
-    .required('Please enter an email.')
+    .required('Please enter an email.');
 
-  submit = async (value) =>
+  submit = async value =>
     fetch(API, {
       method: 'POST',
       body: JSON.stringify({
         email: value,
         SOURCE: this.props.SOURCE,
-        list: this.props.list
+        list: this.props.list,
       }),
       headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+        'Content-Type': 'application/json',
+      },
+    });
 
-  handleChange = debounce(async (value) => {
-    this.setState({ value })
-  }, 200)
+  handleChange = debounce(async value => {
+    this.setState({ value });
+  }, 200);
 
-  onChange = ({ target }) => this.handleChange(target.value)
+  onChange = ({ target }) => this.handleChange(target.value);
 
-  setError = (error) =>
+  setError = error =>
     this.setState({
       loading: false,
       showError: true,
-      error
-    })
+      error,
+    });
 
   clearError = () =>
     this.setState({
-      error: null
-    })
+      error: null,
+    });
 
-  loading = () => this.setState({ loading: true })
+  loading = () => this.setState({ loading: true });
   success = () =>
     this.setState({
       success: true,
-      loading: false
-    })
+      loading: false,
+    });
 
-  validate = async (email) => {
+  validate = async email => {
     try {
-      const isValid = await this.schema.validate(email)
+      const isValid = await this.schema.validate(email);
       if (isValid) {
-        this.clearError()
+        this.clearError();
         this.setState({
-          isValid
-        })
+          isValid,
+        });
       } else {
         this.setState({
-          isValid: false
-        })
+          isValid: false,
+        });
       }
     } catch (e) {
-      console.log(e)
-      e.errors && e.errors.length && this.setError(e.errors[0])
+      console.log(e);
+      e.errors && e.errors.length && this.setError(e.errors[0]);
       return this.setState({
-        isValid: false
-      })
+        isValid: false,
+      });
     }
-  }
+  };
 
-  doSubmit = async (e) => {
+  doSubmit = async e => {
     if (e && e.preventDefault) {
-      e.preventDefault() // to prevent page reload when user submits via hitting return
+      e.preventDefault(); // to prevent page reload when user submits via hitting return
     }
 
-    await this.validate(this.state.value)
+    await this.validate(this.state.value);
 
     if (this.state.isValid && this.state.value) {
       try {
-        this.loading()
+        this.loading();
 
-        const res = await this.submit(this.state.value)
-        const data = await res.json()
+        const res = await this.submit(this.state.value);
+        const data = await res.json();
 
         if (data.success) {
-          trackEvent('Starter Kit Submission Success')
-          this.success()
-          return this.state.value
+          trackEvent('Starter Kit Submission Success');
+          this.success();
+          return this.state.value;
         } else {
-          trackEvent('Starter Kit Submission Error')
-          this.setError(data.error)
-          return false
+          trackEvent('Starter Kit Submission Error');
+          this.setError(data.error);
+          return false;
         }
       } catch (error) {
-        trackEvent('Starter Kit Submission Success')
-        this.setError(error.message)
-        return false
+        trackEvent('Starter Kit Submission Success');
+        this.setError(error.message);
+        return false;
       }
     } else if (this.state.error) {
-      this.setState({ showError: true })
-      return false
+      this.setState({ showError: true });
+      return false;
     }
-  }
+  };
 
   render() {
     const props = {
@@ -124,14 +124,20 @@ class NewsletterWrapper extends React.PureComponent {
       isValid: this.state.value !== '' && this.state.isValid,
       error: this.state.showError && this.state.error,
       success: this.state.success,
-      doSubmit: this.props.onSubmit ? (e) => this.props.onSubmit(() => this.doSubmit(e)) : this.doSubmit,
+      doSubmit: this.props.onSubmit
+        ? e => this.props.onSubmit(() => this.doSubmit(e))
+        : this.doSubmit,
       value: this.state.value,
       bind: {
-        onChange: (e) => this.onChange(e)
-      }
-    }
-    return <NewsletterContext.Provider value={props}>{this.props.children(props)}</NewsletterContext.Provider>
+        onChange: e => this.onChange(e),
+      },
+    };
+    return (
+      <NewsletterContext.Provider value={props}>
+        {this.props.children(props)}
+      </NewsletterContext.Provider>
+    );
   }
 }
 
-export default NewsletterWrapper
+export default NewsletterWrapper;

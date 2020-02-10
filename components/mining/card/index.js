@@ -1,7 +1,7 @@
-import * as React from 'react'
+import * as React from 'react';
 
-import { StyledCard } from '@components/mining/card/styled'
+import { StyledCard } from '@components/mining/card/styled';
 
-const Card = ({ ...rest }) => <StyledCard {...rest} />
+const Card = ({ ...rest }) => <StyledCard {...rest} />;
 
-export { Card }
+export { Card };

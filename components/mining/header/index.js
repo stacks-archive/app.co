@@ -1,6 +1,6 @@
-import * as React from 'react'
-import { Flex, Type, AppMiningLogo } from 'blockstack-ui'
-import { CallToAction, Countdown, Wrapper } from '../shared'
+import * as React from 'react';
+import { Flex, Type, AppMiningLogo } from 'blockstack-ui';
+import { CallToAction, Countdown, Wrapper } from '../shared';
 
 const Header = ({ showOnMobile, link, ...rest }) => {
   return (
@@ -28,29 +28,19 @@ const Header = ({ showOnMobile, link, ...rest }) => {
               <AppMiningLogo typeSize={20} invert />
             </Flex>
           </Flex>
-          <Type
-            display="inline-flex"
-            flexDirection={['column', 'column', 'column', 'row']}
-            color="white"
-            pl={2}
-            flexGrow={1}
-            pt={'2px'}
-          >
-            Next ranking starts on <Countdown pl={[0, 0, 0, 2]} />
-          </Type>
         </Flex>
         <Flex display={['none', 'none', 'flex']}>
           <CallToAction
             buttonProps={{
               py: 4,
               px: [4, 4, 4, 6],
-              fontSize: [2]
+              fontSize: [2],
             }}
             hideTimer
           />
         </Flex>
       </Wrapper>
     </Flex>
-  )
-}
-export { Header }
+  );
+};
+export { Header };

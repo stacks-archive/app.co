@@ -42,7 +42,7 @@ const wrapperStyles = () => (props) =>
   props.wrap &&
   css`
     width: 100%;
-    max-width: 1130px;
+    max-width: 1216px;
     margin-right: auto;
     margin-left: auto;
     z-index: 10;
@@ -72,7 +72,7 @@ const theme = {
       accent: '#0CCABA'
     }),
     grey: Object.assign('#5B647C', {
-      light: '#E6E9EE',
+      light: '#F9F9FC',
       mid: '#7588A2',
       dark: '#142144'
     }),
@@ -85,7 +85,7 @@ const theme = {
 
 const wrapperStyle = css`
   width: 100%;
-  max-width: 1130px;
+  max-width: 1216px;
   margin-right: auto;
   margin-left: auto;
   z-index: 10;
@@ -94,7 +94,7 @@ const wrapperStyle = css`
   padding-right: 20px;
   ${below.md`
     padding-left: 20px;
-    padding-right: 20px;  
+    padding-right: 20px;
   `};
 `
 

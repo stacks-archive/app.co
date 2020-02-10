@@ -1,6 +1,6 @@
-import React from 'react'
-import { StyledHeroSlider } from '@components/hero-slider/styled'
-import Carousel from 'nuka-carousel'
+import React from 'react';
+import { StyledHeroSlider } from '@components/hero-slider/styled';
+import Carousel from 'nuka-carousel';
 const HeroSlider = ({ slides, ...rest }) => (
   <StyledHeroSlider {...rest}>
     <Carousel slidesToShow={3} initialSlideHeight={400}>
@@ -13,6 +13,6 @@ const HeroSlider = ({ slides, ...rest }) => (
       <StyledHeroSlider.Item>slide 1</StyledHeroSlider.Item>
     </Carousel>
   </StyledHeroSlider>
-)
+);
 
-export { HeroSlider }
+export { HeroSlider };

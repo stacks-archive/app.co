@@ -1,55 +1,81 @@
-import React, { useState } from 'react'
-import { Flex, Box } from 'blockstack-ui'
-import MakerModal from '../modal'
-import { MakerCardHeader, MakerCardText, MakerButton } from '../styled'
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import useVisibilityChange from 'use-visibility-change';
 
-const KYC = ({ app, user, apiServer }) => {
-  const [embedURL, setEmbedURL] = useState(app.jumioEmbedURL)
-  const [loading, setLoading] = useState(false)
-  const [modalState, setModalState] = useState(false)
+import { Flex, Box } from 'blockstack-ui';
+import { Button, Text } from '@blockstack/ui';
+import { fetchApps } from '@stores/maker/actions';
+import { MakerCardHeader, MakerCardText } from '../styled';
 
-  const initiateKYC = async () => {
-    setLoading(true)
-    setModalState(true)
-    const url = `${apiServer}/api/maker/apps/initiate-kyc?appId=${app.id}`
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: new Headers({
-        authorization: `Bearer ${user.jwt}`
-      })
-    })
-    const data = await response.json()
-    setEmbedURL(data.embedURL)
-    setLoading(false)
-  }
+const Kyc = ({ app, user }) => {
+  const [loading, setLoading] = useState(false);
+  const [hasStartedKyc, setHasStartedKyc] = useState(false);
+  let syncKycUrl = null;
+  const [kycUrl, setKycUrl] = useState(null);
+  const dispatch = useDispatch();
+
+  useVisibilityChange({
+    onShow() {
+      if (!hasStartedKyc) return;
+      fetchApps({ user })(dispatch);
+    },
+  });
+
+  useEffect(() => {
+    async function getEmbed() {
+      setLoading(true);
+      const url = `${process.env.API_SERVER}/api/maker/apps/initiate-kyc?appId=${app.id}`;
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: new Headers({
+          authorization: `Bearer ${user.jwt}`,
+        }),
+      });
+      const data = await response.json();
+      //
+      // Some confusion here as despite calling setKycUrl()
+      // when reading this value from the initiateKyc fn
+      // it remains null
+      setKycUrl(data.embedURL);
+      syncKycUrl = data.embedURL;
+      setLoading(false);
+    }
+    getEmbed();
+  }, [app.id]);
 
   const buttonText = () => {
     if (loading) {
-      return 'Loading…'
+      return 'Loading…';
     }
-    return app.hasCollectedKYC ? 'Verified' : 'Start verification'
-  }
+    return app.hasCollectedKYC ? 'Verified' : 'Start verification';
+  };
+
+  const url = app.hasCollectedKYC ? null : syncKycUrl || kycUrl;
 
   return (
     <>
-      <MakerModal isOpen={modalState} handleClose={() => setModalState(false)}>
-        <iframe src={embedURL} title="Document" width="100%" height="700px" allow="camera" />
-      </MakerModal>
-
       <Flex>
         <Box width={1} mt={0}>
           <MakerCardHeader>Identity Verification</MakerCardHeader>
-          <MakerCardText mt={0}>
-            Verifying your identity helps keep App Mining secure and fight fraud.
-            Your ID will never be shared.
+          <MakerCardText>
+            Verifying your identity helps keep App Mining secure and fight
+            fraud. Your ID will never be shared.
           </MakerCardText>
-          <MakerButton onClick={initiateKYC} mt={4} disabled={app.hasCollectedKYC}>
-            {buttonText()}
-          </MakerButton>
+          <Box>
+            <a href={url} target="_blank" style={{ textDecoration: 'none' }}>
+              <Button mt={2} disabled={app.hasCollectedKYC}>
+                {buttonText()}
+              </Button>
+            </a>
+          </Box>
+          <Text as="p" display="block" textStyle="caption" mt={4} mb={0}>
+            Note: It may take a few minutes for this page to update after you’ve
+            completed identity verification.
+          </Text>
         </Box>
       </Flex>
     </>
-  )
-}
+  );
+};
 
-export default KYC
+export default Kyc;

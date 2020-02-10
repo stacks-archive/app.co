@@ -1,29 +1,27 @@
-import * as React from 'react'
-import Head from '@containers/head'
-import { MiningPage } from '@components/mining/page'
-import { selectApiServer, selectAppMiningApps } from '@stores/apps/selectors'
-import { connect } from 'react-redux'
-import { AllApps } from '@pages/mining/apps/table-section'
-import { ModalRoot } from 'blockstack-ui'
-import { Header } from '@components/mining/header'
-import { Footer } from '@components/mining/footer'
+import * as React from 'react';
+import Head from '@containers/head';
+import { MiningPage } from '@components/mining/page';
+import { selectAppMiningApps } from '@stores/apps/selectors';
+import { connect } from 'react-redux';
+import { AllApps } from '@containers/mining/apps/table-section';
+import { ModalRoot } from 'blockstack-ui';
+import { Header } from '@components/mining/header';
+import { Footer } from '@components/mining/footer';
 
-const handleBodyScroll = (on) =>
-  on ? document.body.classList.remove('no-scroll') : document.body.classList.add('no-scroll')
-
-const mapStateToProps = (state) => ({
-  apiServer: selectApiServer(state)
-})
+const handleBodyScroll = on =>
+  on
+    ? document.body.classList.remove('no-scroll')
+    : document.body.classList.add('no-scroll');
 
 class AppMiningPage extends React.Component {
   static async getInitialProps({ reduxStore }) {
-    const state = reduxStore.getState()
-    const apps = selectAppMiningApps(state)
-    return { apps }
+    const state = reduxStore.getState();
+    const apps = selectAppMiningApps(state);
+    return { apps };
   }
 
   componentDidMount() {
-    handleBodyScroll(true)
+    handleBodyScroll(true);
   }
 
   render() {
@@ -40,8 +38,8 @@ class AppMiningPage extends React.Component {
           <Footer />
         </MiningPage>
       </ModalRoot>
-    )
+    );
   }
 }
 
-export default connect(mapStateToProps)(AppMiningPage)
+export default connect(state => state)(AppMiningPage);

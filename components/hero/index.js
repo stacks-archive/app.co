@@ -1,7 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
-import { wrapperStyles } from '@common/styles'
-import { headerHeight } from '@common/constants'
+import React from 'react';
+import styled from 'styled-components';
+import { wrapperStyles } from '@common/styles';
 
 const StyledHero = styled.div`
   height: 40vh;
@@ -10,7 +9,11 @@ const StyledHero = styled.div`
   align-items: center;
   position: relative;
 
-  background-image: linear-gradient(to bottom, rgba(240, 229, 232, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(240, 229, 232, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
 
   &::before {
     position: absolute;
@@ -25,8 +28,7 @@ const StyledHero = styled.div`
   @media (max-width: 768px) {
     height: 45vh;
   }
-
-`
+`;
 
 const Content = styled.div`
   position: relative;
@@ -36,7 +38,7 @@ const Content = styled.div`
   @media (max-width: 768px) {
     text-align: center;
   }
-`
+`;
 
 const Inner = styled.div`
   display: flex;
@@ -90,8 +92,8 @@ const Inner = styled.div`
   @media (min-width: 1800px) {
     background-size: 50%;
   }
-`
+`;
 
-StyledHero.Content = Content
-StyledHero.Inner = Inner
-export { StyledHero }
+StyledHero.Content = Content;
+StyledHero.Inner = Inner;
+export { StyledHero };

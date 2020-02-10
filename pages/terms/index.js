@@ -1,9 +1,9 @@
-import React from 'react'
-import { Page } from '@components/page'
-import Head from '@containers/head'
-import { Box } from '@components/mining'
+import React from 'react';
+import { Page } from '@components/page';
+import Head from '@containers/head';
+import { Box } from '@components/mining';
 
-import Content from './content.md'
+import Content from './content.md';
 
 class LearnMore extends React.PureComponent {
   render() {
@@ -19,8 +19,8 @@ class LearnMore extends React.PureComponent {
           </Box>
         </Page.Section>
       </Page>
-    )
+    );
   }
 }
 
-export default LearnMore
+export default LearnMore;

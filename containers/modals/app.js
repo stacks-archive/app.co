@@ -1,60 +1,65 @@
-import React from 'react'
-import { CloseIcon } from 'mdi-react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
+import React from 'react';
+import { CloseIcon } from 'mdi-react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import { selectCurrentApp, selectAppMiningApps } from '@stores/apps/selectors'
-import { doClearApp } from '@stores/apps'
+import { selectCurrentApp, selectAppMiningApps } from '@stores/apps/selectors';
+import { doClearApp } from '@stores/apps';
 
-import StyledModal from '@components/modal'
-import { AppCard } from '@components/app-card'
+import StyledModal from '@components/modal';
+import { AppCard } from '@components/app-card';
 
 class ModalClass extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     app: PropTypes.object,
-    doGoBack: PropTypes.bool
-  }
+    doGoBack: PropTypes.bool,
+  };
 
   static defaultProps = {
-    doGoBack: true
-  }
+    doGoBack: true,
+  };
 
-  handleClose = (goBack) => {
-    const { dispatch } = this.props
-    dispatch(doClearApp())
+  handleClose = goBack => {
+    const { dispatch } = this.props;
+    dispatch(doClearApp());
     if (goBack) {
-      this.goBack(true)
+      this.goBack(true);
     }
-  }
+  };
 
   goBack = () => {
     if (typeof window !== 'undefined') {
-      console.log('document.referrer', document.referrer)
-      if (document.referrer.includes('app.co') || document.referrer.includes('localhost')) {
-        window.history.go(-1)
+      console.log('document.referrer', document.referrer);
+      if (
+        document.referrer.includes('app.co') ||
+        document.referrer.includes('localhost')
+      ) {
+        window.history.go(-1);
       } else {
-        window.history.pushState({}, 'App.co - The Universal Dapp Store', `/`)
+        window.history.pushState({}, 'App.co - The Universal Dapp Store', `/`);
       }
     }
-  }
+  };
 
-  handleBack = (event) => {
+  handleBack = event => {
     if (event.state && !event.state.as.includes('app')) {
-      this.handleClose()
+      this.handleClose();
     }
-  }
+  };
 
   componentDidMount() {
     if (typeof window !== 'undefined') {
-      window.onpopstate = this.handleBack
+      window.onpopstate = this.handleBack;
     }
   }
 
   render() {
-    const { app, doGoBack, appMiningApps } = this.props
+    const { app, doGoBack, appMiningApps } = this.props;
     const appMiningData =
-      app && appMiningApps && appMiningApps.length ? appMiningApps.find((a) => a.name === app.name) : null
+      app && appMiningApps && appMiningApps.length
+        ? appMiningApps.find(a => a.name === app.name)
+        : null;
     return app ? (
       <StyledModal.Modal>
         <StyledModal.Content width={[1, 0.65, 0.65, 0.5]}>
@@ -63,7 +68,7 @@ class ModalClass extends React.Component {
               position: 'absolute',
               zIndex: 20,
               right: '30px',
-              top: '25px'
+              top: '25px',
             }}
             onClick={() => this.handleClose(doGoBack)}
           >
@@ -78,15 +83,15 @@ class ModalClass extends React.Component {
         </StyledModal.Content>
         <StyledModal.Backdrop onClick={() => this.handleClose(doGoBack)} />
       </StyledModal.Modal>
-    ) : null
+    ) : null;
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   app: selectCurrentApp(state),
-  appMiningApps: selectAppMiningApps(state)
-})
+  appMiningApps: selectAppMiningApps(state),
+});
 
-const Modal = connect(mapStateToProps)(ModalClass)
+const Modal = connect(mapStateToProps)(ModalClass);
 
-export default Modal
+export default Modal;

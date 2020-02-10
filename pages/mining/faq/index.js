@@ -1,15 +1,17 @@
-import * as React from 'react'
-import { MiningPage } from '@components/mining/page'
-import { Header, Footer } from '@pages/mining/shared'
-import Head from '@containers/head'
-import { Flex, Type, Box } from 'blockstack-ui'
-import ArrowLeftIcon from 'mdi-react/ArrowLeftIcon'
-import Link from 'next/link'
-import { LinksWrapper } from '@pages/mining/terms'
-import { FAQwrapper } from './faq-section'
-import Markdown from './faq-content.md'
+import * as React from 'react';
+import { MiningPage } from '@components/mining/page';
+import { Header, Footer } from '@containers/mining/shared';
+import Head from '@containers/head';
+import { Flex, Type, Box } from 'blockstack-ui';
+import ArrowLeftIcon from 'mdi-react/ArrowLeftIcon';
+import Link from 'next/link';
+import { LinksWrapper } from '@pages/mining/terms';
+import { FAQwrapper } from '@containers/mining/faq/faq-section';
+import Markdown from '@containers/mining/faq/faq-content.md';
 
-const Content = (props) => <Flex flexDirection="column" width={1} maxWidth="780px" {...props} />
+const Content = props => (
+  <Flex flexDirection="column" width={1} maxWidth="780px" {...props} />
+);
 
 class AppMiningPrivacyPolicy extends React.PureComponent {
   render() {
@@ -43,8 +45,8 @@ class AppMiningPrivacyPolicy extends React.PureComponent {
           </Box>
         </MiningPage>
       </LinksWrapper>
-    )
+    );
   }
 }
 
-export default AppMiningPrivacyPolicy
+export default AppMiningPrivacyPolicy;

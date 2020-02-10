@@ -7,8 +7,6 @@
         "ssr": true
       }
     ],
-    "@babel/plugin-transform-regenerator",
-    "@babel/plugin-transform-runtime",
     [
       "module-resolver",
       {
@@ -19,7 +17,8 @@
           "@stores": "./stores",
           "@pages": "./pages",
           "@common": "./common",
-          "@utils": "./utils"
+          "@utils": "./utils",
+          "@models": "./models"
         }
       }
     ]

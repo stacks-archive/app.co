@@ -1,8 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const AppIcon = ({ size = 34, ...rest }) => (
-  <svg viewBox="0 0 34 34" fill="none" style={{ width: '100%', maxWidth: '100%', display: 'block' }} {...rest}>
+const AppIcon = ({ ...rest }) => (
+  <svg
+    viewBox="0 0 34 34"
+    fill="none"
+    style={{ width: '100%', maxWidth: '100%', display: 'block' }}
+    {...rest}
+  >
     <path
       d="M27.7771 34H6.24321C2.78386 34 1.24936e-06 31.1957 1.24936e-06 27.7568V6.24323C1.24936e-06 2.78386 2.80433 1.56171e-07 6.24321 1.56171e-07H27.7567C31.216 1.56171e-07 33.9999 2.80433 33.9999 6.24323V27.7568C34.0204 31.1957 31.216 34 27.7771 34Z"
       fill="#142144"
@@ -33,10 +38,10 @@ const AppIcon = ({ size = 34, ...rest }) => (
       fill="#D99439"
     />
   </svg>
-)
+);
 
 AppIcon.propTypes = {
-  size: PropTypes.number
-}
+  size: PropTypes.number,
+};
 
-export { AppIcon }
+export { AppIcon };

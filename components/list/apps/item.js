@@ -1,45 +1,49 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Flex, Box } from 'blockstack-ui'
-import { connect } from 'react-redux'
-import Router from 'next/router'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Flex, Box } from 'blockstack-ui';
+import { connect } from 'react-redux';
+import Router from 'next/router';
 
-import styled from 'styled-components'
-import { Type } from '@components/typography'
-import { StyledList } from '@components/list/styled'
-import { AppIcon } from '@components/app-icon'
-import { TagLink } from '@components/tag'
+import styled from 'styled-components';
+import { Type } from '@components/typography';
+import { StyledList } from '@components/list/styled';
+import { AppIcon } from '@components/app-icon';
+import { TagLink } from '@components/tag';
 
-import { doSelectApp } from '@stores/apps'
-import { slugify } from '@common'
-import { getTwitterMentions, trackPageView } from '@utils'
+import { doSelectApp } from '@stores/apps';
+import { slugify } from '@common';
+import { getTwitterMentions, trackPageView } from '@utils';
 
-const rowItemSize = 0.5 / 4
-const TableItem = ({ rowSize=rowItemSize, ...props }) => (
-  <StyledList.TableItem width={[0, rowSize]} style={{ textAlign: 'left', overflow: 'hidden' }} {...props} />
-)
+const rowItemSize = 0.5 / 4;
+const TableItem = ({ rowSize = rowItemSize, ...props }) => (
+  <StyledList.TableItem
+    width={[0, rowSize]}
+    style={{ textAlign: 'left', overflow: 'hidden' }}
+    {...props}
+  />
+);
 
 const SmallText = styled(Type.span)`
   font-size: 12px !important;
-`
+`;
 
-const appTag = (tag) => {
+const appTag = tag => {
   if (!tag) {
-    return ''
+    return '';
   }
-  const url = `/platforms/${slugify(tag)}`
+  const url = `/platforms/${slugify(tag)}`;
   const href = {
     pathname: `/platforms`,
     query: {
-      platform: slugify(tag)
-    }
-  }
+      platform: slugify(tag),
+    },
+  };
   return (
     <TagLink href={href} as={url}>
       {tag.toLowerCase()}
     </TagLink>
-  )
-}
+  );
+};
 
 const AppItem = ({
   imgixImageUrl,
@@ -54,33 +58,37 @@ const AppItem = ({
   ...rest
 }) => {
   const handleClick = (id, event) => {
-    const href = event.target.getAttribute('href')
-    const isClickingTag = href && href.indexOf('/platforms') === 0
-    const altKey = event.metaKey || event.altKey || event.ctrlKey
+    const href = event.target.getAttribute('href');
+    const isClickingTag = href && href.indexOf('/platforms') === 0;
+    const altKey = event.metaKey || event.altKey || event.ctrlKey;
     if (!isClickingTag && !altKey) {
-      dispatch(doSelectApp(id))
+      dispatch(doSelectApp(id));
       if (typeof window !== 'undefined') {
-        const page = `/app/${rest.Slugs[0].value}`
-        window.history.pushState({}, name, page)
-        trackPageView(page)
+        const page = `/app/${rest.Slugs[0].value}`;
+        window.history.pushState({}, name, page);
+        trackPageView(page);
       }
-      event.preventDefault()
+      event.preventDefault();
     } else if (altKey && !href && !isClickingTag) {
-      window.open(`/app/${rest.Slugs[0].value}`, '_blank')
+      window.open(`/app/${rest.Slugs[0].value}`, '_blank');
     }
-  }
-  const rowSize = rest.Rankings ? (0.5 / 4) : (0.5 / 2)
+  };
+  const rowSize = rest.Rankings ? 0.5 / 4 : 0.5 / 2;
   return (
     <StyledList.Item
       {...rest}
       link
-      onClick={(evt) => {
-        handleClick(rest.id, evt)
+      onClick={evt => {
+        handleClick(rest.id, evt);
       }}
       key={rest.id}
     >
       <Flex width={1} alignItems="center">
-        <Flex justifyContent="flex-start" width={single ? [1, 0.5] : [1]} alignItems="center">
+        <Flex
+          justifyContent="flex-start"
+          width={single ? [1, 0.5] : [1]}
+          alignItems="center"
+        >
           {single ? (
             <Flex
               mr={[3, 3]}
@@ -96,7 +104,9 @@ const AppItem = ({
           <AppIcon hover="true" src={imgixImageUrl} alt={name} size={48} />
           <Box style={{ flexGrow: 1, maxWidth: '75%' }} pl="16px">
             <Type.h4 fontSize={16} mt="0">
-              <a href={`/app/${rest.Slugs[0] && rest.Slugs[0].value}`}>{name}</a>
+              <a href={`/app/${rest.Slugs[0] && rest.Slugs[0].value}`}>
+                {name}
+              </a>
             </Type.h4>
             <SmallText p={0} my={2}>
               {description}
@@ -110,7 +120,14 @@ const AppItem = ({
             {rest.Rankings && (
               <>
                 <TableItem rowSize={rowSize}>{appTag(blockchain)}</TableItem>
-                <TableItem style={{ textAlign: 'right', fontSize: '13px', fontWeight: 700 }} width={[0, 0.5 / 4]}>
+                <TableItem
+                  style={{
+                    textAlign: 'right',
+                    fontSize: '13px',
+                    fontWeight: 700,
+                  }}
+                  width={[0, 0.5 / 4]}
+                >
                   {getTwitterMentions(rest).toLocaleString()}
                 </TableItem>
               </>
@@ -119,8 +136,8 @@ const AppItem = ({
         ) : null}
       </Flex>
     </StyledList.Item>
-  )
-}
+  );
+};
 
 AppItem.propTypes = {
   imgixImageUrl: PropTypes.string,
@@ -131,7 +148,7 @@ AppItem.propTypes = {
   storageNetwork: PropTypes.string,
   single: PropTypes.bool,
   dispatch: PropTypes.func.isRequired,
-  rank: PropTypes.number
-}
+  rank: PropTypes.number,
+};
 
-export default connect()(AppItem)
+export default connect()(AppItem);

@@ -1,13 +1,11 @@
-import React, { Fragment } from 'react'
-import styled from 'styled-components'
-const StyledRoot = styled.div``
+import React from 'react';
+import styled from 'styled-components';
+const StyledRoot = styled.div``;
 
-const Root = (props) => (
+const Root = props => (
   <StyledRoot>
-    <>
-      {props.children}
-    </>
+    <>{props.children}</>
   </StyledRoot>
-)
+);
 
-export { Root }
+export { Root };

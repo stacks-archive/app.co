@@ -1,4 +1,4 @@
-import Styled from 'styled-components'
+import Styled from 'styled-components';
 
 export const EarningsPlaceholder = Styled.div`
   background: ${props => props.background};
@@ -9,4 +9,4 @@ export const EarningsPlaceholder = Styled.div`
   position: relative;
   top: 0px;
   margin-left: 2px;
-`
+`;

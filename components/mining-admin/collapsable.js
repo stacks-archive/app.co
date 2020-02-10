@@ -1,4 +1,4 @@
-import Styled from 'styled-components'
+import Styled from 'styled-components';
 
 export const Section = Styled.section`
   background: white;
@@ -8,7 +8,7 @@ export const Section = Styled.section`
     cursor: pointer;
     padding: 24px 64px 32px 64px;
   } 
-`
+`;
 
 export const Caret = Styled.div`
   border-top: 12px solid rgba(20, 33, 68, 0.7);
@@ -16,7 +16,7 @@ export const Caret = Styled.div`
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   content: ' ';
-  transform: ${({open}) => open ? 'none' : 'rotate(-90deg)'};
+  transform: ${({ open }) => (open ? 'none' : 'rotate(-90deg)')};
   transition: transform 0.5s;
   left: -32px;
   position: relative;
@@ -24,11 +24,11 @@ export const Caret = Styled.div`
   top: 15px;
   width: 0;
   height: 0;
-`
+`;
 
 export const Container = Styled.div`
   padding: 32px;
-`
+`;
 
 export const Input = Styled.input`
   background: #f2f4f7;
@@ -38,9 +38,9 @@ export const Input = Styled.input`
   font-size: 1em;
   padding: 1em;
   width: 100%;
-`
+`;
 
-export const Textarea = Input.withComponent('textarea')
+export const Textarea = Input.withComponent('textarea');
 
 export const Button = Styled.button`
   display: block;
@@ -56,6 +56,6 @@ export const Button = Styled.button`
   padding: 1em;
   text-align: center;
   text-decoration: none;
-`
+`;
 
-export const ButtonLink = Button.withComponent('a')
+export const ButtonLink = Button.withComponent('a');
