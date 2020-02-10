@@ -30,17 +30,6 @@ const Footer = ({ ...rest }) => (
     >
       Privacy Policy
     </Type>
-
-    <Type
-      p={3}
-      color="white !important"
-      style={{ textDecoration: 'none' }}
-      is="a"
-      href="/mining/terms"
-      target="_blank"
-    >
-      App Mining Terms
-    </Type>
   </Flex>
 );
 

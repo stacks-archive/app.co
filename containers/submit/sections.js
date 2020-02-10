@@ -24,9 +24,15 @@ export const sections = (user, appConstants) => {
     {
       name: 'referralSource',
       required: false,
+<<<<<<< HEAD
       label: 'How did you learn about App.co or App Mining?',
       placeholder: 'Hacker News'
     }
+=======
+      label: 'How did you learn about App.co?',
+      placeholder: 'Hacker News',
+    },
+>>>>>>> feature/update-form
   ];
 
   const appDetails = [
@@ -162,12 +168,7 @@ export const sections = (user, appConstants) => {
           ,{' '}
           <Type is="a" href="/privacy" target="_blank">
             Privacy Policy
-          </Type>
-          , and{' '}
-          <Type is="a" href="/mining/terms" target="_blank">
-            App Mining Terms
-          </Type>
-          .
+          </Type>.
         </>
       ),
       validation: boolean().required(
@@ -176,7 +177,7 @@ export const sections = (user, appConstants) => {
     }
   ];
 
-  const sections = [
+  const fieldSections = [
     {
       fields: personal
     },
@@ -190,5 +191,5 @@ export const sections = (user, appConstants) => {
       fields: agreements
     }
   ];
-  return sections;
+  return fieldSections;
 };

@@ -6,52 +6,40 @@ export interface NavLink {
 export const primaryNavLinks: NavLink[] = [
   {
     name: 'Discover apps',
-    href: '/blockstack'
+    href: '/blockstack',
   },
   {
     name: 'About app.co',
-    href: '/faq'
-  },
-  {
-    name: 'App Mining',
-    href: '/mining'
+    href: '/faq',
   },
   {
     name: 'Submit app',
-    href: '/submit-your-app'
+    href: '/submit-your-app',
   },
-  {
-    name: 'Manage your apps',
-    href: '/maker/apps'
-  }
-]
+];
 
 export const adminLinks: NavLink[] = [
   {
     name: 'Admin',
-    href: '/admin'
+    href: '/admin',
   },
   {
     name: 'Pending',
-    href: '/admin/pending'
+    href: '/admin/pending',
   },
   {
     name: 'Mining',
-    href: '/admin/mining/months'
-  }
-]
+    href: '/admin/mining/months',
+  },
+];
 
 export const termsLinks: NavLink[] = [
   {
     name: 'Privacy Policy',
-    href: '/privacy'
+    href: '/privacy',
   },
   {
     name: 'Terms of Use',
-    href: '/terms'
+    href: '/terms',
   },
-  {
-    name: 'App Mining Terms',
-    href: '/mining/terms'
-  }
-]
+];
