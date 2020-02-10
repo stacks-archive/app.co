@@ -24,15 +24,9 @@ export const sections = (user, appConstants) => {
     {
       name: 'referralSource',
       required: false,
-<<<<<<< HEAD
       label: 'How did you learn about App.co or App Mining?',
       placeholder: 'Hacker News'
     }
-=======
-      label: 'How did you learn about App.co?',
-      placeholder: 'Hacker News',
-    },
->>>>>>> feature/update-form
   ];
 
   const appDetails = [
