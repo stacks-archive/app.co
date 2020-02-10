@@ -59,9 +59,9 @@ const makeUserReducer = (serverState: any = {}) => {
 
   const serverInitialState = {
     ...initialState,
-    jwt: serverState.token,
-    user: serverState.user,
-    userId: serverState.user && serverState.user.id
+    jwt: serverState && serverState.token,
+    user: serverState && serverState.user,
+    userId: serverState && serverState.user && serverState.user.id
   };
 
   return (state = serverInitialState, { type, payload }) => {
