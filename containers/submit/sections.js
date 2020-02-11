@@ -9,7 +9,7 @@ export const sections = (user, appConstants) => {
       required: true,
       label: 'Your Name',
       placeholder: 'Satoshi Nakamoto',
-      validation: string().required('Your name is required.'),
+      validation: string().required('Your name is required.')
     },
     {
       name: 'contactEmail',
@@ -19,14 +19,14 @@ export const sections = (user, appConstants) => {
       placeholder: 'satoshi@gmail.com',
       validation: string()
         .email('Please enter a valid email.')
-        .required('Your email is required.'),
+        .required('Your email is required.')
     },
     {
       name: 'referralSource',
       required: false,
       label: 'How did you learn about App.co or App Mining?',
-      placeholder: 'Hacker News',
-    },
+      placeholder: 'Hacker News'
+    }
   ];
 
   const appDetails = [
@@ -35,7 +35,7 @@ export const sections = (user, appConstants) => {
       required: true,
       label: 'App Name',
       placeholder: 'Satoshi Chat',
-      validation: string().required('Please enter the app name.'),
+      validation: string().required('Please enter the app name.')
     },
     {
       name: 'description',
@@ -45,7 +45,7 @@ export const sections = (user, appConstants) => {
       message: 'Will appear on App.co category pages and search.',
       placeholder: 'A chat app for crypto.',
       maxLength: 50,
-      validation: string().required('Please enter a short description.'),
+      validation: string().required('Please enter a short description.')
     },
     {
       name: 'website',
@@ -55,7 +55,7 @@ export const sections = (user, appConstants) => {
       placeholder: 'https://satoshi.chat/',
       validation: string()
         .required('Please enter a website.')
-        .url('Must be a valid URL with http/https.'),
+        .url('Must be a valid URL with http/https.')
     },
     {
       name: 'imageUrl',
@@ -67,7 +67,7 @@ export const sections = (user, appConstants) => {
       placeholder: 'https://example.com/app_icon.png',
       validation: string()
         .required('Please provide an icon.')
-        .url('Must be a valid URL with http/https.'),
+        .url('Must be a valid URL with http/https.')
     },
     {
       name: 'openSourceUrl',
@@ -75,14 +75,14 @@ export const sections = (user, appConstants) => {
       label: 'Open source URL',
       type: 'url',
       placeholder: 'https://github.com/SatoshiChat',
-      validation: string().url('Must be a valid URL with http/https.'),
+      validation: string().url('Must be a valid URL with http/https.')
     },
     {
       name: 'twitterHandle',
       required: false,
       label: 'App Twitter handle',
-      placeholder: '@SatoshiChat',
-    },
+      placeholder: '@SatoshiChat'
+    }
   ];
 
   const generateOptions = enums =>
@@ -99,7 +99,7 @@ export const sections = (user, appConstants) => {
     category: generateOptions(appConstants.categoryEnums),
     blockchain: generateOptions(appConstants.blockchainEnums),
     storageNetwork: generateOptions(appConstants.storageEnums),
-    authentication: generateOptions(appConstants.authenticationEnums),
+    authentication: generateOptions(appConstants.authenticationEnums)
   };
 
   const appCategories = [
@@ -111,7 +111,7 @@ export const sections = (user, appConstants) => {
       type: 'select',
       placeholder: 'Social networking',
       options: categoryOptions.category,
-      validation: string().required('Please select a category.'),
+      validation: string().required('Please select a category.')
     },
     {
       name: 'blockchain',
@@ -119,7 +119,7 @@ export const sections = (user, appConstants) => {
       width: '100%',
       type: 'select',
       placeholder: 'Bitcoin',
-      options: categoryOptions.blockchain,
+      options: categoryOptions.blockchain
     },
     {
       name: 'storageNetwork',
@@ -127,7 +127,7 @@ export const sections = (user, appConstants) => {
       width: '100%',
       type: 'select',
       placeholder: 'IPFS',
-      options: categoryOptions.storageNetwork,
+      options: categoryOptions.storageNetwork
     },
     {
       name: 'authentication',
@@ -137,10 +137,8 @@ export const sections = (user, appConstants) => {
       placeholder: 'Blockstack',
       required: true,
       validation: string().required('Please select an authentication method'),
-      options: categoryOptions.authentication,
-      message:
-        'Blockstack authentication is required to qualify for App Mining.',
-    },
+      options: categoryOptions.authentication
+    }
   ];
 
   const agreements = [
@@ -149,7 +147,7 @@ export const sections = (user, appConstants) => {
       required: true,
       type: 'checkbox',
       label: 'App is publicly accessible and user-ready',
-      validation: boolean().required('Required.'),
+      validation: boolean().required('Required.')
     },
     {
       name: 'disclaimers',
@@ -164,33 +162,28 @@ export const sections = (user, appConstants) => {
           ,{' '}
           <Type is="a" href="/privacy" target="_blank">
             Privacy Policy
-          </Type>
-          , and{' '}
-          <Type is="a" href="/mining/terms" target="_blank">
-            App Mining Terms
-          </Type>
-          .
+          </Type>.
         </>
       ),
       validation: boolean().required(
         'To submit an app, you must accept these terms.'
-      ),
-    },
+      )
+    }
   ];
 
-  const sections = [
+  const fieldSections = [
     {
-      fields: personal,
+      fields: personal
     },
     {
-      fields: appDetails,
+      fields: appDetails
     },
     {
-      fields: appCategories,
+      fields: appCategories
     },
     {
-      fields: agreements,
-    },
+      fields: agreements
+    }
   ];
-  return sections;
+  return fieldSections;
 };

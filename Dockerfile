@@ -1,5 +1,5 @@
 # app.co - 20min build
-FROM node:10.16.3-alpine as base
+FROM node:12.15.0-alpine as base
 # FROM blockstack/node:latest as base
 WORKDIR /usr/src
 COPY package.json yarn.lock /usr/src/
@@ -9,6 +9,7 @@ RUN apk add --repository https://dl-3.alpinelinux.org/alpine/edge/community/ --u
   py-pip \
   make \
   g++ \
+  libheif \
   vips-dev
 RUN yarn install
 COPY . .
@@ -20,7 +21,7 @@ RUN yarn build && \
     g++ && \
   yarn --production
 
-FROM node:10.16.3-alpine
+FROM node:12.15.0-alpine
 # FROM blockstack/node:latest
 WORKDIR /usr/src
 ENV NODE_ENV="production"

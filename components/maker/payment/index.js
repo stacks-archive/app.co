@@ -8,7 +8,7 @@ import {
   PaymentHelpText,
   PaymentBtcField,
   PaymentStxField,
-  PaymentButton,
+  PaymentButton
 } from './content';
 
 const PaymentDetails = ({ app, accessToken, user, dispatch }) => {
@@ -32,7 +32,7 @@ const PaymentDetails = ({ app, accessToken, user, dispatch }) => {
       appId: app.id,
       jwt: user.jwt,
       btcAddress,
-      stxAddress,
+      stxAddress
     })(dispatch);
     setSaving(false);
     setSavedValue({ btcAddress, stxAddress });
@@ -52,11 +52,11 @@ const PaymentDetails = ({ app, accessToken, user, dispatch }) => {
   };
   const getBtcError = createInputError({
     validateFn: validateBTC,
-    currencySymbol: 'BTC',
+    currencySymbol: 'BTC'
   });
   const getStxError = createInputError({
     validateFn: validateSTX,
-    currencySymbol: 'STX',
+    currencySymbol: 'STX'
   });
 
   return (

@@ -28,7 +28,7 @@ export const MakerNav: MakerNav = ({ selectedAppId, onSignOut }) => {
   const dispatch = useDispatch();
   const { appList, user } = useSelector(state => ({
     appList: selectAppList(state),
-    user: selectUser(state),
+    user: selectUser(state)
   }));
 
   const updateMakerRoute = (id: number) => router.push(`/maker/apps/${id}`);

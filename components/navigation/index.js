@@ -47,13 +47,6 @@ const NavigationComponent = ({
           <ErrorPageLink isErrorPage={isErrorPage} href="/faq" {...extraProps}>
             <a href="/faq">Learn more</a>
           </ErrorPageLink>
-          <ErrorPageLink
-            isErrorPage={isErrorPage}
-            href="/mining"
-            {...extraProps}
-          >
-            <a href="/mining">App Mining</a>
-          </ErrorPageLink>
           <a
             href="https://blog.app.co"
             target="_blank"
@@ -77,9 +70,6 @@ const NavigationComponent = ({
               </ErrorPageLink>
               <ErrorPageLink isErrorPage={isErrorPage} href="/terms">
                 <a href="/terms">Terms of Use</a>
-              </ErrorPageLink>
-              <ErrorPageLink isErrorPage={isErrorPage} href="/mining/terms">
-                <a href="/mining/terms">App Mining Terms</a>
               </ErrorPageLink>
             </>
           )}

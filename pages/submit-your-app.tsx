@@ -393,7 +393,9 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
               errors={this.state.errorCount > 0 && this.state.errors}
               signIn={this.props.signIn}
               user={this.props.user}
-              isAppMiningEligible={this.appMiningEligible()}
+              //
+              // Always must be false while app mining programme is paused
+              isAppMiningEligible={false}
             />
           )}
         </Page.Section>

@@ -28,16 +28,6 @@ const Header = ({ showOnMobile, link, ...rest }) => {
               <AppMiningLogo typeSize={20} invert />
             </Flex>
           </Flex>
-          <Type
-            display="inline-flex"
-            flexDirection={['column', 'column', 'column', 'row']}
-            color="white"
-            pl={2}
-            flexGrow={1}
-            pt={'2px'}
-          >
-            Next ranking starts on <Countdown pl={[0, 0, 0, 2]} />
-          </Type>
         </Flex>
         <Flex display={['none', 'none', 'flex']}>
           <CallToAction
