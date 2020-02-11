@@ -1,8 +1,18 @@
-import { css } from 'styled-components'
-import system from 'system-components'
-import tag from 'clean-tag'
+import { css } from 'styled-components';
+import system from 'system-components';
+import tag from 'clean-tag';
 
-import { space, color, fontSize, width, flex, flexDirection, flexWrap, alignContent, alignItems } from 'styled-system'
+import {
+  space,
+  color,
+  fontSize,
+  width,
+  flex,
+  flexDirection,
+  flexWrap,
+  alignContent,
+  alignItems,
+} from 'styled-system';
 
 const boxProps = css`
   ${space}
@@ -14,11 +24,11 @@ const boxProps = css`
   ${flexWrap}
   ${alignContent}
   ${alignItems}
-`
+`;
 
 const Box = system(
   {
-    is: tag
+    is: tag,
   },
   'width',
   'space',
@@ -44,11 +54,11 @@ const Box = system(
   'backgroundSize',
   'backgroundPosition',
   'backgroundRepeat'
-)
+);
 
 const A = system(
   {
-    is: tag.a
+    is: tag.a,
   },
   'width',
   'space',
@@ -74,18 +84,18 @@ const A = system(
   'backgroundSize',
   'backgroundPosition',
   'backgroundRepeat'
-)
+);
 
 const Flex = system(
   {
-    is: Box
+    is: Box,
   },
   { display: 'flex' },
   'flexWrap',
   'flexDirection',
   'alignItems',
   'justifyContent'
-)
+);
 
 Box.propTypes = {
   ...space.propTypes,
@@ -96,7 +106,7 @@ Box.propTypes = {
   ...flexWrap.propTypes,
   ...alignContent.propTypes,
   ...alignItems.propTypes,
-  ...color.propTypes
-}
+  ...color.propTypes,
+};
 
-export { Box, Flex, boxProps, A }
+export { Box, Flex, boxProps, A };

@@ -1,4 +1,4 @@
-import Styled from 'styled-components'
+import Styled from 'styled-components';
 
 export const Ol = Styled.ol`
   // margin: 2em;
@@ -6,7 +6,7 @@ export const Ol = Styled.ol`
   counter-reset: counter;
   list-style: none;
   margin: 3em 5em 2em 5em;
-`
+`;
 
 export const Li = Styled.li`
   border-bottom: 1px dotted rgba(0, 0, 0, 0.1);
@@ -41,4 +41,4 @@ export const Li = Styled.li`
     font-weight: bold;
     padding: 0;
   }
-`
+`;

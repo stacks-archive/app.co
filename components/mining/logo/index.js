@@ -1,9 +1,15 @@
-import * as React from 'react'
-import { Box } from 'blockstack-ui'
+import * as React from 'react';
+import { Box } from 'blockstack-ui';
 
 const AppCoLogo = ({ size = 50, ...rest }) => (
   <Box {...rest}>
-    <svg width={size} height={size} viewBox={`0 0 50 50`} fill="none" style={{ display: 'block' }}>
+    <svg
+      width={size}
+      height={size}
+      viewBox={`0 0 50 50`}
+      fill="none"
+      style={{ display: 'block' }}
+    >
       <rect width={size} height={size} fill="black" fillOpacity="0" />
       <path
         d="M0 9.78C0 6.2497 0 4.48455 0.71962 3.15086C1.27551 2.12063 2.12063 1.27551 3.15086 0.71962C4.48455 0 6.2497 0 9.78 0H40.22C43.7503 0 45.5154 0 46.8491 0.71962C47.8794 1.27551 48.7245 2.12063 49.2804 3.15086C50 4.48455 50 6.2497 50 9.78V40.22C50 43.7503 50 45.5154 49.2804 46.8491C48.7245 47.8794 47.8794 48.7245 46.8491 49.2804C45.5154 50 43.7503 50 40.22 50H9.78C6.2497 50 4.48455 50 3.15086 49.2804C2.12063 48.7245 1.27551 47.8794 0.71962 46.8491C0 45.5154 0 43.7503 0 40.22V9.78Z"
@@ -22,7 +28,7 @@ const AppCoLogo = ({ size = 50, ...rest }) => (
       />
     </svg>
   </Box>
-)
+);
 
 const LogoWordmark = () => (
   <svg width="160" height="42" viewBox="0 0 160 42" fill="none">
@@ -63,6 +69,6 @@ const LogoWordmark = () => (
       <circle cx="21" cy="29.4001" r="4.2" fill="white" />
     </g>
   </svg>
-)
+);
 
-export { AppCoLogo, LogoWordmark }
+export { AppCoLogo, LogoWordmark };

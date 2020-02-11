@@ -1,13 +1,13 @@
-import React from 'react'
-import ReactSelect from 'react-select'
-import { theme } from 'blockstack-ui'
+import React from 'react';
+import ReactSelect from 'react-select';
+import { theme } from 'blockstack-ui';
 
-const { colors } = theme
+const { colors } = theme;
 
 const selectStyles = ({ error }) => ({
   container: (styles, state) => ({
     ...styles,
-    width: '100%'
+    width: '100%',
   }),
   control: (styles, state) => ({
     ...styles,
@@ -15,11 +15,15 @@ const selectStyles = ({ error }) => ({
     backgroundColor: String('white'),
     borderColor: `${error ? colors.red : colors.blue.mid} !important`,
     color: `${state.isFocused ? colors.blue.dark : colors.blue.mid} !important`,
-    boxShadow: state.isFocused ? (error ? theme.shadows.focused.error : theme.shadows.focused.light) : 'none',
+    boxShadow: state.isFocused
+      ? error
+        ? theme.shadows.focused.error
+        : theme.shadows.focused.light
+      : 'none',
     ':hover': {
       borderColor: colors.blue.dark,
-      color: colors.blue.dark
-    }
+      color: colors.blue.dark,
+    },
   }),
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
     return {
@@ -31,49 +35,49 @@ const selectStyles = ({ error }) => ({
 
       ':hover': {
         backgroundColor: String(colors.blue.light),
-        color: `${String(colors.blue.dark)}`
-      }
-    }
+        color: `${String(colors.blue.dark)}`,
+      },
+    };
   },
-  input: (styles) => ({
+  input: styles => ({
     ...styles,
     color: 'white',
-    width: '100%'
+    width: '100%',
   }),
-  placeholder: (styles) => ({
+  placeholder: styles => ({
     ...styles,
-    color: 'currentColor'
+    color: 'currentColor',
   }),
-  menu: (styles) => ({
+  menu: styles => ({
     ...styles,
     backgroundColor: String('white'),
     border: `1px solid ${String(colors.blue.mid)} !important`,
-    width: '100%'
+    width: '100%',
   }),
   singleValue: (styles, { data }) => ({
     ...styles,
     color: `${String(colors.blue.dark)}`,
-    width: '100%'
-  })
-})
+    width: '100%',
+  }),
+});
 
 const SelectComponent = ({ ...rest }) => (
   <ReactSelect
     styles={selectStyles(rest)}
     style={{ width: '100%' }}
-    theme={(theme) => ({
+    theme={theme => ({
       ...theme,
       spacing: {
         ...theme.spacing,
-        controlHeight: 48
+        controlHeight: 48,
       },
       colors: {
         ...theme.colors,
-        neutral20: colors.blue.light
-      }
+        neutral20: colors.blue.light,
+      },
     })}
     {...rest}
   />
-)
+);
 
-export default SelectComponent
+export default SelectComponent;

@@ -1,7 +1,7 @@
-import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic';
 
 const Select = dynamic(() => import('./select'), {
-  ssr: false
-})
+  ssr: false,
+});
 
-export { Select }
+export { Select };

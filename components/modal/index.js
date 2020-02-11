@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
-import { theme } from '@common/styles'
-import { Box } from 'blockstack-ui'
+import { theme } from '@common/styles';
+import { Box } from 'blockstack-ui';
 
 export const CloseButton = styled.div`
   opacity: 0.5;
@@ -21,7 +21,7 @@ export const CloseButton = styled.div`
       color: white;
       border-radius: 50%;
     `};
-`
+`;
 
 export const Modal = styled.div`
   position: fixed;
@@ -38,7 +38,7 @@ export const Modal = styled.div`
   @media (max-width: 600px) {
     display: block;
   }
-`
+`;
 export const Backdrop = styled.div`
   position: fixed;
   height: 100vh;
@@ -61,7 +61,7 @@ export const Backdrop = styled.div`
     content: '';
     background: ${theme.colors.grey.mid};
   }
-`
+`;
 
 export const Content = styled(Box)`
   background-color: white;
@@ -89,11 +89,11 @@ export const Content = styled(Box)`
       background-size: 100%;
       background-repeat: no-repeat;
     `};
-`
+`;
 
 export default {
   Content,
   Backdrop,
   Modal,
-  CloseButton
-}
+  CloseButton,
+};

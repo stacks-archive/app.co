@@ -1,5 +1,5 @@
-import React from 'react'
-import { Box, theme } from 'blockstack-ui'
+import React from 'react';
+import { Box, theme } from 'blockstack-ui';
 
 const DemoEarthLogo = ({ color = 'white', strokeWidth = 1, ...props }) => (
   <svg
@@ -8,7 +8,7 @@ const DemoEarthLogo = ({ color = 'white', strokeWidth = 1, ...props }) => (
     style={{
       width: '100%',
       maxWidth: '100%',
-      display: 'block'
+      display: 'block',
     }}
   >
     <path
@@ -104,13 +104,18 @@ const DemoEarthLogo = ({ color = 'white', strokeWidth = 1, ...props }) => (
       fill={color}
     />
   </svg>
-)
-const ProductHuntLogo = ({ bg = theme.colors.blue.dark, color = 'white', strokeWidth = 1, ...props }) => (
+);
+const ProductHuntLogo = ({
+  bg = theme.colors.blue.dark,
+  color = 'white',
+  strokeWidth = 1,
+  ...props
+}) => (
   <svg
     style={{
       width: '100%',
       maxWidth: '100%',
-      display: 'block'
+      display: 'block',
     }}
     viewBox="0 0 181 24"
     fill="none"
@@ -123,7 +128,10 @@ const ProductHuntLogo = ({ bg = theme.colors.blue.dark, color = 'white', strokeW
       d="M12.7998 12.0021H9.39951V8.4H12.7998C13.7884 8.4 14.6005 9.20821 14.6005 10.201C14.6005 11.1938 13.7884 12.0021 12.7998 12.0021ZM12.7998 6H7V18H9.39951V14.4021H12.7998C15.1173 14.4021 17 12.5231 17 10.201C17 7.87897 15.1173 6 12.7998 6Z"
       fill={bg}
     />
-    <path d="M139.422 20V12.6682H131.552V20H128V3H131.543V9.56461H139.413V3H143V20H139.422Z" fill={color} />
+    <path
+      d="M139.422 20V12.6682H131.552V20H128V3H131.543V9.56461H139.413V3H143V20H139.422Z"
+      fill={color}
+    />
     <path
       d="M42.4883 8.37898C42.4883 6.97539 41.4416 6.12974 40.0825 6.12974H36.4442V10.6108H40.0825C41.4331 10.6108 42.4883 9.75641 42.4883 8.37898ZM33 20V3H40.5721C44.0922 3 46 5.44103 46 8.37898C46 11.2908 44.0669 13.7318 40.5721 13.7318H36.4526V20H33Z"
       fill={color}
@@ -165,9 +173,14 @@ const ProductHuntLogo = ({ bg = theme.colors.blue.dark, color = 'white', strokeW
       fill={color}
     />
   </svg>
-)
+);
 
-const ArrowIcon = ({ color = 'currentColor', strokeWidth = 1, width = '30px', ...props }) => (
+const ArrowIcon = ({
+  color = 'currentColor',
+  strokeWidth = 1,
+  width = '30px',
+  ...props
+}) => (
   <Box display="inline-block" color={color} {...props}>
     <Box
       is="svg"
@@ -175,16 +188,33 @@ const ArrowIcon = ({ color = 'currentColor', strokeWidth = 1, width = '30px', ..
       viewBox="0 0 30 15"
       fill="none"
       style={{
-        width
+        width,
       }}
     >
-      <path d="M17.5935 1.83716L28.2381 7.5L17.5935 13.1628V1.83716Z" stroke="currentColor" strokeWidth={strokeWidth} />
-      <line x1="27.1309" y1="7.5" x2="-0.000722885" y2="7.5" stroke="currentColor" strokeWidth={strokeWidth} />
+      <path
+        d="M17.5935 1.83716L28.2381 7.5L17.5935 13.1628V1.83716Z"
+        stroke="currentColor"
+        strokeWidth={strokeWidth}
+      />
+      <line
+        x1="27.1309"
+        y1="7.5"
+        x2="-0.000722885"
+        y2="7.5"
+        stroke="currentColor"
+        strokeWidth={strokeWidth}
+      />
     </Box>
   </Box>
-)
+);
 const Logo = ({ color = 'currentColor', dotsColor = 'white', ...props }) => (
-  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    width="32"
+    height="32"
+    viewBox="0 0 32 32"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M0 3.24C0 2.08213 0 1.5032 0.232469 1.06414C0.420069 0.709825 0.709825 0.420069 1.06414 0.232469C1.5032 0 2.08213 0 3.24 0H28.76C29.9179 0 30.4968 0 30.9359 0.232469C31.2902 0.420069 31.5799 0.709825 31.7675 1.06414C32 1.5032 32 2.08213 32 3.24V28.76C32 29.9179 32 30.4968 31.7675 30.9359C31.5799 31.2902 31.2902 31.5799 30.9359 31.7675C30.4968 32 29.9179 32 28.76 32H3.24C2.08213 32 1.5032 32 1.06414 31.7675C0.709825 31.5799 0.420069 31.2902 0.232469 30.9359C0 30.4968 0 29.9179 0 28.76V3.24Z"
       fill={color}
@@ -196,7 +226,7 @@ const Logo = ({ color = 'currentColor', dotsColor = 'white', ...props }) => (
       fill={dotsColor}
     />
   </svg>
-)
+);
 const OutlinedLogo = ({ color = 'currentColor', ...rest }) => (
   <svg
     viewBox="0 0 28 28"
@@ -204,7 +234,7 @@ const OutlinedLogo = ({ color = 'currentColor', ...rest }) => (
     style={{
       width: '100%',
       maxWidth: '100%',
-      display: 'block'
+      display: 'block',
     }}
   >
     <path
@@ -212,7 +242,7 @@ const OutlinedLogo = ({ color = 'currentColor', ...rest }) => (
       stroke={color}
     />
   </svg>
-)
+);
 
 const CameraIcon = ({ color = 'currentColor' }) => (
   <svg width="48" height="35" viewBox="0 0 48 35" fill="none">
@@ -223,13 +253,13 @@ const CameraIcon = ({ color = 'currentColor' }) => (
       fill={color}
     />
   </svg>
-)
+);
 
 const DotsLine = ({ color = '#EF6F70' }) => (
   <svg width="49" height="148" viewBox="0 0 49 148" fill="none">
     <path d="M0.5 0.5V147.5H48.5" stroke={color} strokeDasharray="2 4" />
   </svg>
-)
+);
 
 const ImproveGraphic = ({ color = '#4410FF' }) => (
   <svg
@@ -238,7 +268,7 @@ const ImproveGraphic = ({ color = '#4410FF' }) => (
     style={{
       width: '100%',
       maxWidth: '100%',
-      display: 'block'
+      display: 'block',
     }}
   >
     <path
@@ -248,7 +278,7 @@ const ImproveGraphic = ({ color = '#4410FF' }) => (
       fill={color}
     />
   </svg>
-)
+);
 
 const TryMyUILogo = ({ color = 'currentColor', ...rest }) => (
   <svg
@@ -257,7 +287,7 @@ const TryMyUILogo = ({ color = 'currentColor', ...rest }) => (
     style={{
       width: '100%',
       maxWidth: '100%',
-      display: 'block'
+      display: 'block',
     }}
     {...rest}
   >
@@ -286,7 +316,7 @@ const TryMyUILogo = ({ color = 'currentColor', ...rest }) => (
       fill={color}
     />
   </svg>
-)
+);
 
 const BuildGraphic = ({ color = '#4410FF' }) => (
   <svg
@@ -295,7 +325,7 @@ const BuildGraphic = ({ color = '#4410FF' }) => (
     style={{
       width: '100%',
       maxWidth: '100%',
-      display: 'block'
+      display: 'block',
     }}
   >
     <path
@@ -305,7 +335,7 @@ const BuildGraphic = ({ color = '#4410FF' }) => (
       fill={color}
     />
   </svg>
-)
+);
 const RegisterGraphic = ({ color = '#4410FF' }) => (
   <svg
     viewBox="0 0 181 130"
@@ -313,7 +343,7 @@ const RegisterGraphic = ({ color = '#4410FF' }) => (
     style={{
       width: '100%',
       maxWidth: '100%',
-      display: 'block'
+      display: 'block',
     }}
   >
     <path
@@ -323,7 +353,7 @@ const RegisterGraphic = ({ color = '#4410FF' }) => (
       fill={color}
     />
   </svg>
-)
+);
 
 const Dots = ({ color = '#EF6F70' }) => (
   <svg width="273" height="25" viewBox="0 0 273 25" fill="none">
@@ -889,7 +919,7 @@ const Dots = ({ color = '#EF6F70' }) => (
     <path d="M273 24H272V25H273V24Z" fill={color} />
     <path d="M273 24H272V25H273V24Z" fill={color} />
   </svg>
-)
+);
 
 const NewInternetLabs = ({ color = 'white', ...rest }) => (
   <Box color={color}>
@@ -900,7 +930,7 @@ const NewInternetLabs = ({ color = 'white', ...rest }) => (
       style={{
         width: '100%',
         maxWidth: '100%',
-        display: 'block'
+        display: 'block',
       }}
     >
       <path
@@ -911,7 +941,7 @@ const NewInternetLabs = ({ color = 'white', ...rest }) => (
       />
     </Box>
   </Box>
-)
+);
 const NewInternetLabsHorizontal = ({ color = 'white', ...rest }) => (
   <Box color={color}>
     <Box
@@ -921,7 +951,7 @@ const NewInternetLabsHorizontal = ({ color = 'white', ...rest }) => (
       style={{
         width: '100%',
         maxWidth: '100%',
-        display: 'block'
+        display: 'block',
       }}
     >
       <path
@@ -932,7 +962,7 @@ const NewInternetLabsHorizontal = ({ color = 'white', ...rest }) => (
       />
     </Box>
   </Box>
-)
+);
 
 const AwarioLogo = ({ color = 'white', ...rest }) => (
   <Box color={color}>
@@ -943,7 +973,7 @@ const AwarioLogo = ({ color = 'white', ...rest }) => (
       style={{
         width: '100%',
         maxWidth: '100%',
-        display: 'block'
+        display: 'block',
       }}
     >
       <path
@@ -958,7 +988,7 @@ const AwarioLogo = ({ color = 'white', ...rest }) => (
       />
     </Box>
   </Box>
-)
+);
 
 export {
   ArrowIcon,
@@ -975,5 +1005,5 @@ export {
   OutlinedLogo,
   NewInternetLabs,
   NewInternetLabsHorizontal,
-  AwarioLogo
-}
+  AwarioLogo,
+};

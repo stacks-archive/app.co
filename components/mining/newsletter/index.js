@@ -1,8 +1,8 @@
-import React from 'react'
-import { Box, Field, Flex, Type } from 'blockstack-ui'
-import { ArrowIcon } from '@components/mining/svg'
+import React from 'react';
+import { Box, Field, Flex, Type } from 'blockstack-ui';
+import { ArrowIcon } from '@components/mining/svg';
 
-import NewsletterWrapper from './container'
+import NewsletterWrapper from './container';
 
 const Button = ({ disabled, ...rest }) => (
   <Flex
@@ -19,7 +19,7 @@ const Button = ({ disabled, ...rest }) => (
   >
     <ArrowIcon />
   </Flex>
-)
+);
 
 const Overlay = ({ label = 'Processing...', loading, ...rest }) => (
   <Flex
@@ -33,7 +33,11 @@ const Overlay = ({ label = 'Processing...', loading, ...rest }) => (
     width="calc(100% - 20px)"
     height="43px"
     zIndex="99999"
-    style={{ whiteSpace: 'nowrap', transition: '0.25s all ease-in-out', pointerEvents: 'none' }}
+    style={{
+      whiteSpace: 'nowrap',
+      transition: '0.25s all ease-in-out',
+      pointerEvents: 'none',
+    }}
     textAlign="center"
     opacity={loading ? 1 : 0}
     {...rest}
@@ -42,7 +46,7 @@ const Overlay = ({ label = 'Processing...', loading, ...rest }) => (
       {label}
     </Type>
   </Flex>
-)
+);
 
 const InputComponent = ({
   loading,
@@ -59,11 +63,23 @@ const InputComponent = ({
   value,
   ...rest
 }) => (
-  <Box width={[1]} style={{ pointerEvents: loading ? 'none' : 'unset' }} {...rest}>
+  <Box
+    width={[1]}
+    style={{ pointerEvents: loading ? 'none' : 'unset' }}
+    {...rest}
+  >
     <Box position="relative">
-      {hideButton ? null : <Button cursor={isValid ? 'pointer' : undefined}  disabled={!isValid} onClick={doSubmit} />}
+      {hideButton ? null : (
+        <Button
+          cursor={isValid ? 'pointer' : undefined}
+          disabled={!isValid}
+          onClick={doSubmit}
+        />
+      )}
       <Overlay loading={loading} />
-      {!hideSuccess && success ? <Overlay label="Thanks for Subscribing!" /> : null}
+      {!hideSuccess && success ? (
+        <Overlay label="Thanks for Subscribing!" />
+      ) : null}
       <form onSubmit={doSubmit}>
         <Field
           width={[1]}
@@ -81,7 +97,7 @@ const InputComponent = ({
       </form>
     </Box>
   </Box>
-)
+);
 const Newsletter = ({
   placeholder = 'Subscribe for updates',
   hideButton,
@@ -109,16 +125,16 @@ const Newsletter = ({
         bind,
         isValid,
         error,
-        ...props
-      }
+        ...props,
+      };
       return (
         <>
           <InputComponent {...inputProps} />
           {children}
         </>
-      )
+      );
     }}
   </NewsletterWrapper>
-)
+);
 
-export { Newsletter }
+export { Newsletter };

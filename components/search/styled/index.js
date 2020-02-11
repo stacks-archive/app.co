@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components'
-import { Box, boxProps } from '@components/box'
-import { theme, wrapperStyle } from '@common/styles'
+import styled, { css } from 'styled-components';
+import { Box, boxProps } from '@components/box';
+import { theme, wrapperStyle } from '@common/styles';
 
 const StyledSearchBar = styled(Box)`
   display: flex;
@@ -15,7 +15,7 @@ const StyledSearchBar = styled(Box)`
     css`
       opacity: 0.75;
     `};
-`
+`;
 
 const SearchResults = styled.div`
   position: fixed;
@@ -23,7 +23,8 @@ const SearchResults = styled.div`
   left: 0;
   top: 65px;
   background: white;
-  box-shadow: 0 1px 1px 0 rgba(20, 33, 68, 0.04), 0 1px 3px 1px rgba(20, 33, 68, 0.09);
+  box-shadow: 0 1px 1px 0 rgba(20, 33, 68, 0.04),
+    0 1px 3px 1px rgba(20, 33, 68, 0.09);
   transition: all 135ms cubic-bezier(0.4, 0, 0.2, 1);
   transform: none;
   opacity: 1;
@@ -45,7 +46,7 @@ const SearchResults = styled.div`
       opacity: 0;
       transform: translateY(-20px);
     `};
-`
+`;
 
 const ResultsWrapper = styled.div`
   max-height: calc(80vh - 65px);
@@ -57,7 +58,7 @@ const ResultsWrapper = styled.div`
     padding: 16px 32px;
     max-height: calc(100vh - 65px);
   }
-`
+`;
 const Icon = styled(Box)`
   flex-shrink: 0;
   ${({ focused }) =>
@@ -68,7 +69,7 @@ const Icon = styled(Box)`
   svg {
     display: block;
   }
-`
+`;
 
 const CloseIcon = styled(Box)`
   color: ${theme.colors.blue};
@@ -84,12 +85,12 @@ const CloseIcon = styled(Box)`
   &:hover {
     opacity: 1;
   }
-`
+`;
 
 const Section = styled.div`
   ${({ grow }) => grow && `flex-grow:1;`};
   position: relative;
-`
+`;
 
 const Backdrop = styled.div`
   position: fixed;
@@ -113,7 +114,7 @@ const Backdrop = styled.div`
     content: '';
     background: ${theme.colors.blue};
   }
-`
+`;
 
 const Input = styled.input`
   border: none;
@@ -124,18 +125,23 @@ const Input = styled.input`
     box-shadow: none;
     outline: none;
   }
-`
+
+  &::placeholder {
+    color: #a1a7b3;
+    font-size: 14px;
+  }
+`;
 
 ResultsWrapper.defaultProps = {
   pl: 100,
-  py: 3
-}
-StyledSearchBar.Backdrop = Backdrop
-StyledSearchBar.Icon = Icon
-StyledSearchBar.Section = Section
-StyledSearchBar.Results = SearchResults
-StyledSearchBar.Results.Wrapper = ResultsWrapper
-StyledSearchBar.CloseIcon = CloseIcon
-StyledSearchBar.Input = Input
+  py: 3,
+};
+StyledSearchBar.Backdrop = Backdrop;
+StyledSearchBar.Icon = Icon;
+StyledSearchBar.Section = Section;
+StyledSearchBar.Results = SearchResults;
+StyledSearchBar.Results.Wrapper = ResultsWrapper;
+StyledSearchBar.CloseIcon = CloseIcon;
+StyledSearchBar.Input = Input;
 
-export { StyledSearchBar }
+export { StyledSearchBar };

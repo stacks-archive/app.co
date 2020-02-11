@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { Flex } from 'blockstack-ui'
+import styled from 'styled-components';
+import { Flex } from 'blockstack-ui';
 
 const StyledMiningButton = styled(Flex)`
   background: #11a9bc;
@@ -12,12 +12,12 @@ const StyledMiningButton = styled(Flex)`
     cursor: pointer;
     transform: translateY(-3px);
   }
-`
+`;
 
 StyledMiningButton.defaultProps = {
   alignItems: 'center',
   justifyContent: 'center',
   py: 3,
-  px: 5
-}
-export { StyledMiningButton }
+  px: 5,
+};
+export { StyledMiningButton };

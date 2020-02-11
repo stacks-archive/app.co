@@ -1,15 +1,26 @@
-import React from 'react'
-import { Modal, Flex, Type, Box, Button } from 'blockstack-ui'
-import { State, Hover } from 'react-powerplug'
-import { BuildGraphic, RegisterGraphic, ArrowIcon } from '@components/mining/svg'
-import { Newsletter } from '@components/mining/newsletter'
-import { NewsletterContext } from '@components/mining/newsletter/container'
-import { trackEvent } from '@utils'
+import React from 'react';
+import { Modal, Flex, Type, Box, Button } from 'blockstack-ui';
+import { State, Hover } from 'react-powerplug';
+import {
+  BuildGraphic,
+  RegisterGraphic,
+  ArrowIcon,
+} from '@components/mining/svg';
+import { Newsletter } from '@components/mining/newsletter';
+import { NewsletterContext } from '@components/mining/newsletter/container';
+import { trackEvent } from '@utils';
 
-const ModalComponent = (props) => (
-  <Flex position="relative" maxWidth={600} width="100%" flexDirection="column" bg="white" {...props} />
-)
-const header = (props) => (
+const ModalComponent = props => (
+  <Flex
+    position="relative"
+    maxWidth={600}
+    width="100%"
+    flexDirection="column"
+    bg="white"
+    {...props}
+  />
+);
+const header = props => (
   <Flex
     minWidth={600}
     p={4}
@@ -21,52 +32,58 @@ const header = (props) => (
     width={48}
     {...props}
   />
-)
+);
 
 const InitialView = ({ setState, view, content }) => (
-    <Box p={6}>
-      <Type color="blue" lineHeight={1.5} maxWidth="80%" fontSize={5} fontFamily="brand">
-        {content.title}
-      </Type>
-      <Box pt={4}>
-        <Box>
-          <Newsletter
-            onSubmit={async (doSubmit) => {
-              const email = await doSubmit()
-              if (email && view === 'initial') {
-                setState({ view: 'success', value: email })
-              }
-            }}
-            hideButton
-            variant="ui"
-            placeholder="Enter your email address"
-          >
-            <NewsletterContext.Consumer>
-              {({ doSubmit, loading, isValid }) => (
-                <Box pt={5}>
-                  <Button
-                    disabled={!isValid}
-                    onClick={async () => {
-                      const email = await doSubmit()
-                      if (email && view === 'initial') {
-                        setState({ view: 'success', value: email })
-                      }
-                    }}
-                    width={1}
-                    height="auto"
-                    py={2}
-                    icon={!loading ? ArrowIcon : undefined}
-                  >
-                    {loading ? 'Loading...' : 'Submit'}
-                  </Button>
-                </Box>
-              )}
-            </NewsletterContext.Consumer>
-          </Newsletter>
-        </Box>
+  <Box p={6}>
+    <Type
+      color="blue"
+      lineHeight={1.5}
+      maxWidth="80%"
+      fontSize={5}
+      fontFamily="brand"
+    >
+      {content.title}
+    </Type>
+    <Box pt={4}>
+      <Box>
+        <Newsletter
+          onSubmit={async doSubmit => {
+            const email = await doSubmit();
+            if (email && view === 'initial') {
+              setState({ view: 'success', value: email });
+            }
+          }}
+          hideButton
+          variant="ui"
+          placeholder="Enter your email address"
+        >
+          <NewsletterContext.Consumer>
+            {({ doSubmit, loading, isValid }) => (
+              <Box pt={5}>
+                <Button
+                  disabled={!isValid}
+                  onClick={async () => {
+                    const email = await doSubmit();
+                    if (email && view === 'initial') {
+                      setState({ view: 'success', value: email });
+                    }
+                  }}
+                  width={1}
+                  height="auto"
+                  py={2}
+                  icon={!loading ? ArrowIcon : undefined}
+                >
+                  {loading ? 'Loading...' : 'Submit'}
+                </Button>
+              </Box>
+            )}
+          </NewsletterContext.Consumer>
+        </Newsletter>
       </Box>
     </Box>
-  )
+  </Box>
+);
 
 const Item = ({ graphic: Graphic, title, link, cta, ...rest }) => (
   <Hover>
@@ -88,11 +105,21 @@ const Item = ({ graphic: Graphic, title, link, cta, ...rest }) => (
         {...rest}
         {...bind}
       >
-        <Box width={['80px', '120px', '140px']} pr={[4, 5]} py={4} flexShrink={0}>
+        <Box
+          width={['80px', '120px', '140px']}
+          pr={[4, 5]}
+          py={4}
+          flexShrink={0}
+        >
           <Graphic />
         </Box>
         <Box lineHeight={1.65}>
-          <Type pb={2} fontSize={3} fontWeight="500" color={hovered ? 'blue' : 'blue.dark'}>
+          <Type
+            pb={2}
+            fontSize={3}
+            fontWeight="500"
+            color={hovered ? 'blue' : 'blue.dark'}
+          >
             {title}
           </Type>
           <Type>{cta}</Type>
@@ -100,7 +127,7 @@ const Item = ({ graphic: Graphic, title, link, cta, ...rest }) => (
       </Flex>
     )}
   </Hover>
-)
+);
 
 const SuccessView = ({ value, content }) => (
   <Flex
@@ -115,7 +142,13 @@ const SuccessView = ({ value, content }) => (
   >
     <Box pb={6}>
       <Box pb={4}>
-        <Type color="blue" lineHeight={1.5} maxWidth="80%" fontSize={5} fontFamily="brand">
+        <Type
+          color="blue"
+          lineHeight={1.5}
+          maxWidth="80%"
+          fontSize={5}
+          fontFamily="brand"
+        >
           {content.title}
         </Type>
       </Box>
@@ -128,7 +161,7 @@ const SuccessView = ({ value, content }) => (
       link="https://docs.blockstack.org/develop/zero_to_dapp_1.html"
       title="New to Blockstack?"
       cta="Need to integrate Blockstack authentication? Learn how with our Zero-to-Dapp tutorial."
-      onClick={() => trackEvent('Starter Kit Click Zero-to-Dapp') }
+      onClick={() => trackEvent('Starter Kit Click Zero-to-Dapp')}
       mb={4}
     />
     <Item
@@ -139,12 +172,12 @@ const SuccessView = ({ value, content }) => (
       cta="Register on App.co and complete the App Mining Ready steps."
     />
   </Flex>
-)
+);
 
-const handleSubmit = (setState) => setState({ view: 'success' })
+const handleSubmit = setState => setState({ view: 'success' });
 const StarterKitModal = ({ content, ...rest }) => {
   if (rest.visible) {
-    trackEvent('Open App Mining Starter Kit Modal')
+    trackEvent('Open App Mining Starter Kit Modal');
   }
   return (
     <Modal
@@ -167,14 +200,13 @@ const StarterKitModal = ({ content, ...rest }) => {
                 handleSubmit={() => handleSubmit(setState)}
               />
             ) : (
-                <SuccessView content={content.success} value={state.value} />
-              )}
+              <SuccessView content={content.success} value={state.value} />
+            )}
           </>
         )}
       </State>
     </Modal>
-  )
-}
-  
+  );
+};
 
-export { StarterKitModal }
+export { StarterKitModal };

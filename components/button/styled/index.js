@@ -1,6 +1,6 @@
-import React from 'react'
-import styled, { css } from 'styled-components'
-import { darken } from 'polished'
+import React from 'react';
+import styled, { css } from 'styled-components';
+import { darken } from 'polished';
 
 const StyledButton = styled.a`
   padding: 10px 20px;
@@ -98,6 +98,6 @@ const StyledButton = styled.a`
         background: ${darken(0.1, '#0CCABA')};
       }
     `};
-`
+`;
 
-export { StyledButton }
+export { StyledButton };

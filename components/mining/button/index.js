@@ -1,8 +1,6 @@
-import React from 'react'
-import { StyledMiningButton } from '@components/mining/button/styled'
+import React from 'react';
+import { StyledMiningButton } from '@components/mining/button/styled';
 
-const MiningButton = ({ ...rest }) => (
-  <StyledMiningButton {...rest} />
-)
+const MiningButton = ({ ...rest }) => <StyledMiningButton {...rest} />;
 
-export { MiningButton }
+export { MiningButton };

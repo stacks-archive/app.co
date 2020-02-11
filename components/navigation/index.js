@@ -1,17 +1,28 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import NewsletterActions from '@stores/newsletter/actions'
-import { StyledTopBar } from '@components/top-bar/styled'
-import Link from 'next/link'
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import NewsletterActions from '@stores/newsletter/actions';
+import { StyledTopBar } from '@components/top-bar/styled';
+import Link from 'next/link';
 
-const ErrorPageLink = ({ isErrorPage, children, onClick,...props }) => 
-  isErrorPage ? children : <Link {...props}>{children}</Link>
+const ErrorPageLink = ({ isErrorPage, children, onClick, ...props }) =>
+  isErrorPage ? children : <Link {...props}>{children}</Link>;
 
-const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, footer, admin, display, ...rest }) => {
-  const extraProps = handleClick ? { onClick: () => handleClick() } : {}
+const NavigationComponent = ({
+  handleClick,
+  isErrorPage,
+  openNewsletterModal,
+  footer,
+  admin,
+  display,
+  ...rest
+}) => {
+  const extraProps = handleClick ? { onClick: () => handleClick() } : {};
   return (
-    <StyledTopBar.Navigation flexWrap={footer ? 'wrap' : undefined} display={display}>
+    <StyledTopBar.Navigation
+      flexWrap={footer ? 'wrap' : undefined}
+      display={display}
+    >
       {admin ? (
         <>
           <Link href="/admin">
@@ -26,21 +37,28 @@ const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, fo
         </>
       ) : (
         <>
-          <ErrorPageLink isErrorPage={isErrorPage} href={{ pathname: '/platforms', query: { platform: 'blockstack' } }} as="/blockstack">
+          <ErrorPageLink
+            isErrorPage={isErrorPage}
+            href={{ pathname: '/platforms', query: { platform: 'blockstack' } }}
+            as="/blockstack"
+          >
             <a href="/blockstack">All apps</a>
           </ErrorPageLink>
           <ErrorPageLink isErrorPage={isErrorPage} href="/faq" {...extraProps}>
             <a href="/faq">Learn more</a>
           </ErrorPageLink>
-          <ErrorPageLink isErrorPage={isErrorPage} href="/mining" {...extraProps}>
-            <a href="/mining">App Mining</a>
-          </ErrorPageLink>
-          <a href="https://blog.app.co" target="_blank" rel="noopener noreferrer">Blog</a>
+          <a
+            href="https://blog.app.co"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Blog
+          </a>
           <a
             href="#"
-            onClick={(evt) => {
-              evt.preventDefault()
-              openNewsletterModal()
+            onClick={evt => {
+              evt.preventDefault();
+              openNewsletterModal();
             }}
           >
             Get updates
@@ -53,25 +71,27 @@ const NavigationComponent = ({ handleClick, isErrorPage, openNewsletterModal, fo
               <ErrorPageLink isErrorPage={isErrorPage} href="/terms">
                 <a href="/terms">Terms of Use</a>
               </ErrorPageLink>
-              <ErrorPageLink isErrorPage={isErrorPage} href="/mining/terms">
-                <a href="/mining/terms">App Mining Terms</a>
-              </ErrorPageLink>
             </>
           )}
-          <ErrorPageLink isErrorPage={isErrorPage} href="/submit" {...extraProps}>
+          <ErrorPageLink
+            isErrorPage={isErrorPage}
+            href="/submit"
+            {...extraProps}
+          >
             <a href="/submit">Add your app</a>
           </ErrorPageLink>
         </>
       )}
     </StyledTopBar.Navigation>
-  )
-}
+  );
+};
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ ...NewsletterActions }, dispatch)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ ...NewsletterActions }, dispatch);
 
 const Navigation = connect(
   null,
   mapDispatchToProps
-)(NavigationComponent)
+)(NavigationComponent);
 
-export { Navigation }
+export { Navigation };

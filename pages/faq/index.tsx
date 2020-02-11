@@ -1,11 +1,11 @@
-import React from 'react'
-import { Page } from '@components/page'
-import { Newsletter } from '@components/newsletter'
-import Head from '@containers/head'
-import {Box} from '@components/mining'
-import { Type } from '@components/typography'
+import React from 'react';
+import { Page } from '@components/page';
+import { Newsletter } from '@components/newsletter';
+import Head from '@containers/head';
+import { Box } from '@components/mining';
+import { Text } from '@blockstack/ui';
 
-import Content from './content.md'
+import Content from './content.md';
 
 class LearnMore extends React.PureComponent {
   render() {
@@ -19,16 +19,16 @@ class LearnMore extends React.PureComponent {
           <Newsletter />
         </Page.Section>
         <Page.Section wrap richText bg="white">
-          <Box p={["32px", "64px"]}>
-            <Type.h1 mt={0} id="whats-a-dapp">
+          <Box p={['32px', '64px']}>
+            <Text mt={0} id="whats-a-dapp" textStyle="display.large">
               What's a Dapp?
-            </Type.h1>
+            </Text>
             <Content />
           </Box>
         </Page.Section>
       </Page>
-    )
+    );
   }
 }
 
-export default LearnMore
+export default LearnMore;

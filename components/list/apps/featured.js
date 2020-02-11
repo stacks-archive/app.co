@@ -1,17 +1,17 @@
 /**
  * TODO: this should not be its own component
  */
-import React from 'react'
-import PropTypes from 'prop-types'
-import sortBy from 'lodash/sortBy'
-import { background } from '@common'
+import React from 'react';
+import PropTypes from 'prop-types';
+import sortBy from 'lodash/sortBy';
+import { background } from '@common';
 
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
-import { selectApps } from '@stores/apps/selectors'
+import { selectApps } from '@stores/apps/selectors';
 
-import { ListContainer } from '@components/list/index'
-import AppItem from './item'
+import { ListContainer } from '@components/list/index';
+import AppItem from './item';
 
 class FeaturedListComponent extends React.Component {
   static propTypes = {
@@ -22,40 +22,48 @@ class FeaturedListComponent extends React.Component {
     singular: PropTypes.string,
     filterBy: PropTypes.string,
     href: PropTypes.string,
-    limit: PropTypes.number
-  }
+    limit: PropTypes.number,
+  };
 
   getFilteredApps() {
-    const { allApps, appNames } = this.props
-    let filtered = allApps.filter((app) => appNames.indexOf(app.name) !== -1)
-    filtered = sortBy(filtered, (app) => appNames.indexOf(app.name))
-    return [...new Set(filtered)]
+    const { allApps, appNames } = this.props;
+    let filtered = allApps.filter(app => appNames.indexOf(app.name) !== -1);
+    filtered = sortBy(filtered, app => appNames.indexOf(app.name));
+    return [...new Set(filtered)];
   }
 
   render() {
-    const { title, href, filterBy, singular, query, image, hrefAttrs } = this.props
+    const {
+      title,
+      href,
+      filterBy,
+      singular,
+      query,
+      image,
+      hrefAttrs,
+    } = this.props;
     const link = href
       ? hrefAttrs || {
           as: `/${filterBy}/${query}`,
           href: {
             pathname: `/${filterBy}`,
             query: {
-              [singular]: query
-            }
-          }
+              [singular]: query,
+            },
+          },
         }
-      : {}
+      : {};
 
-    const bg = image !== 'none' ? background(image || title) : undefined
+    const bg = image !== 'none' ? background(image || title) : undefined;
     const header = {
       title,
       background: bg,
       white: true,
-      ...link
-    }
+      ...link,
+    };
 
     if (href) {
-      header.action = { label: 'View All' }
+      header.action = { label: 'View All' };
     }
     return (
       <ListContainer
@@ -67,14 +75,14 @@ class FeaturedListComponent extends React.Component {
         href={href}
         limit={this.props.limit}
       />
-    )
+    );
   }
 }
 
-const mapStateToProps = (state) => ({
-  allApps: selectApps(state)
-})
+const mapStateToProps = state => ({
+  allApps: selectApps(state),
+});
 
-const FeaturedList = connect(mapStateToProps)(FeaturedListComponent)
+const FeaturedList = connect(mapStateToProps)(FeaturedListComponent);
 
-export default FeaturedList
+export default FeaturedList;

@@ -24,7 +24,8 @@
       "@common/*": ["common/*"],
       "@pages/*": ["pages/*"],
       "@utils/*": ["utils/*"],
-      "@stores/*": ["store/*"]
+      "@stores/*": ["stores/*"],
+      "@models/*": ["models/*"],
     }
   },
   "exclude": [
@@ -33,6 +34,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "**/*.js"
   ]
 }
