@@ -14,7 +14,7 @@ RUN apk add --update --no-cache build-base \
     make   \
     g++   \
     vips-dev
-RUN yarn install
+RUN yarn install --network-timeout 1000000
 COPY . .
 RUN yarn build && \
   apk del \
