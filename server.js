@@ -11,10 +11,10 @@ const morgan = require('morgan');
 const basicAuth = require('express-basic-auth');
 const request = require('request-promise');
 const keyBy = require('lodash/keyBy');
-const { createMiddleware: createPrometheusMiddleware } = require('@promster/express')
+const { createMiddleware: createPrometheusMiddleware } = require('@promster/express');
 const { createServer } = require('@promster/server');
 
-const dev = process.env.NODE_ENV !== 'production'
+const dev = process.env.NODE_ENV !== 'production';
 if (dev) {
   dotenv.config();
 }
@@ -45,7 +45,8 @@ const pageCacheKey = req => {
   const { path } = req;
   const isAdmin = path.indexOf('admin') !== -1;
   const isMaker = path.indexOf('maker') !== -1;
-  if (isAdmin || isMaker) {
+  const isSubmit = path.indexOf('submit') !== -1;
+  if (isAdmin || isMaker || isSubmit) {
     return null;
   }
   return `page-cache-key-${path}`;
@@ -163,12 +164,12 @@ console.warn = (...args) => {
 
 app.prepare().then(() => {
   getApps(apiServer).then((apps) => {
-    const server = express()
-    server.use(createPrometheusMiddleware({ app: server }))
+    const server = express();
+    server.use(createPrometheusMiddleware({ app: server }));
 
     // Create `/metrics` endpoint on separate server
     if (!dev) {
-      createServer({ port: 9153 }).then(() => console.log(`@promster/server started on port 9153.`))
+      createServer({ port: 9153 }).then(() => console.log(`@promster/server started on port 9153.`));
     }
 
     if (!dev) {
