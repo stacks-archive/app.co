@@ -30,4 +30,4 @@ WORKDIR /usr/src
 ENV NODE_ENV="production"
 COPY --from=base /usr/src .
 EXPOSE 3000
-CMD ["node", "./server"]
+CMD ["node", "--max-http-header-size", "16000", "./server"]
