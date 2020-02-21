@@ -1,13 +1,14 @@
-import * as React from 'react'
-import { Flex, Box, Type, OpenModal } from 'blockstack-ui'
-import { Hover } from 'react-powerplug'
-import { ArrowIcon, OutlinedLogo } from '@components/mining/svg'
-import { StarterKitModal } from '@containers/mining/starter-kit-modal'
-import { InView } from 'react-intersection-observer'
+import * as React from 'react';
+import { Flex, Box, Type, OpenModal } from 'blockstack-ui';
+import { Hover } from 'react-powerplug';
+import { ArrowIcon, OutlinedLogo } from '@components/mining/svg';
+import { StarterKitModal } from '@containers/mining/starter-kit-modal';
+import { InView } from 'react-intersection-observer';
 
-import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
-const SectionContext = React.createContext({})
+const SectionContext = React.createContext({});
 
 const defaultContent = {
   initial: {
@@ -17,19 +18,19 @@ const defaultContent = {
     title: 'Welcome to App Mining',
     body: 'We emailed your App Mining Starter Kit to'
   }
-}
+};
 
 const OpenStarterKitModal = ({ content = defaultContent, ...rest }) => (
   <OpenModal
     component={ props => <StarterKitModal { ...props } content={ content }/> }
     { ...rest }
   />
-)
+);
 
 const Countdown = dynamic(() => import('../countdown'), {
   ssr: false,
   loading: () => <>...</>
-})
+});
 const LearnMore = ({
                      label = 'Learn how to earn',
                      color = 'blue.mid',
@@ -62,7 +63,7 @@ const LearnMore = ({
       </Flex>
     ) }
   </Hover>
-)
+);
 
 const Title = ({ style, ...rest }) => (
   <SectionContext.Consumer>
@@ -82,7 +83,7 @@ const Title = ({ style, ...rest }) => (
       />
     ) }
   </SectionContext.Consumer>
-)
+);
 const Wrapper = ({ observed, inView, ...rest }) => (
   <Flex
     maxWidth={ 1180 }
@@ -95,7 +96,7 @@ const Wrapper = ({ observed, inView, ...rest }) => (
     transition="0.35s 0.15s all ease-in-out"
     { ...rest }
   />
-)
+);
 const Section = ({ bg, ...rest }) => (
   <SectionContext.Provider value={ { bg } }>
     <Flex
@@ -110,7 +111,7 @@ const Section = ({ bg, ...rest }) => (
       { ...rest }
     />
   </SectionContext.Provider>
-)
+);
 
 const ObservedSection = ({ children, inViewProps = {}, ...rest }) => (
   <InView rootMargin="60px" threshold={ 0.1 } { ...inViewProps }>
@@ -120,7 +121,7 @@ const ObservedSection = ({ children, inViewProps = {}, ...rest }) => (
       </div>
     ) }
   </InView>
-)
+);
 
 const Logo = ({ ...rest }) => (
   <Box { ...rest }>
@@ -159,11 +160,11 @@ const Logo = ({ ...rest }) => (
       </Type>
     </Type>
   </Box>
-)
+);
 
-const sizes = [1, 0.95, 0.9, 0.89]
-const opacity = [1, 0.46, 0.25, 0.15]
-const offset = [0, 21, 40, 60]
+const sizes = [1, 0.95, 0.9, 0.89];
+const opacity = [1, 0.46, 0.25, 0.15];
+const offset = [0, 21, 40, 60];
 
 const getActiveStyles = (active, index, length) => {
   if (active === index) {
@@ -172,10 +173,10 @@ const getActiveStyles = (active, index, length) => {
       position: 'relative',
       transform: `translateY(${ offset[0] }px) scale(${ sizes[0] })`,
       opacity: opacity[0]
-    }
+    };
   }
   const number =
-    index - active < 0 ? length + (index - active) : index - active
+    index - active < 0 ? length + (index - active) : index - active;
   return {
     position: 'absolute',
     zIndex: length - index,
@@ -183,8 +184,8 @@ const getActiveStyles = (active, index, length) => {
     transform: `translateY(${ offset[number] }px) scale(${ sizes[number] })`,
     left: 0,
     opacity: opacity[number]
-  }
-}
+  };
+};
 
 const AppItem = ({ app, active, index, length, ...rest }) => app ? (
   <Flex
@@ -245,7 +246,9 @@ const CallToAction = ({ buttonProps = {}, ...rest }) => (
           { ...bind }
 
         >
-          <Type>Try Blockstack Apps</Type>
+          <Link href={{ pathname: '/platforms', query: { platform: 'blockstack' } }} as="/blockstack" passHref>
+            <Type is="a" style={{ textDecoration: 'none' }}>Try Blockstack Apps</Type>
+          </Link>
         </Flex>
       </Box>
     ) }
@@ -264,4 +267,4 @@ export {
   CallToAction,
   ObservedSection,
   OpenStarterKitModal
-}
+};
