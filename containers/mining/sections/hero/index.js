@@ -1,12 +1,10 @@
 import React from 'react';
 import { Flex, Box, Type, AppMiningLogo } from 'blockstack-ui';
-import { CurrencyUsdIcon } from 'mdi-react';
 import {
   Title,
   Wrapper,
   AppItem,
   ObservedSection,
-  LearnMore,
   CallToAction,
 } from '@components/mining/shared';
 import { State } from 'react-powerplug';

@@ -6,7 +6,8 @@ import { ArrowIcon } from '@components/mining/svg';
 
 import dayjs from 'dayjs';
 import numeral from 'numeral';
-import { ChevronRightIcon, ChevronLeftIcon } from 'mdi-react';
+import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
+import ChevronLeftIcon from 'mdi-react/ChevronLeftIcon';
 
 const Pill = ({ display, ...rest }) => (
   <Box

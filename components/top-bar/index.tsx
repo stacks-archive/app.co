@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Headroom from 'react-headroom';
 
+import { HelloBar } from '@components/hellobar';
 import { StyledTopBar } from '@components/top-bar/styled';
 import { SearchBar } from '@components/search';
 import GetUpdatesModal from '@containers/modals/get-updates';
@@ -43,6 +44,7 @@ export const TopBar = ({ isErrorPage, admin, wrap, ...props }) => {
 
   return (
     <Headroom>
+      <HelloBar />
       <StyledTopBar {...props}>
         <StyledTopBar.Wrapper wrap={wrap}>
           <StyledTopBar.Section grow>

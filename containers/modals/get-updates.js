@@ -1,5 +1,5 @@
 import React from 'react';
-import { CloseIcon } from 'mdi-react';
+import CloseIcon from 'mdi-react/CloseIcon';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -127,7 +127,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(Object.assign({}, NewsletterActions), dispatch);
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GetUpdates);
+export default connect(mapStateToProps, mapDispatchToProps)(GetUpdates);

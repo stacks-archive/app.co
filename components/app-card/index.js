@@ -1,6 +1,8 @@
 import React from 'react';
 import { Flex, Box, Type as NewType } from 'blockstack-ui';
-import { GithubCircleIcon, TwitterCircleIcon, ArrowLeftIcon } from 'mdi-react';
+import GithubCircleIcon from 'mdi-react/GithubCircleIcon';
+import TwitterCircleIcon from 'mdi-react/TwitterCircleIcon';
+import ArrowLeftIcon from 'mdi-react/ArrowLeftIcon';
 import Link from 'next/link';
 
 import numeral from 'numeral';

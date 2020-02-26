@@ -3,7 +3,8 @@ import { ResultItemGroup } from '@atlaskit/quick-search';
 import debounce from 'lodash/debounce';
 import { connect } from 'react-redux';
 import { Focus } from 'react-powerplug';
-import { SearchIcon, CloseIcon } from 'mdi-react';
+import SearchIcon from 'mdi-react/SearchIcon';
+import CloseIcon from 'mdi-react/CloseIcon';
 
 import { StyledSearchBar } from '@components/search/styled';
 import { AppItem } from '@components/list/apps';

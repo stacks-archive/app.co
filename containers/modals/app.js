@@ -1,5 +1,5 @@
 import React from 'react';
-import { CloseIcon } from 'mdi-react';
+import CloseIcon from 'mdi-react/CloseIcon';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 

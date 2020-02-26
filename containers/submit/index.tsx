@@ -1,6 +1,6 @@
 import React from 'react';
 import { Flex, Box, Text } from '@blockstack/ui';
-import { AlertOutlineIcon } from 'mdi-react';
+import AlertOutlineIcon  from 'mdi-react/AlertOutlineIcon';
 
 export { FormSection } from './form-section';
 export { sections } from './sections';
