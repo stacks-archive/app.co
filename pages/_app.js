@@ -19,6 +19,7 @@ import { theme } from '@common/styles';
 import { Mdx } from '@components/mdx';
 import 'isomorphic-unfetch';
 import { trackPageView } from '@utils';
+import * as Fathom from 'fathom-client';
 
 // Polyfill theme
 // This merge is here to handle some edge cases
@@ -125,8 +126,16 @@ class MyApp extends App {
 
   constructor(props) {
     super(props);
+    if (process.env.FATHOM_ID) {
+      Fathom.load();
+      Fathom.setSiteId(process.env.FATHOM_ID);
+      Fathom.trackPageview();
+    }
     routerEvents.on('routeChangeStart', () => NProgress.start());
-    routerEvents.on('routeChangeComplete', () => NProgress.done());
+    routerEvents.on('routeChangeComplete', () => {
+      Fathom.trackPageview();
+      NProgress.done();
+    });
     routerEvents.on('routeChangeError', () => NProgress.done());
   }
 
