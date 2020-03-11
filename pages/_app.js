@@ -20,7 +20,6 @@ import { Mdx } from '@components/mdx';
 import 'isomorphic-unfetch';
 import * as Fathom from 'fathom-client';
 import { trackPageView } from '@utils';
-import * as Fathom from 'fathom-client';
 
 // Polyfill theme
 // This merge is here to handle some edge cases

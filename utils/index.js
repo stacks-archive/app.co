@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import map from 'lodash/map';
 import lodashDefaults from 'lodash/defaults';
 import find from 'lodash/find';
