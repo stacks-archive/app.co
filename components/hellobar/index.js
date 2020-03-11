@@ -16,7 +16,7 @@ export const HelloBar = ({ ...rest }) => {
             Subscribe to stay in the loop on Proof of Transfer (PoX) and STX
             Mining.
           </Box>
-          <Newsletter />
+          <Newsletter merge={{ SOURCE: 'widget-app.co' }} />
         </Flex>
       </Flex>
     </Box>

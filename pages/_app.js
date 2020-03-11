@@ -126,11 +126,6 @@ class MyApp extends App {
 
   constructor(props) {
     super(props);
-    if (process.env.FATHOM_ID) {
-      Fathom.load();
-      Fathom.setSiteId(process.env.FATHOM_ID);
-      Fathom.trackPageview();
-    }
     routerEvents.on('routeChangeStart', () => NProgress.start());
     routerEvents.on('routeChangeComplete', () => {
       Fathom.trackPageview();
