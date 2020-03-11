@@ -13,10 +13,10 @@ import { Button } from '@components/button';
 import { TagLink } from '@components/tag';
 import Head from '@containers/head';
 
-import { outboundLink } from '@utils';
-import { slugify } from '@common';
 import { theme } from '@common/styles';
 import { doClearApp } from '@stores/apps';
+import { outboundLink } from '@utils';
+import { slugify } from '@common';
 
 const LinkWithIcon = props => {
   const { icon: Icon, link, label, title } = props;
@@ -93,7 +93,7 @@ const TagsSection = ({
   authentication,
   blockchain,
   storageNetwork,
-  handleClose = () => null,
+  handleClose = () => null
 }) => (
   <Flex alignItems="center">
     <TagBox
@@ -128,7 +128,7 @@ const Header = ({
   name,
   category,
   description,
-  handleClose = () => null,
+  handleClose = () => null
 }) => (
   <>
     <Flex alignItems="center">
@@ -141,7 +141,7 @@ const Header = ({
           as={categoryURL(category)}
           href={{
             pathname: '/categories',
-            query: { category: slugify(category) },
+            query: { category: slugify(category) }
           }}
           onClick={() => handleClose()}
         >
@@ -197,7 +197,7 @@ const HomeLink = props => (
     style={{
       position: 'absolute',
       top: '-38px',
-      left: 0,
+      left: 0
     }}
     {...props}
   >
@@ -234,7 +234,7 @@ const AppCard = ({
     ml,
     mt,
     mb,
-    style,
+    style
   };
 
   const descNoPeriod =
@@ -250,7 +250,7 @@ const AppCard = ({
         card
         p={4}
         style={{
-          position: 'relative',
+          position: 'relative'
         }}
         {...appCardStyleProps}
       >
