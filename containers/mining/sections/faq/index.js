@@ -5,10 +5,10 @@ import {
   Wrapper,
   ObservedSection as Section,
 } from '@components/mining/shared';
-import { slugify } from '@utils';
-import { LinkVariantIcon as LinkIcon } from 'mdi-react';
+import LinkIcon from 'mdi-react/LinkVariantIcon';
 import { Hover } from 'react-powerplug';
 import styled from 'styled-components';
+import { slugify } from '@utils';
 
 const IframeStyles = styled.div`
   iframe {

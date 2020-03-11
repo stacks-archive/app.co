@@ -9509,15 +9509,15 @@ mdast-util-to-hast@^3.0.0:
     unist-util-visit "^1.1.0"
     xtend "^4.0.1"
 
-mdi-react@4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/mdi-react/-/mdi-react-4.4.0.tgz#5901a3eda1f0dc5eacec1b13f2e2ee40e883b791"
-  integrity sha512-IxWW/10EHSYSDz5Hce1JzgvBiNtUHWERVDRWY6S+Bc07zUjWcRvQFDQND8GIgXG2Mnr/7uQFk25MBtSgLHQ0Gw==
-
 mdi-react@^5.2.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/mdi-react/-/mdi-react-5.3.0.tgz#e27c876e113ee5706322cb084f898fbaed3c1367"
   integrity sha512-Yf/aZplXLcl+aYlilfcBnCPRBueJMNOl7NxM+layFMRmCOWzxdER8ZsP2GZL7Vjc8U05Anh/mxoVaL0BS6/yCg==
+
+mdi-react@^6.7.0:
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/mdi-react/-/mdi-react-6.7.0.tgz#d291f919b5f0f99cbbeac111f2c9ca5184607b6b"
+  integrity sha512-Xpl3bXh4Nmuufoll8ejtErsDd0v/Ty+Je+qC9V3owriFUQZno91F/f0CkAdQj9fRqWY+LwjhFcWii+3lFFGKvQ==
 
 mdurl@^1.0.1, "mdurl@~ 1.0.1":
   version "1.0.1"
