@@ -18,6 +18,7 @@ import { Root } from '@containers/root';
 import { theme } from '@common/styles';
 import { Mdx } from '@components/mdx';
 import 'isomorphic-unfetch';
+import * as Fathom from 'fathom-client';
 import { trackPageView } from '@utils';
 import * as Fathom from 'fathom-client';
 
@@ -27,9 +28,9 @@ import * as Fathom from 'fathom-client';
 merge(newBlockstackTheme, {
   colors: {
     blue: {
-      mid: '#E1E3E8',
-    },
-  },
+      mid: '#E1E3E8'
+    }
+  }
 });
 
 /**
@@ -95,7 +96,7 @@ const REFACTORED_PATHS = [
   '/maker/apps',
   '/maker/apps/blockstack-only',
   '/maker/apps/[appId]',
-  '/submit-your-app',
+  '/submit-your-app'
 ];
 
 const RenderRouteThemeProvider = ({ children }) => {
@@ -140,6 +141,11 @@ class MyApp extends App {
   }
 
   componentDidMount() {
+    if (process.env.FATHOM_ID) {
+      Fathom.load();
+      Fathom.setSiteId(process.env.FATHOM_ID);
+      Fathom.trackPageview();
+    }
     smoothscroll.polyfill();
     if (
       typeof document !== 'undefined' &&
