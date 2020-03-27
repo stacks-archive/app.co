@@ -379,7 +379,9 @@ class SubmitDapp extends React.Component<SubmitDappProps, SubmitDappState> {
           {this.state.success ? (
             <SuccessCard
               newAppId={this.state.newAppId}
-              isAppMiningEligible={this.appMiningEligible()}
+              //
+              // Always must be false while app mining programme is paused
+              isAppMiningEligible={false}
             />
           ) : (
             <Submit
