@@ -9509,12 +9509,7 @@ mdast-util-to-hast@^3.0.0:
     unist-util-visit "^1.1.0"
     xtend "^4.0.1"
 
-mdi-react@^5.2.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/mdi-react/-/mdi-react-5.3.0.tgz#e27c876e113ee5706322cb084f898fbaed3c1367"
-  integrity sha512-Yf/aZplXLcl+aYlilfcBnCPRBueJMNOl7NxM+layFMRmCOWzxdER8ZsP2GZL7Vjc8U05Anh/mxoVaL0BS6/yCg==
-
-mdi-react@^7.0.0:
+mdi-react@^5.2.0, mdi-react@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/mdi-react/-/mdi-react-7.0.0.tgz#efc3577ef302c9622adc72aa07ed62c8ace2283c"
   integrity sha512-eCsnXO0W4kzPhSuQ3xeGKz4mAZuo0wmSwgoJYOp6LLFZZPWFOX3mjNthk+AXV2jLa6ajXjZeZ/IFrxHMyPQKSQ==

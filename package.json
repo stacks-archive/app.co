@@ -196,6 +196,9 @@
       "^.+\\.js?$": "babel-jest"
     }
   },
+  "resolutions": {
+    "mdi-react": "^7.0.0"
+  },
   "nodemonConfig": {
     "verbose": true,
     "ignore": [

@@ -21,8 +21,7 @@ RUN yarn build && \
     python \
     py-pip \
     make \
-    g++ && \
-  yarn --production
+    g++
 
 FROM node:12.15.0-alpine
 # FROM blockstack/node:latest
