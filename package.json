@@ -74,7 +74,7 @@
     "lodash.debounce": "^4.0.8",
     "lru-cache": "^4.1.3",
     "luxon": "^1.9.0",
-    "mdi-react": "^7.0.0",
+    "mdi-react": "^6.7.0",
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
     "next": "^9.0.5",
@@ -195,9 +195,6 @@
     "transform": {
       "^.+\\.js?$": "babel-jest"
     }
-  },
-  "resolutions": {
-    "mdi-react": "^7.0.0"
   },
   "nodemonConfig": {
     "verbose": true,
