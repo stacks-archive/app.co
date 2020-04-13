@@ -7,8 +7,6 @@ RUN apk update
 RUN apk add --update --no-cache build-base \
   && apk add \
     --update-cache \
-    --repository https://alpine.global.ssl.fastly.net/alpine/edge/community/ \
-    --repository https://alpine.global.ssl.fastly.net/alpine/edge/main \
     python   \
     py-pip   \
     make   \
