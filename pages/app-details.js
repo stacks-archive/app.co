@@ -3,7 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { selectCurrentApp, selectAppMiningApps } from '@stores/apps/selectors';
 import { Flex, Box } from 'blockstack-ui';
-import { GithubCircleIcon, TwitterCircleIcon } from 'mdi-react';
+import GithubCircleIcon from 'mdi-react/GithubCircleIcon';
+import TwitterCircleIcon from 'mdi-react/TwitterCircleIcon';
 import { Page as Container } from '@containers/page';
 import { Header } from '@containers/header';
 import { Hero } from '@containers/hero';
@@ -16,13 +17,13 @@ import Head from '@containers/head';
 
 import UserStore from '@stores/user';
 
-import { outboundLink } from '@utils';
 import app from '@pages/admin/app';
+import { outboundLink } from '@utils';
 
 class AppDetails extends React.Component {
   static getInitialProps({ req, reduxStore }) {
     const {
-      params: { slug },
+      params: { slug }
     } = req;
 
     reduxStore.dispatch(doSelectApp(slug));
@@ -153,7 +154,7 @@ class AppDetails extends React.Component {
       title: `${app.name} on App.co`,
       description: app.description,
       ogImage: app.imageUrl,
-      ...smallMetaContent,
+      ...smallMetaContent
     };
     return (
       <>
@@ -172,12 +173,12 @@ class AppDetails extends React.Component {
 
 const mapStateToProps = state => ({
   selectedApp: selectCurrentApp(state),
-  appMiningApps: selectAppMiningApps(state),
+  appMiningApps: selectAppMiningApps(state)
 });
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    Object.assign({}, AppStore.actions, UserStore.actions),
+    { ...AppStore.actions, ...UserStore.actions},
     dispatch
   );
 }
