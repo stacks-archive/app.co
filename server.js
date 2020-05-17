@@ -370,6 +370,10 @@ app.prepare().then(() => {
     server.use('/rss', RSSController);
     server.use(expressSitemapXml(getSitemapURLs(apiServer), 'https://app.co'));
 
+    server.get('/status', (_req, res) => {
+      res.json({ success: true });
+    });
+
     server.get('/robots.txt', async (req, res) => {
       const robotsFile =
         dev || process.env.STAGING ? 'robots.staging.txt' : 'robots.txt';
