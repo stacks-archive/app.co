@@ -339,6 +339,10 @@ app.prepare().then(() => {
       })
     );
 
+    server.get('/blockstack', (req, res) => {
+      res.redirect('https://www2.blockstack.org/apps');
+    });
+
     apps.platforms.forEach(platform => {
       server.get(`/${slugify(platform)}`, (req, res) => {
         req.params.platform = platform;
