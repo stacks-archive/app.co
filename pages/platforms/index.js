@@ -60,6 +60,9 @@ class PlatformsPage extends React.PureComponent {
   };
   static async getInitialProps({ req, query, reduxStore }) {
     const platform = req ? req.params.platform : query.platform;
+    if (platform === 'blockstack') {
+      window.location.href = 'https://www2.blockstack.org/apps';
+    }
     if (platform) {
       reduxStore.dispatch(doSelectPlatformFilter(platform));
       return { platform };
