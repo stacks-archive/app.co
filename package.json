@@ -66,7 +66,7 @@
     "fathom-client": "^2.0.2",
     "fs-extra": "^7.0.0",
     "gensync": "^1.0.0-beta.1",
-    "googleapis": "^29.0.0",
+    "googleapis": "^39.1.0",
     "grid-styled": "5.0.2",
     "intersection-observer": "^0.5.1",
     "isomorphic-unfetch": "^3.0.0",
