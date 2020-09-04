@@ -83,7 +83,7 @@
     "nprogress": "^0.2.0",
     "nuka-carousel": "^4.3.5",
     "numeral": "^2.0.6",
-    "papaparse": "^4.6.0",
+    "papaparse": "^5.2.0",
     "pg": "^7.4.1",
     "polished": "^1.9.2",
     "prom-client": "^11.5.3",
