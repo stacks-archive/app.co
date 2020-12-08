@@ -62,7 +62,7 @@
     "express-basic-auth": "^1.1.5",
     "express-force-https": "^1.0.0",
     "express-sitemap-xml": "^1.0.2",
-    "fast-csv": "^2.4.1",
+    "fast-csv": "^4.3.6",
     "fathom-client": "^2.0.2",
     "fs-extra": "^7.0.0",
     "gensync": "^1.0.0-beta.1",
