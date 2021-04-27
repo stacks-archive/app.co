@@ -107,7 +107,7 @@
     "react-select": "^3.0.8",
     "react-spring": "^7.2.8",
     "rebass": "^2.3.4",
-    "redis": "^2.8.0",
+    "redis": "^3.1.1",
     "redux": "4.0.4",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.2.0",
