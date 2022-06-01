@@ -161,7 +161,7 @@
     "request": "^2.85.0",
     "responsive-loader": "^1.1.0",
     "sepia": "^2.0.2",
-    "sharp": "^0.24.0",
+    "sharp": "^0.30.5",
     "typescript": "^3.6.3",
     "webpack-cli": "^3.3.10"
   },
