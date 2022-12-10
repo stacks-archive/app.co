@@ -58,7 +58,7 @@
     "dotenv": "^5.0.1",
     "download": "^7.1.0",
     "downloadjs": "^1.4.7",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-basic-auth": "^1.1.5",
     "express-force-https": "^1.0.0",
     "express-sitemap-xml": "^1.0.2",
